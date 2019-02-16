@@ -57,6 +57,7 @@ export class PackageItemListRow extends PureComponent {
                   } else {
                     const { metadata } = data
                     const { name, version } = metadata
+                    const ipfsHash = '0x1234'
 
                     return (
                       <li key={`packageItem-${name}-${version}`} className={classnames(
@@ -66,7 +67,7 @@ export class PackageItemListRow extends PureComponent {
                       )}>
                         <span className='list--cell list__has-padding is-borderless is-monospaced break-words'>
                           <Link
-                            to={formatRoute(routes.PACKAGE_ITEM, { id, version })}
+                            to={formatRoute(routes.HOOK, { ipfsHash })}
                             className='no-margin-right has-text-link is-uppercase has-hover-border'
                           >
                             {name} v{version}

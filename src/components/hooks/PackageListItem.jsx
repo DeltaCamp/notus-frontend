@@ -67,7 +67,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
             // const { Challenged } = Vouching || {}
 
             const id = parseInt(this.props.package.id, 10)
-            const ipfsHash = '0xXYAZ'
+            const ipfsHash = '0xABCD'
             const link = formatRoute(routes.HOOK, { ipfsHash })
 
             const { owner } = { owner: 'asdf' }
@@ -128,8 +128,8 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
                       to={link}
                       className='no-select'
                     >
+                      IMG
                       {/* <GithubProfileImage user={owner} /> */}
-                      MNB
                     </Link>
                   </span>
 

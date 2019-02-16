@@ -6,7 +6,6 @@ import { CSSTransition } from 'react-transition-group'
 import { ZosCodeSnippet } from '~/components/ZosCodeSnippet'
 import { ResearcherLink } from '~/components/ResearcherLink'
 import { GitHubLink } from '~/components/GitHubLink'
-// import { GithubProfileImage } from '~/components/GithubProfileImage'
 import { VouchButton } from '~/components/hooks/VouchButton'
 import { VouchRow } from '~/components/hooks/VouchRow'
 import { projectPackageEvents } from '~/projections/projectPackageEvents'
@@ -59,8 +58,8 @@ export class PackageDetails extends Component {
 
           <div className='col-xs-12 col-start-md-8 col-md-5 has-text-right--desktop'>
             <div className='package-item--image'>
+              IMG
               {/* <GithubProfileImage user={owner} /> */}
-              GHJ
             </div>
           </div>
         </div>

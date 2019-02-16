@@ -7,10 +7,10 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { PageDetailsLoader } from '~/components/PageDetailsLoader'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
-import { PackageDetails } from '~/components/packages/PackageDetails'
+import { PackageDetails } from '~/components/hooks/PackageDetails'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 
-export class PackageItemPage extends PureComponent {
+export class HookPage extends PureComponent {
   static propTypes = {
     match: PropTypes.object.isRequired
   }
@@ -23,7 +23,7 @@ export class PackageItemPage extends PureComponent {
     return (
       <div className='is-positioned-absolutely'>
         <Helmet
-          title='EVM Package'
+          title='Hook'
         />
 
         <ScrollToTop />

@@ -6,7 +6,7 @@ import { CSSTransition } from 'react-transition-group'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { FooterContainer } from '~/components/layout/Footer'
 
-export const BetaSignupPage = class _BetaSignupPage extends PureComponent {
+export const FormExamplePage = class _FormExamplePage extends PureComponent {
   static contextTypes = {
     router: PropTypes.object.isRequired
   }
@@ -234,31 +234,31 @@ export const BetaSignupPage = class _BetaSignupPage extends PureComponent {
             <label className='radio'>
               <input
                 type='radio'
-                value='Developing and maintaining an EVM package'
+                value='Developing and maintaining an Hook'
                 name='participate'
                 onChange={this.handleParticipateChanged}
               />
-              <span className='radio-label'>Developing and maintaining an EVM package</span>
+              <span className='radio-label'>Developing and maintaining an Hook</span>
             </label>
 
             <label className='radio'>
               <input
                 type='radio'
-                value='Reviewing EVM packages code and vouching ZEP Tokens for them'
+                value='Reviewing Hooks code and vouching ZEP Tokens for them'
                 name='participate'
                 onChange={this.handleParticipateChanged}
               />
-              <span className='radio-label'>Reviewing EVM packages code and vouching ZEP Tokens for them</span>
+              <span className='radio-label'>Reviewing Hooks code and vouching ZEP Tokens for them</span>
             </label>
 
             <label className='radio'>
               <input
                 type='radio'
-                value='Developing my own project using EVM packages'
+                value='Developing my own project using Hooks'
                 name='participate'
                 onChange={this.handleParticipateChanged}
               />
-              <span className='radio-label'>Developing my own project using EVM packages</span>
+              <span className='radio-label'>Developing my own project using Hooks</span>
             </label>
 
             <label className='radio'>

@@ -1,14 +1,16 @@
 import React, { PureComponent } from 'react'
 import { ethers } from 'ethers'
 import { get } from 'lodash'
+import { Link } from 'react-router-dom'
 import { Query, graphql, withApollo } from 'react-apollo'
 import { ErrorMessage } from '~/components/ErrorMessage'
-import { PackageListItem } from '~/components/packages/PackageListItem'
-import { PackageListItemLoader } from '~/components/packages/PackageListItemLoader'
+// import { PackageListItem } from '~/components/hooks/PackageListItem'
+import { PackageListItemLoader } from '~/components/hooks/PackageListItemLoader'
 import { vouchingQueries } from '~/queries/vouchingQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
+import * as routes from '~/../config/routes'
 
-export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class _PackageList extends PureComponent {
+export const HooksList = graphql(vouchingQueries.eventsQuery)(withApollo(class HooksList extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
@@ -94,7 +96,8 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
           {
             sortedEvents.map((event, index) => {
               let item
-              const packageValues = event.parsedLog.values
+              // const packageValues = event.parsedLog.values
+              const packageValues = {metadataURI: 'asdf', id: '444'}
 
               item = (
                 <React.Fragment key={`package-item-fragment-${index}`}>
@@ -121,14 +124,17 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
                         }
 
                         return (
-                          <PackageListItem
-                            index={index}
-                            location={this.props.location}
-                            data={data}
-                            package={packageValues}
-                            key={`package-item-${index}`}
-                          />
+                          <span>{index}</span>
                         )
+
+                    // return
+                          // <PackageListItem
+                          //   index={index}
+                          //   location={this.props.location}
+                          //   data={data}
+                          //   package={packageValues}
+                          //   key={`package-item-${index}`}
+                          // />
                       }
                     }
                   </Query>
@@ -154,13 +160,12 @@ export const PackageList = graphql(vouchingQueries.eventsQuery)(withApollo(class
             <p className='message-body--text has-text-grey'>
               Want to start receiving notifications?
             </p>
-            <a
+            <Link
               className='button is-primary'
-              href='#'
-              target='_blank'
-              rel='noopener noreferrer'>
+              to={routes.HOOKS}
+            >
               Create Your First Hook
-            </a>
+            </Link>
           </div>
         </div>
 

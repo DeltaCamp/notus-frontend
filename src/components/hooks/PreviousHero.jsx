@@ -15,7 +15,7 @@ export const PreviousHero = ({ heroColor }) => {
               zeppelinOS Beta
             </h2>
             <p className='is-size-6'>
-              Interested in developing your own EVM package?
+              Interested in developing your own Hook?
               <br />
               Want to vouch for your favourite libraries?
             </p>

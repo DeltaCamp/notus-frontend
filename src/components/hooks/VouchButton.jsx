@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import { transactionQueries } from '~/queries/transactionQueries'
-import { VouchMutationForm } from '~/components/packages/VouchMutationForm'
+import { VouchMutationForm } from '~/components/hooks/VouchMutationForm'
 import { getSystemInfo } from '~/utils/getSystemInfo'
 import { findLast } from 'lodash'
 
