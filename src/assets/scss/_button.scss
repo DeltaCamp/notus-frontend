@@ -22,18 +22,23 @@ button[disabled]:active {
 }
 
 .button:hover,
-.button:focus,
 .button:active {
   background-color: lighten($cyan, 10%);
 }
 
 .button {
   background-color: $blue;
-  border-radius: 20px;
+  border-radius: 100px;
   font-size: 1.25rem;
   font-weight: 900;
-  padding: 2rem;
+  padding: 2rem 4rem;
   text-transform: uppercase;
+}
+
+.button.is-small {
+  border-radius: 100px;
+  font-size: 1rem;
+  padding: 1.25rem 3rem;
 }
 
 .button.is-text {

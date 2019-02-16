@@ -36,7 +36,30 @@ export class HomePage extends PureComponent {
                         `No hooks available on the currently selected Ethereum network.`
                       } />
                     } else {
-                      return <HooksList location={this.props.location} />
+                      return (
+                        <>
+                          <h5 className='is-size-5 has-text-grey-dark is-uppercase has-text-weight-bold'>
+                            Example Hooks
+                          </h5>
+                          <br />
+
+                          <div className='message-white has-text-centered'>
+                            <div className='message-white--body'>
+                              <p className='message-body--text has-text-grey'>
+                                Want to start receiving notifications?
+                              </p>
+                              <Link
+                                className='button is-primary'
+                                to={routes.HOOKS}
+                              >
+                                Create Your First Hook
+                              </Link>
+                            </div>
+                          </div>
+
+                          <HooksList location={this.props.location} />
+                        </>
+                      )
                     }
                   }}
                 </Query>

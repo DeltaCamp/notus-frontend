@@ -13,11 +13,15 @@ $addonsFormHeight: 57px;
   margin-bottom: 2rem;
 }
 
-label,
 .label {
+  // color: #789;
   cursor: pointer;
-  font-family: $code-family;
-  font-size: 1.125rem;
+  text-align: left;
+  // font-family: $family-serif;
+  // font-size: 1.25rem;
+  // font-weight: 900;
+  // font-family: $code-family;
+  // text-transform: uppercase;
 }
 
 .label:not(:last-child) {
@@ -26,14 +30,16 @@ label,
 
 input.input,
 textarea.textarea {
-  border-radius: 3px;
-  font-size: 1.5rem;
+  border-radius: 0;
+  font-family: $family-code;
+  font-size: 1.75rem;
   letter-spacing: 1px;
-  height: 50px;
+  height: 70px;
+  margin: 0.5rem 0;
   padding: 5px 15px 3px;
-  border-bottom: 3px solid #ddd;
+  border: 6px solid #f0f0f0;
   box-shadow: none;
-  transition: border-color 200ms ease-in-out;
+  transition: border-color 100ms ease-in-out;
 }
 
 textarea.textarea {
@@ -46,7 +52,7 @@ input.input:focus,
 textarea.textarea:hover,
 textarea.textarea:focus,
 textarea.textarea:active {
-  border-bottom: 3px solid $link-color;
+  border: 6px solid lighten($cyan, 26%);
 }
 
 input.input:active,
@@ -54,7 +60,7 @@ input.input:focus,
 textarea.textarea:focus,
 textarea.textarea:active {
   border: 1px solid #aaa;
-  border-bottom: 3px solid $blue;
+  border: 6px solid $cyan;
 }
 
 label.radio {

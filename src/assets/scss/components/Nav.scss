@@ -52,12 +52,18 @@
   color: white;
 }
 
+.navbar-brand a {
+  height: 50px;
+  padding-top: 20px;
+  padding-bottom: 2px;
+}
+
 .navbar-brand svg path {
   transition: fill 150ms ease-in;
 }
 
 .navbar-brand svg:hover path {
-  fill: white;
+  // fill: white;
 }
 
 .navbar-end .navbar-item {
