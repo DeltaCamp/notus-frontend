@@ -1,0 +1,211 @@
+// font-family: brandon-grotesque, sans-serif
+// font-weight: 400
+// font-style: normal
+// font-family: brandon-grotesque, sans-serif
+// font-weight: 400
+// font-style: italic
+// font-family: brandon-grotesque, sans-serif
+// font-weight: 900
+// font-style: normal
+// font-family: brandon-grotesque, sans-serif
+// font-weight: 900;
+// font-style: italic;
+
+::placeholder {
+  color: rgba(27, 4, 4, 0.15);
+}
+
+::selection {
+  background-color: $cyan;
+  color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.has-text-primary {
+  color: $link !important;
+}
+
+a.has-text-primary:hover,
+a.has-text-primary:focus {
+  color: $link-hover !important;
+}
+
+a.is-dark {
+  color: $text;
+}
+
+.is-monospaced {
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: auto;
+
+  font-family: $code-family;
+  letter-spacing: 0.05rem;
+}
+
+.is-borderless {
+  border: 0;
+}
+
+// This is used by the page / layout transitions
+.is-positioned-absolutely {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.section--main-content {
+  min-height: 600px;
+}
+
+// This is used by the page / layout transitions
+.is-full-width {
+  width: 100%;
+}
+
+.button-has-icon .has-text-link {
+  margin-left: 0.5rem;
+}
+
+a {
+  border-bottom: 1px solid transparent;
+  transition: all 200ms ease-in-out;
+}
+
+a:hover {
+  border-bottom-color: rgba(200, 110, 220, 0.55);
+}
+
+.has-text-link,
+.has-hover-border {
+  border-bottom: 1px solid transparent;
+  transition: all 200ms ease-in-out;
+}
+
+.has-hover-border:hover {
+  border-bottom-color: rgba(5, 110, 220, 0.5);
+}
+
+.button-has-icon {
+  border: 0;
+}
+
+@media screen and (max-width: $tablet) {
+  .reverse-column-order {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
+.icon-small {
+  height: 16px;
+  width: 16px;
+}
+
+.has-text-right--desktop {
+  @media screen and (min-width: $desktopMin) {
+    text-align: right;
+  }
+}
+
+.is-size-4 {
+  @media screen and (max-width: $desktop) {
+    font-size: 1.25rem !important;
+    line-height: 1.325;
+  }
+}
+
+.researcher--zep-token-icon {
+  margin-right: 6px;
+  position: relative;
+  top: 1px;
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.no-scale:hover {
+  transform: scale3d(1, 1, 1) !important;
+}
+
+.has-text-white a,
+.has-text-white button,
+.has-text-black a,
+.has-text-black button,
+.has-text-light a,
+.has-text-light button,
+.has-text-dark a,
+.has-text-dark button,
+.has-text-primary a,
+.has-text-primary button,
+.has-text-link a,
+.has-text-link button,
+.has-text-info a,
+.has-text-info button,
+.has-text-success a,
+.has-text-success button,
+.has-text-warning a,
+.has-text-warning button,
+.has-text-grey-darker a,
+.has-text-grey-darker button,
+.has-text-grey-dark a,
+.has-text-grey-dark button,
+.has-text-grey a,
+.has-text-grey button,
+.has-text-grey-light a,
+.has-text-grey-light button,
+.has-text-grey-lighter a
+.has-text-grey-lighter button,{
+  color: inherit;
+}
+
+.tag:not(body) {
+  font-family: $code-family;
+  font-size: 0.625rem;
+  font-weight: 900;
+  height: 1.25rem;
+}
+
+.tag.has-arrow-left {
+  position: relative;
+}
+
+.tag.has-arrow-left::before {
+  content: "";
+
+  border-radius: 40px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid $info;
+  width: 10px;
+  height: 100%;
+  position: absolute;
+  left: -8px;
+}
+
+.tx-in-progress .field.has-addons {
+  border-color: $blue;
+}
+
+.has-half-margin {
+  margin-bottom: 0.5rem !important;
+}
+
+.help {
+  font-size: 1rem;
+}
+
+.has-break-word {
+  overflow-wrap: break-word;
+}
+
+.is-family-serif {
+  font-family: $family-serif;
+}

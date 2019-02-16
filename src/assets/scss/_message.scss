@@ -1,0 +1,98 @@
+.message {
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+}
+
+.message-vouch {
+  background-color: transparent;
+  border: 1px solid rgba(100, 100, 100, 0.15);
+  margin-top: 0;
+  height: 10rem;
+  overflow: hidden;
+
+  @media screen and (max-width: 390px) {
+    height: 16rem;
+  }
+}
+
+.message-vouch.has-voted {
+  @media screen and (max-width: 867px) {
+    height: 12rem;
+  }
+
+  @media screen and (max-width: 767px) {
+    height: 8rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 10rem;
+  }
+
+  @media screen and (max-width: 490px) {
+    height: 15rem;
+  }
+
+  @media screen and (max-width: 350px) {
+    height: 19rem;
+  }
+
+  @media screen and (max-width: 300px) {
+    height: 24rem;
+  }
+}
+
+.message--cta {
+  border-left: 0;
+}
+
+.message-body.message-vouch--question {
+  padding-top: 2rem;
+}
+
+.message-body.message-vouch--positive-answer {
+  padding-top: 2rem;
+}
+
+.message-body.message-vouch--negative-answer {
+  padding-top: 3rem;
+}
+
+.message--cta .button {
+  margin-top: 1rem;
+}
+
+.message-body--text {
+  font-size: 1.25rem;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 1rem;
+  }
+}
+
+.message-white {
+  box-shadow: 0px 1px 10px rgba(120, 120, 180, 0.15);
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  position: relative;
+}
+
+.message-white--body {
+  border-left: 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.message-white--body .button {
+  margin-top: 1rem;
+}
+
+.message a:not(.button):not(.tag) {
+  text-decoration: none;
+}
+
+.message-question {
+  height: 5rem;
+}

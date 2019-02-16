@@ -1,0 +1,45 @@
+.footer {
+  color: $grey-light;
+  flex: 0 0 350px;
+  padding: 0;
+  margin-top: 0;
+}
+
+.footer a {
+  color: rgba(200, 110, 220, 1);
+}
+
+.footer--primary {
+  background-color: darken($navbar-grey, 0%);
+  font-size: 1.5rem;
+  padding: 3.5rem 2rem;
+}
+
+.footer--secondary {
+  background-color: darken($navbar-grey, 4%);
+  background-image: linear-gradient(to bottom, darken($navbar-grey, 6%) 0%, #161616 70%, #121212 100%);
+  font-size: 1.25rem;
+  padding: 5.5rem 2rem 4.5rem;
+}
+
+.footer--secondary svg path {
+  fill: white;
+}
+
+.footer-menu .footer-item {
+  border-bottom: 1px solid transparent;
+  color: white;
+  display: inline-block;
+  margin: 0 1rem;
+  transition: border 300ms ease-in-out;
+}
+
+.footer-menu .footer-item:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.footer--secondary .footer-item--copyright {
+  color: rgba(255, 255, 255, 0.4);
+  display: block;
+  margin-top: 0.5rem;
+}

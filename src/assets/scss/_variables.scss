@@ -1,0 +1,88 @@
+$gridGap: 64px;
+$mobileContainerWidth: 90%;
+
+$mobile: 480px + (2 * $gridGap);
+$tablet: 700px + (2 * $gridGap);
+$desktop: 960px + (2 * $gridGap);
+$widescreen: 1100px + (2 * $gridGap);
+$fullhd: 1260px + (2 * $gridGap);
+
+// These are good to use with min-width
+$mobileMin: 0px;     
+$tabletMin: $mobile + 1px;
+$desktopMin: $tablet + 1px;
+$widescreenMin: $desktop + 1px;
+$fullhdMin: $widescreen + 1px;
+
+// Static variables
+$body-line-height: 1.5;
+$body-size: 16px;
+
+$navbar-height: 4rem;
+$navbar-breakpoint: $tablet;
+$navbar-breakpointMin: $desktopMin;
+
+$size-1: 2.2rem;
+$size-2: 1.8rem;
+$size-3: 1.6rem;
+$size-6: 0.9rem;
+
+$section-padding: 4rem 0;
+$section-padding-medium: 9rem 0;
+$section-padding-large: 18rem 0;
+
+$weight-semibold: 500;
+
+$family-sans-serif: 'brandon-grotesque', 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+$family-serif: 'Vollkorn', serif;
+$family-code: 'Roboto Mono', monospace;
+
+$button-color: white;
+$button-hover-color: white;
+// $button-background-color: orange;
+//  $button-static-background-color: green;
+$code-background: #f7f7f7;
+$link-invert: #ffffff;
+$hero-light: #f7f7f9;
+$hero-dark: #252c31;
+// $navbar-background-color: #f6f6f9;
+$navbar-background-color: white;
+$navbar-grey: #13171a;
+$navbar-item-color: #6f6f6f;
+$navbar-item-hover: black;
+$navbar-item-hover-background-color: transparent;
+$navbar-dark-background-color: $navbar-grey;
+$navbar-dark-item-color: white;
+$navbar-dark-item-hover-color: #d9d9d9;
+$text: #141414;
+$green: #00c853;
+$yellow: #ff9800;
+$red: #ff005c;
+$cyan: #30ace6;
+$blue: #085dff;
+$deep-purple: #300776;
+$purple: lighten($deep-purple, 5%);
+$mauve: lighten($deep-purple, 10%);
+
+// Derived variables
+$navbar-item-hover-color: $navbar-item-hover;
+
+$link-color: $cyan;
+$link-hover-color: darken($cyan, 10%);
+$link: $link-color;
+$link-visited: $link-hover-color;
+$link-hover: $link-hover-color;
+$link-hover-border: $link-hover-color;
+$link-focus: $link-hover-color;
+$link-focus-border: $link-hover-color;
+$link-active: $link-hover-color;
+$link-active-border: $link-hover-color;
+
+$hr-background-color: lighten($text, 80%) !default;
+$hr-height: 1px !default
+$hr-margin: 1.5rem 0 1rem 0 !default
+
+$code: $text;
+
+$dark: $navbar-grey;

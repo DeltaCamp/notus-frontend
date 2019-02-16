@@ -1,0 +1,159 @@
+.slow {
+  transition: all 500ms ease-in-out;
+}
+
+.medium {
+  transition: all 300ms ease-in-out;
+}
+
+.fast {
+  transition: all 150ms ease-in-out;
+}
+
+.layout-appear {
+  opacity: 0.01;
+  transform: scale3d(1.02, 1.02, 1.02) translate3d(0, 0, 0);
+  transition-timing-function: ease-out;
+}
+
+.layout-appear.layout-appear-active {
+  opacity: 1;
+  transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+  transition: all 200ms ease-out;
+}
+
+.layout-enter {
+  opacity: 0.01;
+  transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+}
+
+.layout-enter.layout-enter-active {
+  opacity: 1;
+  transition: all 200ms ease;
+  transition-timing-function: ease-in;
+}
+
+.layout-exit {
+  opacity: 1;
+  transition: all 200ms ease-in;
+}
+
+.layout-exit.layout-exit-active {
+  opacity: 0.01;
+}
+
+.layout-enter-done {
+  opacity: 1;
+  transition: all 200ms ease;
+  transition-timing-function: ease-in;
+}
+
+.slide-up {
+  transform: translate3d(0, 10px, 0);
+  transition-property: all;
+  transition-timing-function: ease-out;
+}
+
+.slide-up-enter {
+  transform: translate3d(0, 0, 0);
+}
+
+.fade-in {
+  opacity: 0.01;
+  transition-property: all;
+  transition-timing-function: ease-out;
+}
+
+.fade-in-enter {
+  opacity: 1;
+}
+
+.slide-enter {
+  left: 0;
+  top: 0;
+  height: auto;
+  opacity: 0.01;
+  position: absolute;
+  pointer-events: none;
+  transition: all 1000ms ease-in-out;
+  transform: translate3d(0, 100px, 0);
+  width: 100%;
+}
+
+.slide-enter.slide-enter-active,
+.slide-enter.slide-enter-done {
+  opacity: 1;
+  pointer-events: initial;
+  transition: all 1000ms ease-in-out;
+  transform: translate3d(0, 0, 0);
+}
+
+.slide-exit {
+  opacity: 1;
+  left: 0;
+  top: 0;
+  height: auto;
+  position: absolute;
+  transition: all 1000ms ease-in-out;
+  transform: translate3d(0, 0, 0);
+  width: 100%;
+}
+
+.slide-exit.slide-exit-active,
+.slide-exit.slide-exit-done {
+  opacity: 0.01;
+  transform: translate3d(0, -100px, 0);
+}
+
+.slide-exit-done {
+  display: none;
+}
+
+@keyframes changeLetter {
+  0% {
+    content: attr(name);
+  }
+  50% {
+    color: white;
+  }
+  100% {
+    content: attr(title);
+  }
+}
+
+.animate-content::after {
+  content: attr(name);
+}
+
+.animate-content-enter::after {
+  animation: changeLetter 1s normal forwards ease-in-out;
+}
+
+.accordion,
+.accordion-enter,
+.accordion-exit,
+.accordion-exit-active {
+  height: 1px;
+  opacity: 0.01;
+  transition: all 600ms ease-in-out;
+}
+
+// Important! Set the height custom for your specific accordion in another class:
+//   ie:
+// .my-accordion.accordion-enter-active,
+// .my-accordion.accordion-enter-done {
+//   height: 200px;
+// }
+.accordion-enter-active,
+.accordion-enter-done {
+  opacity: 1;
+}
+
+.accordion-exit {
+  opacity: 1;
+}
+
+.accordion-exit-active,
+.accordion-exit-done {
+  opacity: 0.01;
+}

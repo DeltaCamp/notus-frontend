@@ -1,0 +1,85 @@
+.hero .hero-body {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.hero.is-large .hero-body {
+  padding: 8rem;
+
+  @media screen and (max-width: $fullhd) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.hero h1,
+.hero h2,
+.hero h3 {
+  font-weight: 900;
+}
+
+.hero.is-medium .hero-body,
+.hero.is-link {
+  background-color: $mauve;
+  background-image: linear-gradient(-10deg, $purple 0%, $mauve 10%, $deep-purple 100%);
+}
+
+.hero.is-medium .hero-body {
+  line-height: 2;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 5.5rem;
+  padding-top: 5rem;
+
+  @media screen and (max-width: $desktop) {
+    padding-bottom: 4rem;
+    padding-top: 4rem;
+  }
+}
+
+.hero.is-medium p {
+  color: white !important;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.hero.is-dark.is-bold {
+  background-color: $hero-dark;
+  background-image: none;
+}
+
+.hero--title {
+  font-weight: 400;
+}
+
+.hero.is-light {
+  background-color: $hero-light;
+}
+
+.hero--title.content:not(:last-child),
+.hero--title.title:not(:last-child),
+.hero--title.subtitle:not(:last-child) {
+  margin-bottom: 0.8rem;
+}
+
+.hero a {
+  border-bottom: 1px solid transparent;
+  transition: border 300ms ease-in-out;
+}
+
+.hero a:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero p {
+  font-size: 1.125rem;
+  margin: 1rem 0;
+}
+
+.hero p:first-child {
+  margin-top: 0;
+}
+
+.hero p:last-child {
+  margin-bottom: 0;
+}
