@@ -2133,6 +2133,16 @@ builtin-status-codes@^3.0.0:
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
   integrity sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=
 
+bulma-switch@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/bulma-switch/-/bulma-switch-1.0.1.tgz#447bf2e45ea5ed8e83919ae22b586e6ebc17a4ce"
+  integrity sha1-RHvy5F6l7Y6DkZriK1hubrwXpM4=
+
+bulma@0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.1.tgz#73c2e3b2930c90cc272029cbd19918b493fca486"
+  integrity sha512-wRSO2LXB+qI9Pyz2id+uZr4quz5aftSN7Ay1ysr1+krzVp3utD+Ci4CeKuZdrYGc800t65b7heXBL6qw2Wo/lQ==
+
 bulma@^0.7.2:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.4.tgz#7e74512e9118d9799021339e67e365ee0ac4f3f9"
@@ -2431,7 +2441,12 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@^2.2.5, classnames@^2.2.6:
+classnames@2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
+  integrity sha1-+zgB1FNGdknvNgPH1hoCvRKb3m0=
+
+classnames@2.2.6, classnames@^2.2.5, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
@@ -8953,6 +8968,22 @@ react-async-autocomplete@^1.1.0:
   integrity sha1-X63BDYPx+GmOgODw2AroE2OsFLM=
   dependencies:
     dom-scroll-into-view "^1.2.1"
+
+react-bulma-components@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/react-bulma-components/-/react-bulma-components-2.3.0.tgz#a25fd8f57b5748b0969673dfbfd2cd9186287522"
+  integrity sha512-gt1SeJmknPTET9HOcn+Z3kweYSkxswRgMYgMYOkUUKCtqc70fJfz5+FPZmczUzxej0sTXzwXIVWUqm1ftVu31g==
+  dependencies:
+    bulma "0.7.1"
+    classnames "2.2.6"
+
+react-bulma-switch@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-bulma-switch/-/react-bulma-switch-0.0.3.tgz#7d2577691f3ef8539d14ffa62330c2fb861cdd35"
+  integrity sha512-YSCiakkVJLHafSUg9ITiJxTr6jtabrufeGf61vVjOapRrfHs1SzfOC3LwECl4QcFz4ovqqaPmAXRdUWQG1S8jQ==
+  dependencies:
+    bulma-switch "1.0.1"
+    classnames "2.2.5"
 
 react-content-loader@^3.4.2:
   version "3.4.2"

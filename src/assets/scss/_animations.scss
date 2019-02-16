@@ -135,6 +135,7 @@
 .accordion-exit-active {
   height: 1px;
   opacity: 0.01;
+  overflow: hidden;
   transition: all 600ms ease-in-out;
 }
 

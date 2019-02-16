@@ -2,9 +2,23 @@ import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import Switch from 'react-bulma-switch'
 import { CSSTransition } from 'react-transition-group'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { FooterContainer } from '~/components/layout/Footer'
+
+const ControlledSwitch = class extends PureComponent {
+  render() {
+    return <Switch
+      rounded
+      outlined
+      color='info'
+      size='medium'
+      {...this.props}
+      className='is-uppercase'
+    />
+  }
+}
 
 export const CreateHookForm = class _CreateHookForm extends PureComponent {
   static contextTypes = {
@@ -20,6 +34,7 @@ export const CreateHookForm = class _CreateHookForm extends PureComponent {
       filterTopic1: '',
       filterTopic2: '',
       filterTopic3: '',
+      filterEventBool: false,
       creationSuccessful: false
     }
   }
@@ -163,7 +178,47 @@ export const CreateHookForm = class _CreateHookForm extends PureComponent {
           )}
         </div>
 
+        <hr />
+        <br />
+        <ControlledSwitch
+          value={this.state.filterEventBool}
+          onChange={(e) => {
+
+            this.setState({ filterEventBool: !this.state.filterEventBool })
+          }} 
+        >I would also like to filter by a specific event</ControlledSwitch>
+
+        <CSSTransition
+          timeout={600}
+          classNames='accordion'
+          in={this.state.filterEventBool}
+        >
+          {state => (
+            <div className='accordion event-name-accordion'>
+              <div className='field'>
+                <div className='control'>
+                  <label htmlFor='webhook-url-input' className='label is-size-4 is-uppercase'>
+                    When something happens please send a notification to this URL: <span className='has-text-warning' style={{ display: 'none' }}>*</span>
+                  </label>
+
+                  <input
+                    id='event-name-input'
+                    className='input'
+                    type='text'
+                    value={this.state.eventName}
+                    onChange={(e) => this.setState({ eventName: e.target.value })}
+                  />
+                  {/* TODO: validate proper EVENT NAME! */}
+                </div>
+              </div>
+            </div>
+          )}
+        </CSSTransition>
+
         <div className='field'>
+          <br />
+          <br />
+
           <div className='control has-text-centered'>
             <button
               type='submit'

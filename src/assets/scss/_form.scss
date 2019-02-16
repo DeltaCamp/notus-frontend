@@ -14,18 +14,32 @@ $addonsFormHeight: 57px;
 }
 
 .label {
-  // color: #789;
   cursor: pointer;
   text-align: left;
-  // font-family: $family-serif;
-  // font-size: 1.25rem;
-  // font-weight: 900;
-  // font-family: $code-family;
-  // text-transform: uppercase;
 }
 
 .label:not(:last-child) {
   margin-bottom: 0.5rem;
+}
+
+.switch[type="checkbox"].is-medium.is-outlined + label::before {
+  transition: border-color 100ms ease-in-out;
+}
+
+.switch[type="checkbox"].is-medium.is-outlined + label::before {
+  background-color: white;
+}
+
+.switch[type="checkbox"].is-medium.is-outlined + label:hover::before {
+  border-color: $cyan;
+}
+
+.switch[type="checkbox"].is-medium + label::before {
+  top: 0.25rem;
+}
+
+.switch[type="checkbox"].is-medium + label::after {
+  top: 0.5rem;
 }
 
 input.input,
@@ -33,7 +47,7 @@ textarea.textarea {
   border-radius: 0;
   font-family: $family-code;
   font-size: 1.75rem;
-  letter-spacing: 1px;
+  // letter-spacing: 0;
   height: 70px;
   margin: 0.5rem 0;
   padding: 5px 15px 3px;
@@ -227,4 +241,9 @@ label.radio,
 
 .form.is-warning .field-addon--icon path {
   fill: $yellow;
+}
+
+.event-name-accordion.accordion-enter-active,
+.event-name-accordion.accordion-enter-done {
+  height: 200px;
 }
