@@ -10,7 +10,7 @@ import { GitHubLink } from '~/components/GitHubLink'
 import { VouchButton } from '~/components/hooks/VouchButton'
 import { VouchRow } from '~/components/hooks/VouchRow'
 import { projectPackageEvents } from '~/projections/projectPackageEvents'
-import { vouchingQueries } from '~/queries/vouchingQueries'
+import { velcroQueries } from '~/queries/velcroQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { challengeProjection } from '~/projections/challengeProjection'
 
@@ -19,19 +19,19 @@ export class PackageDetails extends Component {
 
   static propTypes = {
     metadata: PropTypes.object.isRequired,
-    vouching: PropTypes.object.isRequired,
+    velcro: PropTypes.object.isRequired,
     registeredEvent: PropTypes.object.isRequired
   }
 
   render () {
-    const { metadata, vouching, registeredEvent } = this.props
+    const { metadata, velcro, registeredEvent } = this.props
     const { parsedLog } = registeredEvent || {}
     const { values } = parsedLog || {}
     const githubDetails = ''
     // const githubDetails = gh(values.metadataURI || '')
     const { owner, repo } = githubDetails
     const { id } = values || {}
-    const challenges = challengeProjection(vouching.allEvents)
+    const challenges = challengeProjection(velcro.allEvents)
     const noChallenges = challenges.length === 0
 
     const { name } = metadata || {}

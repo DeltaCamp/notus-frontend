@@ -1,19 +1,19 @@
 import React, { PureComponent } from 'react'
-import classnames from 'classnames'
-import { Link } from 'react-router-dom'
+// import classnames from 'classnames'
+// import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
-import { CreateHookForm } from '~/components/hooks/CreateHookForm'
+import { RegisterWebhookForm } from '~/components/hooks/RegisterWebhookForm'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { HooksList } from '~/components/hooks/HooksList'
-import { CodeBox } from '~/components/CodeBox'
+// import { CodeBox } from '~/components/CodeBox'
 import { web3Queries } from '~/queries/web3Queries'
-import * as routes from '~/../config/routes'
+// import * as routes from '~/../config/routes'
 
 export class HooksListPage extends PureComponent {
   render () {
-    const heroColor = 'is-link'
+    // const heroColor = 'is-link'
 
     return (
       <div className='is-positioned-absolutely'>
@@ -26,7 +26,7 @@ export class HooksListPage extends PureComponent {
                 </h1>
                 <br />
 
-                <CreateHookForm />
+                <RegisterWebhookForm />
 
                 {/* <CodeBox /> */}
                 {/* <p>

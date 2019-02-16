@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import VelcroLogo from '~/assets/images/velcro--logo.svg'
+import * as routes from '~/../config/routes'
 
 export const Footer = class _Footer extends Component {
   render () {
@@ -10,12 +12,12 @@ export const Footer = class _Footer extends Component {
         <footer className='footer has-text-centered'>
           <div className='footer--primary'>
             <div className='footer-menu'>
-              <a
-                href='#'
+              <Link
+                to={routes.HOOKS}
                 className='footer-item is-uppercase has-text-weight-bold'
               >
                 Hooks
-              </a>
+              </Link>
             </div>
           </div>
 

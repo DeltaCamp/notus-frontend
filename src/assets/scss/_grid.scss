@@ -19,7 +19,7 @@ $grid_arr: (
     @for $i from 1 through 12 {
       @for $y from 1 through 12 {
         // Differs from bootstrap from the point that it specifies the index of a column to start
-        // example: col-start-6 col-4 (start at col 6 columns and occupy 4 columns
+        // example: col-start-md-6 col-md-4 (start at col 6 columns and occupy 4 columns for medium and up
         .col-start-#{$label}-#{$y}.col-#{$label}-#{$i} {
           grid-column: #{$y} / span #{$i};
         }

@@ -25,7 +25,7 @@ export const mutations = {
           const methodFxn = contract[method]
 
           if (!methodFxn) {
-            throw new Error(`Unknown function ${method} for contract Vouching`)
+            throw new Error(`Unknown function ${method} for contract ${contractName}`)
           }
 
           let data = { transactions: [] }

@@ -161,23 +161,6 @@
   }
 }
 
-.list-item__cell--total-vouched {
-  align-self: baseline;
-  grid-area: total;
-}
-
-.list-item__cell--total-vouched a {
-  padding: 1.5rem 1rem 1.25rem 0;
-}
-
-.list-item__cell--total-vouched__title {
-  align-self: end;
-}
-
-.list-item__cell--total-vouched__value {
-  align-self: start;
-}
-
 .list-item__cell--blank {
   display: none;
   grid-area: blank;
@@ -238,19 +221,11 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  grid-template-areas: 'vouched vouched'
+  grid-template-areas: '. .'
     'icon tokens'
     'view view';
   height: 75px;
   width: 100%;
-}
-
-.list-item--subtitle {
-  grid-area: vouched;
-}
-
-.list-item--subtitle {
-  grid-area: vouched;
 }
 
 .list-item--zep-token-logo {

@@ -4,58 +4,8 @@
   position: relative;
 }
 
-.message-vouch {
-  background-color: transparent;
-  border: 1px solid rgba(100, 100, 100, 0.15);
-  margin-top: 0;
-  height: 10rem;
-  overflow: hidden;
-
-  @media screen and (max-width: 390px) {
-    height: 16rem;
-  }
-}
-
-.message-vouch.has-voted {
-  @media screen and (max-width: 867px) {
-    height: 12rem;
-  }
-
-  @media screen and (max-width: 767px) {
-    height: 8rem;
-  }
-
-  @media screen and (max-width: 600px) {
-    height: 10rem;
-  }
-
-  @media screen and (max-width: 490px) {
-    height: 15rem;
-  }
-
-  @media screen and (max-width: 350px) {
-    height: 19rem;
-  }
-
-  @media screen and (max-width: 300px) {
-    height: 24rem;
-  }
-}
-
 .message--cta {
   border-left: 0;
-}
-
-.message-body.message-vouch--question {
-  padding-top: 2rem;
-}
-
-.message-body.message-vouch--positive-answer {
-  padding-top: 2rem;
-}
-
-.message-body.message-vouch--negative-answer {
-  padding-top: 3rem;
 }
 
 .message--cta .button {

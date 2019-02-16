@@ -26,6 +26,7 @@ $addonsFormHeight: 57px;
   transition: border-color 100ms ease-in-out;
 }
 
+.switch[type="checkbox"].is-info.is-outlined:checked + label::before,
 .switch[type="checkbox"].is-medium.is-outlined + label::before {
   background-color: white;
 }
@@ -245,5 +246,10 @@ label.radio,
 
 .event-name-accordion.accordion-enter-active,
 .event-name-accordion.accordion-enter-done {
-  height: 200px;
+  height: 180px;
+}
+
+.event-topics-accordion.accordion-enter-active,
+.event-topics-accordion.accordion-enter-done {
+  height: 500px;
 }

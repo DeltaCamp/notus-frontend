@@ -13,7 +13,7 @@ import { ErrorMessage } from '~/components/ErrorMessage'
 // import { GithubProfileImage } from '~/components/GithubProfileImage'
 import { ShortText } from '~/components/ShortText'
 import { PackageListItemLoader } from '~/components/hooks/PackageListItemLoader'
-import { vouchingQueries } from '~/queries/vouchingQueries'
+import { velcroQueries } from '~/queries/velcroQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import * as routes from '~/../config/routes'
 
@@ -52,7 +52,7 @@ export const PackageListItem = ReactTimeout(class _PackageListItem extends PureC
   render () {
     return (
       <Query
-        query={vouchingQueries.packageQuery}
+        query={velcroQueries.packageQuery}
         variables={{
           uri: this.props.package.metadataURI,
           id: this.props.package.id.toString()

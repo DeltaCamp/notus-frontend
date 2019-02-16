@@ -58,12 +58,12 @@ export const Nav = class _Nav extends Component {
                 { 'is-active': this.state.mobileNavActive }
               )}>
                 <div className='navbar-end'>
-                  <a
-                    href='#'
+                  <Link
+                    to={routes.HOOKS}
                     className='navbar-item'
                   >
                     Hooks
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

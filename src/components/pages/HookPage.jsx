@@ -8,7 +8,7 @@ import { PageDetailsLoader } from '~/components/PageDetailsLoader'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { PackageDetails } from '~/components/hooks/PackageDetails'
-import { vouchingQueries } from '~/queries/vouchingQueries'
+import { velcroQueries } from '~/queries/velcroQueries'
 
 export class HookPage extends PureComponent {
   static propTypes = {
@@ -41,7 +41,7 @@ export class HookPage extends PureComponent {
                   </button>
                 </p>
 
-                <Query query={vouchingQueries.eventsQuery}>
+                <Query query={velcroQueries.eventsQuery}>
                   {({ loading, error, data }) => {
                     if (loading) return <PageDetailsLoader />
                     if (error) return <ErrorMessage errorMessage={error} />
@@ -59,7 +59,7 @@ export class HookPage extends PureComponent {
 
                     return (
                       <Query
-                        query={vouchingQueries.packageQuery}
+                        query={velcroQueries.packageQuery}
                         variables={{ uri: packageItem.metadataURI, id: packageItem.id.toString() }}
                       >
                         {
@@ -68,7 +68,7 @@ export class HookPage extends PureComponent {
 
                             if (error) return <ErrorMessage errorMessage={error} />
 
-                            const { metadata, Vouching } = data
+                            const { metadata, Velcro } = data
 
                             return (
                               <>
@@ -77,7 +77,7 @@ export class HookPage extends PureComponent {
                                 />
                                 <PackageDetails
                                   metadata={metadata}
-                                  vouching={Vouching}
+                                  velcro={Velcro}
                                   registeredEvent={event}
                                 />
                               </>

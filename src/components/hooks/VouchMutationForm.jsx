@@ -12,16 +12,16 @@ import { abiMapping } from '~/apollo/abiMapping'
 import { ethers } from 'ethers'
 import gql from 'graphql-tag'
 
-const tokenQuery = gql`
-  query tokenQuery($address: String!, $spender: String!) {
-    ZepToken @contract {
-      ...tokenFragment
-      ...allowanceFragment
-    }
-  }
-  ${tokenFragments.tokenFragment}
-  ${tokenFragments.allowanceFragment}
-`
+// const tokenQuery = gql`
+//   query tokenQuery($address: String!, $spender: String!) {
+//     ZepToken @contract {
+//       ...tokenFragment
+//       ...allowanceFragment
+//     }
+//   }
+//   ${tokenFragments.tokenFragment}
+//   ${tokenFragments.allowanceFragment}
+// `
 
 export const VouchMutationForm = graphql(Web3Mutations.sendTransaction, { name: 'sendTransaction' })(
   graphql(web3Queries.networkAccountQuery, { name: 'networkAccount' })(

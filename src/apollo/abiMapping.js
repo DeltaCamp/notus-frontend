@@ -1,8 +1,9 @@
 import { AbiMapping } from 'apollo-link-ethereum'
-import VouchingAbi from './abi/VouchingAbi'
-import ZepTokenAbi from './abi/ZepTokenAbi'
-import Vouching from '#/Vouching.json'
-import ZepToken from '#/ZepToken.json'
+
+// TODO: Replace this with the abi from the artifacts in the velcro-contract npm package
+import VelcroAbi from './abi/VelcroAbi'
+
+import Velcro from '#/Velcro.json'
 
 export const abiMapping = new AbiMapping()
 
@@ -15,5 +16,4 @@ function addTruffleArtifact (name, abi, truffleJsonArtifact) {
   })
 }
 
-addTruffleArtifact('Vouching', VouchingAbi, Vouching)
-addTruffleArtifact('ZepToken', ZepTokenAbi, ZepToken)
+addTruffleArtifact('Velcro', VelcroAbi, Velcro)

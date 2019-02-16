@@ -1,16 +1,16 @@
 import React, { PureComponent } from 'react'
 import { ethers } from 'ethers'
 import { get } from 'lodash'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Query, graphql, withApollo } from 'react-apollo'
 import { ErrorMessage } from '~/components/ErrorMessage'
 // import { PackageListItem } from '~/components/hooks/PackageListItem'
 import { PackageListItemLoader } from '~/components/hooks/PackageListItemLoader'
-import { vouchingQueries } from '~/queries/vouchingQueries'
+import { velcroQueries } from '~/queries/velcroQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import * as routes from '~/../config/routes'
+// import * as routes from '~/../config/routes'
 
-export const HooksList = graphql(vouchingQueries.eventsQuery)(withApollo(class HooksList extends PureComponent {
+export const HooksList = graphql(velcroQueries.eventsQuery)(withApollo(class HooksList extends PureComponent {
   constructor (props) {
     super(props)
     this.state = {
@@ -31,24 +31,26 @@ export const HooksList = graphql(vouchingQueries.eventsQuery)(withApollo(class H
       events.map(event => {
         const id = event.parsedLog.values.id
         return (
-          client.query({ query: vouchingQueries.vouchQuery, variables: { id: id.toString() } })
+          client.query({ query: velcroQueries.velcroQuery, variables: { id: id.toString() } })
             .then(result => {
-              return {
-                id,
-                totalVouched: result.data.Vouching.entry.totalVouched
-              }
+              console.log('.then(result => {', result)
+              // return {
+              //   id,
+              //   totalVouched: result.data.Velcro.entry.totalVouched
+              // }
             })
         )
       })
     ).then((results) => {
-      var totalVouches = results.reduce((accumulator, result) => {
-        accumulator[result.id] = result.totalVouched
-        return accumulator
-      }, {})
+      console.log('(results)', results)
+      // var totalVouches = results.reduce((accumulator, result) => {
+      //   accumulator[result.id] = result.totalVouched
+      //   return accumulator
+      // }, {})
 
-      this.setState({
-        totalVouches
-      })
+      // this.setState({
+      //   totalVouches
+      // })
     })
   }
 
@@ -104,7 +106,7 @@ export const HooksList = graphql(vouchingQueries.eventsQuery)(withApollo(class H
                   {item}
                   <Query
                     key={`package-item-query-${index}`}
-                    query={vouchingQueries.packageQuery}
+                    query={velcroQueries.packageQuery}
                     variables={{
                       uri: packageValues.metadataURI,
                       id: packageValues.id.toString()

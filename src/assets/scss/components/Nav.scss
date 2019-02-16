@@ -1,4 +1,5 @@
 .navbar {
+  box-shadow: 0 8px 16px rgba(10, 10, 10, .03);
   z-index: 9999;
 }
 
@@ -34,22 +35,6 @@
 
 .navbar-end .navbar-item:hover {
   border-bottom: 1px solid black;
-}
-
-.navbar-brand__secondary-logo {
-  color: #75e5ea;
-  font-family: $family-sans-serif;
-  font-weight: 300;
-  font-size: 1.25rem;
-  letter-spacing: 0;
-  position: relative;
-  text-transform: capitalize;
-  transition: color 150ms ease-in;
-  top: -3px;
-}
-
-.navbar-brand__secondary-logo:hover {
-  color: white;
 }
 
 .navbar-brand a {
@@ -244,7 +229,7 @@ a.navbar-item,
 .burger:hover .burger-lines,
 .burger:hover .burger-lines:after,
 .burger:hover .burger-lines:before {
-  background-color: rgba(255, 255, 255, 1);
+  // background-color: rgba(255, 255, 255, 1);
 }
 
 .burger.burger-slip .burger-lines:after, .burger.burger-slip .burger-lines:before {
