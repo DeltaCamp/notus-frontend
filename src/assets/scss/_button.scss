@@ -35,7 +35,7 @@ button[disabled]:active {
   padding: 1rem 4rem;
   text-transform: uppercase;
 
-  @media screen and (max-width: $mobile) {
+  @media screen and (max-width: $tablet) {
     height: auto;
     padding: 0.75rem 2rem;
     white-space: normal;

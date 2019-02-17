@@ -1,13 +1,15 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { ethers } from 'ethers'
 import { Query } from 'react-apollo'
 import { FooterContainer } from '~/components/layout/Footer'
 import { PageDetailsLoader } from '~/components/PageDetailsLoader'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
-import { PackageDetails } from '~/components/hooks/PackageDetails'
+import { HookDetails } from '~/components/hooks/HookDetails'
 import { velcroQueries } from '~/queries/velcroQueries'
+import { LogBox } from '~/components/LogBox'
 
 export class HookPage extends PureComponent {
   static propTypes = {
@@ -45,45 +47,39 @@ export class HookPage extends PureComponent {
                     if (loading) return <PageDetailsLoader />
                     if (error) return <ErrorMessage errorMessage={error} />
 
-                    const events = data.Vouching ? data.Vouching.Registered : []
-                    const id = this.props.match.params.id
-                    const event = events.find((event) => event.parsedLog.values.id.eq(id))
+                    const events = data.Velcro ? data.Velcro.Registered : []
+                    const ipfsHash = this.props.match.params.ipfsHash
+                    const webhookEvent = events.find((e) => {
+                      let ipfsHashUtf8
+                      const ipfsHashAsHex = e.parsedLog.values.ipfsHash
 
-                    if (!event) {
-                      console.warn('event not found')
+                      try {
+                        ipfsHashUtf8 = ethers.utils.toUtf8String(ipfsHashAsHex)
+                      } catch (error) {
+                        console.warn(error)
+                      }
+
+                      return ipfsHashUtf8 === ipfsHash
+                    })
+
+                    if (!webhookEvent) {
+                      console.warn('webhookEvent not found')
                       return null
                     }
 
-                    const packageItem = event.parsedLog.values
-
                     return (
-                      <Query
-                        query={velcroQueries.packageQuery}
-                        variables={{ uri: packageItem.metadataURI, id: packageItem.id.toString() }}
-                      >
-                        {
-                          ({ loading, error, data }) => {
-                            if (loading) return <PageDetailsLoader />
-
-                            if (error) return <ErrorMessage errorMessage={error} />
-
-                            const { metadata, Velcro } = data
-
-                            return (
-                              <>
-                                <Helmet
-                                  title={`${metadata.name}`}
-                                />
-                                <PackageDetails
-                                  metadata={metadata}
-                                  velcro={Velcro}
-                                  registeredEvent={event}
-                                />
-                              </>
-                            )
-                          }
-                        }
-                      </Query>
+                      <>
+                        <Helmet
+                          title={ipfsHash}
+                        />
+                        <HookDetails
+                          webhookEvent={webhookEvent}
+                          ipfsHash={ipfsHash}
+                        />
+                        <LogBox ipfsHash={ipfsHash} />
+                        <br />
+                        <br />
+                      </>
                     )
                   }}
                 </Query>

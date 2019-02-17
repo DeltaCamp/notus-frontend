@@ -11,3 +11,6 @@ export REACT_APP_DEFAULT_NETWORK_NAME=ropsten
 
 # Configures the block from which to retrieve events on mainnet.  Helps optimize queries.
 export REACT_APP_MAINNET_STARTING_BLOCK=7189520
+
+# Velcro WebSocket API to use
+export REACT_APP_WS_API_URL=wss://api.ethvelcro.network
