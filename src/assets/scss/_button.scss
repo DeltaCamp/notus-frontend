@@ -31,12 +31,13 @@ button[disabled]:active {
   border-radius: 100px;
   font-size: 1.25rem;
   font-weight: 900;
-  padding: 2rem 4rem;
+  height: auto;
+  padding: 1rem 4rem;
   text-transform: uppercase;
 
   @media screen and (max-width: $mobile) {
     height: auto;
-    padding: 1rem;
+    padding: 0.75rem 2rem;
     white-space: normal;
     width: 100%;
   }

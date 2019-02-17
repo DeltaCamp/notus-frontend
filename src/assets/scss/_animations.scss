@@ -11,41 +11,35 @@
 }
 
 .layout-appear {
-  opacity: 0.01;
-  transform: scale3d(1.02, 1.02, 1.02) translate3d(0, 0, 0);
-  transition-timing-function: ease-out;
+  transform: translate3d(0, -500px, 0);
+  transition-timing-function: ease-in-out;
 }
 
 .layout-appear.layout-appear-active {
-  opacity: 1;
-  transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
-  transition: all 200ms ease-out;
+  transform: translate3d(0, 0, 0);
+  transition: all 1000ms ease-out;
+  transition-delay: 700ms;
 }
 
 .layout-enter {
-  opacity: 0.01;
-  transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .layout-enter.layout-enter-active {
-  opacity: 1;
-  transition: all 200ms ease;
-  transition-timing-function: ease-in;
-}
-
-.layout-exit {
-  opacity: 1;
-  transition: all 200ms ease-in;
-}
-
-.layout-exit.layout-exit-active {
-  opacity: 0.01;
+  transition: all 100ms ease-in-out;
 }
 
 .layout-enter-done {
   opacity: 1;
-  transition: all 200ms ease;
-  transition-timing-function: ease-in;
+  transition: all 1300ms cubic-bezier(0.175, 0.885, 0.32, 1.075);
+}
+
+.layout-exit {
+  transition: all 200ms ease-out;
+}
+
+.layout-exit.layout-exit-active {
+  opacity: 0.01;
 }
 
 .slide-up {
