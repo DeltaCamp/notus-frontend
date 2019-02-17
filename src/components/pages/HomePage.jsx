@@ -39,23 +39,9 @@ export class HomePage extends PureComponent {
                       return (
                         <>
                           <h5 className='is-size-5 has-text-grey-dark is-uppercase has-text-weight-bold'>
-                            WebHooks
+                            Your WebHooks
                           </h5>
                           <br />
-
-                          <div className='message-white has-text-centered'>
-                            <div className='message-white--body'>
-                              <p className='is-size-4 message-body--text has-text-grey'>
-                                Want to start receiving notifications?
-                              </p>
-                              <Link
-                                className='button is-primary'
-                                to={routes.HOOKS}
-                              >
-                                Create Your First Hook
-                              </Link>
-                            </div>
-                          </div>
 
                           <HooksList location={this.props.location} />
                         </>

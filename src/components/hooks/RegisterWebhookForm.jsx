@@ -265,8 +265,6 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             this.setState({ isLoading: false })
           } else {
             try {
-              // const { networkAccount } = this.props
-
               this.setState({ creating: true, uploadingToIpfs: true })
               
               const ipfsHash = await uploadWebhook(this.state.contractAddress, this.state.webhookUrl)
@@ -276,7 +274,6 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
                 uploadingToIpfs: false
               })
 
-              // const contractName = 'Velcro'
               const ipfsHashAsHex = ethers.utils.hexlify(
                 ethers.utils.toUtf8Bytes(ipfsHash)
               )
