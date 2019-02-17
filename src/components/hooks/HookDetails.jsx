@@ -129,9 +129,6 @@ export class HookDetails extends Component {
             <div className='code-wrapper'>
               {this.props.ipfsHash}
             </div>
-
-            <br />
-            <br />
             <br />
           </div>
         </div>

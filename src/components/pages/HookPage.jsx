@@ -9,6 +9,7 @@ import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { HookDetails } from '~/components/hooks/HookDetails'
 import { velcroQueries } from '~/queries/velcroQueries'
+import { LogBox } from '~/components/LogBox'
 
 export class HookPage extends PureComponent {
   static propTypes = {
@@ -75,6 +76,9 @@ export class HookPage extends PureComponent {
                           webhookEvent={webhookEvent}
                           ipfsHash={ipfsHash}
                         />
+                        <LogBox ipfsHash={ipfsHash} />
+                        <br />
+                        <br />
                       </>
                     )
                   }}
