@@ -13,6 +13,10 @@ import { transactionQueries } from '~/queries/transactionQueries'
 import { web3Queries } from '~/queries/web3Queries'
 // import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { uploadWebhook } from '~/utils/uploadWebhook'
+import { getNetworkId } from '~/web3/getNetworkId'
+import { abiMapping } from '~/apollo/abiMapping'
+
+var newWeb3 = require('./newWeb3')
 
 const ControlledSwitch = class extends PureComponent {
   render() {
@@ -47,13 +51,9 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             filterEventBool: false,
             filterTopicsBool: false,
             isSendingTx: false,
-            creationSuccessful: false
+            creationSuccessful: false,
+            newHook: true
           }
-        }
-
-        async componentDidMount() {
-          await uploadWebhook()
-          console.log('done!')
         }
 
         hasSentTransaction() {
@@ -174,6 +174,11 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
           this.props.sendTransaction({
             variables: {
               txData
+            },
+            onCompleted: () => {
+              this.setState({
+                newHook: false
+              })
             }
           })
         }
@@ -265,32 +270,38 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             this.setState({ isLoading: false })
           } else {
             try {
-              const ipfsHash = await uploadWebhook()
+              const { networkAccount } = this.props
+              
+              // 'https://enessdesb4vmt.x.pipedream.net'
+              // 0xc1846137e6ca6d1380e153b68fe5d8966133807b
+              const ipfsHash = await uploadWebhook(this.state.contractAddress, this.state.webhookUrl)
               console.log('done! ipfsHash is ', ipfsHash)
 
+              console.log('networkAccount', networkAccount)
+              console.log('user', networkAccount.account)
+              const owner = networkAccount.account
+              // 0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e
 
+              const networkId = await getNetworkId()
+              const contractName = 'Velcro'
+              const web3 = newWeb3()
+              const address = abiMapping.getAddress(contractName, networkId)
+              const abi = abiMapping.getAbi(contractName)
+              const velcro = new web3.eth.Contract(abi, address)
+              const hex = web3.utils.toHex(ipfsHash)
 
-
-
-
-
-              // const web3 = newWeb3()
-              // const accounts = await web3.eth.getAccounts()
-              // const [owner] = accounts
-
-              // const velcro = new web3.eth.Contract(velcroArtifact.abi, process.env.CONTRACT_ADDRESS)
-              // const hex = web3.utils.toHex(ipfsHash)
-
-              // const hashOwner = await velcro.methods.owner(hex).call()
-              // if (hashOwner !== '0x0000000000000000000000000000000000000000') {
-              //   await velcro.methods.unregisterWebhook(hex).send({
-              //     from: owner
-              //   })
-              // }
+              const hashOwner = await velcro.methods.owner(hex).call()
+              if (hashOwner !== '0x0000000000000000000000000000000000000000') {
+                this.registerWebhookTransaction()
+                // await velcro.methods.unregisterWebhook(hex).send({
+                //   from: owner
+                // })
+              }
 
               // const tx = await velcro.methods.registerWebhook(hex).send({ from: owner })
               // console.log(chalk.green(`TxResult: ${tx.txHash}`), tx)
 
+              // this.registerWebhookTransaction()
 
               // if (this.registerWebhookTxError()) {
               //   this.resetForm()
@@ -299,7 +310,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
               //   this.setState({ amountError: true })
               // }
 
-              this.setState({ creationSuccessful: true })
+              // this.setState({ creationSuccessful: true })
             } catch (error) {
               console.error(error)
               this.setState({ errorMessage: error.message })
