@@ -12,6 +12,7 @@ import { Web3Mutations } from '~/mutations/Web3Mutations'
 import { transactionQueries } from '~/queries/transactionQueries'
 import { web3Queries } from '~/queries/web3Queries'
 // import { displayWeiToEther } from '~/utils/displayWeiToEther'
+import { uploadWebhook } from '~/utils/uploadWebhook'
 
 const ControlledSwitch = class extends PureComponent {
   render() {
@@ -48,6 +49,11 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             isSendingTx: false,
             creationSuccessful: false
           }
+        }
+
+        async componentDidMount() {
+          await uploadWebhook()
+          console.log('done!')
         }
 
         hasSentTransaction() {
@@ -234,7 +240,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
           return this.props.registerWebhookTx && !this.props.registerWebhookTx.completed
         }
 
-        handleSubmit = () => {
+        async handleSubmit = () => {
           let hasError
           const requiredFields = ['webhookUrl', 'contractAddress']
 
@@ -258,14 +264,41 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
           if (hasError) {
             this.setState({ isLoading: false })
           } else {
-            // if (this.registerWebhookTxError()) {
-            //   this.resetForm()
-            //   // this.focusOnInput()
-            // } else {
-            //   this.setState({ amountError: true })
-            // }
-
             try {
+              const ipfsHash = await uploadWebhook()
+              console.log('done! ipfsHash is ', ipfsHash)
+
+
+
+
+
+
+
+              const web3 = newWeb3()
+              const accounts = await web3.eth.getAccounts()
+              const [owner] = accounts
+
+              const velcro = new web3.eth.Contract(velcroArtifact.abi, process.env.CONTRACT_ADDRESS)
+              const hex = web3.utils.toHex(hash)
+
+              const hashOwner = await velcro.methods.owner(hex).call()
+              if (hashOwner !== '0x0000000000000000000000000000000000000000') {
+                await velcro.methods.unregisterWebhook(hex).send({
+                  from: owner
+                })
+              }
+
+              const tx = await velcro.methods.registerWebhook(hex).send({ from: owner })
+              console.log(chalk.green(`TxResult: ${tx.txHash}`), tx)
+
+
+              // if (this.registerWebhookTxError()) {
+              //   this.resetForm()
+              //   // this.focusOnInput()
+              // } else {
+              //   this.setState({ amountError: true })
+              // }
+
               this.setState({ creationSuccessful: true })
             } catch (error) {
               console.error(error)
