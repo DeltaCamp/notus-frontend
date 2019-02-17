@@ -20,6 +20,7 @@ export const uploadWebhook = async function () {
   const [{ path, hash, size }] = await ipfs.add(buffer)
 
   console.log(chalk.green(`Uploaded file to IPFS with hash ${hash}`))
+  console.log(chalk.green(`path ${path}, size ${size}`))
 
   return hash
 }

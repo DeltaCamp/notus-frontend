@@ -240,7 +240,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
           return this.props.registerWebhookTx && !this.props.registerWebhookTx.completed
         }
 
-        async handleSubmit = () => {
+        handleSubmit = async () => {
           let hasError
           const requiredFields = ['webhookUrl', 'contractAddress']
 
@@ -274,22 +274,22 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
 
 
 
-              const web3 = newWeb3()
-              const accounts = await web3.eth.getAccounts()
-              const [owner] = accounts
+              // const web3 = newWeb3()
+              // const accounts = await web3.eth.getAccounts()
+              // const [owner] = accounts
 
-              const velcro = new web3.eth.Contract(velcroArtifact.abi, process.env.CONTRACT_ADDRESS)
-              const hex = web3.utils.toHex(hash)
+              // const velcro = new web3.eth.Contract(velcroArtifact.abi, process.env.CONTRACT_ADDRESS)
+              // const hex = web3.utils.toHex(ipfsHash)
 
-              const hashOwner = await velcro.methods.owner(hex).call()
-              if (hashOwner !== '0x0000000000000000000000000000000000000000') {
-                await velcro.methods.unregisterWebhook(hex).send({
-                  from: owner
-                })
-              }
+              // const hashOwner = await velcro.methods.owner(hex).call()
+              // if (hashOwner !== '0x0000000000000000000000000000000000000000') {
+              //   await velcro.methods.unregisterWebhook(hex).send({
+              //     from: owner
+              //   })
+              // }
 
-              const tx = await velcro.methods.registerWebhook(hex).send({ from: owner })
-              console.log(chalk.green(`TxResult: ${tx.txHash}`), tx)
+              // const tx = await velcro.methods.registerWebhook(hex).send({ from: owner })
+              // console.log(chalk.green(`TxResult: ${tx.txHash}`), tx)
 
 
               // if (this.registerWebhookTxError()) {
