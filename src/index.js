@@ -18,7 +18,6 @@ window.Intercom('boot', {
 
 window.addEventListener('load', async () => {
   try {
-    await window.ethereum.enable() // TODO Is this the correct way to do this?
     const provider = await getReadProvider()
     const network = await provider.getNetwork()
     let defaultFromBlock = 0
