@@ -64,7 +64,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
 
         registerWebhookTxCompleted() {
           const hookTx = this.props.hookTx
-          console.log((hookTx && !hookTx.error && hookTx.completed))
+          // console.log((hookTx && !hookTx.error && hookTx.completed))
           return hookTx && !hookTx.error && hookTx.completed
         }
 
@@ -300,7 +300,9 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
         }
 
         showModal = () => {
-          return (this.registerWebhookTxCompleted() || this.state.creating) && !this.registerWebhookTxError()
+          console.log('if this is true the modal should still show!')
+          console.log('this.registerWebhookTxCompleted()', this.registerWebhookTxCompleted())
+          return (this.registerWebhookTxCompleted() || this.state.creating)// && !this.registerWebhookTxError()
         }
 
         render () {
