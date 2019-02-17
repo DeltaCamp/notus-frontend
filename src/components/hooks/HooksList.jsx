@@ -27,6 +27,7 @@ export const HooksList = graphql(web3Queries.networkAccountQuery, { name: 'netwo
         const events = this.eventsFromProps(this.props)
         const { client } = this.props
 
+        console.log('events',events)
         console.log(this.props.hooks)
 
         // Promise.all(
@@ -97,7 +98,7 @@ export const HooksList = graphql(web3Queries.networkAccountQuery, { name: 'netwo
           //   return this.totalVouched(ipfsHashA).cmp(this.totalVouched(ipfsHashB))
           //   // return this.totalVouched(ipfsHashA).cmp(this.totalVouched(ipfsHashB))
           // })
-          const sortedEvents = events.slice(0, 3)
+          const sortedEvents = events
 
           content = (
             <>
@@ -107,13 +108,8 @@ export const HooksList = graphql(web3Queries.networkAccountQuery, { name: 'netwo
                   const hookValues = e.parsedLog.values
                   const webhookEvent = e
 
-                  // console.log('broken', e, index)
-                  // 0x516d62587731515351534d334755597171467855624c58356153724832616133647063715567694b4d5139353342
-
                   item = (
                     <React.Fragment key={`hook-fragment-${index}`}>
-                      <span>{index}</span>
-
                       <HookListItem
                         hookValues={hookValues}
                         webhookEvent={webhookEvent}

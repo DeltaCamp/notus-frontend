@@ -68,20 +68,17 @@ export class LogBox extends Component {
     return (
       <div className='row'>
         <div className='col-xs-12'>
-          <h5 className='is-size-5'>
-              Logs:
-          </h5>
           <code className='code code--example'>
             {logs.length < 1 && 
               <>
-                <span className='has-text-info'>Waiting for logs...</span>
+                <span >Waiting for logs...</span>
                 <br />
               </>
             }
             {logs.map((log, i) => {
               return (
                 <div key={i}>
-                  <span className='has-text-info'>{log}</span>
+                  <span >{log}</span>
                   <br />
                 </div>
               )

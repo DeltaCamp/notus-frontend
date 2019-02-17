@@ -22,7 +22,7 @@ export const velcroQueries = {
   ownerQuery: gql`
     query ownerQuery($address: String!) {
       Velcro @contract(type: "OwnerEvents", id: $address) {
-        allEvents @pastEvents(extraTopics: { types: ["address"], values: [$address] })
+        allEvents @pastEvents
       }
     }
   `,

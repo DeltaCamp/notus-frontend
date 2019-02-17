@@ -5,10 +5,8 @@ import { get } from 'lodash'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
 import { EnsName } from '~/components/EnsName'
-// import { projectPackageEvents } from '~/projections/projectPackageEvents'
 import { velcroQueries } from '~/queries/velcroQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-// import { challengeProjection } from '~/projections/challengeProjection'
 const ipfsClient = require('ipfs-http-client')
 
 export class HookDetails extends Component {
@@ -23,6 +21,7 @@ export class HookDetails extends Component {
 
   async componentDidMount() {
     const { ipfsHash } = this.props
+    console.log('CDM ipfsHash', ipfsHash)
     const ipfs = ipfsClient('ipfs.infura.io', '5001', { protocol: 'https' })
 
     const [{ path, content }] = await ipfs.get(ipfsHash)
@@ -123,10 +122,10 @@ export class HookDetails extends Component {
 
         <div className='row'>
           <div className='col-xs-12'>
-            <h5 className='is-size-5'>
+            <h6 className='is-size-6'>
               IPFS Hash:
-            </h5>
-            <div className='code-wrapper'>
+            </h6>
+            <div className='is-size-6'>
               {this.props.ipfsHash}
             </div>
             <br />

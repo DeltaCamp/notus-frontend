@@ -1,8 +1,8 @@
 .code {
   border-radius: 30px;
   display: inline-block;
-  font-size: 0.825rem;
-  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  padding: 1.5rem;
   position: relative;
 
   @media screen and (max-width: $tablet) {
@@ -28,8 +28,8 @@
 .code.code--example {
   background-color: $black-bis;
   border-radius: 10px;
-  color: white;
-  padding: 1rem 1rem;
+  color: white !important;
+  padding: 1.5rem;
   position: relative;
   width: 100%;
 }

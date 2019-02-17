@@ -12,12 +12,12 @@ export const Footer = class _Footer extends Component {
         <footer className='footer has-text-centered'>
           <div className='footer--primary'>
             <div className='footer-menu'>
-              <Link
-                to={routes.HOOKS}
+              <a
+                href='/#your-webhooks'
                 className='footer-item is-uppercase has-text-weight-bold'
               >
                 Hooks
-              </Link>
+              </a>
             </div>
           </div>
 
