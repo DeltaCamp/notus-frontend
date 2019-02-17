@@ -1,21 +1,18 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-// import Helmet from 'react-helmet'
 import Switch from 'react-bulma-switch'
+import { formatRoute } from 'react-router-named-routes'
+import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { graphql } from 'react-apollo'
-// import { abiMapping } from '~/apollo/abiMapping'
 import { ScrollToTop } from '~/components/ScrollToTop'
-// import { FooterContainer } from '~/components/layout/Footer'
 import { Web3Mutations } from '~/mutations/Web3Mutations'
 import { transactionQueries } from '~/queries/transactionQueries'
 import { web3Queries } from '~/queries/web3Queries'
-// import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { uploadWebhook } from '~/utils/uploadWebhook'
-// import { getNetworkId } from '~/web3/getNetworkId'
-import { abiMapping } from '~/apollo/abiMapping'
 import { ethers } from 'ethers'
+import * as routes from '~/../config/routes'
 
 const ControlledSwitch = class extends PureComponent {
   render() {
@@ -49,24 +46,26 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             filterTopic3: '',
             filterEventBool: false,
             filterTopicsBool: false,
-            isSendingTx: false,
-            creationSuccessful: false,
-            newHook: true
+            uploadingToIpfs: false,
+            creating: false,
+            creationSuccessful: false
           }
         }
 
         hasSentTransaction() {
-          return this.state.isSendingTx
+          const hookTx = this.props.hookTx
+          return hookTx && hookTx.sent && !hookTx.completed
         }
 
         registerWebhookTxError() {
           const hookTx = this.props.hookTx
-          return !this.state.newHook && hookTx && !!hookTx.error
+          return hookTx && !!hookTx.error
         }
 
         registerWebhookTxCompleted() {
           const hookTx = this.props.hookTx
-          return !this.state.newHook && hookTx && hookTx.completed
+          console.log((hookTx && !hookTx.error && hookTx.completed))
+          return hookTx && !hookTx.error && hookTx.completed
         }
 
         helpText = () => {
@@ -74,8 +73,8 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
 
           if (this.needsWeb3()) {
             text = `You will need to`
-          } else if (this.hasSentTransaction()) {
-            text = 'Waiting for confirmation...'
+          // } else if (this.hasSentTransaction()) {
+          //   text = 'Waiting for confirmation...'
           } else if (this.hasUncompletedTransaction()) {
             text = 'Waiting to receive transaction...'
           // } else if (this.notLoggedIn()) {
@@ -84,8 +83,8 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             text = 'Please enter an amount'
           } else if (this.registerWebhookTxError()) {
             text = 'Webhook was not registered'
-          } else if (this.registerWebhookTxCompleted()) {
-            text = 'Webhook registration successful'
+          // } else if (this.registerWebhookTxCompleted()) {
+          //   text = 'Webhook registration successful'
           }
 
           return text
@@ -164,26 +163,27 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             ]
           }
 
-          this.props.sendTransaction({
-            variables: {
-              txData
-            },
-            onCompleted: () => {
-              this.setState({
-                newHook: false
-              })
-            }
-          })
+          try {
+            this.props.sendTransaction({
+              variables: {
+                txData
+              }
+            })
+          } catch (error) {
+            // this doesn't work, currently no way to hide the modal
+            // if the user rejects the tx in metamask, etc
+          }
+          
         }
 
         notLoggedIn() {
           const { networkAccount } = this.props
           let notLoggedIn = true
-          // console.log(networkAccount)
-          // console.log(networkAccount.account)
+
           if (networkAccount) {
             notLoggedIn = !networkAccount.account
           }
+
           return notLoggedIn
         }
 
@@ -265,28 +265,48 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             this.setState({ isLoading: false })
           } else {
             try {
-              const { networkAccount } = this.props
+              // const { networkAccount } = this.props
+
+              this.setState({ creating: true, uploadingToIpfs: true })
               
               const ipfsHash = await uploadWebhook(this.state.contractAddress, this.state.webhookUrl)
-              
-              const contractName = 'Velcro'
+             
+              this.setState({
+                newIpfsHash: ipfsHash,
+                uploadingToIpfs: false
+              })
+
+              // const contractName = 'Velcro'
               const ipfsHashAsHex = ethers.utils.hexlify(
                 ethers.utils.toUtf8Bytes(ipfsHash)
               )
 
               this.registerWebhookTransaction(ipfsHashAsHex)
-              // this.setState({ creationSuccessful: true })
             } catch (error) {
+              // this doesn't work, currently no way to hide the modal
+              // if the user rejects the tx in metamask, etc
               console.error(error)
+
+              this.setState({
+                creating: false,
+                uploadingToIpfs: false,
+                newIpfsHash: undefined
+              })
               this.setState({ errorMessage: error.message })
             } finally {
-              this.setState({ isLoading: false })
+              this.setState({ isLoading: false, uploadingToIpfs: false })
             }
           }
         }
 
+        showModal = () => {
+          return (this.registerWebhookTxCompleted() || this.state.creating) && !this.registerWebhookTxError()
+        }
+
         render () {
           var content, error
+
+          const newWebhookLink = formatRoute(routes.HOOK, { ipfsHash: this.state.newIpfsHash })
 
           if (this.state.errorMessage) {
             error =
@@ -379,10 +399,11 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
               <ControlledSwitch
                 value={this.state.filterEventBool}
                 onChange={(e) => {
-
                   this.setState({ filterEventBool: !this.state.filterEventBool })
                 }} 
-              >I would like to filter by a specific event</ControlledSwitch>
+              >
+                <span className='has-text-grey'>I would like to filter by a specific event</span>
+              </ControlledSwitch>
 
               <CSSTransition
                 timeout={600}
@@ -419,7 +440,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
                   this.setState({ filterTopicsBool: !this.state.filterTopicsBool })
                 }}
               >
-                I would like to filter by the following event topics:
+                <span className='has-text-grey'>I would like to filter by the following event topics:</span>
               </ControlledSwitch>
 
               <CSSTransition
@@ -498,20 +519,15 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
                   </button>
                 </div>
               </div>
-            </form>
-
-          return (
-            <>
-              {error}
 
               <CSSTransition
                 timeout={600}
                 classNames='accordion'
-                in={this.state.creationSuccessful}
+                in={this.registerWebhookTxCompleted()}
               >
                 {state => (
                   <div className='accordion'>
-                    {this.state.creationSuccessful && <ScrollToTop />}
+                    {this.registerWebhookTxCompleted() && <ScrollToTop />}
 
                     <div className='has-text-centered'>
                       <ScrollToTop />
@@ -519,9 +535,14 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
                       <br />
                       <h1 className='is-size-1 is-uppercase has-text-success'>
                         Hook created!
-                      </h1>
+                        </h1>
                       <br />
-                      <button className='button is-small' onClick={(e) => { console.log(e) }}>View Activity Logs</button>
+                      <Link
+                        className='button is-small'
+                        to={newWebhookLink}
+                      >
+                          View Webhook Activity
+                        </Link>
                     </div>
                   </div>
                 )}
@@ -529,8 +550,57 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
 
               <CSSTransition
                 timeout={600}
+                classNames='fade'
+                in={this.showModal()}
+              >
+                {state => (
+                  <div className='fade-enter modal has-text-centered'>
+                    <div className='modal-body'>
+                      {this.state.uploadingToIpfs ?
+                        <span>Uploading to IPFS ...</span> :
+                        <span>Uploading to IPFS ... Done!</span>
+                      }
+
+                      {!this.state.uploadingToIpfs && !this.hasSentTransaction() &&
+                        <span><br />Waiting for transaction ...</span>
+                      }
+
+                      {this.hasSentTransaction() &&
+                        <span><br />Waiting for confirmations ...</span>
+                      }
+
+                      {
+                        this.registerWebhookTxCompleted() &&
+                        <>
+                          <span><br />Waiting for confirmations ... Done!</span>
+                          <br />
+                          <br />
+                          <Link
+                            to={newWebhookLink}
+                            className='button is-light'
+                          >
+                            View Webhook Activity
+                          </Link>
+                        </>
+                      }
+                    </div>
+                  </div>
+                )}
+              </CSSTransition>
+            </form>
+
+          return (
+            <>
+              <div
+                className={classnames('modal-background no-select', { 'is-active': this.showModal() })}
+              />
+
+              {error}
+
+              <CSSTransition
+                timeout={600}
                 classNames='accordion'
-                in={!this.state.creationSuccessful}
+                in={!this.registerWebhookTxCompleted()}
               >
                 {state => (
                   <>
