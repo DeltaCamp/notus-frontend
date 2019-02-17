@@ -15,8 +15,14 @@ import { web3Queries } from '~/queries/web3Queries'
 import { uploadWebhook } from '~/utils/uploadWebhook'
 import { getNetworkId } from '~/web3/getNetworkId'
 import { abiMapping } from '~/apollo/abiMapping'
+import { getWriteProvider } from '~/web3/getWriteProvider'
+import { ethers } from 'ethers'
 
-var newWeb3 = require('./newWeb3')
+// var Web3 = require('web3')
+// var newWeb3 = new Web3(
+//   // const provider = await getWriteProvider()
+//   new Web3.providers.HttpProvider(process.env.HTTP_PROVIDER_URL)
+// )
 
 const ControlledSwitch = class extends PureComponent {
   render() {
@@ -156,18 +162,12 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
           return className
         }
 
-        registerWebhookTransaction() {
-          /// wat?
-          const ipfsHash = [
-            this.state.contractAddress,
-            this.state.webhookUrl
-          ]
-
+        registerWebhookTransaction(ipfsHashAsHex) {
           const txData = {
             contractName: 'Velcro',
             method: 'registerWebhook',
             args: [
-              ipfsHash
+              ipfsHashAsHex
             ]
           }
 
@@ -275,28 +275,31 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
               // 'https://enessdesb4vmt.x.pipedream.net'
               // 0xc1846137e6ca6d1380e153b68fe5d8966133807b
               const ipfsHash = await uploadWebhook(this.state.contractAddress, this.state.webhookUrl)
-              console.log('done! ipfsHash is ', ipfsHash)
+              // console.log('done! ipfsHash is ', ipfsHash)
 
-              console.log('networkAccount', networkAccount)
-              console.log('user', networkAccount.account)
+              // console.log('networkAccount', networkAccount.networkId)
+              // console.log('user', networkAccount.account)
+
               const owner = networkAccount.account
               // 0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e
-
-              const networkId = await getNetworkId()
               const contractName = 'Velcro'
-              const web3 = newWeb3()
-              const address = abiMapping.getAddress(contractName, networkId)
+              // const web3 = newWeb3
+              // const provider = await getWriteProvider()
+              const address = abiMapping.getAddress(contractName, networkAccount.networkId)
               const abi = abiMapping.getAbi(contractName)
-              const velcro = new web3.eth.Contract(abi, address)
-              const hex = web3.utils.toHex(ipfsHash)
+              const ipfsHashAsHex = ethers.utils.hexlify(
+                ethers.utils.toUtf8Bytes('QmbXw1QSQSM3GUYqqFxUbLX5aSrH2aa3dpcqUgiKMQ953B')
+              )
+              // console.log('ipfsHashAsHex', ipfsHashAsHex)
 
-              const hashOwner = await velcro.methods.owner(hex).call()
-              if (hashOwner !== '0x0000000000000000000000000000000000000000') {
-                this.registerWebhookTransaction()
-                // await velcro.methods.unregisterWebhook(hex).send({
-                //   from: owner
-                // })
-              }
+              this.registerWebhookTransaction(ipfsHashAsHex)
+
+              // const velcro = new web3.eth.Contract(abi, address)
+              // const hex = web3Utils.toHex(ipfsHash)
+
+              // const hashOwner = await velcro.methods.owner(hex).call()
+              // if (hashOwner !== '0x0000000000000000000000000000000000000000') {
+              // }
 
               // const tx = await velcro.methods.registerWebhook(hex).send({ from: owner })
               // console.log(chalk.green(`TxResult: ${tx.txHash}`), tx)

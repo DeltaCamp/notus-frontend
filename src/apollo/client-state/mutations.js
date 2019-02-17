@@ -70,25 +70,27 @@ export const mutations = {
             return cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
           }
 
-          let gasLimit
-          try {
-            gasLimit = await contract.estimate[method](...args)
-          } catch (error) {
-            console.error(error)
-            const transaction = readTx()
-            const data = { ...transaction, error: error.message }
-            cache.writeData({ id, data })
-            return data
-          }
+          console.log(contract, method, args)
+
+          // let gasLimit
+          // try {
+          //   gasLimit = await contract.estimate[method](...args)
+          // } catch (error) {
+          //   console.error(error)
+          //   const transaction = readTx()
+          //   const data = { ...transaction, error: error.message }
+          //   cache.writeData({ id, data })
+          //   return data
+          // }
 
           // Hack to ensure it works!
-          const newGasLimit = gasLimit.add(3000)
+          // const newGasLimit = gasLimit.add(3000)
 
           const transactionData = contract.interface.functions[method].encode(args)
           const unsignedTransaction = {
             data: transactionData,
-            to: contract.address,
-            gasLimit: newGasLimit
+            to: contract.address//,
+            // gasLimit: newGasLimit
           }
 
           signer.sendUncheckedTransaction(unsignedTransaction)

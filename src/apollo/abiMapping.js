@@ -1,8 +1,6 @@
 import { AbiMapping } from 'apollo-link-ethereum'
-
 // TODO: Replace this with the abi from the artifacts in the velcro-contract npm package
 import VelcroAbi from './abi/VelcroAbi'
-
 import Velcro from '#/Velcro.json'
 
 export const abiMapping = new AbiMapping()
