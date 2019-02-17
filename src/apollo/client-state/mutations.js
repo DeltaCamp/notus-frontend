@@ -19,6 +19,9 @@ export const mutations = {
           const networkId = await getNetworkId()
           const signer = provider.getSigner()
           const address = abiMapping.getAddress(contractName, networkId)
+          // console.log('networkId', networkId)
+          // console.log('contractName', contractName)
+          // console.log('address', address)
           const abi = abiMapping.getAbi(contractName)
           const contract = new ethers.Contract(address, abi, signer)
 
@@ -63,6 +66,8 @@ export const mutations = {
             data.transactions = [newTx]
           }
 
+          // console.log(data)
+
           cache.writeQuery({ query, data })
 
           const id = `Transaction:${txId}`
@@ -70,9 +75,13 @@ export const mutations = {
             return cache.readFragment({ fragment: transactionQueries.transactionFragment, id })
           }
 
-          console.log(contract, method, args)
-
-          // let gasLimit
+          // It seems as though ethers.js + metamask are having a hard time estimating gas limit
+          // no matter which method below that we try (leave it up to the lib or run the 
+          // estimate() method)
+          // hard-coding it to a reasonable limit + price works
+          //
+          // console.log(contract, method, args)
+          let gasLimit = ethers.utils.bigNumberify('0')
           // try {
           //   gasLimit = await contract.estimate[method](...args)
           // } catch (error) {
@@ -85,12 +94,14 @@ export const mutations = {
 
           // Hack to ensure it works!
           // const newGasLimit = gasLimit.add(3000)
+          const newGasLimit = gasLimit.add(1000000)
 
           const transactionData = contract.interface.functions[method].encode(args)
           const unsignedTransaction = {
             data: transactionData,
-            to: contract.address//,
-            // gasLimit: newGasLimit
+            to: contract.address,
+            gasPrice: ethers.utils.bigNumberify('100000000000'),
+            gasLimit: newGasLimit
           }
 
           signer.sendUncheckedTransaction(unsignedTransaction)

@@ -13,16 +13,9 @@ import { transactionQueries } from '~/queries/transactionQueries'
 import { web3Queries } from '~/queries/web3Queries'
 // import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { uploadWebhook } from '~/utils/uploadWebhook'
-import { getNetworkId } from '~/web3/getNetworkId'
+// import { getNetworkId } from '~/web3/getNetworkId'
 import { abiMapping } from '~/apollo/abiMapping'
-import { getWriteProvider } from '~/web3/getWriteProvider'
 import { ethers } from 'ethers'
-
-// var Web3 = require('web3')
-// var newWeb3 = new Web3(
-//   // const provider = await getWriteProvider()
-//   new Web3.providers.HttpProvider(process.env.HTTP_PROVIDER_URL)
-// )
 
 const ControlledSwitch = class extends PureComponent {
   render() {
@@ -85,8 +78,8 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             text = 'Waiting for confirmation...'
           } else if (this.hasUncompletedTransaction()) {
             text = 'Waiting to receive transaction...'
-          } else if (this.notLoggedIn()) {
-            text = `You need to login to MetaMask`
+          // } else if (this.notLoggedIn()) {
+            // text = `You need to login to MetaMask`
           } else if (this.state.amountError) {
             text = 'Please enter an amount'
           } else if (this.registerWebhookTxError()) {
@@ -127,7 +120,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
         }
 
         isButtonDisabled() {
-          return this.hasUncompletedTransaction() || this.registerWebhookTxError() || this.notLoggedIn()
+          return this.hasUncompletedTransaction() || this.registerWebhookTxError()// || this.notLoggedIn()
         }
 
         formClassName() {
@@ -186,6 +179,8 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
         notLoggedIn() {
           const { networkAccount } = this.props
           let notLoggedIn = true
+          // console.log(networkAccount)
+          // console.log(networkAccount.account)
           if (networkAccount) {
             notLoggedIn = !networkAccount.account
           }
@@ -272,47 +267,14 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             try {
               const { networkAccount } = this.props
               
-              // 'https://enessdesb4vmt.x.pipedream.net'
-              // 0xc1846137e6ca6d1380e153b68fe5d8966133807b
               const ipfsHash = await uploadWebhook(this.state.contractAddress, this.state.webhookUrl)
-              // console.log('done! ipfsHash is ', ipfsHash)
-
-              // console.log('networkAccount', networkAccount.networkId)
-              // console.log('user', networkAccount.account)
-
-              const owner = networkAccount.account
-              // 0x8f7F92e0660DD92ecA1faD5F285C4Dca556E433e
+              
               const contractName = 'Velcro'
-              // const web3 = newWeb3
-              // const provider = await getWriteProvider()
-              const address = abiMapping.getAddress(contractName, networkAccount.networkId)
-              const abi = abiMapping.getAbi(contractName)
               const ipfsHashAsHex = ethers.utils.hexlify(
-                ethers.utils.toUtf8Bytes('QmbXw1QSQSM3GUYqqFxUbLX5aSrH2aa3dpcqUgiKMQ953B')
+                ethers.utils.toUtf8Bytes(ipfsHash)
               )
-              // console.log('ipfsHashAsHex', ipfsHashAsHex)
 
               this.registerWebhookTransaction(ipfsHashAsHex)
-
-              // const velcro = new web3.eth.Contract(abi, address)
-              // const hex = web3Utils.toHex(ipfsHash)
-
-              // const hashOwner = await velcro.methods.owner(hex).call()
-              // if (hashOwner !== '0x0000000000000000000000000000000000000000') {
-              // }
-
-              // const tx = await velcro.methods.registerWebhook(hex).send({ from: owner })
-              // console.log(chalk.green(`TxResult: ${tx.txHash}`), tx)
-
-              // this.registerWebhookTransaction()
-
-              // if (this.registerWebhookTxError()) {
-              //   this.resetForm()
-              //   // this.focusOnInput()
-              // } else {
-              //   this.setState({ amountError: true })
-              // }
-
               // this.setState({ creationSuccessful: true })
             } catch (error) {
               console.error(error)
@@ -352,7 +314,13 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
               }}
               className={classnames('form', this.formClassName())}
             >
-            <label htmlFor='contract-address-input' className='label is-size-4 is-uppercase has-text-grey'>
+              <p className={classnames('help is-size-5', this.helpClassName())}>
+                {this.helpText() || '\u00A0'} {this.downloadLink()}
+                <br />
+                <br />
+              </p>
+
+              <label htmlFor='contract-address-input' className='label is-size-4 is-uppercase has-text-grey'>
                 I want to listen to events at this <span className='has-text-grey-darker'>contract address</span>: <span className='has-text-warning' style={{display: 'none'}}>*</span>
               </label>
 
@@ -381,7 +349,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
               </div>
 
               <label htmlFor='webhook-url-input' className='label is-size-4 is-uppercase  has-text-grey'>
-                When something happens please send a notification to this <span className='has-text-grey-darker'>URL</span>: <span className='has-text-warning' style={{ display: 'none' }}>*</span>
+                When an event occurs send a notification to this <span className='has-text-grey-darker'>URL</span>: <span className='has-text-warning' style={{ display: 'none' }}>*</span>
               </label>
 
               <div className='field'>
@@ -530,10 +498,6 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
                   </button>
                 </div>
               </div>
-
-              <p className={classnames('help is-size-6', this.helpClassName())}>
-                {this.helpText() || '\u00A0'} {this.downloadLink()}
-              </p>
             </form>
 
           return (
