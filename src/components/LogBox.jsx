@@ -62,7 +62,7 @@ export class LogBox extends Component {
     }
 
     if (error) {
-      return <ErrorMessage errorMessage='Websocker connection failed' />
+      return <ErrorMessage errorMessage='Websocket connection failed' />
     }
 
     return (
