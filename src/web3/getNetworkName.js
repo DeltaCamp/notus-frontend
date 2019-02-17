@@ -2,6 +2,7 @@ import { ethers } from 'ethers'
 
 export async function getNetworkName () {
   let tempProvider, network, networkName
+
   if (window && window.ethereum) {
     tempProvider = new ethers.providers.Web3Provider(window.ethereum)
     network = await tempProvider.getNetwork()
@@ -13,6 +14,7 @@ export async function getNetworkName () {
       tempProvider = new ethers.providers.Web3Provider(window.web3.currentProvider)
       network = await tempProvider.getNetwork()
     }
+    
     networkName = network.name
   } else {
     if (!process.env.REACT_APP_DEFAULT_NETWORK_NAME) {

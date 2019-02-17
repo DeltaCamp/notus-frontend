@@ -9,6 +9,10 @@
   color: rgba(200, 110, 220, 1);
 }
 
+.footer a:hover {
+  color: rgba(255, 120, 240, 1);
+}
+
 .footer--primary {
   background-color: darken($navbar-grey, 0%);
   font-size: 1.5rem;

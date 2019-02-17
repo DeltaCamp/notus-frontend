@@ -1,5 +1,5 @@
 import React from 'react'
-import VelcroSymbol from '~/assets/images/velcro--symbol.svg'
+import VelcroSymbol from '~/assets/images/velcro--symbol2.svg'
 
 export const LandingHero = ({ heroColor }) => {
   return (

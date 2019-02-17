@@ -13,6 +13,9 @@ import { transactionQueries } from '~/queries/transactionQueries'
 import { web3Queries } from '~/queries/web3Queries'
 // import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import { uploadWebhook } from '~/utils/uploadWebhook'
+// import { getNetworkId } from '~/web3/getNetworkId'
+import { abiMapping } from '~/apollo/abiMapping'
+import { ethers } from 'ethers'
 
 const ControlledSwitch = class extends PureComponent {
   render() {
@@ -47,13 +50,9 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             filterEventBool: false,
             filterTopicsBool: false,
             isSendingTx: false,
-            creationSuccessful: false
+            creationSuccessful: false,
+            newHook: true
           }
-        }
-
-        async componentDidMount() {
-          await uploadWebhook()
-          console.log('done!')
         }
 
         hasSentTransaction() {
@@ -79,8 +78,8 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             text = 'Waiting for confirmation...'
           } else if (this.hasUncompletedTransaction()) {
             text = 'Waiting to receive transaction...'
-          } else if (this.notLoggedIn()) {
-            text = `You need to login to MetaMask`
+          // } else if (this.notLoggedIn()) {
+            // text = `You need to login to MetaMask`
           } else if (this.state.amountError) {
             text = 'Please enter an amount'
           } else if (this.registerWebhookTxError()) {
@@ -121,7 +120,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
         }
 
         isButtonDisabled() {
-          return this.hasUncompletedTransaction() || this.registerWebhookTxError() || this.notLoggedIn()
+          return this.hasUncompletedTransaction() || this.registerWebhookTxError()// || this.notLoggedIn()
         }
 
         formClassName() {
@@ -156,24 +155,23 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
           return className
         }
 
-        registerWebhookTransaction() {
-          /// wat?
-          const ipfsHash = [
-            this.state.contractAddress,
-            this.state.webhookUrl
-          ]
-
+        registerWebhookTransaction(ipfsHashAsHex) {
           const txData = {
             contractName: 'Velcro',
             method: 'registerWebhook',
             args: [
-              ipfsHash
+              ipfsHashAsHex
             ]
           }
 
           this.props.sendTransaction({
             variables: {
               txData
+            },
+            onCompleted: () => {
+              this.setState({
+                newHook: false
+              })
             }
           })
         }
@@ -181,6 +179,8 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
         notLoggedIn() {
           const { networkAccount } = this.props
           let notLoggedIn = true
+          // console.log(networkAccount)
+          // console.log(networkAccount.account)
           if (networkAccount) {
             notLoggedIn = !networkAccount.account
           }
@@ -265,41 +265,17 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
             this.setState({ isLoading: false })
           } else {
             try {
-              const ipfsHash = await uploadWebhook()
-              console.log('done! ipfsHash is ', ipfsHash)
+              const { networkAccount } = this.props
+              
+              const ipfsHash = await uploadWebhook(this.state.contractAddress, this.state.webhookUrl)
+              
+              const contractName = 'Velcro'
+              const ipfsHashAsHex = ethers.utils.hexlify(
+                ethers.utils.toUtf8Bytes(ipfsHash)
+              )
 
-
-
-
-
-
-
-              // const web3 = newWeb3()
-              // const accounts = await web3.eth.getAccounts()
-              // const [owner] = accounts
-
-              // const velcro = new web3.eth.Contract(velcroArtifact.abi, process.env.CONTRACT_ADDRESS)
-              // const hex = web3.utils.toHex(ipfsHash)
-
-              // const hashOwner = await velcro.methods.owner(hex).call()
-              // if (hashOwner !== '0x0000000000000000000000000000000000000000') {
-              //   await velcro.methods.unregisterWebhook(hex).send({
-              //     from: owner
-              //   })
-              // }
-
-              // const tx = await velcro.methods.registerWebhook(hex).send({ from: owner })
-              // console.log(chalk.green(`TxResult: ${tx.txHash}`), tx)
-
-
-              // if (this.registerWebhookTxError()) {
-              //   this.resetForm()
-              //   // this.focusOnInput()
-              // } else {
-              //   this.setState({ amountError: true })
-              // }
-
-              this.setState({ creationSuccessful: true })
+              this.registerWebhookTransaction(ipfsHashAsHex)
+              // this.setState({ creationSuccessful: true })
             } catch (error) {
               console.error(error)
               this.setState({ errorMessage: error.message })
@@ -338,7 +314,13 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
               }}
               className={classnames('form', this.formClassName())}
             >
-            <label htmlFor='contract-address-input' className='label is-size-4 is-uppercase has-text-grey'>
+              <p className={classnames('help is-size-5', this.helpClassName())}>
+                {this.helpText() || '\u00A0'} {this.downloadLink()}
+                <br />
+                <br />
+              </p>
+
+              <label htmlFor='contract-address-input' className='label is-size-4 is-uppercase has-text-grey'>
                 I want to listen to events at this <span className='has-text-grey-darker'>contract address</span>: <span className='has-text-warning' style={{display: 'none'}}>*</span>
               </label>
 
@@ -367,7 +349,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
               </div>
 
               <label htmlFor='webhook-url-input' className='label is-size-4 is-uppercase  has-text-grey'>
-                When something happens please send a notification to this <span className='has-text-grey-darker'>URL</span>: <span className='has-text-warning' style={{ display: 'none' }}>*</span>
+                When an event occurs send a notification to this <span className='has-text-grey-darker'>URL</span>: <span className='has-text-warning' style={{ display: 'none' }}>*</span>
               </label>
 
               <div className='field'>
@@ -516,10 +498,6 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
                   </button>
                 </div>
               </div>
-
-              <p className={classnames('help is-size-6', this.helpClassName())}>
-                {this.helpText() || '\u00A0'} {this.downloadLink()}
-              </p>
             </form>
 
           return (
