@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-// import classnames from 'classnames'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
 import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
@@ -7,7 +6,6 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { HooksList } from '~/components/hooks/HooksList'
 import { LandingHero } from '~/components/hooks/LandingHero'
-// import { CodeBox } from '~/components/CodeBox'
 import { web3Queries } from '~/queries/web3Queries'
 import * as routes from '~/../config/routes'
 
@@ -33,7 +31,7 @@ export class HomePage extends PureComponent {
 
                     if (wrongNetwork) {
                       return <ErrorMessage errorMessage={
-                        `No hooks available on the currently selected Ethereum network.`
+                        `No hooks available on the currently selected Ethereum network. (Wrong network?)`
                       } />
                     } else {
                       return (

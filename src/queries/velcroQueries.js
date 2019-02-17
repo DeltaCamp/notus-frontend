@@ -13,18 +13,16 @@ export const velcroFragments = {
   webhookFragment: gql`
     fragment webhookFragment on Webhook {
       id
-      __typename
-      entry: getEntry(id: $ipfsHash)
-      allEvents @pastEvents(extraTopics: { types: ["uint256"], values: [$ipfsHash] })
+      allEvents @pastEvents
     }
   `
 }
 
 export const velcroQueries = {
   ownerQuery: gql`
-    query ownerVelcroQuery($address: String!) {
+    query ownerQuery($address: String!) {
       Velcro @contract(type: "OwnerEvents", id: $address) {
-        allEvents @pastEvents(extraTopics: { types: ["uint256", "address"], values: [null, $address] })
+        allEvents @pastEvents(extraTopics: { types: ["address"], values: [$address] })
       }
     }
   `,
