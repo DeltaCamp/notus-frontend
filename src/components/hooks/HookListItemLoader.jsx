@@ -1,7 +1,7 @@
 import React from 'react'
 import ContentLoader from 'react-content-loader'
 
-export function PackageListItemLoader () {
+export function HookListItemLoader () {
   return (
     <div className='list-item__loader'>
       <ContentLoader

@@ -1,159 +1,142 @@
 import React, { PureComponent } from 'react'
 import { ethers } from 'ethers'
 import { get } from 'lodash'
-// import { Link } from 'react-router-dom'
 import { Query, graphql, withApollo } from 'react-apollo'
 import { ErrorMessage } from '~/components/ErrorMessage'
-// import { PackageListItem } from '~/components/hooks/PackageListItem'
-import { PackageListItemLoader } from '~/components/hooks/PackageListItemLoader'
+import { HookListItem } from '~/components/hooks/HookListItem'
+import { HookListItemLoader } from '~/components/hooks/HookListItemLoader'
 import { velcroQueries } from '~/queries/velcroQueries'
+import { web3Queries } from '~/queries/web3Queries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-// import * as routes from '~/../config/routes'
 
-export const HooksList = graphql(velcroQueries.eventsQuery)(withApollo(class HooksList extends PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      totalVouches: []
+export const HooksList = graphql(web3Queries.networkAccountQuery, { name: 'networkAccount' })(
+  graphql(
+    velcroQueries.ownerQuery,
+    {
+      name: 'hooks',
+      skip: (props) => !props.networkAccount.account || !props.networkAccount.networkId,
+      options: (props) => ({
+        variables: {
+          address: props.networkAccount.account
+        }
+      })
     }
-  }
+  )(
+    withApollo(class HooksList extends PureComponent {
+      componentDidUpdate (prevProps, prevState, snapshot) {
+        const events = this.eventsFromProps(this.props)
+        const { client } = this.props
 
-  componentDidUpdate (prevProps, prevState, snapshot) {
-    const events = this.eventsFromProps(this.props)
+        console.log(this.props.hooks)
 
-    if (Object.keys(this.state.totalVouches).length === events.length) {
-      return
-    }
+        // Promise.all(
+        //   events.map(event => {
+        //     const ipfsHash = event.parsedLog.values.ipfsHash
+        //     return (
+        //       client.query({ query: velcroQueries.velcroQuery, variables: { ipfsHash: ipfsHash.toString() } })
+        //         .then(result => {
+        //           console.log('.then(result => {', result)
+        //           // return {
+        //           //   id,
+        //           //   totalVouched: result.data.Velcro.entry.totalVouched
+        //           // }
+        //         })
+        //     )
+        //   })
+        // ).then((results) => {
+        //   console.log('(results)', results)
+        //   // var totalVouches = results.reduce((accumulator, result) => {
+        //   //   accumulator[result.id] = result.totalVouched
+        //   //   return accumulator
+        //   // }, {})
 
-    const { client } = this.props
+        //   // this.setState({
+        //   //   totalVouches
+        //   // })
+        // })
+      }
 
-    Promise.all(
-      events.map(event => {
-        const id = event.parsedLog.values.id
+      eventsFromProps (props) {
+        const { hooks } = props
+        const { Velcro } = hooks || {}
+
+        return (Velcro ? Velcro.allEvents : []) || []
+      }
+
+      // totalVouched (id) {
+      //   return this.state.totalVouches[id]
+      //     ? ethers.utils.bigNumberify(this.state.totalVouches[id].toString())
+      //     : ethers.utils.bigNumberify('0')
+      // }
+
+        // TODO: This should filter out Unregistered webhooks!
+      render () {
+        const { loading, error } = this.props.data || {}
+        let content
+
+        const packageListLoader =
+          <>
+            <HookListItemLoader key='package-item-fragment-0' />
+            <HookListItemLoader key='package-item-fragment-1' />
+            <HookListItemLoader key='package-item-fragment-2' />
+          </>
+
+        if (error) {
+          return <ErrorMessage errorMessage={error} />
+        }
+
+        const events = this.eventsFromProps(this.props)
+
+        if (loading) {
+        // if (loading || Object.keys(this.state.totalVouches).length !== events.length) {
+          content = packageListLoader
+        } else {
+          // const sortedEvents = events.sort((a, b) => {
+          //   const ipfsHashA = a.parsedLog.values.ipfsHash
+          //   const ipfsHashB = b.parsedLog.values.ipfsHash
+          //   return this.totalVouched(ipfsHashA).cmp(this.totalVouched(ipfsHashB))
+          //   // return this.totalVouched(ipfsHashA).cmp(this.totalVouched(ipfsHashB))
+          // })
+          const sortedEvents = events.slice(0, 3)
+
+          content = (
+            <>
+              {
+                sortedEvents.map((e, index) => {
+                  let item
+                  const hookValues = e.parsedLog.values
+                  const webhookEvent = e
+
+                  // console.log('broken', e, index)
+                  // 0x516d62587731515351534d334755597171467855624c58356153724832616133647063715567694b4d5139353342
+
+                  item = (
+                    <React.Fragment key={`hook-fragment-${index}`}>
+                      <span>{index}</span>
+
+                      <HookListItem
+                        hookValues={hookValues}
+                        webhookEvent={webhookEvent}
+                        index={index}
+                        location={this.props.location}
+                        key={`hook-${index}`}
+                      />
+                    </React.Fragment>
+                  )
+
+                  return item
+                })
+              }
+            </>
+          )
+        }
+
         return (
-          client.query({ query: velcroQueries.velcroQuery, variables: { id: id.toString() } })
-            .then(result => {
-              console.log('.then(result => {', result)
-              // return {
-              //   id,
-              //   totalVouched: result.data.Velcro.entry.totalVouched
-              // }
-            })
+          <>
+            {content}
+          </>
         )
-      })
-    ).then((results) => {
-      console.log('(results)', results)
-      // var totalVouches = results.reduce((accumulator, result) => {
-      //   accumulator[result.id] = result.totalVouched
-      //   return accumulator
-      // }, {})
-
-      // this.setState({
-      //   totalVouches
-      // })
+      }
     })
-  }
-
-  eventsFromProps (props) {
-    const { data } = props
-    const { Vouching } = data || {}
-
-    return (Vouching ? Vouching.Registered : []) || []
-  }
-
-  totalVouched (id) {
-    return this.state.totalVouches[id]
-      ? ethers.utils.bigNumberify(this.state.totalVouches[id].toString())
-      : ethers.utils.bigNumberify('0')
-  }
-
-  render () {
-    const { loading, error } = this.props.data || {}
-    let content
-
-    const packageListLoader =
-      <>
-        <PackageListItemLoader key='package-item-fragment-0' />
-        <PackageListItemLoader key='package-item-fragment-1' />
-        <PackageListItemLoader key='package-item-fragment-2' />
-      </>
-
-    if (error) {
-      return <ErrorMessage errorMessage={error} />
-    }
-
-    const events = this.eventsFromProps(this.props)
-
-    if (loading || Object.keys(this.state.totalVouches).length !== events.length) {
-      content = packageListLoader
-    } else {
-      const sortedEvents = events.sort((a, b) => {
-        const idA = a.parsedLog.values.id
-        const idB = b.parsedLog.values.id
-        return this.totalVouched(idA).cmp(this.totalVouched(idB))
-      })
-
-      content = (
-        <>
-          {
-            sortedEvents.map((event, index) => {
-              let item
-              // const packageValues = event.parsedLog.values
-              const packageValues = {metadataURI: 'asdf', id: '444'}
-
-              item = (
-                <React.Fragment key={`package-item-fragment-${index}`}>
-                  {item}
-                  <Query
-                    key={`package-item-query-${index}`}
-                    query={velcroQueries.packageQuery}
-                    variables={{
-                      uri: packageValues.metadataURI,
-                      id: packageValues.id.toString()
-                    }}
-                  >
-                    {
-                      ({ loading, error, data }) => {
-                        // using the PackageListItemLoader here can cause packages to not load
-                        // if (loading) return <PackageListItemLoader />
-                        if (error) return <ErrorMessage errorMessage={error} />
-
-                        const { Vouching } = data
-
-                        if (displayWeiToEther(get(Vouching, 'entry.totalVouched')) === '0') {
-                          console.log('skipping package with 0 vouched ZEP')
-                          return null
-                        }
-
-                        return (
-                          <span>{index}</span>
-                        )
-
-                    // return
-                          // <PackageListItem
-                          //   index={index}
-                          //   location={this.props.location}
-                          //   data={data}
-                          //   package={packageValues}
-                          //   key={`package-item-${index}`}
-                          // />
-                      }
-                    }
-                  </Query>
-                </React.Fragment>
-              )
-
-              return item
-            })
-          }
-        </>
-      )
-    }
-
-    return (
-      <>
-        {content}
-      </>
-    )
-  }
-}))
+  )
+)

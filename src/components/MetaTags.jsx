@@ -15,17 +15,16 @@ export const MetaTags = class _MetaTags extends PureComponent {
     const location = this.props.location || {}
 
     const logoPath = '/none.svg'
-    const siteTitle = 'Velcro'
-    const siteURL = 'https://FILLMEIN.com'
-    const siteDescription = 'Velcro - Smart Contract Event Notifications'
+    const siteTitle = 'Eth-Velcro (for Ethereum)'
+    const siteURL = 'https://velcro.netlify.com.com'
+    const siteDescription = 'Eth Velcro - Smart Contract Event Notifications'
     const twitterHandle = 'teamdeltacamp'
     const ownerCoName = 'Delta Camp'
     const author = 'Delta Camp & Jake Caban-Tomski'
     const keywords = 'deltacamp delta camp velcro ethereum smart contract notifications'
-    const themeColor = '#abcdef'
+    const themeColor = '#ffffff'
     const googleFontsURL = 'https://fonts.googleapis.com/css?family=Vollkorn:300,400,500,700|Roboto+Mono:400,700,900'
     const typeKitURL = 'https://use.typekit.net/mov7yqm.css'
-    // href: "https://fonts.googleapis.com/css?family=PT+Mono&subset=cyrillic,cyrillic-ext,latin-ext",
     const year = (new Date()).getFullYear()
 
     return (
