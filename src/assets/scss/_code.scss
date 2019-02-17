@@ -1,9 +1,10 @@
 .code {
   border-radius: 30px;
   display: inline-block;
-  font-size: 1.25rem;
+  font-size: 1rem;
   padding: 1.5rem;
   position: relative;
+  overflow: scroll;
 
   @media screen and (max-width: $tablet) {
     max-width: 100%;
