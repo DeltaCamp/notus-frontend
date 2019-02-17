@@ -329,226 +329,200 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
           }
 
           content =
-            <form
-              onSubmit={(e) => {
-                e.preventDefault()
-                this.handleSubmit()
-              }}
-              className={classnames('form', this.formClassName())}
-            >
-              <p className={classnames('help is-size-5', this.helpClassName())}>
-                {this.helpText() || '\u00A0'} {this.downloadLink()}
-                <br />
-                <br />
-              </p>
-
-              <label htmlFor='contract-address-input' className='label is-size-4 is-uppercase has-text-grey'>
-                I want to listen to events at this <span className='has-text-grey-darker'>contract address</span>: <span className='has-text-warning' style={{display: 'none'}}>*</span>
-              </label>
-
-              <div className='field'>
-                <div className='control'>
-                  <input
-                    autoFocus
-                    maxLength='42'
-                    id='contract-address-input'
-                    className='input'
-                    type='text'
-                    value={this.state.contractAddress}
-                    onChange={(e) => this.setState({ contractAddress: e.target.value })}
-                  />
-                  {/* TODO: validate proper hex address! */}
-                </div>
-
-                {this.state.contractAddressError && (
-                  <>
-                    <ScrollToTop />
-                    <label className='hint has-text-danger'>
-                      Please enter a proper contract address to listen to
-                    </label>
-                  </>
-                )}
-              </div>
-
-              <label htmlFor='webhook-url-input' className='label is-size-4 is-uppercase  has-text-grey'>
-                When an event occurs send a notification to this <span className='has-text-grey-darker'>URL</span>: <span className='has-text-warning' style={{ display: 'none' }}>*</span>
-              </label>
-
-              <div className='field'>
-                <div className='control'>
-                  <input
-                    id='webhook-url-input'
-                    className='input'
-                    type='text'
-                    value={this.state.webhookUrl}
-                    onChange={(e) => this.setState({ webhookUrl: e.target.value })}
-                  />
-                  {/* TODO: validate proper url¿ */}
-                </div>
-
-                {this.state.webhookUrlError && (
-                  <>
-                    <ScrollToTop />
-                    <label className='hint has-text-danger'>
-                      Please enter a valid URL the server can POST JSON data to
-                    </label>
-                  </>
-                )}
-              </div>
-
-              <hr />
-              <br />
-              <ControlledSwitch
-                value={this.state.filterEventBool}
-                onChange={(e) => {
-                  this.setState({ filterEventBool: !this.state.filterEventBool })
-                }} 
-              >
-                <span className='has-text-grey'>I would like to filter by a specific event</span>
-              </ControlledSwitch>
-
-              <CSSTransition
-                timeout={600}
-                classNames='accordion'
-                in={this.state.filterEventBool}
-              >
-                {state => (
-                  <div className='accordion event-name-accordion'>
-                    <div className='field'>
-                      <div className='control'>
-                        <label htmlFor='event-name-input' className='label is-size-4 is-uppercase'>
-                          Contract Event name <span className='is-size-5 has-text-grey-light'>(ie. 'Register', 'Transfer', etc.)</span>
-                        </label>
-
-                        <input
-                          id='event-name-input'
-                          className='input'
-                          type='text'
-                          value={this.state.eventName}
-                          onChange={(e) => this.setState({ eventName: e.target.value })}
-                        />
-                        {/* TODO: validate proper EVENT NAME! */}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </CSSTransition>
-
-              <hr />
-              <br />
-              <ControlledSwitch
-                value={this.state.filterTopicsBool}
-                onChange={(e) => {
-                  this.setState({ filterTopicsBool: !this.state.filterTopicsBool })
+            <>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  this.handleSubmit()
                 }}
+                className={classnames('form', this.formClassName())}
               >
-                <span className='has-text-grey'>I would like to filter by the following event topics:</span>
-              </ControlledSwitch>
+                <p className={classnames('help is-size-5', this.helpClassName())}>
+                  {this.helpText() || '\u00A0'} {this.downloadLink()}
+                  <br />
+                  <br />
+                </p>
 
-              <CSSTransition
-                timeout={600}
-                classNames='accordion'
-                in={this.state.filterTopicsBool}
-              >
-                {state => (
-                  <div className='accordion event-topics-accordion'>
-                    <div className='field'>
-                      <div className='control'>
-                        <label htmlFor='filter-topic-1-input' className='label is-size-4 is-uppercase'>
-                          Event topic #1
-                        </label>
+                <label htmlFor='contract-address-input' className='label is-size-4 is-uppercase has-text-grey'>
+                  I want to listen to events at this <span className='has-text-grey-darker'>contract address</span>: <span className='has-text-warning' style={{display: 'none'}}>*</span>
+                </label>
 
-                        <input
-                          id='filter-topic-1-input'
-                          className='input'
-                          type='text'
-                          value={this.state.filterTopic1}
-                          onChange={(e) => this.setState({ filterTopic1: e.target.value })}
-                        />
-                        {/* TODO: validate proper EVENT TOPIC[0]! */}
-                      </div>
-                    </div>
-
-                    <div className='field'>
-                      <div className='control'>
-                        <label htmlFor='filter-topic-2-input' className='label is-size-4 is-uppercase'>
-                          Event topic #2
-                          </label>
-
-                        <input
-                          id='filter-topic-2-input'
-                          className='input'
-                          type='text'
-                          value={this.state.filterTopic2}
-                          onChange={(e) => this.setState({ filterTopic2: e.target.value })}
-                        />
-                        {/* TODO: validate proper EVENT TOPIC[1]! */}
-                      </div>
-                    </div>
-
-                    <div className='field'>
-                      <div className='control'>
-                        <label htmlFor='filter-topic-3-input' className='label is-size-4 is-uppercase'>
-                          Event topic #3
-                          </label>
-
-                        <input
-                          id='filter-topic-3-input'
-                          className='input'
-                          type='text'
-                          value={this.state.filterTopic3}
-                          onChange={(e) => this.setState({ filterTopic3: e.target.value })}
-                        />
-                        {/* TODO: validate proper EVENT TOPIC[0]! */}
-                      </div>
-                    </div>
+                <div className='field'>
+                  <div className='control'>
+                    <input
+                      autoFocus
+                      maxLength='42'
+                      id='contract-address-input'
+                      className='input'
+                      type='text'
+                      value={this.state.contractAddress}
+                      onChange={(e) => this.setState({ contractAddress: e.target.value })}
+                    />
+                    {/* TODO: validate proper hex address! */}
                   </div>
-                )}
-              </CSSTransition>
 
-              <div className='field'>
-                <br />
-                <br />
-
-                <div className='control has-text-centered'>
-                  <button
-                    disabled={this.isButtonDisabled()}
-                    className={classnames('button is-success', {
-                      'is-loading': this.state.isLoading
-                    })}
-                  >
-                    {this.buttonText()}
-                  </button>
-                </div>
-              </div>
-
-              <CSSTransition
-                timeout={600}
-                classNames='accordion'
-                in={this.registerWebhookTxCompleted()}
-              >
-                {state => (
-                  <div className='accordion'>
-                    {this.registerWebhookTxCompleted() && <ScrollToTop />}
-
-                    <div className='has-text-centered'>
+                  {this.state.contractAddressError && (
+                    <>
                       <ScrollToTop />
-                      <br />
-                      <br />
-                      <h1 className='is-size-1 is-uppercase has-text-success'>
-                        Hook created!
-                        </h1>
-                      <br />
-                      <Link
-                        className='button is-small'
-                        to={newWebhookLink}
-                      >
-                          View Webhook Activity
-                        </Link>
-                    </div>
+                      <label className='hint has-text-danger'>
+                        Please enter a proper contract address to listen to
+                      </label>
+                    </>
+                  )}
+                </div>
+
+                <label htmlFor='webhook-url-input' className='label is-size-4 is-uppercase  has-text-grey'>
+                  When an event occurs send a notification to this <span className='has-text-grey-darker'>URL</span>: <span className='has-text-warning' style={{ display: 'none' }}>*</span>
+                </label>
+
+                <div className='field'>
+                  <div className='control'>
+                    <input
+                      id='webhook-url-input'
+                      className='input'
+                      type='text'
+                      value={this.state.webhookUrl}
+                      onChange={(e) => this.setState({ webhookUrl: e.target.value })}
+                    />
+                    {/* TODO: validate proper url¿ */}
                   </div>
-                )}
-              </CSSTransition>
+
+                  {this.state.webhookUrlError && (
+                    <>
+                      <ScrollToTop />
+                      <label className='hint has-text-danger'>
+                        Please enter a valid URL the server can POST JSON data to
+                      </label>
+                    </>
+                  )}
+                </div>
+
+                <hr />
+                <br />
+                <ControlledSwitch
+                  value={this.state.filterEventBool}
+                  onChange={(e) => {
+                    this.setState({ filterEventBool: !this.state.filterEventBool })
+                  }} 
+                >
+                  <span className='has-text-grey'>I would like to filter by a specific event</span>
+                </ControlledSwitch>
+
+                <CSSTransition
+                  timeout={600}
+                  classNames='accordion'
+                  in={this.state.filterEventBool}
+                >
+                  {state => (
+                    <div className='accordion event-name-accordion'>
+                      <div className='field'>
+                        <div className='control'>
+                          <label htmlFor='event-name-input' className='label is-size-4 is-uppercase'>
+                            Contract Event name <span className='is-size-5 has-text-grey-light'>(ie. 'Register', 'Transfer', etc.)</span>
+                          </label>
+
+                          <input
+                            id='event-name-input'
+                            className='input'
+                            type='text'
+                            value={this.state.eventName}
+                            onChange={(e) => this.setState({ eventName: e.target.value })}
+                          />
+                          {/* TODO: validate proper EVENT NAME! */}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </CSSTransition>
+
+                <hr />
+                <br />
+                <ControlledSwitch
+                  value={this.state.filterTopicsBool}
+                  onChange={(e) => {
+                    this.setState({ filterTopicsBool: !this.state.filterTopicsBool })
+                  }}
+                >
+                  <span className='has-text-grey'>I would like to filter by the following event topics:</span>
+                </ControlledSwitch>
+
+                <CSSTransition
+                  timeout={600}
+                  classNames='accordion'
+                  in={this.state.filterTopicsBool}
+                >
+                  {state => (
+                    <div className='accordion event-topics-accordion'>
+                      <div className='field'>
+                        <div className='control'>
+                          <label htmlFor='filter-topic-1-input' className='label is-size-4 is-uppercase'>
+                            Event topic #1
+                          </label>
+
+                          <input
+                            id='filter-topic-1-input'
+                            className='input'
+                            type='text'
+                            value={this.state.filterTopic1}
+                            onChange={(e) => this.setState({ filterTopic1: e.target.value })}
+                          />
+                          {/* TODO: validate proper EVENT TOPIC[0]! */}
+                        </div>
+                      </div>
+
+                      <div className='field'>
+                        <div className='control'>
+                          <label htmlFor='filter-topic-2-input' className='label is-size-4 is-uppercase'>
+                            Event topic #2
+                            </label>
+
+                          <input
+                            id='filter-topic-2-input'
+                            className='input'
+                            type='text'
+                            value={this.state.filterTopic2}
+                            onChange={(e) => this.setState({ filterTopic2: e.target.value })}
+                          />
+                          {/* TODO: validate proper EVENT TOPIC[1]! */}
+                        </div>
+                      </div>
+
+                      <div className='field'>
+                        <div className='control'>
+                          <label htmlFor='filter-topic-3-input' className='label is-size-4 is-uppercase'>
+                            Event topic #3
+                            </label>
+
+                          <input
+                            id='filter-topic-3-input'
+                            className='input'
+                            type='text'
+                            value={this.state.filterTopic3}
+                            onChange={(e) => this.setState({ filterTopic3: e.target.value })}
+                          />
+                          {/* TODO: validate proper EVENT TOPIC[0]! */}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </CSSTransition>
+
+                <div className='field'>
+                  <br />
+                  <br />
+
+                  <div className='control has-text-centered'>
+                    <button
+                      disabled={this.isButtonDisabled()}
+                      className={classnames('button is-success', {
+                        'is-loading': this.state.isLoading
+                      })}
+                    >
+                      {this.buttonText()}
+                    </button>
+                  </div>
+                </div>
+              </form>
 
               <CSSTransition
                 timeout={600}
@@ -559,11 +533,11 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
                   <div className='fade-enter modal has-text-centered'>
                     <div className='modal-body'>
                       {this.state.uploadingToIpfs ?
-                        <span>Uploading to IPFS ...</span> :
-                        <span>Uploading to IPFS ... Done!</span>
+                        <span>Registering Webhook on IPFS ...</span> :
+                        <span>Registering Webhook on IPFS ... <strong className='has-text-weight-bold'>DONE!</strong></span>
                       }
 
-                      {!this.state.uploadingToIpfs && !this.hasSentTransaction() &&
+                      {!this.registerWebhookTxCompleted() && !this.state.uploadingToIpfs && !this.hasSentTransaction() &&
                         <span><br />Waiting for transaction ...</span>
                       }
 
@@ -574,7 +548,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
                       {
                         this.registerWebhookTxCompleted() &&
                         <>
-                          <span><br />Waiting for confirmations ... Done!</span>
+                          <span><br />Waiting for confirmations ... <strong className='has-text-weight-bold'>DONE!</strong></span>
                           <br />
                           <br />
                           <Link
@@ -589,7 +563,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
                   </div>
                 )}
               </CSSTransition>
-            </form>
+            </>
 
           return (
             <>
@@ -598,18 +572,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
               />
 
               {error}
-
-              <CSSTransition
-                timeout={600}
-                classNames='accordion'
-                in={!this.registerWebhookTxCompleted()}
-              >
-                {state => (
-                  <>
-                    {content}
-                  </>
-                )}
-              </CSSTransition>
+              {content}
             </>
           )
         }

@@ -220,11 +220,11 @@ hr {
   border: 5px solid white;
   color: white;
   position: fixed;
-  top: 20%;
+  top: 15%;
   left: 25%;
   right: 25%;
-  bottom: 30%;
-  height: 50%;
+  bottom: 25%;
+  height: 60%;
   width: 50%;
   z-index: 12398;
 
@@ -261,6 +261,11 @@ hr {
     line-height: 1.75;
     padding: 1.25rem 1.5rem;
   }
+}
+
+.modal-body,
+.modal-body strong {
+  color: white;
 }
 
 .modal-background.is-active {

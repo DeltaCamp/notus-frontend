@@ -54,10 +54,12 @@
 
 .fade-enter {
   opacity: 0.01;
+  pointer-events: none;
   transform: scale(0) translateY(50%);
 }
 
-.fade-enter-active {
+.fade-enter-active,
+.fade-enter-done {
   opacity: 1;
   transform: scale(1) translateY(0%);
   transition: all 300ms ease-out;
@@ -68,8 +70,10 @@
   transform: scale(1) translateY(0%);
 }
 
-.fade-exit-active {
+.fade-exit-active,
+.fade-exit-done {
   opacity: 0.01;
+  pointer-events: none;
   transform: scale(0) translateY(50%);
   transition: all 300ms ease-out;
 }

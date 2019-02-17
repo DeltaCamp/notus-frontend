@@ -31,7 +31,7 @@ export const Footer = class _Footer extends Component {
                 Velcro is an open source project which you can run your own instance of. Learn more on GitHub: 
                 <br />
                 <a 
-                  href='http://zpl.in/betaregistration'
+                  href='https://github.com/ethvelcro'
                   target='_blank'
                   rel='noopener noreferrer'
                 >

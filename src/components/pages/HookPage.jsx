@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Query } from 'react-apollo'
-import { HeroBetaCallout } from '~/components/HeroBetaCallout'
 import { FooterContainer } from '~/components/layout/Footer'
 import { PageDetailsLoader } from '~/components/PageDetailsLoader'
 import { ErrorMessage } from '~/components/ErrorMessage'
@@ -92,8 +91,6 @@ export class HookPage extends PureComponent {
             </div>
           </div>
         </section>
-
-        <HeroBetaCallout />
 
         <FooterContainer />
       </div>

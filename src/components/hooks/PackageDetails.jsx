@@ -3,15 +3,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
-import { ZosCodeSnippet } from '~/components/ZosCodeSnippet'
-import { ResearcherLink } from '~/components/ResearcherLink'
-import { GitHubLink } from '~/components/GitHubLink'
-import { VouchButton } from '~/components/hooks/VouchButton'
-import { VouchRow } from '~/components/hooks/VouchRow'
-import { projectPackageEvents } from '~/projections/projectPackageEvents'
+// import { projectPackageEvents } from '~/projections/projectPackageEvents'
 import { velcroQueries } from '~/queries/velcroQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
-import { challengeProjection } from '~/projections/challengeProjection'
+// import { challengeProjection } from '~/projections/challengeProjection'
 
 export class PackageDetails extends Component {
   state = { voted: false }
@@ -48,7 +43,7 @@ export class PackageDetails extends Component {
             </h1>
 
             <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
-              Maintained by <ResearcherLink address={values.owner} shorten />
+              Maintained by {values.owner} shorten
             </h6>
 
             <p className='is-size-6 package-item--description'>
@@ -70,12 +65,7 @@ export class PackageDetails extends Component {
               Link this package:
             </h5>
             <div className='code-wrapper'>
-              <ZosCodeSnippet packageName={name} />
-              <GitHubLink
-                url={`https://github.com/${repo}`}
-                viewLink
-                cssClassNames='is-text has-extra-margin'
-              />
+              name
             </div>
           </div>
         </div>

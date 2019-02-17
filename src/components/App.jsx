@@ -5,6 +5,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
+import { HookPage } from '~/components/pages/HookPage'
 import { HooksListPage } from '~/components/pages/HooksListPage'
 import { NavContainer } from '~/components/layout/Nav'
 import { FourOhFour } from '~/components/pages/FourOhFour'
@@ -43,6 +44,7 @@ const App = class _App extends PureComponent {
             appear
           >
             <Switch location={this.props.location}>
+              <Route exact path={routes.HOOK} component={HookPage} />
               <Route exact path={routes.HOOKS} component={HooksListPage} />
               <Route exact path={routes.HOME} component={HomePage} />
               <Route component={FourOhFour} />
