@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import VelcroSymbol from '~/assets/images/velcro--symbol2.svg'
+import NotusSymbol from '~/assets/images/notus--symbol.svg'
 import * as routes from '~/../config/routes'
 
 export const LandingHero = ({ heroColor }) => {
@@ -9,37 +9,34 @@ export const LandingHero = ({ heroColor }) => {
       <div className='hero-body'>
         <div className='container'>
           <div className='row'>
-            <div className='col-xs-12 col-lg-8'>
-              <div className='row'>
+            <div className='col-xs-12 col-lg-9'>
+              {/* <div className='row'>
                 <div className='col-xs-6 col-sm-3'>
-                  <VelcroSymbol className='img-responsive' />
+                  <NotusSymbol className='img-responsive' />
                 </div>
-              </div>
-              <br />
+              </div> */}
+              {/* <br /> */}
 
-              <h1 className='is-size-1 is-uppercase is-family-sans-serif'>
-                Velcro <span className="is-hidden-touch is-size-5"> For Ethereum</span>
-              </h1>
-              <h4 className='is-size-4 is-family-serif'>
-                Send and receive <strong>(notifications/texts/emails/slacks, etc.)</strong> when Ethereum Smart Contract events happen.
-              </h4>
+              <h2 className='is-size-2'>
+                Get notified when smart contract events occur.
+              </h2>
+              <h5 className='is-size-5 hero--description-text'>
+                {/* /texts/emails/slacks */}
+                Notus is the distributed network for receiving webhooks when something interesting you've subscribed to happens on the blockchain.
+              </h5>
+
+              <Link
+                className='button is-small is-outlined is-light'
+                to={routes.HOOKS}
+              >
+                Create A Hook
+              </Link>
             </div>
 
             <div className='col-xs-12 col-lg-4'>
-              <div className='message-white'>
-                <div className='message-white--body'>
-                  <p className='is-size-4 message-body--text'>
-                    Want to start receiving notifications?
-                  </p>
-                  <Link
-                    className='button is-light'
-                    to={routes.HOOKS}
-                  >
-                    Create A Hook
-                  </Link>
-                </div>
-              </div>
+              
             </div>
+
           </div>
         </div>
       </div>

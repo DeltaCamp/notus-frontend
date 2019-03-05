@@ -8,36 +8,33 @@ button[disabled] {
   cursor: not-allowed;
 }
 
-.button[disabled]:hover,
-.button[disabled]:focus,
-.button[disabled]:active,
-button[disabled]:hover,
-button[disabled]:focus,
-button[disabled]:active {
-  transform: scale3d(1, 1, 1);
-}
-
-.button {
-  background-color: $cyan;
-}
+// .button[disabled]:hover,
+// .button[disabled]:focus,
+// .button[disabled]:active,
+// button[disabled]:hover,
+// button[disabled]:focus,
+// button[disabled]:active {
+//   transform: scale3d(1, 1, 1);
+// }
 
 .button:hover,
 .button:active {
-  background-color: lighten($cyan, 10%);
+  // background-color: lighten($cyan, 10%);
+  color: $button-hover-color;
 }
 
 .button {
-  background-color: $blue;
+  background-color: transparent;
   border-radius: 100px;
   font-size: 1.25rem;
-  font-weight: 900;
-  height: auto;
-  padding: 1rem 4rem;
+  font-weight: 700;
+  // height: auto;
+  padding: 0.25rem 1rem 0.4rem;
   text-transform: uppercase;
 
   @media screen and (max-width: $tablet) {
     height: auto;
-    padding: 0.75rem 2rem;
+    padding: 0.25rem 2rem;
     white-space: normal;
     width: 100%;
   }
@@ -46,7 +43,7 @@ button[disabled]:active {
 .button.is-small {
   border-radius: 100px;
   font-size: 1rem;
-  padding: 1.25rem 3rem;
+  padding: 1rem 2rem 1.25rem;
 }
 
 .button.is-text {
@@ -85,7 +82,6 @@ button[disabled]:active {
 .button.is-primary:focus,
 .button.is-primary:active {
   background-color: lighten(saturate($cyan, 100%), 10%);
-  transition: all 150ms ease-in-out;
 }
 
 .is-copy-button {
@@ -102,16 +98,21 @@ button[disabled]:active {
 
 a.button,
 button {
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+  transform: translateY(0);
   transition: all 150ms ease-out;
-  transform: scale3d(1, 1, 1);
+  // transform: scale3d(1, 1, 1);
 }
 
 a.button:hover:not(.is-text),
 button:hover:not(.is-text) {
-  transition: transform 150ms ease-in;
-  transform: scale3d(1.04, 1.04, 1.04);
+  box-shadow: 0 9px 15px rgba(50, 50, 93, .2), 0 4px 7px rgba(0, 0, 0, .15);
+  // transition: transform 150ms ease-in;
+  // transform: scale3d(1.04, 1.04, 1.04);
+  transform: translateY(-2px);
+  transition: all 150ms ease-in-out;
 }
 
-.button.is-text.has-underline-border:hover {
-  border-bottom-color: $button-text-hover-color;
-}
+// .button.is-text.has-underline-border:hover {
+//   border-bottom-color: $button-text-hover-color;
+// }

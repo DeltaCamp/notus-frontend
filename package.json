@@ -1,9 +1,9 @@
 {
-  "name": "velcro-dapp",
+  "name": "notus-dapp",
   "author": "Delta Camp & Jake Caban-Tomski",
   "license": "MIT",
   "version": "1.0.0",
-  "description": "Velcro",
+  "description": "Notus",
   "main": "index.js",
   "scripts": {
     "test": "eslint src && standard --verbose | snazzy && node scripts/test.js",
@@ -112,7 +112,7 @@
     "style-loader": "0.23.0",
     "terser-webpack-plugin": "1.1.0",
     "url-loader": "1.1.1",
-    "velcro-contracts": "^0.0.3",
+    "notus-contracts": "^0.0.3",
     "webpack": "^4.0.0",
     "webpack-dev-server": "3.1.11",
     "webpack-manifest-plugin": "2.0.4",

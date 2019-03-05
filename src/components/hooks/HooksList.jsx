@@ -5,13 +5,13 @@ import { Query, graphql, withApollo } from 'react-apollo'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { HookListItem } from '~/components/hooks/HookListItem'
 import { HookListItemLoader } from '~/components/hooks/HookListItemLoader'
-import { velcroQueries } from '~/queries/velcroQueries'
+import { notusQueries } from '~/queries/notusQueries'
 import { web3Queries } from '~/queries/web3Queries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 
 export const HooksList = graphql(web3Queries.networkAccountQuery, { name: 'networkAccount' })(
   graphql(
-    velcroQueries.ownerQuery,
+    notusQueries.ownerQuery,
     {
       name: 'hooks',
       skip: (props) => !props.networkAccount.account || !props.networkAccount.networkId,
@@ -34,12 +34,12 @@ export const HooksList = graphql(web3Queries.networkAccountQuery, { name: 'netwo
         //   events.map(event => {
         //     const ipfsHash = event.parsedLog.values.ipfsHash
         //     return (
-        //       client.query({ query: velcroQueries.velcroQuery, variables: { ipfsHash: ipfsHash.toString() } })
+        //       client.query({ query: notusQueries.notusQuery, variables: { ipfsHash: ipfsHash.toString() } })
         //         .then(result => {
         //           console.log('.then(result => {', result)
         //           // return {
         //           //   id,
-        //           //   totalVouched: result.data.Velcro.entry.totalVouched
+        //           //   totalVouched: result.data.Notus.entry.totalVouched
         //           // }
         //         })
         //     )
@@ -59,9 +59,9 @@ export const HooksList = graphql(web3Queries.networkAccountQuery, { name: 'netwo
 
       eventsFromProps (props) {
         const { hooks } = props
-        const { Velcro } = hooks || {}
+        const { Notus } = hooks || {}
 
-        return (Velcro ? Velcro.allEvents : []) || []
+        return (Notus ? Notus.allEvents : []) || []
       }
 
       // totalVouched (id) {

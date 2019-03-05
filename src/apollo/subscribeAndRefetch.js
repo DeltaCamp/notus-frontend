@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { velcroQueries } from '~/queries/velcroQueries'
+import { notusQueries } from '~/queries/notusQueries'
 import { web3Queries } from '~/queries/web3Queries'
 // import { abiMapping } from '~/apollo/abiMapping'
 
@@ -36,12 +36,12 @@ export function subscribeAndRefetch (apolloClient) {
   // apolloClient.subscribe({
   //   query: gql`
   //     subscription {
-  //       Velcro @contract {
+  //       Notus @contract {
   //         Registered @events
   //       }
   //     }
   //   `
-  // }).subscribe(function ({ data: { Velcro: { Registered: { result, error } } } }) {
+  // }).subscribe(function ({ data: { Notus: { Registered: { result, error } } } }) {
   //   if (error) {
   //     console.error(error)
   //   } else {
@@ -53,7 +53,7 @@ export function subscribeAndRefetch (apolloClient) {
   //     console.log('result.args', result.args)
 
   //     apolloClient.query({
-  //       query: velcroQueries.velcroQuery,
+  //       query: notusQueries.notusQuery,
   //       variables: { ipfsHash: result.args[0].toString() },
   //       fetchPolicy: 'network-only'
   //     })
@@ -64,16 +64,16 @@ export function subscribeAndRefetch (apolloClient) {
   apolloClient.subscribe({
     query: gql`
       subscription {
-        Velcro @contract {
+        Notus @contract {
           Registered @events
         }
       }`
-  }).subscribe(function ({ data: { Velcro: { Registered: { result, error } } } }) {
+  }).subscribe(function ({ data: { Notus: { Registered: { result, error } } } }) {
     if (error) {
       console.error(error)
     } else {
       apolloClient.query({
-        query: velcroQueries.eventsQuery,
+        query: notusQueries.eventsQuery,
         fetchPolicy: 'network-only'
       })
     }

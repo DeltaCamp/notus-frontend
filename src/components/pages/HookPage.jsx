@@ -8,7 +8,7 @@ import { PageDetailsLoader } from '~/components/PageDetailsLoader'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { HookDetails } from '~/components/hooks/HookDetails'
-import { velcroQueries } from '~/queries/velcroQueries'
+import { notusQueries } from '~/queries/notusQueries'
 import { LogBox } from '~/components/LogBox'
 
 export class HookPage extends PureComponent {
@@ -42,12 +42,12 @@ export class HookPage extends PureComponent {
                   </button>
                 </p>
 
-                <Query query={velcroQueries.eventsQuery}>
+                <Query query={notusQueries.eventsQuery}>
                   {({ loading, error, data }) => {
                     if (loading) return <PageDetailsLoader />
                     if (error) return <ErrorMessage errorMessage={error} />
 
-                    const events = data.Velcro ? data.Velcro.Registered : []
+                    const events = data.Notus ? data.Notus.Registered : []
                     const ipfsHash = this.props.match.params.ipfsHash
                     const webhookEvent = events.find((e) => {
                       let ipfsHashUtf8

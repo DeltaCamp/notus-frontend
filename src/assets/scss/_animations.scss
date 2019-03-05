@@ -11,18 +11,18 @@
 }
 
 .layout-appear {
-  transform: translate3d(0, -500px, 0);
+  // transform: translate3d(0, -500px, 0);
   transition-timing-function: ease-in-out;
 }
 
 .layout-appear.layout-appear-active {
-  transform: translate3d(0, 0, 0);
+  // transform: translate3d(0, 0, 0);
   transition: all 1000ms ease-out;
   transition-delay: 700ms;
 }
 
 .layout-enter {
-  transform: translate3d(0, 0, 0);
+  // transform: translate3d(0, 0, 0);
 }
 
 .layout-enter.layout-enter-active {

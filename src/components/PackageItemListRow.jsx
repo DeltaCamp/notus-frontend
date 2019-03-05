@@ -5,7 +5,7 @@ import { ListRowLoader } from '~/components/ListRowLoader'
 import { formatRoute } from 'react-router-named-routes'
 import { Link } from 'react-router-dom'
 import { Query } from 'react-apollo'
-import { velcroQueries } from '~/queries/velcroQueries'
+import { notusQueries } from '~/queries/notusQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import * as routes from '~/../config/routes'
 import { normalizeAddr } from '~/utils/normalizeAddr'
@@ -21,7 +21,7 @@ export class PackageItemListRow extends PureComponent {
     const address = normalizeAddr(this.props.address)
 
     return (
-      <Query query={velcroQueries.eventsQuery}>
+      <Query query={notusQueries.eventsQuery}>
         {({ loading, error, data }) => {
           if (loading) return null
           if (error) {
@@ -42,7 +42,7 @@ export class PackageItemListRow extends PureComponent {
 
           return (
             <Query
-              query={velcroQueries.packageQuery}
+              query={notusQueries.packageQuery}
               variables={{ uri: result.metadataURI, id: result.id.toString() }}
             >
               {

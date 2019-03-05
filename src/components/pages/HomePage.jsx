@@ -15,7 +15,10 @@ export class HomePage extends PureComponent {
 
     return (
       <div className='is-positioned-absolutely'>
-        <LandingHero heroColor={heroColor} />
+        <header className='header'>
+          <div className='hero-bg' />
+          <LandingHero heroColor={heroColor} />
+        </header>
         
         <section id="your-webhooks" className='section section--main-content'>
           <div className='container'>

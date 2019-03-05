@@ -1,11 +1,11 @@
 $gridGap: 64px;
-$mobileContainerWidth: 80%;
+$mobileContainerWidth: 85%;
 
 $mobile: 480px + (2 * $gridGap);
 $tablet: 700px + (2 * $gridGap);
-$desktop: 960px + (2 * $gridGap);
-$widescreen: 1100px + (2 * $gridGap);
-$fullhd: 1260px + (2 * $gridGap);
+$desktop: 820px + (2 * $gridGap);
+$widescreen: 900px + (2 * $gridGap);
+$fullhd: 1000px + (2 * $gridGap);
 
 // These are good to use with min-width
 $mobileMin: 0px;     
@@ -33,28 +33,11 @@ $section-padding-large: 18rem 0;
 
 $weight-semibold: 500;
 
-$family-sans-serif: 'brandon-grotesque', 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+$family-sans-serif: 'acumin-pro', 'Open Sans', 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-$family-serif: 'Vollkorn', serif;
+$family-serif: 'acumin-pro', serif;
 $family-code: 'Roboto Mono', monospace;
 
-$button-color: white;
-$button-hover-color: white;
-// $button-background-color: orange;
-//  $button-static-background-color: green;
-$code-background: #f7f7f7;
-$link-invert: #ffffff;
-$hero-light: #f7f7f9;
-$hero-dark: #252c31;
-// $navbar-background-color: #f6f6f9;
-$navbar-background-color: white;
-$navbar-grey: #13171a;
-$navbar-item-color: #6f6f6f;
-$navbar-item-hover: black;
-$navbar-item-hover-background-color: transparent;
-$navbar-dark-background-color: $navbar-grey;
-$navbar-dark-item-color: white;
-$navbar-dark-item-hover-color: #d9d9d9;
 $text: #141414;
 $green: #00c853;
 $yellow: #ff9800;
@@ -64,6 +47,24 @@ $blue: #085dff;
 $deep-purple: #300776;
 $purple: lighten($deep-purple, 5%);
 $mauve: lighten($deep-purple, 10%);
+
+$button-color: white;
+$button-hover-color: $cyan;
+// $button-background-color: orange;
+//  $button-static-background-color: green;
+$code-background: #f7f7f7;
+$link-invert: #ffffff;
+$hero-light: #f7f7f9;
+$hero-dark: #252c31;
+// $navbar-background-color: #f6f6f9;
+$navbar-background-color: white;
+$navbar-grey: #13171a;
+$navbar-item-color: white;
+$navbar-item-hover: rgba(220, 220, 255, 0.9);
+$navbar-item-hover-background-color: transparent;
+$navbar-dark-background-color: $navbar-grey;
+$navbar-dark-item-color: white;
+$navbar-dark-item-hover-color: #d9d9d9;
 
 // Derived variables
 $navbar-item-hover-color: $navbar-item-hover;

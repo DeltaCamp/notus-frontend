@@ -21,7 +21,7 @@ export const HooksListPage = graphql(transactionQueries.allTransactionsQuery)(
 
       const hookTx = findLast(this.props.data.transactions, tx => {
         return (
-          tx.contractName === 'Velcro' &&
+          tx.contractName === 'Notus' &&
           tx.method === 'registerWebhook'
         )
       })

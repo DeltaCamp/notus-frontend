@@ -1,7 +1,7 @@
 import { AbiMapping } from 'apollo-link-ethereum'
-// TODO: Replace this with the abi from the artifacts in the velcro-contract npm package
-import VelcroAbi from './abi/VelcroAbi'
-import Velcro from '#/Velcro.json'
+// TODO: Replace this with the abi from the artifacts in the notus-contract npm package
+import NotusAbi from './abi/NotusAbi'
+import Notus from '#/Notus.json'
 
 export const abiMapping = new AbiMapping()
 
@@ -14,4 +14,4 @@ function addTruffleArtifact (name, abi, truffleJsonArtifact) {
   })
 }
 
-addTruffleArtifact('Velcro', VelcroAbi, Velcro)
+addTruffleArtifact('Notus', NotusAbi, Notus)

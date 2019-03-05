@@ -24,21 +24,66 @@
 
 .hero.is-medium .hero-body,
 .hero.is-link {
-  animation-name: animateHeroBg;
-  animation-duration: 11s;
-  animation-timing-function: ease-in-out;
-  // cubic-bezier?
-  animation-iteration-count: infinite;
-  background-blend-mode: difference;
-  background-color: white;
+  // animation-name: animateHeroBg;
+  // animation-duration: 11s;
+  // animation-timing-function: ease-in-out;
+
+  // animation-iteration-count: infinite;
+
+  // background-blend-mode: hard-light;
+  // background-color: #4e3c51;
   // background-color: $mauve;
   // background-image: linear-gradient(-10deg, $purple 0%, $mauve 10%, $deep-purple 100%);
-  background-image: 
-    linear-gradient(90deg, $cyan 0%, darken($cyan, 5%) 4%, darken($cyan, 8%) 10%, lighten($mauve, 15%) 70%, lighten($purple, 15%) 85%, lighten($deep-purple, 15%) 100%),
-    url('/swirl_pattern.png');
-  background-position: 0 0;
-  background-size: cover, 300px 300px;
+
+  // background-image: 
+  //   linear-gradient(90deg, #242e3c 0%, #242e3c 99%, #540e5c 100%),
+  //   url('/swirl_pattern.png');
+//   background-position: 0 0;
+  // background-size: cover, 300px 300px;
+
+  background-color: transparent;
   position: relative;
+}
+
+.hero-bg {
+  // background-image: 
+  //   // linear-gradient(90deg, #242e3c 0%, #242e3c 99%, #540e5c 100%),
+  //   linear-gradient(90deg, #242e3c 0%, #542e3c 100%),
+  //   url('/dark-honeycomb.png');
+  // background-blend-mode: color;
+  // // background-blend-mode: hard-light;
+  // // background-blend-mode: soft-light;
+
+  background-image: 
+    linear-gradient(260deg, #C305F3 0%, #7704EC 20%, #3F19CC 60%, #02BDE4 85%, #7fc 100%),
+    url('/dark-honeycomb.png');
+  // background-blend-mode: hard-light;
+
+  // background-position: 0 0;
+  // background-size: cover, 300px 300px;
+  height: 900px;
+  overflow: hidden;
+  position: absolute;
+  transform: skewY(-20deg);
+  transform-origin: 40px;
+  width: 100%;
+
+  @media screen and (min-width: $fullhd + 200px) {
+    transform-origin: 200px;
+  }
+}
+
+.hero .hero-body {
+  margin-top: 50px;
+}
+
+.hero .hero--description-text {
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 20px;
+}
+
+.hero .button {
+  margin-top: 50px;
 }
 
 .has-bg {
@@ -116,12 +161,12 @@
 }
 
 .hero a {
-  border-bottom: 1px solid transparent;
-  transition: border 300ms ease-in-out;
+  // border-bottom: 1px solid transparent;
+  // transition: border 300ms ease-in-out;
 }
 
 .hero a:hover {
-  border-bottom-color: rgba(255, 255, 255, 0.5);
+  // border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
 .hero p {

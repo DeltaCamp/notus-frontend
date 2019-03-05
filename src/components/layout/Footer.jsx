@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import VelcroLogo from '~/assets/images/velcro--logo.svg'
+import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
 import * as routes from '~/../config/routes'
 
 export const Footer = class _Footer extends Component {
@@ -25,17 +25,17 @@ export const Footer = class _Footer extends Component {
             <div className='footer-brand'>
               <div className='footer-item'>
                 <h6 className='is-size-6'>
-                  <VelcroLogo />
+                  <NotusLogo />
                 </h6>
                 <br />
-                Velcro is an open source project which you can run your own instance of. Learn more on GitHub: 
+                Notus is an open source project which you can run your own instance of. Learn more on GitHub: 
                 <br />
                 <a 
-                  href='https://github.com/ethvelcro'
+                  href='https://github.com/ethnotus'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  Visit Velcro on GitHub
+                  Visit Notus on GitHub
                 </a>
                 <br />
                 <br />

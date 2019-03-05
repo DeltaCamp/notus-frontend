@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
-import VelcroLogo from '~/assets/images/velcro--logo.svg'
+import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
 import * as routes from '~/../config/routes'
 
 export const Nav = class _Nav extends Component {
@@ -28,12 +28,12 @@ export const Nav = class _Nav extends Component {
           onClick={this.closeMobileNav}
         />
 
-        <nav className='navbar'>
+        <nav className='navbar is-transparent'>
           <div className='container'>
             <div className='row navbar-menu-container'>
               <div className='navbar-brand col-xs-8 col-md-8'>
                 <Link to={routes.HOME} className='navbar-item'>
-                  <VelcroLogo />
+                  <NotusLogo />
                 </Link>
               </div>
 

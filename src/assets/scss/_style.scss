@@ -1,27 +1,25 @@
-// font-family: brandon-grotesque, sans-serif
-// font-weight: 400
-// font-style: normal
-// font-family: brandon-grotesque, sans-serif
-// font-weight: 400
-// font-style: italic
-// font-family: brandon-grotesque, sans-serif
-// font-weight: 900
-// font-style: normal
-// font-family: brandon-grotesque, sans-serif
-// font-weight: 900;
-// font-style: italic;
+// in adobe fonts package
+// font-family: arya-single, sans-serif;
 
 ::placeholder {
   color: rgba(27, 4, 4, 0.15);
 }
 
 ::selection {
-  background-color: $blue;
+  background-color: $purple;
   color: white;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+header {
+  position: relative;
+}
+
+header .hero {
+  height: 760px;
 }
 
 .has-text-primary {
@@ -55,6 +53,8 @@ a.is-dark {
   position: absolute;
   flex-direction: column;
   min-height: 100vh;
+  top: 0;
+  left: 0;
   width: 100%;
 }
 
@@ -125,9 +125,9 @@ a:hover {
   user-select: none;
 }
 
-.no-scale:hover {
-  transform: scale3d(1, 1, 1) !important;
-}
+// .no-scale:hover {
+//   transform: scale3d(1, 1, 1) !important;
+// }
 
 .has-text-white a,
 .has-text-white button,

@@ -5,7 +5,7 @@ import { get } from 'lodash'
 import { Query } from 'react-apollo'
 import { CSSTransition } from 'react-transition-group'
 import { EnsName } from '~/components/EnsName'
-import { velcroQueries } from '~/queries/velcroQueries'
+import { notusQueries } from '~/queries/notusQueries'
 import { displayWeiToEther } from '~/utils/displayWeiToEther'
 const ipfsClient = require('ipfs-http-client')
 

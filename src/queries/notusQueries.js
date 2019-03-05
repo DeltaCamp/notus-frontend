@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const velcroFragments = {
+export const notusFragments = {
   // metadataFragment: gql`
   //   fragment md on Metadata {
   //     id
@@ -18,32 +18,32 @@ export const velcroFragments = {
   `
 }
 
-export const velcroQueries = {
+export const notusQueries = {
   ownerQuery: gql`
     query ownerQuery($address: String!) {
-      Velcro @contract(type: "OwnerEvents", id: $address) {
+      Notus @contract(type: "OwnerEvents", id: $address) {
         allEvents @pastEvents
       }
     }
   `,
-  velcroEventsQuery: gql`
-    query velcroEventsQuery {
-      Velcro @contract {
+  notusEventsQuery: gql`
+    query notusEventsQuery {
+      Notus @contract {
         allEvents @pastEvents
       }
     }
   `,
-  velcroQuery: gql`
-    query velcroQuery($ipfsHash: String!) {
-      Velcro @contract(type: "Webhook", id: $ipfsHash) {
+  notusQuery: gql`
+    query notusQuery($ipfsHash: String!) {
+      Notus @contract(type: "Webhook", id: $ipfsHash) {
         ...webhookFragment
       }
     }
-    ${velcroFragments.webhookFragment}
+    ${notusFragments.webhookFragment}
   `,
   eventsQuery: gql`
     query eventsQuery {
-      Velcro @contract(type: "GlobalInfo", id: "1") {
+      Notus @contract(type: "GlobalInfo", id: "1") {
         id
         __typename
         Registered @pastEvents
@@ -56,11 +56,11 @@ export const velcroQueries = {
   //     metadata(uri: $uri) @client {
   //       ...md
   //     }
-  //     Velcro @contract(type: "Package", id: $id) {
+  //     Notus @contract(type: "Package", id: $id) {
   //       ...packageFragment
   //     }
   //   }
-  //   ${velcroFragments.metadataFragment}
-  //   ${velcroFragments.packageFragment}
+  //   ${notusFragments.metadataFragment}
+  //   ${notusFragments.packageFragment}
   // `
 }

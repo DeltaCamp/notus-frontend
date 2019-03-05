@@ -156,7 +156,7 @@ export const RegisterWebhookForm = graphql(Web3Mutations.sendTransaction, { name
 
         registerWebhookTransaction(ipfsHashAsHex) {
           const txData = {
-            contractName: 'Velcro',
+            contractName: 'Notus',
             method: 'registerWebhook',
             args: [
               ipfsHashAsHex
