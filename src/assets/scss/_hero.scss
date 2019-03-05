@@ -12,55 +12,33 @@
   }
 }
 
+.hero--description-text,
+.hero--title {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
 .hero h4 {
   line-height: 1.6;
 }
 
-.hero h1,
-.hero h2,
-.hero h3 {
-  font-weight: 900;
-}
-
 .hero.is-medium .hero-body,
 .hero.is-link {
-  // animation-name: animateHeroBg;
-  // animation-duration: 11s;
-  // animation-timing-function: ease-in-out;
-
-  // animation-iteration-count: infinite;
-
-  // background-blend-mode: hard-light;
-  // background-color: #4e3c51;
-  // background-color: $mauve;
-  // background-image: linear-gradient(-10deg, $purple 0%, $mauve 10%, $deep-purple 100%);
-
-  // background-image: 
-  //   linear-gradient(90deg, #242e3c 0%, #242e3c 99%, #540e5c 100%),
-  //   url('/swirl_pattern.png');
-//   background-position: 0 0;
-  // background-size: cover, 300px 300px;
-
   background-color: transparent;
   position: relative;
 }
 
 .hero-bg {
-  // background-image: 
-  //   // linear-gradient(90deg, #242e3c 0%, #242e3c 99%, #540e5c 100%),
-  //   linear-gradient(90deg, #242e3c 0%, #542e3c 100%),
-  //   url('/dark-honeycomb.png');
-  // background-blend-mode: color;
-  // // background-blend-mode: hard-light;
-  // // background-blend-mode: soft-light;
-
+  // animation-name: animateHeroBg;
+  // animation-duration: 40s;
+  // animation-timing-function: ease-in-out;
+  // animation-iteration-count: infinite;
+  
   background-image: 
-    linear-gradient(260deg, #C305F3 0%, #7704EC 20%, #3F19CC 60%, #02BDE4 85%, #7fc 100%),
+    linear-gradient(260deg, #C305F3 0%, #7704EC 40%,rgb(2, 123, 228) 78%, #02BDE4 90%, #7fc 100%),
     url('/dark-honeycomb.png');
-  // background-blend-mode: hard-light;
+  // background-blend-mode: exclusion;
+  background-blend-mode: screen;
 
-  // background-position: 0 0;
-  // background-size: cover, 300px 300px;
   height: 900px;
   overflow: hidden;
   position: absolute;

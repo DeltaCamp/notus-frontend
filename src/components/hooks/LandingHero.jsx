@@ -17,9 +17,9 @@ export const LandingHero = ({ heroColor }) => {
               </div> */}
               {/* <br /> */}
 
-              <h2 className='is-size-2'>
+              <h1 className='is-size-1 has-text-weight-bold hero--title'>
                 Get notified when smart contract events occur.
-              </h2>
+              </h1>
               <h5 className='is-size-5 hero--description-text'>
                 {/* /texts/emails/slacks */}
                 Notus is the distributed network for receiving webhooks when something interesting you've subscribed to happens on the blockchain.
