@@ -5,11 +5,11 @@ import * as routes from '~/../config/routes'
 
 export const LandingHero = ({ heroColor }) => {
   return (
-    <section className={`hero is-large ${heroColor}`}>
+    <section className={`hero ${heroColor}`}>
       <div className='hero-body'>
         <div className='container'>
           <div className='row'>
-            <div className='col-xs-12 col-lg-9'>
+            <div className='col-xs-12 col-lg-7'>
               {/* <div className='row'>
                 <div className='col-xs-6 col-sm-3'>
                   <NotusSymbol className='img-responsive' />

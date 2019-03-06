@@ -18,8 +18,13 @@ header {
   position: relative;
 }
 
-header .hero {
-  height: 760px;
+h1/*,
+h2,
+h3,
+h4,
+h5,
+h6*/ {
+  line-height: 1.2;
 }
 
 .has-text-primary {
@@ -287,4 +292,8 @@ hr {
   opacity: 0;
   z-index: 1;
   background: black;
+}
+
+.is-difference {
+  mix-blend-mode: difference;
 }

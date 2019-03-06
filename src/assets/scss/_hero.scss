@@ -14,7 +14,7 @@
 
 .hero--description-text,
 .hero--title {
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .hero h4 {
@@ -25,6 +25,12 @@
 .hero.is-link {
   background-color: transparent;
   position: relative;
+}
+
+$heroHeightWidescreen: 640px;
+
+header .hero {
+  height: $heroHeightWidescreen - 80px;
 }
 
 .hero-bg {
@@ -39,10 +45,10 @@
   background-blend-mode: multiply;
   background-size: 100% 100%, 300px 200px;
 
-  height: 900px;
+  height: $heroHeightWidescreen;
   overflow: hidden;
   position: absolute;
-  transform: skewY(-20deg);
+  transform: skewY(-15deg);
   transform-origin: 40px;
   width: 100%;
 
@@ -52,7 +58,7 @@
 }
 
 .hero .hero-body {
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .hero .hero--description-text {
