@@ -18,13 +18,20 @@ header {
   position: relative;
 }
 
-h1/*,
-h2,
-h3,
-h4,
-h5,
-h6*/ {
-  line-height: 1.2;
+h1 {
+  line-height: 1.25;
+}
+
+.is-size-1 {
+  @media screen and (max-width: $tablet) {
+    font-size: 1.5rem !important;
+  }
+}
+
+.is-size-5 {
+  @media screen and (max-width: $tablet) {
+    font-size: 1rem !important;
+  }
 }
 
 .has-text-primary {
@@ -294,6 +301,10 @@ hr {
   background: black;
 }
 
+.card {
+  margin: 0;
+}
+
 .card-header {
   box-shadow: none;
   color: $dark;
@@ -306,6 +317,10 @@ hr {
   padding: 1.5rem 2rem 0;
   text-align: center;
   width: 100%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 1rem;
+  }
 }
 
 .card-footer {
@@ -322,17 +337,27 @@ hr {
   box-shadow: 0 17px 50px rgba(50, 50, 93, .1), 0 7px 20px rgba(0, 0, 0, .08);
 }
 
-.signup .logo {
-  margin: 0 auto 2rem auto;
-  width: 300px;
+.logo-signup {
+  height: 60px;
+  margin: 1.5rem auto 2rem auto;
+  width: 200px;
+
+  @media screen and (max-width: $tablet) {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
 }
 
-.signup .logo,
-.signup .logo svg,
-.signup .logo svg path {
+.logo-signup path {
   fill: white
 }
 
 .has-no-top-padding {
   padding-top: 0;
+}
+
+.section.section--main-content {
+  @media screen and (max-width: $tablet) {
+    margin-top: 4rem;
+  }
 }

@@ -27,9 +27,9 @@ export const LandingHero = ({ heroColor }) => {
 
               <Link
                 className='button is-small is-outlined is-light'
-                to={routes.HOOKS}
+                to={routes.SIGNUP}
               >
-                Create A Hook
+                Get Started For Free
               </Link>
             </div>
 

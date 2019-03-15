@@ -11,17 +11,6 @@ export const Footer = class _Footer extends Component {
       <>
         <footer className='footer has-text-centered'>
           <div className='footer--primary'>
-            <div className='footer-menu'>
-              <a
-                href='/#your-webhooks'
-                className='footer-item is-uppercase has-text-weight-bold'
-              >
-                Hooks
-              </a>
-            </div>
-          </div>
-
-          <div className='footer--secondary'>
             <div className='footer-brand'>
               <div className='footer-item'>
                 <h6 className='is-size-6'>
@@ -31,7 +20,7 @@ export const Footer = class _Footer extends Component {
                 Notus is also an open source project. Learn more on GitHub: 
                 <br />
                 <a 
-                  href='https://github.com/ethnotus'
+                  href='https://github.com/notifyus'
                   target='_blank'
                   rel='noopener noreferrer'
                 >

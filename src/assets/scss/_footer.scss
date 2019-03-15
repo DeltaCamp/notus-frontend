@@ -19,18 +19,18 @@
   padding: 3.5rem 2rem;
 }
 
-.footer--secondary {
+.footer--primary {
   background-color: darken($navbar-grey, 4%);
   background-image: linear-gradient(to bottom, darken($navbar-grey, 6%) 0%, #161616 70%, #121212 100%);
   font-size: 1.25rem;
   padding: 5.5rem 2rem 4.5rem;
 }
 
-.footer--secondary svg {
+.footer--primary svg {
   height: 30px;
 }
 
-.footer--secondary svg path {
+.footer--primary svg path {
   fill: white;
 }
 
@@ -40,13 +40,13 @@
   display: inline-block;
   margin: 0 1rem;
   transition: border 300ms ease-in-out;
-}
+} 
 
 .footer-menu .footer-item:hover {
   border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
-.footer--secondary .footer-item--copyright {
+.footer--primary .footer-item--copyright {
   color: rgba(255, 255, 255, 0.4);
   display: block;
   margin-top: 0.5rem;
