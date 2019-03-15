@@ -7,6 +7,7 @@ import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
 import { HookPage } from '~/components/pages/HookPage'
 import { HooksListPage } from '~/components/pages/HooksListPage'
+import { SignupPage } from '~/components/pages/SignupPage'
 import { NavContainer } from '~/components/layout/Nav'
 import { FourOhFour } from '~/components/pages/FourOhFour'
 import { getPurePathname } from '~/utils/getPurePathname'
@@ -39,7 +40,7 @@ const App = class _App extends PureComponent {
         <TransitionGroup>
           <CSSTransition
             key={this.props.location.key}
-            timeout={{ enter: 700, exit: 200 }}
+            timeout={{ enter: 200, exit: 200 }}
             classNames='layout'
             appear
           >
@@ -47,6 +48,7 @@ const App = class _App extends PureComponent {
               <Route exact path={routes.HOOK} component={HookPage} />
               <Route exact path={routes.HOOKS} component={HooksListPage} />
               <Route exact path={routes.HOME} component={HomePage} />
+              <Route exact path={routes.SIGNUP} component={SignupPage} />
               <Route component={FourOhFour} />
             </Switch>
           </CSSTransition>

@@ -26,10 +26,11 @@ button[disabled] {
 .button {
   background-color: transparent;
   border-radius: 100px;
+  border-width: 3px;
   font-size: 1.25rem;
   font-weight: 700;
   // height: auto;
-  padding: 0.35rem 1rem 0.4rem;
+  padding: 0.35rem 3rem 0.4rem;
   text-transform: uppercase;
 
   @media screen and (max-width: $tablet) {
@@ -43,7 +44,8 @@ button[disabled] {
 .button.is-small {
   border-radius: 100px;
   font-size: 1rem;
-  padding: 1.25rem 2rem 1.25rem;
+  height: auto;
+  padding: 0.5rem 2rem 0.5rem;
 }
 
 .button.is-text {
@@ -96,23 +98,68 @@ button[disabled] {
   color: $text;
 }
 
-a.button,
+.button,
 button {
-  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
-  transform: translateY(0);
-  transition: all 150ms ease-out;
+  border: 2px solid white;
+  height: auto;
+  // transform: translateY(0);
+  // transition: all 150ms ease-out;
   // transform: scale3d(1, 1, 1);
 }
 
-a.button:hover:not(.is-text),
+.button:hover:not(.is-text),
 button:hover:not(.is-text) {
-  box-shadow: 0 9px 15px rgba(50, 50, 93, .2), 0 4px 7px rgba(0, 0, 0, .15);
+  border: 2px solid white;
   // transition: transform 150ms ease-in;
   // transform: scale3d(1.04, 1.04, 1.04);
-  transform: translateY(-2px);
-  transition: all 150ms ease-in-out;
+  // transform: translateY(-2px);
+  // transition: all 150ms ease-in-out;
 }
 
 // .button.is-text.has-underline-border:hover {
 //   border-bottom-color: $button-text-hover-color;
 // }
+
+.button.is-success {
+  border: 2px solid white;
+  color: white;
+}
+
+.button.is-success:hover {
+  border: 2px solid white;
+  color: white;
+}
+
+.button.is-success.is-outlined {
+  border-color: $success;
+}
+
+.button.is-success.is-outlined:hover,
+.button.is-success.is-outlined:active,
+.button.is-success.is-outlined:focus {
+  border-color: $success;
+  color: white;
+}
+
+.button.is-dark.is-outlined {
+  border-color: $dark;
+}
+
+.button.is-dark.is-outlined:hover,
+.button.is-dark.is-outlined:active,
+.button.is-dark.is-outlined:focus {
+  border-color: $dark;
+  color: white;
+}
+
+.button.is-outlined.is-light {
+  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+}
+
+.button.is-outlined.is-light:hover {
+  box-shadow: 0 9px 15px rgba(50, 50, 93, .2), 0 4px 7px rgba(0, 0, 0, .15);
+}
+
+.button.is-outlined.is-light:active {
+  box-shadow: none;
+}

@@ -65,6 +65,15 @@ export const Nav = class _Nav extends Component {
                     Hooks
                   </a>
                 </div>
+
+                <div className='navbar-end'>
+                  <Link
+                    to={routes.SIGNUP}
+                    className='navbar-item'
+                  >
+                    Sign Up
+                  </Link>
+                </div>
               </div>
             </div>
 

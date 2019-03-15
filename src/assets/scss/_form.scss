@@ -15,6 +15,7 @@ $addonsFormHeight: 57px;
 
 .label {
   cursor: pointer;
+  margin-bottom: 0;
   text-align: left;
 }
 
@@ -45,14 +46,14 @@ $addonsFormHeight: 57px;
 
 input.input,
 textarea.textarea {
-  border-radius: 0;
+  border-radius: 10px;
   font-family: $family-code;
-  font-size: 1.75rem;
+  font-size: 1.125rem;
   // letter-spacing: 0;
-  height: 70px;
-  margin: 0.5rem 0;
-  padding: 5px 15px 3px;
-  border: 6px solid #f0f0f0;
+  // height: 70px;
+  margin: 0 0;
+  padding: 3px 15px 3px;
+  border: 3px solid #f0f0f0;
   box-shadow: none;
   transition: border-color 100ms ease-in-out;
 }
@@ -67,7 +68,7 @@ input.input:focus,
 textarea.textarea:hover,
 textarea.textarea:focus,
 textarea.textarea:active {
-  border: 6px solid lighten($cyan, 26%);
+  border: 3px solid lighten($cyan, 36%);
 }
 
 input.input:active,
@@ -75,7 +76,15 @@ input.input:focus,
 textarea.textarea:focus,
 textarea.textarea:active {
   border: 1px solid #aaa;
-  border: 6px solid $cyan;
+  border: 3px solid $cyan;
+}
+
+.label {
+  color: $grey;
+  font-family: $family-code;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 label.radio {

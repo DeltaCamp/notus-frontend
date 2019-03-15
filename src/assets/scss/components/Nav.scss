@@ -1,3 +1,19 @@
+html.signup .navbar {
+  display: none;
+}
+
+html:not(.home) .navbar {
+  // background-image: 
+  //   linear-gradient(70deg, #C305F3 0%, #7704EC 40%,rgb(2, 123, 228) 78%, #02BDE4 90%, #7fc 100%),
+  //   url('/funky-lines.png');
+  // background-blend-mode: multiply;
+  // background-size: 100% 100%, 300px 200px;
+  background-color: white;
+  color: white;
+
+  width: 100%;
+}
+
 .navbar {
   background: transparent;
   // box-shadow: 0 8px 16px rgba(10, 10, 10, .03);
@@ -6,6 +22,7 @@
 
 .navbar > .container .navbar-brand,
 .container > .navbar .navbar-brand {
+  padding-top: 0.5rem;
   margin-left: 0;
 }
 
@@ -27,7 +44,7 @@
   margin-right: 0.5rem;
   padding: 0 0.1rem;
   margin: 1rem 0;
-  transition: border 300ms ease-in-out;
+  // transition: border 300ms ease-in-out;
 
   @media screen and (max-width: $navbar-breakpoint) {
     font-size: 1rem;
@@ -46,7 +63,12 @@
 }
 
 .navbar-brand svg {
-  mix-blend-mode: color;
+  // mix-blend-mode: color;
+  color: white;
+}
+
+.signup .navbar-brand svg path {
+  fill: $purple;
 }
 
 .navbar-brand svg path {
@@ -63,7 +85,9 @@
 }
 
 .navbar-end .navbar-item {
-  border-bottom: 1px solid transparent;
+  // border-bottom: 1px solid transparent;
+  font-weight: 900;
+  text-transform: uppercase;
   transition: border 300ms ease-in-out;
 }
 
@@ -72,7 +96,7 @@
 // }
 
 .navbar-menu.is-active .navbar-end .navbar-item:hover {
-  border-bottom-color: transparent;
+  // border-bottom-color: transparent;
 }
 
 .navbar.is-dark {

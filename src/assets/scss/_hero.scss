@@ -72,10 +72,10 @@ header .hero {
 
 .has-bg {
   background-attachment: fixed;
-  background-blend-mode: screen;
-  background-color: #bbb;
+  background-blend-mode: hard-light;
   background-image: 
-    url('/funky-lines.png');
+  linear-gradient(260deg, rgba(195, 5, 243, 1) 0%, rgba(119, 4, 236, 1) 40%,rgba(50, 110, 150, 1) 78%, rgba(20, 150, 190, 1) 90%, rgba(20, 255, 204, 1) 100%),
+  url('/funky-lines.png');
 }
 
 @keyframes animateHeroBg {

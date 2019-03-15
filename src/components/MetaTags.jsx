@@ -23,7 +23,7 @@ export const MetaTags = class _MetaTags extends PureComponent {
     const author = 'Delta Camp & Jake Caban-Tomski'
     const keywords = 'deltacamp delta camp notus ethereum smart contract notifications'
     const themeColor = '#ffffff'
-    const googleFontsURL = 'https://fonts.googleapis.com/css?family=Vollkorn:300,400,500,700|Roboto+Mono:400,700,900'
+    const googleFontsURL = 'https://fonts.googleapis.com/css?family=Vollkorn:300,400,500,700|Roboto+Mono:300,400,700,900'
     const typeKitURL = 'https://use.typekit.net/rjp5pbv.css'
     const year = (new Date()).getFullYear()
 
