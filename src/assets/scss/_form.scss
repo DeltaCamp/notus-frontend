@@ -262,3 +262,13 @@ label.radio,
 .event-topics-accordion.accordion-enter-done {
   height: 500px;
 }
+
+.accordion--signup-thank-you.accordion-enter-active,
+.accordion--signup-thank-you.accordion-enter-done {
+  height: 420px;
+}
+
+.accordion--signup-form.accordion-enter-active,
+.accordion--signup-form.accordion-enter-done {
+  height: 460px;
+}

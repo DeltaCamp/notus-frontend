@@ -24,16 +24,17 @@ window.addEventListener('load', async () => {
     if (network.chainId === 1) {
       defaultFromBlock = parseInt(process.env.REACT_APP_MAINNET_STARTING_BLOCK, 10)
     }
-    const client = await createClient(provider, defaultFromBlock)
-    window.client = client
-    subscribeAndRefetch(client)
+    // const client = await createClient(provider, defaultFromBlock)
+    // window.client = client
+    // subscribeAndRefetch(client)
 
-    let coreApp =
-      <ApolloProvider client={client}>
+    // <ApolloProvider client={client}>
+    // </ApolloProvider>
+
+    let coreApp =      
         <BrowserRouter>
           <AppContainer />
         </BrowserRouter>
-      </ApolloProvider>
 
     ReactDOM.render(coreApp, document.getElementById('root'))
   } catch (error) {

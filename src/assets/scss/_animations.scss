@@ -138,13 +138,22 @@
   animation: changeLetter 1s normal forwards ease-in-out;
 }
 
-.accordion,
-.accordion-enter,
+.accordion {
+  overflow: hidden;
+}
+
 .accordion-exit,
-.accordion-exit-active {
+.accordion-exit-active,
+.accordion-exit-done {
   height: 1px;
   opacity: 0.01;
-  overflow: hidden;
+  transition: all 600ms ease-in-out;
+}
+
+.accordion,
+.accordion-enter {
+  height: 1px;
+  opacity: 0.01;
   transition: all 600ms ease-in-out;
 }
 

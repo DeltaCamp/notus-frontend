@@ -312,7 +312,7 @@ hr {
   display: block;
   font-family: $code-family;
   letter-spacing: -0.05rem;
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 300;
   margin: 0 auto;
   padding: 1.5rem 2rem 0;
@@ -361,4 +361,15 @@ hr {
   @media screen and (max-width: $tablet) {
     margin-top: 4rem;
   }
+}
+
+.icon--signup-large {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  height: 30px;
+  width: 30px;
+}
+
+.column {
+  padding: 0;
 }

@@ -25,7 +25,7 @@ export const HooksList = graphql(web3Queries.networkAccountQuery, { name: 'netwo
     withApollo(class HooksList extends PureComponent {
       componentDidUpdate (prevProps, prevState, snapshot) {
         const events = this.eventsFromProps(this.props)
-        const { client } = this.props
+        // const { client } = this.props
 
         console.log('events',events)
         console.log(this.props.hooks)

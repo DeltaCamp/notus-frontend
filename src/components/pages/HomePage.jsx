@@ -37,7 +37,7 @@ export class HomePage extends PureComponent {
                 <p>
                   <a href='https://github.com/notifyus' target='_blank' rel='noopener noreferrer'>Read the Developer Documentation</a>
                 </p>
-                <Query query={web3Queries.networkIdQuery}>
+                {/* <Query query={web3Queries.networkIdQuery}>
                   {({ data }) => {
                     const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1
 
@@ -58,7 +58,7 @@ export class HomePage extends PureComponent {
                       )
                     }
                   }}
-                </Query>
+                </Query> */}
               </div>
             </div>
           </div>
