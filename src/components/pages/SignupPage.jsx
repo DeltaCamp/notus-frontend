@@ -8,15 +8,14 @@ import { MailOutline } from '@ant-design/icons'
 import * as routes from '~/../config/routes'
 // FORM VALIDATION AND ERROR div!
 
+const MAX_LENGTH = 120
+
 export const SignupPage = 
   class _SignupPage extends Component {
-    state = {}
-
-    constructor(props) {
-      super(props)
-      this.state = {
-        success: false
-      }
+    state = {
+      email: '',
+      dappName: '',
+      success: false
     }
 
     handleSignupSubmit = (e) => {
@@ -33,6 +32,16 @@ export const SignupPage =
         // - on the API server, send an email to the newly signed up user
         this.setState({ success: true })
       }
+    }
+
+    handleDappNameChange = (e) => {
+      // strip bad chars
+      let dappName = e.target.value.replace(/[$ ^* !#|&;$%@"<>()+,]/g, '')
+
+      // strip strings that are too long
+      dappName = dappName.substring(0, MAX_LENGTH)
+
+      this.setState({ dappName })
     }
 
     render () {
@@ -76,6 +85,7 @@ export const SignupPage =
                   id='email'
                   className='input'
                   onChange={(e) => { this.setState({ email: e.target.value }) }}
+                  value={this.state.email}
                 />
               </div>
               <div className='field'>
@@ -86,7 +96,8 @@ export const SignupPage =
                   type='text'
                   id='dapp-name'
                   className='input'
-                  onChange={(e) => { this.setState({ dappName: e.target.value }) }}
+                  onChange={this.handleDappNameChange}
+                  value={this.state.dappName}
                 />
               </div>
               {/* <div className='control checkbox'>
@@ -122,28 +133,27 @@ export const SignupPage =
                         </Link>
                       </div>
                       <section className='card has-shadow has-shadow-big'>
-                        
-                          <CSSTransition
-                            timeout={600}
-                            classNames='accordion'
-                            in={!this.state.success}
-                          >
-                            {state => form}
-                          </CSSTransition>
+                        <CSSTransition
+                          timeout={600}
+                          classNames='accordion'
+                          in={!this.state.success}
+                        >
+                          {state => form}
+                        </CSSTransition>
 
 
-                          <CSSTransition
-                            timeout={600}
-                            classNames='accordion'
-                            in={this.state.success}
-                          >
-                            {state => thankYou}
-                          </CSSTransition>
-                          {/* <footer className='card-footer has-text-centered'>
-                            Signing up signifies you have read and agree to the<a href='/terms'>Terms of Service</a>{' '}
-                            and&nbsp;<a href='/privacy'>Privacy Policy</a>.
-                          </footer> */}
-                        
+                        <CSSTransition
+                          timeout={600}
+                          classNames='accordion'
+                          in={this.state.success}
+                        >
+                          {state => thankYou}
+                        </CSSTransition>
+                        {/* <footer className='card-footer has-text-centered'>
+                          Signing up signifies you have read and agree to the<a href='/terms'>Terms of Service</a>{' '}
+                          and&nbsp;<a href='/privacy'>Privacy Policy</a>.
+                        </footer> */}
+                      
                       </section>
                       <br />
                       <div className='card-footer has-text-centered'>
