@@ -4,26 +4,26 @@ import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from '~/components/App'
 import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from 'react-apollo'
-import { getReadProvider } from '~/web3/getReadProvider'
+// import { getReadProvider } from '~/web3/getReadProvider'
 import { subscribeAndRefetch } from '~/apollo/subscribeAndRefetch'
 import { createClient } from '~/apollo/createClient'
 import './index.scss'
 
 require('./ethers.extension')
-require('./intercom')
+// require('./intercom')
 
-window.Intercom('boot', {
-  app_id: process.env.REACT_APP_INTERCOM_APP_ID
-})
+// window.Intercom('boot', {
+//   app_id: process.env.REACT_APP_INTERCOM_APP_ID
+// })
 
 window.addEventListener('load', async () => {
   try {
-    const provider = await getReadProvider()
-    const network = await provider.getNetwork()
-    let defaultFromBlock = 0
-    if (network.chainId === 1) {
-      defaultFromBlock = parseInt(process.env.REACT_APP_MAINNET_STARTING_BLOCK, 10)
-    }
+    // const provider = await getReadProvider()
+    // const network = await provider.getNetwork()
+    // let defaultFromBlock = 0
+    // if (network.chainId === 1) {
+      // defaultFromBlock = parseInt(process.env.REACT_APP_MAINNET_STARTING_BLOCK, 10)
+    // }
     // const client = await createClient(provider, defaultFromBlock)
     // window.client = client
     // subscribeAndRefetch(client)
