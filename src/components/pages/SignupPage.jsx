@@ -5,6 +5,7 @@ import { FooterContainer } from '~/components/layout/Footer'
 import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
 import AntdIcon from '@ant-design/icons-react'
 import { MailOutline } from '@ant-design/icons'
+import { axiosInstance } from '~/../config/axiosInstance'
 import * as routes from '~/../config/routes'
 // FORM VALIDATION AND ERROR div!
 
@@ -18,20 +19,42 @@ export const SignupPage =
       success: false
     }
 
-    handleSignupSubmit = (e) => {
-      e.preventDefault()
+    notusApiHostAndPort = () => {
+      return 'localhost:4000'
+    }
 
+    doSignup = async () => {
       const { email, dappName } = this.state
 
       if (email && dappName) {
-        // check if dappName exists in DB, if yes:
-        // - name has been taken and recommend to check email used to sign up
+        // check if email and dappName exists in DB, if yes:
+        // - name already registered, check email used to sign up
         // - also could re-send email w/ API key if dapp name matches email provided
+
         // if no:
         // - create a new dapp in the db and hook it up to this email address
         // - on the API server, send an email to the newly signed up user
-        this.setState({ success: true })
+
+        const response = await axiosInstance.post(
+          `//${this.notusApiHostAndPort()}/dapps`
+        )
+
+        if (response.status === 200) {
+          console.log(response.data)
+          this.setState({ success: true })
+        } else {
+          this.setState({ error: true })
+        }
       }
+    }
+
+    handleSignupSubmit = (e) => {
+      e.preventDefault()
+
+      this.setState({
+        error: false,
+        isSigningUp: true
+      }, this.doSignup)
     }
 
     handleDappNameChange = (e) => {
