@@ -19,10 +19,6 @@ export const SignupPage =
       success: false
     }
 
-    notusApiHostAndPort = () => {
-      return 'localhost:4000'
-    }
-
     doSignup = async () => {
       const { email, dappName } = this.state
 
@@ -34,16 +30,30 @@ export const SignupPage =
         // if no:
         // - create a new dapp in the db and hook it up to this email address
         // - on the API server, send an email to the newly signed up user
+        // console.log(process.env.REACT_APP_NOTUS_API_URI)
 
-        const response = await axiosInstance.post(
-          `//${this.notusApiHostAndPort()}/dapps`
-        )
+        try {
+          const response = await axiosInstance.post(
+            `${process.env.REACT_APP_NOTUS_API_URI}/dapps`,
+            {
+              email: this.state.email,
+              dappName: this.state.dappName
+            }
+          )
 
-        if (response.status === 200) {
-          console.log(response.data)
-          this.setState({ success: true })
-        } else {
+          if (response.status === 201) {
+            // console.log(response.data)
+            this.setState({ success: true })
+          } else {
+            this.setState({ error: true })
+          }
+        } catch (err) {
+          console.error(err)
           this.setState({ error: true })
+        } finally {
+          this.setState({
+            isSigningUp: false
+          })
         }
       }
     }
