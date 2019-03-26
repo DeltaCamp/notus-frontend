@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
-import { ethers } from 'ethers'
 import { get } from 'lodash'
 import { formatRoute } from 'react-router-named-routes'
 import { Link } from 'react-router-dom'
@@ -10,10 +9,7 @@ import { Query } from 'react-apollo'
 import { ErrorMessage } from '~/components/ErrorMessage'
 import { ShortText } from '~/components/ShortText'
 import { HookListItemLoader } from '~/components/hooks/HookListItemLoader'
-import { displayWeiToEther } from '~/utils/displayWeiToEther'
 import * as routes from '~/../config/routes'
-
-const ipfsClient = require('ipfs-http-client')
 
 export const HookListItem = ReactTimeout(
   class _HookListItem extends PureComponent {
@@ -26,35 +22,6 @@ export const HookListItem = ReactTimeout(
     }
 
     async componentDidMount() {
-      this.props.setTimeout(() => {
-        this.setState({ startAnimating: true })
-      }, 200)
-
-
-      const ipfsHashAsHex = this.props.hookValues.ipfsHash
-
-      let ipfsHashUtf8
-      try {
-        ipfsHashUtf8 = ethers.utils.toUtf8String(ipfsHashAsHex)
-        this.setState({ ipfsHash: ipfsHashUtf8 })
-
-        // const { ipfsHash } = this.props.hookValues
-        const ipfs = ipfsClient('ipfs.infura.io', '5001', { protocol: 'https' })
-
-        const [{ path, content }] = await ipfs.get(ipfsHashUtf8)
-        const json = JSON.parse(content)
-
-        json.ipfsHash = ipfsHashUtf8
-
-        console.log('json', json)
-
-        this.setState({
-          downloaded: true,
-          json
-        })
-      } catch (error) {
-        console.warn(error)
-      }
     }
 
     render() {

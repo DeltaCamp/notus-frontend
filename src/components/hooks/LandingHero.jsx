@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import NotusSymbol from '~/assets/images/notus--symbol.svg'
 import * as routes from '~/../config/routes'
 
 export const LandingHero = ({ heroColor }) => {
@@ -34,7 +33,7 @@ export const LandingHero = ({ heroColor }) => {
             </div>
 
             <div className='col-xs-12 col-lg-4'>
-              
+
             </div>
 
           </div>

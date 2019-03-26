@@ -1,13 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
 import { get } from 'lodash'
-import { Query } from 'react-apollo'
-import { CSSTransition } from 'react-transition-group'
-import { EnsName } from '~/components/EnsName'
-import { notusQueries } from '~/queries/notusQueries'
-import { displayWeiToEther } from '~/utils/displayWeiToEther'
-const ipfsClient = require('ipfs-http-client')
 
 export class HookDetails extends Component {
   state = {
@@ -15,54 +7,10 @@ export class HookDetails extends Component {
     downloaded: false
   }
 
-  static propTypes = {
-    webhookEvent: PropTypes.object.isRequired
-  }
-
   async componentDidMount() {
-    const { ipfsHash } = this.props
-    console.log('CDM ipfsHash', ipfsHash)
-    const ipfs = ipfsClient('ipfs.infura.io', '5001', { protocol: 'https' })
-
-    const [{ path, content }] = await ipfs.get(ipfsHash)
-    const json = JSON.parse(content)
-    // console.log(json)
-    // const validate = validator()
-    // if (!validate(json)) {
-    //   throw new Error(
-    //     validate.errors.map(err => err.message).join(', ')
-    //   );
-    // }
-    json.ipfsHash = ipfsHash
-
-    this.setState({
-      downloaded: true,
-      json
-    })
   }
 
   render () {
-    const { webhookEvent } = this.props
-    // const { parsedLog } = registeredWebhook || {}
-    // const { values } = parsedLog || {}
-    // const githubDetails = ''
-    // const githubDetails = gh(values.metadataURI || '')
-    // const { owner, repo } = githubDetails
-    // const { id } = values || {}
-    // const challenges = challengeProjection(vouching.allEvents)
-    // const noChallenges = challenges.length === 0
-    // const { name } = metadata || {}
-
-    // ipfsHash: "QmdxVnLrTfjHvrAAyAfbqYhHqQkHZpSV5topZdPcJMYc1e"
-
-
-    // query:
-    //   address: "0xe1dcffcf3888bc8e010c73c2f964b26183daa940"
-
-    //   queryType: "EventQuery"
-    //   topics: Array[]
-    // url: "https://maker.ifttt.com/trigger/ContractEventCame
-
     return (
       <>
         <div className='row reverse-column-order'>
@@ -77,14 +25,6 @@ export class HookDetails extends Component {
 
             <br />
             <br />
-
-            {get(this.state.json, 'address') && 
-              (
-                <h6 className='is-size-6 has-text-weight-semibold package-item--maintained-by'>
-                  Owned by <EnsName address={this.state.json.address} shorten />
-                </h6>    
-              )
-            }
 
             <p className='is-size-4'>
               <span className='is-uppercase'>

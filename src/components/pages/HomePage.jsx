@@ -1,12 +1,6 @@
 import React, { PureComponent } from 'react'
-import { Link } from 'react-router-dom'
-import { Query } from 'react-apollo'
-import { allowedNetworkIds } from '~/web3/allowedNetworkIds'
 import { FooterContainer } from '~/components/layout/Footer'
-import { ErrorMessage } from '~/components/ErrorMessage'
-import { HooksList } from '~/components/hooks/HooksList'
 import { LandingHero } from '~/components/hooks/LandingHero'
-import { web3Queries } from '~/queries/web3Queries'
 import { CodeBox } from '~/components/CodeBox'
 
 export class HomePage extends PureComponent {
@@ -19,7 +13,7 @@ export class HomePage extends PureComponent {
           <div className='hero-bg' />
           <LandingHero heroColor={heroColor} />
         </header>
-        
+
         <section id="your-webhooks" className='section section--main-content'>
           <div className='container'>
             <div className='row'>

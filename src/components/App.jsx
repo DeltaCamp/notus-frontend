@@ -6,6 +6,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
 import { HookPage } from '~/components/pages/HookPage'
+import { ConfirmPage } from '~/components/pages/ConfirmPage'
 import { HooksListPage } from '~/components/pages/HooksListPage'
 import { SignupPage } from '~/components/pages/SignupPage'
 import { NavContainer } from '~/components/layout/Nav'
@@ -49,6 +50,7 @@ const App = class _App extends PureComponent {
               <Route exact path={routes.HOOKS} component={HooksListPage} />
               <Route exact path={routes.HOME} component={HomePage} />
               <Route exact path={routes.SIGNUP} component={SignupPage} />
+              <Route path={routes.CONFIRM} component={ConfirmPage} />
               <Route component={FourOhFour} />
             </Switch>
           </CSSTransition>

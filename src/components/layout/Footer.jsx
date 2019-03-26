@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
-import * as routes from '~/../config/routes'
 
 export const Footer = class _Footer extends Component {
   render () {
@@ -17,9 +15,9 @@ export const Footer = class _Footer extends Component {
                   <NotusLogo />
                 </h6>
                 <br />
-                Notus is also an open source project. Learn more on GitHub: 
+                Notus is also an open source project. Learn more on GitHub:
                 <br />
-                <a 
+                <a
                   href='https://github.com/notifyus'
                   target='_blank'
                   rel='noopener noreferrer'

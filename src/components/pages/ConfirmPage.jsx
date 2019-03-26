@@ -3,8 +3,27 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
+import { get } from 'lodash'
+import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
 
-export class HookPage extends PureComponent {
+const confirmPageQuery = gql`
+  query confirmPageQuery($dappUserId: String!) {
+    dappUser(dappUserId: $dappUserId) @client
+  }
+`
+
+export const ConfirmPage = graphql(confirmPageQuery, {
+  skip: (props) => !get(props, 'match.params.dappUserId'),
+  options: (props) => {
+    const dappUserId = get(props, 'match.params.dappUserId')
+    return {
+      variables: {
+        dappUserId
+      }
+    }
+  }
+})(class _ConfirmPage extends PureComponent {
   static propTypes = {
     match: PropTypes.object.isRequired
   }
@@ -13,11 +32,25 @@ export class HookPage extends PureComponent {
     router: PropTypes.object.isRequired
   }
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      confirming: true
+    }
+  }
+
   render () {
+    const { dappUserId, requestKey } = this.props.match.params
+
+    const { data } = this.props
+    const { loading, error } = data || {}
+
+    console.log(data)
+
     return (
       <div className='is-positioned-absolutely'>
         <Helmet
-          title='Hook'
+          title='Confirm Your Account'
         />
 
         <ScrollToTop />
@@ -34,6 +67,10 @@ export class HookPage extends PureComponent {
                     {'<'} Back
                   </button>
                 </p>
+
+                <p>
+                  Confirming your subscription....
+                </p>
               </div>
             </div>
           </div>
@@ -43,4 +80,4 @@ export class HookPage extends PureComponent {
       </div>
     )
   }
-}
+})

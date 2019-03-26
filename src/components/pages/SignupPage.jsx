@@ -11,7 +11,7 @@ import * as routes from '~/../config/routes'
 
 const MAX_LENGTH = 120
 
-export const SignupPage = 
+export const SignupPage =
   class _SignupPage extends Component {
     state = {
       email: '',
@@ -162,7 +162,7 @@ export const SignupPage =
                     <div>
                       <div className='column has-text-centered'>
                         <Link to={routes.HOME} className='navbar-item'>
-                          <NotusLogo className='logo logo-signup' /> 
+                          <NotusLogo className='logo logo-signup' />
                         </Link>
                       </div>
                       <section className='card has-shadow has-shadow-big'>
@@ -186,7 +186,7 @@ export const SignupPage =
                           Signing up signifies you have read and agree to the<a href='/terms'>Terms of Service</a>{' '}
                           and&nbsp;<a href='/privacy'>Privacy Policy</a>.
                         </footer> */}
-                      
+
                       </section>
                       <br />
                       <div className='card-footer has-text-centered'>
