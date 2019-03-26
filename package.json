@@ -83,6 +83,7 @@
     "postcss-safe-parser": "4.0.1",
     "prop-types": "^15.6.2",
     "qs": "^6.6.0",
+    "query-string": "^6.4.0",
     "react": "^16.7.0",
     "react-apollo": "^2.5.3",
     "react-app-polyfill": "^0.1.3",

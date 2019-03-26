@@ -5,7 +5,7 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { CodeBox } from '~/components/CodeBox'
 import * as routes from '~/../config/routes'
 
-export const DappConfirmPage = 
+export const DappConfirmPage =
   class _DappConfirmPage extends Component {
 
     static propTypes = {
@@ -18,7 +18,6 @@ export const DappConfirmPage =
 
     render () {
       const apiKey = this.props.match.params.api_key
-      const dappName = this.props.match.params.dapp_name
 
       return (
         <div className='is-positioned-absolutely'>

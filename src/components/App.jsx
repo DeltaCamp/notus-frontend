@@ -6,7 +6,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
 import { HookPage } from '~/components/pages/HookPage'
-import { ConfirmPage } from '~/components/pages/ConfirmPage'
+import { DappUserConfirmPage } from '~/components/pages/DappUserConfirmPage'
 import { HooksListPage } from '~/components/pages/HooksListPage'
 import { DappSignupPage } from '~/components/pages/DappSignupPage'
 import { DappConfirmPage } from '~/components/pages/DappConfirmPage'
@@ -50,7 +50,7 @@ const App = class _App extends PureComponent {
               <Route exact path={routes.HOOK} component={HookPage} />
               <Route exact path={routes.HOOKS} component={HooksListPage} />
               <Route exact path={routes.HOME} component={HomePage} />
-              <Route path={routes.CONFIRM} component={ConfirmPage} />
+              <Route path={routes.CONFIRM} component={DappUserConfirmPage} />
               <Route exact path={routes.DAPP_SIGNUP} component={DappSignupPage} />
               <Route exact path={routes.DAPP_CONFIRM} component={DappConfirmPage} />
               <Route component={FourOhFour} />

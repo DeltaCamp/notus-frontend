@@ -1,10 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { Link } from 'react-router-dom'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { FooterContainer } from '~/components/layout/Footer'
-import * as routes from '~/../config/routes'
 
 export const FourOhFour = class _FourOhFour extends PureComponent {
   static contextTypes = {

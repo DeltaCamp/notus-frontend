@@ -11,7 +11,7 @@ import * as routes from '~/../config/routes'
 
 const MAX_LENGTH = 120
 
-export const DappSignupPage = 
+export const DappSignupPage =
   class _DappSignupPage extends Component {
     state = {
       email: '',
@@ -32,29 +32,24 @@ export const DappSignupPage =
         // - on the API server, send an email to the newly signed up user
         // console.log(process.env.REACT_APP_NOTUS_API_URI)
 
-        try {
-          const response = await axiosInstance.post(
-            `${process.env.REACT_APP_NOTUS_API_URI}/dapps`,
-            {
-              email: this.state.email,
-              dappName: this.state.dappName
-            }
-          )
-
-          if (response.status === 201) {
-            // console.log(response.data)
-            this.setState({ success: true })
-          } else {
-            this.setState({ error: true })
+        await axiosInstance.post(
+          `${process.env.REACT_APP_NOTUS_API_URI}/dapps`,
+          {
+            email: this.state.email,
+            dappName: this.state.dappName
           }
-        } catch (err) {
-          console.error(err)
-          this.setState({ error: true })
-        } finally {
+        ).then(() => {
           this.setState({
+            success: true,
             isSigningUp: false
           })
-        }
+        }).catch(error => {
+          console.error(error)
+          this.setState({
+            error: true,
+            isSigningUp: false
+          })
+        })
       }
     }
 
