@@ -11,8 +11,8 @@ import * as routes from '~/../config/routes'
 
 const MAX_LENGTH = 120
 
-export const SignupPage =
-  class _SignupPage extends Component {
+export const DappSignupPage = 
+  class _DappSignupPage extends Component {
     state = {
       email: '',
       dappName: '',

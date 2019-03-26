@@ -26,7 +26,7 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
               <div className='col-xs-12'>
                 <button
                   onClick={this.context.router.history.goBack}
-                  className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
+                  className='button is-xsmall is-outlined is-dark'
                 >
                   {'<'} Back
                 </button>
@@ -34,22 +34,12 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
                 <br />
                 <br />
 
-                <h2 className='is-size-2'>
-                  Couldn't find that ...
-                </h2>
-                <br />
-                <h4 className='is-size-4'>
-                  Nothing lives at {this.props.location.pathname}
-                </h4>
-
-                <br />
-
-                <Link
-                  to={routes.HOME}
-                  className='button is-purple'
-                >
-                  {'<'} Take me home
-                </Link>
+                <h3 className='is-size-3'>
+                  We couldn't find that ...
+                </h3>
+                <h5 className='is-size-5 has-text-grey-light'>
+                  Nothing lives at '{this.props.location.pathname}'
+                </h5>
               </div>
             </div>
           </div>

@@ -2,9 +2,11 @@
   border-radius: 30px;
   display: inline-block;
   font-size: 1rem;
-  padding: 1.5rem;
+  margin-top: 0.5rem;
+  padding: 1rem;
   position: relative;
-  overflow: scroll;
+  // overflow: scroll;
+  overflow: hidden;
 
   @media screen and (max-width: $tablet) {
     max-width: 100%;

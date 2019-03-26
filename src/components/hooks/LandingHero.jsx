@@ -26,7 +26,7 @@ export const LandingHero = ({ heroColor }) => {
 
               <Link
                 className='button is-small is-outlined is-light'
-                to={routes.SIGNUP}
+                to={routes.DAPP_SIGNUP}
               >
                 Get Started For Free
               </Link>

@@ -72,6 +72,7 @@ a.is-dark {
 
 .section--main-content {
   min-height: 600px;
+  margin-top: 100px;
 }
 
 // This is used by the page / layout transitions
@@ -131,11 +132,11 @@ a:hover {
   }
 }
 
-.no-select {
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
+// .no-select {
+//   -webkit-touch-callout: none;
+//   -webkit-tap-highlight-color: transparent;
+//   user-select: none;
+// }
 
 // .no-scale:hover {
 //   transform: scale3d(1, 1, 1) !important;

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
 import * as routes from '~/../config/routes'
 
-export const Nav = class _Nav extends Component {
+export const Nav = withRouter(class _Nav extends Component {
   state = {
     mobileNavActive: false
   }
@@ -64,11 +64,9 @@ export const Nav = class _Nav extends Component {
                   >
                     Hooks
                   </a>
-                </div>
 
-                <div className='navbar-end'>
                   <Link
-                    to={routes.SIGNUP}
+                    to={routes.DAPP_SIGNUP}
                     className='navbar-item'
                   >
                     Sign Up
@@ -82,6 +80,4 @@ export const Nav = class _Nav extends Component {
       </>
     )
   }
-}
-
-export const NavContainer = withRouter(Nav)
+})
