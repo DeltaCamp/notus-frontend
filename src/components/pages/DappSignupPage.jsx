@@ -33,7 +33,7 @@ export const DappSignupPage =
         // console.log(process.env.REACT_APP_NOTUS_API_URI)
 
         await axiosInstance.post(
-          `${process.env.REACT_APP_NOTUS_API_URI}/dapps`,
+          `${process.env.REACT_APP_NOTUS_API_URI}/dapp-users`,
           {
             email: this.state.email,
             dappName: this.state.dappName

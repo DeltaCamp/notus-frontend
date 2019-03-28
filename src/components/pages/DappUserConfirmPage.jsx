@@ -17,6 +17,7 @@ const dappUserConfirmPageMutation = gql`
 
 export const DappUserConfirmPage = graphql(dappUserConfirmPageMutation, { name: 'confirmDappUser' })(
   class _DappUserConfirmPage extends PureComponent {
+
     static propTypes = {
       match: PropTypes.object.isRequired
     }
@@ -57,9 +58,11 @@ export const DappUserConfirmPage = graphql(dappUserConfirmPageMutation, { name: 
           requestKey
         }
       }).then((param) => {
+        const { accessKey } = param.data.confirmDappUser.data
         this.setState({
           confirming: false,
-          confirmed: true
+          confirmed: true,
+          accessKey
         })
       }).catch(error => {
         this.setState({
@@ -82,7 +85,7 @@ export const DappUserConfirmPage = graphql(dappUserConfirmPageMutation, { name: 
       } else if (this.state.error) {
         message = "The request key is no longer valid"
       } else if (this.state.confirmed) {
-        message = "Your subscription is confirmed!"
+        message = `Your subscription is confirmed!  Your access key is: ${this.state.accessKey}`
       }
 
       return (
