@@ -7,22 +7,18 @@ import AntdIcon from '@ant-design/icons-react'
 import { MailOutline } from '@ant-design/icons'
 import { axiosInstance } from '~/../config/axiosInstance'
 import * as routes from '~/../config/routes'
-// FORM VALIDATION AND ERROR div!
 
-const MAX_LENGTH = 120
-
-export const DappSignupPage =
-  class _DappSignupPage extends Component {
+export const UserSignupPage =
+  class _UserSignupPage extends Component {
     state = {
       email: '',
-      dappName: '',
       success: false
     }
 
     doSignup = async () => {
-      const { email, dappName } = this.state
+      const { email } = this.state
 
-      if (email && dappName) {
+      if (email) {
         // check if email and dappName exists in DB, if yes:
         // - name already registered, check email used to sign up
         // - also could re-send email w/ API key if dapp name matches email provided
@@ -33,10 +29,9 @@ export const DappSignupPage =
         // console.log(process.env.REACT_APP_NOTUS_API_URI)
 
         await axiosInstance.post(
-          `${process.env.REACT_APP_NOTUS_API_URI}/dapp-users`,
+          `${process.env.REACT_APP_NOTUS_API_URI}/users`,
           {
-            email: this.state.email,
-            dappName: this.state.dappName
+            email: this.state.email
           }
         ).then(() => {
           this.setState({
@@ -62,16 +57,6 @@ export const DappSignupPage =
       }, this.doSignup)
     }
 
-    handleDappNameChange = (e) => {
-      // strip bad chars
-      let dappName = e.target.value.replace(/[$ ^* !#|&;$%@"<>()+,]/g, '')
-
-      // strip strings that are too long
-      dappName = dappName.substring(0, MAX_LENGTH)
-
-      this.setState({ dappName })
-    }
-
     render () {
       const thankYou = (
         <div className='accordion accordion--signup-thank-you'>
@@ -83,11 +68,11 @@ export const DappSignupPage =
               <AntdIcon type={MailOutline} className='antd-icon icon--signup-large' />
             </div>
             <p>
-              Check your <strong>'{this.state.email}'</strong> inbox for the API secret to <strong>'{this.state.dappName}'</strong>.
+              Check your <strong>'{this.state.email}'</strong> inbox for a magic link to access your Notus account!
             </p>
             <br />
             <p className='is-size-7 has-text-grey-light'>
-              Can't find the email? Check your spam folder first. We can also re-send the key or reach out to us for support.
+              Can't find the email? Check your spam folder first. We can also re-send the link or reach out to us for support.
             </p>
           </div>
         </div>
@@ -114,18 +99,6 @@ export const DappSignupPage =
                   className='input'
                   onChange={(e) => { this.setState({ email: e.target.value }) }}
                   value={this.state.email}
-                />
-              </div>
-              <div className='field'>
-                <label htmlFor='password' className='label'>
-                  dapp name
-              </label>
-                <input
-                  type='text'
-                  id='dapp-name'
-                  className='input'
-                  onChange={this.handleDappNameChange}
-                  value={this.state.dappName}
                 />
               </div>
               {/* <div className='control checkbox'>

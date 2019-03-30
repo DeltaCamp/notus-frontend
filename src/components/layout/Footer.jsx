@@ -15,8 +15,6 @@ export const Footer = class _Footer extends Component {
                   <NotusLogo />
                 </h6>
                 <br />
-                Notus is also an open source project. Learn more on GitHub:
-                <br />
                 <a
                   href='https://github.com/notifyus'
                   target='_blank'

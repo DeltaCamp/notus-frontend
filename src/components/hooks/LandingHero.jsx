@@ -17,16 +17,16 @@ export const LandingHero = ({ heroColor }) => {
               {/* <br /> */}
 
               <h1 className='is-size-1 has-text-weight-bold hero--title'>
-                Get notified when smart contract events occur.
+                Get notified about smart contract events and transactions.
               </h1>
               <h5 className='is-size-5 hero--description-text'>
                 {/* /texts/emails/slacks */}
-                Notus is the distributed network for receiving webhooks when something interesting you've subscribed to happens on the blockchain.
+                Notus allows you to set up user friendly Ethereum notifications.  Whether it's ERC20 transfers or account activity, Notus has your back.
               </h5>
 
               <Link
                 className='button is-small is-outlined is-light'
-                to={routes.DAPP_SIGNUP}
+                to={routes.SIGNUP}
               >
                 Get Started For Free
               </Link>
