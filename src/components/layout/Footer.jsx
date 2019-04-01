@@ -15,13 +15,16 @@ export const Footer = class _Footer extends Component {
                   <NotusLogo />
                 </h6>
                 <br />
-                <a
-                  href='https://github.com/notifyus'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  Visit Notus on GitHub
-                </a>
+                <h6 className='is-size-7'>
+                  <a
+                    href='https://github.com/notifyus'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    Notus on GitHub
+                  </a>
+                </h6>
+                
                 <br />
                 <br />
               </div>

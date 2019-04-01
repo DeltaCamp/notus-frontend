@@ -12,11 +12,6 @@
   }
 }
 
-.hero--description-text,
-.hero--title {
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
-}
-
 .hero h4 {
   line-height: 1.6;
 }
@@ -27,55 +22,48 @@
   position: relative;
 }
 
-$heroHeightWidescreen: 640px;
+$heroHeightWidescreen: 560px;
 
 header .hero {
-  height: $heroHeightWidescreen - 80px;
+  height: $heroHeightWidescreen + 160px;
 }
 
 .hero-bg {
-  // animation-name: animateHeroBg;
-  // animation-duration: 40s;
-  // animation-timing-function: ease-in-out;
-  // animation-iteration-count: infinite;
-  
   background-image: 
-    linear-gradient(260deg, #C305F3 0%, #7704EC 40%,rgb(2, 123, 228) 78%, #02BDE4 90%, #7fc 100%),
+    linear-gradient(260deg, #C305F3 0%, #7704EC 100%),
     url('/funky-lines.png');
+  // background-image: 
+  //   linear-gradient(260deg, #C305F3 0%, #7704EC 40%,rgb(2, 123, 228) 78%, #02BDE4 90%, #7fc 100%),
+  //   url('/funky-lines.png');
   background-blend-mode: multiply;
-  background-size: 100% 100%, 300px 200px;
-
+  background-size: 100% 100%, 400px 400px;
   height: $heroHeightWidescreen;
   overflow: hidden;
   position: absolute;
-  transform: skewY(-15deg);
+  transition: all 300ms ease-in-out;
+  transform: skewY(-2deg);
   transform-origin: 40px;
   width: 100%;
 
   @media screen and (min-width: $fullhd + 200px) {
-    transform-origin: 200px;
+    transform-origin: 3700px;
   }
 }
 
 .hero .hero-body {
-  margin-top: 60px;
+  margin-top: 120px;
 }
 
 .hero .hero--description-text {
-  color: rgba(255, 255, 255, 0.8);
   margin-top: 20px;
-}
-
-.hero .button {
-  margin-top: 50px;
 }
 
 .has-bg {
   background-attachment: fixed;
   background-blend-mode: hard-light;
   background-image: 
-  linear-gradient(260deg, rgba(195, 5, 243, 1) 0%, rgba(119, 4, 236, 1) 40%,rgba(50, 110, 150, 1) 78%, rgba(20, 150, 190, 1) 100%),
-  url('/funky-lines.png');
+    linear-gradient(260deg, rgba(195, 5, 243, 1) 0%, rgba(119, 4, 236, 1) 40%,rgba(50, 110, 150, 1) 78%, rgba(20, 150, 190, 1) 100%),
+    url('/funky-lines.png');
 }
 
 @keyframes animateHeroBg {
@@ -130,27 +118,25 @@ header .hero {
   background-image: none;
 }
 
-.hero--title {
-  font-weight: 400;
-}
-
 .hero.is-light {
   background-color: $hero-light;
+}
+
+.hero--title {
+  font-weight: 700;
+  font-size: 62px;
+  line-height: 1.15;
+}
+
+.hero--description-text,
+.hero--title {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .hero--title.content:not(:last-child),
 .hero--title.title:not(:last-child),
 .hero--title.subtitle:not(:last-child) {
   margin-bottom: 0.8rem;
-}
-
-.hero a {
-  // border-bottom: 1px solid transparent;
-  // transition: border 300ms ease-in-out;
-}
-
-.hero a:hover {
-  // border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
 .hero p {

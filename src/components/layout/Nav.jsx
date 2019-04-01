@@ -28,13 +28,20 @@ export const Nav = graphql(currentUserQuery)(
       let signUp, dashboard
 
       if (!this.props.data.currentUser) {
-        signUp =
+        signUp = <>
           <Link
             to={routes.SIGNUP}
             className='navbar-item'
           >
+            Sign In
+          </Link>
+          <Link
+            to={routes.SIGNUP}
+            className='navbar-item bold'
+          >
             Sign Up
           </Link>
+        </>
       } else {
         dashboard =
           <Link

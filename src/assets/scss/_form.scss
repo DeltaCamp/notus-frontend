@@ -2,11 +2,6 @@ $addonsFormHeight: 57px;
 
 .form {
   padding: 0 0 8rem;
-
-  @media (max-width: 800px) {
-    // margin: 0.25rem;
-    // padding: 0.5rem 0.5rem 8rem;
-  }
 }
 
 .field:not(:last-child) {
@@ -44,39 +39,83 @@ $addonsFormHeight: 57px;
   top: 0.5rem;
 }
 
+$formColor: white;
+
+button.button,
 input.input,
 textarea.textarea {
-  border-radius: 10px;
-  font-family: $family-code;
-  font-size: 1.125rem;
-  // letter-spacing: 0;
-  // height: 70px;
+  border-radius: 100px;
+  border: 3px solid $formColor;
+  font-size: 1.25rem;
+  font-weight: 700;
+  height: 70px;
   margin: 0 0;
-  padding: 3px 15px 3px;
-  border: 2px solid #f0f0f0;
+  padding: 4px 25px 5px;
+  transition: all 200ms ease-in-out;
+}
+
+button.button {
+  padding: 4px 25px 5px 20px;
+}
+
+input.input,
+textarea.textarea {
+  background-color: $formColor;
   box-shadow: none;
-  transition: border-color 100ms ease-in-out;
+}
+
+.control:first-child {
+  flex: 0 0 62%;
+}
+
+.control:last-child {
+  flex: 0 0 38%;
 }
 
 textarea.textarea {
   height: auto;
 }
 
+form.is-active button.button,
+form.is-active button.button:hover,
+form.is-active button.button:focus,
+form.is-active button.button:active,
+form.is-active input.input,
+form.is-active input.input:hover,
+form.is-active input.input:focus,
+form.is-active input.input:active,
+form.is-active textarea.textarea,
+form.is-active textarea.textarea:hover,
+form.is-active textarea.textarea:focus,
+form.is-active textarea.textarea:active {
+  box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
+}
+
+button.button:hover,
+button.button:active,
+button.button:focus,
 input.input:hover,
 input.input:active,
 input.input:focus,
 textarea.textarea:hover,
 textarea.textarea:focus,
 textarea.textarea:active {
-  border: 2px solid lighten($cyan, 36%);
+  border: 3px solid $formColor;
 }
 
-input.input:active,
-input.input:focus,
-textarea.textarea:focus,
-textarea.textarea:active {
-  border: 1px solid #aaa;
-  border: 2px solid $cyan;
+button.button:active {
+  background-color: lighten($cyan, 10%) !important;
+}
+
+
+.control,
+.input,
+.textarea,
+.select select,
+.file-cta,
+.file-name,
+.button {
+  font-size: 1rem;
 }
 
 .label {
@@ -114,7 +153,6 @@ input[type='radio'] {
   height: 20px;
 }
 
-// Bulma override
 label.radio,
 .radio + .radio {
   margin-left: 10px;
@@ -129,110 +167,22 @@ label.radio,
   transition: color 200ms ease-in-out;
 }
 
-.is-addons-form-toggler-height {
-  height: $addonsFormHeight + 24px;
-}
-
-.is-addons-form-height {
-  height: $addonsFormHeight;
-}
-
-.field.has-addons {
-  background-color: $code-background;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border-bottom: 2px solid black;
-  max-width: 300px;
-
-  @media screen and (max-width: 330px) {
-    max-width: 100%;
-  }
-}
-
-.form:not(.tx-in-progress) .field.has-addons:hover path,
-.form:not(.tx-in-progress) .field.has-addons:hover .input,
-.form:not(.tx-in-progress) .field.has-addons:hover .button,
-.form:not(.tx-in-progress) .field.has-addons .input:focus {
-  fill: white;
-  color: black;
-}
-
-.form:not(.tx-in-progress) .field.has-addons:hover svg {
-  filter: invert(100%);
-}
-
-.field.has-addons.is-right {
-  margin: 0 0 0 auto;
-
-  @media screen and (max-width: $tablet) {
-    margin-left: 0;
-  }
-}
-
-.field.has-addons .input.is-large {
-  padding: 0;
-  height: 100%;
-}
-
-.input {
-  box-shadow: none;
-  color: $grey-darker;
-  font-weight: 300;
-}
-
-.input:focus {
-  box-shadow: none;
-}
-
-.input.is-large {
-  background-color: transparent;
-  border-radius: 0;
-  font-size: 2rem;
-  padding: 1.5rem 1rem 1rem;
-
-  @media screen and (max-width: $tablet) {
-    max-width: 100%;
-    min-width: 100%;
-  }
-}
-
-.field.has-addons .control:not(:last-child) {
-  margin-right: 0;
-}
-
 .field.has-addons .button {
-  color: $grey;
-  font-weight: 900;
-  height: 100%;
-  margin: 0;
-  padding: 1rem 1.5rem;
+  background: black;
+  text-transform: capitalize;
+  width: 240px;
+  z-index: 5;
 }
 
-.form:not(.tx-in-progress) .field.has-addons .button:hover,
-.form:not(.tx-in-progress) .field.has-addons .button:focus {
-  background-color: lighten($grey-lighter, 6%);
-}
-
-.form.is-success .control,
-.form.is-success .field.has-addons .button:hover {
-  background-color: rgba(174, 216, 147, 0.1);
-  color: $green;
-}
-
-.form.is-success .field.has-addons {
-  border-bottom-color: $green;
-}
-
-.form.is-danger .field.has-addons {
-  border-bottom-color: $red;
+.field.has-addons .button:hover,
+.field.has-addons .button:focus,
+.field.has-addons .button:active {
+  background: $cyan;
+  color: white;
 }
 
 .form.is-warning .field {
   opacity: 0.4;
-}
-
-.form.is-warning .field.has-addons {
-  border-bottom-color: $yellow;
 }
 
 .field-addon--icon {
@@ -270,5 +220,5 @@ label.radio,
 
 .accordion--signup-form.accordion-enter-active,
 .accordion--signup-form.accordion-enter-done {
-  height: 460px;
+  height: 320px;
 }

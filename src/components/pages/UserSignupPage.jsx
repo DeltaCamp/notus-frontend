@@ -123,7 +123,7 @@ export const UserSignupPage =
       return (
         <div>
           <div className='is-positioned-absolutely'>
-            <section className='section has-bg has-no-top-padding'>
+            <section className='section section--main-content has-bg has-no-top-padding'>
               <div className='container'>
                 <div className='row'>
                   <div className='column col-xs-12 col-lg-8 col-start-lg-3'>
@@ -159,7 +159,8 @@ export const UserSignupPage =
                       <br />
                       <div className='card-footer has-text-centered'>
                         Already have an account?
-                        <br />Check your email for the API key originally sent to you.
+                        <a>Reset your Password</a>
+                        {/* <br />Check your email for the API key originally sent to you. */}
                       </div>
                     </div>
                   </div>

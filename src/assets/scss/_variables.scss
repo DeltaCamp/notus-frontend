@@ -36,7 +36,7 @@ $section-padding-large: 18rem 0;
 
 $weight-semibold: 500;
 
-$family-sans-serif: 'source-sans-pro', 'Open Sans', 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+$family-sans-serif: 'futura-pt', 'source-sans-pro', 'Open Sans', 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 $family-serif: $family-sans-serif;
 $family-code: 'Roboto Mono', monospace;
@@ -45,7 +45,7 @@ $text: #141414;
 $green: #6ef8cc;
 $yellow: #ff9800;
 $red: #ff005c;
-$cyan: #30ace6;
+$cyan: #429ae2;
 $blue: #085dff;
 $deep-purple: #300776;
 $purple: lighten($deep-purple, 5%);
@@ -62,8 +62,8 @@ $hero-dark: #252c31;
 // $navbar-background-color: #f6f6f9;
 $navbar-background-color: white;
 $navbar-grey: #13171a;
-$navbar-item-color: white;
-$navbar-item-hover: rgba(220, 220, 255, 0.9);
+$navbar-item-color: black;
+$navbar-item-hover: rgba(0, 0, 20, 0.7);
 $navbar-item-hover-background-color: transparent;
 $navbar-dark-background-color: $navbar-grey;
 $navbar-dark-item-color: white;

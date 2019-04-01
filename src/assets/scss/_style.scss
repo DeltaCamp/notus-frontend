@@ -1,8 +1,16 @@
-// in adobe fonts package
-// font-family: arya-single, sans-serif;
+::placeholder,
+.input::placeholder,
+.textarea::placeholder {
+  color: rgba(27, 4, 4, 1);
+}
 
-::placeholder {
-  color: rgba(27, 4, 4, 0.15);
+input:-internal-autofill-previewed,
+input:-internal-autofill-selected,
+textarea:-internal-autofill-previewed,
+textarea:-internal-autofill-selected,
+select:-internal-autofill-previewed,
+select:-internal-autofill-selected {
+  background-color: white !important;
 }
 
 ::selection {
@@ -22,9 +30,38 @@ h1 {
   line-height: 1.25;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
 .is-size-1 {
   @media screen and (max-width: $tablet) {
     font-size: 1.5rem !important;
+  }
+}
+
+.is-size-2 {
+  @media screen and (max-width: $tablet) {
+    font-size: 1.35rem !important;
+  }
+}
+
+.is-size-3 {
+  @media screen and (max-width: $tablet) {
+    font-size: 1.25rem !important;
+  }
+}
+
+.is-size-4 {
+  // font-size: 1.2rem !important;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 1.15rem !important;
   }
 }
 
@@ -71,8 +108,7 @@ a.is-dark {
 }
 
 .section--main-content {
-  min-height: 600px;
-  margin-top: 100px;
+  min-height: 700px;
 }
 
 // This is used by the page / layout transitions
@@ -228,7 +264,6 @@ hr {
 }
 
 .modal {
-  // background-color: darkgoldenrod;
   box-shadow: 0 12px 25px rgba(10, 10, 10, .3);
   border: 5px solid white;
   color: white;
@@ -252,7 +287,6 @@ hr {
     url('/swirl_pattern.png');
   background-position: 0 0;
   background-size: cover, 300px 300px;
-  // position: relative;
 
   @media screen and (max-width: $tablet) {
     top: 5%;
@@ -373,4 +407,8 @@ hr {
 
 .column {
   padding: 0;
+}
+
+.mt30 {
+  margin-top: 30px;
 }

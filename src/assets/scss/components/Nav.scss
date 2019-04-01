@@ -1,4 +1,4 @@
-html.dapp-signup .navbar {
+html.signup .navbar {
   display: none;
 }
 
@@ -12,13 +12,7 @@ html:not(.home) .navbar {
   background-size: 100% 100%, 300px 200px;
   box-shadow: 1px 2px 8px 2px rgba(100, 130, 180, 0.2);
   border-bottom: 3px solid white;
-  // border-top: 2px solid white;
-  // border-top: 2px solid white;
-  // border: 2px solid white;
   position: fixed;
-  // top: 10px;
-  // left: 10px;
-  // right: 10px;
   width: 100%;
 }
 
@@ -66,16 +60,8 @@ html:not(.home) .navbar {
   padding-bottom: 2px;
 }
 
-.navbar-brand svg {
-  color: white;
-}
-
-// .dapp-signup .navbar-brand svg path {
-//   fill: $purple;
-// }
-
 .navbar-brand svg path {
-  fill: white;
+  fill: black;
   transition: fill 150ms ease-in;
 }
 
@@ -84,9 +70,13 @@ html:not(.home) .navbar {
 }
 
 .navbar-end .navbar-item {
-  font-weight: 900;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: -0.01rem;
   transition: border 300ms ease-in-out;
+}
+
+.navbar-end .navbar-item.bold {
+  color: $cyan;
 }
 
 .navbar.is-dark {
@@ -196,10 +186,8 @@ a.navbar-item,
   font-size: 9px;
   height: 3em;
   margin-top: 1.25rem;
-  // margin-left: auto;
   position: relative;
   transition: 0.1s all ease-in-out;
-  // user-select: none;
   outline: none;
   width: 3.5em;
   margin-right: 1em;

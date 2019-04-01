@@ -16,7 +16,7 @@ export class HomePage extends PureComponent {
         <section className='section'>
           <div className='container'>
             <div className='row'>
-              <div className='col-xs-12 col-md-8 col-start-md-4'>
+              <div className='col-xs-10 col-md-9 col-start-md-2'>
                 <h1 className='is-size-1'>
                   Update your DApp's users when you need their attention.
                 </h1>

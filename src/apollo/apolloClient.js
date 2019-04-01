@@ -22,9 +22,14 @@ if (storage) {
     cache,
     storage
   }).then(() => {
-    const data = cache.readQuery({ query: accessKeyQuery })
-    const accessKey = data.accessKey
-    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessKey}`
+    try {
+      const data = cache.readQuery({ query: accessKeyQuery })
+      const accessKey = data.accessKey
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessKey}`
+    } catch (error) {
+      console.warn(error)
+      // rollbar.error()
+    }
   })
 }
 
