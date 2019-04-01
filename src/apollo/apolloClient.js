@@ -7,7 +7,7 @@ import { axiosInstance } from '~/../config/axiosInstance'
 import { metadataResolvers } from './client-state/metadataResolvers'
 import { notusResolvers } from './client-state/notusResolvers'
 import { storage } from './storage'
-import { accessKeyQuery } from '~/queries/accessKeyQuery'
+import { jwtTokenQuery } from '~/queries/jwtTokenQuery'
 
 const resolvers = merge(
   {},
@@ -16,26 +16,27 @@ const resolvers = merge(
 )
 
 const cache = new InMemoryCache()
-
-if (storage) {
-  persistCache({
-    cache,
-    storage
-  }).then(() => {
-    try {
-      const data = cache.readQuery({ query: accessKeyQuery })
-      const accessKey = data.accessKey
-      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessKey}`
-    } catch (error) {
-      console.warn(error)
-      // rollbar.error()
-    }
-  })
-}
+//
+// if (storage) {
+//   persistCache({
+//     cache,
+//     storage
+//   }).then(() => {
+//     try {
+//       const data = cache.readQuery({ query: jwtTokenQuery })
+//       const jwtToken = data.jwtToken
+//       axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
+//     } catch (error) {
+//       console.warn(error)
+//       // rollbar.error()
+//     }
+//   })
+// }
 
 cache.writeData({
   data: {
-    currentUser: null
+    currentUser: null,
+    jwtToken: null
   }
 })
 

@@ -19,17 +19,27 @@ export const notusResolvers = {
   Mutation: {
     confirmUser:  async function (object, args, { cache }, info) {
       console.log('starting confirmUser: ')
-      const { requestKey } = args
-      if (!requestKey) {
-        throw new Error('requestKey is not defined')
+      const { oneTimeKey, password } = args
+      if (!oneTimeKey) {
+        throw new Error('oneTimeKey is not defined')
       }
+      if (!password) {
+        throw new Error('You must pass a password')
+      }
+      console.log('got here')
       return axiosInstance
-        .post(`${process.env.REACT_APP_NOTUS_API_URI}/users/confirm`, { requestKey })
+        .post(`${process.env.REACT_APP_NOTUS_API_URI}/users/confirm`, {
+          password
+        }, {
+          headers: {
+            'Authorization': `Bearer ${oneTimeKey}`
+          }
+        })
         .then(confirmResponse => {
           const { data } = confirmResponse
-          const accessKey = data || ''
-          cache.writeData({ data: { accessKey } })
-          axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessKey}`
+          const jwtToken = data || ''
+          cache.writeData({ data: { jwtToken } })
+          axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
           return axiosInstance
             .get(`${process.env.REACT_APP_NOTUS_API_URI}/users`)
             .then(userResponse => {
@@ -56,9 +66,6 @@ export const notusResolvers = {
         .post(`${process.env.REACT_APP_NOTUS_API_URI}/dapp-users/confirm`, { requestKey })
         .then(json => {
           const { data } = json
-          const { accessKey } = data || {}
-
-          cache.writeData({ data: { accessKey } })
 
           return json
         })

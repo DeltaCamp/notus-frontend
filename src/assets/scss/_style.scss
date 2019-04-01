@@ -319,7 +319,7 @@ hr {
   animation-iteration-count: infinite;
   background-blend-mode: difference;
   background-color: white;
-  background-image: 
+  background-image:
     linear-gradient(90deg, $cyan 0%, darken($cyan, 5%) 4%, darken($cyan, 8%) 10%, lighten($mauve, 15%) 70%, lighten($purple, 15%) 85%, lighten($deep-purple, 15%) 100%),
     url('/swirl_pattern.png');
   background-position: 0 0;
@@ -430,9 +430,7 @@ hr {
 }
 
 .section.section--main-content {
-  @media screen and (max-width: $tablet) {
-    margin-top: 4rem;
-  }
+  margin-top: 4rem;
 }
 
 .icon--signup {

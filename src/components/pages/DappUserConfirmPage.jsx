@@ -58,11 +58,11 @@ export const DappUserConfirmPage = graphql(dappUserConfirmPageMutation, { name: 
           requestKey
         }
       }).then((param) => {
-        const { accessKey } = param.data.confirmDappUser.data
+        const { jwtToken } = param.data.confirmDappUser.data
         this.setState({
           confirming: false,
           confirmed: true,
-          accessKey
+          jwtToken
         })
       }).catch(error => {
         this.setState({
@@ -85,7 +85,7 @@ export const DappUserConfirmPage = graphql(dappUserConfirmPageMutation, { name: 
       } else if (this.state.error) {
         message = "The request key is no longer valid"
       } else if (this.state.confirmed) {
-        message = `Your subscription is confirmed!  Your access key is: ${this.state.accessKey}`
+        message = `Your subscription is confirmed!  Your access key is: ${this.state.jwtToken}`
       }
 
       return (

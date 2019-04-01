@@ -4,7 +4,7 @@ body.signup .navbar {
 
 body:not(.home) .navbar {
   background-color: white;
-  background-image: 
+  background-image:
     linear-gradient(260deg, #C305F3 0%, #7704EC 40%,rgb(2, 123, 228) 78%, #02BDE4 90%, #7fc 100%),
     url('/funky-lines.png');
   color: white;
@@ -12,7 +12,6 @@ body:not(.home) .navbar {
   background-size: 100% 100%, 300px 200px;
   box-shadow: 1px 2px 8px 2px rgba(100, 130, 180, 0.2);
   border-bottom: 3px solid white;
-  position: fixed;
   width: 100%;
 }
 
@@ -32,7 +31,7 @@ body:not(.home) .navbar {
   margin-right: 0;
 }
 
-.navbar-brand {  
+.navbar-brand {
   @media screen and (max-width: $navbar-breakpoint) {
     z-index: 2000;
     position: relative;
@@ -166,7 +165,6 @@ a.navbar-item,
 }
 
 .nav-background {
-  position: fixed;
   pointer-events: none;
   top: 0;
   left: 0;
