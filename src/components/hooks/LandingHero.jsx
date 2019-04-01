@@ -7,16 +7,10 @@ export const LandingHero = ({ heroColor }) => {
       <div className='hero-body'>
         <div className='container'>
           <div className='row'>
+          
             <div className='col-xs-12 col-lg-8'>
-              {/* <div className='row'>
-                <div className='col-xs-6 col-sm-3'>
-                  <NotusSymbol className='img-responsive' />
-                </div>
-              </div> */}
-              {/* <br /> */}
-
               <h1 className='hero--title'>
-                Ethereum notifications done simple.
+                Ethereum notifications made simple.
               </h1>
 
               <h5 className='is-size-5 hero--description-text'>
@@ -27,13 +21,6 @@ export const LandingHero = ({ heroColor }) => {
               <div className='mt30'>
                 <SignupForm />
               </div>
-
-              {/* <Link
-                className='button is-small is-outlined is-light'
-                to={routes.SIGNUP}
-              >
-                Get Started For Free
-              </Link> */}
             </div>
 
           </div>

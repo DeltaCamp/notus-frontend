@@ -39,13 +39,13 @@ $addonsFormHeight: 57px;
   top: 0.5rem;
 }
 
-$formColor: white;
+$hasAddonsformColor: white;
 
 button.button,
 input.input,
 textarea.textarea {
   border-radius: 100px;
-  border: 3px solid $formColor;
+  border: 3px solid black;
   font-size: 1.25rem;
   font-weight: 700;
   height: 70px;
@@ -54,13 +54,17 @@ textarea.textarea {
   transition: all 200ms ease-in-out;
 }
 
+.has-addons input.input {
+  border-color: $hasAddonsformColor;
+}
+
 button.button {
   padding: 4px 25px 5px 20px;
 }
 
 input.input,
 textarea.textarea {
-  background-color: $formColor;
+  background-color: white;
   box-shadow: none;
 }
 
@@ -91,16 +95,16 @@ form.is-active textarea.textarea:active {
   box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
 }
 
-button.button:hover,
-button.button:active,
-button.button:focus,
-input.input:hover,
-input.input:active,
-input.input:focus,
-textarea.textarea:hover,
-textarea.textarea:focus,
-textarea.textarea:active {
-  border: 3px solid $formColor;
+.has-addons button.button:hover,
+.has-addons button.button:active,
+.has-addons button.button:focus,
+.has-addons input.input:hover,
+.has-addons input.input:active,
+.has-addons input.input:focus,
+.has-addons textarea.textarea:hover,
+.has-addons textarea.textarea:focus,
+.has-addons textarea.textarea:active {
+  border: 3px solid $hasAddonsformColor;
 }
 
 button.button:active {

@@ -1,8 +1,8 @@
-html.signup .navbar {
+body.signup .navbar {
   display: none;
 }
 
-html:not(.home) .navbar {
+body:not(.home) .navbar {
   background-color: white;
   background-image: 
     linear-gradient(260deg, #C305F3 0%, #7704EC 40%,rgb(2, 123, 228) 78%, #02BDE4 90%, #7fc 100%),

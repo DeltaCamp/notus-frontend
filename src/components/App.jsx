@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import * as WebFont from 'webfontloader'
 import { hot } from 'react-hot-loader'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
 import { HookPage } from '~/components/pages/HookPage'
@@ -14,9 +16,13 @@ import { UserSignupPage } from '~/components/pages/UserSignupPage'
 import { DappConfirmPage } from '~/components/pages/DappConfirmPage'
 import { Nav } from '~/components/layout/Nav'
 import { FourOhFour } from '~/components/pages/FourOhFour'
-import { getPurePathname } from '~/utils/getPurePathname'
 import * as routes from '~/../config/routes'
-import { getSystemInfo } from '~/utils/getSystemInfo'
+
+WebFont.load({
+  typekit: {
+    id: 'rjp5pbv'
+  }
+})
 
 const App = class _App extends PureComponent {
   static propTypes = {
@@ -27,24 +33,17 @@ const App = class _App extends PureComponent {
     location: {}
   }
 
-  currentPage = () => {
-    const pathname = this.props.location.pathname
-    return getPurePathname(pathname)
-  }
-
   render () {
-    const { browser } = getSystemInfo()
-
     return (
-      <div className={browser}>
-        <MetaTags {...this.props} cssClass={this.currentPage()} />
+      <BodyClass {...this.props}>
+        <MetaTags {...this.props} />
 
         <Nav />
 
         <TransitionGroup>
           <CSSTransition
             key={this.props.location.key}
-            timeout={{ enter: 200, exit: 200 }}
+            timeout={{ enter: 400, exit: 400 }}
             classNames='layout'
             appear
           >
@@ -61,7 +60,7 @@ const App = class _App extends PureComponent {
             </Switch>
           </CSSTransition>
         </TransitionGroup>
-      </div>
+      </BodyClass>
     )
   }
 }
