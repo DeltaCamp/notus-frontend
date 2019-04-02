@@ -5,7 +5,6 @@ export const currentUserQuery = gql`
     currentUser @client {
       id
       email
-      access_key_expires_at
     }
   }
 `

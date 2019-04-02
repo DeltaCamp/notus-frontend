@@ -11,12 +11,12 @@ import { currentUserQuery } from '~/queries/currentUserQuery'
 const queryString = require('query-string')
 
 const userConfirmPageMutation = gql`
-  mutation confirmUser($oneTimeKey: String!) {
-    confirmUser(oneTimeKey: $oneTimeKey) @client
+  mutation confirmUser($oneTimeKey: String!, $password: String!) {
+    confirmUser(oneTimeKey: $oneTimeKey, password: $password) @client
   }
 `
 
-export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUser' })(
+export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUserData' })(
   graphql(userConfirmPageMutation, { name: 'confirmUser' })(
     class _UserConfirmPage extends PureComponent {
 
@@ -34,35 +34,6 @@ export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUser' }
           confirming: false,
           password: '',
           passwordConfirmation: ''
-        }
-      }
-
-      componentDidMount () {
-        const oneTimeKey = this.getOneTimeKey(this.props)
-        if (oneTimeKey) {
-          this.confirmUser(oneTimeKey)
-        }
-      }
-
-      componentDidUpdate (prevProps) {
-        const oldRequestKey = this.getOneTimeKey(prevProps)
-        const newRequestKey = this.getOneTimeKey(this.props)
-
-        if (newRequestKey !== oldRequestKey) {
-          this.confirmUser(newRequestKey)
-        }
-      }
-
-      confirmUser (oneTimeKey) {
-        const { loading, error, currentUser } = this.props.currentUser
-        const currentUserExists = !loading && !error && currentUser
-        if (currentUserExists) {
-          this.setState({
-            confirming: false,
-            confirmed: true
-          })
-        } else {
-
         }
       }
 
@@ -120,14 +91,62 @@ export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUser' }
       }
 
       render () {
-        let message
+        const { loading, error, currentUser } = this.props.currentUserData
+        const currentUserExists = !loading && !error && currentUser
+
+        let message, createPasswordFormRow
 
         if (this.state.confirming) {
           message = "Confirming your subscription..."
-        } else if (this.state.error) {
-          message = `There was an error: ${this.state.error}`
         } else if (this.state.confirmed) {
           message = `Your subscription is confirmed!`
+        }
+
+        if (!this.state.confirmed && !currentUser) {
+          createPasswordFormRow =
+            <div className='row'>
+              <div className='col-xs-12'>
+                <h1>Create Your Password</h1>
+                <form onSubmit={this.handleConfirmSubmit}>
+                  <div className='form-error'>
+                    <span />
+                    {this.state.error}
+                  </div>
+                  <div className='field'>
+                    <label htmlFor='password' className='label'>
+                      Password
+                    </label>
+                    <input
+                      autoFocus
+                      type='password'
+                      className='input'
+                      onChange={(e) => { this.setState({ password: e.target.value }) }}
+                      value={this.state.password}
+                    />
+                  </div>
+                  <div className='field'>
+                    <label htmlFor='password' className='label'>
+                      Confirm Password
+                    </label>
+                    <input
+                      autoFocus
+                      type='password'
+                      className='input'
+                      onChange={(e) => { this.setState({ passwordConfirmation: e.target.value }) }}
+                      value={this.state.passwordConfirmation}
+                    />
+                  </div>
+                  <div className='control form-submit has-text-centered'>
+                    <button
+                      type='submit'
+                      className='button is-dark is-outlined is-small'
+                    >
+                      Save
+                  </button>
+                  </div>
+                </form>
+              </div>
+            </div>
         }
 
         return (
@@ -140,49 +159,7 @@ export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUser' }
 
             <section className='section section--main-content'>
               <div className='container'>
-                <div className='row'>
-                  <div className='col-xs-12'>
-                    <h1>Create Your Password</h1>
-                    <form onSubmit={this.handleConfirmSubmit}>
-                      <div className='form-error'>
-                        <span />
-                        {this.state.error}
-                      </div>
-                      <div className='field'>
-                        <label htmlFor='password' className='label'>
-                          Password
-                        </label>
-                        <input
-                          autoFocus
-                          type='password'
-                          className='input'
-                          onChange={(e) => { this.setState({ password: e.target.value }) }}
-                          value={this.state.password}
-                        />
-                      </div>
-                      <div className='field'>
-                        <label htmlFor='password' className='label'>
-                          Confirm Password
-                        </label>
-                        <input
-                          autoFocus
-                          type='password'
-                          className='input'
-                          onChange={(e) => { this.setState({ passwordConfirmation: e.target.value }) }}
-                          value={this.state.passwordConfirmation}
-                        />
-                      </div>
-                      <div className='control form-submit has-text-centered'>
-                        <button
-                          type='submit'
-                          className='button is-dark is-outlined is-small'
-                        >
-                          Save
-                      </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
+                {createPasswordFormRow}
                 <div className='row'>
                   <div className='col-xs-12'>
                     <p>

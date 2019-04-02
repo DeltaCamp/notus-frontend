@@ -16,22 +16,6 @@ const resolvers = merge(
 )
 
 const cache = new InMemoryCache()
-//
-// if (storage) {
-//   persistCache({
-//     cache,
-//     storage
-//   }).then(() => {
-//     try {
-//       const data = cache.readQuery({ query: jwtTokenQuery })
-//       const jwtToken = data.jwtToken
-//       axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
-//     } catch (error) {
-//       console.warn(error)
-//       // rollbar.error()
-//     }
-//   })
-// }
 
 cache.writeData({
   data: {

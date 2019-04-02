@@ -26,7 +26,6 @@ export const notusResolvers = {
       if (!password) {
         throw new Error('You must pass a password')
       }
-      console.log('got here')
       return axiosInstance
         .post(`${process.env.REACT_APP_NOTUS_API_URI}/users/confirm`, {
           password
@@ -53,6 +52,8 @@ export const notusResolvers = {
                 }
               })
             })
+        }).catch(error => {
+          console.error(error)
         })
     },
 
@@ -65,8 +66,6 @@ export const notusResolvers = {
       return axiosInstance
         .post(`${process.env.REACT_APP_NOTUS_API_URI}/dapp-users/confirm`, { requestKey })
         .then(json => {
-          const { data } = json
-
           return json
         })
     }
