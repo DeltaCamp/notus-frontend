@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom'
 import ReactTimeout from 'react-timeout'
 import ReactTooltip from 'react-tooltip'
 import PropTypes from 'prop-types'
-import AntdIcon from '@ant-design/icons-react'
-import { CopyOutline } from '@ant-design/icons'
+import { Copy } from 'react-feather'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent {
@@ -41,7 +40,9 @@ export const CodeSnippet = ReactTimeout(class _CodeSnippet extends PureComponent
             text={snippet}
             onCopy={this.handleCopyClick}
           >
-            <span className='has-text-right'><AntdIcon type={CopyOutline} className='antd-icon' /></span>
+            <span className='has-text-right'>
+              <Copy />
+            </span>
           </CopyToClipboard>
         </span>
       </code>

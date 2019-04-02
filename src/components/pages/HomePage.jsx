@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { FooterContainer } from '~/components/layout/Footer'
 import { LandingHero } from '~/components/hooks/LandingHero'
-import { CodeBox } from '~/components/CodeBox'
+// import { CodeBox } from '~/components/CodeBox'
 
 export class HomePage extends PureComponent {
   render () {
@@ -22,13 +22,13 @@ export class HomePage extends PureComponent {
                 </h1>
                 <br />
                 <p>
-                  Notus is a service that allows users to trigger webhooks from Ethereum smart contract events or Graph Protocol GraphQL subscriptions.  The service will be run by a cloud of server nodes that are coordinated and incentivized by smart contracts.  Users will store their webhook definitions in IPFS, register the hash in a smart contract, then a Notus node will be assigned the webhook and start listening.  Anyone will be able to manage a Notus node and earn money by triggering webhooks.
+                  Notus allows you to react to Ethereum smart contract events by triggering webhooks, allowing you to run anything you like. For example, I could have a webhook that says when a new Auction Contract is ready to be bid on, I receive a Twilio SMS, MailGun email, and a msg in my Slack about it.
                 </p>
                 <br />
 
-                <CodeBox />
+                {/* <CodeBox /> */}
                 <p>
-                  <a href='https://github.com/notifyus' target='_blank' rel='noopener noreferrer'>Read the Developer Documentation</a>
+                  <a href='https://docs.notus.network'>Read the Developer Documentation</a>
                 </p>
                 {/* <Query query={web3Queries.networkIdQuery}>
                   {({ data }) => {

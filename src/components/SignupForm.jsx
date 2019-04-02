@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import AntdIcon from '@ant-design/icons-react'
-import { MailOutline } from '@ant-design/icons'
+import { Mail } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { axiosInstance } from '~/../config/axiosInstance'
 import { getSystemInfo } from '~/utils/getSystemInfo'
@@ -81,7 +80,7 @@ export const SignupForm =
       const thankYou = (
         <div className='accordion accordion--signup-thank-you'>
           <p>
-            <AntdIcon type={MailOutline} className='antd-icon icon--signup' />
+            <Mail className='icon--signup' />
             Thanks for using Notus! Your <strong>'{this.state.email}'</strong> inbox should have a magic link to access your Notus account.
             <br /><span className='is-size-7 has-text-light'>
               Can't find the email? Check your spam folder first. We can also re-send the link or reach out to us for support.

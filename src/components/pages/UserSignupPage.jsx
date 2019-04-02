@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { FooterContainer } from '~/components/layout/Footer'
-import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
-import AntdIcon from '@ant-design/icons-react'
-import { MailOutline } from '@ant-design/icons'
+import { Mail } from 'react-feather'
 import { axiosInstance } from '~/../config/axiosInstance'
 import * as routes from '~/../config/routes'
+import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
 
 export const UserSignupPage =
   class _UserSignupPage extends Component {
@@ -65,7 +64,7 @@ export const UserSignupPage =
               Thanks for using Notus!
             </h4>
             <div className='has-text-centered'>
-              <AntdIcon type={MailOutline} className='antd-icon icon--signup-large' />
+              <Mail className='icon--signup-large' />
             </div>
             <p>
               Check your <strong>'{this.state.email}'</strong> inbox for a magic link to access your Notus account!
@@ -159,7 +158,9 @@ export const UserSignupPage =
                       <br />
                       <div className='card-footer has-text-centered'>
                         Already have an account?
-                        <a>Reset your Password</a>
+                        <Link to='/reset'>
+                          Reset your Password
+                        </Link>
                         {/* <br />Check your email for the API key originally sent to you. */}
                       </div>
                     </div>

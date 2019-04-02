@@ -85,8 +85,7 @@ export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUserDat
       }
 
       render () {
-        const { loading, error, currentUser } = this.props.currentUserData
-        const currentUserExists = !loading && !error && currentUser
+        const { currentUser } = this.props.currentUserData
 
         let message, createPasswordFormRow
 
