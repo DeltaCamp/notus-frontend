@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
+import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { FooterContainer } from '~/components/layout/Footer'
 import { Mail } from 'react-feather'
 import { axiosInstance } from '~/../config/axiosInstance'
-import * as routes from '~/../config/routes'
-import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
+import { ScrollToTop } from '~/components/ScrollToTop'
 
 export const SignUpPage =
   class _SignUpPage extends Component {
@@ -60,17 +60,17 @@ export const SignUpPage =
       const thankYou = (
         <div className='accordion accordion--signup-thank-you'>
           <div className='card-content'>
-            <h4 className='is-size-4 has-text-centered'>
+            <h4 className='is-size-4 has-text-centered mt30'>
               Thanks for using Notus!
             </h4>
             <div className='has-text-centered'>
               <Mail className='icon--signup-large' />
             </div>
             <p>
-              Check your <strong>'{this.state.email}'</strong> inbox for a magic link to access your Notus account!
+              Check your <span className='has-text-light'>'{this.state.email}'</span> inbox for a magic link to access your Notus account!
             </p>
             <br />
-            <p className='is-size-7 has-text-grey-light'>
+            <p className='is-size-7 has-text-light'>
               Can't find the email? Check your spam folder first. We can also re-send the link or reach out to us for support.
             </p>
           </div>
@@ -79,19 +79,11 @@ export const SignUpPage =
 
       const form = (
         <div className='accordion accordion-enter-done accordion--signup-form'>
-          <header className='card-header has-text-centered'>
-            Get Started for Free
-          </header>
           <div className='card-content'>
             <form onSubmit={this.handleSignupSubmit}>
-              <div className='form-error'>
-                <span />
-              </div>
-              <div className='field'>
-                <label htmlFor='email' className='label'>
-                  email
-              </label>
+              <div className='field mt15'>
                 <input
+                  placeholder='Your Email Address'
                   autoFocus
                   type='email'
                   id='email'
@@ -109,7 +101,7 @@ export const SignUpPage =
               <div className='control form-submit has-text-centered'>
                 <button
                   type='submit'
-                  className='button is-dark is-outlined is-small'
+                  className='button is-small'
                 >
                   Sign Up
               </button>
@@ -121,47 +113,52 @@ export const SignUpPage =
 
       return (
         <div className='is-positioned-absolutely'>
-          <section className='section section--main-content has-bg has-no-top-padding'>
+          <Helmet
+            title='Confirm Your Account'
+          />
+
+          <ScrollToTop />
+
+          <section className='section section--main-content has-no-top-padding'>
             <div className='container'>
               <div className='row'>
                 <div className='column col-xs-12 col-lg-8 col-start-lg-3'>
-                  <div>
-                    <div className='column has-text-centered'>
-                      <Link to={routes.HOME} className='navbar-item'>
-                        <NotusLogo className='logo logo-signup' />
-                      </Link>
-                    </div>
-                    <section className='card has-shadow has-shadow-big'>
-                      <CSSTransition
-                        timeout={600}
-                        classNames='accordion'
-                        in={!this.state.success}
-                      >
-                        {state => form}
-                      </CSSTransition>
+                  <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt100'>
+                    Get Started For Free
+                  </h1>
+
+                  <section className='card has-bg has-shadow has-shadow-big mt30'>
+                    <CSSTransition
+                      timeout={600}
+                      classNames='accordion'
+                      in={!this.state.success}
+                    >
+                      {state => form}
+                    </CSSTransition>
 
 
-                      <CSSTransition
-                        timeout={600}
-                        classNames='accordion'
-                        in={this.state.success}
-                      >
-                        {state => thankYou}
-                      </CSSTransition>
-                      {/* <footer className='card-footer has-text-centered'>
-                        Signing up signifies you have read and agree to the<a href='/terms'>Terms of Service</a>{' '}
-                        and&nbsp;<a href='/privacy'>Privacy Policy</a>.
-                      </footer> */}
+                    <CSSTransition
+                      timeout={600}
+                      classNames='accordion'
+                      in={this.state.success}
+                    >
+                      {state => thankYou}
+                    </CSSTransition>
+                    {/* <footer className='card-footer has-text-centered'>
+                      Signing up signifies you have read and agree to the<a href='/terms'>Terms of Service</a>{' '}
+                      and&nbsp;<a href='/privacy'>Privacy Policy</a>.
+                    </footer> */}
+                  </section>
 
-                    </section>
+                  <br />
+
+                  <div className='card-footer has-text-centered'>
+                    Already have an account you lost the password to?
                     <br />
-                    <div className='card-footer has-text-centered'>
-                      Already have an account?
-                      <Link to='/reset'>
-                        Reset your Password
-                      </Link>
-                      {/* <br />Check your email for the API key originally sent to you. */}
-                    </div>
+                    <Link to='/reset'>
+                      Reset your Password
+                    </Link>
+                    {/* <br />Check your email for the API key originally sent to you. */}
                   </div>
                 </div>
               </div>

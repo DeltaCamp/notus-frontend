@@ -1,7 +1,7 @@
 ::placeholder,
 .input::placeholder,
 .textarea::placeholder {
-  color: rgba(27, 4, 4, 1);
+  color: rgba(160, 160, 160, 1);
 }
 
 input:-internal-autofill-previewed,
@@ -72,6 +72,10 @@ h6 {
   font-weight: 500;
 }
 
+.has-text-weight-extrabold {
+  font-weight: 800;
+}
+
 .is-size-1 {
   @media screen and (max-width: $tablet) {
     font-size: 1.5rem !important;
@@ -91,8 +95,6 @@ h6 {
 }
 
 .is-size-4 {
-  // font-size: 1.2rem !important;
-
   @media screen and (max-width: $tablet) {
     font-size: 1.15rem !important;
   }
@@ -154,12 +156,7 @@ a.is-dark {
 }
 
 a {
-  // border-bottom: 1px solid transparent;
   transition: all 200ms ease-in-out;
-}
-
-a:hover {
-  // border-bottom-color: rgba(200, 110, 220, 0.55);
 }
 
 .has-text-link,
@@ -200,16 +197,6 @@ a:hover {
     line-height: 1.325;
   }
 }
-
-// .no-select {
-//   -webkit-touch-callout: none;
-//   -webkit-tap-highlight-color: transparent;
-//   user-select: none;
-// }
-
-// .no-scale:hover {
-//   transform: scale3d(1, 1, 1) !important;
-// }
 
 .has-text-white a,
 .has-text-white button,
@@ -313,18 +300,6 @@ hr {
   width: 50%;
   z-index: 12398;
 
-  animation-name: animateHeroBg;
-  animation-duration: 11s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  background-blend-mode: difference;
-  background-color: white;
-  background-image:
-    linear-gradient(90deg, $cyan 0%, darken($cyan, 5%) 4%, darken($cyan, 8%) 10%, lighten($mauve, 15%) 70%, lighten($purple, 15%) 85%, lighten($deep-purple, 15%) 100%),
-    url('/swirl_pattern.png');
-  background-position: 0 0;
-  background-size: cover, 300px 300px;
-
   @media screen and (max-width: $tablet) {
     top: 5%;
     left: 5%;
@@ -398,8 +373,14 @@ hr {
 
 .card-footer {
   border: none;
-  color: white;
   display: block;
+}
+
+.has-bg .card-content,
+.has-bg .card-header,
+.has-bg .card-body,
+.has-bg .card-footer {
+  color: white;
 }
 
 .has-shadow {
@@ -452,6 +433,22 @@ hr {
   padding: 0;
 }
 
+.mt100 {
+  margin-top: 100px;
+}
+
 .mt30 {
   margin-top: 30px;
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.mt15 {
+  margin-top: 15px;
+}
+
+.mt10 {
+  margin-top: 10px;
 }

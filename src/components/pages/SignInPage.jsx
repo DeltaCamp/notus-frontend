@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
-
-import * as routes from '~/../config/routes'
+import { Link } from 'react-router-dom'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
+import * as routes from '~/../config/routes'
 
 const queryString = require('query-string')
 
@@ -43,7 +43,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         return email
       }
 
-      handleConfirmSubmit = (e) => {
+      handleConfirmSubmit = async (e) => {
         e.preventDefault()
 
         let error
@@ -58,83 +58,124 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
 
         if (error) {
           this.setState({
-            error
+            error,
+            message: ''
           })
           return
         } else {
           this.setState({
             signingIn: true,
-            error: null
+            error: null,
+            message: ''
           })
         }
 
-        this.props.signIn({
-          variables: {
-            email: this.state.email,
-            password: this.state.password
-          }
-        }).then((param) => {
+        try {
+          await this.props.signIn({
+            variables: {
+              email: this.state.email,
+              password: this.state.password
+            }
+          })          
+
           this.props.history.push(routes.DASHBOARD)
-        }).catch(error => {
+        } catch (error) {
           this.setState({
             signingIn: false,
-            error: error.message
+            error: this.translateErrorMessage(error.message),
+            message: ''
           })
-        })
+        }
+      }
+
+      translateErrorMessage = (message) => {
+        if (message.match(/401/)) {
+          return 'Invalid username and password combination.'
+        }
+
+        return message
       }
 
       render () {
         const { currentUser } = this.props.currentUserData
 
-        let message, createPasswordFormRow
+        let message, signInForm
 
         if (this.state.signingIn) {
-          message = "Confirming your subscription..."
+          message = "Signing in ..."
         }
 
         if (!this.state.signedIn && !currentUser) {
-          createPasswordFormRow =
+          signInForm =
             <div className='row'>
-              <div className='col-xs-12'>
-                <h1>Sign In</h1>
-                <form onSubmit={this.handleConfirmSubmit}>
-                  <div className='form-error'>
-                    <span />
-                    {this.state.error}
+              <div className='column col-xs-12 col-lg-8 col-start-lg-3'>
+                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt100'>
+                  Welcome Back
+                </h1>
+
+                <section className='card has-bg has-shadow has-shadow-big mt30'>
+                  <div className='card-content'>
+                    <form onSubmit={this.handleConfirmSubmit}>
+                      <h6 className='is-size-6 has-text-centered has-text-weight-bold'>
+                        {this.state.error}
+                      </h6>
+                      <div className='field mt15'>
+                        <input
+                          placeholder='Your email'
+                          autoFocus
+                          type='email'
+                          className='input'
+                          onChange={(e) => {
+                            this.setState({ 
+                              email: e.target.value,
+                              error: ''
+                            }) }
+                          }
+                          value={this.state.email}
+                        />
+                      </div>
+                      <div className='field'>
+                        <input
+                          placeholder='Password'
+                          autoFocus
+                          type='password'
+                          className='input'
+                          onChange={(e) => {
+                            this.setState({
+                              password: e.target.value,
+                              error: ''
+                            }) 
+                          }}
+                          value={this.state.password}
+                        />
+                      </div>
+                      <div className='control form-submit has-text-centered'>
+                        <button
+                          type='submit'
+                          className='button is-small'
+                        >
+                          Sign In
+                      </button>
+                      </div>
+                    </form>
                   </div>
-                  <div className='field'>
-                    <label htmlFor='password' className='label'>
-                      Email
-                    </label>
-                    <input
-                      autoFocus
-                      type='text'
-                      className='input'
-                      onChange={(e) => { this.setState({ email: e.target.value }) }}
-                      value={this.state.email}
-                    />
-                  </div>
-                  <div className='field'>
-                    <label htmlFor='password' className='label'>
-                      Password
-                    </label>
-                    <input
-                      autoFocus
-                      type='password'
-                      className='input'
-                      onChange={(e) => { this.setState({ password: e.target.value }) }}
-                      value={this.state.password}
-                    />
-                  </div>
-                  <div className='control form-submit has-text-centered'>
-                    <button
-                      type='submit'
-                      className='button is-dark is-outlined is-small'
-                    >
-                      Save
-                  </button>
-                  </div>
-                </form>
+                </section>
+
+                <br />
+
+                <div className='card-footer has-text-centered'>
+                  <p className='has-text-weight-bold'>
+                    {message}
+                  </p>
+
+                  Already have an account you lost the password to?
+                  <br />
+                  <Link to='/reset'>
+                    Reset your Password
+                  </Link>
+                  {/* <br />Check your email for the API key originally sent to you. */}
+                </div>
+
               </div>
             </div>
         }
@@ -147,16 +188,9 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
 
             <ScrollToTop />
 
-            <section className='section section--main-content'>
+            <section className='section section--main-content has-no-top-padding'>
               <div className='container'>
-                {createPasswordFormRow}
-                <div className='row'>
-                  <div className='col-xs-12'>
-                    <p>
-                      {message}
-                    </p>
-                  </div>
-                </div>
+                {signInForm}
               </div>
             </section>
 

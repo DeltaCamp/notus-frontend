@@ -64,7 +64,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
         } else {
           signOut =
             <button
-              className='navbar-item'
+              className='navbar-item button is-small'
               onClick={this.handleSignOut}
             >
               Sign Out

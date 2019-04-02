@@ -35,28 +35,30 @@ export const notusResolvers = {
         throw new Error('password must be provided')
       }
 
-      return axiosInstance.get(`${process.env.REACT_APP_NOTUS_API_URI}/sign-in`, {
+      const response = await axiosInstance.get(`${process.env.REACT_APP_NOTUS_API_URI}/sign-in`, {
         params: {
           email, password
         }
-      }).then(response => {
-        const { data } = response
-        const jwtToken = data || ''
-        cache.writeData({ data: { jwtToken } })
-        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
-        return axiosInstance
-          .get(`${process.env.REACT_APP_NOTUS_API_URI}/users`)
-          .then(userResponse => {
-            const { data } = userResponse
-            data.__typename = 'User'
-            cache.writeQuery({
-              query: currentUserQuery,
-              data: {
-                currentUser: data
-              }
-            })
-          })
       })
+
+      const { data } = response
+      const jwtToken = data || ''
+      cache.writeData({ data: { jwtToken } })
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
+      
+      return axiosInstance
+        .get(`${process.env.REACT_APP_NOTUS_API_URI}/users`)
+        .then(userResponse => {
+          const { data } = userResponse
+          data.__typename = 'User'
+          cache.writeQuery({
+            query: currentUserQuery,
+            data: {
+              currentUser: data
+            }
+          })
+        })
+      
     },
 
     confirmUser:  async function (object, args, { cache }, info) {

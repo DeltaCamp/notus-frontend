@@ -118,10 +118,6 @@ form.is-active textarea.textarea:active {
   border: 3px solid $hasAddonsformColor;
 }
 
-button.button:active {
-  background-color: lighten($cyan, 10%) !important;
-}
-
 .control,
 .input,
 .textarea,
@@ -134,8 +130,6 @@ button.button:active {
 
 .label {
   color: $grey;
-  font-family: $family-code;
-  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -181,6 +175,25 @@ label.radio,
   transition: color 200ms ease-in-out;
 }
 
+.has-bg input.input,
+.has-bg textarea.textarea {
+  border-color: white;
+}
+
+.has-bg input.input:hover,
+.has-bg input.input:focus,
+.has-bg input.input:active,
+.has-bg textarea.textarea:hover,
+.has-bg textarea.textarea:focus,
+.has-bg textarea.textarea:active {
+  border-color: white;
+  box-shadow: 1px 2px 30px rgba(255, 255, 255, 0.55);
+}
+
+.has-bg .label {
+  color: white;
+}
+
 .field.has-addons {
   @media screen and (max-width: $mobile) {
     flex-direction: column;
@@ -206,7 +219,6 @@ label.radio,
     border-bottom-left-radius: 20px !important;
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
-    // border-top-left-radius: 100px;
   }
 }
 
@@ -224,9 +236,7 @@ label.radio,
 .field.has-addons .button:hover,
 .field.has-addons .button:focus,
 .field.has-addons .button:active {
-  background: $cyan;
-  border-color: $cyan;
-  color: white;
+  transform: scale3d(1, 1, 1);
 }
 
 .has-addons input.input {
@@ -272,5 +282,5 @@ label.radio,
 
 .accordion--signup-form.accordion-enter-active,
 .accordion--signup-form.accordion-enter-done {
-  height: 320px;
+  height: 280px;
 }

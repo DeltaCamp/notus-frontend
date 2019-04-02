@@ -16,10 +16,10 @@ export class HomePage extends PureComponent {
         <section className='section'>
           <div className='container'>
             <div className='row'>
-              <div className='col-xs-10 col-md-9 col-start-md-2'>
-                <h1 className='is-size-1'>
+              <div className='col-xs-10 col-md-9'>
+                <h5 className='is-size-5'>
                   Notify your DApp's users when you need their attention.
-                </h1>
+                </h5>
                 <br />
                 <p>
                   Notus allows you to react to Ethereum smart contract events by triggering webhooks, allowing you to run anything you like. For example, I could have a webhook that says when a new Auction Contract is ready to be bid on, I receive a Twilio SMS, MailGun email, and a msg in my Slack about it.

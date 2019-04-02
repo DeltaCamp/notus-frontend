@@ -104,10 +104,8 @@ export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUserDat
                 </h1>
                 <br />
                 <form onSubmit={this.handleConfirmSubmit}>
-                  <div className='form-error'>
-                    <span />
-                    {this.state.error}
-                  </div>
+                  {this.state.error}
+
                   <div className='field'>
                     <label htmlFor='password' className='label'>
                       Password

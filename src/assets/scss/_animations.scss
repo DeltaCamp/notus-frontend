@@ -149,6 +149,10 @@
   pointer-events: none;
 }
 
+.accordion {
+  pointer-events: none;
+}
+
 .accordion,
 .accordion-enter {
   height: 1px;
@@ -165,6 +169,7 @@
 .accordion-enter-active,
 .accordion-enter-done {
   opacity: 1;
+  pointer-events: initial;
 }
 
 .accordion-exit {

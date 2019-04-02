@@ -13,10 +13,10 @@ export const LandingHero = ({ heroColor }) => {
                 Ethereum notifications made simple.
               </h1>
 
-              <h5 className='is-size-5 hero--description-text'>
+              <h6 className='is-size-6 hero--description-text'>
                 {/* /texts/emails/slacks */}
                 Notus enables you to listen in on Ethereum. Whether it's token transfers or contract activity, Notus has your back.
-              </h5>
+              </h6>
 
               <div className='mt30'>
                 <SignupForm />
