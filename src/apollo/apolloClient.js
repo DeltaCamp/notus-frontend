@@ -1,13 +1,8 @@
 import ApolloClient from 'apollo-boost'
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { merge } from 'lodash'
-import { persistCache } from 'apollo-cache-persist';
-
-import { axiosInstance } from '~/../config/axiosInstance'
 import { metadataResolvers } from './client-state/metadataResolvers'
 import { notusResolvers } from './client-state/notusResolvers'
-import { storage } from './storage'
-import { jwtTokenQuery } from '~/queries/jwtTokenQuery'
 
 const resolvers = merge(
   {},
