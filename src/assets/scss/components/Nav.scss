@@ -2,6 +2,14 @@ body:not(.home) .navbar {
   box-shadow: 0 1px 3px rgba(100, 130, 180, 0.1);
 }
 
+body:not(.home) .hide-not-home {
+  display: none;
+}
+
+body.home .navbar-start .navbar-item {
+  display: none;
+}
+
 .navbar {
   background: transparent;
   z-index: 9999;
@@ -48,6 +56,10 @@ body:not(.home) .navbar {
   border: 0;
   color: rgba(0, 0, 0, 0.5);
   width: auto;
+
+  @media screen and (max-width: $navbar-breakpoint) {
+    width: 100%;
+  }
 }
 
 .navbar-menu .navbar-item.button:hover {
@@ -157,17 +169,31 @@ a.navbar-item,
   height: 100%;
 }
 
-.navbar-menu .navbar-end {
+.navbar-menu .navbar-start {
   @media screen and (max-width: $navbar-breakpoint) {
-    height: 75%;
+    height: auto;
     right: 0.75rem;
     padding-top: 80px;
     width: 100%;
   }
 }
 
+.navbar-menu .navbar-end {
+  @media screen and (max-width: $navbar-breakpoint) {
+    height: 75%;
+    right: 0.75rem;
+    padding-top: 0;
+    text-align: center;
+    width: 100%;
+  }
+}
+
 .navbar-menu .navbar-item {
   margin-left: 1rem;
+
+  @media screen and (max-width: $navbar-breakpoint) {
+    margin-left: 0;
+  }
 }
 
 .nav-background.is-active {

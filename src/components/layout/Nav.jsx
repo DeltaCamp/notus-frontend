@@ -35,6 +35,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
 
       handleSignOut = (e) => {
         this.props.signOutMutation().then(() => {
+          this.closeMobileNav()
           this.props.history.push(routes.SIGNIN)
         }).catch(error => {
           console.error(error)
@@ -62,13 +63,24 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
             </Link>
           </>
         } else {
-          signOut =
-            <button
-              className='navbar-item button is-small'
-              onClick={this.handleSignOut}
-            >
-              Sign Out
-            </button>
+          signOut = (
+            <>
+              <Link
+                className='navbar-item bold hide-not-home'
+                to={routes.MY_EVENTS}
+                onClick={this.closeMobileNav}
+              >
+                Account
+              </Link>
+              <button
+                className='navbar-item button is-small'
+                onClick={this.handleSignOut}
+              >
+                Sign Out
+              </button>
+            </>
+          )
+            
           myEvents =
             <Link
               to={routes.MY_EVENTS}
