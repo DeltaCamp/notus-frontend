@@ -170,7 +170,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
 
                   Already have an account you lost the password to?
                   <br />
-                  <Link to='/reset'>
+                  <Link to={routes.PASSWORD_RESET}>
                     Reset your Password
                   </Link>
                   {/* <br />Check your email for the API key originally sent to you. */}

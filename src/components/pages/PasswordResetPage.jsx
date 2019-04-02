@@ -8,56 +8,53 @@ import { axiosInstance } from '~/../config/axiosInstance'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import * as routes from '~/../config/routes'
 
-export const SignUpPage =
-  class _SignUpPage extends Component {
+export const PasswordResetPage =
+  class _PasswordResetPage extends Component {
     state = {
       email: '',
+      error: '',
       success: false
     }
 
-    doSignup = async () => {
+    doReset = async () => {
       const { email } = this.state
 
       if (email) {
-        // check if email and dappName exists in DB, if yes:
-        // - name already registered, check email used to sign up
-        // - also could re-send email w/ API key if dapp name matches email provided
-
-        // if no:
-        // - create a new dapp in the db and hook it up to this email address
-        // - on the API server, send an email to the newly signed up user
-        // console.log(process.env.REACT_APP_NOTUS_API_URI)
-
         await axiosInstance.post(
-          `${process.env.REACT_APP_NOTUS_API_URI}/users`,
+          `${process.env.REACT_APP_NOTUS_API_URI}/users/password-reset`,
           {
             email: this.state.email
           }
         ).then(() => {
           this.setState({
             success: true,
-            isSigningUp: false
+            isResetting: false
           })
         }).catch(error => {
-          console.error(error)
           this.setState({
-            error: true,
-            isSigningUp: false
+            error: error.message,
+            isResetting: false
           })
         })
       }
     }
 
-    handleSignupSubmit = (e) => {
+    handlePasswordReset = (e) => {
       e.preventDefault()
 
       this.setState({
-        error: false,
-        isSigningUp: true
-      }, this.doSignup)
+        error: '',
+        isResetting: true
+      }, this.doReset)
     }
 
     render () {
+      let message
+
+      if (this.state.isResetting) {
+        message = "Checking account ..."
+      }
+      
       const thankYou = (
         <div className='accordion accordion--signup-thank-you'>
           <div className='card-content'>
@@ -68,11 +65,11 @@ export const SignUpPage =
               <Mail className='icon--signup-large' />
             </div>
             <p>
-              Check your <span className='has-text-light'>'{this.state.email}'</span> inbox for a magic link to access your Notus account!
+              If an account exists with the email <span className='has-text-light'>'{this.state.email}'</span> check it's inbox for a reset password link.
             </p>
             <br />
             <p className='is-size-7 has-text-light'>
-              Can't find the email? Check your spam folder first. We can also re-send the link or reach out to us for support.
+              Can't find the email? Check your spam folder first. Or reach out to us for support.
             </p>
           </div>
         </div>
@@ -81,10 +78,14 @@ export const SignUpPage =
       const form = (
         <div className='accordion accordion-enter-done accordion--signup-form'>
           <div className='card-content'>
-            <form onSubmit={this.handleSignupSubmit}>
-              <div className='field mt15'>
+            <form onSubmit={this.handlePasswordReset}>
+              <h6 className='is-size-6 has-text-centered has-text-weight-bold'>
+                {this.state.error}
+              </h6>            
+
+              <div className='field mt15'>    
                 <input
-                  placeholder='Your Email Address'
+                  placeholder='Account email address'
                   autoFocus
                   type='email'
                   id='email'
@@ -104,7 +105,7 @@ export const SignUpPage =
                   type='submit'
                   className='button is-small'
                 >
-                  Sign Up
+                  Reset
               </button>
               </div>
             </form>
@@ -125,7 +126,7 @@ export const SignUpPage =
               <div className='row'>
                 <div className='column col-xs-12 col-lg-8 col-start-lg-3'>
                   <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt100'>
-                    Get Started For Free
+                    Reset Your Password
                   </h1>
 
                   <section className='card has-bg has-shadow has-shadow-big mt30'>
@@ -136,7 +137,6 @@ export const SignUpPage =
                     >
                       {state => form}
                     </CSSTransition>
-
 
                     <CSSTransition
                       timeout={600}
@@ -154,10 +154,25 @@ export const SignUpPage =
                   <br />
 
                   <div className='card-footer has-text-centered'>
-                    Already have an account you lost the password to?
+                    <p className='has-text-weight-bold'>
+                      {message}
+                    </p>
+
+                    Remembered the password?
                     <br />
-                    <Link to={routes.PASSWORD_RESET}>
-                      Reset your Password
+                    <Link to={routes.SIGNIN}>
+                      Sign In
+                    </Link>
+                    {/* <br />Check your email for the API key originally sent to you. */}
+                  </div>
+
+                  <hr />
+
+                  <div className='card-footer has-text-centered'>
+                    Need a new account?
+                    <br />
+                    <Link to={routes.SIGNUP}>
+                      Sign Up
                     </Link>
                     {/* <br />Check your email for the API key originally sent to you. */}
                   </div>

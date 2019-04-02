@@ -10,6 +10,7 @@ import { HomePage } from '~/components/pages/HomePage'
 import { HookPage } from '~/components/pages/HookPage'
 import { DashboardPage } from '~/components/pages/DashboardPage'
 import { HooksListPage } from '~/components/pages/HooksListPage'
+import { PasswordResetPage } from '~/components/pages/PasswordResetPage'
 import { SignInPage } from '~/components/pages/SignInPage'
 import { SignUpPage } from '~/components/pages/SignUpPage'
 import { UserConfirmPage } from '~/components/pages/UserConfirmPage'
@@ -57,6 +58,7 @@ const App = class _App extends PureComponent {
               <Route path={routes.DASHBOARD} component={DashboardPage} />
               <Route exact path={routes.SIGNUP} component={SignUpPage} />
               <Route exact path={routes.SIGNIN} component={SignInPage} />
+              <Route exact path={routes.PASSWORD_RESET} component={PasswordResetPage} />
               <Route exact path={routes.DAPP_CONFIRM} component={DappConfirmPage} />
               <Route component={FourOhFour} />
             </Switch>
