@@ -95,9 +95,6 @@ form.is-active textarea.textarea:active {
   box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
 }
 
-.has-addons button.button:hover,
-.has-addons button.button:active,
-.has-addons button.button:focus,
 .has-addons input.input:hover,
 .has-addons input.input:active,
 .has-addons input.input:focus,
@@ -110,7 +107,6 @@ form.is-active textarea.textarea:active {
 button.button:active {
   background-color: lighten($cyan, 10%) !important;
 }
-
 
 .control,
 .input,
@@ -182,6 +178,7 @@ label.radio,
 .field.has-addons .button:focus,
 .field.has-addons .button:active {
   background: $cyan;
+  border-color: $cyan;
   color: white;
 }
 

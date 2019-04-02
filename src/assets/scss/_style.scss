@@ -242,6 +242,10 @@ a:hover {
   color: inherit;
 }
 
+.has-text-light {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
 .tag:not(body) {
   font-family: $code-family;
   font-size: 0.625rem;
@@ -429,6 +433,14 @@ hr {
   @media screen and (max-width: $tablet) {
     margin-top: 4rem;
   }
+}
+
+.icon--signup {
+  margin-right: 10px;
+  position: relative;
+  height: 20px;
+  top: 3px;
+  width: 20px;
 }
 
 .icon--signup-large {
