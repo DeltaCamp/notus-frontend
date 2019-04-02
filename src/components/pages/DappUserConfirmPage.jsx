@@ -91,7 +91,7 @@ export const DappUserConfirmPage = graphql(dappUserConfirmPageMutation, { name: 
       return (
         <div className='is-positioned-absolutely'>
           <Helmet
-            title='Confirm Your Account'
+            title='Confirm Your DApp Account'
           />
 
           <ScrollToTop />

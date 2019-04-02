@@ -115,7 +115,7 @@ export const SignUpPage =
       return (
         <div className='is-positioned-absolutely'>
           <Helmet
-            title='Confirm Your Account'
+            title='Sign Up for Notus'
           />
 
           <ScrollToTop />
@@ -123,8 +123,8 @@ export const SignUpPage =
           <section className='section section--main-content has-no-top-padding'>
             <div className='container'>
               <div className='row'>
-                <div className='column col-xs-12 col-lg-8 col-start-lg-3'>
-                  <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt100'>
+                <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3'>
+                  <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
                     Get Started For Free
                   </h1>
 

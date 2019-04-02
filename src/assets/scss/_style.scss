@@ -382,6 +382,28 @@ hr {
   color: white;
 }
 
+.card-content {
+  @media screen and (max-width: $tablet) {
+    padding: 1rem;
+  }  
+}
+
+.col-xtra-wide-touch {
+  margin-left: -10%;
+  width: 120%;
+}
+
+.col-xtra-wide-touch .is-size-1,
+.col-xtra-wide-touch .card-footer {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+// .card-xtra-wide-touch {
+//   margin-left: -10%;
+//   width: 120%;
+// }
+
 .has-shadow {
   box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
 }
@@ -434,6 +456,14 @@ hr {
 
 .mt100 {
   margin-top: 100px;
+}
+
+.mt75 {
+  margin-top: 75px;
+}
+
+.mt50 {
+  margin-top: 50px;
 }
 
 .mt30 {

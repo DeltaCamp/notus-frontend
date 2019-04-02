@@ -25,7 +25,7 @@ body:not(.home) .navbar {
   }
 }
 
-.navbar-end .navbar-item {
+.navbar-menu .navbar-item {
   color: $navbar-item-color;
   margin-right: 0.5rem;
   padding: 0 0.1rem;
@@ -37,26 +37,26 @@ body:not(.home) .navbar {
   }
 }
 
-.navbar-end .navbar-item:hover {
+.navbar-menu .navbar-item:hover {
   color: $navbar-item-hover;
 }
 
-.navbar-end .navbar-item.button,
-.navbar-end .navbar-item.button:focus,
-.navbar-end .navbar-item.button:active {
+.navbar-menu .navbar-item.button,
+.navbar-menu .navbar-item.button:focus,
+.navbar-menu .navbar-item.button:active {
   background-color: transparent;
   border: 0;
   color: rgba(0, 0, 0, 0.5);
   width: auto;
 }
 
-.navbar-end .navbar-item.button:hover {
+.navbar-menu .navbar-item.button:hover {
   box-shadow: none;
   color: black;
   transform: scale3d(1, 1, 1);
 }
 
-.home .navbar-end .navbar-item {
+.home .navbar-menu .navbar-item {
   color: white;
   $navbar-item-hover: rgba(255, 255, 255, 0.87);
 
@@ -65,7 +65,7 @@ body:not(.home) .navbar {
   }
 }
 
-.home .navbar-end .navbar-item:hover {
+.home .navbar-menu .navbar-item:hover {
   color: rgba(255, 255, 255, 0.87);
 
   @media screen and (max-width: $navbar-breakpoint) {
@@ -88,13 +88,13 @@ body:not(.home) .navbar {
   height: 30px;
 }
 
-.navbar-end .navbar-item {
+.navbar-menu .navbar-item {
   font-weight: 600;
   letter-spacing: -0.01rem;
   transition: border 300ms ease-in-out;
 }
 
-.home .navbar-end .navbar-item.bold {
+.home .navbar-menu .navbar-item.bold {
   color: #24f0e2;
 
   @media screen and (max-width: $navbar-breakpoint) {
@@ -102,7 +102,7 @@ body:not(.home) .navbar {
   }
 }
 
-.home .navbar-end .navbar-item.bold:hover {
+.home .navbar-menu .navbar-item.bold:hover {
   color: white;
 
   @media screen and (max-width: $navbar-breakpoint) {

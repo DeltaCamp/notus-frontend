@@ -9,8 +9,10 @@ import { apolloClient } from '~/apollo/apolloClient'
 
 window.addEventListener('load', async () => {
   try {
+    const client = await apolloClient()
+    
     let coreApp =
-      <ApolloProvider client={apolloClient}>
+      <ApolloProvider client={client}>
         <BrowserRouter>
           <AppContainer />
         </BrowserRouter>

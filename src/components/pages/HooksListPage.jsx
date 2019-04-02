@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react'
+import Helmet from 'react-helmet'
+import { ScrollToTop } from '~/components/ScrollToTop'
 import { RegisterWebhookForm } from '~/components/hooks/RegisterWebhookForm'
 import { FooterContainer } from '~/components/layout/Footer'
 import { findLast } from 'lodash'
@@ -16,6 +18,12 @@ export const HooksListPage = class _HooksListPage extends PureComponent {
 
     return (
       <div className='is-positioned-absolutely'>
+        <Helmet
+          title='Hooks'
+        />
+
+        <ScrollToTop />
+
         <section className='section section--main-content has-bg'>
           <div className='container'>
             <div className='row'>

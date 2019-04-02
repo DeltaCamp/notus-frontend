@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import { ScrollToTop } from '~/components/ScrollToTop'
 import { FooterContainer } from '~/components/layout/Footer'
 import { CodeBox } from '~/components/CodeBox'
 import * as routes from '~/../config/routes'
@@ -21,6 +23,12 @@ export const DappConfirmPage =
 
       return (
         <div className='is-positioned-absolutely'>
+          <Helmet
+            title='Confirm Your DApp'
+          />
+
+          <ScrollToTop />
+
           <section className='section section--main-content'>
             <div className='container'>
               <div className='row'>

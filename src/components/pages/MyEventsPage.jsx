@@ -7,8 +7,8 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 
-export const DashboardPage = graphql(currentUserQuery, { name: 'currentUser' })(
-  class _DashboardPage extends PureComponent {
+export const MyEventsPage = graphql(currentUserQuery, { name: 'currentUser' })(
+  class _MyEventsPage extends PureComponent {
 
     static propTypes = {
       match: PropTypes.object.isRequired
@@ -22,7 +22,7 @@ export const DashboardPage = graphql(currentUserQuery, { name: 'currentUser' })(
       return (
         <div className='is-positioned-absolutely'>
           <Helmet
-            title='Dashboard'
+            title='My Events'
           />
 
           <ScrollToTop />
@@ -31,9 +31,9 @@ export const DashboardPage = graphql(currentUserQuery, { name: 'currentUser' })(
             <div className='container'>
               <div className='row'>
                 <div className='col-xs-12'>
-                  <p>
+                  <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
                     What would you like to do today?
-                  </p>
+                  </h1>
                 </div>
               </div>
             </div>

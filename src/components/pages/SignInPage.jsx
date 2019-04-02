@@ -76,9 +76,9 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
               email: this.state.email,
               password: this.state.password
             }
-          })          
+          })
 
-          this.props.history.push(routes.DASHBOARD)
+          this.props.history.push(routes.MY_EVENTS)
         } catch (error) {
           this.setState({
             signingIn: false,
@@ -108,8 +108,8 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         if (!this.state.signedIn && !currentUser) {
           signInForm =
             <div className='row'>
-              <div className='column col-xs-12 col-lg-8 col-start-lg-3'>
-                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt100'>
+              <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3'>
+                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
                   Welcome Back
                 </h1>
 
@@ -137,7 +137,6 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
                       <div className='field'>
                         <input
                           placeholder='Password'
-                          autoFocus
                           type='password'
                           className='input'
                           onChange={(e) => {
@@ -183,7 +182,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         return (
           <div className='is-positioned-absolutely'>
             <Helmet
-              title='Confirm Your Account'
+              title='Sign In to Notus'
             />
 
             <ScrollToTop />

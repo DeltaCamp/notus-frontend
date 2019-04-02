@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { FooterContainer } from '~/components/layout/Footer'
 import { LandingHero } from '~/components/hooks/LandingHero'
+import { ScrollToTop } from '~/components/ScrollToTop'
 // import { CodeBox } from '~/components/CodeBox'
 
 export class HomePage extends PureComponent {
@@ -9,6 +10,8 @@ export class HomePage extends PureComponent {
 
     return (
       <div className='is-positioned-absolutely'>
+        <ScrollToTop />
+        
         <header className='header'>
           <div className='hero-bg' />
           <LandingHero heroColor={heroColor} />

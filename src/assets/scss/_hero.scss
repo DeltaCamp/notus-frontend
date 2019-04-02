@@ -26,29 +26,27 @@ $heroHeightWidescreen: 560px;
 
 header .hero {
   height: $heroHeightWidescreen + 160px;
+
+  @media screen and (max-width: $mobile) {
+    height: $heroHeightWidescreen + 260px;
+  }
 }
 
 .hero-bg {
   background-image: 
     linear-gradient(220deg, #7704EC 0%, #7704EC 10%, #C305F3 100%),
     url('/funky-lines.png');
-  // background-image: 
-  //   linear-gradient(260deg, #C305F3 0%, #7704EC 40%,rgb(2, 123, 228) 78%, #02BDE4 90%, #7fc 100%),
-  //   url('/funky-lines.png');
   background-blend-mode: multiply;
   background-size: 100% 100%, 400px 400px;
   height: $heroHeightWidescreen;
   overflow: hidden;
   position: absolute;
   transition: all 300ms ease-in-out;
-  // transform: skewY(-2deg);
-  // transform-origin: 40px;
   transform: skewY(-10deg);
   transform-origin: 700px;
   width: 100%;
 
   @media screen and (min-width: $fullhd + 200px) {
-    // transform-origin: 3700px;
     transform-origin: 1050px;
   }
   @media screen and (max-width: $mobile + 100px) {

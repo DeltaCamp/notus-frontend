@@ -3,24 +3,45 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { merge } from 'lodash'
 import { metadataResolvers } from './client-state/metadataResolvers'
 import { notusResolvers } from './client-state/notusResolvers'
+import { storage } from '~/apollo/storage'
+import { axiosGetUserFromApi } from '~/utils/axiosGetUserFromApi'
 
-const resolvers = merge(
-  {},
-  metadataResolvers,
-  notusResolvers
-)
+export const apolloClient = async () => {
+  const cache = new InMemoryCache()
 
-const cache = new InMemoryCache()
+  const resolvers = merge(
+    {},
+    metadataResolvers,
+    notusResolvers
+  )
 
-cache.writeData({
-  data: {
-    currentUser: null,
-    jwtToken: null
+  let currentUser = null
+  let jwtToken = null
+
+  if (storage()) {
+    jwtToken = localStorage.getItem('jwtToken')
   }
-})
 
-export const apolloClient = new ApolloClient({
-  resolvers: { ...resolvers },
-  uri: null,
-  cache
-})
+  if (jwtToken) {
+    try {
+      currentUser = await axiosGetUserFromApi(cache, jwtToken)
+    } catch (error) {
+      console.warn(error)
+      localStorage.removeItem('jwtToken')
+      jwtToken = null
+    }    
+  }
+
+  cache.writeData({
+    data: {
+      currentUser,
+      jwtToken
+    }
+  })
+
+  return new ApolloClient({
+    resolvers: { ...resolvers },
+    uri: null,
+    cache
+  })
+}

@@ -1,6 +1,7 @@
 import { axiosInstance } from '~/../config/axiosInstance'
+import { storage } from '~/apollo/storage'
 import { DappUserFragment } from '~/fragments/DappUserFragment'
-import { currentUserQuery } from '~/queries/currentUserQuery'
+import { axiosGetUserFromApi } from '~/utils/axiosGetUserFromApi'
 
 export const notusResolvers = {
   Query: {
@@ -24,6 +25,10 @@ export const notusResolvers = {
           currentUser: null
         }
       })
+
+      if (storage()) {
+        localStorage.removeItem('jwtToken')
+      }
     },
 
     signIn: async function (object, args, { cache }, info) {
@@ -44,24 +49,19 @@ export const notusResolvers = {
       const { data } = response
       const jwtToken = data || ''
       cache.writeData({ data: { jwtToken } })
-      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
-      
-      return axiosInstance
-        .get(`${process.env.REACT_APP_NOTUS_API_URI}/users`)
-        .then(userResponse => {
-          const { data } = userResponse
-          data.__typename = 'User'
-          cache.writeQuery({
-            query: currentUserQuery,
-            data: {
-              currentUser: data
-            }
-          })
-        })
-      
+
+      if (storage()) {
+        localStorage.setItem('jwtToken', jwtToken)
+      }
+
+      try {
+        return await axiosGetUserFromApi(cache, jwtToken)
+      } catch (error) {
+        console.error(error)
+      }
     },
 
-    confirmUser:  async function (object, args, { cache }, info) {
+    confirmUser: async function (object, args, { cache }, info) {
       const { oneTimeKey, password } = args
       if (!oneTimeKey) {
         throw new Error('oneTimeKey is not defined')
@@ -69,7 +69,9 @@ export const notusResolvers = {
       if (!password) {
         throw new Error('You must pass a password')
       }
-      return axiosInstance
+
+
+      const confirmResponse = await axiosInstance
         .post(`${process.env.REACT_APP_NOTUS_API_URI}/users/confirm`, {
           password
         }, {
@@ -77,26 +79,20 @@ export const notusResolvers = {
             'Authorization': `Bearer ${oneTimeKey}`
           }
         })
-        .then(confirmResponse => {
-          const { data } = confirmResponse
-          const jwtToken = data || ''
-          cache.writeData({ data: { jwtToken } })
-          axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
-          return axiosInstance
-            .get(`${process.env.REACT_APP_NOTUS_API_URI}/users`)
-            .then(userResponse => {
-              const { data } = userResponse
-              data.__typename = 'User'
-              cache.writeQuery({
-                query: currentUserQuery,
-                data: {
-                  currentUser: data
-                }
-              })
-            })
-        }).catch(error => {
+
+        const { data } = confirmResponse
+        const jwtToken = data || ''
+        cache.writeData({ data: { jwtToken } })
+
+        if (storage()) {
+          localStorage.setItem('jwtToken', jwtToken);
+        }
+
+        try {
+          return await axiosGetUserFromApi(cache, jwtToken)
+        } catch(error) {
           console.error(error)
-        })
+        }
     },
 
     confirmDappUser: async function (object, args, { cache }, info) {

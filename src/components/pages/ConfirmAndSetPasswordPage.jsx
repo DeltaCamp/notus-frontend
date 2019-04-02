@@ -2,17 +2,17 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql } from 'react-apollo'
-
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { confirmUserMutation } from '~/mutations/confirmUserMutation'
+import * as routes from '~/../config/routes'
 
 const queryString = require('query-string')
 
-export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUserData' })(
+export const ConfirmAndSetPasswordPage = graphql(currentUserQuery, { name: 'currentUserData' })(
   graphql(confirmUserMutation, { name: 'confirmUser' })(
-    class _UserConfirmPage extends PureComponent {
+    class _ConfirmAndSetPasswordPage extends PureComponent {
 
       static propTypes = {
         match: PropTypes.object.isRequired
@@ -71,11 +71,8 @@ export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUserDat
             oneTimeKey,
             password: this.state.password
           }
-        }).then((param) => {
-          this.setState({
-            confirming: false,
-            confirmed: true
-          })
+        }).then((response) => {
+          this.props.history.push(routes.MY_EVENTS)
         }).catch(error => {
           this.setState({
             confirming: false,
@@ -90,54 +87,54 @@ export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUserDat
         let message, createPasswordFormRow
 
         if (this.state.confirming) {
-          message = "Confirming your subscription..."
-        } else if (this.state.confirmed) {
-          message = `Your subscription is confirmed!`
+          message = "Confirming your account ..."
         }
 
         if (!this.state.confirmed && !currentUser) {
           createPasswordFormRow =
             <div className='row'>
-              <div className='col-xs-12 col-sm-6 col-start-sm-4'>
-                <h1>
-                  Create Your Password
+              <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3'>
+                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
+                  Set Your Password
                 </h1>
-                <br />
-                <form onSubmit={this.handleConfirmSubmit}>
-                  {this.state.error}
 
-                  <div className='field'>
-                    <label htmlFor='password' className='label'>
-                      Password
-                    </label>
-                    <input
-                      autoFocus
-                      type='password'
-                      className='input'
-                      onChange={(e) => { this.setState({ password: e.target.value }) }}
-                      value={this.state.password}
-                    />
+                <section className='card has-bg has-shadow has-shadow-big mt30'>
+                  <div className='card-content'>
+                    <form onSubmit={this.handleConfirmSubmit}>
+                      <h6 className='is-size-6 has-text-centered has-text-weight-bold'>
+                        {this.state.error}
+                      </h6>
+
+                      <div className='field mt15'>
+                        <input
+                          autoFocus
+                          placeholder='New Password'
+                          type='password'
+                          className='input'
+                          onChange={(e) => { this.setState({ password: e.target.value }) }}
+                          value={this.state.password}
+                        />
+                      </div>
+                      <div className='field'>
+                        <input
+                          type='password'
+                          placeholder='Confirm Password'
+                          className='input'
+                          onChange={(e) => { this.setState({ passwordConfirmation: e.target.value }) }}
+                          value={this.state.passwordConfirmation}
+                        />
+                      </div>
+                      <div className='control form-submit has-text-centered'>
+                        <button
+                          type='submit'
+                          className='button is-small'
+                        >
+                          Save
+                      </button>
+                      </div>
+                    </form>
                   </div>
-                  <div className='field'>
-                    <label htmlFor='password' className='label'>
-                      Confirm Password
-                    </label>
-                    <input
-                      type='password'
-                      className='input'
-                      onChange={(e) => { this.setState({ passwordConfirmation: e.target.value }) }}
-                      value={this.state.passwordConfirmation}
-                    />
-                  </div>
-                  <div className='control form-submit has-text-centered'>
-                    <button
-                      type='submit'
-                      className='button is-dark is-outlined is-small'
-                    >
-                      Save
-                  </button>
-                  </div>
-                </form>
+                </section>
               </div>
             </div>
         }

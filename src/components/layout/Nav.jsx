@@ -42,7 +42,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
       }
 
       render () {
-        let signUp, dashboard, signOut
+        let signUp, myEvents, signOut
 
         if (!this.props.data.currentUser) {
           signUp = <>
@@ -69,17 +69,15 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
             >
               Sign Out
             </button>
-          dashboard =
+          myEvents =
             <Link
-              to={routes.DASHBOARD}
+              to={routes.MY_EVENTS}
               className='navbar-item'
               onClick={this.closeMobileNav}
             >
-              Dashboard
+              My Events
             </Link>
         }
-
-        // {this.state.signedOut && <Redirect to={routes.SIGNIN} />}
 
         return (
           <>
@@ -95,7 +93,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
             )}>
               <div className='container'>
                 <div className='row navbar-menu-container'>
-                  <div className='navbar-brand col-xs-8 col-md-8'>
+                  <div className='navbar-brand col-xs-6 col-md-2'>
                     <Link
                       to={routes.HOME}
                       className='navbar-item'
@@ -105,7 +103,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                     </Link>
                   </div>
 
-                  <div className='col-xs-4 is-hidden-tablet has-text-right'>
+                  <div className='col-xs-6 is-hidden-tablet has-text-right'>
                     <button
                       className={classnames(
                         'burger',
@@ -121,13 +119,15 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
 
                   <div id='navbar-menu' className={classnames(
                     'navbar-menu',
-                    'col-xs-4',
-                    'col-md-4',
+                    'col-xs-12',
+                    'col-md-10',
                     { 'is-active': this.state.mobileNavActive }
                   )}>
+                    <div className='navbar-start'>
+                      {myEvents}
+                    </div>
                     <div className='navbar-end'>
                       {signUp}
-                      {dashboard}
                       {signOut}
                     </div>
                   </div>

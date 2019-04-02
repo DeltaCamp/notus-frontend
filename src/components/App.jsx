@@ -8,12 +8,12 @@ import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
 import { HookPage } from '~/components/pages/HookPage'
-import { DashboardPage } from '~/components/pages/DashboardPage'
+import { MyEventsPage } from '~/components/pages/MyEventsPage'
 import { HooksListPage } from '~/components/pages/HooksListPage'
 import { PasswordResetPage } from '~/components/pages/PasswordResetPage'
 import { SignInPage } from '~/components/pages/SignInPage'
 import { SignUpPage } from '~/components/pages/SignUpPage'
-import { UserConfirmPage } from '~/components/pages/UserConfirmPage'
+import { ConfirmAndSetPasswordPage } from '~/components/pages/ConfirmAndSetPasswordPage'
 import { DappConfirmPage } from '~/components/pages/DappConfirmPage'
 import { DappUserConfirmPage } from '~/components/pages/DappUserConfirmPage'
 import { Nav } from '~/components/layout/Nav'
@@ -53,9 +53,9 @@ const App = class _App extends PureComponent {
               <Route exact path={routes.HOOK} component={HookPage} />
               <Route exact path={routes.HOOKS} component={HooksListPage} />
               <Route exact path={routes.HOME} component={HomePage} />
-              <Route path={routes.USER_CONFIRM} component={UserConfirmPage} />
+              <Route path={routes.CONFIRM_AND_SET_PASSWORD_PAGE} component={ConfirmAndSetPasswordPage} />
               <Route path={routes.CONFIRM} component={DappUserConfirmPage} />
-              <Route path={routes.DASHBOARD} component={DashboardPage} />
+              <Route path={routes.MY_EVENTS} component={MyEventsPage} />
               <Route exact path={routes.SIGNUP} component={SignUpPage} />
               <Route exact path={routes.SIGNIN} component={SignInPage} />
               <Route exact path={routes.PASSWORD_RESET} component={PasswordResetPage} />
