@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
-import { withRouter, Redirect } from 'react-router'
+import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
 import * as routes from '~/../config/routes'
@@ -63,7 +63,12 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
           </>
         } else {
           signOut =
-            <a className='navbar-item' onClick={this.handleSignOut}>Sign Out</a>
+            <button
+              className='navbar-item'
+              onClick={this.handleSignOut}
+            >
+              Sign Out
+            </button>
           dashboard =
             <Link
               to={routes.DASHBOARD}
@@ -91,7 +96,11 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
               <div className='container'>
                 <div className='row navbar-menu-container'>
                   <div className='navbar-brand col-xs-8 col-md-8'>
-                    <Link to={routes.HOME} className='navbar-item'>
+                    <Link
+                      to={routes.HOME}
+                      className='navbar-item'
+                      onClick={this.closeMobileNav}
+                    >
                       <NotusLogo />
                     </Link>
                   </div>

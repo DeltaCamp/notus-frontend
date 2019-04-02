@@ -98,8 +98,11 @@ export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUserDat
         if (!this.state.confirmed && !currentUser) {
           createPasswordFormRow =
             <div className='row'>
-              <div className='col-xs-12'>
-                <h1>Create Your Password</h1>
+              <div className='col-xs-12 col-sm-6 col-start-sm-4'>
+                <h1>
+                  Create Your Password
+                </h1>
+                <br />
                 <form onSubmit={this.handleConfirmSubmit}>
                   <div className='form-error'>
                     <span />
@@ -122,7 +125,6 @@ export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUserDat
                       Confirm Password
                     </label>
                     <input
-                      autoFocus
                       type='password'
                       className='input'
                       onChange={(e) => { this.setState({ passwordConfirmation: e.target.value }) }}

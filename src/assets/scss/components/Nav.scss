@@ -1,18 +1,5 @@
-body.signup .navbar {
-  display: none;
-}
-
 body:not(.home) .navbar {
-  background-color: white;
-  background-image:
-    linear-gradient(260deg, #C305F3 0%, #7704EC 40%,rgb(2, 123, 228) 78%, #02BDE4 90%, #7fc 100%),
-    url('/funky-lines.png');
-  color: white;
-  background-blend-mode: multiply;
-  background-size: 100% 100%, 300px 200px;
-  box-shadow: 1px 2px 8px 2px rgba(100, 130, 180, 0.2);
-  border-bottom: 3px solid white;
-  width: 100%;
+  box-shadow: 0 1px 3px rgba(100, 130, 180, 0.1);
 }
 
 .navbar {
@@ -45,7 +32,25 @@ body:not(.home) .navbar {
   margin: 1rem 0;
 
   @media screen and (max-width: $navbar-breakpoint) {
+    color: rgba(0, 0, 0, 0.5);
     font-size: 1rem;
+  }
+}
+
+.home .navbar-end .navbar-item {
+  color: white;
+  $navbar-item-hover: rgba(255, 255, 255, 0.87);
+
+  @media screen and (max-width: $navbar-breakpoint) {
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.home .navbar-end .navbar-item:hover {
+  color: rgba(255, 255, 255, 0.87);
+
+  @media screen and (max-width: $navbar-breakpoint) {
+    color: black;
   }
 }
 
@@ -74,16 +79,20 @@ body:not(.home) .navbar {
   transition: border 300ms ease-in-out;
 }
 
-.navbar-end .navbar-item.bold {
+.home .navbar-end .navbar-item.bold {
   color: #24f0e2;
+
+  @media screen and (max-width: $navbar-breakpoint) {
+    color: rgba(0, 0, 0, 0.5);
+  }
 }
 
-.navbar-end .navbar-item.bold:hover {
+.home .navbar-end .navbar-item.bold:hover {
   color: white;
-}
 
-.navbar.is-dark {
-  background-color: darken($navbar-grey, 8%);
+  @media screen and (max-width: $navbar-breakpoint) {
+    color: inherit;
+  }
 }
 
 .navbar-item svg:hover {
@@ -93,22 +102,6 @@ body:not(.home) .navbar {
 a.navbar-item,
 .navbar-link {
   color: $navbar-item-hover;
-}
-
-.navbar.is-dark a.navbar-item,
-.navbar.is-dark .navbar-link {
-  color: $navbar-dark-item-color;
-}
-
-.navbar.is-dark a.navbar-item.is-active,
-.navbar.is-dark .navbar-link.is-active {
-  color: $navbar-dark-item-hover-color;
-}
-
-.navbar-menu .navbar-item {
-  @media screen and (max-width: $mobile) {
-    color: $cyan;
-  }
 }
 
 .navbar-menu.is-active .navbar-item:hover {
@@ -147,8 +140,6 @@ a.navbar-item,
 
 .navbar-menu.is-active {
   height: 100%;
-  // top: 0;
-  // width: 100%;
 }
 
 .navbar-menu .navbar-end {
@@ -162,14 +153,6 @@ a.navbar-item,
 
 .navbar-menu .navbar-item {
   margin-left: 1rem;
-}
-
-.navbar.is-dark .navbar-menu {
-  background-color: transparent;
-
-  @media screen and (max-width: $navbar-breakpoint) {
-    background-color: darken($navbar-dark-background-color, 8%);
-  }
 }
 
 .nav-background.is-active {
@@ -239,10 +222,16 @@ a.navbar-item,
   content: "";
   width: 100%;
   border-radius: 0.25em;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
   height: 0.25em;
   position: absolute;
   transform: rotate(0);
+}
+
+.home .burger .burger-lines,
+.home .burger .burger-lines:after,
+.home .burger .burger-lines:before {
+  background-color: white;
 }
 
 .navbar.is-active .burger .burger-lines,
@@ -265,7 +254,13 @@ a.navbar-item,
 .burger:hover .burger-lines,
 .burger:hover .burger-lines:after,
 .burger:hover .burger-lines:before {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.home .burger:hover .burger-lines,
+.home .burger:hover .burger-lines:after,
+.home .burger:hover .burger-lines:before {
+  background-color: rgba(0, 255, 255, 1);
 }
 
 .burger.burger-slip .burger-lines:after, .burger.burger-slip .burger-lines:before {

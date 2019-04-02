@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
-import { Redirect } from 'react-router-dom'
 
 import * as routes from '~/../config/routes'
 import { FooterContainer } from '~/components/layout/Footer'

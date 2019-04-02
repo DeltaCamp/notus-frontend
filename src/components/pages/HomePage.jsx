@@ -18,7 +18,7 @@ export class HomePage extends PureComponent {
             <div className='row'>
               <div className='col-xs-10 col-md-9 col-start-md-2'>
                 <h1 className='is-size-1'>
-                  Update your DApp's users when you need their attention.
+                  Notify your DApp's users when you need their attention.
                 </h1>
                 <br />
                 <p>

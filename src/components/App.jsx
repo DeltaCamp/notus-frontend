@@ -9,12 +9,12 @@ import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
 import { HookPage } from '~/components/pages/HookPage'
 import { DashboardPage } from '~/components/pages/DashboardPage'
-import { UserConfirmPage } from '~/components/pages/UserConfirmPage'
-import { SignInPage } from '~/components/pages/SignInPage'
-import { DappUserConfirmPage } from '~/components/pages/DappUserConfirmPage'
 import { HooksListPage } from '~/components/pages/HooksListPage'
-import { UserSignupPage } from '~/components/pages/UserSignupPage'
+import { SignInPage } from '~/components/pages/SignInPage'
+import { SignUpPage } from '~/components/pages/SignUpPage'
+import { UserConfirmPage } from '~/components/pages/UserConfirmPage'
 import { DappConfirmPage } from '~/components/pages/DappConfirmPage'
+import { DappUserConfirmPage } from '~/components/pages/DappUserConfirmPage'
 import { Nav } from '~/components/layout/Nav'
 import { FourOhFour } from '~/components/pages/FourOhFour'
 import * as routes from '~/../config/routes'
@@ -55,7 +55,7 @@ const App = class _App extends PureComponent {
               <Route path={routes.USER_CONFIRM} component={UserConfirmPage} />
               <Route path={routes.CONFIRM} component={DappUserConfirmPage} />
               <Route path={routes.DASHBOARD} component={DashboardPage} />
-              <Route exact path={routes.SIGNUP} component={UserSignupPage} />
+              <Route exact path={routes.SIGNUP} component={SignUpPage} />
               <Route exact path={routes.SIGNIN} component={SignInPage} />
               <Route exact path={routes.DAPP_CONFIRM} component={DappConfirmPage} />
               <Route component={FourOhFour} />

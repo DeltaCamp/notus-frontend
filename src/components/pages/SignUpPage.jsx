@@ -7,8 +7,8 @@ import { axiosInstance } from '~/../config/axiosInstance'
 import * as routes from '~/../config/routes'
 import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
 
-export const UserSignupPage =
-  class _UserSignupPage extends Component {
+export const SignUpPage =
+  class _SignUpPage extends Component {
     state = {
       email: '',
       success: false
@@ -120,58 +120,56 @@ export const UserSignupPage =
       )
 
       return (
-        <div>
-          <div className='is-positioned-absolutely'>
-            <section className='section section--main-content has-bg has-no-top-padding'>
-              <div className='container'>
-                <div className='row'>
-                  <div className='column col-xs-12 col-lg-8 col-start-lg-3'>
-                    <div>
-                      <div className='column has-text-centered'>
-                        <Link to={routes.HOME} className='navbar-item'>
-                          <NotusLogo className='logo logo-signup' />
-                        </Link>
-                      </div>
-                      <section className='card has-shadow has-shadow-big'>
-                        <CSSTransition
-                          timeout={600}
-                          classNames='accordion'
-                          in={!this.state.success}
-                        >
-                          {state => form}
-                        </CSSTransition>
+        <div className='is-positioned-absolutely'>
+          <section className='section section--main-content has-bg has-no-top-padding'>
+            <div className='container'>
+              <div className='row'>
+                <div className='column col-xs-12 col-lg-8 col-start-lg-3'>
+                  <div>
+                    <div className='column has-text-centered'>
+                      <Link to={routes.HOME} className='navbar-item'>
+                        <NotusLogo className='logo logo-signup' />
+                      </Link>
+                    </div>
+                    <section className='card has-shadow has-shadow-big'>
+                      <CSSTransition
+                        timeout={600}
+                        classNames='accordion'
+                        in={!this.state.success}
+                      >
+                        {state => form}
+                      </CSSTransition>
 
 
-                        <CSSTransition
-                          timeout={600}
-                          classNames='accordion'
-                          in={this.state.success}
-                        >
-                          {state => thankYou}
-                        </CSSTransition>
-                        {/* <footer className='card-footer has-text-centered'>
-                          Signing up signifies you have read and agree to the<a href='/terms'>Terms of Service</a>{' '}
-                          and&nbsp;<a href='/privacy'>Privacy Policy</a>.
-                        </footer> */}
+                      <CSSTransition
+                        timeout={600}
+                        classNames='accordion'
+                        in={this.state.success}
+                      >
+                        {state => thankYou}
+                      </CSSTransition>
+                      {/* <footer className='card-footer has-text-centered'>
+                        Signing up signifies you have read and agree to the<a href='/terms'>Terms of Service</a>{' '}
+                        and&nbsp;<a href='/privacy'>Privacy Policy</a>.
+                      </footer> */}
 
-                      </section>
-                      <br />
-                      <div className='card-footer has-text-centered'>
-                        Already have an account?
-                        <Link to='/reset'>
-                          Reset your Password
-                        </Link>
-                        {/* <br />Check your email for the API key originally sent to you. */}
-                      </div>
+                    </section>
+                    <br />
+                    <div className='card-footer has-text-centered'>
+                      Already have an account?
+                      <Link to='/reset'>
+                        Reset your Password
+                      </Link>
+                      {/* <br />Check your email for the API key originally sent to you. */}
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
 
-            </section>
+          </section>
 
-            <FooterContainer />
-          </div>
+          <FooterContainer />
         </div>
       )
     }
