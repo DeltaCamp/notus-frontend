@@ -49,17 +49,23 @@ textarea.textarea {
   font-size: 1.25rem;
   font-weight: 700;
   height: 70px;
-  margin: 0 0;
+  margin: 0;
   padding: 4px 25px 5px;
   transition: all 200ms ease-in-out;
-}
 
-.has-addons input.input {
-  border-color: $hasAddonsformColor;
+  @media screen and (max-width: $mobile) {
+    font-size: 0.875rem;
+    height: 50px;
+    padding: 4px 10px 5px;
+  }
 }
 
 button.button {
   padding: 4px 25px 5px 20px;
+
+  @media screen and (max-width: $mobile) {
+    padding: 4px 10px 5px;
+  }
 }
 
 input.input,
@@ -70,10 +76,18 @@ textarea.textarea {
 
 .control:first-child {
   flex: 0 0 62%;
+
+  @media screen and (max-width: $mobile) {
+    flex: 0 0 50%;
+  }
 }
 
 .control:last-child {
   flex: 0 0 38%;
+
+  @media screen and (max-width: $mobile) {
+    flex: 0 0 50%;
+  }
 }
 
 textarea.textarea {
@@ -167,11 +181,44 @@ label.radio,
   transition: color 200ms ease-in-out;
 }
 
+.field.has-addons {
+  @media screen and (max-width: $mobile) {
+    flex-direction: column;
+  }
+}
+
+.field.has-addons .control:first-child:not(:only-child) .button,
+.field.has-addons .control:first-child:not(:only-child) .input,
+.field.has-addons .control:first-child:not(:only-child) .select select {
+  @media screen and (max-width: $mobile) {
+    border-top-left-radius: 20px !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+}
+
+.field.has-addons .control:last-child:not(:only-child) .button,
+.field.has-addons .control:last-child:not(:only-child) .input,
+.field.has-addons .control:last-child:not(:only-child) .select select {
+  @media screen and (max-width: $mobile) {
+    border-bottom-right-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    // border-top-left-radius: 100px;
+  }
+}
+
 .field.has-addons .button {
   background: black;
   text-transform: capitalize;
   width: 240px;
   z-index: 5;
+
+  @media screen and (max-width: $mobile) {
+    width: 100%;
+  }
 }
 
 .field.has-addons .button:hover,
@@ -180,6 +227,10 @@ label.radio,
   background: $cyan;
   border-color: $cyan;
   color: white;
+}
+
+.has-addons input.input {
+  border-color: $hasAddonsformColor;
 }
 
 .form.is-warning .field {

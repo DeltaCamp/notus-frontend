@@ -32,12 +32,14 @@ export const Nav = graphql(currentUserQuery)(
           <Link
             to={routes.SIGNIN}
             className='navbar-item'
+            onClick={this.closeMobileNav}
           >
             Sign In
           </Link>
           <Link
             to={routes.SIGNUP}
             className='navbar-item bold'
+            onClick={this.closeMobileNav}
           >
             Sign Up
           </Link>
@@ -46,7 +48,9 @@ export const Nav = graphql(currentUserQuery)(
         dashboard =
           <Link
             to={routes.DASHBOARD}
-            className='navbar-item'>
+            className='navbar-item'
+            onClick={this.closeMobileNav}
+          >
             Dashboard
           </Link>
       }
@@ -58,7 +62,11 @@ export const Nav = graphql(currentUserQuery)(
             onClick={this.closeMobileNav}
           />
 
-          <nav className='navbar is-transparent'>
+          <nav className={classnames(
+            'navbar',
+            'is-transparent',
+            { 'is-active': this.state.mobileNavActive }
+          )}>
             <div className='container'>
               <div className='row navbar-menu-container'>
                 <div className='navbar-brand col-xs-8 col-md-8'>

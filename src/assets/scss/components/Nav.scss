@@ -75,7 +75,11 @@ body:not(.home) .navbar {
 }
 
 .navbar-end .navbar-item.bold {
-  color: $cyan;
+  color: lighten(#6be6c6, 10%);
+}
+
+.navbar-end .navbar-item.bold:hover {
+  color: white;
 }
 
 .navbar.is-dark {
@@ -101,8 +105,16 @@ a.navbar-item,
   color: $navbar-dark-item-hover-color;
 }
 
-.navbar-menu.is-active .navbar-item {
-  color: orange;
+.navbar-menu .navbar-item {
+  @media screen and (max-width: $mobile) {
+    color: $cyan;
+  }
+}
+
+.navbar-menu.is-active .navbar-item:hover {
+  @media screen and (max-width: $mobile) {
+    color: black;
+  }
 }
 
 .navbar-item,
@@ -118,28 +130,30 @@ a.navbar-item,
 
 .navbar-menu {
   @media screen and (max-width: $navbar-breakpoint) {
-    display: block;
-    height: 250%;
-    position: absolute;
-    text-align: right;
-    top: -250%;
-    transition: top 400ms cubic-bezier(0.35, 0.49, 0, 1);
-
-    left: -10vw;
-    right: -10vw;
     box-sizing: content-box;
-    padding: 0 10vw;
+    display: block;
+    height: 1px;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    transition: all 800ms cubic-bezier(0.35, 0.49, 0, 1);
+    padding: 0;
   }
 }
 
 .navbar-menu.is-active {
-  top: 100%;
+  height: 100%;
+  top: 0;
+  width: 100%;
 }
 
 .navbar-menu .navbar-end {
   @media screen and (max-width: $navbar-breakpoint) {
     height: 75%;
     right: 0.75rem;
+    padding-top: 80px;
     width: 100%;
   }
 }
@@ -207,6 +221,7 @@ a.navbar-item,
   width: 150%;
   top: -25%;
   left: 0;
+  z-index: 10000;
 }
 
 .burger .burger-lines {
@@ -226,6 +241,13 @@ a.navbar-item,
   height: 0.25em;
   position: absolute;
   transform: rotate(0);
+}
+
+.navbar.is-active .burger .burger-lines,
+.navbar.is-active .burger .burger-lines:after,
+.navbar.is-active .burger .burger-lines:before {
+  background-color: black;
+  z-index: 10000;
 }
 
 .burger .burger-lines .burger-lines:after {

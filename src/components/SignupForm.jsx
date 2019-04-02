@@ -3,12 +3,28 @@ import AntdIcon from '@ant-design/icons-react'
 import { MailOutline } from '@ant-design/icons'
 import { CSSTransition } from 'react-transition-group'
 import { axiosInstance } from '~/../config/axiosInstance'
+import { getSystemInfo } from '~/utils/getSystemInfo'
 
 export const SignupForm =
   class _SignupForm extends Component {
     state = {
       email: '',
       success: false
+    }
+
+    constructor(props) {
+      super(props)
+
+      this.inputRef = React.createRef()
+    }
+
+    componentDidMount() {
+      const { mobileOS } = getSystemInfo()
+      const touch = (mobileOS === 'iOS' || mobileOS === 'Android')
+
+      if (!touch) {
+        this.inputRef.current.focus()
+      }
     }
 
     doSignup = async () => {
@@ -83,8 +99,8 @@ export const SignupForm =
             <div className="field has-addons">
               <div className="control">
                 <input
+                  ref={this.inputRef}
                   placeholder='Enter your email'
-                  autoFocus
                   type='email'
                   id='email'
                   className='input'
