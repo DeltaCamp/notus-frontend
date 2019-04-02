@@ -1,23 +1,17 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
+import { confirmUserMutation } from '~/mutations/confirmUserMutation'
 
 const queryString = require('query-string')
 
-const userConfirmPageMutation = gql`
-  mutation confirmUser($oneTimeKey: String!, $password: String!) {
-    confirmUser(oneTimeKey: $oneTimeKey, password: $password) @client
-  }
-`
-
 export const UserConfirmPage = graphql(currentUserQuery, { name: 'currentUserData' })(
-  graphql(userConfirmPageMutation, { name: 'confirmUser' })(
+  graphql(confirmUserMutation, { name: 'confirmUser' })(
     class _UserConfirmPage extends PureComponent {
 
       static propTypes = {

@@ -17,6 +17,15 @@ export const notusResolvers = {
   },
 
   Mutation: {
+    signOut: async function (object, args, { cache }, info) {
+      cache.writeData({
+        data: {
+          jwtToken: null,
+          currentUser: null
+        }
+      })
+    },
+
     signIn: async function (object, args, { cache }, info) {
       const { email, password } = args
       if (!email) {
@@ -26,14 +35,11 @@ export const notusResolvers = {
         throw new Error('password must be provided')
       }
 
-      console.log('sending: ', email, password)
-
       return axiosInstance.get(`${process.env.REACT_APP_NOTUS_API_URI}/sign-in`, {
         params: {
           email, password
         }
       }).then(response => {
-        console.log('received ', response)
         const { data } = response
         const jwtToken = data || ''
         cache.writeData({ data: { jwtToken } })

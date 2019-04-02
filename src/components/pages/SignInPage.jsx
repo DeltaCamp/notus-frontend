@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
+import { Redirect } from 'react-router-dom'
 
+import * as routes from '~/../config/routes'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
@@ -32,7 +34,8 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         super(props)
         this.state = {
           signingIn: false,
-          password: ''
+          password: '',
+          email: ''
         }
       }
 
@@ -72,10 +75,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
             password: this.state.password
           }
         }).then((param) => {
-          this.setState({
-            signingIn: false,
-            signedIn: true
-          })
+          this.props.history.push(routes.DASHBOARD)
         }).catch(error => {
           this.setState({
             signingIn: false,
@@ -92,8 +92,6 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
 
         if (this.state.signingIn) {
           message = "Confirming your subscription..."
-        } else if (this.state.signedIn) {
-          message = `You're signed in`
         }
 
         if (!this.state.signedIn && !currentUser) {
