@@ -30,7 +30,7 @@ export const Nav = graphql(currentUserQuery)(
       if (!this.props.data.currentUser) {
         signUp = <>
           <Link
-            to={routes.SIGNUP}
+            to={routes.SIGNIN}
             className='navbar-item'
           >
             Sign In

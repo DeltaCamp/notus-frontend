@@ -17,8 +17,43 @@ export const notusResolvers = {
   },
 
   Mutation: {
+    signIn: async function (object, args, { cache }, info) {
+      const { email, password } = args
+      if (!email) {
+        throw new Error('email must be provided')
+      }
+      if (!password) {
+        throw new Error('password must be provided')
+      }
+
+      console.log('sending: ', email, password)
+
+      return axiosInstance.get(`${process.env.REACT_APP_NOTUS_API_URI}/sign-in`, {
+        params: {
+          email, password
+        }
+      }).then(response => {
+        console.log('received ', response)
+        const { data } = response
+        const jwtToken = data || ''
+        cache.writeData({ data: { jwtToken } })
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
+        return axiosInstance
+          .get(`${process.env.REACT_APP_NOTUS_API_URI}/users`)
+          .then(userResponse => {
+            const { data } = userResponse
+            data.__typename = 'User'
+            cache.writeQuery({
+              query: currentUserQuery,
+              data: {
+                currentUser: data
+              }
+            })
+          })
+      })
+    },
+
     confirmUser:  async function (object, args, { cache }, info) {
-      console.log('starting confirmUser: ')
       const { oneTimeKey, password } = args
       if (!oneTimeKey) {
         throw new Error('oneTimeKey is not defined')
@@ -43,7 +78,6 @@ export const notusResolvers = {
             .get(`${process.env.REACT_APP_NOTUS_API_URI}/users`)
             .then(userResponse => {
               const { data } = userResponse
-              console.log('have: ', data)
               data.__typename = 'User'
               cache.writeQuery({
                 query: currentUserQuery,
