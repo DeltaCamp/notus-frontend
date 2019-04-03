@@ -45,7 +45,6 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
 
       render () {
         let signUp, myEvents, signOut
-        throw new Error('salad!')
         
         if (!this.props.data.currentUser) {
           signUp = <>
