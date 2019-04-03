@@ -14,7 +14,6 @@
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "jsdom": "^13.0.0",
-    "react-hot-loader": "^4.3.11",
     "snazzy": "^8.0.0",
     "standard": "^12.0.1"
   },
@@ -94,6 +93,7 @@
     "react-dom": "^16.7.0",
     "react-feather": "^1.1.6",
     "react-helmet": "^5.2.0",
+    "react-hot-loader": "^4.3.11",
     "react-router-dom": "^4.3.1",
     "react-router-named-routes": "^0.0.23",
     "react-timeout": "^1.1.2",
