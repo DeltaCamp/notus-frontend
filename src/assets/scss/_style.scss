@@ -481,3 +481,68 @@ hr {
 .mt10 {
   margin-top: 10px;
 }
+
+
+.notus-toast {
+  background: transparent;
+  font-size: 2rem;
+  margin-left: 0;
+  left: 0;
+  padding: 0;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 20000;
+}
+
+.notus-toast .Toastify__toast {
+  color: white;
+  font-family: inherit;
+  font-weight: 600;
+  margin-bottom: 0;
+  min-height: 90px;
+  padding: 0;
+}
+
+.notus-toast .Toastify__toast--default {
+  background: $orange;
+}
+
+.notus-toast .Toastify__toast--success {
+  background: $green;
+}
+
+.notus-toast .Toastify__toast--error {
+  background: $red;
+}
+
+.notus-toast .Toastify__toast--warn {
+  background: $yellow;
+}
+
+.notus-toast .Toastify__toast--info {
+  background: $purple;
+}
+
+.notus-toast .Toastify__toast-body {
+  flex: 0 0 100%;
+  font-size: 26px;
+  margin: 28px auto;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 22px;
+  }
+}
+
+.notus-toast .Toastify__close-button {
+  align-self: center;
+  color: white;
+  flex: 1 0 0;
+  font-size: 26px;
+  margin-left: -6%;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 22px;
+    margin-left: -16%;
+  }
+}

@@ -97,6 +97,7 @@
     "react-router-dom": "^4.3.1",
     "react-router-named-routes": "^0.0.23",
     "react-timeout": "^1.1.2",
+    "react-toastify": "^5.0.0-rc.6",
     "react-tooltip": "^3.9.0",
     "react-transition-group": "^2.5.3",
     "resolve": "1.8.1",

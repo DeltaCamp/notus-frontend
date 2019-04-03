@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import * as WebFont from 'webfontloader'
+import { Slide, ToastContainer } from 'react-toastify'
 import { hot } from 'react-hot-loader'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
@@ -38,6 +39,14 @@ const App = class _App extends PureComponent {
   render () {
     return (
       <BodyClass {...this.props}>
+        <ToastContainer
+          className='notus-toast'
+          position='top-center'
+          hideProgressBar={true}
+          autoClose={7000}
+          transition={Slide}
+        />
+
         <MetaTags {...this.props} />
 
         <Nav />

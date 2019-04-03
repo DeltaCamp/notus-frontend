@@ -188,7 +188,15 @@ a.navbar-item,
   }
 }
 
-.navbar-menu .navbar-item {
+.navbar-start .navbar-item {
+  margin-right: 1rem;
+
+  @media screen and (max-width: $navbar-breakpoint) {
+    margin-right: 0;
+  }
+}
+
+.navbar-end .navbar-item {
   margin-left: 1rem;
 
   @media screen and (max-width: $navbar-breakpoint) {

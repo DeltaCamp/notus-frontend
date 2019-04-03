@@ -2,10 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter } from 'react-router-dom'
-import { AppContainer } from '~/components/App'
 import * as serviceWorker from './serviceWorker'
-import './index.scss'
 import { apolloClient } from '~/apollo/apolloClient'
+import { AppContainer } from '~/components/App'
+
+import 'react-toastify/dist/ReactToastify.css'
+import './index.scss'
 
 window.addEventListener('load', async () => {
   try {

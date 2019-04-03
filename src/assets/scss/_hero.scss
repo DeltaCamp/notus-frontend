@@ -70,7 +70,7 @@ header .hero {
 
 .has-bg {
   background-image: 
-    linear-gradient(220deg, #7704EC 0%, #7704EC 10%, #C305F3 100%),
+    linear-gradient(220deg, $purple 0%, $purple 10%, $pink 100%),
     url('/funky-lines.png');
   background-blend-mode: multiply;
   background-size: 100% 100%, 400px 400px;
