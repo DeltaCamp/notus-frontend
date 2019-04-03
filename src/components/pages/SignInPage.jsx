@@ -52,6 +52,10 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
           error = "Please enter your email address"
         }
 
+        if (this.state.password.length < 8) {
+          error = "Your password must be at least 8 characters in length"
+        }
+
         if (!this.state.password) {
           error = "Please enter your password"
         }

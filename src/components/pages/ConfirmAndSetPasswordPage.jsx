@@ -54,6 +54,10 @@ export const ConfirmAndSetPasswordPage = graphql(currentUserQuery, { name: 'curr
           error = "The passwords do not match"
         }
 
+        if (this.state.password.length < 8 || this.state.passwordConfirmation.length < 8) {
+          error = "Passwords must be at least 8 characters in length"
+        }
+
         if (error) {
           this.setState({
             error
@@ -111,7 +115,12 @@ export const ConfirmAndSetPasswordPage = graphql(currentUserQuery, { name: 'curr
                           placeholder='New Password'
                           type='password'
                           className='input'
-                          onChange={(e) => { this.setState({ password: e.target.value }) }}
+                          onChange={(e) => {
+                            this.setState({ 
+                              error: '',
+                              password: e.target.value
+                            })
+                          }}
                           value={this.state.password}
                         />
                       </div>
@@ -120,7 +129,12 @@ export const ConfirmAndSetPasswordPage = graphql(currentUserQuery, { name: 'curr
                           type='password'
                           placeholder='Confirm Password'
                           className='input'
-                          onChange={(e) => { this.setState({ passwordConfirmation: e.target.value }) }}
+                          onChange={(e) => {
+                            this.setState({ 
+                              error: '',
+                              passwordConfirmation: e.target.value
+                            })
+                          }}
                           value={this.state.passwordConfirmation}
                         />
                       </div>
@@ -135,6 +149,13 @@ export const ConfirmAndSetPasswordPage = graphql(currentUserQuery, { name: 'curr
                     </form>
                   </div>
                 </section>
+
+                <div className='card-footer has-text-centered'>
+                  <p className='has-text-weight-bold'>
+                    {message}
+                  </p>
+                </div>
+                
               </div>
             </div>
         }
@@ -150,13 +171,6 @@ export const ConfirmAndSetPasswordPage = graphql(currentUserQuery, { name: 'curr
             <section className='section section--main-content'>
               <div className='container'>
                 {createPasswordFormRow}
-                <div className='row'>
-                  <div className='col-xs-12'>
-                    <p>
-                      {message}
-                    </p>
-                  </div>
-                </div>
               </div>
             </section>
 
