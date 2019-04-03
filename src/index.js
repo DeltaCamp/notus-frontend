@@ -4,7 +4,8 @@ import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker'
 import { apolloClient } from '~/apollo/apolloClient'
-import { AppContainer } from '~/components/App'
+import { App } from '~/components/App'
+import { AppErrorBoundary } from '~/components/AppErrorBoundary'
 
 import 'react-toastify/dist/ReactToastify.css'
 import './index.scss'
@@ -14,11 +15,13 @@ window.addEventListener('load', async () => {
     const client = await apolloClient()
     
     let coreApp =
-      <ApolloProvider client={client}>
-        <BrowserRouter>
-          <AppContainer />
-        </BrowserRouter>
-      </ApolloProvider>
+      <AppErrorBoundary>
+        <ApolloProvider client={client}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ApolloProvider>
+      </AppErrorBoundary>
 
     ReactDOM.render(coreApp, document.getElementById('root'))
   } catch (error) {

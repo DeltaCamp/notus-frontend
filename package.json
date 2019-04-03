@@ -101,6 +101,7 @@
     "react-tooltip": "^3.9.0",
     "react-transition-group": "^2.5.3",
     "resolve": "1.8.1",
+    "rollbar": "^2.5.4",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",
     "terser-webpack-plugin": "1.1.0",
