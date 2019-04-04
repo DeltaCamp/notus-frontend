@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { toast } from 'react-toastify'
-import { Redirect } from 'react-router-dom'
+import { formatRoute } from 'react-router-named-routes'
+import { Link, Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -28,12 +29,6 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
         toast.error('Please sign in to access this page.')
         this.setState({ redirect: true })
       }
-    }
-
-    handleEventType = (e) => {
-      e.preventDefault()
-
-      return <Redirect to={routes.NEW_EVENT} param={e.target.value} />
     }
 
     buttonColor = (id) => {
@@ -62,9 +57,13 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
         ['Something something MakerDAO CDP', 5],
         ['PoolTogether', 6]
       ].map((value) => (
-        <button key={value[1]} className={`button ${this.buttonColor(value[1])}`}>
+        <Link
+          key={`event-type-${value[1]}`}
+          to={formatRoute(routes.NEW_EVENT, { eventTypeId: value[1] })}
+          className={`button event-bubble ${this.buttonColor(value[1])}`}
+        >
           {value[0]}
-        </button>
+        </Link>
       ))
 
       return (
@@ -95,9 +94,9 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
                 </div>
               </div>
               <div className='row'>
-                <div className='col-xs-12 has-text-centered'>
+                <div className='col-xs-12 has-text-centered mt50'>
 
-                  <div class="md:tw-flex md:tw-justify-between xl:tw-justify-around xl:tw-mx-8 md:tw-mb-8">
+                  {/* <div class="md:tw-flex md:tw-justify-between xl:tw-justify-around xl:tw-mx-8 md:tw-mb-8">
                     <div class="skill-card is-laravel tw-relative tw-rounded-lg md:tw-rounded-none tw-mb-6 md:tw-mb-0 md:tw-mx-2 lg:tw-mx-0 tw-flex md:tw-flex-col">
                       <div class="skill-card-top tw-text-center tw-py-3 tw-pl-8 tw-pr-6 md:tw-px-8 tw-rounded-lg tw-relative">
                         <h4 class="tw-text-lg tw-leading-tight tw-text-center tw-tracking-tight">
@@ -107,8 +106,7 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
                         </h4>
                       </div>
                     </div>
-                  </div>
-                        
+                  </div> */}
 
                   {eventTypes}
                 </div>
