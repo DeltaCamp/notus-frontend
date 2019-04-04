@@ -90,25 +90,27 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
 
               <div className='row'>
                 <div className='col-xs-12 has-text-centered'>
-                  <div className={`is-size-4 event-box ${colorClass}`}>
-                    <button className='button__variable'>
+                  <div className={`is-size-4 event-box event-box__header ${colorClass}`}>
+                    <button className='event-box__variable'>
                       Every time
                     </button>
-                    <button className='button__variable'>
-                      greater than 200
+                    <button className='event-box__variable'>
+                      more than 200
                     </button>
-                    ether of the token at
-                    <button className='button__variable has-hint'>
+                    <span className='event-box__text'>
+                      of the token at
+                    </span>
+                    <button className='event-box__variable has-hint'>
                       0x1234...5619
                       <span className='hint'>Contract Address</span>
                     </button>
-                    <button className='button__variable'>
+                    <button className='event-box__variable'>
                       is sent to 0x1234
                     </button>
                   </div>
 
-                  <div className={`is-size-4 event-box ${altColorClass}`}>
-                    then turn on my Phillips Hue lightbulb.
+                  <div className={`is-size-4 event-box event-box__footer ${altColorClass}`}>
+                    ... then turn on my Phillips Hue lightbulb
                   </div>
 
                   <form className='form mt20'>

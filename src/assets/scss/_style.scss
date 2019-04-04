@@ -14,7 +14,7 @@ select:-internal-autofill-selected {
 }
 
 ::selection {
-  background-color: $info;
+  background-color: $cyan;
   color: white;
 }
 
@@ -200,7 +200,7 @@ a {
 .is-size-4 {
   @media screen and (max-width: $desktop) {
     font-size: 1.25rem !important;
-    line-height: 1.325;
+    // line-height: 1.325;
   }
 }
 

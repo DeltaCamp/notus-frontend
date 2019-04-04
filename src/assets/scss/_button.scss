@@ -96,15 +96,16 @@ button[disabled] {
 
 .button.is-primary {
   // background-color: #05a8ae;
-  background-color: $cyan;
-  color: black;
+  background-color: lighten(saturate($cyan, 100%), 10%);
+  // color: black;
+  color: $purple;
 }
 
 .button.is-primary:hover,
 .button.is-primary:focus,
 .button.is-primary:active {
-  background-color: lighten(saturate($cyan, 100%), 10%);
-  color: black;
+  background-color: lighten(saturate($cyan, 100%), 20%);
+  color: $pink;
 }
 
 .button.is-success {
