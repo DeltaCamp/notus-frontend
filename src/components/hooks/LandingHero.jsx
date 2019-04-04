@@ -1,9 +1,10 @@
 import React from 'react'
 import { SignupForm } from '~/components/SignupForm'
 
-export const LandingHero = ({ heroColor }) => {
+export const LandingHero = ({ setSuccess, success }) => {
   return (
-    <section className={`hero ${heroColor}`}>
+    <section className={`hero ${success ? 'is-signed-up' : ''}`}>
+      <div className='hero-bg has-bg' />
       <div className='hero-body'>
         <div className='container'>
           <div className='row'>
@@ -19,7 +20,7 @@ export const LandingHero = ({ heroColor }) => {
               </h6>
 
               <div className='mt30'>
-                <SignupForm />
+                <SignupForm setSuccess={setSuccess} />
               </div>
             </div>
 

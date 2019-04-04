@@ -204,8 +204,8 @@ label.radio,
 .field.has-addons .control:first-child:not(:only-child) .input,
 .field.has-addons .control:first-child:not(:only-child) .select select {
   @media screen and (max-width: $mobile) {
-    border-top-left-radius: 20px !important;
-    border-top-right-radius: 20px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
     border-bottom-left-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
   }
@@ -215,8 +215,8 @@ label.radio,
 .field.has-addons .control:last-child:not(:only-child) .input,
 .field.has-addons .control:last-child:not(:only-child) .select select {
   @media screen and (max-width: $mobile) {
-    border-bottom-right-radius: 20px !important;
-    border-bottom-left-radius: 20px !important;
+    border-bottom-right-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
     border-top-left-radius: 0 !important;
     border-top-right-radius: 0 !important;
   }
@@ -236,6 +236,8 @@ label.radio,
 .field.has-addons .button:hover,
 .field.has-addons .button:focus,
 .field.has-addons .button:active {
+  border-color: $cyan;
+  border-width: 5px;
   transform: scale3d(1, 1, 1);
 }
 

@@ -45,6 +45,8 @@ export const SignupForm =
             email: this.state.email
           }
         ).then(() => {
+          this.props.setSuccess()
+          
           this.setState({
             success: true,
             isSigningUp: false
@@ -79,11 +81,11 @@ export const SignupForm =
     render () {
       const thankYou = (
         <div className='accordion accordion--signup-thank-you'>
-          <p>
+          <p className='signup-message-homepage'>
             <Mail className='icon--signup' />
-            Thanks for using Notus! Your <strong>'{this.state.email}'</strong> inbox should have a magic link to access your Notus account.
-            <br /><span className='is-size-7 has-text-light'>
-              Can't find the email? Check your spam folder first. We can also re-send the link or reach out to us for support.
+            Thanks! We've invited: <strong>'{this.state.email}'</strong>
+            <span className='is-size-7 has-text-light'>
+              (Can't find it? Check your spam and 'Updates' folders as well!)
             </span>
           </p>
         </div>

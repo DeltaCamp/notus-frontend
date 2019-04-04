@@ -1,20 +1,26 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { FooterContainer } from '~/components/layout/Footer'
 import { LandingHero } from '~/components/hooks/LandingHero'
 import { ScrollToTop } from '~/components/ScrollToTop'
 // import { CodeBox } from '~/components/CodeBox'
 
-export class HomePage extends PureComponent {
-  render () {
-    const heroColor = 'is-link'
+export class HomePage extends Component {
+  state = {}
 
+  setSuccess = () => {
+    this.setState({ success: true })
+  }
+
+  render () {
     return (
       <div className='is-positioned-absolutely'>
         <ScrollToTop />
         
         <header className='header'>
-          <div className='hero-bg' />
-          <LandingHero heroColor={heroColor} />
+          <LandingHero
+            setSuccess={this.setSuccess}
+            success={this.state.success}
+          />
         </header>
         <section className='section'>
           <div className='container'>
