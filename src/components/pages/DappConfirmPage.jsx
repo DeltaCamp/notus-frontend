@@ -19,7 +19,7 @@ export const DappConfirmPage =
     }
 
     render () {
-      const apiKey = this.props.match.params.api_key
+      const apiKey = this.props.match.params.apiKey
 
       return (
         <div className='is-positioned-absolutely'>

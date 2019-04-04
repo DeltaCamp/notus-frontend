@@ -9,6 +9,8 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
 
+import { EVENT_TYPES } from '~/../config/eventTypes'
+
 export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' })(
   class _NewEventPage extends PureComponent {
     state = {}
@@ -35,10 +37,38 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
 
     }
 
+    buttonColor = (id) => {
+      const classes = [
+        'is-link',
+        'is-info',
+        'is-fun',
+        'is-primary',
+        'is-purple',
+        'is-success',
+        'is-danger',
+        'is-warning'
+      ]
+
+      return classes[id % classes.length]
+    }
+
     render () {
       if (this.state.redirect) {
         return <Redirect to={routes.SIGNIN} />
       }
+
+      const eventTypeId = this.props.match.params.eventTypeId
+
+      const event = EVENT_TYPES.find(
+        (eventType) => (eventType.id === parseInt(eventTypeId, 10))
+      )
+
+      if (!event) {
+        return <Redirect to={routes.DISCOVER_EVENTS} />
+      }
+
+      const colorClass = this.buttonColor(event.id)
+      const altColorClass = this.buttonColor(event.id + 1)
 
       return (
         <div className='is-positioned-absolutely'>
@@ -52,7 +82,38 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
             <div className='container'>
               <div className='row'>
                 <div className='col-xs-12 has-text-centered'>
-                  Form
+                  <h4 className='is-size-4 has-text-centered is-uppercase has-text-weight-extrabold mt20'>
+                    {event.name}
+                  </h4>
+                </div>
+              </div>
+
+              <div className='row'>
+                <div className='col-xs-12 has-text-centered'>
+                  <div className={`is-size-4 event-box ${colorClass}`}>
+                    <button className='button__variable'>
+                      Every time
+                    </button>
+                    <button className='button__variable'>
+                      greater than 200
+                    </button>
+                    ether of the token at
+                    <button className='button__variable has-hint'>
+                      0x1234...5619
+                      <span className='hint'>Contract Address</span>
+                    </button>
+                    <button className='button__variable'>
+                      is sent to 0x1234
+                    </button>
+                  </div>
+
+                  <div className={`is-size-4 event-box ${altColorClass}`}>
+                    then turn on my Phillips Hue lightbulb.
+                  </div>
+
+                  <form className='form mt20'>
+                  </form>
+                  
                 </div>
               </div>
             </div>

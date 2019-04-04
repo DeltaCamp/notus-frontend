@@ -77,27 +77,69 @@ button[disabled] {
   background-color: initial;
 }
 
+.button.is-info,
+.button.is-info:hover,
+.button.is-info:active {
+  color: white;
+}
+
+.button.is-fun {
+  background-color: $fun;
+  color: white;
+}
+
+.button.is-fun:hover,
+.button.is-fun:focus,
+.button.is-fun:active {
+  background-color: lighten(saturate($fun, 100%), 10%);
+}
+
 .button.is-primary {
+  // background-color: #05a8ae;
   background-color: $cyan;
-  // color: $button-text-color;
-}
-
-.button.is-purple {
-  background-color: $purple;
-  border: none;
-  color: white;
-}
-
-.button.is-purple:hover {
-  background-color: lighten($purple, 10%);
-  border: none;
-  color: white;
+  color: black;
 }
 
 .button.is-primary:hover,
 .button.is-primary:focus,
 .button.is-primary:active {
   background-color: lighten(saturate($cyan, 100%), 10%);
+  color: black;
+}
+
+.button.is-success {
+  border: 2px solid white;
+  color: white;
+}
+
+.button.is-success:hover,
+.button.is-success:focus,
+.button.is-success:active {
+  background-color: lighten(saturate($success, 100%), 2%);
+}
+
+.button.is-success.is-outlined {
+  border-color: $success;
+}
+
+.button.is-success.is-outlined:hover,
+.button.is-success.is-outlined:active,
+.button.is-success.is-outlined:focus {
+  border-color: $success;
+  color: white;
+}
+
+.button.is-purple,
+.button.is-purple:hover,
+.button.is-purple:active {
+  background-color: $purple;
+  border: none;
+  color: white;
+}
+
+.button.is-purple:hover,
+.button.is-purple:active {
+  background-color: lighten($purple, 10%);
 }
 
 .is-copy-button {
@@ -137,51 +179,30 @@ button.button.is-small:active {
   transform: scale3d(1.07, 1.07, 1.07);
 }
 
-.button:hover:not(.is-text),
-button:hover:not(.is-text) {
+.button:hover:not(.is-text) {
   transform: scale3d(1.1, 1.1, 1.1);
 }
 
-.button.is-success {
-  border: 2px solid white;
-  color: white;
-}
 
-.button.is-success:hover {
-  border: 2px solid white;
-  color: white;
-}
+// .button.is-dark.is-outlined {
+//   border-color: $dark;
+// }
 
-.button.is-success.is-outlined {
-  border-color: $success;
-}
+// .button.is-dark.is-outlined:hover,
+// .button.is-dark.is-outlined:active,
+// .button.is-dark.is-outlined:focus {
+//   border-color: $dark;
+//   color: white;
+// }
 
-.button.is-success.is-outlined:hover,
-.button.is-success.is-outlined:active,
-.button.is-success.is-outlined:focus {
-  border-color: $success;
-  color: white;
-}
+// .button.is-outlined.is-light {
+//   box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
+// }
 
-.button.is-dark.is-outlined {
-  border-color: $dark;
-}
+// .button.is-outlined.is-light:hover {
+//   box-shadow: 0 9px 15px rgba(50, 50, 93, .2), 0 4px 7px rgba(0, 0, 0, .15);
+// }
 
-.button.is-dark.is-outlined:hover,
-.button.is-dark.is-outlined:active,
-.button.is-dark.is-outlined:focus {
-  border-color: $dark;
-  color: white;
-}
-
-.button.is-outlined.is-light {
-  box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
-}
-
-.button.is-outlined.is-light:hover {
-  box-shadow: 0 9px 15px rgba(50, 50, 93, .2), 0 4px 7px rgba(0, 0, 0, .15);
-}
-
-.button.is-outlined.is-light:active {
-  box-shadow: none;
-}
+// .button.is-outlined.is-light:active {
+//   box-shadow: none;
+// }

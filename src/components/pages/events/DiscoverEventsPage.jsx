@@ -10,17 +10,11 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
 
+import { EVENT_TYPES } from '~/../config/eventTypes'
+
 export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUserData' })(
   class _DiscoverEventsPage extends PureComponent {
     state = {}
-
-    static propTypes = {
-      match: PropTypes.object.isRequired
-    }
-
-    static contextTypes = {
-      router: PropTypes.object.isRequired
-    }
 
     componentWillMount() {
       const { currentUser } = this.props.currentUserData
@@ -34,6 +28,8 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
     buttonColor = (id) => {
       const classes =[
         'is-link',
+        'is-info',
+        'is-fun',
         'is-primary',
         'is-purple',
         'is-success',
@@ -41,7 +37,7 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
         'is-warning'
       ]
 
-      return classes[id % classes.length - 1]
+      return classes[id % classes.length]
     }
 
     render () {
@@ -49,20 +45,13 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
         return <Redirect to={routes.SIGNIN} />
       }
 
-      const eventTypes = [
-        ['ERC20 Token Transfer', 1],
-        ['ERC721 NFT Minting', 2],
-        ['Ether Transfer', 3],
-        ['Price of ether ... ?', 4],
-        ['Something something MakerDAO CDP', 5],
-        ['PoolTogether', 6]
-      ].map((value) => (
+      const eventTypes = EVENT_TYPES.map((value) => (
         <Link
-          key={`event-type-${value[1]}`}
-          to={formatRoute(routes.NEW_EVENT, { eventTypeId: value[1] })}
-          className={`button event-bubble ${this.buttonColor(value[1])}`}
+          key={`event-type-${value.id}`}
+          to={formatRoute(routes.NEW_EVENT, { eventTypeId: value.id })}
+          className={`button event-bubble ${this.buttonColor(value.id)}`}
         >
-          {value[0]}
+          {value.name}
         </Link>
       ))
 
