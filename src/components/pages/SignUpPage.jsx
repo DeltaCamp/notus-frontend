@@ -81,7 +81,10 @@ export const SignUpPage =
       const form = (
         <div className='accordion accordion-enter-done accordion--signup-form'>
           <div className='card-content'>
-            <form onSubmit={this.handleSignupSubmit}>
+            <form
+              onSubmit={this.handleSignupSubmit}
+              className='form'
+            >
               <div className='field mt15'>
                 <input
                   placeholder='Your Email Address'

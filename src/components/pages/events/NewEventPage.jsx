@@ -9,8 +9,8 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
 
-export const MyEventsPage = graphql(currentUserQuery, { name: 'currentUserData' })(
-  class _MyEventsPage extends PureComponent {
+export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' })(
+  class _NewEventPage extends PureComponent {
     state = {}
 
     static propTypes = {
@@ -30,6 +30,11 @@ export const MyEventsPage = graphql(currentUserQuery, { name: 'currentUserData' 
       }
     }
 
+    handleSubmitEvent = (e) => {
+      e.preventDefault()
+
+    }
+
     render () {
       if (this.state.redirect) {
         return <Redirect to={routes.SIGNIN} />
@@ -38,7 +43,7 @@ export const MyEventsPage = graphql(currentUserQuery, { name: 'currentUserData' 
       return (
         <div className='is-positioned-absolutely'>
           <Helmet
-            title='My Events'
+            title='Create New Event'
           />
 
           <ScrollToTop />
@@ -46,10 +51,8 @@ export const MyEventsPage = graphql(currentUserQuery, { name: 'currentUserData' 
           <section className='section section--main-content'>
             <div className='container'>
               <div className='row'>
-                <div className='col-xs-12'>
-                  <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
-                    What would you like to do today?
-                  </h1>
+                <div className='col-xs-12 has-text-centered'>
+                  Form
                 </div>
               </div>
             </div>

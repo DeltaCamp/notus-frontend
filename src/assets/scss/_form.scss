@@ -1,7 +1,7 @@
 $addonsFormHeight: 57px;
 
 .form {
-  padding: 0 0 8rem;
+  // padding: 0 0 8rem;
 }
 
 .field:not(:last-child) {
@@ -41,14 +41,13 @@ $addonsFormHeight: 57px;
 
 $hasAddonsformColor: white;
 
-button.button,
-input.input,
-textarea.textarea {
+.form .button,
+.form .input,
+.form .textarea {
   border-radius: 100px;
-  border: 3px solid black;
   font-size: 1.25rem;
   font-weight: 700;
-  height: 70px;
+  height: 60px;
   margin: 0;
   padding: 4px 25px 5px;
   transition: all 200ms ease-in-out;
@@ -60,7 +59,8 @@ textarea.textarea {
   }
 }
 
-button.button {
+.has-addons button.button {
+  border: 3px solid black;
   padding: 4px 25px 5px 20px;
 
   @media screen and (max-width: $mobile) {
@@ -72,6 +72,16 @@ input.input,
 textarea.textarea {
   background-color: white;
   box-shadow: none;
+  border-width: 5px;
+}
+
+input.input:hover,
+input.input:focus,
+input.input:active,
+textarea.textarea:hover,
+textarea.textarea:focus,
+textarea.textarea:active {
+  box-shadow: 1px 2px 30px rgba(255, 255, 255, 0.55);
 }
 
 .control:first-child {
@@ -118,13 +128,13 @@ form.is-active textarea.textarea:active {
   border: 3px solid $hasAddonsformColor;
 }
 
-.control,
-.input,
-.textarea,
-.select select,
-.file-cta,
-.file-name,
-.button {
+.form .control,
+.form .input,
+.form .textarea,
+.form .select select,
+.form .file-cta,
+.form .file-name,
+.form .button {
   font-size: 1rem;
 }
 
@@ -192,6 +202,10 @@ label.radio,
 
 .has-bg .label {
   color: white;
+}
+
+.has-bg .button {
+  border: 3px solid black;
 }
 
 .field.has-addons {

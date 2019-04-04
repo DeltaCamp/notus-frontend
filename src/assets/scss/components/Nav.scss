@@ -55,6 +55,7 @@ body.home .navbar-start .navbar-item {
   background-color: transparent;
   border: 0;
   color: rgba(0, 0, 0, 0.5);
+  min-width: auto;
   width: auto;
 
   @media screen and (max-width: $navbar-breakpoint) {

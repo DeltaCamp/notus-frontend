@@ -78,7 +78,10 @@ export const PasswordResetPage =
       const form = (
         <div className='accordion accordion-enter-done accordion--signup-form'>
           <div className='card-content'>
-            <form onSubmit={this.handlePasswordReset}>
+            <form
+              onSubmit={this.handlePasswordReset}
+              className='form'
+            >
               <h6 className='is-size-6 has-text-centered has-text-weight-bold'>
                 {this.state.error}
               </h6>            

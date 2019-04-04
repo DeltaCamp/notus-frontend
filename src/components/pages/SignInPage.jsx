@@ -119,7 +119,10 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
 
                 <section className='card has-bg has-shadow has-shadow-big mt30'>
                   <div className='card-content'>
-                    <form onSubmit={this.handleConfirmSubmit}>
+                    <form
+                      onSubmit={this.handleConfirmSubmit}
+                      className='form'
+                    >
                       <h6 className='is-size-6 has-text-centered has-text-weight-bold'>
                         {this.state.error}
                       </h6>

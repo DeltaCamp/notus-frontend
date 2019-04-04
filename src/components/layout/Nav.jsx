@@ -71,7 +71,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 to={routes.MY_EVENTS}
                 onClick={this.closeMobileNav}
               >
-                Account
+                Your Account
               </Link>
               <button
                 className='navbar-item button is-small'

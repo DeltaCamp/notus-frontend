@@ -9,7 +9,8 @@ import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
 import { HookPage } from '~/components/pages/HookPage'
-import { MyEventsPage } from '~/components/pages/MyEventsPage'
+import { MyEventsPage } from '~/components/pages/events/MyEventsPage'
+import { NewEventPage } from '~/components/pages/events/NewEventPage'
 import { HooksListPage } from '~/components/pages/HooksListPage'
 import { PasswordResetPage } from '~/components/pages/PasswordResetPage'
 import { SignInPage } from '~/components/pages/SignInPage'
@@ -20,6 +21,7 @@ import { DappUserConfirmPage } from '~/components/pages/DappUserConfirmPage'
 import { Nav } from '~/components/layout/Nav'
 import { FourOhFour } from '~/components/pages/FourOhFour'
 import * as routes from '~/../config/routes'
+import { DiscoverEventsPage } from './pages/events/DiscoverEventsPage';
 
 WebFont.load({
   typekit: {
@@ -63,9 +65,11 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.HOOK} component={HookPage} />
                 <Route exact path={routes.HOOKS} component={HooksListPage} />
                 <Route exact path={routes.HOME} component={HomePage} />
-                <Route path={routes.CONFIRM_AND_SET_PASSWORD_PAGE} component={ConfirmAndSetPasswordPage} />
-                <Route path={routes.CONFIRM} component={DappUserConfirmPage} />
-                <Route path={routes.MY_EVENTS} component={MyEventsPage} />
+                <Route exact path={routes.CONFIRM_AND_SET_PASSWORD_PAGE} component={ConfirmAndSetPasswordPage} />
+                <Route exact path={routes.CONFIRM} component={DappUserConfirmPage} />
+                <Route exact path={routes.NEW_EVENT} component={NewEventPage} />
+                <Route exact path={routes.MY_EVENTS} component={MyEventsPage} />
+                <Route exact path={routes.DISCOVER_EVENTS} component={DiscoverEventsPage} />
                 <Route exact path={routes.SIGNUP} component={SignUpPage} />
                 <Route exact path={routes.SIGNIN} component={SignInPage} />
                 <Route exact path={routes.PASSWORD_RESET} component={PasswordResetPage} />

@@ -95,7 +95,7 @@ export const SignupForm =
         <div className='accordion accordion-enter-done accordion--signup-form'>
           <form
             onSubmit={this.handleSignupSubmit}
-            className={this.state.active ? 'is-active' : ''}
+            className={`form ${this.state.active ? 'is-active' : ''}`}
           >
             <div className="field has-addons">
               <div className="control">
