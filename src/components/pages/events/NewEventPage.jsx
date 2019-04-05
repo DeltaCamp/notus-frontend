@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { CheckCircle, XCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
@@ -59,6 +60,23 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
       return classes[id % classes.length]
     }
 
+    handleCancelVariable = (e) => {
+      e.preventDefault()
+
+      this.setState({
+        isEditing: false
+      })
+    }
+
+    handleSaveVariable = (e) => {
+      e.preventDefault()
+
+      // on success:
+      // this.setState({
+      //   isEditing: false
+      // })
+    }
+
     render () {
       if (this.state.redirect) {
         return <Redirect to={routes.SIGNIN} />
@@ -83,6 +101,13 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
             <div className='row'>
               <div className='col-xs-12 has-text-centered'>
                 <form className='form mt20'>
+                  <button
+                    className='button has-icon'
+                    onClick={this.handleCancelVariable}
+                  >
+                    <XCircle className='icon__button' />
+                  </button>
+
                   <div className='field'>
                     <div className='control'>
                       <div className='select'>
@@ -122,6 +147,14 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
                       />
                     </div>
                   </div>
+
+                  <button 
+                    className='button has-icon'
+                    onClick={this.handleSaveVariable}
+                  >
+                    <CheckCircle className='icon__button' />
+                  </button>
+
                 </form>
               </div>
             </div>

@@ -207,3 +207,19 @@ button.button.is-small:active {
 // .button.is-outlined.is-light:active {
 //   box-shadow: none;
 // }
+
+.has-bg .button.has-icon,
+.has-bg__dark .button.has-icon,
+.button.has-icon {
+  background-color: white;
+  border: 0;
+  margin: 8px 8px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0;
+  // width: 64px;
+}
+
+.icon__button {
+  stroke: $dark;
+}

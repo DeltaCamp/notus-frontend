@@ -194,10 +194,10 @@
 .drawer.drawer-enter-done {
   bottom: 0;
   pointer-events: initial;
-  height: 160px;
+  height: 120px;
 
   @media screen and (max-width: $tablet) {
-    height: 160px;
+    height: 120px;
   }
 }
 

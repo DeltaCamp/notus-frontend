@@ -61,8 +61,13 @@ $hasAddonsformColor: white;
 }
 
 .form .select {
-  margin-left: -1rem;
-  margin-right: -1rem;
+  // margin-left: -1rem;
+  // margin-right: -1rem;
+}
+
+.field:not(:last-child) {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
 }
 
 .select:not(.is-multiple):not(.is-loading)::after {
@@ -99,7 +104,7 @@ input.input:active,
 textarea.textarea:hover,
 textarea.textarea:focus,
 textarea.textarea:active {
-  box-shadow: 1px 2px 30px rgba(255, 255, 255, 0.55);
+  // box-shadow: 1px 2px 30px rgba(255, 255, 255, 0.55);
 }
 
 .control:first-child {
@@ -221,13 +226,7 @@ label.radio,
 .has-bg input.input:active,
 .has-bg textarea.textarea:hover,
 .has-bg textarea.textarea:focus,
-.has-bg textarea.textarea:active,
-.has-bg__dark input.input:hover,
-.has-bg__dark input.input:focus,
-.has-bg__dark input.input:active,
-.has-bg__dark textarea.textarea:hover,
-.has-bg__dark textarea.textarea:focus,
-.has-bg__dark textarea.textarea:active {
+.has-bg textarea.textarea:active {
   border-color: white;
   box-shadow: 1px 2px 30px rgba(255, 255, 255, 0.55);
 }
