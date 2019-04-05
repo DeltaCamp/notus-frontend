@@ -1,5 +1,5 @@
 .footer {
-  color: $grey-light;
+  color: $dark;
   flex: 0 0 350px;
   padding: 0;
   margin-top: 0;
@@ -14,14 +14,14 @@
 }
 
 .footer--primary {
-  background-color: darken($navbar-grey, 0%);
-  font-size: 1.5rem;
+  background-color: whitesmoke;
+  color: $dark;
+  font-size: 1.25rem;
   padding: 3.5rem 2rem;
 }
 
 .footer--primary {
-  background-color: darken($navbar-grey, 4%);
-  background-image: linear-gradient(to bottom, darken($navbar-grey, 6%) 0%, #161616 70%, #121212 100%);
+  // background-image: linear-gradient(to bottom, darken($navbar-grey, 6%) 0%, #161616 70%, #121212 100%);
   font-size: 1.25rem;
   padding: 5.5rem 2rem 4.5rem;
 }
@@ -31,12 +31,13 @@
 }
 
 .footer--primary svg path {
-  fill: white;
+  fill: black;
 }
 
 .footer-menu .footer-item {
   border-bottom: 1px solid transparent;
-  color: white;
+  // color: white;
+  color: pink;
   display: inline-block;
   margin: 0 1rem;
   transition: border 300ms ease-in-out;
@@ -47,7 +48,7 @@
 }
 
 .footer--primary .footer-item--copyright {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgb(158, 173, 173);
   display: block;
   margin-top: 0.5rem;
 }

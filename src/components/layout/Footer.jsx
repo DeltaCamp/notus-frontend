@@ -26,11 +26,8 @@ export const Footer = class _Footer extends Component {
                 </h6>
                 
                 <br />
-                <br />
               </div>
             </div>
-
-            <br />
 
             <span
               className='footer-item footer-item--copyright'

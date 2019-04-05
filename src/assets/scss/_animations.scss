@@ -180,3 +180,40 @@
 .accordion-exit-done {
   opacity: 0.001;
 }
+
+
+.drawer,
+.drawer-enter {
+  bottom: -120px;
+  height: 1px;
+  transition: all 300ms ease-in-out;
+  will-change: bottom, height;
+}
+
+.drawer.drawer-enter-active,
+.drawer.drawer-enter-done {
+  bottom: 0;
+  pointer-events: initial;
+  height: 100px;
+
+  @media screen and (max-width: $tablet) {
+    height: 160px;
+  }
+}
+
+.drawer-exit {
+}
+
+.drawer-exit-active,
+.drawer-exit-done {
+}
+
+.drawer-exit,
+.drawer-exit-active,
+.drawer-exit-done {
+  bottom: -120px;
+  height: 1px;
+  transition: all 300ms ease-in-out;
+  pointer-events: none;
+  will-change: bottom, height;
+}

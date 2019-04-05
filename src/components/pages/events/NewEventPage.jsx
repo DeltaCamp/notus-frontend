@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
@@ -37,6 +38,12 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
 
     }
 
+    handleVariable = (variable) => {
+      this.setState({
+        isEditing: true
+      })
+    }
+
     buttonColor = (id) => {
       const classes = [
         'is-link',
@@ -70,6 +77,58 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
       const colorClass = this.buttonColor(event.id)
       const altColorClass = this.buttonColor(event.id + 1)
 
+      const variableForm = (
+        <div className='drawer has-bg__dark'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-xs-12 has-text-centered'>
+                <form className='form mt20'>
+                  <div className='field'>
+                    <div className='control'>
+                      <div className='select'>
+                        <select>
+                          <option>
+                            More than
+                          </option>
+                          <option>
+                            Less than
+                          </option>
+                          <option>
+                            Is equal to
+                          </option>
+                          <option>
+                            Is greater than or equal to
+                          </option>
+                          <option>
+                            Is less than or equal to
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='field'>
+                    <div className='control'>
+                      <input
+                        placeholder='Amount in Ether'
+                        type='number'
+                        className='input is-small'
+                        onChange={(e) => {
+                          this.setState({
+                            variableValueOne: e.target.value
+                          })
+                        }}
+                        value={this.state.variableValueOne}
+                      />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+
       return (
         <div className='is-positioned-absolutely'>
           <Helmet
@@ -77,6 +136,14 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
           />
 
           <ScrollToTop />
+
+          <CSSTransition
+            timeout={300}
+            classNames='drawer'
+            in={this.state.isEditing}
+          >
+            {state => variableForm}
+          </CSSTransition>
 
           <section className='section section--main-content'>
             <div className='container'>
@@ -91,20 +158,44 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
               <div className='row'>
                 <div className='col-xs-12 has-text-centered'>
                   <div className={`is-size-4 event-box event-box__header ${colorClass}`}>
-                    <button className='event-box__variable'>
+                    <button
+                      className='event-box__variable'
+                      onClick={(e) => {
+                        e.preventDefault()
+                        this.handleVariable('frequency')
+                      }}
+                    >
                       Every time
                     </button>
-                    <button className='event-box__variable'>
+                    <button
+                      className='event-box__variable'
+                      onClick={(e) => {
+                        e.preventDefault()
+                        this.handleVariable('matcher-one')
+                      }}
+                    >
                       more than 200
                     </button>
                     <span className='event-box__text'>
                       of the token at
                     </span>
-                    <button className='event-box__variable has-hint'>
+                    <button
+                      className='event-box__variable has-hint'
+                      onClick={(e) => {
+                        e.preventDefault()
+                        this.handleVariable('contract-address')
+                      }}
+                    >
                       0x1234...5619
                       <span className='hint'>Contract Address</span>
                     </button>
-                    <button className='event-box__variable'>
+                    <button
+                      className='event-box__variable'
+                      onClick={(e) => {
+                        e.preventDefault()
+                        this.handleVariable('sender-receiver')
+                      }}
+                    >
                       is sent to 0x1234
                     </button>
                   </div>
@@ -112,10 +203,6 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
                   <div className={`is-size-4 event-box event-box__footer ${altColorClass}`}>
                     ... then turn on my Phillips Hue lightbulb
                   </div>
-
-                  <form className='form mt20'>
-                  </form>
-                  
                 </div>
               </div>
             </div>
