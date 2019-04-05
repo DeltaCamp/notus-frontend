@@ -391,7 +391,11 @@ hr {
 
 .has-bg__dark {
   background-image: 
-    linear-gradient(220deg, darken(saturate($purple, 100%), 16%) 0%, darken(saturate($purple, 100%), 16%) 30%, darken($blue, 6) 100%),
+    linear-gradient(
+      220deg,
+      darken(saturate($purple, 100%), 34%) 0%,
+      darken(saturate($blue, 100%), 17%) 100%
+    ),
     url('/funky-lines.png');
   background-blend-mode: multiply;
   background-size: 100% 100%, 400px 400px;
