@@ -60,6 +60,19 @@ $hasAddonsformColor: white;
   }
 }
 
+.form .select {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  margin-top: -0.1rem;
+
+  @media screen and (max-width: $mobile) {
+    margin-top: -0.4rem;
+  }
+}
+
 .has-addons button.button {
   border: 3px solid black;
   padding: 4px 25px 5px 20px;

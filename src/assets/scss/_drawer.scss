@@ -3,13 +3,25 @@
   border-top: 5px solid white;
   box-shadow: 0 -3px 14px rgba(40, 20, 40, 0.2);
   color: white;
+  padding-top: 20px;
   pointer-events: none;
   position: fixed;
   width: 100%;
   z-index: 20000;
+
+  @media screen and (max-width: $tablet - 203px) {
+    padding-top: 0;
+  }
 }
 
 .drawer .field {
   display: inline-block;
-  max-width: 300px;
+  max-width: 260px;
+}
+
+.drawer .form .select {
+  @media screen and (max-width: $tablet - 203px) {
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
 }
