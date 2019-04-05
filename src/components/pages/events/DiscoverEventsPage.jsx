@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { toast } from 'react-toastify'
 import { formatRoute } from 'react-router-named-routes'

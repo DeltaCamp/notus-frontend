@@ -4,13 +4,12 @@ import Helmet from 'react-helmet'
 import { graphql } from 'react-apollo'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
-import { currentUserQuery } from '~/queries/currentUserQuery'
 import { confirmUserMutation } from '~/mutations/confirmUserMutation'
 import * as routes from '~/../config/routes'
 
 const queryString = require('query-string')
 
-export const ConfirmAndSetPasswordPage = graphql(currentUserQuery, { name: 'currentUserData' })(
+export const ConfirmAndSetPasswordPage = 
   graphql(confirmUserMutation, { name: 'confirmUser' })(
     class _ConfirmAndSetPasswordPage extends PureComponent {
 
@@ -86,15 +85,29 @@ export const ConfirmAndSetPasswordPage = graphql(currentUserQuery, { name: 'curr
       }
 
       render () {
-        const { currentUser } = this.props.currentUserData
-
         let message, createPasswordFormRow
 
         if (this.state.confirming) {
           message = "Confirming your account ..."
         }
 
-        if (!this.state.confirmed && !currentUser) {
+        const oneTimeKey = this.getOneTimeKey(this.props)
+
+        if (!oneTimeKey) {
+          createPasswordFormRow = 
+            <div className='row'>
+              <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3'>
+                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
+                  Set Your Password
+                </h1>
+                <br />
+                <br />
+                <p>
+                  Unable to set password and confirm account without a one time key. (already signed up?).
+                </p>
+              </div>
+            </div>
+        } else {
           createPasswordFormRow =
             <div className='row'>
               <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3'>
@@ -183,4 +196,3 @@ export const ConfirmAndSetPasswordPage = graphql(currentUserQuery, { name: 'curr
       }
     }
   )
-)
