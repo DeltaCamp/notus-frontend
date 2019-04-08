@@ -26,7 +26,7 @@ export const DiscoverEventsListing =
       const eventTypes = EVENT_TYPES.map((value) => (
         <Link
           key={`event-type-${value.id}`}
-          to={formatRoute(routes.NEW_EVENT, { eventTypeId: value.id })}
+          to={formatRoute(routes.NEW_EVENT_FROM_EVENT_TYPE, { eventTypeId: value.id })}
           className={`button event-card ${this.buttonColor(value.id)}`}
         >
           <div className="event-card__header">

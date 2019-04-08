@@ -8,37 +8,12 @@ button[disabled] {
   cursor: not-allowed;
 }
 
-// .button[disabled]:hover,
-// .button[disabled]:focus,
-// .button[disabled]:active,
-// button[disabled]:hover,
-// button[disabled]:focus,
-// button[disabled]:active {
-//   transform: scale3d(1, 1, 1);
-// }
-
 .button:hover,
 .button:active {
-  // background-color: lighten($cyan, 10%);
   color: $button-hover-color;
 }
 
 .button {
-  // background-color: transparent;
-  // border-radius: 100px;
-  // border-width: 3px;
-  // font-size: 1.25rem;
-  // // height: auto;
-  // padding: 0.35rem 3rem 0.4rem;
-  // text-transform: uppercase;
-
-  // @media screen and (max-width: $tablet) {
-  //   height: auto;
-  //   padding: 0.25rem 2rem;
-  //   white-space: normal;
-  //   width: 100%;
-  // }
-
   background-color: black;
   border-radius: 100px;
   height: auto;
@@ -47,7 +22,7 @@ button[disabled] {
   padding: 1rem 3rem 1rem;
 
   text-transform: capitalize;
-  transition: transform 100ms cubic-bezier(0.15, 0.89, 0, 1);
+  transition: transform 400ms cubic-bezier(0.15, 0.89, 0, 1);
   min-width: 240px;
 
   @media screen and (max-width: $mobile) {
@@ -182,7 +157,7 @@ button.button.is-small:active {
 }
 
 .button:hover:not(.is-text) {
-  transform: scale3d(1.1, 1.1, 1.1);
+  transform: scale3d(1.06, 1.06, 1.0);
 }
 
 
@@ -223,4 +198,31 @@ button.button.is-small:active {
 
 .icon__button {
   stroke: $dark;
+}
+
+.button.has-stroke-green:hover {
+  background-color: $success;
+}
+
+.button.has-stroke-red:hover {
+  background-color: $danger;
+}
+
+.button.has-stroke-green:hover svg {
+  // fill: $success;
+  stroke: white;
+}
+
+.button.has-stroke-red:hover svg {
+  // background-color: $danger;
+  // fill: $danger;
+  stroke: white;
+}
+
+.has-stroke-green {
+  stroke: $success;
+}
+
+.has-stroke-red {
+  stroke: $danger;
 }

@@ -68,6 +68,7 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.CONFIRM_AND_SET_PASSWORD_PAGE} component={ConfirmAndSetPasswordPage} />
                 <Route exact path={routes.CONFIRM} component={DappUserConfirmPage} />
                 <Route exact path={routes.NEW_EVENT} component={NewEventPage} />
+                <Route exact path={routes.NEW_EVENT_FROM_EVENT_TYPE} component={NewEventPage} />
                 <Route exact path={routes.MY_EVENTS} component={MyEventsPage} />
                 <Route exact path={routes.DISCOVER_EVENTS} component={DiscoverEventsPage} />
                 <Route exact path={routes.SIGNUP} component={SignUpPage} />

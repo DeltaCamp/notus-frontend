@@ -32,7 +32,7 @@ export const EVENT_TYPES = [
     id: 8
   },
   {
-    name: 'Get a text when your have NFT sale activity on OpenSea',
+    name: 'Get texts regarding your NFT activity on OpenSea',
     id: 9
   }
 ]

@@ -83,13 +83,22 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
           )
             
           myEvents =
-            <Link
-              to={routes.MY_EVENTS}
-              className='navbar-item'
-              onClick={this.closeMobileNav}
-            >
-              My Events
-            </Link>
+            <>
+              <Link
+                to={routes.MY_EVENTS}
+                className='navbar-item'
+                onClick={this.closeMobileNav}
+              >
+                My Events
+              </Link>
+              <Link
+                to={routes.DISCOVER_EVENTS}
+                className='navbar-item'
+                onClick={this.closeMobileNav}
+              >
+                Discover Events
+              </Link>
+            </>
         }
 
         return (

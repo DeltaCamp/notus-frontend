@@ -1,5 +1,4 @@
 .drawer {
-  // background-color: lighten($dark, 10%);
   border-top: 5px solid black;
   box-shadow: 0 -3px 14px rgba(40, 20, 40, 0.2);
   color: white;
@@ -14,14 +13,106 @@
   }
 }
 
+.drawer,
+.drawer-enter {
+  bottom: -120px;
+}
+
+.drawer.drawer-enter-active,
+.drawer.drawer-enter-done {
+  bottom: 0;
+  height: 160px;
+
+  @media screen and (max-width: $tablet) {
+    height: 220px;
+  }
+}
+
+.drawer-exit,
+.drawer-exit-active,
+.drawer-exit-done {
+  bottom: -120px;
+}
+
 .drawer .field {
   display: inline-block;
-  max-width: 260px;
+  height: 50px;
+  margin-left: 0;
+  // max-width: 260px;
+
+  @media screen and (max-width: $tablet - 203px) {
+    // max-width: 100%;
+    width: 100%;
+  }
+}
+
+.drawer .field:not(:last-child) {
+  margin-bottom: 0.5rem;
+
+  @media screen and (max-width: $tablet - 203px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .drawer .form .select {
   @media screen and (max-width: $tablet - 203px) {
-    margin-left: 0rem;
-    margin-right: 0rem;
+    width: 100%;
+  }
+}
+
+.drawer .form .select select {
+  width: 360px;
+
+  @media screen and (max-width: $widescreen) {
+    background-color: green;
+    width: 260px;
+  }
+
+  @media screen and (max-width: $desktop) {
+    background-color: orange;
+    width: 260px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    width: 200px;
+  }
+
+  @media screen and (max-width: $tablet - 203px) {
+    width: 100%;
+  }
+}
+
+.drawer .button.has-icon {
+  height: 44px;
+  margin-left: 0;
+  margin-right: 0;
+  width: 44px;
+}
+
+.drawer .buttons .button:not(:last-child):not(.is-fullwidth) {
+  margin-right: 4px;
+}
+
+.drawer .buttons {
+  justify-content: flex-end;
+}
+
+.drawer-inputs {
+  display: flex;
+
+  @media screen and (max-width: $tablet - 203px) {
+    display: block;
+  }
+}
+
+.drawer-inputs .field {
+  display: flex;
+  flex-grow: 1;
+  flex-flow: column;
+  flex: 0 0 50%;
+
+  @media screen and (max-width: $tablet - 203px) {
+    display: block;
   }
 }

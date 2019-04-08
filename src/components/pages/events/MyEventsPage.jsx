@@ -58,7 +58,7 @@ export const MyEventsPage = graphql(currentUserQuery, { name: 'currentUserData' 
                   </h2>
                   <Link
                     className='button mt20 is-purple'
-                    to={routes.DISCOVER_EVENTS}
+                    to={routes.NEW_EVENT}
                   >
                     Create a Custom Event
                   </Link>

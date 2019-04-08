@@ -184,7 +184,7 @@
 
 .drawer,
 .drawer-enter {
-  bottom: -120px;
+  // bottom: -120px;// set this in your custom code
   height: 1px;
   transition: all 300ms ease-in-out;
   will-change: bottom, height;
@@ -192,26 +192,19 @@
 
 .drawer.drawer-enter-active,
 .drawer.drawer-enter-done {
-  bottom: 0;
+  // bottom: 0;// set this in your custom code
   pointer-events: initial;
-  height: 120px;
+  // height: 120px;// set this in your custom code
 
   @media screen and (max-width: $tablet) {
-    height: 120px;
+    // height: 120px;// set this in your custom code
   }
-}
-
-.drawer-exit {
-}
-
-.drawer-exit-active,
-.drawer-exit-done {
 }
 
 .drawer-exit,
 .drawer-exit-active,
 .drawer-exit-done {
-  bottom: -120px;
+  // bottom: -120px; // set this in your custom code
   height: 1px;
   transition: all 300ms ease-in-out;
   pointer-events: none;

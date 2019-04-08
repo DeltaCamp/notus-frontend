@@ -78,82 +78,99 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
     }
 
     render () {
+      let colorClass,
+        altColorClass
+
       if (this.state.redirect) {
         return <Redirect to={routes.SIGNIN} />
       }
 
       const eventTypeId = this.props.match.params.eventTypeId
 
-      const event = EVENT_TYPES.find(
+      let event = EVENT_TYPES.find(
         (eventType) => (eventType.id === parseInt(eventTypeId, 10))
       )
 
-      if (!event) {
-        return <Redirect to={routes.DISCOVER_EVENTS} />
+      if (event) {
+        colorClass = this.buttonColor(event.id)
+        altColorClass = this.buttonColor(event.id + 1)
+        // return <Redirect to={routes.DISCOVER_EVENTS} />
+      } else {
+        event = {
+          name: 'When this happens trigger that'
+        }
+        colorClass = 'is-dark'
+        altColorClass = 'is-blue'
       }
-
-      const colorClass = this.buttonColor(event.id)
-      const altColorClass = this.buttonColor(event.id + 1)
 
       const variableForm = (
         <div className='drawer has-bg__dark'>
           <div className='container'>
             <div className='row'>
-              <div className='col-xs-12 has-text-centered'>
+              <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
                 <form className='form mt20'>
-                  <button
-                    className='button has-icon'
-                    onClick={this.handleCancelVariable}
-                  >
-                    <XCircle className='icon__button' />
-                  </button>
 
-                  <div className='field'>
-                    <div className='control'>
-                      <div className='select'>
-                        <select>
-                          <option>
-                            More than
-                          </option>
-                          <option>
-                            Less than
-                          </option>
-                          <option>
-                            Is equal to
-                          </option>
-                          <option>
-                            Is greater than or equal to
-                          </option>
-                          <option>
-                            Is less than or equal to
-                          </option>
-                        </select>
+                  <div className='drawer-inputs'>
+                    <div className='field'>
+                      <div className='control'>
+                        <div className='select'>
+                          <select>
+                            <option>
+                              More than
+                            </option>
+                            <option>
+                              Less than
+                            </option>
+                            <option>
+                              Is equal to
+                            </option>
+                            <option>
+                              Is greater than or equal to
+                            </option>
+                            <option>
+                              Is less than or equal to
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className='field'>
+                      <div className='control'>
+                        <input
+                          placeholder='Amount in Ether'
+                          type='number'
+                          className='input is-small'
+                          onChange={(e) => {
+                            this.setState({
+                              variableValueOne: e.target.value
+                            })
+                          }}
+                          value={this.state.variableValueOne}
+                        />
                       </div>
                     </div>
                   </div>
 
-                  <div className='field'>
-                    <div className='control'>
-                      <input
-                        placeholder='Amount in Ether'
-                        type='number'
-                        className='input is-small'
-                        onChange={(e) => {
-                          this.setState({
-                            variableValueOne: e.target.value
-                          })
-                        }}
-                        value={this.state.variableValueOne}
+                  <div className='buttons'>
+                    <button
+                      className='button has-icon has-stroke-red'
+                      onClick={this.handleCancelVariable}
+                    >
+                      <XCircle
+                        className='icon__button has-stroke-red'
                       />
-                    </div>
-                  </div>
+                    </button>
 
-                  <button 
-                    className='button has-icon'
-                    onClick={this.handleSaveVariable}
-                  >
-                    <CheckCircle className='icon__button' />
-                  </button>
+                    <button 
+                      className='button has-icon has-stroke-green'
+                      onClick={this.handleSaveVariable}
+                    >
+                      <CheckCircle
+                        className='icon__button has-stroke-green'
+                      />
+                    </button>
+                  </div>
 
                 </form>
               </div>
@@ -181,8 +198,8 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
           <section className='section section--main-content pb100'>
             <div className='container'>
               <div className='row'>
-                <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
-                  <h4 className='is-size-4 has-text-centered is-uppercase has-text-weight-extrabold mt20'>
+                <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered pb50'>
+                  <h4 className='is-size-4 has-text-grey-dark has-text-centered is-uppercase has-text-weight-bold mt20'>
                     {event.name}
                   </h4>
                 </div>
@@ -251,7 +268,29 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
                     <div className='container'>
                       <div className='row'>
                         <div className='col-xs-12 has-text-centered is-size-4'>
-                          ... then turn on my Phillips Hue lightbulb
+                          {/* ... then turn on my Phillips Hue lightbulb */}
+                          ... then send me an email
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={`event-box event-box__footer is-white-ter pt50`}>
+              <div className={`container-fluid`}>
+                <div className='row'>
+                  <div className='col-xs-12'>
+                    <div className='container'>
+                      <div className='row'>
+                        <div className='col-xs-12 has-text-centered is-size-4'>
+                          <button
+                            onClick={this.handleSaveEvent}
+                            className='button is-success'
+                          >
+                            Save/Create Event
+                          </button>
                         </div>
                       </div>
                     </div>

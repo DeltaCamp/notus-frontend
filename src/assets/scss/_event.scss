@@ -80,6 +80,8 @@
   }
 }
 
+.event-box.is-blue,
+.event-box.is-dark,
 .event-box.is-info,
 .event-box.is-fun,
 .event-box.is-success,
@@ -87,6 +89,18 @@
 .event-box.is-purple,
 .event-box.is-link {
   color: white;
+}
+
+.event-box.is-white-ter {
+  background-color: $white-ter;
+}
+
+.event-box.is-blue {
+  background-color: $blue;
+}
+
+.event-box.is-dark {
+  background-color: $dark;
 }
 
 .event-box.is-link {
