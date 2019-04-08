@@ -1,16 +1,13 @@
 import React, { PureComponent } from 'react'
 import Helmet from 'react-helmet'
 import { toast } from 'react-toastify'
-import { formatRoute } from 'react-router-named-routes'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
-
-import { EVENT_TYPES } from '~/../config/eventTypes'
 
 export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUserData' })(
   class _DiscoverEventsPage extends PureComponent {
@@ -25,35 +22,10 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
       }
     }
 
-    buttonColor = (id) => {
-      const classes =[
-        'is-link',
-        'is-info',
-        'is-fun',
-        'is-primary',
-        'is-purple',
-        'is-success',
-        'is-danger',
-        'is-warning'
-      ]
-
-      return classes[id % classes.length]
-    }
-
     render () {
       if (this.state.redirect) {
         return <Redirect to={routes.SIGNIN} />
       }
-
-      const eventTypes = EVENT_TYPES.map((value) => (
-        <Link
-          key={`event-type-${value.id}`}
-          to={formatRoute(routes.NEW_EVENT_FROM_EVENT_TYPE, { eventTypeId: value.id })}
-          className={`button event-card ${this.buttonColor(value.id)}`}
-        >
-          {value.name}
-        </Link>
-      ))
 
       return (
         <div className='is-positioned-absolutely'>

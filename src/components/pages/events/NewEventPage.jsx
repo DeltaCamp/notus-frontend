@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import classnames from 'classnames'
 import { CheckCircle, XCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
@@ -12,10 +13,25 @@ import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
 
 import { EVENT_TYPES } from '~/../config/eventTypes'
+import * as CONSTANTS from '~/constants';
 
 export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' })(
   class _NewEventPage extends PureComponent {
-    state = {}
+    state = {
+      event: {
+        frequency: 'default',
+        comparison: 'default',
+        amount: '[amount]',
+        contractAddress: '[address]',
+        senderOrReceiver: '[sent to] or [received by]',
+        senderAddress: '[address]',
+        receiverAddress: '[address]',
+        createdAt: null
+      },
+      editVariables: [],
+      variableOne: '',
+      variableTwo: ''
+    }
 
     static propTypes = {
       match: PropTypes.object.isRequired
@@ -34,17 +50,6 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
       }
     }
 
-    handleSubmitEvent = (e) => {
-      e.preventDefault()
-
-    }
-
-    handleVariable = (variable) => {
-      this.setState({
-        isEditing: true
-      })
-    }
-
     buttonColor = (id) => {
       const classes = [
         'is-link',
@@ -58,6 +63,42 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
       ]
 
       return classes[id % classes.length]
+    }
+
+    handleSubmitEvent = (e) => {
+      e.preventDefault()
+
+    }
+
+    handleVariables = (variable) => {
+      this.setState({
+        editVariables: variable,
+        isEditing: true
+      })
+    }
+
+    drawerFormInputs = () => {
+      let inputs = null
+
+      if (this.state.editVariables.includes('frequency')) {
+        inputs = (
+          <>
+            {this.frequencySelect()}
+          </>
+        )
+      } else if (this.state.editVariables.includes('amount')) {
+        inputs = <>
+          {this.gtLtSelect()}
+          {this.amountUintInput()}
+        </>
+      } else if (!this.state.editVariables.length) {
+        inputs = null
+      } else {
+        inputs = null
+        throw new Error('drawerFormInputs called with no matching variable type!')
+      }
+
+      return inputs
     }
 
     handleCancelVariable = (e) => {
@@ -75,6 +116,198 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
       // this.setState({
       //   isEditing: false
       // })
+    }
+
+    senderOrReceiverButton = () => {
+      return (
+        <button
+          className={classnames(
+            `event-box__variable`,
+            `has-hint`,
+            {
+              'is-active': this.state.isEditing && this.state.editVariables.includes('senderOrReceiver')
+            }
+          )}
+          onClick={(e) => {
+            e.preventDefault()
+            this.handleVariables(['senderOrReceiver'])
+          }}
+        >
+          {this.state.event.senderOrReceiver} {/* sent to / received by */}
+          {this.state.event.senderAddress} {/* sent to / received by */}
+          <span className='hint'>Sender or Receiver</span>
+        </button>
+      )
+    }
+
+    contractAddressButton = () => {
+      return (
+        <button
+          className={classnames(
+            `event-box__variable`,
+            `has-hint`,
+            {
+              'is-active': this.state.isEditing && this.state.editVariables.includes('contractAddress')
+            }
+          )}
+          onClick={(e) => {
+            e.preventDefault()
+            this.handleVariables(['contractAddress'])
+          }}
+        >
+          {this.state.event.contractAddress}
+          <span className='hint'>Contract Address</span>
+        </button>
+      )
+    }
+
+    convertTemplate = (template, val) => {
+      console.log('template: ', template)
+      console.log('val: ', val)
+      const replacedText = template.replace(/(\[.*\])*/, val)
+      console.log('replacedText: ', replacedText)
+
+      return replacedText
+    }
+
+    amountButton = () => {
+      return (
+        <button
+          className={classnames(
+            `event-box__variable`,
+            `has-hint`,
+            {
+              'is-active': this.state.isEditing && this.state.editVariables.includes('comparison')
+            }
+          )}
+          onClick={(e) => {
+            e.preventDefault()
+            this.handleVariables(['comparison', 'amount'])
+          }}
+        >
+          {/* more than 200 */}
+          {this.convertTemplate(
+            CONSTANTS.en.templates.comparisonsAndAmounts[this.state.event.comparison],
+            this.state.event.amount
+          )}
+          <span className='hint'>Transfer Amount</span>
+        </button>
+      )
+    }
+
+    frequencyButton = () => {
+      return (
+        <button
+          className={classnames(
+            `event-box__variable`,
+            `has-hint`,
+            {
+              'is-active': this.state.isEditing && this.state.editVariables.includes('frequency')
+            }
+          )}
+          onClick={(e) => {
+            e.preventDefault()
+            this.handleVariables(['frequency'])
+          }}
+        >
+          {CONSTANTS.en.templates.frequencies[this.state.event.frequency]}
+          <span className='hint'>Freqency</span>
+        </button>
+      )
+    }
+
+    handleVariableChange = (varName, val) => {
+      const key = varName === 'variableOne' ?
+        this.state.editVariables[0] :
+        this.state.editVariables[1]
+
+      this.setState({
+        [varName]: val
+      }, this.updateEvent(key, val))
+    }
+
+    updateEvent = (key, val) => {
+      this.setState({
+        event: {
+          ...this.state.event,
+          [key]: val
+        }
+      })
+    }
+
+    amountUintInput = () => {
+      return (
+        <div className='field'>
+          <div className='control'>
+            <input
+              placeholder='Amount in Ether'
+              type='number'
+              className='input is-small'
+              onChange={(e) => {
+                this.handleVariableChange('variableTwo', e.target.value)
+              }}
+              value={this.state.event.amount}
+            />
+          </div>
+        </div>
+      )
+    }
+
+    gtLtSelect = () => {
+      return (
+        <div className='field'>
+          <div className='control'>
+            <div className='select'>
+              <select
+                value={this.state.variableOne}
+                onChange={(e) => {
+                  this.handleVariableChange('variableOne', e.target.value)
+                }}
+              >
+                <option value='gt'>
+                  {CONSTANTS.en.formFields.comparisons['gt']}
+                </option>
+                <option value='lt'>
+                  {CONSTANTS.en.formFields.comparisons['lt']}
+                </option>
+                <option value='eq'>
+                  {CONSTANTS.en.formFields.comparisons['eq']}
+                </option>
+                <option value='gte'>
+                  {CONSTANTS.en.formFields.comparisons['gte']}
+                </option>
+                <option value='lte'>
+                  {CONSTANTS.en.formFields.comparisons['lte']}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    frequencySelect = () => {
+      return (
+        <div className='field'>
+          <div className='control'>
+            <div className='select'>
+              <select
+                value={this.state.variableOne}
+                onChange={(e) => {
+                  this.handleVariableChange('variableOne', e.target.value)
+                }}
+              >
+                <option value='everyTime'>
+                  {CONSTANTS.en.formFields.frequencies['everyTime']}
+                </option>
+                <option value='onlyOnce'>
+                  {CONSTANTS.en.formFields.frequencies['onlyOnce']}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      )
     }
 
     render () {
@@ -111,45 +344,7 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
                 <form className='form mt20'>
 
                   <div className='drawer-inputs'>
-                    <div className='field'>
-                      <div className='control'>
-                        <div className='select'>
-                          <select>
-                            <option>
-                              More than
-                            </option>
-                            <option>
-                              Less than
-                            </option>
-                            <option>
-                              Is equal to
-                            </option>
-                            <option>
-                              Is greater than or equal to
-                            </option>
-                            <option>
-                              Is less than or equal to
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className='field'>
-                      <div className='control'>
-                        <input
-                          placeholder='Amount in Ether'
-                          type='number'
-                          className='input is-small'
-                          onChange={(e) => {
-                            this.setState({
-                              variableValueOne: e.target.value
-                            })
-                          }}
-                          value={this.state.variableValueOne}
-                        />
-                      </div>
-                    </div>
+                    {this.drawerFormInputs()}
                   </div>
 
                   <div className='buttons'>
@@ -207,52 +402,23 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
             </div>
 
             <div className={`event-box event-box__header ${colorClass}`}>
-              <div className={`container-fluid pt20 pb20`}>
+              <div className={`container-fluid pt50 pb20`}>
                 <div className='row'>
                   <div className='col-xs-12'>
                     <div className='container'>
                       <div className='row'>
                         <div className='col-xs-12 has-text-centered is-size-4'>
-                          <button
-                            className='event-box__variable'
-                            onClick={(e) => {
-                              e.preventDefault()
-                              this.handleVariable('frequency')
-                            }}
-                          >
-                            Every time
-                          </button>
-                          <button
-                            className='event-box__variable'
-                            onClick={(e) => {
-                              e.preventDefault()
-                              this.handleVariable('matcher-one')
-                            }}
-                          >
-                            more than 200
-                          </button>
+                          {this.frequencyButton()}
+                          {this.amountButton()}
                           <span className='event-box__text'>
-                            of the token at
+                            ether's worth of the token at
                           </span>
-                          <button
-                            className='event-box__variable has-hint'
-                            onClick={(e) => {
-                              e.preventDefault()
-                              this.handleVariable('contract-address')
-                            }}
-                          >
-                            0x1234...5619
-                            <span className='hint'>Contract Address</span>
-                          </button>
-                          <button
-                            className='event-box__variable'
-                            onClick={(e) => {
-                              e.preventDefault()
-                              this.handleVariable('sender-receiver')
-                            }}
-                          >
-                            is sent to 0x1234
-                          </button>
+
+                          {this.contractAddressButton()}
+
+                          &nbsp;is&nbsp;
+
+                          {this.senderOrReceiverButton()}
                         </div>
                       </div>
                     </div>
@@ -289,7 +455,7 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
                             onClick={this.handleSaveEvent}
                             className='button is-success'
                           >
-                            Save/Create Event
+                            {!this.state.event.createdAt ? 'Create' : 'Save'} Event
                           </button>
                         </div>
                       </div>
