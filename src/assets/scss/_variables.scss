@@ -4,8 +4,8 @@ $mobileContainerWidth: 85%;
 $mobile: 480px + (2 * $gridGap);
 $tablet: 700px + (2 * $gridGap);
 $desktop: 820px + (2 * $gridGap);
-$widescreen: 900px + (2 * $gridGap);
-$fullhd: 1000px + (2 * $gridGap);
+$widescreen: 1150px + (2 * $gridGap);
+$fullhd: 1400px + (2 * $gridGap);
 
 // These are good to use with min-width
 $mobileMin: 0px;     
@@ -30,7 +30,7 @@ $size-5: 1.5rem;
 $size-6: 1.25rem;
 $size-7: 0.875rem;
 
-$section-padding: 2rem 0;
+$section-padding: 2rem 0 0 0;
 $section-padding-medium: 9rem 0;
 $section-padding-large: 18rem 0;
 

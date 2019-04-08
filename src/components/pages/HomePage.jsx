@@ -24,7 +24,7 @@ export class HomePage extends Component {
         </header>
         <section className='section'>
           <div className='container'>
-            <div className='row'>
+            <div className='row pb100'>
               <div className='col-xs-10 col-md-9'>
                 <h5 className='is-size-5'>
                   Notify your DApp's users when you need their attention.

@@ -149,6 +149,7 @@ a.is-dark {
 }
 
 .section--main-content {
+  margin-top: 4rem;
   min-height: 700px;
 }
 
@@ -401,6 +402,14 @@ hr {
   background-size: 100% 100%, 400px 400px;
 }
 
+.has-bg.is-blue {
+  background-image: none;
+  background-color: lighten(saturate($blue, 100%), 12%);
+  background-blend-mode: initial;
+  // background-blend-mode: multiply;
+  // background-size: 100% 100%, 400px 400px;
+}
+
 .has-bg .card-content,
 .has-bg .card-header,
 .has-bg .card-body,
@@ -457,10 +466,6 @@ hr {
   padding-top: 0;
 }
 
-.section.section--main-content {
-  margin-top: 4rem;
-}
-
 .icon--signup {
   margin-right: 10px;
   position: relative;
@@ -507,6 +512,63 @@ hr {
 .mt10 {
   margin-top: 10px !important;
 }
+
+.pb100 {
+  padding-bottom: 100px !important;
+}
+
+.pb75 {
+  padding-bottom: 75px !important;
+}
+
+.pb50 {
+  padding-bottom: 50px !important;
+}
+
+.pb30 {
+  padding-bottom: 30px !important;
+}
+
+.pb20 {
+  padding-bottom: 20px !important;
+}
+
+.pb15 {
+  padding-bottom: 15px !important;
+}
+
+.pb10 {
+  padding-bottom: 10px !important;
+}
+
+.pt100 {
+  padding-top: 100px !important;
+}
+
+.pt75 {
+  padding-top: 75px !important;
+}
+
+.pt50 {
+  padding-top: 50px !important;
+}
+
+.pt30 {
+  padding-top: 30px !important;
+}
+
+.pt20 {
+  padding-top: 20px !important;
+}
+
+.pt15 {
+  padding-top: 15px !important;
+}
+
+.pt10 {
+  padding-top: 10px !important;
+}
+
 
 
 .notus-toast {

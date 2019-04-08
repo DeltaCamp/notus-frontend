@@ -51,6 +51,7 @@ button[disabled] {
   min-width: 240px;
 
   @media screen and (max-width: $mobile) {
+    font-size: 1rem;
     width: 100%;
   }
 }
@@ -109,7 +110,7 @@ button[disabled] {
 }
 
 .button.is-success {
-  border: 2px solid white;
+  // border: 2px solid white;
   color: white;
 }
 

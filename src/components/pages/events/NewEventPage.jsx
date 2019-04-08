@@ -178,63 +178,83 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
             {state => variableForm}
           </CSSTransition>
 
-          <section className='section section--main-content'>
+          <section className='section section--main-content pb100'>
             <div className='container'>
               <div className='row'>
-                <div className='col-xs-12 has-text-centered'>
+                <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
                   <h4 className='is-size-4 has-text-centered is-uppercase has-text-weight-extrabold mt20'>
                     {event.name}
                   </h4>
                 </div>
               </div>
+            </div>
 
-              <div className='row'>
-                <div className='col-xs-12 has-text-centered'>
-                  <div className={`is-size-4 event-box event-box__header ${colorClass}`}>
-                    <button
-                      className='event-box__variable'
-                      onClick={(e) => {
-                        e.preventDefault()
-                        this.handleVariable('frequency')
-                      }}
-                    >
-                      Every time
-                    </button>
-                    <button
-                      className='event-box__variable'
-                      onClick={(e) => {
-                        e.preventDefault()
-                        this.handleVariable('matcher-one')
-                      }}
-                    >
-                      more than 200
-                    </button>
-                    <span className='event-box__text'>
-                      of the token at
-                    </span>
-                    <button
-                      className='event-box__variable has-hint'
-                      onClick={(e) => {
-                        e.preventDefault()
-                        this.handleVariable('contract-address')
-                      }}
-                    >
-                      0x1234...5619
-                      <span className='hint'>Contract Address</span>
-                    </button>
-                    <button
-                      className='event-box__variable'
-                      onClick={(e) => {
-                        e.preventDefault()
-                        this.handleVariable('sender-receiver')
-                      }}
-                    >
-                      is sent to 0x1234
-                    </button>
+            <div className={`event-box event-box__header ${colorClass}`}>
+              <div className={`container-fluid pt20 pb20`}>
+                <div className='row'>
+                  <div className='col-xs-12'>
+                    <div className='container'>
+                      <div className='row'>
+                        <div className='col-xs-12 has-text-centered is-size-4'>
+                          <button
+                            className='event-box__variable'
+                            onClick={(e) => {
+                              e.preventDefault()
+                              this.handleVariable('frequency')
+                            }}
+                          >
+                            Every time
+                          </button>
+                          <button
+                            className='event-box__variable'
+                            onClick={(e) => {
+                              e.preventDefault()
+                              this.handleVariable('matcher-one')
+                            }}
+                          >
+                            more than 200
+                          </button>
+                          <span className='event-box__text'>
+                            of the token at
+                          </span>
+                          <button
+                            className='event-box__variable has-hint'
+                            onClick={(e) => {
+                              e.preventDefault()
+                              this.handleVariable('contract-address')
+                            }}
+                          >
+                            0x1234...5619
+                            <span className='hint'>Contract Address</span>
+                          </button>
+                          <button
+                            className='event-box__variable'
+                            onClick={(e) => {
+                              e.preventDefault()
+                              this.handleVariable('sender-receiver')
+                            }}
+                          >
+                            is sent to 0x1234
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                </div>
+              </div>
+            </div>
 
-                  <div className={`is-size-4 event-box event-box__footer ${altColorClass}`}>
-                    ... then turn on my Phillips Hue lightbulb
+            <div className={`event-box event-box__footer ${altColorClass}`}>
+              <div className={`container-fluid`}>
+                <div className='row'>
+                  <div className='col-xs-12'>
+                    <div className='container'>
+                      <div className='row'>
+                        <div className='col-xs-12 has-text-centered is-size-4'>
+                          ... then turn on my Phillips Hue lightbulb
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

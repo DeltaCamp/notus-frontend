@@ -1,38 +1,38 @@
 export const EVENT_TYPES = [
   {
-    name: 'ERC20 Token Transfer',
+    name: 'Get notified when a large Token Transfer (ERC20) happens',
     id: 1
   },
   {
-    name: 'ERC721 NFT Minting',
+    name: 'Send an email when an NFT (ERC721) is minted',
     id: 2
   },
   {
-    name: 'Ether Transfer',
+    name: 'Receive an SMS when ether is transferred to an address',
     id: 3
   },
   {
-    name: 'Price of ether ... ?',
+    name: 'Blink your Phillips Hue Lightbulb when the price of ether goes up',
     id: 4
   },
   {
-    name: 'Something something MakerDAO CDP',
+    name: 'Send an alert when your MakerDAO CDP is going to default',
     id: 5
   },
   {
-    name: 'PoolTogether',
+    name: 'Send a msg to a Slack channel when a new PoolTogether lottery is created',
     id: 6
   },
   {
-    name: 'MKR Does Stuff',
+    name: 'Tweet when your CryptoKitty gives birth',
     id: 7
   },
   {
-    name: 'Bitcoin Flies',
+    name: 'Get an email when your Decentraland auction has ended',
     id: 8
   },
   {
-    name: 'Doge Descends',
+    name: 'Get a text when your have NFT sale activity on OpenSea',
     id: 9
   }
 ]

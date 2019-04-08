@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import { toast } from 'react-toastify'
 import { Link, Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
+import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
@@ -52,15 +53,40 @@ export const MyEventsPage = graphql(currentUserQuery, { name: 'currentUserData' 
             <div className='container'>
               <div className='row'>
                 <div className='col-xs-12 has-text-centered'>
-                  <h4 className='is-size-4 has-text-weight-bold mt75'>
+                  <h2 className='is-size-2 has-text-weight-bold mt75'>
                     You have no active events.
-                  </h4>
+                  </h2>
                   <Link
                     className='button mt20 is-purple'
                     to={routes.DISCOVER_EVENTS}
                   >
-                    Create Your First Event
+                    Create a Custom Event
                   </Link>
+                </div>
+              </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div className='container-fluid has-bg is-blue pt50 pb100'>
+              <div className='row'>
+                <div className='col-xs-12'>
+                  <div className='container'>
+                    <div className='row'>
+                      <div className='col-xs-12 has-text-centered mt50 is-dark'>
+                        <h4 className='is-size-4 has-text-white has-text-weight-bold'>
+                          Or, choose from an existing event type:
+                        </h4>
+
+                        <br />
+
+                        <DiscoverEventsListing />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
