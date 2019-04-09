@@ -259,7 +259,7 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
           <div className='control'>
             <div className='select'>
               <select
-                value={this.state.variableOne}
+                value={this.state.event.comparison}
                 onChange={(e) => {
                   this.handleVariableChange('variableOne', e.target.value)
                 }}
@@ -292,7 +292,7 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
           <div className='control'>
             <div className='select'>
               <select
-                value={this.state.variableOne}
+                value={this.state.event.frequency}
                 onChange={(e) => {
                   this.handleVariableChange('variableOne', e.target.value)
                 }}
@@ -337,41 +337,52 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
       }
 
       const variableForm = (
-        <div className='drawer has-bg__dark'>
-          <div className='container'>
-            <div className='row'>
-              <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
-                <form className='form mt20'>
+        <>          
+          <div className='drawer has-bg__dark'>
+            <div className='container'>
+              <div className='row'>
+                <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
+                  <form className='form mt20'>
 
-                  <div className='drawer-inputs'>
-                    {this.drawerFormInputs()}
-                  </div>
+                    <div className='drawer-inputs'>
+                      {this.drawerFormInputs()}
+                    </div>
 
-                  <div className='buttons'>
-                    <button
-                      className='button has-icon has-stroke-red'
-                      onClick={this.handleCancelVariable}
-                    >
-                      <XCircle
-                        className='icon__button has-stroke-red'
-                      />
-                    </button>
+                    <div className='buttons'>
+                      <button
+                        className='button has-icon has-stroke-red'
+                        onClick={this.handleCancelVariable}
+                      >
+                        <XCircle
+                          className='icon__button has-stroke-red'
+                        />
+                      </button>
 
-                    <button 
-                      className='button has-icon has-stroke-green'
-                      onClick={this.handleSaveVariable}
-                    >
-                      <CheckCircle
-                        className='icon__button has-stroke-green'
-                      />
-                    </button>
-                  </div>
+                      <button 
+                        className='button has-icon has-stroke-green'
+                        onClick={this.handleSaveVariable}
+                      >
+                        <CheckCircle
+                          className='icon__button has-stroke-green'
+                        />
+                      </button>
+                    </div>
 
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+
+          {/* this needs to be at the bottom or it takes the <CSSTransition/> classes */}
+          <div
+            className={`drawer__clickbox ${this.state.isEditing ? 'is-active' : null}`}
+            onClick={(e) => {
+              e.preventDefault()
+              this.setState({ isEditing: false })
+            }}
+          />
+        </>
       )
 
       return (
