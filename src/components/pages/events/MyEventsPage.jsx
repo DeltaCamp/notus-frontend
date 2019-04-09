@@ -31,11 +31,6 @@ export const MyEventsPage = graphql(currentUserQuery, { name: 'currentUserData' 
       }
     }
 
-    handleCreateEvent = (e) => {
-      e.preventDefault()
-
-    }
-
     render () {
       if (this.state.redirect) {
         return <Redirect to={routes.SIGNIN} />

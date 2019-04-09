@@ -11,6 +11,7 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { saveEventMutation } from '~/mutations/saveEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
+import { altBrandColor, brandColor } from '~/utils/brandColors'
 import { rollbar } from '~/../config/rollbar'
 import { EVENT_TYPES } from '~/../config/eventTypes'
 import * as routes from '~/../config/routes'
@@ -51,21 +52,6 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           toast.error('Please sign in to access this page.')
           this.setState({ redirect: true })
         }
-      }
-
-      buttonColor = (id) => {
-        const classes = [
-          'is-link',
-          'is-info',
-          'is-fun',
-          'is-primary',
-          'is-purple',
-          'is-success',
-          'is-danger',
-          'is-warning'
-        ]
-
-        return classes[id % classes.length]
       }
 
       handleSaveEvent = (e) => {
@@ -376,9 +362,8 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         )
 
         if (event) {
-          colorClass = this.buttonColor(event.id)
-          altColorClass = this.buttonColor(event.id + 1)
-          // return <Redirect to={routes.DISCOVER_EVENTS} />
+          colorClass = brandColor(event.id)
+          altColorClass = altBrandColor(event.id + 1)
         } else {
           event = {
             name: 'When this happens trigger that'

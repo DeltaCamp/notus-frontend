@@ -1,47 +1,15 @@
 import React, { PureComponent } from 'react'
-import { formatRoute } from 'react-router-named-routes'
-import { Link } from 'react-router-dom'
-import * as routes from '~/../config/routes'
-
+import { EventTypeCard } from '~/components/events/EventTypeCard'
 import { EVENT_TYPES } from '~/../config/eventTypes'
 
 export const DiscoverEventsListing = 
   class _DiscoverEventsListing extends PureComponent {
-    buttonColor = (id) => {
-      const classes =[
-        'is-link',
-        'is-info',
-        'is-fun',
-        'is-primary',
-        'is-purple',
-        'is-success',
-        'is-danger',
-        'is-warning'
-      ]
-
-      return classes[id % classes.length]
-    }
-
     render () {
-      const eventTypes = EVENT_TYPES.map((value) => (
-        <Link
-          key={`event-type-${value.id}`}
-          to={formatRoute(routes.NEW_EVENT_FROM_EVENT_TYPE, { eventTypeId: value.id })}
-          className={`button event-card ${this.buttonColor(value.id)}`}
-        >
-          <div className="event-card__header">
-            <p className='event-card__name is-size-5'>
-              {value.name}
-            </p>
-          </div>
-
-          
-          <div className="event-card__footer">
-            <p className='is-size-7'>
-              by notus
-            </p>
-          </div>
-        </Link>
+      const eventTypes = EVENT_TYPES.map((eventType) => (
+        <EventTypeCard
+          key={`event-type-${eventType.id}`}
+          eventType={eventType}
+        />
       ))
 
       return (
