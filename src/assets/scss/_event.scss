@@ -41,7 +41,7 @@
 }
 
 .event-box {
-  margin: 1rem 0;
+  // margin: 1rem 0;
   font-weight: 600;
   line-height: 3.5;
   padding: 1.5rem 0;
@@ -69,7 +69,7 @@
 .event-box__footer {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  margin-top: -1rem;
+  // margin-top: -1rem;
 }
 
 .event-box__variable.has-hint {
@@ -148,6 +148,7 @@
   position: relative;
   font-size: inherit;
   font-weight: 600;
+  transition: all 275ms ease-in-out;
 
   @media screen and (max-width: $tablet) {
     margin-left: 0;
@@ -158,6 +159,10 @@
 
 .event-box__variable {
   min-width: 180px;
+}
+
+.event-box__variable-value {
+  display: inline-block;
 }
 
 .event-box__variable:hover,
@@ -226,3 +231,41 @@
   background: rgba(255, 255, 255, 1);
   color: black;
 }
+
+
+
+
+// This could let us animate the width of the button boxes on the event form so it doesn't jump around
+// when typing:
+// <span
+//             name={'oldamount'}
+//             className={classnames(
+//               'event-box__variable-value',
+//               'animate-content', 
+//               'animate-content-enter',
+//               {
+//                 'animate-content-enter': Math.random(1) > 0.5 ? true : false
+//               }
+//             )}
+//             title={this.state.event.amount}
+//           >
+//           </span>
+// @keyframes changeLetter {
+//   0% {
+//     content: attr(name);
+//   }
+//   50% {
+//     color: orange;
+//   }
+//   100% {
+//     content: attr(title);
+//   }
+// }
+
+// .animate-content::after {
+//   content: attr(name);
+// }
+
+// .animate-content-enter::after {
+//   animation: changeLetter 250ms normal forwards ease-in-out;
+// }

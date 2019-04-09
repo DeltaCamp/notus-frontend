@@ -35,7 +35,7 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
 
           <ScrollToTop />
 
-          <section className='section section--main-content'>
+          <section className='section section--main-content pb100'>
             <div className='container'>
               <div className='row'>
                 <div className='col-xs-12 col-sm-6 col-start-sm-4 has-text-centered'>

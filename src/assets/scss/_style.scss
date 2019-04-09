@@ -149,7 +149,7 @@ a.is-dark {
 }
 
 .section--main-content {
-  margin-top: 4rem;
+  margin-top: 2rem;
   min-height: 700px;
 }
 
@@ -639,4 +639,12 @@ hr {
   background-color: rgba(255, 255, 255, 0.2);
   padding: 1rem;
   max-width: 480px;
+}
+
+.is-white-ter {
+  background-color: $white-ter;
+}
+
+.is-dark {
+  background-color: $grey-darker;
 }

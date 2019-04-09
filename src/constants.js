@@ -24,8 +24,13 @@ export const en = {
       gte: 'X or more',
       lte: 'X or less'
     },
-    amounts: {
+    sentToOrReceivedBy: {
+      sentTo: 'sent to',
+      receivedBy: 'received by'
     },
+    addresses: {
+      default: ''
+    }
   },
   templates: {
     frequencies: {
@@ -39,11 +44,20 @@ export const en = {
       lt: 'less than [amount]',
       eq: '[amount]',
       gte: '[amount] or more',
-      lte: '[amount] or less'
+      lte: '[amount] or less',
+      asdf: 'asdf'
     },
-    // amounts: {
-    //   default: '[amount]'
-    // }
+    sentToOrReceivedBy: {
+      default: '[sent to] or [received by] [address]',
+      sentTo: 'sent to [senderAddress]',
+      receivedBy: 'received by [senderAddress]'
+    }
+  },
+  placeholders: {
+    amount: `Amount in Ether`,
+    contractAddress: `Contract Address (ie. 0x1234 ...)`,
+    senderAddress: `Sender's Address (ie. 0x1234 ...)`,
+    recipientAddress: `Recipient's Address (ie. 0x1234 ...)`
   }
 }
 
