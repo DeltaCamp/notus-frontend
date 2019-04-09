@@ -10,10 +10,10 @@ import { graphql } from 'react-apollo'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
-import * as routes from '~/../config/routes'
-
+import { rollbar } from '~/../config/rollbar'
 import { EVENT_TYPES } from '~/../config/eventTypes'
-import * as CONSTANTS from '~/constants';
+import * as routes from '~/../config/routes'
+import * as CONSTANTS from '~/constants'
 
 export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' })(
   class _NewEventPage extends PureComponent {
@@ -95,7 +95,9 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
         inputs = null
       } else {
         inputs = null
-        throw new Error('drawerFormInputs called with no matching variable type!')
+        rollbar.error(
+          `drawerFormInputs() called with ${this.state.editVariables.toString()}: no matching variable type!`
+        )
       }
 
       return inputs
@@ -162,10 +164,7 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
     }
 
     convertTemplate = (template, val) => {
-      console.log('template: ', template)
-      console.log('val: ', val)
-      const replacedText = template.replace(/(\[.*\])*/, val)
-      console.log('replacedText: ', replacedText)
+      const replacedText = template.replace(/(\[.*\])/, val)
 
       return replacedText
     }
@@ -260,6 +259,9 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
             <div className='select'>
               <select
                 value={this.state.event.comparison}
+                onFocus={(e) => {
+                  this.handleVariableChange('variableOne', e.target.value)
+                }}
                 onChange={(e) => {
                   this.handleVariableChange('variableOne', e.target.value)
                 }}
@@ -293,6 +295,9 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
             <div className='select'>
               <select
                 value={this.state.event.frequency}
+                onFocus={(e) => {
+                  this.handleVariableChange('variableOne', e.target.value)
+                }}
                 onChange={(e) => {
                   this.handleVariableChange('variableOne', e.target.value)
                 }}
@@ -349,18 +354,27 @@ export const NewEventPage = graphql(currentUserQuery, { name: 'currentUserData' 
                     </div>
 
                     <div className='buttons'>
-                      <button
+                      {/* <button
                         className='button has-icon has-stroke-red'
                         onClick={this.handleCancelVariable}
                       >
                         <XCircle
                           className='icon__button has-stroke-red'
                         />
-                      </button>
+                      </button> */}
 
-                      <button 
+                      {/* <button 
                         className='button has-icon has-stroke-green'
                         onClick={this.handleSaveVariable}
+                      >
+                        <CheckCircle
+                          className='icon__button has-stroke-green'
+                        />
+                      </button> */}
+
+                      <button
+                        className='button has-icon has-stroke-green'
+                        onClick={this.handleCancelVariable}
                       >
                         <CheckCircle
                           className='icon__button has-stroke-green'
