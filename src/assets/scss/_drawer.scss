@@ -14,7 +14,7 @@
 }
 
 .drawer__clickbox {
-  background-color: rgba(10, 0, 50, 0.3);
+  background-color: rgba(10, 0, 50, 0.4);
   cursor: pointer;
   height: 100%;
   left: 0;
@@ -41,8 +41,8 @@
 
 .drawer.drawer-enter-active,
 .drawer.drawer-enter-done {
-  bottom: 0;
-  height: 160px;
+  bottom: -20px;
+  height: 180px;
 
   @media screen and (max-width: $tablet) {
     height: 220px;
