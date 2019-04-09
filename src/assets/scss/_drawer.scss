@@ -86,12 +86,10 @@
   width: 360px;
 
   @media screen and (max-width: $widescreen) {
-    background-color: green;
     width: 260px;
   }
 
   @media screen and (max-width: $desktop) {
-    background-color: orange;
     width: 260px;
   }
 
