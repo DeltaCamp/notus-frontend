@@ -41,7 +41,7 @@ export const apolloClient = async () => {
 
   return new ApolloClient({
     resolvers: { ...resolvers },
-    uri: null,
+    uri: process.env.REACT_APP_NOTUS_API_URI,
     cache
   })
 }

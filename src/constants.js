@@ -25,8 +25,9 @@ export const en = {
       lte: 'X or less'
     },
     sentToOrReceivedBy: {
-      sentTo: 'sent to',
-      receivedBy: 'received by'
+      sent: 'sent to anyone',
+      sentToAddress: 'sent to',
+      receivedByAddress: 'received by'
     },
     addresses: {
       default: ''
@@ -49,8 +50,9 @@ export const en = {
     },
     sentToOrReceivedBy: {
       default: '[sent to] or [received by] [address]',
-      sentTo: 'sent to [senderAddress]',
-      receivedBy: 'received by [senderAddress]'
+      sent: 'sent to anyone',
+      sentToAddress: 'sent to [senderAddress]',
+      receivedByAddress: 'received by [recipientAddress]'
     }
   },
   placeholders: {
