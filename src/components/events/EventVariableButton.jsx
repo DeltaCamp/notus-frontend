@@ -1,57 +1,16 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import { rollbar } from '~/../config/rollbar'
 import * as CONSTANTS from '~/constants'
 
-export const EventVariableButton = class _EventVariableButton extends Component {
+export const EventVariableButton = class _EventVariableButton extends PureComponent {
 
-  drawerFormInputs = () => {
-    let inputs = null
+  convertTemplate = (name, type) => {
+    let val = this.props.event[name]
+    const template = CONSTANTS.en.templates[type][name][val]
 
-    if (this.state.editVariables.includes('frequency')) {
-      const selectOptions = [
-        { value: 'everyTime', text: CONSTANTS.en.formFields.frequencies['everyTime'] },
-        { value: 'onlyOnce', text: CONSTANTS.en.formFields.frequencies['onlyOnce'] }
-      ]
-
-      inputs = this.selectDropdown('frequency', 'variableOne', 'string', selectOptions)
-    } else if (this.state.editVariables.includes('amount')) {
-      const selectOptions = [
-        { value: 'gt', text: CONSTANTS.en.formFields.comparisons['gt'] },
-        { value: 'lt', text: CONSTANTS.en.formFields.comparisons['lt'] },
-        { value: 'eq', text: CONSTANTS.en.formFields.comparisons['eq'] },
-        { value: 'gte', text: CONSTANTS.en.formFields.comparisons['gte'] },
-        { value: 'lte', text: CONSTANTS.en.formFields.comparisons['lte'] }
-      ]
-
-      inputs = <>
-        {this.selectDropdown('comparison', 'variableOne', 'string', selectOptions)}
-        {this.textInput('amount', 'variableTwo', 'decimal')}
-      </>
-    } else if (this.state.editVariables.includes('contractAddress')) {
-      inputs = this.textInput('contractAddress', 'variableOne', 'string')
-    } else if (this.state.editVariables.includes('senderAddress')) {
-      inputs = <>
-        {this.textInput('senderAddress', 'variableOne', 'string')}
-      </>
-    } else if (this.state.editVariables.includes('recipientAddress')) {
-      inputs = <>
-        {this.textInput('recipientAddress', 'variableOne', 'string')}
-      </>
-    } else if (!this.state.editVariables.length) {
-      inputs = null
-    } else {
-      inputs = null
-      rollbar.error(
-        `drawerFormInputs() called with ${this.state.editVariables.toString()}: no matching variable type!`
-      )
-    }
-
-    return inputs
-  }
-  convertTemplate = (template, val) => {
-    if (val === '') {
-      return template
+    if (!template || val === '') {
+      return `[${name}]`
     }
 
     try {
@@ -61,133 +20,6 @@ export const EventVariableButton = class _EventVariableButton extends Component 
     }
     
     return val
-  }
-
-  amountButton = () => {
-    return (
-      <button
-        className={classnames(
-          `event-box__variable`,
-          `has-hint`,
-          {
-            'is-active': this.state.isEditing && this.state.editVariables.includes('comparison')
-          }
-        )}
-        onClick={(e) => {
-          e.preventDefault()
-          this.handleVariables(['comparison', 'amount'])
-        }}
-      >
-        <span className='event-box__variable-value'>
-          {this.convertTemplate(
-            CONSTANTS.en.templates.comparisonsAndAmounts[this.state.event.comparison],
-            this.state.event.amount
-          )}
-        </span>
-        <span className='hint'>Transfer Amount</span>
-      </button>
-    )
-  }
-
-  frequencyButton = () => {
-    return (
-      <button
-        className={classnames(
-          `event-box__variable`,
-          `has-hint`,
-          {
-            'is-active': this.state.isEditing && this.state.editVariables.includes('frequency')
-          }
-        )}
-        onClick={(e) => {
-          e.preventDefault()
-          this.handleVariables(['frequency'])
-        }}
-      >
-        <span className='event-box__variable-value'>
-          {CONSTANTS.en.templates.frequencies[this.state.event.frequency]}
-        </span>
-        <span className='hint'>Freqency</span>
-      </button>
-    )
-  }
-
-  handleVariableChange = (varName, type, val) => {
-    const key = varName === 'variableOne'
-      ? this.state.editVariables[0]
-      : this.state.editVariables[1]
-
-    if (type === 'decimal') {
-      // note: currently does not handle negative values:
-      val = val.replace(/[^0-9.]/g, '')
-    }
-
-    this.setState({
-      [varName]: val
-    }, this.updateEvent(key, val))
-  }
-
-  updateEvent = (key, val) => {
-    this.setState({
-      event: {
-        ...this.state.event,
-        [key]: val
-      }
-    })
-  }
-
-  textInput = (variableName, variableNumber, variableType, options = {}) => {
-    return (
-      <div className='field'>
-        <div className='control'>
-          <input
-            autoFocus={(variableNumber === 'variableOne')}
-            placeholder={CONSTANTS.en.placeholders[variableName]}
-            className='input is-small'
-            onClick={(e) => {
-              e.target.setSelectionRange(0, e.target.value.length)
-            }}
-            onChange={(e) => {
-              this.handleVariableChange(variableNumber, variableType, e.target.value)
-            }}
-            value={this.state.event[variableName]}
-          />
-        </div>
-      </div>
-    )
-  }
-
-  selectDropdown = (variableName, variableNumber, variableType, selectOptions) => {
-    const callback = (e) => {
-      this.handleVariableChange(variableNumber, variableType, e.target.value)
-    }
-
-    return (
-      <div className='field'>
-        <div className='control'>
-          <div className='select'>
-            <select
-              value={this.state.event[variableName]} 
-              onFocus={(e) => {
-                callback(e)
-              }}
-              onChange={(e) => {
-                callback(e)
-              }}
-            >
-              {selectOptions.map((option, index) => (
-                <option
-                  key={`${variableName}-options-${index}`}
-                  value={option.value}
-                >
-                  {option.text}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div>
-    )
   }
 
   render () {
@@ -202,7 +34,7 @@ export const EventVariableButton = class _EventVariableButton extends Component 
           `event-box__variable`,
           `has-hint`,
           {
-            'is-active': this.state.isEditing && this.state.editVariables.includes('senderAddress')
+            'is-active': this.props.isEditing && this.props.editVariables.includes(name)
           }
         )}
         onClick={(e) => {
@@ -211,12 +43,12 @@ export const EventVariableButton = class _EventVariableButton extends Component 
         }}
       >
         <span className='event-box__variable-value'>
-          {this.convertTemplate(
-            CONSTANTS.en.templates[type]['default'],
-            this.props.event[name]
-          )}
+          {this.convertTemplate(name, type)}
         </span>
-        <span className='hint'>{name}</span>
+        <span
+          className='hint'
+          style={{'textTransform': 'capitalize'}}
+        >{name}</span>
       </button>
     )
   }

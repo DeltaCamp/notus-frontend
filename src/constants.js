@@ -26,22 +26,33 @@ export const en = {
     }
   },
   templates: {
-    frequencies: {
-      default: 'Choose how often',
-      everyTime: 'Every time',
-      onlyOnce: 'Only once'
+    string: {
+      frequency: {
+        default: 'Choose how often',
+        everyTime: 'Every time',
+        onlyOnce: 'Only once'
+      },
     },
-    comparisonsAndAmounts: {
-      default: '[amount]',
-      gt: 'more than [amount]',
-      lt: 'less than [amount]',
-      eq: '[amount]',
-      gte: '[amount] or more',
-      lte: '[amount] or less',
-      asdf: 'asdf'
+    uint256: {
+      amount: {
+        default: '[amount]',
+        gt: 'more than [amount]',
+        lt: 'less than [amount]',
+        eq: '[amount]',
+        gte: '[amount] or more',
+        lte: '[amount] or less'
+      }
     },
     address: {
-      default: '[address]'
+      contractAddress: {
+        default: '[address]'
+      },
+      senderAddress: {
+        default: '[address]'
+      },
+      recipientAddress: {
+        default: '[address]'
+      }
     }
   },
   placeholders: {
