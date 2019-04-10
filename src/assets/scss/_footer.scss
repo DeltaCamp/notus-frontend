@@ -14,7 +14,9 @@
 }
 
 .footer--primary {
-  background-color: whitesmoke;
+  // background-color: whitesmoke;
+  background-color: white;
+  border-top: 5px solid whitesmoke;
   color: $dark;
   font-size: 1.25rem;
   padding: 3.5rem 2rem;

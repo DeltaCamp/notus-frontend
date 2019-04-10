@@ -26,7 +26,6 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           comparison: 'default',
           amount: '0',
           contractAddress: '',
-          sentToOrReceivedBy: 'default',
           senderAddress: '',
           recipientAddress: '',
           createdAt: null
@@ -99,21 +98,13 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           </>
         } else if (this.state.editVariables.includes('contractAddress')) {
           inputs = this.textInput('contractAddress', 'variableOne', 'string')
-        } else if (this.state.editVariables.includes('sentToOrReceivedBy')) {
-          const selectOptions = [
-            { value: 'sent', text: CONSTANTS.en.formFields.sentToOrReceivedBy['sent'] },
-            { value: 'sentToAddress', text: CONSTANTS.en.formFields.sentToOrReceivedBy['sentToAddress'] },
-            { value: 'receivedByAddress', text: CONSTANTS.en.formFields.sentToOrReceivedBy['receivedByAddress'] }
-          ]
-
-          const isHidden = (
-            this.state.event.sentToOrReceivedBy === 'receivedBy'
-          )
-          
+        } else if (this.state.editVariables.includes('senderAddress')) {
           inputs = <>
-            {this.selectDropdown('sentToOrReceivedBy', 'variableOne', 'string', selectOptions)}
-            {this.textInput('senderAddress', 'variableTwo', 'string', { hidden: isHidden })}
-            {this.textInput('recipientAddress', 'variableThree', 'string', { hidden: !isHidden })}
+            {this.textInput('senderAddress', 'variableOne', 'string')}
+          </>
+        } else if (this.state.editVariables.includes('recipientAddress')) {
+          inputs = <>
+            {this.textInput('recipientAddress', 'variableOne', 'string')}
           </>
         } else if (!this.state.editVariables.length) {
           inputs = null
@@ -144,34 +135,55 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         // })
       }
 
-      senderOrRecipientButton = () => {
+      senderButton = () => {
         return (
           <button
             className={classnames(
               `event-box__variable`,
               `has-hint`,
               {
-                'is-active': this.state.isEditing && this.state.editVariables.includes('sentToOrReceivedBy')
+                'is-active': this.state.isEditing && this.state.editVariables.includes('senderAddress')
               }
             )}
             onClick={(e) => {
               e.preventDefault()
-              this.handleVariables(['sentToOrReceivedBy', 'senderAddress', 'recipientAddress'])
+              this.handleVariables(['senderAddress'])
             }}
           >
             <span className='event-box__variable-value'>
-              {
-                this.state.event.sentToOrReceivedBy === 'default'
-                  ? CONSTANTS.en.templates.sentToOrReceivedBy['default']
-                  : this.convertTemplate(
-                    CONSTANTS.en.templates.sentToOrReceivedBy[this.state.event.sentToOrReceivedBy],
-                    this.state.event.senderAddress
-                  )
-                  
-            }
-          {/* this.state.event.recipientAddress */}
+              {this.convertTemplate(
+                CONSTANTS.en.templates.addresses['default'],
+                this.state.event.senderAddress
+              )}
             </span>
-            <span className='hint'>Sender or Recipient</span>
+            <span className='hint'>Sender</span>
+          </button>
+        )
+      }
+
+
+      recipientButton = () => {
+        return (
+          <button
+            className={classnames(
+              `event-box__variable`,
+              `has-hint`,
+              {
+                'is-active': this.state.isEditing && this.state.editVariables.includes('recipientAddress')
+              }
+            )}
+            onClick={(e) => {
+              e.preventDefault()
+              this.handleVariables(['recipientAddress'])
+            }}
+          >
+            <span className='event-box__variable-value'>
+              {this.convertTemplate(
+                CONSTANTS.en.templates.addresses['default'],
+                this.state.event.recipientAddress
+              )}
+            </span>
+            <span className='hint'>Recipient</span>
           </button>
         )
       }
@@ -192,9 +204,10 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
             }}
           >
             <span className='event-box__variable-value'>
-              {this.state.event.contractAddress === ''
-                ? '[address]'
-                : this.state.event.contractAddress}
+              {this.convertTemplate(
+                CONSTANTS.en.templates.addresses['default'],
+                this.state.event.contractAddress
+              )}
             </span>
             <span className='hint'>Contract Address</span>
           </button>
@@ -202,6 +215,10 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
       }
 
       convertTemplate = (template, val) => {
+        if (val === '') {
+          return template
+        }
+
         try {
           val = template.replace(/(\[.*\])/, val)
         } catch (err) {
@@ -261,18 +278,9 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
       }
 
       handleVariableChange = (varName, type, val) => {
-        let key = this.state.editVariables[0]
-
-        if (varName === 'variableTwo') {
-          key = this.state.editVariables[1]
-        } else if (varName === 'variableThree') {
-          key = this.state.editVariables[2]
-        }
-        // const key = varName === 'variableOne'
-        //   ? this.state.editVariables[0]
-        //   : this.state.editVariables[1]
-
-        // console.log(varName, type, val, key)
+        const key = varName === 'variableOne'
+          ? this.state.editVariables[0]
+          : this.state.editVariables[1]
 
         if (type === 'decimal') {
           // note: currently does not handle negative values:
@@ -295,7 +303,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
       textInput = (variableName, variableNumber, variableType, options = {}) => {
         return (
-          <div className='field' style={{ display: options.hidden ? 'none' : 'block' }}>
+          <div className='field'>
             <div className='control'>
               <input
                 autoFocus={(variableNumber === 'variableOne')}
@@ -446,21 +454,15 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
               {state => variableForm}
             </CSSTransition>
 
-            <section className='section section--main-content pb100'>
-              <div className=''>
-                <div className={`container-fluid pb20 is-dark`}>
+            <section className='section section--main-content'>
+              <div className={`container-fluid pb20 is-dark`}>
+                <div className='container'>
                   <div className='row'>
-                    <div className='col-xs-12'>
-                      <div className='container'>
-                        <div className='row'>
-                          <div className='col-xs-12 has-text-centered is-size-4'>
-                          {/* <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'> */}
-                            <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                              {event.name}
-                            </h6>
-                          </div>
-                        </div>
-                      </div>
+                    <div className='col-xs-12 has-text-centered is-size-4'>
+                    {/* <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'> */}
+                      <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
+                        {event.name}
+                      </h6>
                     </div>
                   </div>
                 </div>
@@ -468,24 +470,30 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
               <div className={`event-box event-box__header ${colorClass}`}>
                 <div className={`container-fluid pt50 pb20`}>
-                  <div className='row'>
-                    <div className='col-xs-12'>
-                      <div className='container'>
-                        <div className='row'>
-                          <div className='col-xs-12 has-text-centered is-size-4'>
-                            {this.frequencyButton()}
-                            {this.amountButton()}
-                            <span className='event-box__text'>
-                              ether's worth of the token at
-                            </span>
+                  <div className='container'>
+                    <div className='row'>
+                      <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
+                        {this.frequencyButton()} an ERC20 Transfer event occurs
+                        <br />
+                        <span className='event-box__text'>
+                          where the token contract address is {this.contractAddressButton()}
+                        </span>
 
-                            {this.contractAddressButton()}
+                        <br />
+                        <span className='event-box__text'>
+                          and the amount is {this.amountButton()} &lt;ether&gt;
+                        </span>
 
-                            &nbsp;is&nbsp;
+                        <br />
+                        <span className='event-box__text'>
+                          and the sender is {this.senderButton()}
+                        </span>
 
-                            {this.senderOrRecipientButton()}
-                          </div>
-                        </div>
+                        <br />
+                        <span className='event-box__text'>
+                          and the recipient is {this.recipientButton()}
+                        </span>
+                        {/* {<VariableButton />} */}
                       </div>
                     </div>
                   </div>
@@ -494,15 +502,11 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
               <div className={`event-box event-box__footer ${altColorClass}`}>
                 <div className={`container-fluid`}>
-                  <div className='row'>
-                    <div className='col-xs-12'>
-                      <div className='container'>
-                        <div className='row'>
-                          <div className='col-xs-12 has-text-centered is-size-4'>
-                            {/* ... then turn on my Phillips Hue lightbulb */}
-                            ... then send me an email
-                          </div>
-                        </div>
+                  <div className='container'>
+                    <div className='row'>
+                      <div className='col-xs-12 has-text-centered is-size-4'>
+                        {/* ... then turn on my Phillips Hue lightbulb */}
+                        ... then send me an email
                       </div>
                     </div>
                   </div>
@@ -511,19 +515,15 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
               <div className={`is-white-ter pt30 pb30`}>
                 <div className={`container-fluid`}>
-                  <div className='row'>
-                    <div className='col-xs-12'>
-                      <div className='container'>
-                        <div className='row'>
-                          <div className='col-xs-12 has-text-centered is-size-4'>
-                            <button
-                              onClick={this.handleSaveEvent}
-                              className='button is-success'
-                            >
-                              {!this.state.event.createdAt ? 'Create' : 'Save'} Event
-                            </button>
-                          </div>
-                        </div>
+                  <div className='container'>
+                    <div className='row'>
+                      <div className='col-xs-12 has-text-centered is-size-4'>
+                        <button
+                          onClick={this.handleSaveEvent}
+                          className='button is-success'
+                        >
+                          {!this.state.event.createdAt ? 'Create' : 'Save'} Event
+                        </button>
                       </div>
                     </div>
                   </div>

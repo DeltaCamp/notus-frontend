@@ -23,14 +23,6 @@ export const en = {
       eq: 'equal to',
       gte: 'X or more',
       lte: 'X or less'
-    },
-    sentToOrReceivedBy: {
-      sent: 'sent to anyone',
-      sentToAddress: 'sent to',
-      receivedByAddress: 'received by'
-    },
-    addresses: {
-      default: ''
     }
   },
   templates: {
@@ -48,11 +40,8 @@ export const en = {
       lte: '[amount] or less',
       asdf: 'asdf'
     },
-    sentToOrReceivedBy: {
-      default: '[sent to] or [received by] [address]',
-      sent: 'sent to anyone',
-      sentToAddress: 'sent to [senderAddress]',
-      receivedByAddress: 'received by [recipientAddress]'
+    addresses: {
+      default: '[address]'
     }
   },
   placeholders: {

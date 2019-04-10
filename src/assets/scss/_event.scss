@@ -136,7 +136,11 @@
   background-color: $fun;
 }
 
-.event-box__text,
+.event-box__text {
+  margin: 0.5rem 0.5rem;
+  transition: all 275ms ease-in-out;
+}
+
 .event-box__variable {
   background: rgba(255, 255, 255, 0.3);
   border: none;
@@ -144,6 +148,8 @@
   color: white;
   cursor: pointer;
   margin: 0.5rem 0.5rem;
+  max-width: 360px;
+  min-width: 180px;
   padding: 0.5rem 1rem;
   position: relative;
   font-size: inherit;
@@ -155,10 +161,6 @@
     margin-right: 0;
     width: 100%;
   }
-}
-
-.event-box__variable {
-  min-width: 180px;
 }
 
 .event-box__variable-value {
@@ -173,16 +175,6 @@
 
 .event-box__variable.is-active {
   background: rgba(255, 255, 255, 0.7);
-}
-
-.event-box__text {
-  background: transparent;
-  cursor: default;
-  display: inline-block;
-  line-height: 1.5;
-  margin-top: -0.5rem;
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .event-box__variable .hint {
