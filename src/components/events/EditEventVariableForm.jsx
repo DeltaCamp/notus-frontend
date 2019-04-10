@@ -27,8 +27,8 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
         {this.selectDropdown('comparison', 'variableOne', 'string', selectOptions)}
         {this.textInput('amount', 'variableTwo', 'decimal')}
       </>
-    } else if (this.props.editVariables.includes('contractAddress')) {
-      inputs = this.textInput('contractAddress', 'variableOne', 'string')
+    } else if (this.props.editVariables.includes('tokenContractAddress')) {
+      inputs = this.textInput('tokenContractAddress', 'variableOne', 'string')
     } else if (this.props.editVariables.includes('senderAddress')) {
       inputs = <>
         {this.textInput('senderAddress', 'variableOne', 'string')}

@@ -7,9 +7,15 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
 
   convertTemplate = (name, type) => {
     let val = this.props.event[name]
+    // console.log('type', type, 'name', name, val, val)
+
+    if (!val) {
+      return `[${name}]`
+    }
+
     const template = CONSTANTS.en.templates[type][name][val]
 
-    if (!template || val === '') {
+    if (!template) {
       return `[${name}]`
     }
 
@@ -23,33 +29,62 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
   }
 
   render () {
+    // and the amount is
+      // & lt; ether & gt;
+    // {
+    //   name: 'contractAddress',
+    //     type: 'address'
+    // }
+    // and the recipient is 
+    // and the sender is 
+
     const {
-      name,
-      type
+      description,
+      sourceDataType,
+      isPublic
     } = this.props.variable
 
+    if (!isPublic) {
+      return null
+    }
+
+    const name = description.charAt(0).toLowerCase() + description.replace(/ /g, '').slice(1)
+    console.log(name)
+    const type = sourceDataType
+
+    // sourceDataType: 'address',
+    //   description: 'Token Contract Address',
+
+    const andWord = this.props.isFirst ? '' : 'and'
+
     return (
-      <button
-        className={classnames(
-          `event-box__variable`,
-          `has-hint`,
-          {
-            'is-active': this.props.isEditing && this.props.editVariables.includes(name)
-          }
-        )}
-        onClick={(e) => {
-          e.preventDefault()
-          this.props.handleVariables([name])
-        }}
-      >
-        <span className='event-box__variable-value'>
-          {this.convertTemplate(name, type)}
+      <>
+        <br />
+        <span className='event-box__text'>
+          {andWord} the {description.toLowerCase()} is
         </span>
-        <span
-          className='hint'
-          style={{'textTransform': 'capitalize'}}
-        >{name}</span>
-      </button>
+        <button
+          className={classnames(
+            `event-box__variable`,
+            `has-hint`,
+            {
+              'is-active': this.props.isEditing && this.props.editVariables.includes(name)
+            }
+          )}
+          onClick={(e) => {
+            e.preventDefault()
+            this.props.handleVariables([name])
+          }}
+        >
+          <span className='event-box__variable-value'>
+            {this.convertTemplate(name, type)}
+          </span>
+          <span
+            className='hint'
+            style={{'textTransform': 'capitalize'}}
+          >{name}</span>
+        </button>
+      </>
     )
   }
 

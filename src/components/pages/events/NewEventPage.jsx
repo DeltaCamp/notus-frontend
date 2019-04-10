@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import classnames from 'classnames'
 import { CheckCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
@@ -14,23 +13,31 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { saveEventMutation } from '~/mutations/saveEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
-import { rollbar } from '~/../config/rollbar'
 import { EVENT_TYPES } from '~/../config/eventTypes'
 import * as routes from '~/../config/routes'
-import * as CONSTANTS from '~/constants'
 
 export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutation' })(
   graphql(currentUserQuery, { name: 'currentUserData' })(
     class _NewEventPage extends Component {
       state = {
         event: {
-          frequency: 'default',
-          comparison: '',
-          amount: '0',
-          contractAddress: '',
-          senderAddress: '',
-          recipientAddress: '',
-          createdAt: null
+          eventTypeId: 12345,
+          matchers: [
+            {
+              variableId: 8756, // var id, var needs to exist beforehand
+              type: '', // int of enum type,   0 EQ, 1 LT, 2 GT, 3 LTE, 4 GTE
+              operand: '', // value
+            },
+            {
+              frequency: 'default',
+              comparison: '',
+              amount: '0',
+              tokenContractAddress: '',
+              senderAddress: '',
+              recipientAddress: '',
+              createdAt: null
+            }
+          ]
         },
         editVariables: [],
         variableOne: '',
@@ -133,6 +140,46 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           altColorClass = 'is-blue'
         }
 
+        const fakeEventType = {
+          variables: [
+            {
+              source: 'transaction.to',
+              sourceDataType: 'address',
+              description: 'I should be hidden',
+              isPublic: false,
+
+            },
+            {
+              source: 'transaction.to',
+              sourceDataType: 'address',
+              description: 'Token Contract Address',
+              isPublic: true,
+
+            },
+            {
+              source: 'transaction.from',
+              sourceDataType: 'address',
+              description: 'Sender Address',
+              isPublic: true,
+
+            },
+            {
+              source: 'log.topic[2]',
+              sourceDataType: 'address',
+              description: 'Recipient Address',
+              isPublic: true,
+
+            },
+            {
+              source: 'log.topic[3]',
+              sourceDataType: 'uint256',
+              description: 'Amount',
+              isPublic: true,
+
+            }
+          ]
+        }
+
         const variableForm = (
           <>          
             <div className='drawer has-bg__dark'>
@@ -215,7 +262,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
               </div>
 
               <div className={`event-box event-box__header ${colorClass}`}>
-                <div className={`container-fluid pt50 pb20`}>
+                <div className={`container-fluid pt20 pb20`}>
                   <div className='container'>
                     <div className='row'>
                       <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
@@ -224,67 +271,28 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                           event={this.state.event}
                           handleVariables={this.handleVariables}
                           variable={{
-                            name: 'frequency',
+                            description: 'Frequency',
                             type: 'string'
                           }}
                         />
-                        an ERC20 Transfer event occurs
-                        <br />
-                        <span className='event-box__text'>
-                          where the token contract address is 
-                          <EventVariableButton
-                            editVariables={this.state.editVariables}
-                            event={this.state.event}
-                            handleVariables={this.handleVariables}
-                            variable={{
-                              name: 'contractAddress',
-                              type: 'address'
-                            }}
-                          />
+
+                        <span className="event-box__text">
+                          an ERC20 Transfer event occurs where
                         </span>
 
-                        <br />
-                        <span className='event-box__text'>
-                          and the amount is
-                          <EventVariableButton
-                            editVariables={this.state.editVariables}
-                            event={this.state.event}
-                            handleVariables={this.handleVariables}
-                            variable={{
-                              name: 'amount',
-                              type: 'uint256'
-                            }}
-                          /> &lt;ether&gt;
-                        </span>
-
-                        <br />
-                        <span className='event-box__text'>
-                          and the sender is 
-                          <EventVariableButton
-                            editVariables={this.state.editVariables}
-                            event={this.state.event}
-                            handleVariables={this.handleVariables}
-                            variable={{
-                              name: 'senderAddress',
-                              type: 'address'
-                            }}
-                          />
-                        </span>
-
-                        <br />
-                        <span className='event-box__text'>
-                          and the recipient is 
-                          <EventVariableButton
-                            editVariables={this.state.editVariables}
-                            event={this.state.event}
-                            handleVariables={this.handleVariables}
-                            variable={{
-                              name: 'recipientAddress',
-                              type: 'address'
-                            }}
-                          />
-                        </span>
-                        {/* {<VariableButton />} */}
+                        {fakeEventType.variables.map((variable, index) => {
+                          return (
+                            <EventVariableButton
+                              isFirst={index === 1}
+                              key={`readable-variable-${index}`}
+                              editVariables={this.state.editVariables}
+                              event={this.state.event}
+                              handleVariables={this.handleVariables}
+                              variable={variable}
+                            />
+                          )
+                        })}
+                        
                       </div>
                     </div>
                   </div>

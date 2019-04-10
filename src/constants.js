@@ -44,7 +44,7 @@ export const en = {
       }
     },
     address: {
-      contractAddress: {
+      tokenContractAddress: {
         default: '[address]'
       },
       senderAddress: {
@@ -57,7 +57,7 @@ export const en = {
   },
   placeholders: {
     amount: `Amount in Ether`,
-    contractAddress: `Contract Address (ie. 0x1234 ...)`,
+    tokenContractAddress: `Contract Address (ie. 0x1234 ...)`,
     senderAddress: `Sender's Address (ie. 0x1234 ...)`,
     recipientAddress: `Recipient's Address (ie. 0x1234 ...)`
   }
