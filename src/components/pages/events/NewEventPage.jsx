@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import classnames from 'classnames'
@@ -7,6 +7,7 @@ import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
+import { EventVariableButton } from '~/components/events/EventVariableButton'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { saveEventMutation } from '~/mutations/saveEventMutation'
@@ -19,7 +20,7 @@ import * as CONSTANTS from '~/constants'
 
 export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutation' })(
   graphql(currentUserQuery, { name: 'currentUserData' })(
-    class _NewEventPage extends PureComponent {
+    class _NewEventPage extends Component {
       state = {
         event: {
           frequency: 'default',
@@ -160,7 +161,6 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           </button>
         )
       }
-
 
       recipientButton = () => {
         return (
@@ -476,7 +476,15 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                         {this.frequencyButton()} an ERC20 Transfer event occurs
                         <br />
                         <span className='event-box__text'>
-                          where the token contract address is {this.contractAddressButton()}
+                          where the token contract address is 
+                          <EventVariableButton
+                            event={this.state.event}
+                            handleVariables={this.handleVariables}
+                            variable={{
+                              name: 'contractAddress',
+                              type: 'address'
+                            }}
+                          />
                         </span>
 
                         <br />
@@ -486,12 +494,28 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
                         <br />
                         <span className='event-box__text'>
-                          and the sender is {this.senderButton()}
+                          and the sender is 
+                          <EventVariableButton
+                            event={this.state.event}
+                            handleVariables={this.handleVariables}
+                            variable={{
+                              name: 'senderAddress',
+                              type: 'address'
+                            }}
+                          />
                         </span>
 
                         <br />
                         <span className='event-box__text'>
-                          and the recipient is {this.recipientButton()}
+                          and the recipient is 
+                          <EventVariableButton
+                            event={this.state.event}
+                            handleVariables={this.handleVariables}
+                            variable={{
+                              name: 'recipientAddress',
+                              type: 'address'
+                            }}
+                          />
                         </span>
                         {/* {<VariableButton />} */}
                       </div>

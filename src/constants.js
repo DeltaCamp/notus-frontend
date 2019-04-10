@@ -40,7 +40,7 @@ export const en = {
       lte: '[amount] or less',
       asdf: 'asdf'
     },
-    addresses: {
+    address: {
       default: '[address]'
     }
   },
