@@ -55,18 +55,28 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
     // sourceDataType: 'address',
     //   description: 'Token Contract Address',
 
-    const andWord = this.props.isFirst ? '' : 'and'
+    const andWord = (this.props.isFirst || this.props.isFrequency) ? 'where' : '... and'
+    let humanReadableDescription = null
+
+    if (!this.props.isFrequency) {
+      humanReadableDescription = (
+        <>
+          <br />
+          <span className='event-box__text'>
+            {andWord} the {description.toLowerCase()} is
+          </span>
+        </>
+      )
+    }
 
     return (
       <>
-        <br />
-        <span className='event-box__text'>
-          {andWord} the {description.toLowerCase()} is
-        </span>
+        {humanReadableDescription}
+
         <button
           className={classnames(
             `event-box__variable`,
-            `has-hint`,
+            // `has-hint`,
             {
               'is-active': this.props.isEditing && this.props.editVariables.includes(name)
             }
@@ -79,10 +89,10 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
           <span className='event-box__variable-value'>
             {this.convertTemplate(name, type)}
           </span>
-          <span
+          {/* <span
             className='hint'
             style={{'textTransform': 'capitalize'}}
-          >{name}</span>
+          >{name}</span> */}
         </button>
       </>
     )

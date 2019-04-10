@@ -252,7 +252,6 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                 <div className='container'>
                   <div className='row'>
                     <div className='col-xs-12 has-text-centered is-size-4'>
-                    {/* <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'> */}
                       <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
                         {event.name}
                       </h6>
@@ -272,12 +271,14 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                           handleVariables={this.handleVariables}
                           variable={{
                             description: 'Frequency',
-                            type: 'string'
+                            sourceDataType: 'string',
+                            isPublic: true
                           }}
+                          isFrequency={true}
                         />
 
                         <span className="event-box__text">
-                          an ERC20 Transfer event occurs where
+                          an ERC20 Transfer event occurs
                         </span>
 
                         {fakeEventType.variables.map((variable, index) => {

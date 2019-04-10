@@ -43,7 +43,7 @@
 .event-box {
   // margin: 1rem 0;
   font-weight: 600;
-  line-height: 3.5;
+  line-height: 2.5;
   padding: 1.5rem 0;
   width: 100%;
 
@@ -137,8 +137,15 @@
 }
 
 .event-box__text {
-  margin: 0.5rem 0.5rem;
+  display: inline-block;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   transition: all 275ms ease-in-out;
+
+  @media screen and (max-width: $tablet) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .event-box__variable {
@@ -147,16 +154,20 @@
   border-radius: 10px;
   color: white;
   cursor: pointer;
+  display: inline-block;
+  top: -0.1rem;
+  position: relative;
   margin: 0.5rem 0.5rem;
   max-width: 360px;
   min-width: 180px;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 1rem;
   position: relative;
-  font-size: inherit;
+  font-size: 1.5rem;
   font-weight: 600;
   transition: all 275ms ease-in-out;
 
   @media screen and (max-width: $tablet) {
+    font-size: 1.25rem;
     margin-left: 0;
     margin-right: 0;
     width: 100%;
