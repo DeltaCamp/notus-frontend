@@ -13,36 +13,16 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { saveEventMutation } from '~/mutations/saveEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
-import { EVENT_TYPES } from '~/../config/eventTypes'
+// import { EVENT_TYPES } from '~/../config/eventTypes'
 import * as routes from '~/../config/routes'
 
 export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutation' })(
   graphql(currentUserQuery, { name: 'currentUserData' })(
     class _NewEventPage extends Component {
       state = {
-        event: {
-          eventTypeId: 12345,
-          matchers: [
-            {
-              variableId: 8756, // var id, var needs to exist beforehand
-              type: '', // int of enum type,   0 EQ, 1 LT, 2 GT, 3 LTE, 4 GTE
-              operand: '', // value
-            },
-            {
-              frequency: 'default',
-              comparison: '',
-              amount: '0',
-              tokenContractAddress: '',
-              senderAddress: '',
-              recipientAddress: '',
-              createdAt: null
-            }
-          ]
-        },
-        editVariables: [],
+        editVariable: null,
         variableOne: '',
-        variableTwo: '',
-        variableThree: ''
+        variableTwo: ''
       }
 
       static propTypes = {
@@ -62,85 +42,47 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         }
       }
 
-      handleSaveEvent = (e) => {
-        e.preventDefault()
-        console.log('event', this.state.event)
-
-        this.props.saveEventMutation().then(() => {
-          // this.closeMobileNav()
-          // this.props.history.push(routes.SIGNIN)
-          // toast('Successfully signed out. Thanks for using Notus!')
-        }).catch(error => {
-          console.error(error)
-        })
-      }
-
-      handleVariables = (variableArray) => {
-        this.setState({
-          editVariables: variableArray
-        })
-      }
-
-      handleCancelVariable = (e) => {
-        e.preventDefault()
-
-        this.handleVariables([])
-      }
-
-      handleVariableChange = (varName, type, val) => {
-        const key = varName === 'variableOne'
-          ? this.state.editVariables[0]
-          : this.state.editVariables[1]
-
-        if (type === 'decimal') {
-          // note: currently does not handle negative values:
-          val = val.replace(/[^0-9.]/g, '')
-        }
-
-        this.setState({
-          [varName]: val
-        }, this.updateEvent(key, val))
-      }
-
-      updateEvent = (key, val) => {
-        this.setState({
-          event: {
-            ...this.state.event,
-            [key]: val
-          }
-        })
-      }
-
-      isEditing = () => {
-        return this.state.editVariables.length > 0
-      }
-
-      render () {
+      componentDidMount() {
         let colorClass,
           altColorClass
 
-        if (this.state.redirect) {
-          return <Redirect to={routes.SIGNIN} />
+        // const eventTypeId = this.props.match.params.eventTypeId
+
+        // let recipe = EVENT_TYPES.find(
+        //   (eventType) => (eventType.id === parseInt(eventTypeId, 10))
+        // )
+
+        const newRecipe = {
+          frequency: 'default',
+          name: 'When this happens trigger that',
+          createdAt: null
         }
 
-        const eventTypeId = this.props.match.params.eventTypeId
+        // recipe: {
+        //   eventTypeId: 12345,
+        //     matchers: [
+        //       {
+        //         variableId: 8756, // var id, var needs to exist beforehand
+        //         type: '', // int of enum type,   0 EQ, 1 LT, 2 GT, 3 LTE, 4 GTE
+        //         operand: '', // value
+        //       }
+        //     ],
+        //       variables: [],
+        //         createdAt: null
+        // },
 
-        let event = EVENT_TYPES.find(
-          (eventType) => (eventType.id === parseInt(eventTypeId, 10))
-        )
+        let recipe = {
+          id: 8,
+          name: 'ERC20 Token Transfer event',
 
-        if (event) {
-          colorClass = brandColor(event.id)
-          altColorClass = altBrandColor(event.id + 1)
-        } else {
-          event = {
-            name: 'When this happens trigger that'
-          }
-          colorClass = 'is-dark'
-          altColorClass = 'is-blue'
-        }
+          frequency: 'default',
+          operator: '',
+          amount: '0',
+          tokenContractAddress: '',
+          senderAddress: '',
+          recipientAddress: '',
+          createdAt: null,
 
-        const fakeEventType = {
           variables: [
             {
               source: 'transaction.to',
@@ -180,6 +122,102 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           ]
         }
 
+        const event = recipe
+
+        if (!recipe) {
+          recipe = newRecipe
+        }
+
+        this.setState({
+          event,
+          recipe
+        })
+
+
+
+
+        if (recipe) {
+          colorClass = brandColor(recipe.id)
+          altColorClass = altBrandColor(recipe.id + 1)
+        } else {
+          colorClass = 'is-dark'
+          altColorClass = 'is-blue'
+        }
+        console.log(colorClass, altColorClass)
+       
+        this.setState({
+          colorClass,
+          altColorClass
+        })
+      }
+
+      handleSaveEvent = (e) => {
+        e.preventDefault()
+        console.log('event', this.state.event)
+
+        this.props.saveEventMutation().then(() => {
+          // this.closeMobileNav()
+          // this.props.history.push(routes.SIGNIN)
+          // toast('Successfully signed out. Thanks for using Notus!')
+        }).catch(error => {
+          console.error(error)
+        })
+      }
+
+      handleSetEditVariable = (editVariable) => {
+        this.setState({
+          editVariable
+        })
+      }
+
+      handleCancelVariable = (e) => {
+        e.preventDefault()
+
+        this.handleSetEditVariable(null)
+      }
+
+      handleInputChange = (varName, type, val) => {
+        const key = this.state.editVariable
+        console.log('key', key)
+        console.log('varName', varName)
+        console.log('type', type)
+        console.log('val', val)
+
+        if (type === 'decimal') {
+          // note: currently does not handle negative values:
+          val = val.replace(/[^0-9.]/g, '')
+        }
+
+        this.setState({
+          [varName]: val
+        }, this.updateEvent(key, val))
+      }
+
+      updateEvent = (key, val) => {
+        this.setState({
+          event: {
+            ...this.state.event,
+            [key]: val
+          }
+        })
+        console.log(this.state.event)
+      }
+
+      isEditing = () => {
+        return this.state.editVariable !== null
+      }
+
+      render () {
+        if (this.state.redirect) {
+          return <Redirect to={routes.SIGNIN} />
+        }
+
+        if (!this.state.event) {
+          // SHOW LOADING STATE!
+          return null
+        }
+        
+
         const variableForm = (
           <>          
             <div className='drawer has-bg__dark'>
@@ -189,9 +227,9 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                     <form className='form mt20'>
 
                       <EditEventVariableForm
-                        editVariables={this.state.editVariables}
+                        editVariable={this.state.editVariable}
                         event={this.state.event}
-                        handleVariableChange={this.handleVariableChange}
+                        handleInputChange={this.handleInputChange}
                       />
 
                       <div className='buttons'>
@@ -225,7 +263,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
               className={`drawer__clickbox ${this.isEditing() ? 'is-active' : null}`}
               onClick={(e) => {
                 e.preventDefault()
-                this.handleVariables([])
+                this.handleSetEditVariable(null)
               }}
             />
           </>
@@ -253,22 +291,22 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                   <div className='row'>
                     <div className='col-xs-12 has-text-centered is-size-4'>
                       <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                        {event.name}
+                        {this.state.recipe.name}
                       </h6>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className={`event-box event-box__header ${colorClass}`}>
+              <div className={`event-box event-box__header ${this.state.colorClass}`}>
                 <div className={`container-fluid pt20 pb20`}>
                   <div className='container'>
                     <div className='row'>
                       <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
                         <EventVariableButton
-                          editVariables={this.state.editVariables}
+                          editVariable={this.state.editVariable}
                           event={this.state.event}
-                          handleVariables={this.handleVariables}
+                          handleSetEditVariable={this.handleSetEditVariable}
                           variable={{
                             description: 'Frequency',
                             sourceDataType: 'string',
@@ -281,14 +319,14 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                           an ERC20 Transfer event occurs
                         </span>
 
-                        {fakeEventType.variables.map((variable, index) => {
+                        {this.state.recipe.variables.map((variable, index) => {
                           return (
                             <EventVariableButton
                               isFirst={index === 1}
                               key={`readable-variable-${index}`}
-                              editVariables={this.state.editVariables}
+                              editVariable={this.state.editVariable}
                               event={this.state.event}
-                              handleVariables={this.handleVariables}
+                              handleSetEditVariable={this.handleSetEditVariable}
                               variable={variable}
                             />
                           )
@@ -300,7 +338,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                 </div>
               </div>
 
-              <div className={`event-box event-box__footer ${altColorClass}`}>
+              <div className={`event-box event-box__footer ${this.state.altColorClass}`}>
                 <div className={`container-fluid`}>
                   <div className='container'>
                     <div className='row'>

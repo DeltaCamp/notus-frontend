@@ -7,16 +7,22 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
 
   convertTemplate = (name, type) => {
     let val = this.props.event[name]
-    // console.log('type', type, 'name', name, val, val)
 
     if (!val) {
-      return `[${name}]`
+      // return `[${name}]`
+      // val = 'default'
+      return CONSTANTS.en.templates[type][name]['default']
     }
 
+    // console.log('template lookup is: ', `templates.${type}.${name}.${val}`)
+
+    // try to get a template such as "gt: 'more than [amount]'," or "gte: '[amount] or more',"
     const template = CONSTANTS.en.templates[type][name][val]
 
     if (!template) {
-      return `[${name}]`
+      // rollbar.error(`No template found for ${name} !`)
+      // template = `[${name}]`
+      return val
     }
 
     try {
@@ -49,11 +55,7 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
     }
 
     const name = description.charAt(0).toLowerCase() + description.replace(/ /g, '').slice(1)
-    console.log(name)
     const type = sourceDataType
-
-    // sourceDataType: 'address',
-    //   description: 'Token Contract Address',
 
     const andWord = (this.props.isFirst || this.props.isFrequency) ? 'where' : '... and'
     let humanReadableDescription = null
@@ -83,7 +85,7 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
           )}
           onClick={(e) => {
             e.preventDefault()
-            this.props.handleVariables([name])
+            this.props.handleSetEditVariable(name)
           }}
         >
           <span className='event-box__variable-value'>

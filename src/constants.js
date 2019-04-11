@@ -17,7 +17,7 @@ export const en = {
       everyTime: 'Every time',
       onlyOnce: 'Only once'
     },
-    comparisons: {
+    operators: {
       gt: 'more than',
       lt: 'less than',
       eq: 'equal to',
@@ -35,7 +35,7 @@ export const en = {
     },
     uint256: {
       amount: {
-        default: '[amount]',
+        default: 'enter amount',
         gt: 'more than [amount]',
         lt: 'less than [amount]',
         eq: '[amount]',
@@ -45,13 +45,13 @@ export const en = {
     },
     address: {
       tokenContractAddress: {
-        default: '[address]'
+        default: 'enter address'
       },
       senderAddress: {
-        default: '[address]'
+        default: 'enter address'
       },
       recipientAddress: {
-        default: '[address]'
+        default: 'enter address'
       }
     }
   },
