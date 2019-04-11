@@ -175,40 +175,48 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         this.handleSetEditVariable(null)
       }
 
-      handleInputChange = (variable, operatorVal, operandVal) => {
+      handleInputChange = (variable, operatorOrOperand, newValue) => {
         const {
           description,
           sourceDataType
         } = variable
 
         const name = varDescriptionToVarName(description)
-        // const key = this.state.editVariable
-
-        console.log('name', name)
-        console.log('sourceDataType', sourceDataType)
-        console.log('operandVal', operandVal)
 
         if (sourceDataType === 'uint256') {
           // note: currently does not handle negative values:
-          operandVal = operandVal.replace(/[^0-9.]/g, '')
+          newValue = newValue.replace(/[^0-9.]/g, '')
+        }
+
+        let matcher = this.state[name]
+        if (!matcher) {
+          matcher = {
+            operator: '0',
+            operand: newValue
+          }
+        }
+
+        if (operatorOrOperand === 'operator') {
+          matcher.operator = newValue
+        } else {
+          matcher.operand = newValue
         }
 
         this.setState({
-          [name]: {
-            operator: operatorVal,
-            operand: operandVal
-          }
+          [name]: matcher
         }, this.updateEventMatcher(name))
       }
 
       updateEventMatcher = (key, val) => {
-        console.log("TO IMPLEMENT!")
+        // console.log("TO IMPLEMENT!")
+        
         // this.setState({
         //   event: {
         //     ...this.state.event,
         //     [key]: val
         //   }
         // })
+
         console.log(this.state)
       }
 

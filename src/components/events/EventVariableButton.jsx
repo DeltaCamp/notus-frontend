@@ -10,24 +10,31 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
     let operand,
       operator
     let matcher = this.props.state[name]
-
+    
     // console.log('matcher', matcher)
     // console.log(type)
 
+    // hack for freq
     if (name === 'frequency') {
       type = 'frequency'
+      
+      if (matcher) {
+        return CONSTANTS.en.templates['frequency'][matcher.operand]
+      }
     }
 
     if (!matcher) {
       return CONSTANTS.en.templates[type]['default']
-    } else {
-      operand = matcher.operand
-      operator = matcher.operand
     }
 
-    if (type === 'uint256') {
-      operator = matcher.operator
-    }
+    console.log(matcher)
+
+    operand = matcher.operand
+    operator = matcher.operator
+
+    // if (type === 'uint256') {
+    //   operator = matcher.operator
+    // }
 
     console.log('template lookup is: ', `templates.${type}.${operator}`)
     const template = CONSTANTS.en.templates[type][operator]
