@@ -234,7 +234,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
                       <EditEventVariableForm
                         editVariable={this.state.editVariable}
-                        event={this.state.event}
+                        state={this.state}
                         handleInputChange={this.handleInputChange}
                       />
 

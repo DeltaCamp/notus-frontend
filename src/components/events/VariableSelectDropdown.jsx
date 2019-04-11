@@ -4,7 +4,7 @@ import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
 export const VariableSelectDropdown = ({
   variable,
   operatorOrOperand,
-  event,
+  state,
   handleInputChange,
   selectOptions
 }) => {
@@ -18,12 +18,20 @@ export const VariableSelectDropdown = ({
     )
   }
 
+  const matcher = state[name]
+  let value
+  if (matcher) {
+    value = matcher[operatorOrOperand]
+  } else {
+    value = ''
+  }
+
   return (
     <div className='field'>
       <div className='control'>
         <div className='select'>
           <select
-            value={event[name]}
+            value={value}
             onFocus={(e) => {
               callback(e)
             }}

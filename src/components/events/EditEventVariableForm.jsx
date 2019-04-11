@@ -7,16 +7,16 @@ import * as CONSTANTS from '~/constants'
 export const EditEventVariableForm = class _EditEventVariableForm extends PureComponent {
 
   uint256Inputs = (variable) => {
-    const selectOptions = Object.keys(CONSTANTS.OPERATORS).map((operator, index) => {
-      return {
+    const selectOptions = Object.keys(CONSTANTS.OPERATORS).map((operator, index) => (
+      {
         value: CONSTANTS.OPERATORS[operator],
         text: CONSTANTS.en.formFields.operators[index]
       }
-    }) 
+    )) 
 
     return <>
       <VariableSelectDropdown
-        event={this.props.event}
+        state={this.props.state}
         handleInputChange={this.props.handleInputChange}
         variable={variable}
         operatorOrOperand='operator'
@@ -24,7 +24,7 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
       />
 
       <VariableTextInput
-        event={this.props.event}
+        state={this.props.state}
         handleInputChange={this.props.handleInputChange}
         variable={variable}
         operatorOrOperand='operand'
@@ -53,7 +53,7 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
       ]
 
       inputs = <VariableSelectDropdown
-        event={this.props.event}
+        state={this.props.state}
         handleInputChange={this.props.handleInputChange}
         variable={variable}
         operatorOrOperand='operand'
@@ -63,7 +63,7 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
       inputs = this.uint256Inputs(variable)
     } else if (variableIsStringish) {
       inputs = <VariableTextInput
-        event={this.props.event}
+        state={this.props.state}
         handleInputChange={this.props.handleInputChange}
         variable={variable}
         operatorOrOperand='operand'

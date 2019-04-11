@@ -2,7 +2,12 @@ import React from 'react'
 import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
 import * as CONSTANTS from '~/constants'
 
-export const VariableTextInput = ({ variable, operatorOrOperand, event, handleInputChange }) => {
+export const VariableTextInput = ({
+  variable,
+  operatorOrOperand,
+  state,
+  handleInputChange
+}) => {
   let placeholder = `${variable.description}`
 
   if (variable.sourceDataType === 'address') {
@@ -12,6 +17,14 @@ export const VariableTextInput = ({ variable, operatorOrOperand, event, handleIn
   }
 
   const name = varDescriptionToVarName(variable.description)
+
+  const matcher = state[name]
+  let value
+  if (matcher) {
+    value = matcher[operatorOrOperand]
+  } else {
+    value = ''
+  }
 
   return (
     <div className='field'>
@@ -31,7 +44,7 @@ export const VariableTextInput = ({ variable, operatorOrOperand, event, handleIn
               e.target.value
             )
           }}
-          value={event[name]}
+          value={value}
         />
       </div>
     </div>
