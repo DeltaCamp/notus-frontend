@@ -115,6 +115,7 @@
 .drawer-inputs {
   display: flex;
   flex-grow: 1;
+  height: 50px;
 
   @media screen and (max-width: $tablet - 203px) {
     display: block;

@@ -54,8 +54,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
         const newRecipe = {
           frequency: 'default',
-          name: 'When this happens trigger that',
-          createdAt: null
+          name: 'When this happens trigger that'
         }
 
         // recipe: {
@@ -74,15 +73,6 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         let recipe = {
           id: 8,
           name: 'ERC20 Token Transfer event',
-
-          frequency: 'default',
-          operator: '',
-          amount: '0',
-          tokenContractAddress: '',
-          senderAddress: '',
-          recipientAddress: '',
-          createdAt: null,
-
           variables: [
             {
               source: 'transaction.to',
@@ -129,11 +119,8 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         }
 
         this.setState({
-          // event,
           recipe
         })
-
-
 
 
         if (recipe) {
@@ -152,12 +139,9 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
       handleSaveEvent = (e) => {
         e.preventDefault()
-        // console.log('event', this.state.event)
 
         this.props.saveEventMutation().then(() => {
-          // this.closeMobileNav()
-          // this.props.history.push(routes.SIGNIN)
-          // toast('Successfully signed out. Thanks for using Notus!')
+          toast('Successfully saved event!')
         }).catch(error => {
           console.error(error)
         })
@@ -166,10 +150,10 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
       handleSetEditVariable = (editVariable) => {
         this.setState({
           editVariable
-        }, () => { console.log(this.state) })
+        })
       }
 
-      handleCancelVariable = (e) => {
+      handleCancelEditVariable = (e) => {
         e.preventDefault()
 
         this.handleSetEditVariable(null)
@@ -216,8 +200,6 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         //     [key]: val
         //   }
         // })
-
-        console.log(this.state)
       }
 
       isEditing = () => {
@@ -259,7 +241,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                       <div className='buttons'>
                         {/* <button
                           className='button has-icon has-stroke-red'
-                          onClick={this.handleCancelVariable}
+                          onClick={this.handleCancelEditVariable}
                         >
                           <XCircle
                             className='icon__button has-stroke-red'
@@ -268,7 +250,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
                         <button
                           className='button has-icon has-stroke-green'
-                          onClick={this.handleCancelVariable}
+                          onClick={this.handleCancelEditVariable}
                         >
                           <CheckCircle
                             className='icon__button has-stroke-green'
@@ -287,7 +269,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
               className={`drawer__clickbox ${this.isEditing() ? 'is-active' : null}`}
               onClick={(e) => {
                 e.preventDefault()
-                this.handleSetEditVariable(null)
+                this.handleCancelEditVariable(e)
               }}
             />
           </>
@@ -334,12 +316,12 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                         {this.state.recipe.variables.map((variable, index) => {
                           return (
                             <EventVariableButton
-                              isFirst={index === 1}
                               key={`readable-variable-${index}`}
                               editVariable={this.state.editVariable}
                               state={this.state}
                               handleSetEditVariable={this.handleSetEditVariable}
                               variable={variable}
+                              isFirst={index === 1}
                             />
                           )
                         })}

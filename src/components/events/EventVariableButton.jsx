@@ -10,11 +10,9 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
     let operand,
       operator
     let matcher = this.props.state[name]
-    
-    // console.log('matcher', matcher)
-    // console.log(type)
 
-    // hack for freq
+    
+    // hack for freq!
     if (name === 'frequency') {
       type = 'frequency'
       
@@ -23,25 +21,19 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
       }
     }
 
+
+
     if (!matcher) {
       return CONSTANTS.en.templates[type]['default']
     }
 
-    console.log(matcher)
-
     operand = matcher.operand
     operator = matcher.operator
 
-    // if (type === 'uint256') {
-    //   operator = matcher.operator
-    // }
-
-    console.log('template lookup is: ', `templates.${type}.${operator}`)
+    // console.log('template lookup is: ', `templates.${type}.${operator}`)
     const template = CONSTANTS.en.templates[type][operator]
 
     if (!template) {
-      // console.log('returning value: ', operand)
-
       return operand
     }
 
@@ -51,7 +43,6 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
       rollbar.error(`convertTemplate() called with ${template} to replace operand: ${operand} but ${err.message}`)
     }
     
-    // console.log('returning operand: ', operand)
     return operand
   }
 

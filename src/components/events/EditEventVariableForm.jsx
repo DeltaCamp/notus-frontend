@@ -6,28 +6,12 @@ import * as CONSTANTS from '~/constants'
 export const EditEventVariableForm = class _EditEventVariableForm extends PureComponent {
 
   uint256Inputs = (variable) => {
-    const selectOptions = [
-      {
-        value: CONSTANTS.OPERATORS.EQ,
-        text: CONSTANTS.en.formFields.operators[CONSTANTS.OPERATORS.EQ]
-      },
-      {
-        value: CONSTANTS.OPERATORS.LT,
-        text: CONSTANTS.en.formFields.operators[CONSTANTS.OPERATORS.LT]
-      },
-      {
-        value: CONSTANTS.OPERATORS.GT,
-        text: CONSTANTS.en.formFields.operators[CONSTANTS.OPERATORS.GT]
-      },
-      {
-        value: CONSTANTS.OPERATORS.LTE,
-        text: CONSTANTS.en.formFields.operators[CONSTANTS.OPERATORS.LTE]
-      },
-      {
-        value: CONSTANTS.OPERATORS.GTE,
-        text: CONSTANTS.en.formFields.operators[CONSTANTS.OPERATORS.GTE]
-      },
-    ]
+    const selectOptions = Object.keys(CONSTANTS.OPERATORS).map((operator, index) => {
+      return {
+        value: CONSTANTS.OPERATORS[operator],
+        text: CONSTANTS.en.formFields.operators[index]
+      }
+    }) 
 
     return <>
       {this.selectDropdown(variable, 'operator', selectOptions)}
