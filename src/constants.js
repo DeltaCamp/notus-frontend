@@ -27,8 +27,8 @@ export const FREQUENCIES = {
 export const en = {
   formFields: {
     frequencies: {
-      [FREQUENCIES.EVERY_TIME]: 'Every time',
-      [FREQUENCIES.ONLY_ONCE]: 'Only once'
+      [FREQUENCIES.EVERY_TIME]: 'every time',
+      [FREQUENCIES.ONLY_ONCE]: 'only once'
     },
     operators: {
       [OPERATORS.EQ]: 'equal to',
@@ -40,9 +40,9 @@ export const en = {
   },
   templates: {
     frequency: { // type
-      default: 'Choose how often',
-      [FREQUENCIES.EVERY_TIME]: 'Every time',
-      [FREQUENCIES.ONLY_ONCE]: 'Only once'
+      default: 'how often',
+      [FREQUENCIES.EVERY_TIME]: 'every time',
+      [FREQUENCIES.ONLY_ONCE]: 'only once'
     },
     uint256: {
       default: 'enter amount',

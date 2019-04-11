@@ -224,6 +224,12 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         return this.state.editVariable !== null
       }
 
+      recipeSentence = () => {
+        let str = !this.state.recipe.name.charAt(0).match(/[aeiou]/) ? `an ` : `a `
+        str += this.state.recipe.name
+        return str
+      }
+
       render () {
         if (this.state.redirect) {
           return <Redirect to={routes.SIGNIN} />
@@ -233,6 +239,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           // SHOW LOADING STATE! or implement new event without recipe
           return null
         }
+
         
 
         const variableForm = (
@@ -320,20 +327,8 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                   <div className='container'>
                     <div className='row'>
                       <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
-                        <EventVariableButton
-                          editVariable={this.state.editVariable}
-                          state={this.state}
-                          handleSetEditVariable={this.handleSetEditVariable}
-                          variable={{
-                            description: 'Frequency',
-                            sourceDataType: 'string',
-                            isPublic: true
-                          }}
-                          isFrequency={true}
-                        />
-
                         <span className="event-box__text">
-                          an ERC20 Transfer event occurs
+                          When {this.recipeSentence()} occurs
                         </span>
 
                         {this.state.recipe.variables.map((variable, index) => {
@@ -361,7 +356,19 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                     <div className='row'>
                       <div className='col-xs-12 has-text-centered is-size-4'>
                         {/* ... then turn on my Phillips Hue lightbulb */}
-                        ... then send me an email
+                        ... then send me an email&nbsp;
+                        <EventVariableButton
+                          editVariable={this.state.editVariable}
+                          state={this.state}
+                          handleSetEditVariable={this.handleSetEditVariable}
+                          variable={{
+                            description: 'Frequency',
+                            sourceDataType: 'string',
+                            isPublic: true
+                          }}
+                          isFrequency={true}
+                        />
+
                       </div>
                     </div>
                   </div>
