@@ -42,10 +42,10 @@
 .drawer.drawer-enter-active,
 .drawer.drawer-enter-done {
   bottom: -20px;
-  height: 180px;
+  height: 140px;
 
   @media screen and (max-width: $tablet) {
-    height: 220px;
+    height: 200px;
   }
 }
 
@@ -68,7 +68,7 @@
 }
 
 .drawer .field:not(:last-child) {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 
   @media screen and (max-width: $tablet - 203px) {
     margin-left: 0;
@@ -77,36 +77,31 @@
 }
 
 .drawer .form .select {
+  display: flex;
+  flex-direction: column;
+
   @media screen and (max-width: $tablet - 203px) {
     width: 100%;
   }
+}
+
+.drawer .form .input {
+  height: 60px !important;
 }
 
 .drawer .form .select select {
-  width: 360px;
-
-  @media screen and (max-width: $widescreen) {
-    width: 260px;
-  }
-
-  @media screen and (max-width: $desktop) {
-    width: 260px;
-  }
-
-  @media screen and (max-width: $tablet) {
-    width: 200px;
-  }
-
-  @media screen and (max-width: $tablet - 203px) {
-    width: 100%;
-  }
+  height: 60px !important;
+  line-height: 2;
 }
 
+.has-bg .form .button.has-icon,
+.has-bg__dark .form .button.has-icon,
 .drawer .button.has-icon {
-  height: 44px;
-  margin-left: 0;
+  border: 0;
+  height: 60px;
+  margin-left: 20px;
   margin-right: 0;
-  width: 44px;
+  width: 60px;
 }
 
 .drawer .buttons .button:not(:last-child):not(.is-fullwidth) {
@@ -114,24 +109,38 @@
 }
 
 .drawer .buttons {
-  justify-content: flex-end;
+  display: flex;
 }
 
 .drawer-inputs {
   display: flex;
+  flex-grow: 1;
 
   @media screen and (max-width: $tablet - 203px) {
     display: block;
   }
+}
+
+.drawer-inputs .control:last-child {
+  flex: initial;
+}
+
+.drawer-inputs .control:first-child {
+  flex: initial;
 }
 
 .drawer-inputs .field {
   display: flex;
   flex-grow: 1;
   flex-flow: column;
-  flex: 0 0 50%;
 
   @media screen and (max-width: $tablet - 203px) {
     display: block;
   }
+}
+
+.drawer-form {
+  align-items: flex-end;
+  display: flex;
+  justify-content: center;
 }

@@ -1,39 +1,28 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import classnames from 'classnames'
 import { CheckCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
+import { EditEventVariableForm } from '~/components/events/EditEventVariableForm'
+import { EventVariableButton } from '~/components/events/EventVariableButton'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { saveEventMutation } from '~/mutations/saveEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
-import { rollbar } from '~/../config/rollbar'
-import { EVENT_TYPES } from '~/../config/eventTypes'
+import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
+// import { EVENT_TYPES } from '~/../config/eventTypes'
 import * as routes from '~/../config/routes'
-import * as CONSTANTS from '~/constants'
 
 export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutation' })(
   graphql(currentUserQuery, { name: 'currentUserData' })(
-    class _NewEventPage extends PureComponent {
+    class _NewEventPage extends Component {
       state = {
-        event: {
-          frequency: 'default',
-          comparison: 'default',
-          amount: '0',
-          contractAddress: '',
-          senderAddress: '',
-          recipientAddress: '',
-          createdAt: null
-        },
-        editVariables: [],
-        variableOne: '',
-        variableTwo: '',
-        variableThree: ''
+        event: {},
+        editVariable: null
       }
 
       static propTypes = {
@@ -53,9 +42,117 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         }
       }
 
+      componentDidMount() {
+        let colorClass,
+          altColorClass
+
+        // const eventTypeId = this.props.match.params.eventTypeId
+
+        // let recipe = EVENT_TYPES.find(
+        //   (eventType) => (eventType.id === parseInt(eventTypeId, 10))
+        // )
+
+        const newRecipe = {
+          frequency: 'default',
+          name: 'When this happens trigger that',
+          createdAt: null
+        }
+
+        // recipe: {
+        //   eventTypeId: 12345,
+        //     matchers: [
+        //       {
+        //         variableId: 8756, // var id, var needs to exist beforehand
+        //         type: '', // int of enum type,   0 EQ, 1 LT, 2 GT, 3 LTE, 4 GTE
+        //         operand: '', // value
+        //       }
+        //     ],
+        //       variables: [],
+        //         createdAt: null
+        // },
+
+        let recipe = {
+          id: 8,
+          name: 'ERC20 Token Transfer event',
+
+          frequency: 'default',
+          operator: '',
+          amount: '0',
+          tokenContractAddress: '',
+          senderAddress: '',
+          recipientAddress: '',
+          createdAt: null,
+
+          variables: [
+            {
+              source: 'transaction.to',
+              sourceDataType: 'address',
+              description: 'I should be hidden',
+              isPublic: false,
+
+            },
+            {
+              source: 'transaction.to',
+              sourceDataType: 'address',
+              description: 'Token Contract Address',
+              isPublic: true,
+
+            },
+            {
+              source: 'transaction.from',
+              sourceDataType: 'address',
+              description: 'Sender Address',
+              isPublic: true,
+
+            },
+            {
+              source: 'log.topic[2]',
+              sourceDataType: 'address',
+              description: 'Recipient Address',
+              isPublic: true,
+
+            },
+            {
+              source: 'log.topic[3]',
+              sourceDataType: 'uint256',
+              description: 'Amount',
+              isPublic: true,
+
+            }
+          ]
+        }
+
+        // const event = recipe
+
+        if (!recipe) {
+          recipe = newRecipe
+        }
+
+        this.setState({
+          // event,
+          recipe
+        })
+
+
+
+
+        if (recipe) {
+          colorClass = brandColor(recipe.id)
+          altColorClass = altBrandColor(recipe.id + 1)
+        } else {
+          colorClass = 'is-dark'
+          altColorClass = 'is-blue'
+        }
+       
+        this.setState({
+          colorClass,
+          altColorClass
+        })
+      }
+
       handleSaveEvent = (e) => {
         e.preventDefault()
-        console.log('event', this.state.event)
+        // console.log('event', this.state.event)
 
         this.props.saveEventMutation().then(() => {
           // this.closeMobileNav()
@@ -66,319 +163,69 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         })
       }
 
-      handleVariables = (variable) => {
+      handleSetEditVariable = (editVariable) => {
         this.setState({
-          editVariables: variable,
-          isEditing: true
-        })
-      }
-
-      drawerFormInputs = () => {
-        let inputs = null
-
-        if (this.state.editVariables.includes('frequency')) {
-          const selectOptions = [
-            { value: 'everyTime', text: CONSTANTS.en.formFields.frequencies['everyTime'] },
-            { value: 'onlyOnce', text: CONSTANTS.en.formFields.frequencies['onlyOnce'] }
-          ]
-
-          inputs = this.selectDropdown('frequency', 'variableOne', 'string', selectOptions)
-        } else if (this.state.editVariables.includes('amount')) {
-          const selectOptions = [
-            { value: 'gt', text: CONSTANTS.en.formFields.comparisons['gt'] },
-            { value: 'lt', text: CONSTANTS.en.formFields.comparisons['lt'] },
-            { value: 'eq', text: CONSTANTS.en.formFields.comparisons['eq'] },
-            { value: 'gte', text: CONSTANTS.en.formFields.comparisons['gte'] },
-            { value: 'lte', text: CONSTANTS.en.formFields.comparisons['lte'] }
-          ]
-
-          inputs = <>
-            {this.selectDropdown('comparison', 'variableOne', 'string', selectOptions)}
-            {this.textInput('amount', 'variableTwo', 'decimal')}
-          </>
-        } else if (this.state.editVariables.includes('contractAddress')) {
-          inputs = this.textInput('contractAddress', 'variableOne', 'string')
-        } else if (this.state.editVariables.includes('senderAddress')) {
-          inputs = <>
-            {this.textInput('senderAddress', 'variableOne', 'string')}
-          </>
-        } else if (this.state.editVariables.includes('recipientAddress')) {
-          inputs = <>
-            {this.textInput('recipientAddress', 'variableOne', 'string')}
-          </>
-        } else if (!this.state.editVariables.length) {
-          inputs = null
-        } else {
-          inputs = null
-          rollbar.error(
-            `drawerFormInputs() called with ${this.state.editVariables.toString()}: no matching variable type!`
-          )
-        }
-
-        return inputs
+          editVariable
+        }, () => { console.log(this.state) })
       }
 
       handleCancelVariable = (e) => {
         e.preventDefault()
 
-        this.setState({
-          isEditing: false
-        })
+        this.handleSetEditVariable(null)
       }
 
-      handleSaveVariable = (e) => {
-        e.preventDefault()
+      handleInputChange = (variable, operatorVal, operandVal) => {
+        const {
+          description,
+          sourceDataType
+        } = variable
 
-        // on success:
-        // this.setState({
-        //   isEditing: false
-        // })
-      }
+        const name = varDescriptionToVarName(description)
+        // const key = this.state.editVariable
 
-      senderButton = () => {
-        return (
-          <button
-            className={classnames(
-              `event-box__variable`,
-              `has-hint`,
-              {
-                'is-active': this.state.isEditing && this.state.editVariables.includes('senderAddress')
-              }
-            )}
-            onClick={(e) => {
-              e.preventDefault()
-              this.handleVariables(['senderAddress'])
-            }}
-          >
-            <span className='event-box__variable-value'>
-              {this.convertTemplate(
-                CONSTANTS.en.templates.addresses['default'],
-                this.state.event.senderAddress
-              )}
-            </span>
-            <span className='hint'>Sender</span>
-          </button>
-        )
-      }
+        console.log('name', name)
+        console.log('sourceDataType', sourceDataType)
+        console.log('operandVal', operandVal)
 
-
-      recipientButton = () => {
-        return (
-          <button
-            className={classnames(
-              `event-box__variable`,
-              `has-hint`,
-              {
-                'is-active': this.state.isEditing && this.state.editVariables.includes('recipientAddress')
-              }
-            )}
-            onClick={(e) => {
-              e.preventDefault()
-              this.handleVariables(['recipientAddress'])
-            }}
-          >
-            <span className='event-box__variable-value'>
-              {this.convertTemplate(
-                CONSTANTS.en.templates.addresses['default'],
-                this.state.event.recipientAddress
-              )}
-            </span>
-            <span className='hint'>Recipient</span>
-          </button>
-        )
-      }
-
-      contractAddressButton = () => {
-        return (
-          <button
-            className={classnames(
-              `event-box__variable`,
-              `has-hint`,
-              {
-                'is-active': this.state.isEditing && this.state.editVariables.includes('contractAddress')
-              }
-            )}
-            onClick={(e) => {
-              e.preventDefault()
-              this.handleVariables(['contractAddress'])
-            }}
-          >
-            <span className='event-box__variable-value'>
-              {this.convertTemplate(
-                CONSTANTS.en.templates.addresses['default'],
-                this.state.event.contractAddress
-              )}
-            </span>
-            <span className='hint'>Contract Address</span>
-          </button>
-        )
-      }
-
-      convertTemplate = (template, val) => {
-        if (val === '') {
-          return template
-        }
-
-        try {
-          val = template.replace(/(\[.*\])/, val)
-        } catch (err) {
-          rollbar.error(`convertTemplate() called with ${template} to replace text ${val} but ${err.message}`)
-        }
-        
-        return val
-      }
-
-      amountButton = () => {
-        return (
-          <button
-            className={classnames(
-              `event-box__variable`,
-              `has-hint`,
-              {
-                'is-active': this.state.isEditing && this.state.editVariables.includes('comparison')
-              }
-            )}
-            onClick={(e) => {
-              e.preventDefault()
-              this.handleVariables(['comparison', 'amount'])
-            }}
-          >
-            <span className='event-box__variable-value'>
-              {this.convertTemplate(
-                CONSTANTS.en.templates.comparisonsAndAmounts[this.state.event.comparison],
-                this.state.event.amount
-              )}
-            </span>
-            <span className='hint'>Transfer Amount</span>
-          </button>
-        )
-      }
-
-      frequencyButton = () => {
-        return (
-          <button
-            className={classnames(
-              `event-box__variable`,
-              `has-hint`,
-              {
-                'is-active': this.state.isEditing && this.state.editVariables.includes('frequency')
-              }
-            )}
-            onClick={(e) => {
-              e.preventDefault()
-              this.handleVariables(['frequency'])
-            }}
-          >
-            <span className='event-box__variable-value'>
-              {CONSTANTS.en.templates.frequencies[this.state.event.frequency]}
-            </span>
-            <span className='hint'>Freqency</span>
-          </button>
-        )
-      }
-
-      handleVariableChange = (varName, type, val) => {
-        const key = varName === 'variableOne'
-          ? this.state.editVariables[0]
-          : this.state.editVariables[1]
-
-        if (type === 'decimal') {
+        if (sourceDataType === 'uint256') {
           // note: currently does not handle negative values:
-          val = val.replace(/[^0-9.]/g, '')
+          operandVal = operandVal.replace(/[^0-9.]/g, '')
         }
 
         this.setState({
-          [varName]: val
-        }, this.updateEvent(key, val))
-      }
-
-      updateEvent = (key, val) => {
-        this.setState({
-          event: {
-            ...this.state.event,
-            [key]: val
+          [name]: {
+            operator: operatorVal,
+            operand: operandVal
           }
-        })
+        }, this.updateEventMatcher(name))
       }
 
-      textInput = (variableName, variableNumber, variableType, options = {}) => {
-        return (
-          <div className='field'>
-            <div className='control'>
-              <input
-                autoFocus={(variableNumber === 'variableOne')}
-                placeholder={CONSTANTS.en.placeholders[variableName]}
-                className='input is-small'
-                onClick={(e) => {
-                  e.target.setSelectionRange(0, e.target.value.length)
-                }}
-                onChange={(e) => {
-                  this.handleVariableChange(variableNumber, variableType, e.target.value)
-                }}
-                value={this.state.event[variableName]}
-              />
-            </div>
-          </div>
-        )
+      updateEventMatcher = (key, val) => {
+        console.log("TO IMPLEMENT!")
+        // this.setState({
+        //   event: {
+        //     ...this.state.event,
+        //     [key]: val
+        //   }
+        // })
+        console.log(this.state)
       }
 
-      selectDropdown = (variableName, variableNumber, variableType, selectOptions) => {
-        const callback = (e) => {
-          this.handleVariableChange(variableNumber, variableType, e.target.value)
-        }
-
-        return (
-          <div className='field'>
-            <div className='control'>
-              <div className='select'>
-                <select
-                  value={this.state.event[variableName]} 
-                  onFocus={(e) => {
-                    callback(e)
-                  }}
-                  onChange={(e) => {
-                    callback(e)
-                  }}
-                >
-                  {selectOptions.map((option, index) => (
-                    <option
-                      key={`${variableName}-options-${index}`}
-                      value={option.value}
-                    >
-                      {option.text}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-        )
+      isEditing = () => {
+        return this.state.editVariable !== null
       }
 
       render () {
-        let colorClass,
-          altColorClass
-
         if (this.state.redirect) {
           return <Redirect to={routes.SIGNIN} />
         }
 
-        const eventTypeId = this.props.match.params.eventTypeId
-
-        let event = EVENT_TYPES.find(
-          (eventType) => (eventType.id === parseInt(eventTypeId, 10))
-        )
-
-        if (event) {
-          colorClass = brandColor(event.id)
-          altColorClass = altBrandColor(event.id + 1)
-        } else {
-          event = {
-            name: 'When this happens trigger that'
-          }
-          colorClass = 'is-dark'
-          altColorClass = 'is-blue'
+        if (!this.state.recipe) {
+          // SHOW LOADING STATE! or implement new event without recipe
+          return null
         }
+        
 
         const variableForm = (
           <>          
@@ -386,11 +233,13 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
-                    <form className='form mt20'>
+                    <form className='form mt10 drawer-form'>
 
-                      <div className='drawer-inputs'>
-                        {this.drawerFormInputs()}
-                      </div>
+                      <EditEventVariableForm
+                        editVariable={this.state.editVariable}
+                        event={this.state.event}
+                        handleInputChange={this.handleInputChange}
+                      />
 
                       <div className='buttons'>
                         {/* <button
@@ -399,15 +248,6 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                         >
                           <XCircle
                             className='icon__button has-stroke-red'
-                          />
-                        </button> */}
-
-                        {/* <button 
-                          className='button has-icon has-stroke-green'
-                          onClick={this.handleSaveVariable}
-                        >
-                          <CheckCircle
-                            className='icon__button has-stroke-green'
                           />
                         </button> */}
 
@@ -429,10 +269,10 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
             {/* this needs to be at the bottom or it takes the <CSSTransition/> classes */}
             <div
-              className={`drawer__clickbox ${this.state.isEditing ? 'is-active' : null}`}
+              className={`drawer__clickbox ${this.isEditing() ? 'is-active' : null}`}
               onClick={(e) => {
                 e.preventDefault()
-                this.setState({ isEditing: false })
+                this.handleSetEditVariable(null)
               }}
             />
           </>
@@ -449,7 +289,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
             <CSSTransition
               timeout={300}
               classNames='drawer'
-              in={this.state.isEditing}
+              in={this.isEditing()}
             >
               {state => variableForm}
             </CSSTransition>
@@ -459,48 +299,55 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                 <div className='container'>
                   <div className='row'>
                     <div className='col-xs-12 has-text-centered is-size-4'>
-                    {/* <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'> */}
                       <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                        {event.name}
+                        {this.state.recipe.name}
                       </h6>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className={`event-box event-box__header ${colorClass}`}>
-                <div className={`container-fluid pt50 pb20`}>
+              <div className={`event-box event-box__header ${this.state.colorClass}`}>
+                <div className={`container-fluid pt20 pb20`}>
                   <div className='container'>
                     <div className='row'>
                       <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
-                        {this.frequencyButton()} an ERC20 Transfer event occurs
-                        <br />
-                        <span className='event-box__text'>
-                          where the token contract address is {this.contractAddressButton()}
+                        <EventVariableButton
+                          editVariable={this.state.editVariable}
+                          state={this.state}
+                          handleSetEditVariable={this.handleSetEditVariable}
+                          variable={{
+                            description: 'Frequency',
+                            sourceDataType: 'string',
+                            isPublic: true
+                          }}
+                          isFrequency={true}
+                        />
+
+                        <span className="event-box__text">
+                          an ERC20 Transfer event occurs
                         </span>
 
-                        <br />
-                        <span className='event-box__text'>
-                          and the amount is {this.amountButton()} &lt;ether&gt;
-                        </span>
-
-                        <br />
-                        <span className='event-box__text'>
-                          and the sender is {this.senderButton()}
-                        </span>
-
-                        <br />
-                        <span className='event-box__text'>
-                          and the recipient is {this.recipientButton()}
-                        </span>
-                        {/* {<VariableButton />} */}
+                        {this.state.recipe.variables.map((variable, index) => {
+                          return (
+                            <EventVariableButton
+                              isFirst={index === 1}
+                              key={`readable-variable-${index}`}
+                              editVariable={this.state.editVariable}
+                              state={this.state}
+                              handleSetEditVariable={this.handleSetEditVariable}
+                              variable={variable}
+                            />
+                          )
+                        })}
+                        
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className={`event-box event-box__footer ${altColorClass}`}>
+              <div className={`event-box event-box__footer ${this.state.altColorClass}`}>
                 <div className={`container-fluid`}>
                   <div className='container'>
                     <div className='row'>

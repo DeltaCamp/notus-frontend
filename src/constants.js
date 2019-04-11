@@ -11,44 +11,48 @@ export const INFO = 'info'
 export const WARNING = 'warning'
 export const DANGER = 'danger'
 
+export const OPERATORS = {
+  EQ: '0',
+  LT: '1',
+  GT: '2',
+  LTE: '3',
+  GTE: '4'
+}
+
 export const en = {
   formFields: {
     frequencies: {
       everyTime: 'Every time',
       onlyOnce: 'Only once'
     },
-    comparisons: {
-      gt: 'more than',
-      lt: 'less than',
-      eq: 'equal to',
-      gte: 'X or more',
-      lte: 'X or less'
+    operators: {
+      [OPERATORS.EQ]: 'equal to',
+      [OPERATORS.LT]: 'less than',
+      [OPERATORS.GT]: 'more than',
+      [OPERATORS.LTE]: 'X or less',
+      [OPERATORS.GTE]: 'X or more',
     }
   },
   templates: {
-    frequencies: {
+    frequency: {
       default: 'Choose how often',
       everyTime: 'Every time',
       onlyOnce: 'Only once'
     },
-    comparisonsAndAmounts: {
-      default: '[amount]',
-      gt: 'more than [amount]',
-      lt: 'less than [amount]',
-      eq: '[amount]',
-      gte: '[amount] or more',
-      lte: '[amount] or less',
-      asdf: 'asdf'
+    uint256: {
+      default: 'enter amount',
+      [OPERATORS.EQ]: '[amount]',
+      [OPERATORS.LT]: 'less than [amount]',
+      [OPERATORS.GT]: 'more than [amount]',
+      [OPERATORS.LTE]: '[amount] or less',
+      [OPERATORS.GTE]: '[amount] or more',
     },
-    addresses: {
-      default: '[address]'
+    address: {
+      default: 'enter address'
     }
   },
   placeholders: {
-    amount: `Amount in Ether`,
-    contractAddress: `Contract Address (ie. 0x1234 ...)`,
-    senderAddress: `Sender's Address (ie. 0x1234 ...)`,
-    recipientAddress: `Recipient's Address (ie. 0x1234 ...)`
+    amount: `Amount in Ether`
   }
 }
 
