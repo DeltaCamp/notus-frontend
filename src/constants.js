@@ -19,11 +19,16 @@ export const OPERATORS = {
   GTE: '4'
 }
 
+export const FREQUENCIES = {
+  EVERY_TIME: '0',
+  ONLY_ONCE: '1'
+}
+
 export const en = {
   formFields: {
     frequencies: {
-      everyTime: 'Every time',
-      onlyOnce: 'Only once'
+      [FREQUENCIES.EVERY_TIME]: 'Every time',
+      [FREQUENCIES.ONLY_ONCE]: 'Only once'
     },
     operators: {
       [OPERATORS.EQ]: 'equal to',
@@ -34,14 +39,14 @@ export const en = {
     }
   },
   templates: {
-    frequency: {
+    frequency: { // type
       default: 'Choose how often',
-      everyTime: 'Every time',
-      onlyOnce: 'Only once'
+      [FREQUENCIES.EVERY_TIME]: 'Every time',
+      [FREQUENCIES.ONLY_ONCE]: 'Only once'
     },
     uint256: {
       default: 'enter amount',
-      [OPERATORS.EQ]: '[amount]',
+      [OPERATORS.EQ]: '[amount]', // operator
       [OPERATORS.LT]: 'less than [amount]',
       [OPERATORS.GT]: 'more than [amount]',
       [OPERATORS.LTE]: '[amount] or less',

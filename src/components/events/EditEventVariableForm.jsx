@@ -51,8 +51,8 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
 
     if (variable.description === 'Frequency') {
       const selectOptions = [
-        { value: 'everyTime', text: CONSTANTS.en.formFields.frequencies['everyTime'] },
-        { value: 'onlyOnce', text: CONSTANTS.en.formFields.frequencies['onlyOnce'] }
+        { value: '0', text: CONSTANTS.en.formFields.frequencies['0'] },
+        { value: '1', text: CONSTANTS.en.formFields.frequencies['1'] }
       ]
 
       inputs = this.selectDropdown(variable, 'operand', selectOptions)
@@ -109,13 +109,9 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
     const name = varDescriptionToVarName(variable.description)
 
     const callback = (e) => {
-      const operatorVal = (operatorOrOperand === 'operand')
-        ? CONSTANTS.OPERATORS.EQ
-        : e.target.value
-      console.log('operatorVal', operatorVal)
       this.props.handleInputChange(
         variable, 
-        operatorVal,
+        operatorOrOperand,
         e.target.value
       )
     }
