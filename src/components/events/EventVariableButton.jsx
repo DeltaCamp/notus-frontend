@@ -45,10 +45,15 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
     // and the sender is 
 
     const {
+      editVariable,
+      variable
+    } = this.props
+
+    const {
       description,
       sourceDataType,
       isPublic
-    } = this.props.variable
+    } = variable
 
     if (!isPublic) {
       return null
@@ -80,12 +85,12 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
             `event-box__variable`,
             // `has-hint`,
             {
-              'is-active': this.props.isEditing && this.props.editVariables.includes(name)
+              'is-active': editVariable === variable
             }
           )}
           onClick={(e) => {
             e.preventDefault()
-            this.props.handleSetEditVariable(name)
+            this.props.handleSetEditVariable(variable)
           }}
         >
           <span className='event-box__variable-value'>

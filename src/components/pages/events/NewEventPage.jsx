@@ -143,7 +143,6 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           colorClass = 'is-dark'
           altColorClass = 'is-blue'
         }
-        console.log(colorClass, altColorClass)
        
         this.setState({
           colorClass,
@@ -153,7 +152,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
       handleSaveEvent = (e) => {
         e.preventDefault()
-        console.log('event', this.state.event)
+        // console.log('event', this.state.event)
 
         this.props.saveEventMutation().then(() => {
           // this.closeMobileNav()
@@ -167,7 +166,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
       handleSetEditVariable = (editVariable) => {
         this.setState({
           editVariable
-        })
+        }, () => { console.log(this.state) })
       }
 
       handleCancelVariable = (e) => {
@@ -224,7 +223,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
-                    <form className='form mt20'>
+                    <form className='form mt20 drawer-form'>
 
                       <EditEventVariableForm
                         editVariable={this.state.editVariable}

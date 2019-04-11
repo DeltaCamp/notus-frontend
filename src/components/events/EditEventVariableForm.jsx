@@ -7,14 +7,14 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
   drawerFormInputs = () => {
     let inputs = null
 
-    if (this.props.editVariable === 'frequency') {
+    if (this.props.editVariable.description === 'Frequency') {
       const selectOptions = [
         { value: 'everyTime', text: CONSTANTS.en.formFields.frequencies['everyTime'] },
         { value: 'onlyOnce', text: CONSTANTS.en.formFields.frequencies['onlyOnce'] }
       ]
 
       inputs = this.selectDropdown('frequency', 'variableOne', 'string', selectOptions)
-    } else if (this.props.editVariable === 'amount') {
+    } else if (this.props.editVariable.description === 'Amount') {
       const selectOptions = [
         { value: 'gt', text: CONSTANTS.en.formFields.operators['gt'] },
         { value: 'lt', text: CONSTANTS.en.formFields.operators['lt'] },
@@ -27,18 +27,16 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
         {this.selectDropdown('operator', 'variableOne', 'string', selectOptions)}
         {this.textInput('amount', 'variableTwo', 'decimal')}
       </>
-    } else if (this.props.editVariable === 'tokenContractAddress') {
+    } else if (this.props.editVariable.description === 'Token Contract Address') {
       inputs = this.textInput('tokenContractAddress', 'variableOne', 'string')
-    } else if (this.props.editVariable === 'senderAddress') {
+    } else if (this.props.editVariable.description === 'Sender Address') {
       inputs = <>
         {this.textInput('senderAddress', 'variableOne', 'string')}
       </>
-    } else if (this.props.editVariable === 'recipientAddress') {
+    } else if (this.props.editVariable.description === 'Recipient Address') {
       inputs = <>
         {this.textInput('recipientAddress', 'variableOne', 'string')}
       </>
-    } else if (!this.props.editVariable.length) {
-      inputs = null
     } else {
       inputs = null
       rollbar.error(
