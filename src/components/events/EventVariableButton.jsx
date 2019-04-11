@@ -1,51 +1,58 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import { rollbar } from '~/../config/rollbar'
+import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
 import * as CONSTANTS from '~/constants'
 
 export const EventVariableButton = class _EventVariableButton extends PureComponent {
 
   convertTemplate = (name, type) => {
-    let val = this.props.event[name]
+    let operand,
+      operator
+    let matcher = this.props.state[name]
 
-    if (!val) {
-      // return `[${name}]`
-      // val = 'default'
-      return CONSTANTS.en.templates[type][name]['default']
+    // console.log('matcher', matcher)
+    // console.log(type)
+
+    if (name === 'frequency') {
+      type = 'frequency'
     }
 
-    // console.log('template lookup is: ', `templates.${type}.${name}.${val}`)
+    if (!matcher) {
+      return CONSTANTS.en.templates[type]['default']
+    } else {
+      operand = matcher.operand
+      operator = matcher.operand
+    }
 
-    // try to get a template such as "gt: 'more than [amount]'," or "gte: '[amount] or more',"
-    const template = CONSTANTS.en.templates[type][name][val]
+    if (type === 'uint256') {
+      operator = matcher.operator
+    }
+
+    console.log('template lookup is: ', `templates.${type}.${operator}`)
+    const template = CONSTANTS.en.templates[type][operator]
 
     if (!template) {
-      // rollbar.error(`No template found for ${name} !`)
-      // template = `[${name}]`
-      return val
+      // console.log('returning value: ', operand)
+
+      return operand
     }
 
     try {
-      val = template.replace(/(\[.*\])/, val)
+      operand = template.replace(/(\[.*\])/, operand)
     } catch (err) {
-      rollbar.error(`convertTemplate() called with ${template} to replace text ${val} but ${err.message}`)
+      rollbar.error(`convertTemplate() called with ${template} to replace operand: ${operand} but ${err.message}`)
     }
     
-    return val
+    // console.log('returning operand: ', operand)
+    return operand
   }
 
   render () {
-    // and the amount is
-      // & lt; ether & gt;
-    // {
-    //   name: 'contractAddress',
-    //     type: 'address'
-    // }
-    // and the recipient is 
-    // and the sender is 
-
     const {
       editVariable,
+      isFirst,
+      isFrequency,
       variable
     } = this.props
 
@@ -59,13 +66,13 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
       return null
     }
 
-    const name = description.charAt(0).toLowerCase() + description.replace(/ /g, '').slice(1)
+    const name = varDescriptionToVarName(description)
     const type = sourceDataType
 
-    const andWord = (this.props.isFirst || this.props.isFrequency) ? 'where' : '... and'
+    const andWord = (isFirst || isFrequency) ? 'where' : '... and'
     let humanReadableDescription = null
 
-    if (!this.props.isFrequency) {
+    if (!isFrequency) {
       humanReadableDescription = (
         <>
           <br />

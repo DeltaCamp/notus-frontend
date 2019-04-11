@@ -13,6 +13,7 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { saveEventMutation } from '~/mutations/saveEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
+import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
 // import { EVENT_TYPES } from '~/../config/eventTypes'
 import * as routes from '~/../config/routes'
 
@@ -20,9 +21,8 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
   graphql(currentUserQuery, { name: 'currentUserData' })(
     class _NewEventPage extends Component {
       state = {
-        editVariable: null,
-        variableOne: '',
-        variableTwo: ''
+        event: {},
+        editVariable: null
       }
 
       static propTypes = {
@@ -122,14 +122,14 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           ]
         }
 
-        const event = recipe
+        // const event = recipe
 
         if (!recipe) {
           recipe = newRecipe
         }
 
         this.setState({
-          event,
+          // event,
           recipe
         })
 
@@ -175,31 +175,41 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         this.handleSetEditVariable(null)
       }
 
-      handleInputChange = (varName, type, val) => {
-        const key = this.state.editVariable
-        console.log('key', key)
-        console.log('varName', varName)
-        console.log('type', type)
-        console.log('val', val)
+      handleInputChange = (variable, operatorVal, operandVal) => {
+        const {
+          description,
+          sourceDataType
+        } = variable
 
-        if (type === 'decimal') {
+        const name = varDescriptionToVarName(description)
+        // const key = this.state.editVariable
+
+        console.log('name', name)
+        console.log('sourceDataType', sourceDataType)
+        console.log('operandVal', operandVal)
+
+        if (sourceDataType === 'uint256') {
           // note: currently does not handle negative values:
-          val = val.replace(/[^0-9.]/g, '')
+          operandVal = operandVal.replace(/[^0-9.]/g, '')
         }
 
         this.setState({
-          [varName]: val
-        }, this.updateEvent(key, val))
+          [name]: {
+            operator: operatorVal,
+            operand: operandVal
+          }
+        }, this.updateEventMatcher(name))
       }
 
-      updateEvent = (key, val) => {
-        this.setState({
-          event: {
-            ...this.state.event,
-            [key]: val
-          }
-        })
-        console.log(this.state.event)
+      updateEventMatcher = (key, val) => {
+        console.log("TO IMPLEMENT!")
+        // this.setState({
+        //   event: {
+        //     ...this.state.event,
+        //     [key]: val
+        //   }
+        // })
+        console.log(this.state)
       }
 
       isEditing = () => {
@@ -211,8 +221,8 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           return <Redirect to={routes.SIGNIN} />
         }
 
-        if (!this.state.event) {
-          // SHOW LOADING STATE!
+        if (!this.state.recipe) {
+          // SHOW LOADING STATE! or implement new event without recipe
           return null
         }
         
@@ -223,7 +233,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
-                    <form className='form mt20 drawer-form'>
+                    <form className='form mt10 drawer-form'>
 
                       <EditEventVariableForm
                         editVariable={this.state.editVariable}
@@ -304,7 +314,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                       <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
                         <EventVariableButton
                           editVariable={this.state.editVariable}
-                          event={this.state.event}
+                          state={this.state}
                           handleSetEditVariable={this.handleSetEditVariable}
                           variable={{
                             description: 'Frequency',
@@ -324,7 +334,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                               isFirst={index === 1}
                               key={`readable-variable-${index}`}
                               editVariable={this.state.editVariable}
-                              event={this.state.event}
+                              state={this.state}
                               handleSetEditVariable={this.handleSetEditVariable}
                               variable={variable}
                             />
