@@ -319,7 +319,7 @@ export const NewEventPage =
                                   state={this.state}
                                   handleSetEditVariable={this.handleSetEditVariable}
                                   variable={variable}
-                                  isFirst={index === 1}
+                                  isFirst={index === 0}
                                 />
                               )
                             })}
