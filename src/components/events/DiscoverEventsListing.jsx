@@ -23,12 +23,12 @@ export const DiscoverEventsListing =
             console.error(this.props.eventTypesData.error)
           }
         }
-        eventTypes = EVENT_TYPES.map((eventType) => (
-          <EventTypeCard
-            key={`event-type-${eventType.id}`}
-            eventType={eventType}
-          />
-        ))
+        // eventTypes = EVENT_TYPES.map((eventType) => (
+        //   <EventTypeCard
+        //     key={`event-type-${eventType.id}`}
+        //     eventType={eventType}
+        //   />
+        // ))
 
         return (
           <>

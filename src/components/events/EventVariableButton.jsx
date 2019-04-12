@@ -6,42 +6,34 @@ import * as CONSTANTS from '~/constants'
 
 export const EventVariableButton = class _EventVariableButton extends PureComponent {
 
-  convertTemplate = (name, type) => {
+  convertTemplate = (name, varType) => {
     let operand,
-      operator
+      type
     let matcher = this.props.state[name]
-    
-    // console.log('matcher', matcher)
-    // console.log(type)
 
-    // hack for freq
+    
+    // hack for freq!
     if (name === 'frequency') {
-      type = 'frequency'
+      varType = 'frequency'
       
       if (matcher) {
         return CONSTANTS.en.templates['frequency'][matcher.operand]
       }
     }
 
+
+
     if (!matcher) {
-      return CONSTANTS.en.templates[type]['default']
+      return CONSTANTS.en.templates[varType]['default']
     }
 
-    console.log(matcher)
-
     operand = matcher.operand
-    operator = matcher.operator
+    type = matcher.type
 
-    // if (type === 'uint256') {
-    //   operator = matcher.operator
-    // }
-
-    console.log('template lookup is: ', `templates.${type}.${operator}`)
-    const template = CONSTANTS.en.templates[type][operator]
+    // console.log('template lookup is: ', `templates.${varType}.${type}`)
+    const template = CONSTANTS.en.templates[varType][type]
 
     if (!template) {
-      // console.log('returning value: ', operand)
-
       return operand
     }
 
@@ -51,7 +43,6 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
       rollbar.error(`convertTemplate() called with ${template} to replace operand: ${operand} but ${err.message}`)
     }
     
-    // console.log('returning operand: ', operand)
     return operand
   }
 
