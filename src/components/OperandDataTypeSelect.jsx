@@ -40,7 +40,7 @@ export const OperandDataTypeSelect = function (props) {
   ]
 
   let selectedOption
-  if (props.value) {
+  if (props.value !== undefined) {
     selectedOption = options.find(option => option.value === props.value)
     props = {...props, value: selectedOption}
   }

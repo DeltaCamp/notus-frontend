@@ -12,7 +12,7 @@ export const WARNING = 'warning'
 export const DANGER = 'danger'
 
 export const OPERATORS = {
-  ANYTHING: 0,
+  NOOP: 0,
   EQ: 1,
   LT: 2,
   GT: 3,
@@ -21,7 +21,7 @@ export const OPERATORS = {
 }
 
 export const OPERATOR_LABELS = {
-  [OPERATORS.ANYTHING]: 'is anything',
+  [OPERATORS.NOOP]: 'is user defined',
   [OPERATORS.EQ]: 'equal to',
   [OPERATORS.LT]: 'less than',
   [OPERATORS.GT]: 'greater than',
