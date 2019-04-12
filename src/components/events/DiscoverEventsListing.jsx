@@ -14,6 +14,7 @@ export const DiscoverEventsListing =
           if (this.props.eventTypesData.error) {
             console.error(this.props.eventTypesData.error)
           } else {
+            console.error(this.props.eventTypes.error)
             // console.log(this.props.eventTypesData)
             eventTypes = this.props.eventTypesData.eventTypes.map((eventType) => (
               <EventTypeCard
@@ -21,11 +22,6 @@ export const DiscoverEventsListing =
                 eventType={eventType}
               />
             ))
-<<<<<<< HEAD
-          } else {
-            console.error(this.props.eventTypesData.error)
-=======
->>>>>>> * fixes
           }
         }
         // eventTypes = EVENT_TYPES.map((eventType) => (

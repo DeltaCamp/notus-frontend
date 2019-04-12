@@ -20,7 +20,13 @@ import * as routes from '~/../config/routes'
 
 export const NewEventPage = 
   graphql(currentUserQuery, { name: 'currentUserData' })(
-    graphql(eventTypeQuery, { name: 'eventTypeData', variables: { id: "2" } })(
+    graphql(eventTypeQuery, {
+      name: 'eventTypeData',
+      // skip
+      options: (props) => ({
+        variables: { id: props.match.params.eventTypeId }
+      })
+    })(
       graphql(saveEventMutation, { name: 'saveEventMutation' })(
         class _NewEventPage extends Component {
           state = {
@@ -48,9 +54,7 @@ export const NewEventPage =
           }
 
           componentDidMount() {
-            let colorClass,
-              altColorClass
-
+            
             // const eventTypeId = this.props.match.params.eventTypeId
 
             // let recipe = EVENT_TYPES.find(
@@ -80,42 +84,7 @@ export const NewEventPage =
             // isPublic: Boolean = false
             // eventTypeId: Float
 
-            let recipe = null
-
-            console.log(this.props.eventTypeData)
-
-            if (!this.props.eventTypeData.loading) {
-              if (!this.props.eventTypeData.error) {
-                console.log(this.props.eventTypeData)
-                recipe = this.props.eventTypeData.eventType
-
-                const event = {
-                  ...this.state.event,
-                  eventTypeId: recipe.id || -1
-                }
-
-                this.setState({
-                  event,
-                  recipe
-                })
-
-
-                if (recipe) {
-                  colorClass = brandColor(recipe.id)
-                  altColorClass = altBrandColor(recipe.id + 1)
-                } else {
-                  colorClass = 'is-dark'
-                  altColorClass = 'is-blue'
-                }
-
-                this.setState({
-                  colorClass,
-                  altColorClass
-                })
-              } else {
-                console.error(this.props.eventType.error)
-              }
-            }
+            
           }
 
           handleSaveEvent = (e) => {
@@ -203,23 +172,54 @@ export const NewEventPage =
             return this.state.editVariable !== null
           }
 
-          recipeSentence = () => {
-            let str = !this.state.recipe.name.charAt(0).match(/[aeiou]/) ? `an ` : `a `
-            str += this.state.recipe.name
+          recipeSentence = (recipe) => {
+            let str = !recipe.name.charAt(0).match(/[aeiou]/) ? `an ` : `a `
+            str += recipe.name
+            
             return str
           }
 
+          componentDidUpdate(prevProps) {
+            let recipe 
+            
+            if (prevProps.eventTypeData.eventType !== this.props.eventTypeData.eventType) {
+              recipe = this.props.eventTypeData.eventType
+
+              const event = {
+                ...this.state.event,
+                eventTypeId: recipe.id || -1
+              }
+
+              this.setState({
+                event
+              })
+            }
+          }
+
           render () {
+            let colorClass,
+              altColorClass
+
+
             if (this.state.redirect) {
               return <Redirect to={routes.SIGNIN} />
             }
 
-            if (!this.state.recipe) {
-              // SHOW LOADING STATE! or implement new event without recipe
-              return null
-            }
+            let recipe = null
 
-            console.log(this.state.recipe)
+            if (this.props.eventTypeData.loading) {
+              return null
+            } else {
+              recipe = this.props.eventTypeData.eventType
+
+              if (recipe) {
+                colorClass = brandColor(recipe.id)
+                altColorClass = altBrandColor(recipe.id + 1)
+              } else {
+                colorClass = 'is-dark'
+                altColorClass = 'is-blue'
+              }
+            }
             
 
             const variableForm = (
@@ -295,23 +295,23 @@ export const NewEventPage =
                       <div className='row'>
                         <div className='col-xs-12 has-text-centered is-size-4'>
                           <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                            {this.state.recipe.name}
+                            {recipe.name}
                           </h6>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className={`event-box event-box__header ${this.state.colorClass}`}>
+                  <div className={`event-box event-box__header ${colorClass}`}>
                     <div className={`container-fluid pt20 pb20`}>
                       <div className='container'>
                         <div className='row'>
                           <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
                             <span className="event-box__text">
-                              When {this.recipeSentence()} occurs
+                              When {this.recipeSentence(this.props.eventTypeData.eventType)} occurs
                             </span>
 
-                            {this.state.recipe.variables.map((variable, index) => {
+                            {/*recipe.variables.map((variable, index) => {
                               return (
                                 <EventVariableButton
                                   key={`readable-variable-${index}`}
@@ -322,7 +322,7 @@ export const NewEventPage =
                                   isFirst={index === 0}
                                 />
                               )
-                            })}
+                            })*/}
                             
                           </div>
                         </div>
@@ -330,7 +330,7 @@ export const NewEventPage =
                     </div>
                   </div>
 
-                  <div className={`event-box event-box__footer ${this.state.altColorClass}`}>
+                  <div className={`event-box event-box__footer ${altColorClass}`}>
                     <div className={`container-fluid`}>
                       <div className='container'>
                         <div className='row'>
