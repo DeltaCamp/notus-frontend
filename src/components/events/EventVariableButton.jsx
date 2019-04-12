@@ -56,13 +56,8 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
 
     const {
       description,
-      sourceDataType,
-      isPublic
+      sourceDataType
     } = variable
-
-    if (!isPublic) {
-      return null
-    }
 
     const name = varDescriptionToVarName(description)
     const type = sourceDataType
@@ -95,7 +90,7 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
           )}
           onClick={(e) => {
             e.preventDefault()
-            this.props.handleSetEditVariable(variable)
+            this.props.handleSetEditingMatcher(variable)
           }}
         >
           <span className='event-box__variable-value'>

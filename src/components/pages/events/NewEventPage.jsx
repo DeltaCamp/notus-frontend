@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { omit } from 'lodash'
-import cloneDeep from 'clone-deep'
 import { CheckCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
@@ -10,6 +8,7 @@ import { Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { EditEventVariableForm } from '~/components/events/EditEventVariableForm'
 import { EventVariableButton } from '~/components/events/EventVariableButton'
+import { MatcherForm } from '~/components/recipes/MatcherForm'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { createEventMutation } from '~/mutations/createEventMutation'
@@ -17,7 +16,7 @@ import { currentUserQuery } from '~/queries/currentUserQuery'
 import { recipeQuery } from '~/queries/recipeQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
 import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
-import { MatcherForm } from '~/components/recipes/MatcherForm'
+import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 // import { RECIPES } from '~/../config/recipes'
 import * as routes from '~/../config/routes'
 
@@ -25,7 +24,7 @@ export const NewEventPage =
   graphql(currentUserQuery, { name: 'currentUserData' })(
     graphql(recipeQuery, {
       name: 'recipeData',
-      // skip
+      skip: (props) => !props.match.params.recipeId,
       options: (props) => ({
         variables: { id: props.match.params.recipeId }
       })
@@ -34,9 +33,14 @@ export const NewEventPage =
         class _NewEventPage extends Component {
           state = {
             event: {
-              matchers: []
+              matchers: [
+                {
+                  operator: -1,
+                  operand: -1
+                }
+              ]
             },
-            editVariable: null
+            editingMatcher: null
           }
 
           static propTypes = {
@@ -56,75 +60,6 @@ export const NewEventPage =
             }
           }
 
-          componentDidMount() {
-            let colorClass,
-              altColorClass
-
-            // let recipe = RECIPES.find(
-            //   (recipe) => (recipe.id === parseInt(recipeId, 10))
-            // )
-
-            // const newRecipe = {
-            //   frequency: 'default',
-            //   name: 'When this happens trigger that'
-            // }
-
-            //   recipeId: 12345,
-            //     matchers: [
-            //       {
-            //         variableId: 8756, // var id, var needs to exist beforehand
-            //         type: '', // int of enum type,   0 EQ, 1 LT, 2 GT, 3 LTE, 4 GTE
-            //         operand: '', // value
-            //       }
-            //     ],
-
-            // VariableDTO:
-            //
-            // id: ID
-            // source: String!
-            // sourceDataType: String!
-            // description: String = ""
-            // isPublic: Boolean = false
-            // recipeId: Float
-
-            let recipe = null
-
-            console.log(this.props.recipeData)
-
-            if (!this.props.recipeData.loading) {
-              if (!this.props.recipeData.error) {
-                console.log(this.props.recipeData)
-                recipe = this.props.recipeData.recipe
-
-                const event = {
-                  ...this.state.event,
-                  recipeId: recipe.id || -1
-                }
-
-                this.setState({
-                  event,
-                  recipe
-                })
-
-
-                if (recipe) {
-                  colorClass = brandColor(recipe.id)
-                  altColorClass = altBrandColor(recipe.id + 1)
-                } else {
-                  colorClass = 'is-dark'
-                  altColorClass = 'is-blue'
-                }
-
-                this.setState({
-                  colorClass,
-                  altColorClass
-                })
-              } else {
-                console.error(this.props.recipe.error)
-              }
-            }
-          }
-
           handleSaveEvent = (e) => {
             e.preventDefault()
 
@@ -139,16 +74,16 @@ export const NewEventPage =
             })
           }
 
-          handleSetEditVariable = (editVariable) => {
+          handleSetEditingMatcher = (editingMatcher) => {
             this.setState({
-              editVariable
+              editingMatcher
             })
           }
 
-          handleCancelEditVariable = (e) => {
+          handleCancelEditingMatcher = (e) => {
             e.preventDefault()
 
-            this.handleSetEditVariable(null)
+            this.handleSetEditingMatcher(null)
           }
 
           handleInputChange = (variable, typeOrOperand, newValue) => {
@@ -211,11 +146,11 @@ export const NewEventPage =
           // }
 
           isEditing = () => {
-            return this.state.editVariable !== null
+            return this.state.editingMatcher !== null
           }
 
           recipeSentence = (recipe) => {
-            let str = !recipe.name.charAt(0).match(/[aeiou]/) ? `an ` : `a `
+            let str = !recipe.name.charAt(0).match(/[aeiou]/) ? `a ` : `an `
             str += recipe.name
             
             return str
@@ -236,14 +171,14 @@ export const NewEventPage =
           componentDidUpdate(prevProps) {
             let recipe 
             
-            if (prevProps.recipeData.recipe !== this.props.recipeData.recipe) {
+            if (prevProps.recipeData && (prevProps.recipeData.recipe !== this.props.recipeData.recipe)) {
               recipe = this.props.recipeData.recipe
               console.log(recipe)
 
               let matchers = recipe.recipeMatchers.map(recipeMatcher => (
-                omit(recipeMatcher.matcher, [ 'id', 'createdAt', 'updatedAt', '__typename' ])
+                deepCloneMatcher(recipeMatcher.matcher)
               ))
-              matchers = cloneDeep(matchers)
+              // matchers = cloneDeep(matchers)
 
               const event = {
                 ...this.state.event,
@@ -259,30 +194,30 @@ export const NewEventPage =
           }
 
           render () {
-            let colorClass,
-              altColorClass
+            let colorClass = 'is-dark'
+            let altColorClass = 'is-blue'
 
+            let recipe = {
+              description: 'New Event',
+              name: 'event matching the following'
+            }
 
             if (this.state.redirect) {
               return <Redirect to={routes.SIGNIN} />
             }
 
-            let recipe = null
-
-            if (this.props.recipeData.loading) {
-              return null
-            } else {
-              recipe = this.props.recipeData.recipe
-
-              if (recipe) {
-                colorClass = brandColor(recipe.id)
-                altColorClass = altBrandColor(recipe.id + 1)
+            if (this.props.recipeData) {
+              if (this.props.recipeData.loading) {
+                return null
               } else {
-                colorClass = 'is-dark'
-                altColorClass = 'is-blue'
+                recipe = this.props.recipeData.recipe
+    
+                if (recipe) {
+                  colorClass = brandColor(recipe.id)
+                  altColorClass = altBrandColor(recipe.id + 1)
+                }
               }
             }
-            
 
             const variableForm = (
               <>          
@@ -293,7 +228,7 @@ export const NewEventPage =
                         <form className='form mt10 drawer-form'>
 
                           <EditEventVariableForm
-                            editVariable={this.state.editVariable}
+                            editingMatcher={this.state.editingMatcher}
                             state={this.state}
                             handleInputChange={this.handleInputChange}
                           />
@@ -301,7 +236,7 @@ export const NewEventPage =
                           <div className='buttons'>
                             {/* <button
                               className='button has-icon has-stroke-red'
-                              onClick={this.handleCancelEditVariable}
+                              onClick={this.handleCancelEditingMatcher}
                             >
                               <XCircle
                                 className='icon__button has-stroke-red'
@@ -310,7 +245,7 @@ export const NewEventPage =
 
                             <button
                               className='button has-icon has-stroke-green'
-                              onClick={this.handleCancelEditVariable}
+                              onClick={this.handleCancelEditingMatcher}
                             >
                               <CheckCircle
                                 className='icon__button has-stroke-green'
@@ -329,7 +264,7 @@ export const NewEventPage =
                   className={`drawer__clickbox ${this.isEditing() ? 'is-active' : null}`}
                   onClick={(e) => {
                     e.preventDefault()
-                    this.handleCancelEditVariable(e)
+                    this.handleCancelEditingMatcher(e)
                   }}
                 />
               </>
@@ -359,7 +294,7 @@ export const NewEventPage =
                       <div className='row'>
                         <div className='col-xs-12 has-text-centered is-size-4'>
                           <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                            {recipe.name}
+                            {recipe.description || recipe.name}
                           </h6>
                         </div>
                       </div>
@@ -372,24 +307,25 @@ export const NewEventPage =
                         <div className='row'>
                           <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
                             <span className="event-box__text">
-                              When {this.recipeSentence(this.props.recipeData.recipe)} occurs
+                              When {this.recipeSentence(recipe)} occurs
                             </span>
 
                             {this.state.event.matchers.map((matcher, index) => {
                               return (
                                 <MatcherForm
                                   key={`matcher-${index}`}
-                                  variables={this.state.variables}
                                   matcher={matcher}
-                                  onChange={(matcher) => this.onChangeMatcher(index, matcher)}
+                                  onChange={
+                                    (updatedMatcher) => this.onChangeMatcher(index, updatedMatcher)
+                                  }
                                 />
                               )
                               // return (
                               //   <EventVariableButton
                               //     key={`readable-variable-${index}`}
-                              //     editVariable={this.state.editVariable}
+                              //     editingMatcher={this.state.editingMatcher}
                               //     state={this.state}
-                              //     handleSetEditVariable={this.handleSetEditVariable}
+                              //     handleSetEditingMatcher={this.handleSetEditingMatcher}
                                   // variable={variable}
                                   // isFirst={index === 0}
                                 // />
@@ -410,14 +346,13 @@ export const NewEventPage =
                             {/* ... then turn on my Phillips Hue lightbulb */}
                             ... then send me an email&nbsp;
                             <EventVariableButton
-                              editVariable={this.state.editVariable}
+                              editingMatcher={this.state.editingMatcher}
                               state={this.state}
-                              handleSetEditVariable={this.handleSetEditVariable}
+                              handleSetEditingMatcher={this.handleSetEditingMatcher}
                               variable={{
                                 id: -1,
                                 description: 'Frequency',
-                                sourceDataType: 'string',
-                                isPublic: true
+                                sourceDataType: 'string'
                               }}
                               isFrequency={true}
                             />

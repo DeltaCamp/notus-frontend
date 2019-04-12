@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-
 import { SourceSelect } from '~/components/SourceSelect'
 import { OperatorSelect } from '~/components/OperatorSelect'
 import { OperandDataTypeSelect } from '~/components/OperandDataTypeSelect'
+import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 
 export class MatcherForm extends PureComponent {
   static propTypes = {
@@ -12,27 +12,27 @@ export class MatcherForm extends PureComponent {
   }
 
   onChangeSource = (option) => {
-    const copy = {...this.props.matcher}
-    copy.source = option.value
-    this.props.onChange(copy)
+    const clone = deepCloneMatcher(this.props.matcher)
+    clone.source = option.value
+    this.props.onChange(clone)
   }
 
   onChangeOperator = (option) => {
-    const copy = {...this.props.matcher}
-    copy.operator = option.value
-    this.props.onChange(copy)
+    const clone = deepCloneMatcher(this.props.matcher)
+    clone.operator = option.value
+    this.props.onChange(clone)
   }
 
   onChangeOperandDataType = (option) => {
-    const copy = {...this.props.matcher}
-    copy.operandDataType = option.value
-    this.props.onChange(copy)
+    const clone = deepCloneMatcher(this.props.matcher)
+    clone.operandDataType = option.value
+    this.props.onChange(clone)
   }
 
   onChangeOperand = (e) => {
-    const copy = {...this.props.matcher}
-    copy.operand = e.target.value
-    this.props.onChange(copy)
+    const clone = deepCloneMatcher(this.props.matcher)
+    clone.operand = e.target.value
+    this.props.onChange(clone)
   }
 
   render () {
@@ -45,12 +45,12 @@ export class MatcherForm extends PureComponent {
           type='text'
           value={this.props.matcher.operand}
           onChange={this.onChangeOperand}
-          />
+        />
       operandDataTypeSelect =
         <OperandDataTypeSelect
           value={this.props.matcher.operandDataType}
           onChange={this.onChangeOperandDataType}
-          />
+        />
     }
 
     return (
@@ -59,13 +59,13 @@ export class MatcherForm extends PureComponent {
           <SourceSelect
             value={this.props.matcher.source}
             onChange={this.onChangeSource}
-            />
+          />
         </div>
         <div className='col-md-4'>
           <OperatorSelect
             value={this.props.matcher.operator}
             onChange={this.onChangeOperator}
-             />
+          />
         </div>
         <div className='col-md-4'>
           {operandInput}
