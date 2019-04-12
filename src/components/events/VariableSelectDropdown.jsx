@@ -1,5 +1,5 @@
 import React from 'react'
-import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
+import { matcherToVarName } from '~/utils/matcherToVarName'
 
 export const VariableSelectDropdown = ({
   variable,
@@ -8,7 +8,7 @@ export const VariableSelectDropdown = ({
   handleInputChange,
   selectOptions
 }) => {
-  const name = varDescriptionToVarName(variable.description)
+  const name = matcherToVarName(variable.description)
 
   const callback = (e) => {
     handleInputChange(

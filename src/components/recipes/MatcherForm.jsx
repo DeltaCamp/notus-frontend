@@ -36,19 +36,21 @@ export class MatcherForm extends PureComponent {
   }
 
   render () {
+    const { matcher } = this.props
+
     let operandInput, operandDataTypeSelect
 
-    if (this.props.matcher.operator !== 0) {
+    if (matcher.operator !== 0) {
       operandInput =
         <input
           className='input'
           type='text'
-          value={this.props.matcher.operand}
+          value={matcher.operand}
           onChange={this.onChangeOperand}
         />
       operandDataTypeSelect =
         <OperandDataTypeSelect
-          value={this.props.matcher.operandDataType}
+          value={matcher.operandDataType}
           onChange={this.onChangeOperandDataType}
         />
     }
@@ -57,13 +59,13 @@ export class MatcherForm extends PureComponent {
       <div className='row'>
         <div className='col-md-3'>
           <SourceSelect
-            value={this.props.matcher.source}
+            value={matcher.source}
             onChange={this.onChangeSource}
           />
         </div>
         <div className='col-md-4'>
           <OperatorSelect
-            value={this.props.matcher.operator}
+            value={matcher.operator}
             onChange={this.onChangeOperator}
           />
         </div>

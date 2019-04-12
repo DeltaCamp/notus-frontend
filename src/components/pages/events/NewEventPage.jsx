@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { EditEventVariableForm } from '~/components/events/EditEventVariableForm'
-import { EventVariableButton } from '~/components/events/EventVariableButton'
+import { EventMatcherSentence } from '~/components/events/EventMatcherSentence'
 import { MatcherForm } from '~/components/recipes/MatcherForm'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -15,7 +15,7 @@ import { createEventMutation } from '~/mutations/createEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { recipeQuery } from '~/queries/recipeQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
-import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
+// import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 // import { RECIPES } from '~/../config/recipes'
 import * as routes from '~/../config/routes'
@@ -33,14 +33,15 @@ export const NewEventPage =
         class _NewEventPage extends Component {
           state = {
             event: {
+              frequency: '-1',
               matchers: [
-                {
-                  operator: -1,
-                  operand: -1
-                }
+                // {
+                //   operator: -1,
+                //   operand: -1
+                // }
               ]
             },
-            editingMatcher: null
+            editMatcherIndex: null
           }
 
           static propTypes = {
@@ -74,54 +75,54 @@ export const NewEventPage =
             })
           }
 
-          handleSetEditingMatcher = (editingMatcher) => {
+          handleSetEditMatcher = (editMatcherIndex) => {
             this.setState({
-              editingMatcher
+              editMatcherIndex
             })
           }
 
           handleCancelEditingMatcher = (e) => {
             e.preventDefault()
 
-            this.handleSetEditingMatcher(null)
+            this.handleSetEditMatcher(null)
           }
 
-          handleInputChange = (variable, typeOrOperand, newValue) => {
-            const {
-              description,
-              sourceDataType
-            } = variable
+          // handleInputChange = (variable, typeOrOperand, newValue) => {
+          //   const {
+          //     description,
+          //     sourceDataType
+          //   } = variable
 
-            const name = varDescriptionToVarName(description)
+          //   const name = varDescriptionToVarName(description)
 
-            if (sourceDataType === 'uint256') {
-              // note: currently does not handle negative values:
-              newValue = newValue.replace(/[^0-9.]/g, '')
-            }
+          //   if (sourceDataType === 'uint256') {
+          //     // note: currently does not handle negative values:
+          //     newValue = newValue.replace(/[^0-9.]/g, '')
+          //   }
 
-            let matcher = this.state.event.matchers.find((matcher) => (
-              matcher.variableId === variable.id
-            ))
+          //   let matcher = this.state.event.matchers.find((matcher) => (
+          //     matcher.variableId === variable.id
+          //   ))
 
-            if (!matcher) {
-              console.log('no matcher yet, creating one with variableId: ', variable.id)
-              matcher = {
-                variableId: variable.id,
-                type: '0',
-                operand: newValue
-              }
-            }
+          //   if (!matcher) {
+          //     console.log('no matcher yet, creating one with variableId: ', variable.id)
+          //     matcher = {
+          //       variableId: variable.id,
+          //       type: '0',
+          //       operand: newValue
+          //     }
+          //   }
 
-            if (typeOrOperand === 'type') {
-              matcher.type = newValue
-            } else {
-              matcher.operand = newValue
-            }
+          //   if (typeOrOperand === 'type') {
+          //     matcher.type = newValue
+          //   } else {
+          //     matcher.operand = newValue
+          //   }
 
-            this.setState({
-              [name]: matcher
-            }, this.updateEventMatcher(variable, matcher))
-          }
+          //   this.setState({
+          //     [name]: matcher
+          //   }, this.updateEventMatcher(variable, matcher))
+          // }
 
           // updateEventMatcher = (variable, matcher) => {
           //   const matchers = this.state.event.matchers
@@ -146,7 +147,7 @@ export const NewEventPage =
           // }
 
           isEditing = () => {
-            return this.state.editingMatcher !== null
+            return this.state.editMatcherIndex !== null
           }
 
           recipeSentence = (recipe) => {
@@ -156,9 +157,9 @@ export const NewEventPage =
             return str
           }
 
-          onChangeMatcher = (index, matcher) => {
+          onChangeMatcher = (matcher) => {
             const matchers = this.state.event.matchers.slice()
-            matchers[index] = matcher
+            matchers[this.state.editMatcherIndex] = matcher
 
             this.setState({
               event: {
@@ -186,16 +187,21 @@ export const NewEventPage =
                 recipeId: parseInt(recipe.id, 10)
               }
               console.log('event', event)
-
+              
               this.setState({
                 event
               })
             }
           }
-
+          
           render () {
             let colorClass = 'is-dark'
             let altColorClass = 'is-blue'
+            let variableForm = null
+
+            const editMatcher = this.isEditing()
+              ? this.state.event.matchers[this.state.editMatcherIndex]
+              : null
 
             let recipe = {
               description: 'New Event',
@@ -219,58 +225,83 @@ export const NewEventPage =
               }
             }
 
-            const variableForm = (
-              <>          
-                <div className='drawer has-bg__dark'>
-                  <div className='container'>
-                    <div className='row'>
-                      <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
-                        <form className='form mt10 drawer-form'>
 
-                          <EditEventVariableForm
-                            editingMatcher={this.state.editingMatcher}
-                            state={this.state}
-                            handleInputChange={this.handleInputChange}
-                          />
+            if (editMatcher) {
+              variableForm = (
+                <>          
+                  <div className='drawer has-bg__dark'>
+                    <div className='container'>
+                      <div className='row'>
+                        <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
+                          <form className='form mt10 drawer-form'>
+                            <MatcherForm
+                              key={`matcher-${this.state.matcherIndex}`}
+                              matcher={editMatcher}
+                              onChange={
+                                (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
+                              }
+                            />
+                            {/* <EditEventVariableForm */}
 
-                          <div className='buttons'>
-                            {/* <button
-                              className='button has-icon has-stroke-red'
-                              onClick={this.handleCancelEditingMatcher}
-                            >
-                              <XCircle
-                                className='icon__button has-stroke-red'
-                              />
-                            </button> */}
+                            <div className='buttons'>
+                              {/* <button
+                                className='button has-icon has-stroke-red'
+                                onClick={this.handleCancelEditingMatcher}
+                              >
+                                <XCircle
+                                  className='icon__button has-stroke-red'
+                                />
+                              </button> */}
 
-                            <button
-                              className='button has-icon has-stroke-green'
-                              onClick={this.handleCancelEditingMatcher}
-                            >
-                              <CheckCircle
-                                className='icon__button has-stroke-green'
-                              />
-                            </button>
-                          </div>
+                              <button
+                                className='button has-icon has-stroke-green'
+                                onClick={this.handleCancelEditingMatcher}
+                              >
+                                <CheckCircle
+                                  className='icon__button has-stroke-green'
+                                />
+                              </button>
+                            </div>
 
-                        </form>
+                          </form>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                {/* this needs to be at the bottom or it takes the <CSSTransition/> classes */}
-                <div
-                  className={`drawer__clickbox ${this.isEditing() ? 'is-active' : null}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    this.handleCancelEditingMatcher(e)
-                  }}
-                />
+                  {/* this needs to be at the bottom or it takes the <CSSTransition/> classes */}
+                  <div
+                    className={`drawer__clickbox ${this.isEditing() ? 'is-active' : null}`}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      this.handleCancelEditingMatcher(e)
+                    }}
+                  />
+                </>
+              )
+            }
+
+            const frequencyWord = (this.state.event.frequency === '-1') ? 'Every time' : 'Only once'
+
+            const matcherSentences = (
+              <>
+                <span className="event-box__text">
+                  {frequencyWord} {this.recipeSentence(recipe)} occurs
+                </span>
+                {this.state.event.matchers.map((eventMatcher, index) => (
+                  <EventMatcherSentence
+                    key={`event-matcher-sentence-${index}`}
+                    matcher={eventMatcher}
+                    index={index}
+                    state={this.state}
+                    handleSetEditMatcher={this.handleSetEditMatcher}
+                    isFirst={index === 0}
+                    isActive={editMatcher && eventMatcher === editMatcher}
+                  />
+                ))}
               </>
             )
 
-            // const wildcardMatchers = recipe.matchers.filter()
 
             return (
               <div className='is-positioned-absolutely'>
@@ -306,32 +337,7 @@ export const NewEventPage =
                       <div className='container'>
                         <div className='row'>
                           <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
-                            <span className="event-box__text">
-                              When {this.recipeSentence(recipe)} occurs
-                            </span>
-
-                            {this.state.event.matchers.map((matcher, index) => {
-                              return (
-                                <MatcherForm
-                                  key={`matcher-${index}`}
-                                  matcher={matcher}
-                                  onChange={
-                                    (updatedMatcher) => this.onChangeMatcher(index, updatedMatcher)
-                                  }
-                                />
-                              )
-                              // return (
-                              //   <EventVariableButton
-                              //     key={`readable-variable-${index}`}
-                              //     editingMatcher={this.state.editingMatcher}
-                              //     state={this.state}
-                              //     handleSetEditingMatcher={this.handleSetEditingMatcher}
-                                  // variable={variable}
-                                  // isFirst={index === 0}
-                                // />
-                              // )
-                            })}
-                            
+                            {matcherSentences}
                           </div>
                         </div>
                       </div>
@@ -345,18 +351,6 @@ export const NewEventPage =
                           <div className='col-xs-12 has-text-centered is-size-4'>
                             {/* ... then turn on my Phillips Hue lightbulb */}
                             ... then send me an email&nbsp;
-                            <EventVariableButton
-                              editingMatcher={this.state.editingMatcher}
-                              state={this.state}
-                              handleSetEditingMatcher={this.handleSetEditingMatcher}
-                              variable={{
-                                id: -1,
-                                description: 'Frequency',
-                                sourceDataType: 'string'
-                              }}
-                              isFrequency={true}
-                            />
-
                           </div>
                         </div>
                       </div>

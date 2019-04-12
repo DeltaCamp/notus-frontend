@@ -1,4 +1,4 @@
-export const varDescriptionToVarName = (description) => {
+export const matcherToVarName = (description) => {
   const firstLetter = description.charAt(0).toLowerCase()
   const remainingString = description.replace(/ /g, '').slice(1)
 

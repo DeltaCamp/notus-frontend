@@ -1,5 +1,5 @@
 import React from 'react'
-import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
+import { matcherToVarName } from '~/utils/matcherToVarName'
 import * as CONSTANTS from '~/constants'
 
 export const VariableTextInput = ({
@@ -16,7 +16,7 @@ export const VariableTextInput = ({
     placeholder += ` (Amount in Ether)`
   }
 
-  const name = varDescriptionToVarName(variable.description)
+  const name = matcherToVarName(variable.description)
 
   const matcher = state[name]
   let value
