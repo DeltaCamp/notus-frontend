@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { omit } from 'lodash'
+import cloneDeep from 'clone-deep'
 import { CheckCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
@@ -10,11 +12,12 @@ import { EditEventVariableForm } from '~/components/events/EditEventVariableForm
 import { EventVariableButton } from '~/components/events/EventVariableButton'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
-import { saveEventMutation } from '~/mutations/saveEventMutation'
+import { createEventMutation } from '~/mutations/createEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { recipeQuery } from '~/queries/recipeQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
 import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
+import { MatcherForm } from '~/components/recipes/MatcherForm'
 // import { RECIPES } from '~/../config/recipes'
 import * as routes from '~/../config/routes'
 
@@ -27,7 +30,7 @@ export const NewEventPage =
         variables: { id: props.match.params.recipeId }
       })
     })(
-      graphql(saveEventMutation, { name: 'saveEventMutation' })(
+      graphql(createEventMutation, { name: 'createEventMutation' })(
         class _NewEventPage extends Component {
           state = {
             event: {
@@ -125,7 +128,11 @@ export const NewEventPage =
           handleSaveEvent = (e) => {
             e.preventDefault()
 
-            this.props.saveEventMutation().then(() => {
+            this.props.createEventMutation({
+              variables: {
+                event: this.state.event
+              }
+            }).then(() => {
               toast('Successfully saved event!')
             }).catch(error => {
               console.error(error)
@@ -181,27 +188,27 @@ export const NewEventPage =
             }, this.updateEventMatcher(variable, matcher))
           }
 
-          updateEventMatcher = (variable, matcher) => {
-            const matchers = this.state.event.matchers
+          // updateEventMatcher = (variable, matcher) => {
+          //   const matchers = this.state.event.matchers
 
-            let existingMatcher = this.state.event.matchers.find((matcher) => (
-              matcher.variableId === variable.id
-            ))
+          //   let existingMatcher = this.state.event.matchers.find((matcher) => (
+          //     matcher.variableId === variable.id
+          //   ))
 
-            if (!existingMatcher) {
-              matchers.push(matcher)
-            } else {
-              const matcherIndex = this.state.event.matchers.indexOf(existingMatcher)
-              matchers[matcherIndex].operand = matcher.operand
-            }
+          //   if (!existingMatcher) {
+          //     matchers.push(matcher)
+          //   } else {
+          //     const matcherIndex = this.state.event.matchers.indexOf(existingMatcher)
+          //     matchers[matcherIndex].operand = matcher.operand
+          //   }
             
-            this.setState({
-              event: {
-                ...this.state.event,
-                matchers
-              }
-            }, () => { console.log(this.state.event)})
-          }
+          //   this.setState({
+          //     event: {
+          //       ...this.state.event,
+          //       matchers
+          //     }
+          //   }, () => { console.log(this.state.event)})
+          // }
 
           isEditing = () => {
             return this.state.editVariable !== null
@@ -214,16 +221,36 @@ export const NewEventPage =
             return str
           }
 
+          onChangeMatcher = (index, matcher) => {
+            const matchers = this.state.event.matchers.slice()
+            matchers[index] = matcher
+
+            this.setState({
+              event: {
+                ...this.state.event,
+                matchers
+              }
+            })
+          }
+
           componentDidUpdate(prevProps) {
             let recipe 
             
             if (prevProps.recipeData.recipe !== this.props.recipeData.recipe) {
               recipe = this.props.recipeData.recipe
+              console.log(recipe)
+
+              let matchers = recipe.recipeMatchers.map(recipeMatcher => (
+                omit(recipeMatcher.matcher, [ 'id', 'createdAt', 'updatedAt', '__typename' ])
+              ))
+              matchers = cloneDeep(matchers)
 
               const event = {
                 ...this.state.event,
-                recipeId: recipe.id || -1
+                matchers,
+                recipeId: parseInt(recipe.id, 10)
               }
+              console.log('event', event)
 
               this.setState({
                 event
@@ -308,6 +335,8 @@ export const NewEventPage =
               </>
             )
 
+            // const wildcardMatchers = recipe.matchers.filter()
+
             return (
               <div className='is-positioned-absolutely'>
                 <Helmet
@@ -346,18 +375,26 @@ export const NewEventPage =
                               When {this.recipeSentence(this.props.recipeData.recipe)} occurs
                             </span>
 
-                            {/*recipe.variables.map((variable, index) => {
+                            {this.state.event.matchers.map((matcher, index) => {
+                              return (
+                                <MatcherForm
+                                  key={`matcher-${index}`}
+                                  variables={this.state.variables}
+                                  matcher={matcher}
+                                  onChange={(matcher) => this.onChangeMatcher(index, matcher)}
+                                />
+                              )
                               return (
                                 <EventVariableButton
                                   key={`readable-variable-${index}`}
                                   editVariable={this.state.editVariable}
                                   state={this.state}
                                   handleSetEditVariable={this.handleSetEditVariable}
-                                  variable={variable}
+                                  // variable={variable}
                                   isFirst={index === 0}
                                 />
                               )
-                            })*/}
+                            })}
                             
                           </div>
                         </div>
