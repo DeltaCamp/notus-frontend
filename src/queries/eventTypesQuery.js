@@ -5,9 +5,6 @@ export const eventTypesQuery = gql`
     eventTypes {
       id
       name
-      variables {
-        id
-      }
       createdAt
       updatedAt
     }

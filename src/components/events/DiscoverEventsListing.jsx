@@ -4,12 +4,12 @@ import { eventTypesQuery } from '~/queries/eventTypesQuery'
 import { EventTypeCard } from '~/components/events/EventTypeCard'
 import { EVENT_TYPES } from '~/../config/eventTypes'
 
-export const DiscoverEventsListing = 
+export const DiscoverEventsListing =
   graphql(eventTypesQuery, { name: 'eventTypesData' })(
     class _DiscoverEventsListing extends PureComponent {
       render () {
         let eventTypes
-        
+
         if (!this.props.eventTypesData.loading) {
           if (!this.props.eventTypesData.error) {
             // console.log(this.props.eventTypesData)
@@ -20,7 +20,7 @@ export const DiscoverEventsListing =
               />
             ))
           } else {
-            console.error(this.props.eventTypes.error)
+            console.error(this.props.eventTypesData.error)
           }
         }
         eventTypes = EVENT_TYPES.map((eventType) => (

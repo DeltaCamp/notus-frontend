@@ -12,6 +12,7 @@ import { HookPage } from '~/components/pages/HookPage'
 import { MyEventsPage } from '~/components/pages/events/MyEventsPage'
 import { NewEventPage } from '~/components/pages/events/NewEventPage'
 import { HooksListPage } from '~/components/pages/HooksListPage'
+import { NewRecipePage } from '~/components/pages/NewRecipePage'
 import { PasswordResetPage } from '~/components/pages/PasswordResetPage'
 import { SignInPage } from '~/components/pages/SignInPage'
 import { SignUpPage } from '~/components/pages/SignUpPage'
@@ -75,6 +76,7 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.SIGNIN} component={SignInPage} />
                 <Route exact path={routes.PASSWORD_RESET} component={PasswordResetPage} />
                 <Route exact path={routes.DAPP_CONFIRM} component={DappConfirmPage} />
+                <Route exact path={routes.NEW_RECIPE} component={NewRecipePage} />
                 <Route component={FourOhFour} />
               </Switch>
             </CSSTransition>

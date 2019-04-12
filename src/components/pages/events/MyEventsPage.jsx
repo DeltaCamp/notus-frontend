@@ -87,6 +87,21 @@ export const MyEventsPage = graphql(currentUserQuery, { name: 'currentUserData' 
             </div>
           </section>
 
+          <section className='section'>
+            <div className='container'>
+              <div className='row'>
+                <div className='col-xs-12 has-text-centered'>
+                  <Link
+                    className='button mt20 is-purple'
+                    to={routes.NEW_RECIPE}
+                  >
+                    Create a new Recipe
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <FooterContainer />
         </div>
       )

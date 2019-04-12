@@ -12,11 +12,32 @@ export const WARNING = 'warning'
 export const DANGER = 'danger'
 
 export const OPERATORS = {
-  EQ: '0',
-  LT: '1',
-  GT: '2',
-  LTE: '3',
-  GTE: '4'
+  ANYTHING: 0,
+  EQ: 1,
+  LT: 2,
+  GT: 3,
+  LTE: 4,
+  GTE: 5
+}
+
+export const OPERATOR_LABELS = {
+  [OPERATORS.ANYTHING]: 'is anything',
+  [OPERATORS.EQ]: 'equal to',
+  [OPERATORS.LT]: 'less than',
+  [OPERATORS.GT]: 'greater than',
+  [OPERATORS.LTE]: 'less than or equal to',
+  [OPERATORS.GTE]: 'greater than or equal to',
+}
+
+export const OPERAND_DATA_TYPES = {
+  WEI: 0,
+  KWEI: 1,
+  MWEI: 2,
+  GWEI: 3,
+  MICROETHER: 4,
+  MILLIETHER: 5,
+  ETHER: 6,
+  NUMBER: 7
 }
 
 export const FREQUENCIES = {
