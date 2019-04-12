@@ -384,16 +384,16 @@ export const NewEventPage =
                                   onChange={(matcher) => this.onChangeMatcher(index, matcher)}
                                 />
                               )
-                              return (
-                                <EventVariableButton
-                                  key={`readable-variable-${index}`}
-                                  editVariable={this.state.editVariable}
-                                  state={this.state}
-                                  handleSetEditVariable={this.handleSetEditVariable}
+                              // return (
+                              //   <EventVariableButton
+                              //     key={`readable-variable-${index}`}
+                              //     editVariable={this.state.editVariable}
+                              //     state={this.state}
+                              //     handleSetEditVariable={this.handleSetEditVariable}
                                   // variable={variable}
-                                  isFirst={index === 0}
-                                />
-                              )
+                                  // isFirst={index === 0}
+                                // />
+                              // )
                             })}
                             
                           </div>

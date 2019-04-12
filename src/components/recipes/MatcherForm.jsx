@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { SourceSelect } from '~/components/SourceSelect'
 import { OperatorSelect } from '~/components/OperatorSelect'
 import { OperandDataTypeSelect } from '~/components/OperandDataTypeSelect'
-import { OPERATORS } from '~/constants'
 
 export class MatcherForm extends PureComponent {
   static propTypes = {

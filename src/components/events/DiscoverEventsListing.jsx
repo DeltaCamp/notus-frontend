@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import { graphql } from 'react-apollo'
 import { recipesQuery } from '~/queries/recipesQuery'
 import { RecipeCard } from '~/components/events/RecipeCard'
-import { RECIPES } from '~/../config/recipes'
 
 export const DiscoverEventsListing =
   graphql(recipesQuery, { name: 'recipesData' })(
