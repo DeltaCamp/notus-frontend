@@ -6,15 +6,15 @@ import * as CONSTANTS from '~/constants'
 
 export const EventVariableButton = class _EventVariableButton extends PureComponent {
 
-  convertTemplate = (name, type) => {
+  convertTemplate = (name, varType) => {
     let operand,
-      operator
+      type
     let matcher = this.props.state[name]
 
     
     // hack for freq!
     if (name === 'frequency') {
-      type = 'frequency'
+      varType = 'frequency'
       
       if (matcher) {
         return CONSTANTS.en.templates['frequency'][matcher.operand]
@@ -24,14 +24,14 @@ export const EventVariableButton = class _EventVariableButton extends PureCompon
 
 
     if (!matcher) {
-      return CONSTANTS.en.templates[type]['default']
+      return CONSTANTS.en.templates[varType]['default']
     }
 
     operand = matcher.operand
-    operator = matcher.operator
+    type = matcher.type
 
-    // console.log('template lookup is: ', `templates.${type}.${operator}`)
-    const template = CONSTANTS.en.templates[type][operator]
+    // console.log('template lookup is: ', `templates.${varType}.${type}`)
+    const template = CONSTANTS.en.templates[varType][type]
 
     if (!template) {
       return operand

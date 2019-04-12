@@ -3,7 +3,7 @@ import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
 
 export const VariableSelectDropdown = ({
   variable,
-  operatorOrOperand,
+  typeOrOperand,
   state,
   handleInputChange,
   selectOptions
@@ -13,7 +13,7 @@ export const VariableSelectDropdown = ({
   const callback = (e) => {
     handleInputChange(
       variable,
-      operatorOrOperand,
+      typeOrOperand,
       e.target.value
     )
   }
@@ -21,7 +21,7 @@ export const VariableSelectDropdown = ({
   const matcher = state[name]
   let value
   if (matcher) {
-    value = matcher[operatorOrOperand]
+    value = matcher[typeOrOperand]
   } else {
     value = ''
   }

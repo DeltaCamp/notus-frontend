@@ -19,7 +19,7 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
         state={this.props.state}
         handleInputChange={this.props.handleInputChange}
         variable={variable}
-        operatorOrOperand='operator'
+        typeOrOperand='type'
         selectOptions={selectOptions}
       />
 
@@ -27,7 +27,7 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
         state={this.props.state}
         handleInputChange={this.props.handleInputChange}
         variable={variable}
-        operatorOrOperand='operand'
+        typeOrOperand='operand'
       />
     </>
   }
@@ -56,7 +56,7 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
         state={this.props.state}
         handleInputChange={this.props.handleInputChange}
         variable={variable}
-        operatorOrOperand='operand'
+        typeOrOperand='operand'
         selectOptions={selectOptions}
       />
     } else if (variableIsNumberish) {
@@ -66,7 +66,7 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
         state={this.props.state}
         handleInputChange={this.props.handleInputChange}
         variable={variable}
-        operatorOrOperand='operand'
+        typeOrOperand='operand'
       />
     } else {
       rollbar.error(

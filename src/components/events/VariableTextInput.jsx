@@ -4,7 +4,7 @@ import * as CONSTANTS from '~/constants'
 
 export const VariableTextInput = ({
   variable,
-  operatorOrOperand,
+  typeOrOperand,
   state,
   handleInputChange
 }) => {
@@ -21,7 +21,7 @@ export const VariableTextInput = ({
   const matcher = state[name]
   let value
   if (matcher) {
-    value = matcher[operatorOrOperand]
+    value = matcher[typeOrOperand]
   } else {
     value = ''
   }
@@ -31,7 +31,7 @@ export const VariableTextInput = ({
       <div className='control'>
         <input
           type='text'
-          autoFocus={(operatorOrOperand === 'operand')}
+          autoFocus={(typeOrOperand === 'operand')}
           placeholder={placeholder}
           className='input is-small'
           onClick={(e) => {

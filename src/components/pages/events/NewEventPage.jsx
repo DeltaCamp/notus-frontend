@@ -21,7 +21,9 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
   graphql(currentUserQuery, { name: 'currentUserData' })(
     class _NewEventPage extends Component {
       state = {
-        event: {},
+        event: {
+          matchers: []
+        },
         editVariable: null
       }
 
@@ -57,7 +59,6 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           name: 'When this happens trigger that'
         }
 
-        // recipe: {
         //   eventTypeId: 12345,
         //     matchers: [
         //       {
@@ -66,22 +67,29 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         //         operand: '', // value
         //       }
         //     ],
-        //       variables: [],
-        //         createdAt: null
-        // },
+
+        // VariableDTO:
+        //
+        // id: ID
+        // source: String!
+        // sourceDataType: String!
+        // description: String = ""
+        // isPublic: Boolean = false
+        // eventTypeId: Float
 
         let recipe = {
           id: 8,
           name: 'ERC20 Token Transfer event',
           variables: [
             {
+              id: 1,
               source: 'transaction.to',
               sourceDataType: 'address',
               description: 'I should be hidden',
               isPublic: false,
-
             },
             {
+              id: 2,
               source: 'transaction.to',
               sourceDataType: 'address',
               description: 'Token Contract Address',
@@ -89,13 +97,14 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
             },
             {
+              id: 3,
               source: 'transaction.from',
               sourceDataType: 'address',
               description: 'Sender Address',
               isPublic: true,
-
             },
             {
+              id: 4,
               source: 'log.topic[2]',
               sourceDataType: 'address',
               description: 'Recipient Address',
@@ -103,6 +112,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
 
             },
             {
+              id: 5,
               source: 'log.topic[3]',
               sourceDataType: 'uint256',
               description: 'Amount',
@@ -118,7 +128,13 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           recipe = newRecipe
         }
 
+        const event = {
+          ...this.state.event,
+          eventTypeId: recipe.id || -1
+        }
+
         this.setState({
+          event,
           recipe
         })
 
@@ -159,7 +175,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
         this.handleSetEditVariable(null)
       }
 
-      handleInputChange = (variable, operatorOrOperand, newValue) => {
+      handleInputChange = (variable, typeOrOperand, newValue) => {
         const {
           description,
           sourceDataType
@@ -172,34 +188,50 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
           newValue = newValue.replace(/[^0-9.]/g, '')
         }
 
-        let matcher = this.state[name]
+        let matcher = this.state.event.matchers.find((matcher) => (
+          matcher.variableId === variable.id
+        ))
+
         if (!matcher) {
+          console.log('no matcher yet, creating one with variableId: ', variable.id)
           matcher = {
-            operator: '0',
+            variableId: variable.id,
+            type: '0',
             operand: newValue
           }
         }
 
-        if (operatorOrOperand === 'operator') {
-          matcher.operator = newValue
+        if (typeOrOperand === 'type') {
+          matcher.type = newValue
         } else {
           matcher.operand = newValue
         }
 
         this.setState({
           [name]: matcher
-        }, this.updateEventMatcher(name))
+        }, this.updateEventMatcher(variable, matcher))
       }
 
-      updateEventMatcher = (key, val) => {
-        // console.log("TO IMPLEMENT!")
+      updateEventMatcher = (variable, matcher) => {
+        const matchers = this.state.event.matchers
+
+        let existingMatcher = this.state.event.matchers.find((matcher) => (
+          matcher.variableId === variable.id
+        ))
+
+        if (!existingMatcher) {
+          matchers.push(matcher)
+        } else {
+          const matcherIndex = this.state.event.matchers.indexOf(existingMatcher)
+          matchers[matcherIndex].operand = matcher.operand
+        }
         
-        // this.setState({
-        //   event: {
-        //     ...this.state.event,
-        //     [key]: val
-        //   }
-        // })
+        this.setState({
+          event: {
+            ...this.state.event,
+            matchers
+          }
+        }, () => { console.log(this.state.event)})
       }
 
       isEditing = () => {
@@ -344,6 +376,7 @@ export const NewEventPage = graphql(saveEventMutation, { name: 'saveEventMutatio
                           state={this.state}
                           handleSetEditVariable={this.handleSetEditVariable}
                           variable={{
+                            id: -1,
                             description: 'Frequency',
                             sourceDataType: 'string',
                             isPublic: true
