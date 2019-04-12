@@ -65,7 +65,7 @@ export const NewRecipePage = graphql(currentUserQuery, { name: 'currentUserData'
       create = () => {
         this.props.createEventTypeMutation({
           variables: {
-            eventType: this.state
+            recipe: this.state
           }
         })
           .then(response => console.log(response))

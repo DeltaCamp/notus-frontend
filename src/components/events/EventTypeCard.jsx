@@ -7,17 +7,17 @@ import * as routes from '~/../config/routes'
 export const EventTypeCard = 
   class _EventTypeCard extends PureComponent {
     render () {
-      const { eventType } = this.props
+      const { recipe } = this.props
 
       return (
         <Link
-          key={`event-type-${eventType.id}`}
-          to={formatRoute(routes.NEW_EVENT_FROM_EVENT_TYPE, { eventTypeId: eventType.id })}
-          className={`button event-card ${brandColor(eventType.id)}`}
+          key={`recipe-${recipe.id}`}
+          to={formatRoute(routes.NEW_EVENT_FROM_EVENT_TYPE, { recipeId: recipe.id })}
+          className={`button event-card ${brandColor(recipe.id)}`}
         >
           <div className="event-card__header">
             <p className='event-card__name is-size-5'>
-              {eventType.name}
+              {recipe.name}
             </p>
           </div>
 

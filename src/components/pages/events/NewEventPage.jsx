@@ -12,19 +12,19 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { saveEventMutation } from '~/mutations/saveEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
-import { eventTypeQuery } from '~/queries/eventTypeQuery'
+import { recipeQuery } from '~/queries/recipeQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
 import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
-// import { EVENT_TYPES } from '~/../config/eventTypes'
+// import { RECIPES } from '~/../config/recipes'
 import * as routes from '~/../config/routes'
 
 export const NewEventPage = 
   graphql(currentUserQuery, { name: 'currentUserData' })(
-    graphql(eventTypeQuery, {
-      name: 'eventTypeData',
+    graphql(recipeQuery, {
+      name: 'recipeData',
       // skip
       options: (props) => ({
-        variables: { id: props.match.params.eventTypeId }
+        variables: { id: props.match.params.recipeId }
       })
     })(
       graphql(saveEventMutation, { name: 'saveEventMutation' })(
@@ -54,11 +54,11 @@ export const NewEventPage =
           }
 
           componentDidMount() {
-            
-            // const eventTypeId = this.props.match.params.eventTypeId
+            let colorClass,
+              altColorClass
 
-            // let recipe = EVENT_TYPES.find(
-            //   (eventType) => (eventType.id === parseInt(eventTypeId, 10))
+            // let recipe = RECIPES.find(
+            //   (recipe) => (recipe.id === parseInt(recipeId, 10))
             // )
 
             // const newRecipe = {
@@ -66,7 +66,7 @@ export const NewEventPage =
             //   name: 'When this happens trigger that'
             // }
 
-            //   eventTypeId: 12345,
+            //   recipeId: 12345,
             //     matchers: [
             //       {
             //         variableId: 8756, // var id, var needs to exist beforehand
@@ -82,9 +82,44 @@ export const NewEventPage =
             // sourceDataType: String!
             // description: String = ""
             // isPublic: Boolean = false
-            // eventTypeId: Float
+            // recipeId: Float
 
-            
+            let recipe = null
+
+            console.log(this.props.recipeData)
+
+            if (!this.props.recipeData.loading) {
+              if (!this.props.recipeData.error) {
+                console.log(this.props.recipeData)
+                recipe = this.props.recipeData.recipe
+
+                const event = {
+                  ...this.state.event,
+                  recipeId: recipe.id || -1
+                }
+
+                this.setState({
+                  event,
+                  recipe
+                })
+
+
+                if (recipe) {
+                  colorClass = brandColor(recipe.id)
+                  altColorClass = altBrandColor(recipe.id + 1)
+                } else {
+                  colorClass = 'is-dark'
+                  altColorClass = 'is-blue'
+                }
+
+                this.setState({
+                  colorClass,
+                  altColorClass
+                })
+              } else {
+                console.error(this.props.recipe.error)
+              }
+            }
           }
 
           handleSaveEvent = (e) => {
@@ -182,12 +217,12 @@ export const NewEventPage =
           componentDidUpdate(prevProps) {
             let recipe 
             
-            if (prevProps.eventTypeData.eventType !== this.props.eventTypeData.eventType) {
-              recipe = this.props.eventTypeData.eventType
+            if (prevProps.recipeData.recipe !== this.props.recipeData.recipe) {
+              recipe = this.props.recipeData.recipe
 
               const event = {
                 ...this.state.event,
-                eventTypeId: recipe.id || -1
+                recipeId: recipe.id || -1
               }
 
               this.setState({
@@ -207,10 +242,10 @@ export const NewEventPage =
 
             let recipe = null
 
-            if (this.props.eventTypeData.loading) {
+            if (this.props.recipeData.loading) {
               return null
             } else {
-              recipe = this.props.eventTypeData.eventType
+              recipe = this.props.recipeData.recipe
 
               if (recipe) {
                 colorClass = brandColor(recipe.id)
@@ -308,7 +343,7 @@ export const NewEventPage =
                         <div className='row'>
                           <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
                             <span className="event-box__text">
-                              When {this.recipeSentence(this.props.eventTypeData.eventType)} occurs
+                              When {this.recipeSentence(this.props.recipeData.recipe)} occurs
                             </span>
 
                             {/*recipe.variables.map((variable, index) => {

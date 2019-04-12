@@ -3,14 +3,14 @@ import gql from 'graphql-tag'
 import { dappFragment } from '~/fragments/dappFragment'
 import { matcherFragment } from '~/fragments/matcherFragment'
 
-export const eventTypeFragment = gql`
-  fragment eventTypeFragment on EventTypeEntity {
+export const recipeFragment = gql`
+  fragment recipeFragment on EventTypeEntity {
     id
     name
     dapp {
       ...dappFragment
     }
-    eventTypeMatchers {
+    recipeMatchers {
       id
       matcher {
         ...matcherFragment

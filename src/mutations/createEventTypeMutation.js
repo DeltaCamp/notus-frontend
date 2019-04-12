@@ -1,12 +1,12 @@
 import gql from 'graphql-tag'
 
-import { eventTypeFragment } from '~/fragments/eventTypeFragment'
+import { recipeFragment } from '~/fragments/recipeFragment'
 
 export const createEventTypeMutation = gql`
-  mutation createEventTypeMutation($eventType: EventTypeDto!) {
-    createEventType(eventType: $eventType) {
-      ...eventTypeFragment
+  mutation createEventTypeMutation($recipe: EventTypeDto!) {
+    createEventType(recipe: $recipe) {
+      ...recipeFragment
     }
   }
-  ${eventTypeFragment}
+  ${recipeFragment}
 `

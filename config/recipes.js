@@ -1,4 +1,4 @@
-export const EVENT_TYPES = [
+export const RECIPES = [
   {
     name: 'Get notified when a large Token Transfer (ERC20) happens',
     id: 1

@@ -1,33 +1,33 @@
 import React, { PureComponent } from 'react'
 import { graphql } from 'react-apollo'
-import { eventTypesQuery } from '~/queries/eventTypesQuery'
+import { recipesQuery } from '~/queries/recipesQuery'
 import { EventTypeCard } from '~/components/events/EventTypeCard'
-import { EVENT_TYPES } from '~/../config/eventTypes'
+import { RECIPES } from '~/../config/recipes'
 
 export const DiscoverEventsListing =
-  graphql(eventTypesQuery, { name: 'eventTypesData' })(
+  graphql(recipesQuery, { name: 'recipesData' })(
     class _DiscoverEventsListing extends PureComponent {
       render () {
-        let eventTypes
+        let recipes
 
-        if (!this.props.eventTypesData.loading) {
-          if (this.props.eventTypesData.error) {
-            console.error(this.props.eventTypesData.error)
+        if (!this.props.recipesData.loading) {
+          if (this.props.recipesData.error) {
+            console.error(this.props.recipesData.error)
           } else {
-            console.error(this.props.eventTypes.error)
-            // console.log(this.props.eventTypesData)
-            eventTypes = this.props.eventTypesData.eventTypes.map((eventType) => (
+            console.error(this.props.recipes.error)
+            // console.log(this.props.recipesData)
+            recipes = this.props.recipesData.recipes.map((recipe) => (
               <EventTypeCard
-                key={`event-type-${eventType.id}`}
-                eventType={eventType}
+                key={`recipe-${recipe.id}`}
+                recipe={recipe}
               />
             ))
           }
         }
-        // eventTypes = EVENT_TYPES.map((eventType) => (
+        // recipes = RECIPES.map((recipe) => (
         //   <EventTypeCard
-        //     key={`event-type-${eventType.id}`}
-        //     eventType={eventType}
+        //     key={`recipe-${recipe.id}`}
+        //     recipe={recipe}
         //   />
         // ))
 
@@ -45,7 +45,7 @@ export const DiscoverEventsListing =
               </div>
             </div> */}
 
-            {eventTypes}
+            {recipes}
           </>
         )
       }

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const eventTypeQuery = gql`
+export const recipeQuery = gql`
   query($id: String!) {
-    eventType(id: $id) {
+    recipe(id: $id) {
       id
       name
     }
