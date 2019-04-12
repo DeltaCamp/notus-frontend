@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { brandColor } from '~/utils/brandColors'
 import * as routes from '~/../config/routes'
 
-export const EventTypeCard = 
-  class _EventTypeCard extends PureComponent {
+export const RecipeCard = 
+  class _RecipeCard extends PureComponent {
     render () {
       const { recipe } = this.props
 

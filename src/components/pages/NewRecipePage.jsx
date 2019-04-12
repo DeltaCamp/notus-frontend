@@ -11,10 +11,10 @@ import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
 import { MatcherForm } from '~/components/recipes/MatcherForm'
 import { DappSelect } from '~/components/DappSelect'
-import { createEventTypeMutation } from '~/mutations/createEventTypeMutation'
+import { createRecipeMutation } from '~/mutations/createRecipeMutation'
 
 export const NewRecipePage = graphql(currentUserQuery, { name: 'currentUserData' })(
-  graphql(createEventTypeMutation, { name: 'createEventTypeMutation' })(
+  graphql(createRecipeMutation, { name: 'createRecipeMutation' })(
     class _NewRecipePage extends PureComponent {
       state = {}
 
@@ -63,7 +63,7 @@ export const NewRecipePage = graphql(currentUserQuery, { name: 'currentUserData'
       }
 
       create = () => {
-        this.props.createEventTypeMutation({
+        this.props.createRecipeMutation({
           variables: {
             recipe: this.state
           }

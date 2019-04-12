@@ -4,7 +4,7 @@ import { dappFragment } from '~/fragments/dappFragment'
 import { matcherFragment } from '~/fragments/matcherFragment'
 
 export const recipeFragment = gql`
-  fragment recipeFragment on EventTypeEntity {
+  fragment recipeFragment on RecipeEntity {
     id
     name
     dapp {

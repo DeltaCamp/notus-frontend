@@ -2,9 +2,9 @@ import gql from 'graphql-tag'
 
 import { recipeFragment } from '~/fragments/recipeFragment'
 
-export const createEventTypeMutation = gql`
-  mutation createEventTypeMutation($recipe: EventTypeDto!) {
-    createEventType(recipe: $recipe) {
+export const createRecipeMutation = gql`
+  mutation createRecipeMutation($recipe: RecipeDto!) {
+    createRecipe(recipe: $recipe) {
       ...recipeFragment
     }
   }

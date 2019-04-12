@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { graphql } from 'react-apollo'
 import { recipesQuery } from '~/queries/recipesQuery'
-import { EventTypeCard } from '~/components/events/EventTypeCard'
+import { RecipeCard } from '~/components/events/RecipeCard'
 import { RECIPES } from '~/../config/recipes'
 
 export const DiscoverEventsListing =
@@ -14,10 +14,8 @@ export const DiscoverEventsListing =
           if (this.props.recipesData.error) {
             console.error(this.props.recipesData.error)
           } else {
-            console.error(this.props.recipes.error)
-            // console.log(this.props.recipesData)
             recipes = this.props.recipesData.recipes.map((recipe) => (
-              <EventTypeCard
+              <RecipeCard
                 key={`recipe-${recipe.id}`}
                 recipe={recipe}
               />
@@ -25,7 +23,7 @@ export const DiscoverEventsListing =
           }
         }
         // recipes = RECIPES.map((recipe) => (
-        //   <EventTypeCard
+        //   <RecipeCard
         //     key={`recipe-${recipe.id}`}
         //     recipe={recipe}
         //   />
