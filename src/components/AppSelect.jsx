@@ -5,11 +5,11 @@ import { get } from 'lodash'
 import AsyncCreatable from 'react-select/lib/AsyncCreatable'
 
 import { currentUserQuery } from '~/queries/currentUserQuery'
-import { dappUsersQuery } from '~/queries/dappUsersQuery'
+import { appUsersQuery } from '~/queries/appUsersQuery'
 
-export const DappSelect = graphql(currentUserQuery, { name: 'currentUserData' })(
-  graphql(dappUsersQuery, {
-    name: 'dappUsersQuery',
+export const AppSelect = graphql(currentUserQuery, { name: 'currentUserData' })(
+  graphql(appUsersQuery, {
+    name: 'appUsersQuery',
     skip: (props) => {
       return !get(props, 'currentUserData.currentUser.id')
     },
@@ -22,31 +22,31 @@ export const DappSelect = graphql(currentUserQuery, { name: 'currentUserData' })
       }
     }
   })(
-    class _DappSelect extends PureComponent {
+    class _AppSelect extends PureComponent {
       static propTypes = {
         value: PropTypes.object.isRequired,
         onChange: PropTypes.func.isRequired
       }
 
       onChangeApp = (option) => {
-        let dapp
+        let app
         if (typeof option.value === 'string') {
-          dapp = {
+          app = {
             name: option.value
           }
         } else {
-          dapp = {
+          app = {
             id: option.value
           }
         }
-        this.props.onChange(dapp)
+        this.props.onChange(app)
       }
 
       render () {
-        const appOptions = get(this.props, 'dappUsersQuery.dappUsers', []).map(dappUser => {
+        const appOptions = get(this.props, 'appUsersQuery.appUsers', []).map(appUser => {
           return {
-            value: dappUser.dapp.id,
-            label: dappUser.dapp.name
+            value: appUser.app.id,
+            label: appUser.app.name
           }
         })
 

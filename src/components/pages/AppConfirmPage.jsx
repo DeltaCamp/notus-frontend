@@ -7,8 +7,8 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { CodeBox } from '~/components/CodeBox'
 import * as routes from '~/../config/routes'
 
-export const DappConfirmPage =
-  class _DappConfirmPage extends Component {
+export const AppConfirmPage =
+  class _AppConfirmPage extends Component {
 
     static propTypes = {
       match: PropTypes.object.isRequired
@@ -24,7 +24,7 @@ export const DappConfirmPage =
       return (
         <div className='is-positioned-absolutely'>
           <Helmet
-            title='Confirm Your DApp'
+            title='Confirm Your App'
           />
 
           <ScrollToTop />
@@ -42,7 +42,7 @@ export const DappConfirmPage =
                   <br />
                   <br />
                   <p className='has-text-grey-light'>
-                    Quickly Integrate Notus with your DApp:
+                    Quickly Integrate Notus with your App:
                   </p>
                   <CodeBox apiKey={apiKey} />
 

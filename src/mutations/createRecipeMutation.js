@@ -1,12 +1,12 @@
-import gql from 'graphql-tag'
+// import gql from 'graphql-tag'
 
-import { recipeFragment } from '~/fragments/recipeFragment'
+// import { recipeFragment } from '~/fragments/recipeFragment'
 
-export const createRecipeMutation = gql`
-  mutation createRecipeMutation($recipe: RecipeDto!) {
-    createRecipe(recipe: $recipe) {
-      ...recipeFragment
-    }
-  }
-  ${recipeFragment}
-`
+// export const createRecipeMutation = gql`
+//   mutation createRecipeMutation($recipe: RecipeDto!) {
+//     createRecipe(recipe: $recipe) {
+//       ...recipeFragment
+//     }
+//   }
+//   ${recipeFragment}
+// `

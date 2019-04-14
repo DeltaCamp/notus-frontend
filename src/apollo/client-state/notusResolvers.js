@@ -1,18 +1,18 @@
 import { axiosInstance } from '~/../config/axiosInstance'
 import { storage } from '~/apollo/storage'
-import { DappUserFragment } from '~/fragments/DappUserFragment'
+import { AppUserFragment } from '~/fragments/AppUserFragment'
 import { axiosGetUserFromApi } from '~/utils/axiosGetUserFromApi'
 
 export const notusResolvers = {
   Query: {
-    dappUser: async function (object, args, options, info) {
-      const { dappUserId } = args
-      if (!dappUserId) { throw new Error('You must pass the dappUserId') }
+    appUser: async function (object, args, options, info) {
+      const { appUserId } = args
+      if (!appUserId) { throw new Error('You must pass the appUserId') }
       return axiosInstance
-        .get(`${process.env.REACT_APP_NOTUS_API_URI}/dapp-users/${dappUserId}`)
+        .get(`${process.env.REACT_APP_NOTUS_API_URI}/app-users/${appUserId}`)
         .then(json => {
-          const id = `DappUser:${json.id}`
-          return options.writeFragment({id, fragment: DappUserFragment, data: json })
+          const id = `AppUser:${json.id}`
+          return options.writeFragment({id, fragment: AppUserFragment, data: json })
         })
     }
   },
@@ -95,14 +95,14 @@ export const notusResolvers = {
         }
     },
 
-    confirmDappUser: async function (object, args, { cache }, info) {
-      console.log('starting confirmDappUser: ')
+    confirmAppUser: async function (object, args, { cache }, info) {
+      console.log('starting confirmAppUser: ')
       const { requestKey } = args
       if (!requestKey) {
         throw new Error('requestKey is not defined')
       }
       return axiosInstance
-        .post(`${process.env.REACT_APP_NOTUS_API_URI}/dapp-users/confirm`, { requestKey })
+        .post(`${process.env.REACT_APP_NOTUS_API_URI}/app-users/confirm`, { requestKey })
         .then(json => {
           return json
         })

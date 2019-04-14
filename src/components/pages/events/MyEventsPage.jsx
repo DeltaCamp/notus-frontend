@@ -73,7 +73,7 @@ export const MyEventsPage = graphql(currentUserQuery, { name: 'currentUserData' 
                     <div className='row'>
                       <div className='col-xs-12 has-text-centered mt50'>
                         <h4 className='is-size-4 has-text-white has-text-weight-bold'>
-                          Or, choose from an existing event type:
+                          Create a new event based off an existing one:
                         </h4>
 
                         <br />

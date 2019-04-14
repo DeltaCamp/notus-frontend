@@ -1,30 +1,31 @@
 import React, { PureComponent } from 'react'
 import { graphql } from 'react-apollo'
-import { recipesQuery } from '~/queries/recipesQuery'
+import { eventsQuery } from '~/queries/eventsQuery'
 import { RecipeCard } from '~/components/events/RecipeCard'
 
 export const DiscoverEventsListing =
-  graphql(recipesQuery, { name: 'recipesData' })(
+  graphql(eventsQuery, { name: 'eventsData' })(
     class _DiscoverEventsListing extends PureComponent {
       render () {
-        let recipes
+        let events
 
-        if (!this.props.recipesData.loading) {
-          if (this.props.recipesData.error) {
-            console.error(this.props.recipesData.error)
+        if (!this.props.eventsData.loading) {
+          if (this.props.eventsData.error) {
+            console.error(this.props.eventsData.error)
           } else {
-            recipes = this.props.recipesData.recipes.map((recipe) => (
+            console.log(this.props.eventsData)
+            events = this.props.eventsData.events.map((event) => (
               <RecipeCard
-                key={`recipe-${recipe.id}`}
-                recipe={recipe}
+                key={`event-${event.id}`}
+                recipe={event}
               />
             ))
           }
         }
-        // recipes = RECIPES.map((recipe) => (
+        // events = RECIPES.map((event) => (
         //   <RecipeCard
-        //     key={`recipe-${recipe.id}`}
-        //     recipe={recipe}
+        //     key={`event-${event.id}`}
+        //     event={event}
         //   />
         // ))
 
@@ -42,7 +43,7 @@ export const DiscoverEventsListing =
               </div>
             </div> */}
 
-            {recipes}
+            {events}
           </>
         )
       }

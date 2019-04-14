@@ -10,11 +10,11 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
 import { MatcherForm } from '~/components/recipes/MatcherForm'
-import { DappSelect } from '~/components/DappSelect'
-import { createRecipeMutation } from '~/mutations/createRecipeMutation'
+import { AppSelect } from '~/components/AppSelect'
+// import { createRecipeMutation } from '~/mutations/createRecipeMutation'
 
 export const NewRecipePage = graphql(currentUserQuery, { name: 'currentUserData' })(
-  graphql(createRecipeMutation, { name: 'createRecipeMutation' })(
+  // graphql(createRecipeMutation, { name: 'createRecipeMutation' })(
     class _NewRecipePage extends PureComponent {
       state = {}
 
@@ -29,7 +29,7 @@ export const NewRecipePage = graphql(currentUserQuery, { name: 'currentUserData'
       constructor (props) {
         super(props)
         this.state = {
-          dapp: {},
+          app: {},
           name: '',
           matchers: []
         }
@@ -58,18 +58,18 @@ export const NewRecipePage = graphql(currentUserQuery, { name: 'currentUserData'
         })
       }
 
-      onChangeApp = (dapp) => {
-        this.setState({ dapp })
+      onChangeApp = (app) => {
+        this.setState({ app })
       }
 
       create = () => {
-        this.props.createRecipeMutation({
-          variables: {
-            recipe: this.state
-          }
-        })
-          .then(response => console.log(response))
-          .catch(error => console.error(error))
+        // this.props.createRecipeMutation({
+        //   variables: {
+        //     recipe: this.state
+        //   }
+        // })
+        //   .then(response => console.log(response))
+        //   .catch(error => console.error(error))
       }
 
       render () {
@@ -93,8 +93,8 @@ export const NewRecipePage = graphql(currentUserQuery, { name: 'currentUserData'
                       <label className='label'>
                         App
                       </label>
-                      <DappSelect
-                        value={this.state.dapp}
+                      <AppSelect
+                        value={this.state.app}
                         onChange={this.onChangeApp}
                         />
                     </div>
@@ -138,5 +138,5 @@ export const NewRecipePage = graphql(currentUserQuery, { name: 'currentUserData'
         )
       }
     }
-  )
+  // )
 )

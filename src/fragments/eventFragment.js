@@ -1,23 +1,24 @@
 import gql from 'graphql-tag'
-
-import { recipeFragment } from '~/fragments/recipeFragment'
 import { matcherFragment } from '~/fragments/matcherFragment'
 
 export const eventFragment = gql`
   fragment eventFragment on EventEntity {
     id
-    recipe {
-      ...recipeFragment
-    }
-    eventMatchers {
+    title
+    parent {
       id
-      matcher {
+      matchers {
         ...matcherFragment
       }
+      createdAt
+      updatedAt
+    }
+    matchers {
+      ...matcherFragment
     }
     createdAt
     updatedAt
   }
-  ${recipeFragment}
+  ${matcherFragment}
   ${matcherFragment}
 `

@@ -17,8 +17,8 @@ import { PasswordResetPage } from '~/components/pages/PasswordResetPage'
 import { SignInPage } from '~/components/pages/SignInPage'
 import { SignUpPage } from '~/components/pages/SignUpPage'
 import { ConfirmAndSetPasswordPage } from '~/components/pages/ConfirmAndSetPasswordPage'
-import { DappConfirmPage } from '~/components/pages/DappConfirmPage'
-import { DappUserConfirmPage } from '~/components/pages/DappUserConfirmPage'
+import { AppConfirmPage } from '~/components/pages/AppConfirmPage'
+import { AppUserConfirmPage } from '~/components/pages/AppUserConfirmPage'
 import { Nav } from '~/components/layout/Nav'
 import { FourOhFour } from '~/components/pages/FourOhFour'
 import * as routes from '~/../config/routes'
@@ -67,7 +67,7 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.HOOKS} component={HooksListPage} />
                 <Route exact path={routes.HOME} component={HomePage} />
                 <Route exact path={routes.CONFIRM_AND_SET_PASSWORD_PAGE} component={ConfirmAndSetPasswordPage} />
-                <Route exact path={routes.CONFIRM} component={DappUserConfirmPage} />
+                <Route exact path={routes.CONFIRM} component={AppUserConfirmPage} />
                 <Route exact path={routes.NEW_EVENT} component={NewEventPage} />
                 <Route exact path={routes.NEW_EVENT_FROM_EVENT_TYPE} component={NewEventPage} />
                 <Route exact path={routes.MY_EVENTS} component={MyEventsPage} />
@@ -75,7 +75,7 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.SIGNUP} component={SignUpPage} />
                 <Route exact path={routes.SIGNIN} component={SignInPage} />
                 <Route exact path={routes.PASSWORD_RESET} component={PasswordResetPage} />
-                <Route exact path={routes.DAPP_CONFIRM} component={DappConfirmPage} />
+                <Route exact path={routes.APP_CONFIRM} component={AppConfirmPage} />
                 <Route exact path={routes.NEW_RECIPE} component={NewRecipePage} />
                 <Route component={FourOhFour} />
               </Switch>

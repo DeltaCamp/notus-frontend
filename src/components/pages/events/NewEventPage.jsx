@@ -13,20 +13,19 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { createEventMutation } from '~/mutations/createEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
-import { recipeQuery } from '~/queries/recipeQuery'
+import { eventQuery } from '~/queries/eventQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
-// import { varDescriptionToVarName } from '~/utils/varDescriptionToVarName'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 // import { RECIPES } from '~/../config/recipes'
 import * as routes from '~/../config/routes'
 
 export const NewEventPage = 
   graphql(currentUserQuery, { name: 'currentUserData' })(
-    graphql(recipeQuery, {
-      name: 'recipeData',
-      skip: (props) => !props.match.params.recipeId,
+    graphql(eventQuery, {
+      name: 'eventData',
+      skip: (props) => !props.match.params.parentEventId,
       options: (props) => ({
-        variables: { id: props.match.params.recipeId }
+        variables: { id: parseInt(props.match.params.parentEventId, 10) }
       })
     })(
       graphql(createEventMutation, { name: 'createEventMutation' })(
@@ -151,10 +150,10 @@ export const NewEventPage =
           }
 
           recipeSentence = (recipe) => {
-            let str = !recipe.name.charAt(0).match(/[aeiou]/) ? `a ` : `an `
-            str += recipe.name
-            
-            return str
+            const firstLetter = recipe.title.charAt(0)
+            const startsWithVowel = /[aeiou]/i.test(firstLetter)
+
+            return startsWithVowel ? `an ${recipe.title}` : `a ${recipe.title}`
           }
 
           onChangeMatcher = (matcher) => {
@@ -172,11 +171,14 @@ export const NewEventPage =
           componentDidUpdate(prevProps) {
             let recipe 
             
-            if (prevProps.recipeData && (prevProps.recipeData.recipe !== this.props.recipeData.recipe)) {
-              recipe = this.props.recipeData.recipe
+            if (
+              prevProps.eventData
+              && (prevProps.eventData.event !== this.props.eventData.event)
+            ) {
+              recipe = this.props.eventData.event
               console.log(recipe)
 
-              let matchers = recipe.recipeMatchers.map(recipeMatcher => (
+              let matchers = recipe.matchers.map(recipeMatcher => (
                 deepCloneMatcher(recipeMatcher.matcher)
               ))
               // matchers = cloneDeep(matchers)
@@ -184,7 +186,7 @@ export const NewEventPage =
               const event = {
                 ...this.state.event,
                 matchers,
-                recipeId: parseInt(recipe.id, 10)
+                parentEventId: parseInt(recipe.id, 10)
               }
               console.log('event', event)
               
@@ -212,15 +214,20 @@ export const NewEventPage =
               return <Redirect to={routes.SIGNIN} />
             }
 
-            if (this.props.recipeData) {
-              if (this.props.recipeData.loading) {
+            if (this.props.eventData) {
+              if (this.props.eventData.loading) {
                 return null
               } else {
-                recipe = this.props.recipeData.recipe
-    
-                if (recipe) {
-                  colorClass = brandColor(recipe.id)
-                  altColorClass = altBrandColor(recipe.id + 1)
+                if (this.props.eventData.error) {
+                  console.warn(this.props.eventData.error)
+                  return null
+                } else {
+                  recipe = this.props.eventData.event
+
+                  if (recipe) {
+                    colorClass = brandColor(recipe.id)
+                    altColorClass = altBrandColor(recipe.id + 1)
+                  }
                 }
               }
             }

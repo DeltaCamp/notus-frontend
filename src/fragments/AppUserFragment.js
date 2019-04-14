@@ -1,13 +1,13 @@
 import gql from 'graphql-tag'
 import { UserFragment } from './UserFragment'
 
-export const DappUserFragment = gql`
-  fragment dappUserFragment on DappUser {
+export const AppUserFragment = gql`
+  fragment appUserFragment on AppUser {
     id
     user {
       ...userFragment
     }
-    dapp {
+    app {
       id
     }
     owner

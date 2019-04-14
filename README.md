@@ -1,4 +1,4 @@
-# Notus Network - Marketing Site & UI DApp
+# Notus Network - Marketing Site & UI App
 
 A frontend for interacting with Notus nodes for monitoring smart contract events and firing off webhooks in response.
 

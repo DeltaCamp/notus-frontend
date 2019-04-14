@@ -27,7 +27,7 @@ export class HomePage extends Component {
             <div className='row pb100'>
               <div className='col-xs-10 col-md-9'>
                 <h5 className='is-size-5'>
-                  Notify your DApp's users when you need their attention.
+                  Notify your app's users when you need their attention.
                 </h5>
                 <br />
                 <p>

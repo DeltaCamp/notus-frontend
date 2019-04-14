@@ -9,14 +9,14 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 
 const queryString = require('query-string')
 
-const dappUserConfirmPageMutation = gql`
-  mutation confirmDappUser($requestKey: String!) {
-    confirmDappUser(requestKey: $requestKey) @client
+const appUserConfirmPageMutation = gql`
+  mutation confirmAppUser($requestKey: String!) {
+    confirmAppUser(requestKey: $requestKey) @client
   }
 `
 
-export const DappUserConfirmPage = graphql(dappUserConfirmPageMutation, { name: 'confirmDappUser' })(
-  class _DappUserConfirmPage extends PureComponent {
+export const AppUserConfirmPage = graphql(appUserConfirmPageMutation, { name: 'confirmAppUser' })(
+  class _AppUserConfirmPage extends PureComponent {
 
     static propTypes = {
       match: PropTypes.object.isRequired
@@ -36,7 +36,7 @@ export const DappUserConfirmPage = graphql(dappUserConfirmPageMutation, { name: 
     componentDidMount () {
       const requestKey = this.getRequestKey(this.props)
       if (requestKey) {
-        this.confirmDappUser(requestKey)
+        this.confirmAppUser(requestKey)
       }
     }
 
@@ -45,20 +45,20 @@ export const DappUserConfirmPage = graphql(dappUserConfirmPageMutation, { name: 
       const newRequestKey = this.getRequestKey(this.props)
 
       if (newRequestKey !== oldRequestKey) {
-        this.confirmDappUser(newRequestKey)
+        this.confirmAppUser(newRequestKey)
       }
     }
 
-    confirmDappUser (requestKey) {
+    confirmAppUser (requestKey) {
       this.setState({
         confirming: true
       })
-      this.props.confirmDappUser({
+      this.props.confirmAppUser({
         variables: {
           requestKey
         }
       }).then((param) => {
-        const { jwtToken } = param.data.confirmDappUser.data
+        const { jwtToken } = param.data.confirmAppUser.data
         this.setState({
           confirming: false,
           confirmed: true,
@@ -91,7 +91,7 @@ export const DappUserConfirmPage = graphql(dappUserConfirmPageMutation, { name: 
       return (
         <div className='is-positioned-absolutely'>
           <Helmet
-            title='Confirm Your DApp Account'
+            title='Confirm Your App Account'
           />
 
           <ScrollToTop />

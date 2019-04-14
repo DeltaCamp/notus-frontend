@@ -12,7 +12,7 @@ export const RecipeCard =
       return (
         <Link
           key={`recipe-${recipe.id}`}
-          to={formatRoute(routes.NEW_EVENT_FROM_EVENT_TYPE, { recipeId: recipe.id })}
+          to={formatRoute(routes.NEW_EVENT_FROM_EVENT_TYPE, { parentEventId: recipe.id })}
           className={`button event-card ${brandColor(recipe.id)}`}
         >
           <div className="event-card__header">

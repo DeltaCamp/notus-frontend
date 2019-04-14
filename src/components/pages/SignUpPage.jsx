@@ -19,12 +19,12 @@ export const SignUpPage =
       const { email } = this.state
 
       if (email) {
-        // check if email and dappName exists in DB, if yes:
+        // check if email and appName exists in DB, if yes:
         // - name already registered, check email used to sign up
-        // - also could re-send email w/ API key if dapp name matches email provided
+        // - also could re-send email w/ API key if app name matches email provided
 
         // if no:
-        // - create a new dapp in the db and hook it up to this email address
+        // - create a new app in the db and hook it up to this email address
         // - on the API server, send an email to the newly signed up user
         // console.log(process.env.REACT_APP_NOTUS_API_URI)
 
