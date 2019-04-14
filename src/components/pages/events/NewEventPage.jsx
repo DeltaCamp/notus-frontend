@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import cloneDeep from 'clone-deep'
 import { CheckCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
@@ -34,10 +35,13 @@ export const NewEventPage =
             event: {
               frequency: '-1',
               matchers: [
-                // {
-                //   operator: -1,
-                //   operand: -1
-                // }
+                {
+                  operand: "",
+                  operandDataType: 1,
+                  operator: 2,
+                  order: 1,
+                  source: "transaction.value"
+                }
               ]
             },
             editMatcherIndex: null
@@ -176,19 +180,14 @@ export const NewEventPage =
               && (prevProps.eventData.event !== this.props.eventData.event)
             ) {
               recipe = this.props.eventData.event
-              console.log(recipe)
 
-              let matchers = recipe.matchers.map(recipeMatcher => (
-                deepCloneMatcher(recipeMatcher.matcher)
-              ))
-              // matchers = cloneDeep(matchers)
+              const matchers = cloneDeep(recipe.matchers)
 
               const event = {
                 ...this.state.event,
                 matchers,
                 parentEventId: parseInt(recipe.id, 10)
               }
-              console.log('event', event)
               
               this.setState({
                 event
@@ -206,8 +205,8 @@ export const NewEventPage =
               : null
 
             let recipe = {
-              description: 'New Event',
-              name: 'event matching the following'
+              title: 'New Event',
+              description: 'event matching the following'
             }
 
             if (this.state.redirect) {
@@ -332,7 +331,7 @@ export const NewEventPage =
                       <div className='row'>
                         <div className='col-xs-12 has-text-centered is-size-4'>
                           <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                            {recipe.description || recipe.name}
+                            {recipe.title}
                           </h6>
                         </div>
                       </div>

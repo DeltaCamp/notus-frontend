@@ -13,12 +13,15 @@ export const EventMatcherSentence = class _EventMatcherSentence extends PureComp
     this.props.handleSetEditMatcher(this.props.index)
   }
 
-  convertTemplate = (source) => {
-    let operand,
-      operator
-    // let matcher = this.props.state[name]
-    let { matcher } = this.props
-    
+  convertTemplate = (matcher) => {
+    let replaced
+    let {
+      operand,
+      operator,
+      operandDataType,
+      source,
+    } = matcher
+   
     // hack for freq!
     // if (name === 'frequency') {
     //   source = 'frequency'
@@ -27,29 +30,28 @@ export const EventMatcherSentence = class _EventMatcherSentence extends PureComp
     //     return CONSTANTS.en.templates['frequency'][matcher.operand]
     //   }
     // }
-    return 'fuck'
 
-    if (!matcher) {
-      return CONSTANTS.en.templates[source]['default']
-    }
+    // if (!matcher) {
+    //   return CONSTANTS.en.templates[source]['default']
+    // }
 
     operand = matcher.operand
     operator = matcher.operator
 
     console.log('template lookup is: ', `templates.${source}.${operator}`)
-    const template = CONSTANTS.en.templates[source][operator]
+    const template = CONSTANTS.en.templates[source][operandDataType]
 
     if (!template) {
       return operand
     }
 
     try {
-      operand = template.replace(/(\[.*\])/, operand)
+      replaced = template.replace(/(\[.*\])/, operand)
     } catch (err) {
       rollbar.error(`convertTemplate() called with ${template} to replace operand: ${operand} but ${err.message}`)
     }
     
-    return operand
+    return replaced
   }
 
   render () {
@@ -63,18 +65,14 @@ export const EventMatcherSentence = class _EventMatcherSentence extends PureComp
     const {
       source
     } = matcher
-    
-    // const sourceName
+
     const andWord = (isFirst) ? 'where' : '... and'
-
-    if (!source) { return null }
-
+    
     const humanReadableDescription = (
       <>
         <br />
         <span className='event-box__text'>
-          {andWord} the {source.replace('.', '')} is
-          {/* {andWord} the {source.title.replace('.', '')} is */}
+          {andWord} the {source.replace('.', ' ')} is
         </span>
       </>
     )
@@ -94,7 +92,8 @@ export const EventMatcherSentence = class _EventMatcherSentence extends PureComp
           onClick={this.onClick}
         >
           <span className='event-box__variable-value'>
-            <SourceAsSentence source={source} /> {this.convertTemplate(source)}
+            {/* <SourceAsSentence source={source} /> */}
+            {this.convertTemplate(matcher)}
           </span>
           {/* <span
             className='hint'

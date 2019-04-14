@@ -65,7 +65,7 @@ export const en = {
       [FREQUENCIES.EVERY_TIME]: 'every time',
       [FREQUENCIES.ONLY_ONCE]: 'only once'
     },
-    uint256: {
+    'transaction.value': {
       default: 'enter amount',
       [OPERATORS.EQ]: '[amount]', // operator
       [OPERATORS.LT]: 'less than [amount]',
