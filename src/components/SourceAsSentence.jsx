@@ -17,7 +17,6 @@ export const SourceAsSentence = graphql(sourcesQuery,
     if (error) {
       return `Error: ${error}`
     } else if (!loading) {
-      return 'shit'
       console.log(source)
       return source.toLowerCase()
     } else {

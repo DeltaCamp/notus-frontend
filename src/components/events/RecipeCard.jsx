@@ -17,7 +17,7 @@ export const RecipeCard =
         >
           <div className="event-card__header">
             <p className='event-card__name is-size-5'>
-              {recipe.name}
+              {recipe.title}
             </p>
           </div>
 

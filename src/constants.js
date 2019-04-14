@@ -61,12 +61,26 @@ export const en = {
   },
   templates: {
     frequency: { // type
-      default: 'how often',
       [FREQUENCIES.EVERY_TIME]: 'every time',
       [FREQUENCIES.ONLY_ONCE]: 'only once'
     },
     'transaction.value': {
-      default: 'enter amount',
+      [OPERATORS.EQ]: '[amount]', // operator
+      [OPERATORS.LT]: 'less than [amount]',
+      [OPERATORS.GT]: 'more than [amount]',
+      [OPERATORS.LTE]: '[amount] or less',
+      [OPERATORS.GTE]: '[amount] or more',
+    },
+    'transaction.to': {
+      [OPERATORS.EQ]: '[address]'
+    },
+    'transaction.from': {
+      [OPERATORS.EQ]: '[address]'
+    },
+    'log.topic[2]': {
+      [OPERATORS.EQ]: '[address]'
+    },
+    'log.topic[3]': {
       [OPERATORS.EQ]: '[amount]', // operator
       [OPERATORS.LT]: 'less than [amount]',
       [OPERATORS.GT]: 'more than [amount]',
@@ -74,7 +88,6 @@ export const en = {
       [OPERATORS.GTE]: '[amount] or more',
     },
     address: {
-      default: 'enter address'
     }
   },
   placeholders: {

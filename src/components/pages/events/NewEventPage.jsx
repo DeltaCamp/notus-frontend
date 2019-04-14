@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import cloneDeep from 'clone-deep'
+import { orderBy } from 'lodash'
 import { CheckCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
@@ -44,7 +45,8 @@ export const NewEventPage =
                 }
               ]
             },
-            editMatcherIndex: null
+            editMatcherIndex: null,
+            newEventTitle: ''
           }
 
           static propTypes = {
@@ -64,12 +66,22 @@ export const NewEventPage =
             }
           }
 
+          generateTitle = () => {
+            const matcherTitle = this.state.event.matchers.map((matcher) => {
+              return `${matcher.source} is ${matcher.operand} and `
+            })
+            return `${this.state.event.title} where ${matcherTitle}`
+          }
+
           handleSaveEvent = (e) => {
             e.preventDefault()
 
             this.props.createEventMutation({
               variables: {
-                event: this.state.event
+                event: {
+                  ...this.state.event,
+                  title: this.state.newEventTitle || this.generateTitle()
+                }
               }
             }).then(() => {
               toast('Successfully saved event!')
@@ -181,12 +193,14 @@ export const NewEventPage =
             ) {
               recipe = this.props.eventData.event
 
-              const matchers = cloneDeep(recipe.matchers)
+              // const matchers = cloneDeep(recipe.matchers)
+              const matchers = recipe.matchers.map(matcher => deepCloneMatcher(matcher))
 
               const event = {
-                ...this.state.event,
-                matchers,
-                parentEventId: parseInt(recipe.id, 10)
+                isPublic: false,
+                matchers: orderBy(matchers, 'order'),
+                parentId: parseInt(recipe.id, 10),
+                title: recipe.title
               }
               
               this.setState({

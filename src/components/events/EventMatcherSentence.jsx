@@ -14,44 +14,27 @@ export const EventMatcherSentence = class _EventMatcherSentence extends PureComp
   }
 
   convertTemplate = (matcher) => {
-    let replaced
     let {
       operand,
       operator,
       operandDataType,
       source,
     } = matcher
-   
-    // hack for freq!
-    // if (name === 'frequency') {
-    //   source = 'frequency'
-      
-    //   if (matcher) {
-    //     return CONSTANTS.en.templates['frequency'][matcher.operand]
-    //   }
-    // }
 
-    // if (!matcher) {
-    //   return CONSTANTS.en.templates[source]['default']
-    // }
+    // operandDataType is units: ether, gwei, etc
 
-    operand = matcher.operand
-    operator = matcher.operator
-
-    console.log('template lookup is: ', `templates.${source}.${operator}`)
-    const template = CONSTANTS.en.templates[source][operandDataType]
+    // console.log('template lookup is: ', `templates.${source}.${operator}`)
+    const template = CONSTANTS.en.templates[source][operator]
 
     if (!template) {
       return operand
     }
 
-    try {
-      replaced = template.replace(/(\[.*\])/, operand)
-    } catch (err) {
-      rollbar.error(`convertTemplate() called with ${template} to replace operand: ${operand} but ${err.message}`)
+    if (operand === '') {
+      return template
     }
-    
-    return replaced
+
+    return template.replace(/(\[.*\])/, operand)
   }
 
   render () {
