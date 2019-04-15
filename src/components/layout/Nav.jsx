@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import { toast } from 'react-toastify'
 import { withRouter } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { signOutMutation } from '~/mutations/signOutMutation'
@@ -48,31 +48,37 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
         
         if (!this.props.data.currentUser) {
           signUp = <>
-            <Link
+            <NavLink
+              exact
               to={routes.SIGNIN}
               className='navbar-item'
               onClick={this.closeMobileNav}
-            >
-              Sign In
-            </Link>
-            <Link
+              activeClassName="is-active"
+          >
+            Sign In
+            </NavLink>
+            <NavLink
+              exact
               to={routes.SIGNUP}
               className='navbar-item bold'
               onClick={this.closeMobileNav}
+              activeClassName="is-active"
             >
               Sign Up
-            </Link>
+            </NavLink>
           </>
         } else {
           signOut = (
             <>
-              <Link
+              <NavLink
+                exact
                 className='navbar-item bold hide-not-home'
                 to={routes.MY_EVENTS}
                 onClick={this.closeMobileNav}
+                activeClassName="is-active"
               >
                 Your Account
-              </Link>
+              </NavLink>
               <button
                 className='navbar-item button is-small'
                 onClick={this.handleSignOut}
@@ -84,20 +90,24 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
             
           myEvents =
             <>
-              <Link
+              <NavLink
+                exact
                 to={routes.MY_EVENTS}
                 className='navbar-item'
                 onClick={this.closeMobileNav}
+                activeClassName="is-active"
               >
                 My Events
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
+                exact
                 to={routes.DISCOVER_EVENTS}
                 className='navbar-item'
                 onClick={this.closeMobileNav}
+                activeClassName="is-active"
               >
                 Discover Events
-              </Link>
+              </NavLink>
             </>
         }
 

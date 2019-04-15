@@ -38,9 +38,9 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
           <section className='section section--main-content pb100'>
             <div className='container'>
               <div className='row'>
-                <div className='col-xs-12 col-sm-6 col-start-sm-4 has-text-centered'>
+                <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
                   <h4 className='is-size-4 has-text-weight-bold mt75'>
-                    What type of event?
+                    Search for a recipe to base a new event off of:
                   </h4>
 
                   <form className='form mt20'>

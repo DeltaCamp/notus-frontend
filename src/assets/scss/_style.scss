@@ -648,3 +648,14 @@ hr {
 .is-dark {
   background-color: $grey-darker;
 }
+
+.listing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+
+  @media screen and (max-width: $tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
