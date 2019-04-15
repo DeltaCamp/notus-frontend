@@ -1,16 +1,18 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
-import { rollbar } from '~/../config/rollbar'
-import { SourceAsSentence } from '~/components/SourceAsSentence'
-import { matcherToVarName } from '~/utils/matcherToVarName'
+import { Edit, XCircle } from 'react-feather'
 import * as CONSTANTS from '~/constants'
 
 export const EventMatcherSentence = class _EventMatcherSentence extends PureComponent {
 
-  onClick = (e) => {
+  handleEdit = (e) => {
     e.preventDefault()
-    
     this.props.handleSetEditMatcher(this.props.index)
+  }
+
+  handleRemove = (e) => {
+    e.preventDefault()
+    this.props.handleRemoveMatcher(this.props.index)
   }
 
   convertTemplate = (matcher) => {
@@ -52,18 +54,20 @@ export const EventMatcherSentence = class _EventMatcherSentence extends PureComp
     const andWord = (isFirst) ? 'where' : '... and'
     
     const humanReadableDescription = (
-      <>
-        <br />
-        <span className='event-box__text'>
-          {andWord} the {source.replace('.', ' ')} is
-        </span>
-      </>
+      <span className='event-box__text'>
+        {andWord} the {source.replace('.', ' ')} is
+      </span>
     )
 
     return (
-      <>
-        {humanReadableDescription}
-
+      <div
+        className={classnames(
+          `event-box__variable-wrapper`,
+          {
+            'is-active': this.props.isActive
+          }
+        )}
+      >
         <button
           className={classnames(
             `event-box__variable`,
@@ -72,18 +76,32 @@ export const EventMatcherSentence = class _EventMatcherSentence extends PureComp
               'is-active': this.props.isActive
             }
           )}
-          onClick={this.onClick}
+          onClick={this.handleEdit}
         >
-          <span className='event-box__variable-value'>
-            {/* <SourceAsSentence source={source} /> */}
-            {this.convertTemplate(matcher)}
-          </span>
-          {/* <span
-            className='hint'
-            style={{'textTransform': 'capitalize'}}
-          >{name}</span> */}
+          {humanReadableDescription}
+          {this.convertTemplate(matcher)}
         </button>
-      </>
+
+        <span className="icons">
+          <button
+            className='button has-icon has-icon__transparent has-stroke-light edit'
+            onClick={this.handleEdit}
+          >
+            <Edit
+              className='icon__button has-stroke-light'
+            />
+          </button>
+
+          <button
+            className='button has-icon has-icon__transparent has-stroke-light'
+            onClick={this.handleRemove}
+          >
+            <XCircle
+              className='icon__button has-stroke-light'
+            />
+          </button>
+        </span>
+      </div>
     )
   }
 

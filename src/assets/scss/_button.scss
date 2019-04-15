@@ -72,7 +72,7 @@ button[disabled] {
 
 .button.is-primary {
   // background-color: #05a8ae;
-  background-color: lighten(saturate($cyan, 100%), 10%);
+  background-color: lighten(saturate($cyan, 100%), 5%);
   // color: black;
   color: $purple;
 }
@@ -189,11 +189,14 @@ button.button.is-small:active {
 .button.has-icon {
   background-color: white;
   border: 0;
-  // margin: 8px 8px;
   height: 44px;
   min-width: 44px;
   padding: 0;
-  // width: 64px;
+}
+
+.has-icon.has-icon__transparent {
+  background-color: transparent;
+  margin-top: 10px;
 }
 
 .icon__button {
@@ -208,14 +211,19 @@ button.button.is-small:active {
   background-color: $danger;
 }
 
+.button.has-stroke-light:hover {
+  background-color: transparent;
+}
+
 .button.has-stroke-green:hover svg {
-  // fill: $success;
   stroke: white;
 }
 
 .button.has-stroke-red:hover svg {
-  // background-color: $danger;
-  // fill: $danger;
+  stroke: white;
+}
+
+.button.has-stroke-light:hover svg {
   stroke: white;
 }
 
@@ -225,4 +233,8 @@ button.button.is-small:active {
 
 .has-stroke-red {
   stroke: $danger;
+}
+
+.has-stroke-light {
+  stroke: rgba(255, 255, 255, 0.6);
 }

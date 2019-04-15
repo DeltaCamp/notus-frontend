@@ -1,5 +1,16 @@
 $addonsFormHeight: 57px;
 
+.input:focus,
+.input.is-focused,
+.input:active,
+.input.is-active,
+.textarea:focus,
+.textarea.is-focused,
+.textarea:active,
+.textarea.is-active {
+  box-shadow: none;
+}
+
 .form {
   // padding: 0 0 8rem;
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import cloneDeep from 'clone-deep'
 import { orderBy } from 'lodash'
-import { CheckCircle } from 'react-feather'
+import { CheckCircle, XCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
@@ -208,6 +208,23 @@ export const NewEventPage =
               })
             }
           }
+
+          handleRemoveMatcher = (matcherIndex) => {
+            const matchers = this.state.event.matchers
+
+            if (matchers.length > 1) {
+              matchers.splice(matcherIndex, 1)
+
+              this.setState({
+                event: {
+                  ...this.state.event,
+                  matchers
+                }
+              })
+            } else {
+              toast.error('Each event needs at least one matcher.')
+            }
+          }
           
           render () {
             let colorClass = 'is-dark'
@@ -264,15 +281,6 @@ export const NewEventPage =
                             {/* <EditEventVariableForm */}
 
                             <div className='buttons'>
-                              {/* <button
-                                className='button has-icon has-stroke-red'
-                                onClick={this.handleCancelEditingMatcher}
-                              >
-                                <XCircle
-                                  className='icon__button has-stroke-red'
-                                />
-                              </button> */}
-
                               <button
                                 className='button has-icon has-stroke-green'
                                 onClick={this.handleCancelEditingMatcher}
@@ -315,6 +323,7 @@ export const NewEventPage =
                     index={index}
                     state={this.state}
                     handleSetEditMatcher={this.handleSetEditMatcher}
+                    handleRemoveMatcher={this.handleRemoveMatcher}
                     isFirst={index === 0}
                     isActive={editMatcher && eventMatcher === editMatcher}
                   />
@@ -356,7 +365,7 @@ export const NewEventPage =
                     <div className={`container-fluid pt20 pb20`}>
                       <div className='container'>
                         <div className='row'>
-                          <div className='col-xs-12 col-xl-10 col-start-xl-3 is-size-4'>
+                          <div className='col-xs-12 col-xl-12 col-start-xl-2 is-size-4'>
                             {matcherSentences}
                           </div>
                         </div>
