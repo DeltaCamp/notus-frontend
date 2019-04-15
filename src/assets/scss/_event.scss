@@ -9,12 +9,19 @@
   transform: scale3d(1.0, 1.0, 1.0);
   transition: transform 75ms ease-in-out;
   will-change: transform;
-  width: 100%;
   white-space: initial;
 
   @media screen and (max-width: $tablet) {
     width: 100%;
   }
+}
+
+.event-card__title {
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  // white-space: nowrap;
+  width: 100%;
 }
 
 .event-card:hover {
@@ -146,6 +153,13 @@
   }
 }
 
+.event-box__variable-wrapper .icons {
+  display: inline-block;
+  top: 0.1rem;
+  position: relative;
+  padding-left: 0.5rem;
+}
+
 .event-box__variable-wrapper .has-icon {
   opacity: 0.001;
   pointer-events: none;
@@ -175,7 +189,7 @@
   top: -0.1rem;
   position: relative;
   margin: 0.5rem 1rem 0.5rem 0.25rem;
-  padding: 0.25rem 2rem 0;
+  padding: 0.5rem 2rem 0.25rem;
   position: relative;
   font-size: 1.5rem;
   font-weight: 600;
@@ -233,7 +247,6 @@
   background-color: white;
   color: black;
 }
-
 
 
 // overrides

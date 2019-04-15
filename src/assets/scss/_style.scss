@@ -237,7 +237,11 @@ a {
 }
 
 .has-text-light {
-  color: rgba(255, 255, 255, 0.6) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.has-text-light:hover {
+  color: rgba(255, 255, 255, 1) !important;
 }
 
 .tag:not(body) {
@@ -588,7 +592,7 @@ hr {
   font-family: inherit;
   font-weight: 600;
   margin-bottom: 0;
-  min-height: 90px;
+  min-height: 70px;
   padding: 0;
 }
 
@@ -615,7 +619,7 @@ hr {
 .notus-toast .Toastify__toast-body {
   flex: 0 0 100%;
   font-size: 26px;
-  margin: 28px auto;
+  margin: 1.1rem auto;
 
   @media screen and (max-width: $tablet) {
     font-size: 22px;

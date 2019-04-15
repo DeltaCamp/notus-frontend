@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import cloneDeep from 'clone-deep'
 import { orderBy } from 'lodash'
-import { CheckCircle, XCircle } from 'react-feather'
+import { CheckCircle, PlusCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
@@ -84,7 +84,7 @@ export const NewEventPage =
                 }
               }
             }).then(() => {
-              toast('Successfully saved event!')
+              toast.success('Successfully saved event!')
             }).catch(error => {
               console.error(error)
             })
@@ -207,6 +207,23 @@ export const NewEventPage =
                 event
               })
             }
+          }
+
+          handleAddMatcher = () => {
+            const newMatcher = {
+              operand: "",
+              operandDataType: 1,
+              operator: 2,
+              order: 1,
+              source: "transaction.value"
+            }
+
+            this.setState({
+              event: {
+                ...this.state.event,
+                matchers: this.state.event.matchers.concat(newMatcher)
+              }
+            })
           }
 
           handleRemoveMatcher = (matcherIndex) => {
@@ -367,6 +384,16 @@ export const NewEventPage =
                         <div className='row'>
                           <div className='col-xs-12 col-xl-12 col-start-xl-2 is-size-4'>
                             {matcherSentences}
+
+                            <br />
+                            <button
+                              className='button has-icon has-icon__transparent has-stroke-light is-lowercase has-text-light'
+                              onClick={this.handleAddMatcher}
+                            >
+                              <PlusCircle
+                                className='icon__button has-stroke-light'
+                              /> &nbsp; add matcher
+                            </button>
                           </div>
                         </div>
                       </div>

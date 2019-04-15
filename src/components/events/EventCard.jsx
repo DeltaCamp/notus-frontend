@@ -21,7 +21,7 @@ export const EventCard =
             className={`button event-card ${brandColor(recipe.id)}`}
           >
             <div className="event-card__header">
-              <p className='event-card__name is-size-5'>
+              <p className='event-card__title is-size-5'>
                 {recipe.title}
               </p>
             </div>
