@@ -56,7 +56,9 @@ export const DiscoverEventsPage = graphql(currentUserQuery, { name: 'currentUser
               </div>
               <div className='row'>
                 <div className='col-xs-12 has-text-centered mt50'>
-                  <DiscoverEventsListing />
+                  <div className='listing-grid mt30'>
+                    <DiscoverEventsListing />
+                  </div>
                 </div>
               </div>
             </div>
