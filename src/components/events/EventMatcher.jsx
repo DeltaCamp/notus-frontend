@@ -24,8 +24,7 @@ export const EventMatcher =
       let {
         operand,
         operator,
-        operandDataType,
-        source,
+        source
       } = matcher
 
       // operandDataType is units: ether, gwei, etc
@@ -46,8 +45,6 @@ export const EventMatcher =
 
     render () {
       const {
-        editVariable,
-        isActive,
         isFirst,
         matcher
       } = this.props

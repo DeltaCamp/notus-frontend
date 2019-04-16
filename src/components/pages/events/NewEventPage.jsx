@@ -9,7 +9,6 @@ import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
-import { EditEventVariableForm } from '~/components/events/EditEventVariableForm'
 import { EventMatcher } from '~/components/events/EventMatcher'
 import { MatcherForm } from '~/components/recipes/MatcherForm'
 import { FooterContainer } from '~/components/layout/Footer'
@@ -19,9 +18,7 @@ import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventQuery } from '~/queries/eventQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
-// import { RECIPES } from '~/../config/recipes'
 import * as routes from '~/../config/routes'
-
 
 export const NewEventPage = 
   graphql(currentUserQuery, { name: 'currentUserData' })(
@@ -283,14 +280,12 @@ export const NewEventPage =
               : null
 
             let recipe = {
-              title: 'New Event',
-              description: 'event matching the following'
+              title: 'event'
             }
 
             if (this.state.redirect) {
               return <Redirect to={routes.SIGNIN} />
             }
-
             if (this.props.eventData) {
               if (this.props.eventData.loading) {
                 return null
