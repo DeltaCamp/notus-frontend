@@ -32,7 +32,9 @@ export const NewEventPage =
         variables: { id: parseInt(props.match.params.parentEventId, 10) }
       })
     })(
-      graphql(createEventMutation, { name: 'createEventMutation' })(
+      graphql(createEventMutation, {
+        name: 'createEventMutation'
+      })(
         class _NewEventPage extends Component {
           state = {
             event: {
@@ -96,7 +98,7 @@ export const NewEventPage =
           onDragEnd = (result) => {
             // dropped outside the list
             if (!result.destination) {
-              return;
+              return
             }
 
             const matchers = arrayMove(
@@ -123,13 +125,19 @@ export const NewEventPage =
           handleSaveEvent = (e) => {
             e.preventDefault()
 
+            const event = {
+              ...this.state.event,
+              title: this.state.newEventTitle || this.generateTitle()
+            }
+
             this.props.createEventMutation({
               variables: {
-                event: {
-                  ...this.state.event,
-                  title: this.state.newEventTitle || this.generateTitle()
-                }
-              }
+                event
+              },
+              refetchQueries: [
+                'eventsQuery',
+                'publicEventsQuery',
+              ],
             }).then(() => {
               toast.success('Successfully saved event!')
             }).catch(error => {

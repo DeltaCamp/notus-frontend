@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { eventFragment } from '~/fragments/eventFragment'
 
 export const publicEventsQuery = gql`
-  query {
+  query publicEventsQuery {
     publicEvents {
       ...eventFragment
     }
