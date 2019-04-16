@@ -143,14 +143,15 @@
 
 .event-box__text {
   display: inline-block;
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
   transition: all 275ms ease-in-out;
 
   @media screen and (max-width: $tablet) {
     margin-left: 0;
     margin-right: 0;
   }
+}
+
+.event-box__variable-wrapper {
 }
 
 .event-box__variable-wrapper .icons {
@@ -160,7 +161,8 @@
   padding-left: 0.5rem;
 }
 
-.event-box__variable-wrapper .has-icon {
+.event-box__variable-wrapper .has-icon,
+.event-box__variable-wrapper .drag-handle {
   opacity: 0.001;
   pointer-events: none;
   transition: opacity 200ms ease-in-out;
@@ -172,7 +174,8 @@
 }
 
 .event-box__variable-wrapper:hover .has-icon,
-.event-box__variable-wrapper.is-active .has-icon {
+.event-box__variable-wrapper.is-active .has-icon,
+.event-box__variable-wrapper:hover .drag-handle {
   opacity: 1;
   pointer-events: initial;
   transition-duration: 600ms;
@@ -205,16 +208,12 @@
   }
 }
 
-// .event-box__variable-value {
-//   display: inline-block;
-// }
-
 .event-box__variable:hover,
 .event-box__variable:active,
 .event-box__variable:focus,
 .event-box__variable.is-active {
   background: rgba(255, 255, 255, 0.2);
-  transform: scale3d(1.04, 1.04, 1.04);
+  transform: scale3d(1.01, 1.01, 1.01);
   border-color: white;
 }
 

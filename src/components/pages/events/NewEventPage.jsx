@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import cloneDeep from 'clone-deep'
+import arrayMove from 'array-move'
 import { orderBy } from 'lodash'
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { CheckCircle, PlusCircle } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { EditEventVariableForm } from '~/components/events/EditEventVariableForm'
-import { EventMatcherSentence } from '~/components/events/EventMatcherSentence'
+import { EventMatcher } from '~/components/events/EventMatcher'
 import { MatcherForm } from '~/components/recipes/MatcherForm'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -20,6 +21,7 @@ import { altBrandColor, brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 // import { RECIPES } from '~/../config/recipes'
 import * as routes from '~/../config/routes'
+
 
 export const NewEventPage = 
   graphql(currentUserQuery, { name: 'currentUserData' })(
@@ -64,6 +66,51 @@ export const NewEventPage =
               toast.error('Please sign in to access this page.')
               this.setState({ redirect: true })
             }
+          }
+
+          componentDidUpdate(prevProps) {
+            let recipe
+
+            if (
+              prevProps.eventData
+              && (prevProps.eventData.event !== this.props.eventData.event)
+            ) {
+              recipe = this.props.eventData.event
+
+              // const matchers = cloneDeep(recipe.matchers)
+              const matchers = recipe.matchers.map(matcher => deepCloneMatcher(matcher))
+
+              const event = {
+                isPublic: false,
+                matchers: orderBy(matchers, 'order'),
+                parentId: parseInt(recipe.id, 10),
+                title: recipe.title
+              }
+
+              this.setState({
+                event
+              })
+            }
+          }
+
+          onDragEnd = (result) => {
+            // dropped outside the list
+            if (!result.destination) {
+              return;
+            }
+
+            const matchers = arrayMove(
+              this.state.event.matchers,
+              result.source.index,
+              result.destination.index
+            )
+
+            this.setState({
+              event: {
+                ...this.state.event,
+                matchers
+              }
+            })
           }
 
           generateTitle = () => {
@@ -182,31 +229,6 @@ export const NewEventPage =
                 matchers
               }
             })
-          }
-
-          componentDidUpdate(prevProps) {
-            let recipe 
-            
-            if (
-              prevProps.eventData
-              && (prevProps.eventData.event !== this.props.eventData.event)
-            ) {
-              recipe = this.props.eventData.event
-
-              // const matchers = cloneDeep(recipe.matchers)
-              const matchers = recipe.matchers.map(matcher => deepCloneMatcher(matcher))
-
-              const event = {
-                isPublic: false,
-                matchers: orderBy(matchers, 'order'),
-                parentId: parseInt(recipe.id, 10),
-                title: recipe.title
-              }
-              
-              this.setState({
-                event
-              })
-            }
           }
 
           handleAddMatcher = () => {
@@ -333,18 +355,44 @@ export const NewEventPage =
                 <span className="event-box__text">
                   {frequencyWord} {this.recipeSentence(recipe)} occurs
                 </span>
-                {this.state.event.matchers.map((eventMatcher, index) => (
-                  <EventMatcherSentence
-                    key={`event-matcher-sentence-${index}`}
-                    matcher={eventMatcher}
-                    index={index}
-                    state={this.state}
-                    handleSetEditMatcher={this.handleSetEditMatcher}
-                    handleRemoveMatcher={this.handleRemoveMatcher}
-                    isFirst={index === 0}
-                    isActive={editMatcher && eventMatcher === editMatcher}
-                  />
-                ))}
+
+                {/* <MatcherDragDropContext 
+
+                /> */}
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                  <Droppable droppableId="droppable">
+                    {(provided, snapshot) => (
+                      <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
+                      >
+                        {this.state.event.matchers.map((eventMatcher, index) => (
+                          <Draggable key={`event-matcher-${index}`} draggableId={index+1} index={index}>
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <EventMatcher
+                                  key={`event-matcher-${index}`}
+                                  matcher={eventMatcher}
+                                  index={index}
+                                  handleSetEditMatcher={this.handleSetEditMatcher}
+                                  handleRemoveMatcher={this.handleRemoveMatcher}
+                                  onSortEnd={this.onSortEnd}
+                                  isFirst={index === 0}
+                                  isActive={editMatcher && eventMatcher === editMatcher}
+                                />
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </DragDropContext>
               </>
             )
 

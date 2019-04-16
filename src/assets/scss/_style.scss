@@ -663,3 +663,23 @@ hr {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }
+
+.drag-handle {
+  cursor: grab;
+  margin-left: 0.25rem;
+  margin-right: 0.5rem;
+}
+
+.drag-handle path,
+.drag-handle rect,
+.drag-handle circle,
+.drag-handle svg {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.drag-handle:hover path,
+.drag-handle:hover rect,
+.drag-handle:hover circle,
+.drag-handle:hover svg {
+  stroke: white;
+}
