@@ -23,6 +23,7 @@ export const eventFragment = gql`
     }
     createdAt
     updatedAt
+    deletedAt
   }
   ${matcherFragment}
   ${matcherFragment}

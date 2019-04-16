@@ -1,3 +1,5 @@
+// EVENT CARD
+
 .event-card {
   border-radius: 15px;
   display: inline-block;
@@ -40,10 +42,69 @@
 
 .event-card__footer {
   background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
   height: 54px;
   margin-top: 0rem;
   padding: 0.75rem 1.5rem;
 }
+
+.event-card__footer .event-card__author {
+  display: inline-flex;
+}
+
+.event-card .event-card__icons {
+  display: inline-flex;
+  margin: 0 0 0 auto;
+  top: -0.5rem;
+  position: relative;
+}
+
+.event-card .has-icon {
+  min-width: 100%;
+  opacity: 0.001;
+  pointer-events: none;
+  transition: opacity 200ms ease-in-out;
+  text-align: center;
+  will-change: opacity;
+}
+
+.event-card:hover .has-icon {
+  opacity: 0.5;
+  pointer-events: initial;
+  transition-duration: 600ms;
+}
+
+.event-card:hover .has-icon:hover {
+  opacity: 1;
+  pointer-events: initial;
+  transition-duration: 600ms;
+}
+
+// .event-card:hover .has-icon path,
+// .event-card:hover .has-icon rect,
+// .event-card:hover .has-icon circle,
+// .event-card:hover .has-icon svg {
+//   stroke: rgba(255, 255, 255, 0.3);
+// }
+
+.event-card:hover .has-icon:active path,
+.event-card:hover .has-icon:active rect,
+.event-card:hover .has-icon:active circle,
+.event-card:hover .has-icon:active svg,
+.event-card:hover .has-icon:focus path,
+.event-card:hover .has-icon:focus rect,
+.event-card:hover .has-icon:focus circle,
+.event-card:hover .has-icon:focus svg,
+.event-card:hover .has-icon:hover path,
+.event-card:hover .has-icon:hover rect,
+.event-card:hover .has-icon:hover circle,
+.event-card:hover .has-icon:hover svg {
+  stroke: white;
+}
+
+
+
+// EVENT BOX
 
 .event-box {
   // margin: 1rem 0;

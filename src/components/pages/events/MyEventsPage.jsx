@@ -51,7 +51,8 @@ export const MyEventsPage =
               events = eventsData.events.map((event) => (
                 <EventCard
                   key={`event-${event.id}`}
-                  recipe={event}
+                  event={event}
+                  editable={true}
                 />
               ))
             }

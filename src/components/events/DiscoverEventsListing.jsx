@@ -13,11 +13,11 @@ export const DiscoverEventsListing =
           if (this.props.publicEventsData.error) {
             console.error(this.props.publicEventsData.error)
           } else {
-            console.log(this.props.publicEventsData)
+            // console.log(this.props.publicEventsData)
             events = this.props.publicEventsData.publicEvents.map((event) => (
               <EventCard
                 key={`event-${event.id}`}
-                recipe={event}
+                event={event}
               />
             ))
           }
