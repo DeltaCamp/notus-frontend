@@ -319,7 +319,7 @@ export const NewEventPage =
                   <div className='drawer has-bg__dark'>
                     <div className='container'>
                       <div className='row'>
-                        <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
+                        <div className='col-xs-12 col-md-10 col-start-md-2 has-text-centered'>
                           <form className='form mt10 drawer-form'>
                             <MatcherForm
                               key={`matcher-${this.state.matcherIndex}`}

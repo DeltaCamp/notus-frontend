@@ -47,6 +47,7 @@ export class MatcherForm extends PureComponent {
           type='text'
           value={matcher.operand}
           onChange={this.onChangeOperand}
+          placeholder={`Enter ${matcher.operandDataType}`}
         />
       operandDataTypeSelect =
         <OperandDataTypeSelect
@@ -65,8 +66,8 @@ export class MatcherForm extends PureComponent {
           value={matcher.operator}
           onChange={this.onChangeOperator}
         />
-        {/* {operandInput} */}
-        {/* {operandDataTypeSelect} */}
+        {operandInput}
+        {operandDataTypeSelect}
       </>
     )
   }

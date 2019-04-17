@@ -20,6 +20,8 @@ export const OPERATORS = {
   GTE: 5
 }
 
+
+
 export const OPERATOR_LABELS = {
   [OPERATORS.NOOP]: 'is user defined',
   [OPERATORS.EQ]: 'equal to',
@@ -38,6 +40,17 @@ export const OPERAND_DATA_TYPES = {
   MILLIETHER: 5,
   ETHER: 6,
   NUMBER: 7
+}
+
+export const OPERAND_DATA_TYPE_LABELS = {
+  [OPERAND_DATA_TYPES.WEI]: 'Wei',
+  [OPERAND_DATA_TYPES.KWEI]: 'Kwei (babbage)',
+  [OPERAND_DATA_TYPES.MWEI]: 'Mwei (lovelace)',
+  [OPERAND_DATA_TYPES.GWEI]: 'Gwei (shannon)',
+  [OPERAND_DATA_TYPES.MICROETHER]: 'Microether (szabo)',
+  [OPERAND_DATA_TYPES.MILLIETHER]: 'Milliether (finney)',
+  [OPERAND_DATA_TYPES.ETHER]: 'Ether',
+  [OPERAND_DATA_TYPES.NUMBER]: 'Number',
 }
 
 export const FREQUENCIES = {

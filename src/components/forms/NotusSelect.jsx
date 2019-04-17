@@ -9,5 +9,7 @@ export const NotusSelect =
       className='react-select'
       classNamePrefix='react-select'
     />
-      {/*menuIsOpen={true}*/}
+      
   }
+
+//menuIsOpen={true}*/

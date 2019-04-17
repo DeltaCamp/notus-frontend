@@ -80,7 +80,7 @@
 .drawer .form .react-select {
   display: flex;
   flex-direction: column;
-  min-width: 300px;
+  min-width: 230px;
 
   @media screen and (max-width: $tablet - 203px) {
     min-width: 100%;

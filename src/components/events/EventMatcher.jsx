@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import { Edit, XCircle, Menu } from 'react-feather'
-import * as CONSTANTS from '~/constants'
 
 const DragHandle = (() => <span className='drag-handle'>
   <Menu />
