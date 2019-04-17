@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { FooterContainer } from '~/components/layout/Footer'
 import { CodeBox } from '~/components/CodeBox'
-import * as routes from '~/../config/routes'
 
 export const AppConfirmPage =
   class _AppConfirmPage extends Component {
@@ -53,9 +51,9 @@ export const AppConfirmPage =
                   <h6 className='is-size-6'>
                     Learn how to use the API in depth:
                   </h6>
-                  <Link to={routes.API_DOCS}>
+                  <a href='https://docs.notus.network'>
                     Read the Developer Documentation
-                  </Link>
+                  </a>
                 </div>
               </div>
             </div>

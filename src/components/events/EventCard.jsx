@@ -68,6 +68,10 @@ export const EventCard =
           const { currentUser } = currentUserData
           const { user } = event
 
+          if (!currentUser) {
+            return null
+          }
+
           if (editable) {
             editDropdown = (
               <div

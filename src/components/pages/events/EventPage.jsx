@@ -3,18 +3,17 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { PlusCircle } from 'react-feather'
 import { formatRoute } from 'react-router-named-routes'
-import { toast } from 'react-toastify'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
+import { IsAuthed } from '~/components/IsAuthed'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
-import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventQuery } from '~/queries/eventQuery'
 import { brandColor } from '~/utils/brandColors'
 import * as routes from '~/../config/routes'
 
 export const EventPage = 
-  graphql(currentUserQuery, { name: 'currentUserData' })(
+  IsAuthed(
     graphql(eventQuery, {
       name: 'eventData',
       skip: (props) => !props.match.params.eventId,
@@ -33,25 +32,12 @@ export const EventPage =
           router: PropTypes.object.isRequired
         }
 
-        componentWillMount() {
-          const { currentUser } = this.props.currentUserData
-
-          if (!currentUser) {
-            toast.error('Please sign in to access this page.')
-            this.setState({ redirect: true })
-          }
-        }
-
         render () {
           let event,
             colorClass
             // altColorClass
 
           const { eventData } = this.props
-
-          if (this.state.redirect) {
-            return <Redirect to={routes.SIGNIN} />
-          }
 
           if (eventData) {
             if (eventData.loading) {

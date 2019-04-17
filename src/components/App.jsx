@@ -8,12 +8,9 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
-import { HookPage } from '~/components/pages/HookPage'
 import { EventPage } from '~/components/pages/events/EventPage'
 import { MyEventsPage } from '~/components/pages/events/MyEventsPage'
 import { NewEventPage } from '~/components/pages/events/NewEventPage'
-import { HooksListPage } from '~/components/pages/HooksListPage'
-import { NewRecipePage } from '~/components/pages/NewRecipePage'
 import { PasswordResetPage } from '~/components/pages/PasswordResetPage'
 import { SignInPage } from '~/components/pages/SignInPage'
 import { SignUpPage } from '~/components/pages/SignUpPage'
@@ -64,21 +61,21 @@ export const App = withRouter(hot(module)(
               appear
             >
               <Switch location={this.props.location}>
-                <Route exact path={routes.HOOK} component={HookPage} />
-                <Route exact path={routes.HOOKS} component={HooksListPage} />
                 <Route exact path={routes.HOME} component={HomePage} />
-                <Route exact path={routes.CONFIRM_AND_SET_PASSWORD_PAGE} component={ConfirmAndSetPasswordPage} />
-                <Route exact path={routes.CONFIRM} component={AppUserConfirmPage} />
+
                 <Route exact path={routes.NEW_EVENT} component={NewEventPage} />
                 <Route exact path={routes.NEW_EVENT_FROM_PARENT} component={NewEventPage} />
                 <Route exact path={routes.MY_EVENTS} component={MyEventsPage} />
                 <Route exact path={routes.DISCOVER_EVENTS} component={DiscoverEventsPage} />
                 <Route exact path={routes.EVENT} component={EventPage} />
+
+                <Route exact path={routes.CONFIRM_AND_SET_PASSWORD_PAGE} component={ConfirmAndSetPasswordPage} />
+                <Route exact path={routes.CONFIRM} component={AppUserConfirmPage} />
                 <Route exact path={routes.SIGNUP} component={SignUpPage} />
                 <Route exact path={routes.SIGNIN} component={SignInPage} />
                 <Route exact path={routes.PASSWORD_RESET} component={PasswordResetPage} />
                 <Route exact path={routes.APP_CONFIRM} component={AppConfirmPage} />
-                <Route exact path={routes.NEW_RECIPE} component={NewRecipePage} />
+                
                 <Route component={FourOhFour} />
               </Switch>
             </CSSTransition>

@@ -7,9 +7,7 @@ import { orderBy } from 'lodash'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { CheckCircle, PlusCircle } from 'react-feather'
 import { toast } from 'react-toastify'
-import { Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
-
 import { Drawer } from '~/components/Drawer'
 import { EventMatcher } from '~/components/events/EventMatcher'
 import { MatcherForm } from '~/components/recipes/MatcherForm'
@@ -59,15 +57,6 @@ export const NewEventPage =
 
           static contextTypes = {
             router: PropTypes.object.isRequired
-          }
-
-          componentWillMount() {
-            const { currentUser } = this.props.currentUserData
-
-            if (!currentUser) {
-              toast.error('Please sign in to access this page.')
-              this.setState({ redirect: true })
-            }
           }
 
           componentDidUpdate(prevProps) {
@@ -292,9 +281,6 @@ export const NewEventPage =
               title: 'event'
             }
 
-            if (this.state.redirect) {
-              return <Redirect to={routes.SIGNIN} />
-            }
             if (eventData) {
               if (eventData.loading) {
                 return null

@@ -36,8 +36,8 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
       handleSignOut = (e) => {
         this.props.signOutMutation().then(() => {
           this.closeMobileNav()
+          toast.success('Successfully signed out. Thanks for using Notus!')
           this.props.history.push(routes.SIGNIN)
-          toast('Successfully signed out. Thanks for using Notus!')
         }).catch(error => {
           console.error(error)
         })
@@ -45,7 +45,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
 
       render () {
         let signUp, myEvents, signOut
-        
+
         if (!this.props.data.currentUser) {
           signUp = <>
             <NavLink
