@@ -60,16 +60,11 @@ export class MatcherForm extends PureComponent {
         <SourceSelect
           value={matcher.source}
           onChange={this.onChangeSource}
-          menuPlacement='auto'
-          className='react-select'
-          classNamePrefix='react-select'
-          />
-        {/*menuIsOpen={true}*/}
-        {/* <OperatorSelect
+        />
+        <OperatorSelect
           value={matcher.operator}
           onChange={this.onChangeOperator}
-          menuPlacement='auto'
-        /> */}
+        />
         {/* {operandInput} */}
         {/* {operandDataTypeSelect} */}
       </>

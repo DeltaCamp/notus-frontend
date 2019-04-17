@@ -1,5 +1,5 @@
 import React from 'react'
-import Select from 'react-select'
+import { NotusSelect } from '~/components/forms/NotusSelect'
 import { graphql } from 'react-apollo'
 import { sourcesQuery } from '~/queries/sourcesQuery'
 
@@ -26,6 +26,6 @@ export const SourceSelect = graphql(sourcesQuery, { name: 'sourcesQuery' })(
       props = {...props, value: selectedOption}
     }
 
-    return <Select {...props} options={options} />
+    return <NotusSelect {...props} options={options} />
   }
 )

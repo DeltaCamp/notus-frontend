@@ -359,7 +359,7 @@ label.radio,
 
 .react-select__menu-list {
   text-align: left;
-    overflow-y: auto;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -371,9 +371,8 @@ label.radio,
 }
 
 .react-select__option.react-select__option--is-focused {
-  background-color: $orange;
+  background-color: lighten($cyan, 30%);
   border-radius: 5px;
-  color: white !important;
 }
 
 .react-select__option.react-select__option--is-selected {
