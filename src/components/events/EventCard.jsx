@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 import { toast } from 'react-toastify'
 import { Settings } from 'react-feather'
@@ -20,11 +21,26 @@ export const EventCard =
           editDropdownActive: false  
         }
 
+        handleClick = (e) => {
+          const domNode = ReactDOM.findDOMNode(this.node)
+
+          if (domNode && !domNode.contains(e.target)) {
+            this.handleEditClick(e)
+          }
+        }
+
         handleEditClick = (e) => {
           e.preventDefault()
+
           this.setState({
             editDropdownActive: !this.state.editDropdownActive
           })
+
+          if (this.state.editDropdownActive) {
+            document.removeEventListener('mousedown', this.handleClick, false)
+          } else {
+            document.addEventListener('mousedown', this.handleClick, false)
+          }
         }
 
         handleDeleteEvent = (e) => {
@@ -89,6 +105,7 @@ export const EventCard =
               key={`event-${event.id}`}
               to={formatRoute(routes.NEW_EVENT_FROM_EVENT_TYPE, { parentEventId: event.id })}
               className={`button event-card ${brandColor(event.id)}`}
+              ref={node => {this.node = node}}
             >
               <div className="event-card__header">
                 <p className='event-card__title is-size-5'>
