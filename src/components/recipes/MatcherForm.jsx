@@ -56,26 +56,23 @@ export class MatcherForm extends PureComponent {
     }
 
     return (
-      <div className='row'>
-        <div className='col-md-3'>
-          <SourceSelect
-            value={matcher.source}
-            onChange={this.onChangeSource}
+      <>
+        <SourceSelect
+          value={matcher.source}
+          onChange={this.onChangeSource}
+          menuPlacement='auto'
+          className='react-select'
+          classNamePrefix='react-select'
           />
-        </div>
-        <div className='col-md-4'>
-          <OperatorSelect
-            value={matcher.operator}
-            onChange={this.onChangeOperator}
-          />
-        </div>
-        <div className='col-md-4'>
-          {operandInput}
-        </div>
-        <div className='col-md-4'>
-          {operandDataTypeSelect}
-        </div>
-      </div>
+        {/*menuIsOpen={true}*/}
+        {/* <OperatorSelect
+          value={matcher.operator}
+          onChange={this.onChangeOperator}
+          menuPlacement='auto'
+        /> */}
+        {/* {operandInput} */}
+        {/* {operandDataTypeSelect} */}
+      </>
     )
   }
 }

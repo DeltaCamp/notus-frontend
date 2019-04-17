@@ -36,7 +36,8 @@ export const NewEventPage =
         class _NewEventPage extends Component {
           state = {
             event: {
-              frequency: '-1',
+              isPublic: false,
+              // frequency: '-1',
               matchers: [
                 {
                   operand: "",

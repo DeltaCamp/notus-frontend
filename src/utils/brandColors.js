@@ -2,10 +2,10 @@ const classes = [
   'is-link',
   'is-success',
   'is-purple',
-  'is-fun',
   'is-info',
-  'is-danger',
+  'is-fun',
   'is-warning',
+  'is-danger',
   'is-primary',
 ]
 

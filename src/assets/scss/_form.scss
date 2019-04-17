@@ -55,7 +55,8 @@ $hasAddonsformColor: white;
 .form .button,
 .form .input,
 .form .select select,
-.form .textarea {
+.form .textarea,
+.react-select__control {
   border-radius: 100px;
   font-size: 1.25rem;
   font-weight: 700;
@@ -100,22 +101,11 @@ $hasAddonsformColor: white;
 
 .select select,
 input.input,
-textarea.textarea {
+textarea.textarea,
+.react-select__control {
   background-color: white;
   box-shadow: none;
   border-width: 5px;
-}
-
-.select select:hover,
-.select select:focus,
-.select select:active,
-input.input:hover,
-input.input:focus,
-input.input:active,
-textarea.textarea:hover,
-textarea.textarea:focus,
-textarea.textarea:active {
-  // box-shadow: 1px 2px 30px rgba(255, 255, 255, 0.55);
 }
 
 .control:first-child {
@@ -170,6 +160,7 @@ form.is-active textarea.textarea:active {
 .form .input,
 .form .textarea,
 .form .select select,
+.react-select__control,
 .form .file-cta,
 .form .file-name,
 .form .button {
@@ -224,9 +215,11 @@ label.radio,
 }
 
 .has-bg .select select,
+.has-bg .react-select__control,
 .has-bg input.input,
 .has-bg textarea.textarea,
 .has-bg__dark .select select,
+.has-bg__dark .react-select__control,
 .has-bg__dark input.input,
 .has-bg__dark textarea.textarea {
   border-color: white;
@@ -343,4 +336,48 @@ label.radio,
 .accordion--signup-form.accordion-enter-active,
 .accordion--signup-form.accordion-enter-done {
   height: 220px;
+}
+
+// REACT SELECT OVERRIDES
+.react-select__control {
+  border-radius: 100px !important;
+  cursor: pointer !important;
+  padding: 0 5px 0;
+}
+
+.react-select__indicator-separator {
+  display: none;
+}
+
+.react-select .react-select__menu {
+  border-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-bottom: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.react-select__menu-list {
+  text-align: left;
+    overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.react-select .react-select__option {
+  color: black;
+  cursor: pointer;
+  margin: 5px;
+  padding: 0 10px;
+}
+
+.react-select__option.react-select__option--is-focused {
+  background-color: $orange;
+  border-radius: 5px;
+  color: white !important;
+}
+
+.react-select__option.react-select__option--is-selected {
+  background-color: $cyan;
+  border-radius: 5px;
+  color: black !important;
 }

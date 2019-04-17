@@ -76,11 +76,14 @@
   }
 }
 
-.drawer .form .select {
+.drawer .form .select,
+.drawer .form .react-select {
   display: flex;
   flex-direction: column;
+  min-width: 300px;
 
   @media screen and (max-width: $tablet - 203px) {
+    min-width: 100%;
     width: 100%;
   }
 }
@@ -89,7 +92,8 @@
   height: 60px !important;
 }
 
-.drawer .form .select select {
+.drawer .form .select select,
+.drawer .form .react-select {
   height: 60px !important;
   line-height: 2;
 }

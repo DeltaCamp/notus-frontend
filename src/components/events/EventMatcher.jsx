@@ -20,28 +20,28 @@ export const EventMatcher =
       this.props.handleRemoveMatcher(this.props.index)
     }
 
-    convertTemplate = (matcher) => {
-      let {
-        operand,
-        operator,
-        source
-      } = matcher
+    // convertTemplate = (matcher) => {
+    //   let {
+    //     operand,
+    //     operator,
+    //     source
+    //   } = matcher
 
-      // operandDataType is units: ether, gwei, etc
+    //   // operandDataType is units: ether, gwei, etc
 
-      // console.log('template lookup is: ', `templates.${source}.${operator}`)
-      const template = CONSTANTS.en.templates[source][operator]
+    //   // console.log('template lookup is: ', `templates.${source}.${operator}`)
+    //   const template = CONSTANTS.en.templates[source][operator]
 
-      if (!template) {
-        return operand
-      }
+    //   if (!template) {
+    //     return operand
+    //   }
 
-      if (operand === '') {
-        return template
-      }
+    //   if (operand === '') {
+    //     return template
+    //   }
 
-      return template.replace(/(\[.*\])/, operand)
-    }
+    //   return template.replace(/(\[.*\])/, operand)
+    // }
 
     render () {
       const {
@@ -80,7 +80,8 @@ export const EventMatcher =
             )}
             onClick={this.handleEdit}
           >
-            {humanReadableDescription}&nbsp;{this.convertTemplate(matcher)}
+            {humanReadableDescription}&nbsp;
+            {/* {this.convertTemplate(matcher)} */}
           </button>
 
           <span className="icons">

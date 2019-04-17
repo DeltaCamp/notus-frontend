@@ -227,3 +227,7 @@ button.button.is-small:active {
 .has-stroke-light {
   stroke: rgba(255, 255, 255, 0.75);
 }
+
+.buttons:last-child {
+  margin-bottom: 0;
+}

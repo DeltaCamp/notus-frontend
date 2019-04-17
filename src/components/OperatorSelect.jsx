@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
+// import Select from '~/components/forms/Select'
 
 import { OPERATORS, OPERATOR_LABELS } from '~/constants'
 
@@ -19,5 +20,7 @@ export const OperatorSelect = function (props) {
     props = {...props, value: selectedOption}
   }
 
+  // return <Select {...props} options={options} />
   return <Select {...props} options={options} />
+
 }
