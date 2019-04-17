@@ -674,7 +674,7 @@ hr {
 .drag-handle rect,
 .drag-handle circle,
 .drag-handle svg {
-  stroke: rgba(255, 255, 255, 0.3);
+  stroke: rgba(255, 255, 255, 0.7);
 }
 
 .drag-handle:hover path,
@@ -682,4 +682,64 @@ hr {
 .drag-handle:hover circle,
 .drag-handle:hover svg {
   stroke: white;
+}
+
+
+
+
+.color-block.is-blue,
+.color-block.is-dark,
+.color-block.is-info,
+.color-block.is-fun,
+.color-block.is-success,
+.color-block.is-danger,
+.color-block.is-purple,
+.color-block.is-link {
+  color: white;
+}
+
+.color-block.is-white-ter {
+  background-color: $white-ter;
+}
+
+.color-block.is-blue {
+  background-color: $blue;
+}
+
+.color-block.is-dark {
+  background-color: $dark;
+}
+
+.color-block.is-link {
+  background-color: $link;
+}
+
+.color-block.is-info {
+  background-color: $info;
+}
+
+.color-block.is-primary {
+  background-color: $cyan;
+  // color: black;
+  color: $purple;
+}
+
+.color-block.is-purple {
+  background-color: $purple;
+}
+
+.color-block.is-success {
+  background-color: $success;
+}
+
+.color-block.is-warning {
+  background-color: $warning;
+}
+
+.color-block.is-danger {
+  background-color: $danger;
+}
+
+.color-block.is-fun {
+  background-color: $fun;
 }

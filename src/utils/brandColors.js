@@ -1,12 +1,12 @@
 const classes = [
   'is-link',
-  'is-info',
-  'is-fun',
-  'is-primary',
-  'is-purple',
   'is-success',
+  'is-purple',
+  'is-fun',
+  'is-info',
   'is-danger',
-  'is-warning'
+  'is-warning',
+  'is-primary',
 ]
 
 export const brandColor = (id) => {

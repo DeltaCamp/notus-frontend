@@ -4,12 +4,10 @@ import classnames from 'classnames'
 import { toast } from 'react-toastify'
 import { Settings } from 'react-feather'
 import { graphql } from 'react-apollo'
-import { formatRoute } from 'react-router-named-routes'
 import { Link } from 'react-router-dom'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { deleteEventMutation } from '~/mutations/deleteEventMutation'
 import { brandColor } from '~/utils/brandColors'
-import * as routes from '~/../config/routes'
 
 export const EventCard = 
   graphql(currentUserQuery, { name: 'currentUserData' })(
@@ -72,12 +70,14 @@ export const EventCard =
 
           if (editable) {
             editDropdown = (
-              <div className={classnames(
-                'dropdown',
-                'is-right',
-                'is-up',
-                { 'is-active': this.state.editDropdownActive }
-              )}>
+              <div
+                className={classnames(
+                  'dropdown',
+                  'is-right',
+                  'is-up',
+                  { 'is-active': this.state.editDropdownActive }
+                )
+              }>
                 <div className='dropdown-trigger'>
                   <button
                     className='button has-icon has-icon__transparent'

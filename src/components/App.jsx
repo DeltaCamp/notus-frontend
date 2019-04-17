@@ -72,8 +72,8 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.NEW_EVENT} component={NewEventPage} />
                 <Route exact path={routes.NEW_EVENT_FROM_PARENT} component={NewEventPage} />
                 <Route exact path={routes.MY_EVENTS} component={MyEventsPage} />
-                <Route exact path={routes.EVENT} component={EventPage} />
                 <Route exact path={routes.DISCOVER_EVENTS} component={DiscoverEventsPage} />
+                <Route exact path={routes.EVENT} component={EventPage} />
                 <Route exact path={routes.SIGNUP} component={SignUpPage} />
                 <Route exact path={routes.SIGNIN} component={SignInPage} />
                 <Route exact path={routes.PASSWORD_RESET} component={PasswordResetPage} />

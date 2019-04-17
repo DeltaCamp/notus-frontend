@@ -10,7 +10,7 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventQuery } from '~/queries/eventQuery'
-import { altBrandColor, brandColor } from '~/utils/brandColors'
+import { brandColor } from '~/utils/brandColors'
 import * as routes from '~/../config/routes'
 
 export const EventPage = 
@@ -44,8 +44,8 @@ export const EventPage =
 
         render () {
           let event,
-            colorClass,
-            altColorClass
+            colorClass
+            // altColorClass
 
           const { eventData } = this.props
 
@@ -64,7 +64,7 @@ export const EventPage =
                 event = eventData.event
 
                 colorClass = brandColor(event.id)
-                altColorClass = altBrandColor(event.id + 1)
+                // altColorClass = altBrandColor(event.id + 1)
               }
             }
           }
@@ -84,90 +84,91 @@ export const EventPage =
               <ScrollToTop />
 
               <section className='section section--main-content'>
-                <div className={`${altColorClass}`}>
-                  <div className='container'>
-                    <div className='row'>
-                      <div className='col-xs-12 has-text-centered is-size-4'>
-                        <h4 className='is-size-4 has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                          {event.title}
-                        </h4>
-                      </div>
+                <div className={`container-fluid color-block pb20 ${colorClass}`}>
+                  <div className='row'>
+                    <div className='col-xs-12 has-text-centered is-size-4'>
+                      <h4 className='is-size-4 has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
+                        {event.title}
+                      </h4>
                     </div>
+                  </div>
+                </div>
 
-                    <div className='row'>
-                      <div className='col-xs-12 has-text-centered'>
-                        <Link
-                          to={createEventFromParentRoute}
-                          className='button is-small is-outlined is-primary'
-                        >
-                          <PlusCircle /> &nbsp;Create Event From This One
-                        </Link>
-                      </div>
+                <div className='container pt50'>
+                  <div className='row'>
+                    <div className='col-xs-12 has-text-centered'>
+                      <Link
+                        to={createEventFromParentRoute}
+                        className='button is-small is-outlined is-primary'
+                      >
+                        <PlusCircle /> &nbsp;Create Event From This One
+                      </Link>
                     </div>
+                  </div>
+                </div>
 
                     <br />
 
-                    <div className='row'>
-                      <div className='col-xs-12 col-md-6 col-start-md-4'>
-                        <h5 className='is-size-5 has-text-centered is-uppercase has-text-weight-bold mt20 pt20'>
-                          Event History
-                        </h5>
-                        <p className='has-text-centered has-text-weight-bold has-text-link'>
-                          Triggered 4 times:
-                        </p>
-                        <br/>
+                <div className='container'>
+                  <div className='row'>
+                    <div className='col-xs-12 col-md-6 col-start-md-4'>
+                      <h5 className='is-size-5 has-text-centered is-uppercase has-text-weight-bold mt20 pt20'>
+                        Event History
+                      </h5>
+                      <p className='has-text-centered has-text-weight-bold has-text-link'>
+                        Triggered 4 times:
+                      </p>
+                      <br/>
 
-                        <table className='table is-full-width'>
-                          
-                          <tbody>
-                            <tr>
-                              <td>
-                                <strong>Sent email:</strong>
-                              </td>
-                              <td>
-                                Jan 12<sup>th</sup>, 1994
-                              </td>
-                              <td>
-                                2:03pm
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <strong>Sent email:</strong>
-                              </td>
-                              <td>
-                                March 3<sup>rd</sup>
-                              </td>
-                              <td>
-                                4:03pm
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <strong>Sent email:</strong>
-                              </td>
-                              <td>
-                                July 4<sup>th</sup>, 2018
-                              </td>
-                              <td>
-                                6:03pm
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <strong>Sent email:</strong>
-                              </td>
-                              <td>
-                                Dec 31<sup>st</sup>, 2019
-                              </td>
-                              <td>
-                                1:01am
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                      <table className='table is-striped is-hoverable is-fullwidth'>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <strong>Sent email:</strong>
+                            </td>
+                            <td>
+                              Jan 12<sup>th</sup>, 1994
+                            </td>
+                            <td>
+                              2:03pm
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <strong>Sent email:</strong>
+                            </td>
+                            <td>
+                              March 3<sup>rd</sup>
+                            </td>
+                            <td>
+                              4:03pm
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <strong>Sent email:</strong>
+                            </td>
+                            <td>
+                              July 4<sup>th</sup>, 2018
+                            </td>
+                            <td>
+                              6:03pm
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <strong>Sent email:</strong>
+                            </td>
+                            <td>
+                              Dec 31<sup>st</sup>, 2019
+                            </td>
+                            <td>
+                              1:01am
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
 
-                      </div>
                     </div>
                   </div>
                 </div>

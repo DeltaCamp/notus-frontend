@@ -22,7 +22,6 @@
   height: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  // white-space: nowrap;
   width: 100%;
 }
 
@@ -59,7 +58,7 @@
   position: relative;
 }
 
-.event-card .has-icon {
+.event-card .dropdown {
   min-width: 100%;
   opacity: 0.001;
   pointer-events: none;
@@ -68,37 +67,38 @@
   will-change: opacity;
 }
 
-.event-card:hover .has-icon {
-  opacity: 0.5;
+.event-card:hover .dropdown {
+  opacity: 0.7;
   pointer-events: initial;
   transition-duration: 600ms;
 }
 
-.event-card:hover .has-icon:hover {
+.event-card:hover .dropdown:hover,
+.event-card:hover .is-active {
   opacity: 1;
   pointer-events: initial;
   transition-duration: 600ms;
 }
 
-// .event-card:hover .has-icon path,
-// .event-card:hover .has-icon rect,
-// .event-card:hover .has-icon circle,
-// .event-card:hover .has-icon svg {
+// .event-card:hover .dropdown path,
+// .event-card:hover .dropdown rect,
+// .event-card:hover .dropdown circle,
+// .event-card:hover .dropdown svg {
 //   stroke: rgba(255, 255, 255, 0.3);
 // }
 
-.event-card:hover .has-icon:active path,
-.event-card:hover .has-icon:active rect,
-.event-card:hover .has-icon:active circle,
-.event-card:hover .has-icon:active svg,
-.event-card:hover .has-icon:focus path,
-.event-card:hover .has-icon:focus rect,
-.event-card:hover .has-icon:focus circle,
-.event-card:hover .has-icon:focus svg,
-.event-card:hover .has-icon:hover path,
-.event-card:hover .has-icon:hover rect,
-.event-card:hover .has-icon:hover circle,
-.event-card:hover .has-icon:hover svg {
+.event-card:hover .dropdown .button.has-icon:active path,
+.event-card:hover .dropdown .button.has-icon:active rect,
+.event-card:hover .dropdown .button.has-icon:active circle,
+.event-card:hover .dropdown .button.has-icon:active svg,
+.event-card:hover .dropdown .button.has-icon:focus path,
+.event-card:hover .dropdown .button.has-icon:focus rect,
+.event-card:hover .dropdown .button.has-icon:focus circle,
+.event-card:hover .dropdown .button.has-icon:focus svg,
+.event-card:hover .dropdown .button.has-icon:hover path,
+.event-card:hover .dropdown .button.has-icon:hover rect,
+.event-card:hover .dropdown .button.has-icon:hover circle,
+.event-card:hover .dropdown .button.has-icon:hover svg {
   stroke: white;
 }
 
@@ -107,7 +107,6 @@
 // EVENT BOX
 
 .event-box {
-  // margin: 1rem 0;
   font-weight: 600;
   line-height: 1.5;
   padding: 1.5rem 0;
@@ -135,7 +134,6 @@
 .event-box__footer {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  // margin-top: -1rem;
 }
 
 .event-box__variable.has-hint {
@@ -144,62 +142,6 @@
   @media screen and (max-width: $tablet) {
     margin-top: 1.5rem;
   }
-}
-
-.event-box.is-blue,
-.event-box.is-dark,
-.event-box.is-info,
-.event-box.is-fun,
-.event-box.is-success,
-.event-box.is-danger,
-.event-box.is-purple,
-.event-box.is-link {
-  color: white;
-}
-
-.event-box.is-white-ter {
-  background-color: $white-ter;
-}
-
-.event-box.is-blue {
-  background-color: $blue;
-}
-
-.event-box.is-dark {
-  background-color: $dark;
-}
-
-.event-box.is-link {
-  background-color: $link;
-}
-
-.event-box.is-info {
-  background-color: $info;
-}
-
-.event-box.is-primary {
-  background-color: $cyan;
-  color: black;
-}
-
-.event-box.is-purple {
-  background-color: $purple;
-}
-
-.event-box.is-success {
-  background-color: $success;
-}
-
-.event-box.is-warning {
-  background-color: $warning;
-}
-
-.event-box.is-danger {
-  background-color: $danger;
-}
-
-.event-box.is-fun {
-  background-color: $fun;
 }
 
 .event-box__text {
@@ -310,20 +252,28 @@
 
 
 // overrides
-.event-box.is-warning .event-box__text,
-.event-box.is-warning .event-box__variable,
-.event-box.is-warning .hint {
+.color-block.is-warning .event-box__text,
+.color-block.is-warning .event-box__variable,
+.color-block.is-warning .hint {
   color: black;
 }
 
-.event-box.is-primary .event-box__text,
-.event-box.is-primary .event-box__variable,
-.event-box.is-primary .hint {
+.color-block.is-primary .event-box__text,
+.color-block.is-primary .event-box__variable,
+.color-block.is-primary .hint {
   color: $purple;
 }
 
-.event-box.is-warning .event-box__variable:hover,
-.event-box.is-primary .event-box__variable:hover {
+.color-block.is-primary .event-box__variable {
+  border-color: white;
+}
+
+.color-block.is-primary .has-text-light {
+  color: white !important;
+}
+
+.color-block.is-warning .event-box__variable:hover,
+.color-block.is-primary .event-box__variable:hover {
   background: rgba(255, 255, 255, 1);
   color: black;
 }

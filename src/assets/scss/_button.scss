@@ -16,6 +16,7 @@ button[disabled] {
 .button {
   background-color: black;
   border-radius: 100px;
+  border-width: 0;
   height: auto;
   font-size: 1.25rem;
   font-weight: 700;
@@ -71,16 +72,14 @@ button[disabled] {
 }
 
 .button.is-primary {
-  // background-color: #05a8ae;
-  background-color: lighten(saturate($cyan, 100%), 5%);
-  // color: black;
+  background-color: $cyan;
   color: $purple;
 }
 
 .button.is-primary:hover,
 .button.is-primary:focus,
 .button.is-primary:active {
-  background-color: lighten(saturate($cyan, 100%), 20%);
+  background-color: darken(saturate($cyan, 100%), 15%);
   color: $pink;
 }
 
@@ -226,5 +225,5 @@ button.button.is-small:active {
 }
 
 .has-stroke-light {
-  stroke: rgba(255, 255, 255, 0.6);
+  stroke: rgba(255, 255, 255, 0.75);
 }

@@ -436,7 +436,7 @@ export const NewEventPage =
                     </div>
                   </div>
 
-                  <div className={`event-box event-box__header ${colorClass}`}>
+                  <div className={`event-box event-box__header color-block ${colorClass}`}>
                     <div className={`container-fluid pt20 pb20`}>
                       <div className='container'>
                         <div className='row'>
@@ -458,7 +458,7 @@ export const NewEventPage =
                     </div>
                   </div>
 
-                  <div className={`event-box event-box__footer ${altColorClass}`}>
+                  <div className={`event-box event-box__footer color-block ${altColorClass}`}>
                     <div className={`container-fluid`}>
                       <div className='container'>
                         <div className='row'>
