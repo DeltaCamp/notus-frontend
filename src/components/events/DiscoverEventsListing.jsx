@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react'
+import { formatRoute } from 'react-router-named-routes'
 import { graphql } from 'react-apollo'
 import { publicEventsQuery } from '~/queries/publicEventsQuery'
 import { EventCard } from '~/components/events/EventCard'
+import * as routes from '~/../config/routes'
 
 export const DiscoverEventsListing =
   graphql(publicEventsQuery, { name: 'publicEventsData' })(
@@ -18,6 +20,7 @@ export const DiscoverEventsListing =
               <EventCard
                 key={`event-${event.id}`}
                 event={event}
+                linkTo={formatRoute(routes.NEW_EVENT_FROM_PARENT, { parentEventId: event.id })}
               />
             ))
           }

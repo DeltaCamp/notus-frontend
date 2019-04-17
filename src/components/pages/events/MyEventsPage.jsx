@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { formatRoute } from 'react-router-named-routes'
+import { PlusCircle } from 'react-feather'
 import { toast } from 'react-toastify'
 import { Link, Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
@@ -53,6 +55,7 @@ export const MyEventsPage =
                   key={`event-${event.id}`}
                   event={event}
                   editable={true}
+                  linkTo={formatRoute(routes.EVENT, { eventId: event.id })}
                 />
               ))
             }
@@ -75,10 +78,10 @@ export const MyEventsPage =
               <>
                 <div className='mt20 has-text-right'>
                   <Link
-                    className='button is-small mt20 is-purple'
+                    className='button is-small mt20 is-outlined is-link'
                     to={routes.NEW_EVENT}
                     >
-                    Create a Custom Event
+                    <PlusCircle /> &nbsp;Create a Custom Event
                   </Link>
                 </div>
                 <div className='listing-grid mt75'>

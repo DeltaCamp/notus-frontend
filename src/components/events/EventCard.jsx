@@ -103,7 +103,7 @@ export const EventCard =
           return (
             <Link
               key={`event-${event.id}`}
-              to={formatRoute(routes.NEW_EVENT_FROM_PARENT, { parentEventId: event.id })}
+              to={this.props.linkTo}
               className={`button event-card ${brandColor(event.id)}`}
               ref={node => {this.node = node}}
             >

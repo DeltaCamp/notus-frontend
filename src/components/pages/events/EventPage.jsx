@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { PlusCircle } from 'react-feather'
 import { formatRoute } from 'react-router-named-routes'
 import { toast } from 'react-toastify'
 import { Link, Redirect } from 'react-router-dom'
@@ -99,7 +100,7 @@ export const EventPage =
                           to={createEventFromParentRoute}
                           className='button is-small is-outlined is-primary'
                         >
-                          Create a new Event based on this one
+                          <PlusCircle /> &nbsp;Create Event From This One
                         </Link>
                       </div>
                     </div>

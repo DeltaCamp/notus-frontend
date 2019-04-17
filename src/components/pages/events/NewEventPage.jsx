@@ -280,6 +280,8 @@ export const NewEventPage =
             let altColorClass = 'is-blue'
             let variableForm = null
 
+            const { eventData } = this.props
+
             const editMatcher = this.isEditing()
               ? this.state.event.matchers[this.state.editMatcherIndex]
               : null
@@ -291,15 +293,15 @@ export const NewEventPage =
             if (this.state.redirect) {
               return <Redirect to={routes.SIGNIN} />
             }
-            if (this.props.eventData) {
-              if (this.props.eventData.loading) {
+            if (eventData) {
+              if (eventData.loading) {
                 return null
               } else {
-                if (this.props.eventData.error) {
-                  console.warn(this.props.eventData.error)
+                if (eventData.error) {
+                  console.warn(eventData.error)
                   return null
                 } else {
-                  recipe = this.props.eventData.event
+                  recipe = eventData.event
 
                   if (recipe) {
                     colorClass = brandColor(recipe.id)

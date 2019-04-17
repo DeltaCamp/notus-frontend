@@ -55,7 +55,7 @@ body.home .navbar-start .navbar-item {
 .navbar-menu .navbar-item.button:active {
   background-color: transparent;
   border: 0;
-  color: rgba(0, 0, 0, 0.5);
+  color: $navbar-item-color;
   min-width: auto;
   width: auto;
 
