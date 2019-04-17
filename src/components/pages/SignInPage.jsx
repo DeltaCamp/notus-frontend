@@ -81,8 +81,6 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
               password: this.state.password
             }
           })
-
-          this.props.history.push(routes.MY_EVENTS)
         } catch (error) {
           this.setState({
             signingIn: false,

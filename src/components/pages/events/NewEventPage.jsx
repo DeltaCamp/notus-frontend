@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import arrayMove from 'array-move'
+import { formatRoute } from 'react-router-named-routes'
 import { orderBy } from 'lodash'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { CheckCircle, PlusCircle } from 'react-feather'
@@ -135,8 +136,12 @@ export const NewEventPage =
                 'eventsQuery',
                 'publicEventsQuery',
               ],
-            }).then(() => {
+            }).then((mutationResult) => {
               toast.success('Successfully saved event!')
+              const eventId = mutationResult.data.createEvent.id
+              const newEventLink = formatRoute(routes.EVENT, { eventId })
+
+              this.props.history.push(newEventLink)
             }).catch(error => {
               console.error(error)
             })

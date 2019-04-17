@@ -160,29 +160,20 @@ button.button.is-small:active {
   transform: scale3d(1.06, 1.06, 1.0);
 }
 
+.button.is-outlined {
+  border-width: 5px;
+}
 
-// .button.is-dark.is-outlined {
-//   border-color: $dark;
-// }
+.button.is-outlined.is-dark {
+  border-color: $dark;
+}
 
-// .button.is-dark.is-outlined:hover,
-// .button.is-dark.is-outlined:active,
-// .button.is-dark.is-outlined:focus {
-//   border-color: $dark;
-//   color: white;
-// }
-
-// .button.is-outlined.is-light {
-//   box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
-// }
-
-// .button.is-outlined.is-light:hover {
-//   box-shadow: 0 9px 15px rgba(50, 50, 93, .2), 0 4px 7px rgba(0, 0, 0, .15);
-// }
-
-// .button.is-outlined.is-light:active {
-//   box-shadow: none;
-// }
+.button.is-outlined.is-dark:hover,
+.button.is-outlined.is-dark:active,
+.button.is-outlined.is-dark:focus {
+  border-color: $dark;
+  color: white;
+}
 
 .has-bg .button.has-icon,
 .has-bg__dark .button.has-icon,
