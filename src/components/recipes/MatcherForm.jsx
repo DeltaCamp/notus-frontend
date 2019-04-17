@@ -6,6 +6,8 @@ import { OperandDataTypeSelect } from '~/components/OperandDataTypeSelect'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { ContractEventInputSelect } from '~/components/ContractEventInputSelect'
 
+import { OPERAND_DATA_TYPE_LABELS } from '~/constants'
+
 export class MatcherForm extends PureComponent {
   static propTypes = {
     matcher: PropTypes.object.isRequired,
@@ -54,7 +56,7 @@ export class MatcherForm extends PureComponent {
           type='text'
           value={matcher.operand}
           onChange={this.onChangeOperand}
-          placeholder={`Enter ${matcher.operandDataType}`}
+          placeholder={`Enter ${OPERAND_DATA_TYPE_LABELS[matcher.operandDataType]}`}
         />
       operandDataTypeSelect =
         <OperandDataTypeSelect

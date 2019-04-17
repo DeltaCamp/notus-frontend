@@ -20,15 +20,13 @@ export const OPERATORS = {
   GTE: 5
 }
 
-
-
 export const OPERATOR_LABELS = {
   [OPERATORS.NOOP]: 'is user defined',
-  [OPERATORS.EQ]: 'equal to',
-  [OPERATORS.LT]: 'less than',
-  [OPERATORS.GT]: 'greater than',
-  [OPERATORS.LTE]: 'less than or equal to',
-  [OPERATORS.GTE]: 'greater than or equal to',
+  [OPERATORS.EQ]: 'is equal to',
+  [OPERATORS.LT]: 'is less than',
+  [OPERATORS.GT]: 'is greater than',
+  [OPERATORS.LTE]: 'is less than or equal to',
+  [OPERATORS.GTE]: 'is greater than or equal to',
 }
 
 export const OPERAND_DATA_TYPES = {
