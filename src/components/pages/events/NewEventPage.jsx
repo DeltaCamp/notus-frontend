@@ -6,10 +6,11 @@ import { formatRoute } from 'react-router-named-routes'
 import { orderBy } from 'lodash'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { CheckCircle, PlusCircle } from 'react-feather'
-import { CSSTransition } from 'react-transition-group'
 import { toast } from 'react-toastify'
 import { Redirect } from 'react-router-dom'
 import { graphql } from 'react-apollo'
+
+import { Drawer } from '~/components/Drawer'
 import { EventMatcher } from '~/components/events/EventMatcher'
 import { MatcherForm } from '~/components/recipes/MatcherForm'
 import { FooterContainer } from '~/components/layout/Footer'
@@ -315,47 +316,27 @@ export const NewEventPage =
 
             if (editMatcher) {
               variableForm = (
-                <>          
-                  <div className='drawer has-bg__dark'>
-                    <div className='container'>
-                      <div className='row'>
-                        <div className='col-xs-12 col-md-10 col-start-md-2 has-text-centered'>
-                          <form className='form mt10 drawer-form'>
-                            <MatcherForm
-                              key={`matcher-${this.state.matcherIndex}`}
-                              matcher={editMatcher}
-                              onChange={
-                                (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
-                              }
-                            />
-                            {/* <EditEventVariableForm */}
+                <form className='form drawer-form'>
+                  <MatcherForm
+                    key={`matcher-${this.state.matcherIndex}`}
+                    matcher={editMatcher}
+                    onChange={
+                      (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
+                    }
+                  />
 
-                            <div className='buttons'>
-                              <button
-                                className='button has-icon has-stroke-green'
-                                onClick={this.handleCancelEditingMatcher}
-                              >
-                                <CheckCircle
-                                  className='icon__button has-stroke-green'
-                                />
-                              </button>
-                            </div>
-
-                          </form>
-                        </div>
-                      </div>
-                    </div>
+                  <div className='buttons'>
+                    <button
+                      className='button has-icon has-stroke-green'
+                      onClick={this.handleCancelEditingMatcher}
+                    >
+                      <CheckCircle
+                        className='icon__button has-stroke-green'
+                      />
+                    </button>
                   </div>
 
-                  {/* this needs to be at the bottom or it takes the <CSSTransition/> classes */}
-                  <div
-                    className={`drawer__clickbox ${this.isEditing() ? 'is-active' : null}`}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      this.handleCancelEditingMatcher(e)
-                    }}
-                  />
-                </>
+                </form>
               )
             }
 
@@ -415,13 +396,9 @@ export const NewEventPage =
 
                 <ScrollToTop />
 
-                <CSSTransition
-                  timeout={300}
-                  classNames='drawer'
-                  in={this.isEditing()}
-                >
-                  {state => variableForm}
-                </CSSTransition>
+                <Drawer show={this.isEditing()} onClose={this.handleCancelEditingMatcher}>
+                  {variableForm}
+                </Drawer>
 
                 <section className='section section--main-content'>
                   <div className={`container-fluid pb20 is-dark`}>

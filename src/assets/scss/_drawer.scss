@@ -42,7 +42,7 @@
 .drawer.drawer-enter-active,
 .drawer.drawer-enter-done {
   bottom: -20px;
-  height: 400px;
+  height: 120px;
 
   @media screen and (max-width: $tablet) {
     height: 200px;
