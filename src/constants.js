@@ -90,10 +90,7 @@ export const en = {
     'transaction.from': {
       [OPERATORS.EQ]: '[address]'
     },
-    'log.topic[2]': {
-      [OPERATORS.EQ]: '[address]'
-    },
-    'log.topic[3]': {
+    'log.topics[3]': {
       [OPERATORS.EQ]: '[amount]', // operator
       [OPERATORS.LT]: 'less than [amount]',
       [OPERATORS.GT]: 'more than [amount]',

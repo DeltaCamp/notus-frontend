@@ -359,7 +359,7 @@ export const NewEventPage =
               )
             }
 
-            const frequencyWord = (this.state.event.frequency === '-1') ? 'Every time' : 'Only once'
+            const frequencyWord = (this.state.event.frequency === '-1') ? 'Every time' : 'Next time'
 
             const matcherSentences = (
               <>
@@ -391,9 +391,8 @@ export const NewEventPage =
                                   index={index}
                                   handleSetEditMatcher={this.handleSetEditMatcher}
                                   handleRemoveMatcher={this.handleRemoveMatcher}
-                                  onSortEnd={this.onSortEnd}
                                   isFirst={index === 0}
-                                  isActive={editMatcher && eventMatcher === editMatcher}
+                                  isActive={!!editMatcher && eventMatcher === editMatcher}
                                 />
                               </div>
                             )}

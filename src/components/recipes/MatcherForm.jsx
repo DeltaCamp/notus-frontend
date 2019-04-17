@@ -4,6 +4,7 @@ import { SourceSelect } from '~/components/SourceSelect'
 import { OperatorSelect } from '~/components/OperatorSelect'
 import { OperandDataTypeSelect } from '~/components/OperandDataTypeSelect'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
+import { ContractEventInputSelect } from '~/components/ContractEventInputSelect'
 
 export class MatcherForm extends PureComponent {
   static propTypes = {
@@ -35,10 +36,16 @@ export class MatcherForm extends PureComponent {
     this.props.onChange(clone)
   }
 
+  onChangeContractEventInput = (contractEventInput) => {
+    const clone = deepCloneMatcher(this.props.matcher)
+    clone.contractEventInput = contractEventInput
+    this.props.onChange(clone)
+  }
+
   render () {
     const { matcher } = this.props
 
-    let operandInput, operandDataTypeSelect
+    let operandInput, operandDataTypeSelect, contractEventInputSelect
 
     if (matcher.operator !== 0) {
       operandInput =
@@ -56,12 +63,19 @@ export class MatcherForm extends PureComponent {
         />
     }
 
+    if (matcher.source === 'contractEventInput') {
+      contractEventInputSelect = (
+        <ContractEventInputSelect value={matcher.contractEventInput} onChange={this.onChangeContractEventInput} />
+      )
+    }
+
     return (
       <>
         <SourceSelect
           value={matcher.source}
           onChange={this.onChangeSource}
         />
+        {contractEventInputSelect}
         <OperatorSelect
           value={matcher.operator}
           onChange={this.onChangeOperator}

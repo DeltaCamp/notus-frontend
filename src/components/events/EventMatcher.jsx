@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import { Edit, XCircle, Menu } from 'react-feather'
+import PropTypes from 'prop-types'
 
 const DragHandle = (() => <span className='drag-handle'>
   <Menu />
@@ -8,6 +9,15 @@ const DragHandle = (() => <span className='drag-handle'>
 
 export const EventMatcher = 
   class _EventMatcher extends PureComponent {
+
+    static propTypes = {
+      isFirst: PropTypes.bool.isRequired,
+      matcher: PropTypes.object.isRequired,
+      index: PropTypes.number.isRequired,
+      handleSetEditMatcher: PropTypes.func.isRequired,
+      handleRemoveMatcher: PropTypes.func.isRequired,
+      isActive: PropTypes.bool.isRequired
+    }
 
     handleEdit = (e) => {
       e.preventDefault()
@@ -30,6 +40,7 @@ export const EventMatcher =
 
     //   // console.log('template lookup is: ', `templates.${source}.${operator}`)
     //   const template = CONSTANTS.en.templates[source][operator]
+
 
     //   if (!template) {
     //     return operand
