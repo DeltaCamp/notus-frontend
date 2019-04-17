@@ -42,7 +42,7 @@
 .drawer.drawer-enter-active,
 .drawer.drawer-enter-done {
   bottom: -20px;
-  height: 120px;
+  height: 140px;
 
   @media screen and (max-width: $tablet) {
     height: 200px;
@@ -103,7 +103,6 @@
 .drawer .button.has-icon {
   border: 0;
   height: 60px;
-  margin-left: 20px;
   margin-right: 0;
   width: 60px;
 }
@@ -112,8 +111,23 @@
   margin-right: 4px;
 }
 
-.drawer .buttons {
+.drawer .form .input,
+.drawer .form .react-select,
+.drawer .form .buttons {
   display: flex;
+  margin: 0 5px;
+}
+
+.drawer .form .input:first-child,
+.drawer .form .react-select:first-child,
+.drawer .form .buttons:first-child {
+  margin-left: 0;
+}
+
+.drawer .form .input:last-child,
+.drawer .form .react-select:last-child,
+.drawer .form .buttons:last-child {
+  margin-right: 0;
 }
 
 .drawer-inputs {
