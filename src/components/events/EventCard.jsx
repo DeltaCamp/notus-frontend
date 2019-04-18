@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 import {
   AlertTriangle,
-  PlusCircle,
   StopCircle,
   CheckCircle
 } from 'react-feather'
