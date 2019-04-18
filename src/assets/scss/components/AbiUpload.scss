@@ -1,6 +1,10 @@
 .abi-upload {
   border: 2px dashed white;
-  width: 60px;
-  height: 60px;
   border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.abi-upload p {
+  padding: 2rem;
 }

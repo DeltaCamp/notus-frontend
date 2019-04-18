@@ -4,7 +4,7 @@ import { SourceSelect } from '~/components/SourceSelect'
 import { OperatorSelect } from '~/components/OperatorSelect'
 import { OperandDataTypeSelect } from '~/components/OperandDataTypeSelect'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
-import { ContractEventInputSelect } from '~/components/ContractEventInputSelect'
+import { AbiEventInputSelect } from '~/components/AbiEventInputSelect'
 
 import { OPERAND_DATA_TYPE_LABELS } from '~/constants'
 
@@ -38,16 +38,16 @@ export class MatcherForm extends PureComponent {
     this.props.onChange(clone)
   }
 
-  onChangeContractEventInput = (contractEventInput) => {
+  onChangeabiEventInput = (abiEventInput) => {
     const clone = deepCloneMatcher(this.props.matcher)
-    clone.contractEventInput = contractEventInput
+    clone.abiEventInput = abiEventInput
     this.props.onChange(clone)
   }
 
   render () {
     const { matcher } = this.props
 
-    let operandInput, operandDataTypeSelect, contractEventInputSelect
+    let operandInput, operandDataTypeSelect, abiEventInputSelect
 
     if (matcher.operator !== 0) {
       operandInput =
@@ -65,9 +65,9 @@ export class MatcherForm extends PureComponent {
         />
     }
 
-    if (matcher.source === 'contractEventInput') {
-      contractEventInputSelect = (
-        <ContractEventInputSelect value={matcher.contractEventInput} onChange={this.onChangeContractEventInput} />
+    if (matcher.source === 'abiEventInput') {
+      abiEventInputSelect = (
+        <AbiEventInputSelect value={matcher.abiEventInput} onChange={this.onChangeabiEventInput} />
       )
     }
 
@@ -77,7 +77,7 @@ export class MatcherForm extends PureComponent {
           value={matcher.source}
           onChange={this.onChangeSource}
         />
-        {contractEventInputSelect}
+        {abiEventInputSelect}
         <OperatorSelect
           value={matcher.operator}
           onChange={this.onChangeOperator}

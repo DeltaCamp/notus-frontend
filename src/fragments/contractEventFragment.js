@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 
-export const contractEventFragment = gql`
-  fragment contractEventFragment on ContractEventEntity {
+export const abiEventFragment = gql`
+  fragment abiEventFragment on abiEventEntity {
     id
     name
     topic
-    contract {
+    abi {
       id
       name
     }
