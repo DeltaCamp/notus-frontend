@@ -1,0 +1,71 @@
+.modal {
+  display: flex;
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+  pointer-events: none;
+  z-index: 20000;
+}
+
+.modal-content {
+  overflow: initial;
+  background: blue;
+}
+
+.modal-content,
+.modal-card {
+  max-height: -webkit-fill-available;
+}
+
+.modal hr {
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 2rem auto;
+  width: 50%;
+}
+
+.modal.is-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+  pointer-events: initial;
+}
+
+.modal.is-active .modal-background {
+  pointer-events: all;
+  opacity: 0.2;
+  background-color: black;
+  z-index: 0;
+}
+
+.modal-card-head,
+.modal-card-foot {
+  border-radius: 0;
+}
+
+.modal-content--inner {
+  padding: 3rem 2rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 3rem 1.5rem;
+  }
+}
+
+.modal-content {
+  position: relative;
+  box-shadow: 0 0 100px 0 rgba(10, 10, 20, 0.6);
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+  }
+}
+
+.modal-content,
+.modal-card {
+  @media screen and (min-width: 769px) {
+    max-height: calc(100vh - 40px);
+    width: 640px;
+  }
+
+  @media screen and (min-width: 1025px) {
+    max-height: calc(100vh - 20px);
+    width: 1020px;
+  }
+}

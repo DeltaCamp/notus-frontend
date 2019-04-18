@@ -8,6 +8,11 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { CheckCircle, PlusCircle } from 'react-feather'
 import { toast } from 'react-toastify'
 import { graphql } from 'react-apollo'
+
+import { ContractForm } from '~/components/forms/ContractForm'
+import { ScopeSelect } from '~/components/ScopeSelect'
+import { ContractEventSelect } from '~/components/ContractEventSelect'
+import { Modal } from '~/components/Modal'
 import { Drawer } from '~/components/Drawer'
 import { EventMatcher } from '~/components/events/EventMatcher'
 import { MatcherForm } from '~/components/recipes/MatcherForm'
@@ -19,6 +24,10 @@ import { eventQuery } from '~/queries/eventQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import * as routes from '~/../config/routes'
+import {
+  SCOPES,
+  SCOPE_LABELS
+} from '~/constants'
 
 export const NewEventPage = 
   graphql(currentUserQuery, { name: 'currentUserData' })(
@@ -35,6 +44,8 @@ export const NewEventPage =
         class _NewEventPage extends Component {
           state = {
             event: {
+              scope: 0,
+              contractEventId: null,
               isPublic: false,
               // frequency: '-1',
               matchers: [
@@ -48,7 +59,9 @@ export const NewEventPage =
               ]
             },
             editMatcherIndex: null,
-            newEventTitle: ''
+            newEventTitle: '',
+            showEventForm: false,
+            showAddContract: false
           }
 
           static propTypes = {
@@ -150,6 +163,19 @@ export const NewEventPage =
             this.handleSetEditMatcher(null)
           }
 
+          showAddContract = (e) => {
+            e.preventDefault()
+            this.setState({
+              showAddContract: true
+            })
+          }
+
+          hideAddContract = () => {
+            this.setState({
+              showAddContract: false
+            })
+          }
+
           // handleInputChange = (variable, typeOrOperand, newValue) => {
           //   const {
           //     description,
@@ -209,15 +235,23 @@ export const NewEventPage =
           //   }, () => { console.log(this.state.event)})
           // }
 
-          isEditing = () => {
+          showEventForm = () => {
+            this.setState({ showEventForm: true })
+          }
+
+          hideEventForm = () => {
+            this.setState({ showEventForm: false })
+          }
+
+          isEditingMatcher = () => {
             return this.state.editMatcherIndex !== null
           }
 
-          recipeSentence = (recipe) => {
-            const firstLetter = recipe.title.charAt(0)
+          recipeSentence = (title) => {
+            const firstLetter = title.charAt(0)
             const startsWithVowel = /[aeiou]/i.test(firstLetter)
 
-            return startsWithVowel ? `an ${recipe.title}` : `a ${recipe.title}`
+            return startsWithVowel ? `an ${title}` : `a ${title}`
           }
 
           onChangeMatcher = (matcher) => {
@@ -229,6 +263,25 @@ export const NewEventPage =
                 ...this.state.event,
                 matchers
               }
+            })
+          }
+
+          onChangeScope = (option) => {
+            this.setState({
+              event: {
+                ...this.state.event,
+                scope: option.value
+              }
+            })
+          }
+
+          onChangeContractEvent = (option) => {
+            this.setState({
+              event: {
+                ...this.state.event,
+                contractEventId: option.value
+              },
+              contractEvent: option.contractEvent
             })
           }
 
@@ -273,7 +326,7 @@ export const NewEventPage =
 
             const { eventData } = this.props
 
-            const editMatcher = this.isEditing()
+            const editMatcher = this.isEditingMatcher()
               ? this.state.event.matchers[this.state.editMatcherIndex]
               : null
 
@@ -298,7 +351,6 @@ export const NewEventPage =
                 }
               }
             }
-
 
             if (editMatcher) {
               variableForm = (
@@ -328,11 +380,23 @@ export const NewEventPage =
 
             const frequencyWord = (this.state.event.frequency === '-1') ? 'Every time' : 'Next time'
 
+            let title
+            if (this.state.event.scope === SCOPES.CONTRACT_EVENT && this.state.contractEvent) {
+              title = `${this.state.contractEvent.contract.name} ${this.state.contractEvent.name}`
+            } else {
+              title = SCOPE_LABELS[this.state.event.scope]
+            }
+
             const matcherSentences = (
               <>
-                <span className="event-box__text">
-                  {frequencyWord} {this.recipeSentence(recipe)} occurs
-                </span>
+                <div className='event-box__variable-wrapper' onClick={this.showEventForm}>
+                  <div className='event-box__variable'>
+                    <span className="event-box__text">
+                      {frequencyWord} {this.recipeSentence(title)} occurs
+                    </span>
+                  </div>
+                </div>
+
 
                 {/* <MatcherDragDropContext 
 
@@ -373,6 +437,15 @@ export const NewEventPage =
               </>
             )
 
+            let contractEventSelect, addContract
+            if (this.state.event.scope === SCOPES.CONTRACT_EVENT) {
+              contractEventSelect =
+                <ContractEventSelect
+                  value={this.state.event.contractEventId}
+                  onChange={this.onChangeContractEvent}
+                  />
+              addContract = <button onClick={this.showAddContract} className='button'>add contract</button>
+            }
 
             return (
               <div className='is-positioned-absolutely'>
@@ -382,9 +455,21 @@ export const NewEventPage =
 
                 <ScrollToTop />
 
-                <Drawer show={this.isEditing()} onClose={this.handleCancelEditingMatcher}>
+                <Drawer show={this.isEditingMatcher()} onClose={this.handleCancelEditingMatcher}>
                   {variableForm}
                 </Drawer>
+
+                <Drawer show={this.state.showEventForm} onClose={this.hideEventForm}>
+                  <form className='form drawer-form'>
+                    <ScopeSelect value={this.state.event.scope} onChange={this.onChangeScope} />
+                    {contractEventSelect}
+                    {addContract}
+                  </form>
+                </Drawer>
+
+                <Modal isOpen={this.state.showAddContract} handleClose={this.hideAddContract}>
+                  <ContractForm onCancel={this.hideAddContract} />
+                </Modal>
 
                 <section className='section section--main-content'>
                   <div className={`container-fluid pb20 is-dark`}>

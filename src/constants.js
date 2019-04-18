@@ -11,6 +11,18 @@ export const INFO = 'info'
 export const WARNING = 'warning'
 export const DANGER = 'danger'
 
+export const SCOPES = {
+  TRANSACTION: 0,
+  BLOCK: 1,
+  CONTRACT_EVENT: 2
+}
+
+export const SCOPE_LABELS = {
+  [SCOPES.TRANSACTION]: 'transaction',
+  [SCOPES.BLOCK]: 'block',
+  [SCOPES.CONTRACT_EVENT]: 'contract event'
+}
+
 export const OPERATORS = {
   NOOP: 0,
   EQ: 1,
