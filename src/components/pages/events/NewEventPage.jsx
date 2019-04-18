@@ -191,65 +191,6 @@ export const NewEventPage =
               })
             }
 
-            // handleInputChange = (variable, typeOrOperand, newValue) => {
-            //   const {
-            //     description,
-            //     sourceDataType
-            //   } = variable
-
-            //   const name = varDescriptionToVarName(description)
-
-            //   if (sourceDataType === 'uint256') {
-            //     // note: currently does not handle negative values:
-            //     newValue = newValue.replace(/[^0-9.]/g, '')
-            //   }
-
-            //   let matcher = this.state.event.matchers.find((matcher) => (
-            //     matcher.variableId === variable.id
-            //   ))
-
-            //   if (!matcher) {
-            //     console.log('no matcher yet, creating one with variableId: ', variable.id)
-            //     matcher = {
-            //       variableId: variable.id,
-            //       type: '0',
-            //       operand: newValue
-            //     }
-            //   }
-
-            //   if (typeOrOperand === 'type') {
-            //     matcher.type = newValue
-            //   } else {
-            //     matcher.operand = newValue
-            //   }
-
-            //   this.setState({
-            //     [name]: matcher
-            //   }, this.updateEventMatcher(variable, matcher))
-            // }
-
-            // updateEventMatcher = (variable, matcher) => {
-            //   const matchers = this.state.event.matchers
-
-            //   let existingMatcher = this.state.event.matchers.find((matcher) => (
-            //     matcher.variableId === variable.id
-            //   ))
-
-            //   if (!existingMatcher) {
-            //     matchers.push(matcher)
-            //   } else {
-            //     const matcherIndex = this.state.event.matchers.indexOf(existingMatcher)
-            //     matchers[matcherIndex].operand = matcher.operand
-            //   }
-              
-            //   this.setState({
-            //     event: {
-            //       ...this.state.event,
-            //       matchers
-            //     }
-            //   }, () => { console.log(this.state.event)})
-            // }
-
             showEventForm = () => {
               this.setState({ showEventForm: true })
             }
@@ -283,7 +224,6 @@ export const NewEventPage =
             }
 
             onChangeScope = (option) => {
-              console.log('changed! ', option)
               this.setState({
                 event: {
                   ...this.state.event,
@@ -296,7 +236,7 @@ export const NewEventPage =
               this.setState({
                 event: {
                   ...this.state.event,
-                  abiEventId: option.value
+                  abiEventId: parseInt(option.value, 10)
                 }
               })
             }
@@ -398,8 +338,10 @@ export const NewEventPage =
               const frequencyWord = (this.state.event.frequency === '-1') ? 'Every time' : 'Next time'
 
               let abiEvent = null
-              if (this.state.event.scope === SCOPES.CONTRACT_EVENT && this.state.event.abiEventId && abiEvents) {
-                abiEvent = abiEvents.find(abiEvent => abiEvent.id === this.state.event.abiEventId)
+              if (this.state.event.scope === SCOPES.CONTRACT_EVENT && !!this.state.event.abiEventId && abiEvents) {
+                abiEvent = abiEvents.find(abiEvent => {
+                  return parseInt(abiEvent.id, 10) === this.state.event.abiEventId
+                })
               }
 
               let title
@@ -408,8 +350,6 @@ export const NewEventPage =
               } else {
                 title = SCOPE_LABELS[this.state.event.scope]
               }
-
-              console.log(this.state.event)
 
               const matcherSentences = (
                 <>
