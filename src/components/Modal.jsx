@@ -4,7 +4,13 @@ import PropTypes from 'prop-types'
 
 export const Modal = ({ children, handleClose, isOpen, className }) => {
   return (
-    <div className={classnames('modal', className || '', { 'is-active': isOpen })}>
+    <div
+      className={classnames(
+        'modal',
+        className || '',
+        { 'is-active': isOpen }
+      )}
+    >
       <div className="modal-background" onClick={handleClose} />
       <div className="modal-content">
         <div className="modal-content--inner">

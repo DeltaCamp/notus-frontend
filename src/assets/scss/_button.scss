@@ -85,11 +85,9 @@ button[disabled] {
 .button.is-primary:focus,
 .button.is-primary:active {
   background-color: darken(saturate($cyan, 100%), 15%);
-  // color: $pink;
 }
 
 .button.is-success {
-  // border: 2px solid white;
   color: white;
 }
 
@@ -97,6 +95,16 @@ button[disabled] {
 .button.is-success:focus,
 .button.is-success:active {
   background-color: lighten(saturate($success, 100%), 2%);
+}
+
+.button.is-light {
+}
+
+.button.is-light:hover,
+.button.is-light:focus,
+.button.is-light:active {
+  background-color: lighten(saturate($light, 100%), 2%);
+  color: $dark !important;
 }
 
 .button.is-success.is-outlined {
@@ -151,8 +159,8 @@ button[disabled] {
 .button.is-small:hover,
 .button.is-small:active,
 .button.is-small:focus {
-  background-color: #161628;
-  border-color: #161628;
+  // background-color: #161628;
+  // border-color: #161628;
   box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
   color: white;
 }
@@ -245,4 +253,10 @@ button.button.is-small:active {
 
 .buttons:last-child {
   margin-bottom: 0;
+}
+
+.buttons .button:not(:last-child):not(.is-fullwidth) {
+  @media screen and (max-width: $tablet) {
+    margin-right: 0;
+  }
 }

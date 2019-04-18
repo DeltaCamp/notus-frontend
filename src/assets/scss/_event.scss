@@ -59,27 +59,27 @@
   position: relative;
 }
 
-// .event-card .dropdown {
-//   min-width: 100%;
-//   opacity: 0.001;
-//   pointer-events: none;
-//   transition: opacity 200ms ease-in-out;
-//   text-align: left;
-//   will-change: opacity;
-// }
+.event-card .dropdown {
+  min-width: 100%;
+  opacity: 0.001;
+  pointer-events: none;
+  transition: opacity 200ms ease-in-out;
+  text-align: left;
+  will-change: opacity;
+}
 
-// .event-card:hover .dropdown {
-//   opacity: 0.7;
-//   pointer-events: initial;
-//   transition-duration: 600ms;
-// }
+.event-card:hover .dropdown {
+  opacity: 0.7;
+  pointer-events: initial;
+  transition-duration: 600ms;
+}
 
-// .event-card:hover .dropdown:hover,
-// .event-card:hover .is-active {
-//   opacity: 1;
-//   pointer-events: initial;
-//   transition-duration: 600ms;
-// }
+.event-card:hover .dropdown:hover,
+.event-card:hover .is-active {
+  opacity: 1;
+  pointer-events: initial;
+  transition-duration: 600ms;
+}
 
 .event-card:hover .dropdown .button.has-icon:active path,
 .event-card:hover .dropdown .button.has-icon:active rect,

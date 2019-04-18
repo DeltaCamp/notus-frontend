@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { toast } from 'react-toastify'
 import { IsAuthed } from '~/components/IsAuthed'
+import { Modal } from '~/components/Modal'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { deleteEventMutation } from '~/mutations/deleteEventMutation'
@@ -20,25 +21,7 @@ import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventQuery } from '~/queries/eventQuery'
 import { brandColor } from '~/utils/brandColors'
-import { omitDeep } from '~/utils/omitDeep'
 import * as routes from '~/../config/routes'
-
-const eventDto = (event) => {
-  // event = omitDeep(event, 'id')
-  event = omitDeep(event, '__typename')
-  event = omitDeep(event, 'parent')
-  event = omitDeep(event, 'user')
-  event = omitDeep(event, 'createdAt')
-  event = omitDeep(event, 'updatedAt')
-
-  // omitDeep is converting our array of objects into an object of objects
-  // this converts it back
-  event.matchers = Object.keys(event.matchers).map((key) => (
-    event.matchers[key]
-  ))
-  
-  return event
-}
 
 export const EventPage = 
   IsAuthed(
@@ -70,26 +53,38 @@ export const EventPage =
               handleActivate = (e) => {
                 e.preventDefault()
 
-                const event = eventDto(this.props.eventData.event)
-                const updatedEvent = {
-                  ...event,
-                  isActive: !this.props.eventData.event.isActive
-                }
+                const event = this.props.eventData.event
                 
                 this.props.updateEventMutation({
                   variables: {
-                    event: updatedEvent
+                    event: {
+                      id: event.id,
+                      isActive: !event.isActive
+                    }
                   },
                   refetchQueries: [
                     'eventsQuery',
                     'publicEventsQuery',
                   ],
                 }).then((mutationResult) => {
-                  toast.success('Event updated')
+                  toast.dismiss()
+                  toast.success(`Event ${event.isActive ? 'deactivated' : 're-activated'}`)
                 }).catch(error => {
                   toast.error('Error while updating event')
                   console.error(error)
                 })
+              }
+
+              handleOpenConfirmDeleteModal = (e) => {
+                e.preventDefault()
+
+                this.setState({ isConfirmingDelete: true })
+              }
+
+              handleCloseConfirmDeleteModal = (e) => {
+                e.preventDefault()
+
+                this.setState({ isConfirmingDelete: false })
               }
 
               handleDelete = (e) => {
@@ -106,7 +101,7 @@ export const EventPage =
                     'publicEventsQuery',
                   ],
                 }).then(() => {
-                  toast.success('Successfully deleted event!')
+                  toast.success('Successfully deleted event')
                   this.props.history.push(routes.MY_EVENTS)
                 }).catch(error => {
                   console.error(error)
@@ -186,7 +181,7 @@ export const EventPage =
                             'is-full-opacity': event.isActive
                           }
                         )}
-                        onClick={this.handleDelete}
+                        onClick={this.handleOpenConfirmDeleteModal}
                       >
                         <AlertTriangle /> &nbsp;Delete
                     </button>
@@ -201,6 +196,32 @@ export const EventPage =
                     />
 
                     <ScrollToTop />
+
+                    <Modal
+                      isOpen={this.state.isConfirmingDelete}
+                      handleClose={this.handleCloseConfirmDeleteModal}
+                    >
+                      <div className='has-text-centered'>
+                        <h5 className='is-size-5 has-text-weight-normal'>
+                          Are you sure you want to delete this event?
+                        </h5>
+                        <br/>
+                        <div className="buttons">
+                          <button
+                            className='button is-small is-light'
+                            onClick={this.handleCloseConfirmDeleteModal}
+                          >
+                            No
+                          </button>
+                          <button
+                            className='button is-small is-success'
+                            onClick={this.handleDelete}
+                          >
+                            Yes
+                          </button>
+                        </div>
+                      </div>
+                    </Modal>
 
                     <section
                       className={classnames(

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import arrayMove from 'array-move'
+import ReactTimeout from 'react-timeout'
 import { formatRoute } from 'react-router-named-routes'
 import { orderBy } from 'lodash'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
@@ -43,7 +44,7 @@ export const NewEventPage =
         graphql(createEventMutation, {
           name: 'createEventMutation'
         })(
-          class _NewEventPage extends Component {
+          ReactTimeout(class _NewEventPage extends Component {
             state = {
               event: {
                 scope: 0,
@@ -127,9 +128,7 @@ export const NewEventPage =
               return `${this.state.event.title} where ${matcherTitle}`
             }
 
-            handleSaveEvent = (e) => {
-              e.preventDefault()
-
+            doSave = () => {
               const event = {
                 ...this.state.event,
                 title: this.state.newEventTitle || this.generateTitle()
@@ -151,7 +150,20 @@ export const NewEventPage =
                 this.props.history.push(newEventLink)
               }).catch(error => {
                 console.error(error)
+              }).finally(() => {
+                // delay a bit while we wait for the page transition animation to finish
+                this.props.setTimeout(() => {
+                  this.setState({ isCreating: false })
+                }, 1000)
               })
+            }
+
+            handleSaveEvent = (e) => {
+              e.preventDefault()
+
+              this.setState({
+                isCreating: true
+              }, this.doSave)
             }
 
             handleSetEditMatcher = (editMatcherIndex) => {
@@ -431,7 +443,10 @@ export const NewEventPage =
                     </form>
                   </Drawer>
 
-                  <Modal isOpen={this.state.showAddContract} handleClose={this.hideAddContract}>
+                  <Modal
+                    isOpen={this.state.showAddContract}
+                    handleClose={this.hideAddContract}
+                  >
                     {
                       this.state.showAddContract && 
                       <ContractForm onCancel={this.hideAddContract} onCreate={this.handleOnCreateAbi} />
@@ -494,6 +509,7 @@ export const NewEventPage =
                               <button
                                 onClick={this.handleSaveEvent}
                                 className='button is-success'
+                                disabled={this.state.isCreating}
                               >
                                 {!this.state.event.createdAt ? 'Create' : 'Save'} Event
                               </button>
@@ -508,7 +524,7 @@ export const NewEventPage =
                 </div>
               )
             }
-          }
+          })
         )
       )
     )

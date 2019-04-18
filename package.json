@@ -6,6 +6,7 @@
   "description": "Notus",
   "main": "index.js",
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "eslint src && standard --verbose | snazzy && node scripts/test.js",
     "build": "node --max-old-space-size=4096 scripts/build.js",
     "start": "node --max-old-space-size=4096 scripts/start.js"
@@ -15,6 +16,7 @@
     "enzyme-adapter-react-16": "^1.7.1",
     "jsdom": "^13.0.0",
     "snazzy": "^8.0.0",
+    "source-map-explorer": "^1.8.0",
     "standard": "^12.0.1",
     "tailwindcss": "^0.7.4"
   },

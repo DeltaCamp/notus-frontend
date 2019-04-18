@@ -13,25 +13,7 @@ import { Link } from 'react-router-dom'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { deleteEventMutation } from '~/mutations/deleteEventMutation'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
-import { omitDeep } from '~/utils/omitDeep'
 import { brandColor } from '~/utils/brandColors'
-
-const eventDto = (event) => {
-  // event = omitDeep(event, 'id')
-  event = omitDeep(event, '__typename')
-  event = omitDeep(event, 'parent')
-  event = omitDeep(event, 'user')
-  event = omitDeep(event, 'createdAt')
-  event = omitDeep(event, 'updatedAt')
-
-  // omitDeep is converting our array of objects into an object of objects
-  // this converts it back
-  event.matchers = Object.keys(event.matchers).map((key) => (
-    event.matchers[key]
-  ))
-
-  return event
-}
 
 export const EventCard = 
   graphql(currentUserQuery, { name: 'currentUserData' })(
@@ -83,23 +65,23 @@ export const EventCard =
           handleActivate = (e) => {
             e.preventDefault()
 
-            const event = eventDto(this.props.event)
-            const updatedEvent = {
-              ...event,
-              isActive: !event.isActive
-            }
+            const event = this.props.event
 
             this.props.updateEventMutation({
               variables: {
-                event: updatedEvent
+                event: {
+                  id: event.id,
+                  isActive: !event.isActive
+                }
               },
               refetchQueries: [
                 'eventsQuery',
                 'publicEventsQuery',
               ],
             }).then((mutationResult) => {
-              toast.success('Event updated')
               this.deactivateEditMenu()
+              toast.dismiss()
+              toast.success(`Event ${event.isActive ? 'deactivated' : 're-activated'}`)
             }).catch(error => {
               toast.error('Error while updating event')
               console.error(error)
@@ -120,7 +102,7 @@ export const EventCard =
                 'publicEventsQuery',
               ],
             }).then(() => {
-              toast.success('Successfully deleted event!')
+              toast.success('Successfully deleted event')
             }).catch(error => {
               console.error(error)
             })
@@ -168,7 +150,7 @@ export const EventCard =
                       </div>
                       <div
                         className='dropdown-item'
-                        onClick={this.handleDelete}
+                        onClick={this.props.handleOpenConfirmDeleteModal}
                       >
                         <AlertTriangle /> &nbsp;Delete
                       </div>
@@ -195,6 +177,8 @@ export const EventCard =
                   }
                 )}
               >
+                
+
                 <div className="event-card__header">
                   <p className='event-card__title is-size-5'>
                     {event.title}

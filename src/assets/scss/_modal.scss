@@ -1,19 +1,6 @@
-
-.modal-body {
-  font-size: 2rem;
-  line-height: 2;
-  padding: 6rem 3rem;
-
-  @media screen and (max-width: $tablet) {
-    font-size: 1.5rem;
-    line-height: 1.75;
-    padding: 1.25rem 1.5rem;
-  }
-}
-
-.modal-body,
-.modal-body strong {
-  color: white;
+.modal,
+.modal-content {
+  border-radius: 20px;
 }
 
 .modal {
@@ -23,7 +10,7 @@
   pointer-events: none;
   z-index: 20000;
   box-shadow: 0 12px 25px rgba(10, 10, 10, .3);
-  color: white;
+  color: black;
   position: fixed;
   top: 15%;
   left: 25%;
@@ -34,6 +21,7 @@
   z-index: 20000;
 
   @media screen and (max-width: $tablet) {
+    display: block;
     top: 5%;
     left: 5%;
     right: 5%;
@@ -43,15 +31,6 @@
   }
 }
 
-.modal-content {
-  overflow: initial;
-  background: blue;
-}
-
-.modal-content,
-.modal-card {
-  max-height: -webkit-fill-available;
-}
 
 .modal hr {
   background-color: rgba(255, 255, 255, 0.1);
@@ -80,7 +59,7 @@
 
 .modal.is-active .modal-background {
   pointer-events: all;
-  opacity: 0.2;
+  opacity: 0.5;
   background-color: black;
   z-index: 0;
   box-shadow: 0 8px 16px rgba(10, 10, 10, .1);
@@ -88,30 +67,29 @@
   pointer-events: auto;
 }
 
-.modal-card-head,
-.modal-card-foot {
-  border-radius: 0;
-}
-
-.modal-content--inner {
-  padding: 3rem 2rem;
-
-  @media screen and (max-width: 768px) {
-    padding: 3rem 1.5rem;
-  }
-}
-
 .modal-content {
-  position: relative;
+  background-color: darken($light, 10%);
+  border: 5px solid white;
   box-shadow: 0 0 100px 0 rgba(10, 10, 20, 0.6);
+  position: relative;
+  height: 100%;
+  // max-height: -webkit-fill-available;
+  overflow: initial;
 
   @media screen and (max-width: 768px) {
     margin: 0;
   }
 }
 
-.modal-content,
-.modal-card {
+.modal-content--inner {
+  padding: 3rem 2rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 2rem 0.5rem;
+  }
+}
+
+.modal-content {
   @media screen and (min-width: 769px) {
     max-height: calc(100vh - 40px);
     width: 640px;
