@@ -3,6 +3,11 @@
   box-shadow: none;
 }
 
+.button.is-info:focus,
+.button.is-info.is-focused {
+  color: white;
+}
+
 .button[disabled],
 button[disabled] {
   cursor: not-allowed;
@@ -80,7 +85,7 @@ button[disabled] {
 .button.is-primary:focus,
 .button.is-primary:active {
   background-color: darken(saturate($cyan, 100%), 15%);
-  color: $pink;
+  // color: $pink;
 }
 
 .button.is-success {
@@ -102,6 +107,12 @@ button[disabled] {
 .button.is-success.is-outlined:active,
 .button.is-success.is-outlined:focus {
   border-color: $success;
+  color: white;
+}
+
+.button.is-info.is-outlined:hover,
+.button.is-info.is-outlined:focus,
+.button.is-info.is-outlined:active {
   color: white;
 }
 
@@ -226,6 +237,10 @@ button.button.is-small:active {
 
 .has-stroke-light {
   stroke: rgba(255, 255, 255, 0.75);
+}
+
+.buttons {
+  display: inline-flex;
 }
 
 .buttons:last-child {
