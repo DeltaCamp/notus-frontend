@@ -4,12 +4,14 @@ import { matcherFragment } from '~/fragments/matcherFragment'
 export const eventFragment = gql`
   fragment eventFragment on EventEntity {
     id
+    title
+    isPublic
+    isActive
     user {
       id
       name
       email
     }
-    title
     parent {
       id
       matchers {

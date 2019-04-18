@@ -43,6 +43,7 @@ export const MyEventsPage =
                     key={`event-${event.id}`}
                     event={event}
                     editable={true}
+                    isSmall={true}
                     linkTo={formatRoute(routes.EVENT, { eventId: event.id })}
                   />
                 ))

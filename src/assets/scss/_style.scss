@@ -743,3 +743,21 @@ hr {
 .color-block.is-fun {
   background-color: $fun;
 }
+
+.is-full-opacity {
+  opacity: 1 !important;
+  transition: opacity 1000ms ease-in-out;
+  will-change: opacity;
+}
+
+.is-half-opacity {
+  opacity: 0.5 !important;
+  transition: opacity 1000ms ease-in-out;
+  will-change: opacity;
+}
+
+.is-two-thirds-opacity {
+  opacity: 0.33 !important;
+  transition: opacity 1000ms ease-in-out;
+  will-change: opacity;
+}

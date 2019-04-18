@@ -2,6 +2,7 @@
 
 .event-card {
   border-radius: 15px;
+  border: 5px solid white !important;
   display: inline-block;
   height: 300px;
   line-height: 1.3;
@@ -29,10 +30,10 @@
   transform: scale3d(1.1, 1.1, 1.0);
 }
 
-.has-bg .event-card,
-.has-bg .event-card:hover {
-  border: 5px solid white;
-}
+// .event-card--has-border,
+// .event-card--has-border:hover {
+//   border: 5px solid white;
+// }
 
 .event-card__header {
   height: 220px;
@@ -58,33 +59,26 @@
   position: relative;
 }
 
-.event-card .dropdown {
-  min-width: 100%;
-  opacity: 0.001;
-  pointer-events: none;
-  transition: opacity 200ms ease-in-out;
-  text-align: center;
-  will-change: opacity;
-}
+// .event-card .dropdown {
+//   min-width: 100%;
+//   opacity: 0.001;
+//   pointer-events: none;
+//   transition: opacity 200ms ease-in-out;
+//   text-align: left;
+//   will-change: opacity;
+// }
 
-.event-card:hover .dropdown {
-  opacity: 0.7;
-  pointer-events: initial;
-  transition-duration: 600ms;
-}
+// .event-card:hover .dropdown {
+//   opacity: 0.7;
+//   pointer-events: initial;
+//   transition-duration: 600ms;
+// }
 
-.event-card:hover .dropdown:hover,
-.event-card:hover .is-active {
-  opacity: 1;
-  pointer-events: initial;
-  transition-duration: 600ms;
-}
-
-// .event-card:hover .dropdown path,
-// .event-card:hover .dropdown rect,
-// .event-card:hover .dropdown circle,
-// .event-card:hover .dropdown svg {
-//   stroke: rgba(255, 255, 255, 0.3);
+// .event-card:hover .dropdown:hover,
+// .event-card:hover .is-active {
+//   opacity: 1;
+//   pointer-events: initial;
+//   transition-duration: 600ms;
 // }
 
 .event-card:hover .dropdown .button.has-icon:active path,
@@ -102,6 +96,43 @@
   stroke: white;
 }
 
+.event-card .dropdown-menu {
+  min-width: 180px;
+}
+
+.event-card .dropdown-content {
+  box-shadow: 2px 7px 14px rgba(50, 50, 93, .1), -2px -3px 6px rgba(30, 40, 70, .05);
+}
+
+.event-card .dropdown-item {
+  display: inline-flex;
+  width: 100%;
+}
+
+.event-card .dropdown-item:hover {
+  background-color: lighten($cyan, 20%);
+}
+
+.event-card--small {
+  border-radius: 15px;
+  height: 190px;
+}
+
+.event-card--small .event-card__header {
+  height: 120px;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.event-card--small .event-card__footer {
+  height: 44px;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.event-card--small .is-size-5 {
+  font-size: 1rem !important;
+}
 
 
 // EVENT BOX

@@ -5,8 +5,8 @@ const classes = [
   'is-info',
   'is-fun',
   'is-warning',
-  'is-danger',
-  'is-primary',
+  // 'is-danger',
+  // 'is-primary',
 ]
 
 export const brandColor = (id) => {
