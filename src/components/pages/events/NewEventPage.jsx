@@ -19,10 +19,10 @@ import { MatcherForm } from '~/components/recipes/MatcherForm'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { createEventMutation } from '~/mutations/createEventMutation'
-import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventQuery } from '~/queries/eventQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
+import { IsAuthed } from '~/components/IsAuthed'
 import * as routes from '~/../config/routes'
 import {
   SCOPES,
@@ -30,7 +30,7 @@ import {
 } from '~/constants'
 
 export const NewEventPage = 
-  graphql(currentUserQuery, { name: 'currentUserData' })(
+  IsAuthed(
     graphql(eventQuery, {
       name: 'eventData',
       skip: (props) => !props.match.params.parentEventId,
