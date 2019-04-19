@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import arrayMove from 'array-move'
 import ReactTimeout from 'react-timeout'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { formatRoute } from 'react-router-named-routes'
 import { orderBy } from 'lodash'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
@@ -342,9 +343,6 @@ export const NewEventPage =
                 </div>
 
 
-                {/* <MatcherDragDropContext 
-
-                /> */}
                 <DragDropContext onDragEnd={this.onDragEnd}>
                   <Droppable droppableId="droppable">
                     {(provided, snapshot) => (
@@ -353,23 +351,39 @@ export const NewEventPage =
                         ref={provided.innerRef}
                       >
                         {this.state.event.matchers.map((eventMatcher, index) => (
-                          <Draggable key={`event-matcher-${index}`} draggableId={index+1} index={index}>
+                          <Draggable
+                            key={`event-matcher-${index}`}
+                            draggableId={index+1}
+                            index={index}
+                            
+                          >
                             {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                              >
-                                <EventMatcher
-                                  key={`event-matcher-${index}`}
-                                  matcher={eventMatcher}
-                                  index={index}
-                                  handleSetEditMatcher={this.handleSetEditMatcher}
-                                  handleRemoveMatcher={this.handleRemoveMatcher}
-                                  isFirst={index === 0}
-                                  isActive={!!editMatcher && eventMatcher === editMatcher}
-                                />
-                              </div>
+                              <TransitionGroup>
+                                <CSSTransition
+                                  key={`event-matcher-css-transition-${index}`}
+                                  timeout={{ enter: 150, exit: 1000 }}
+                                  classNames='fade'
+                                  appear
+                                >
+                                  <div className='fade-enter'>
+                                    <div
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                    >
+                                      <EventMatcher
+                                        key={`event-matcher-${index}`}
+                                        matcher={eventMatcher}
+                                        index={index}
+                                        handleSetEditMatcher={this.handleSetEditMatcher}
+                                        handleRemoveMatcher={this.handleRemoveMatcher}
+                                        isFirst={index === 0}
+                                        isActive={!!editMatcher && eventMatcher === editMatcher}
+                                      />
+                                    </div>
+                                  </div>
+                                </CSSTransition>
+                              </TransitionGroup>
                             )}
                           </Draggable>
                         ))}
@@ -470,9 +484,8 @@ export const NewEventPage =
                           <div className='col-xs-12 col-xl-12 col-start-xl-2 is-size-4'>
                             {matcherSentences}
 
-                            <br />
                             <button
-                              className='button has-icon has-icon__transparent has-stroke-light is-lowercase has-text-light'
+                              className='button has-icon has-icon__transparent has-stroke-light is-lowercase has-text-light ml45 mt10'
                               onClick={this.handleAddMatcher}
                             >
                               <PlusCircle
