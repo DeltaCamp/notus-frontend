@@ -6,6 +6,7 @@ import { PlusCircle } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { IsAuthed } from '~/components/IsAuthed'
+import { Modal } from '~/components/Modal'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -19,7 +20,9 @@ export const MyEventsPage =
     graphql(currentUserQuery, { name: 'currentUserData' })(
       graphql(eventsQuery, { name: 'eventsData' })(
         class _MyEventsPage extends PureComponent {
-          state = {}
+          state = {
+            isConfirmingDelete: false
+          }
 
           static propTypes = {
             match: PropTypes.object.isRequired
@@ -27,6 +30,18 @@ export const MyEventsPage =
 
           static contextTypes = {
             router: PropTypes.object.isRequired
+          }
+
+          handleOpenConfirmDeleteModal = (e) => {
+            e.preventDefault()
+
+            this.setState({ isConfirmingDelete: true })
+          }
+
+          handleCloseConfirmDeleteModal = (e) => {
+            e.preventDefault()
+
+            this.setState({ isConfirmingDelete: false })
           }
 
           render () {
@@ -45,6 +60,7 @@ export const MyEventsPage =
                     editable={true}
                     isSmall={true}
                     linkTo={formatRoute(routes.EVENT, { eventId: event.id })}
+                    handleOpenConfirmDeleteModal={this.handleOpenConfirmDeleteModal}
                   />
                 ))
               }
@@ -86,6 +102,32 @@ export const MyEventsPage =
                 />
 
                 <ScrollToTop />
+
+                <Modal
+                  isOpen={this.state.isConfirmingDelete}
+                  handleClose={this.handleCloseConfirmDeleteModal}
+                >
+                  <div className='has-text-centered'>
+                    <h5 className='is-size-5 has-text-weight-normal'>
+                      Are you sure you want to delete this event?
+                    </h5>
+                    <br />
+                    <div className="buttons">
+                      <button
+                        className='button is-small is-light'
+                        onClick={this.handleCloseConfirmDeleteModal}
+                      >
+                        No
+                      </button>
+                      <button
+                        className='button is-small is-success'
+                        onClick={this.handleDelete}
+                      >
+                        Yes
+                      </button>
+                    </div>
+                  </div>
+                </Modal>
 
                 <section className='section section--main-content'>
                   <div className='container'>

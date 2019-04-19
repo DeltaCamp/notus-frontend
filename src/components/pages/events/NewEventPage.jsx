@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import arrayMove from 'array-move'
+import ReactTimeout from 'react-timeout'
 import { formatRoute } from 'react-router-named-routes'
 import { orderBy } from 'lodash'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
@@ -42,7 +43,7 @@ export const NewEventPage =
       graphql(createEventMutation, {
         name: 'createEventMutation'
       })(
-        class _NewEventPage extends Component {
+        ReactTimeout(class _NewEventPage extends Component {
           state = {
             event: {
               scope: 0,
@@ -472,6 +473,7 @@ export const NewEventPage =
                             <button
                               onClick={this.handleSaveEvent}
                               className='button is-success'
+                              disabled={this.state.isCreating}
                             >
                               {!this.state.event.createdAt ? 'Create' : 'Save'} Event
                             </button>
@@ -486,7 +488,7 @@ export const NewEventPage =
               </div>
             )
           }
-        }
+        })
       )
     )
   )
