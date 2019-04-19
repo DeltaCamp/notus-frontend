@@ -78,6 +78,7 @@
 
 .drawer .form .select,
 .drawer .form .react-select {
+  border-width: 0;
   display: flex;
   flex-direction: column;
   min-width: 230px;
@@ -89,7 +90,7 @@
 }
 
 .drawer .form .react-select.is-wide {
-  width: 340px;
+  width: 350px;
 
   @media screen and (max-width: $tablet) {
     width: 100%;
@@ -138,6 +139,11 @@
   margin-right: 0;
 }
 
+.drawer .form .buttons:not(:last-child),
+.drawer .form .buttons .button {
+  margin-bottom: 0 !important;
+}
+
 .drawer-inputs {
   display: flex;
   flex-grow: 1;
@@ -169,5 +175,6 @@
 .drawer-form {
   align-items: flex-end;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
+  justify-content: space-between;
 }

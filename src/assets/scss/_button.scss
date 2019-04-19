@@ -118,6 +118,19 @@ button[disabled] {
   color: white;
 }
 
+.button.is-fun.is-outlined {
+  background-color: transparent;
+  border-color: $fun;
+  color: lighten($fun, 30%);
+}
+
+.button.is-fun.is-outlined:hover,
+.button.is-fun.is-outlined:active,
+.button.is-fun.is-outlined:focus {
+  border-color: $fun;
+  color: white;
+}
+
 .button.is-info.is-outlined:hover,
 .button.is-info.is-outlined:focus,
 .button.is-info.is-outlined:active {
@@ -254,4 +267,8 @@ button.button.is-small:active {
 
 .buttons .button {
   margin-bottom: 0.5rem !important;
+}
+
+.button:hover[disabled] {
+  transform: scale3d(1.0, 1.0, 1.0);
 }

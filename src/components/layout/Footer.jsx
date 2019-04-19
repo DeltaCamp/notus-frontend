@@ -9,38 +9,49 @@ export const Footer = class _Footer extends Component {
       <>
         <footer className='footer has-text-centered'>
           <div className='footer--primary'>
-            <div className='footer-brand'>
+            <ul className='footer-list'>
+              <li className='list-item is-inline-block'><a href="about">About</a></li>
+              <li className='list-item is-inline-block'><a href="mailto:help@notus.network">Help</a></li>
+              <li className='list-item is-inline-block'>
+                <a
+                  href='https://github.com/notifyus'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  Open Source
+                </a>
+              </li>
+              <li className='list-item is-inline-block'><a href="terms">Terms</a></li>
+              <li className='list-item is-inline-block'><a href="privacy">Privacy</a></li>
+              <li className='list-item is-inline-block'><a href="trust">Trust</a></li>
+            </ul>
+
+            <div className='footer-brand pt75'>
               <div className='footer-item'>
-                <h6 className='is-size-6'>
-                  <NotusLogo />
-                </h6>
-                <br />
-                <h6 className='is-size-7'>
-                  <a
-                    href='https://github.com/notifyus'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
-                    Notus on GitHub
-                  </a>
-                </h6>
-                
-                <br />
+                <div className='container'>
+                  <div className='row pb50'>
+                    <div className='col-xs-12 col-md-6 col-start-md-4'>
+                      <NotusLogo />
+
+                      <p className='is-size-7'>
+                        Notus makes it easy to listen for Ethereum smart contract events and triggering webhooks or sending messages in response.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
             <span
-              className='footer-item footer-item--copyright'
+              className='footer-item footer-item--copyright is-size-7'
             >
-              &copy; {year} <a
+              Built by <a
                 href='https://delta.camp'
                 target='_blank'
                 rel='noopener noreferrer'
-              >Delta Camp</a> &amp; <a
-                href='https://twitter.com/jacque006'
-                target='_blank'
-                rel='noopener noreferrer'
-              >Jake Caban-Tomski</a>
+              >Delta Camp</a>
+              <br />
+              Copyright &copy; {year}
             </span>
           </div>
         </footer>

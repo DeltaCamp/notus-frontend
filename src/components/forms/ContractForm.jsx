@@ -40,7 +40,8 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
       const newState = {
         abi: JSON.stringify(abi, null, 2)
       }
-      if (name) {
+
+      if (name && this.state.name === '') {
         newState.name = name
       }
 
@@ -56,6 +57,10 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
     onSubmit = (e) => {
       e.preventDefault()
 
+      if (this.state.name === '' || this.state.abi === '') {
+        return
+      }
+
       this.props.createAbiMutation({
         variables: {
           abi: {
@@ -70,10 +75,8 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
     }
 
     render () {
-
-
       return (
-        <form className='form' onSubmit={this.onSubmit}>
+        <div className='form'>
           <div className='field'>
             <ABIUpload onAbi={this.handleAbi} onError={this.handleAbiError} />
           </div>
@@ -107,13 +110,14 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
             <button
               className='button is-success has-stroke-white'
               onClick={this.onSubmit}
+              disabled={this.state.name === '' || this.state.abi === ''}
             >
               <CheckCircle
                 className='has-stroke-white'
               />&nbsp;Save
             </button>
           </div>
-        </form>
+        </div>
       )
     }
   }

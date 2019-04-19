@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
+import { NotusSelect } from '~/components/forms/NotusSelect'
 import { graphql } from 'react-apollo'
 import { IsAuthed } from '~/components/IsAuthed'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
@@ -30,15 +31,14 @@ export const DiscoverEventsPage =
                         Search for a template to base a new event off of:
                       </h4>
 
-                      <form className='form mt20'>
-                        <input
-                          placeholder='Search ...'
-                          className='input'
-                          type='text'
-                          value={this.state.searchValue}
-                          onChange={(e) => this.setState({ searchValue: e.target.value })}
-                        />
-                      </form>
+                      <NotusSelect
+                        placeholder='Search ...'
+                        value={this.state.searchValue}
+                        onChange={(e) => this.setState({
+                          searchValue: e.target.value
+                        })}
+                        className='mt20'
+                      />
                     </div>
                   </div>
                   <div className='row'>

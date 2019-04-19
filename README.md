@@ -1,5 +1,11 @@
 # Notus Network - Marketing Site & UI App
 
+Mention Jake: <a
+                href='https://twitter.com/jacque006'
+                target='_blank'
+                rel='noopener noreferrer'
+              >Jake Caban-Tomski</a>
+
 A frontend for interacting with Notus nodes for monitoring smart contract events and firing off webhooks in response.
 
 # Setup

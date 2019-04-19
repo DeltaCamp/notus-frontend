@@ -1,6 +1,7 @@
 ::placeholder,
 .input::placeholder,
-.textarea::placeholder {
+.textarea::placeholder,
+.react-select .react-select__placeholder {
   color: rgba(160, 160, 160, 1);
 }
 
@@ -334,28 +335,12 @@ hr {
 }
 
 .has-bg__dark {
-  background-image: 
-    linear-gradient(
-      220deg,
-      darken(saturate($purple, 100%), 34%) 0%,
-      darken(saturate($blue, 100%), 27%) 100%
-    ),
-    url('/funky-lines.png');
-  background-blend-mode: multiply;
-  background-size: 100% 100%, 400px 400px;
+  background-color: darken(saturate($purple, 100%), 34%);
 }
 
 .has-bg__cyan {
-  background-color: lighten(saturate($blue, 100%), 12%);
-  background-image: 
-    linear-gradient(
-      220deg,
-      darken(saturate($cyan, 100%), 41%) 0%,
-      darken(saturate($blue, 100%), 17%) 100%
-    ),
-    url('/funky-lines.png');
+  background-color: darken(saturate($purple, 100%), 21%);
   background-blend-mode: multiply;
-  background-size: 100% 100%, 400px 400px;
 }
 
 .has-bg.is-blue {

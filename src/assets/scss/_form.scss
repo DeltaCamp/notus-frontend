@@ -341,8 +341,10 @@ label.radio,
 }
 
 // REACT SELECT OVERRIDES
-.react-select__control {
+
+.react-select .react-select__control {
   border-radius: 100px !important;
+  border-width: 4px;
   cursor: pointer !important;
   padding: 0 10px 0;
 }

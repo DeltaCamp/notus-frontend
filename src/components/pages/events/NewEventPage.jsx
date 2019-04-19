@@ -391,9 +391,9 @@ export const NewEventPage =
                 />
               addContract = <button
                 onClick={this.showAddContract}
-                className='button is-link'
+                className='button is-fun is-outlined'
               >
-                Add a New Contract
+                Or Add a New Contract
               </button>
             }
 
@@ -414,12 +414,25 @@ export const NewEventPage =
 
                 <Drawer show={this.state.showEventForm} onClose={this.hideEventForm}>
                   <form className='form drawer-form'>
-                    <ScopeSelect
-                      value={this.state.event.scope}
-                      onChange={this.onChangeScope}
-                    />
-                    {abiEventSelect}
+                    <div className='buttons'>
+                      <ScopeSelect
+                        value={this.state.event.scope}
+                        onChange={this.onChangeScope}
+                      />
+                      {abiEventSelect}
+                      </div>
                     {addContract}
+
+                    <div className='buttons'>
+                      <button
+                        className='button has-icon has-stroke-green'
+                        onClick={this.handleCancelEditingMatcher}
+                      >
+                        <CheckCircle
+                          className='icon__button has-stroke-green'
+                        />
+                      </button>
+                    </div>
                   </form>
                 </Drawer>
 

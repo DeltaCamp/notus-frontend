@@ -1,56 +1,33 @@
 .footer {
-  color: $dark;
-  flex: 0 0 350px;
-  padding: 0;
-  margin-top: 0;
+  background-color: darken(white, 2%);
+  border-top: 3px solid whitesmoke;
+  padding: 3rem 2rem;
 }
 
-.footer a {
-  color: rgba(200, 110, 220, 1);
-}
-
-.footer a:hover {
-  color: rgba(255, 120, 240, 1);
-}
-
-.footer--primary {
-  // background-color: whitesmoke;
-  background-color: white;
-  border-top: 5px solid whitesmoke;
-  color: $dark;
-  font-size: 1.25rem;
-  padding: 3.5rem 2rem;
-}
-
-.footer--primary {
-  // background-image: linear-gradient(to bottom, darken($navbar-grey, 6%) 0%, #161616 70%, #121212 100%);
-  font-size: 1.25rem;
-  padding: 5.5rem 2rem 4.5rem;
-}
-
-.footer--primary svg {
+.footer-brand svg {
   height: 30px;
 }
 
-.footer--primary svg path {
+.footer-brand svg path {
   fill: black;
 }
 
-.footer-menu .footer-item {
-  border-bottom: 1px solid transparent;
-  // color: white;
-  color: pink;
-  display: inline-block;
-  margin: 0 1rem;
-  transition: border 300ms ease-in-out;
-} 
-
-.footer-menu .footer-item:hover {
-  border-bottom-color: rgba(255, 255, 255, 0.5);
-}
-
-.footer--primary .footer-item--copyright {
-  color: rgb(158, 173, 173);
+.footer-item--copyright {
+  color: rgb(158, 160, 165);
   display: block;
   margin-top: 0.5rem;
+}
+
+.footer-item--copyright a {
+  color: rgba(200, 110, 220, 1);
+  font-weight: 700;
+}
+
+.footer-item--copyright a:hover {
+  color: rgba(255, 120, 240, 1);
+}
+
+.footer-list .list-item {
+  margin: 0 1rem;
+  font-weight: 700;
 }
