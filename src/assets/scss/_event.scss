@@ -148,12 +148,12 @@
   }
 
   @media screen and (max-width: $widescreen) {
-    line-height: 4;
+    // line-height: 4;
     padding: 1.5rem 0;
   }
 
   @media screen and (max-width: $tablet) {
-    line-height: 2;
+    // line-height: 2;
   }
 }
 
@@ -165,14 +165,6 @@
 .event-box__footer {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-.event-box__variable.has-hint {
-  border-top-left-radius: 0;
-
-  @media screen and (max-width: $tablet) {
-    margin-top: 1.5rem;
-  }
 }
 
 .event-box__text {
@@ -220,7 +212,7 @@
   border: none;
   border-bottom: 4px dotted rgba(255, 255, 255, 0.2);
   border-radius: 6px;
-  color: white;
+  color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
   display: inline-block;
   top: -0.1rem;
@@ -234,11 +226,13 @@
   transition: all 275ms ease-in-out;
   width: 880px;
 
-  @media screen and (max-width: $tablet) {
+  @media screen and (max-width: $widescreen) {
     font-size: 1.25rem;
-    margin-left: 0;
-    margin-right: 0;
     width: 100%;
+  }
+
+  @media screen and (max-width: $mobile) {
+    font-size: 1rem;
   }
 }
 
@@ -247,12 +241,33 @@
 .event-box__variable:focus,
 .event-box__variable.is-active {
   background: rgba(255, 255, 255, 0.2);
-  transform: scale3d(1.01, 1.01, 1.01);
   border-color: white;
+  color: white;
+  transform: scale3d(1.01, 1.01, 1.01);
 }
 
 .event-box__variable.is-active {
   background: rgba(255, 255, 255, 0.4);
+}
+
+.event-box__action {
+  margin-left: 240px;
+  margin-right: auto;
+  max-width: 600px;  
+  text-align: right;
+
+  @media screen and (max-width: $widescreen) {
+    margin-left: auto;
+    max-width: 100%;
+  }
+}
+
+.event-box__variable.has-hint {
+  border-top-left-radius: 0;
+
+  @media screen and (max-width: $tablet) {
+    margin-top: 1.5rem;
+  }
 }
 
 .event-box__variable .hint {

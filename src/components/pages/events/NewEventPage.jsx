@@ -11,6 +11,7 @@ import { CheckCircle, PlusCircle } from 'react-feather'
 import { toast } from 'react-toastify'
 import { graphql } from 'react-apollo'
 
+import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { FrequencyTitle } from '~/components/events/FrequencyTitle'
 import { ContractForm } from '~/components/forms/ContractForm'
@@ -63,7 +64,6 @@ export const NewEventPage =
               ]
             },
             editMatcherIndex: null,
-            newEventTitle: '',
             showEventForm: false,
             showAddContract: false
           }
@@ -120,13 +120,6 @@ export const NewEventPage =
                 matchers
               }
             })
-          }
-
-          generateTitle = () => {
-            const matcherTitle = this.state.event.matchers.map((matcher) => {
-              return `${matcher.source} is ${matcher.operand} and `
-            })
-            return `${this.state.event.title} where ${matcherTitle}`
           }
 
           handleSaveEvent = (e) => {
@@ -285,7 +278,7 @@ export const NewEventPage =
               : null
 
             let recipe = {
-              title: 'event'
+              title: 'new event'
             }
 
             if (eventData) {
@@ -503,8 +496,7 @@ export const NewEventPage =
                       <div className='container'>
                         <div className='row'>
                           <div className='col-xs-12 has-text-centered is-size-4'>
-                            {/* ... then turn on my Phillips Hue lightbulb */}
-                            ... then send me an email&nbsp;
+                            <EventAction />
                           </div>
                         </div>
                       </div>

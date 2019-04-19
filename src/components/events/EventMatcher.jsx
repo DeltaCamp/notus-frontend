@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { MatcherTitle } from '~/components/events/MatcherTitle'
 
-const DragHandle = (() => <span className='drag-handle'>
+const DragHandle = (() => <span className='drag-handle is-hidden-touch'>
   <Menu />
 </span>)
 
@@ -88,7 +88,7 @@ export const EventMatcher =
 
           <span className="icons">
             <button
-              className='button has-icon has-icon__transparent has-stroke-light edit'
+              className='button has-icon has-icon__transparent has-stroke-light edit is-hidden-touch'
               onClick={this.handleEdit}
             >
               <Edit
