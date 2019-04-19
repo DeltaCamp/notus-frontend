@@ -15,6 +15,7 @@ import { deleteEventMutation } from '~/mutations/deleteEventMutation'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { omitDeep } from '~/utils/omitDeep'
 import { brandColor } from '~/utils/brandColors'
+import { EventDescription } from '~/components/events/EventDescription'
 
 const eventDto = (event) => {
   // event = omitDeep(event, 'id')
@@ -197,7 +198,7 @@ export const EventCard =
               >
                 <div className="event-card__header">
                   <p className='event-card__title is-size-5'>
-                    {event.title}
+                    {event.title || <EventDescription event={event} brief={true} />}
                   </p>
                 </div>
 

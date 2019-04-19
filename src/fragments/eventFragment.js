@@ -7,11 +7,13 @@ export const eventFragment = gql`
     title
     isPublic
     isActive
+    scope
     user {
       id
       name
       email
     }
+    abiEventId
     parent {
       id
       matchers {
@@ -27,6 +29,5 @@ export const eventFragment = gql`
     updatedAt
     deletedAt
   }
-  ${matcherFragment}
   ${matcherFragment}
 `

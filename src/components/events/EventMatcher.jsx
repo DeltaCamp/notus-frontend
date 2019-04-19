@@ -3,10 +3,7 @@ import classnames from 'classnames'
 import { Edit, XCircle, Menu } from 'react-feather'
 import PropTypes from 'prop-types'
 
-import {
-  OPERATOR_LABELS,
-  OPERAND_DATA_TYPE_LABELS
-} from '~/constants'
+import { MatcherTitle } from '~/components/events/MatcherTitle'
 
 const DragHandle = (() => <span className='drag-handle'>
   <Menu />
@@ -63,21 +60,8 @@ export const EventMatcher =
         isFirst,
         matcher
       } = this.props
-
-      const {
-        source,
-        operator,
-        operand,
-        operandDataType
-      } = matcher
-
-      const andWord = (isFirst) ? 'where' : 'and'
       
-      const humanReadableDescription = (
-        <>
-          {andWord} the {source.replace('.', ' ')} {OPERATOR_LABELS[operator]} {operand} {OPERAND_DATA_TYPE_LABELS[operandDataType]}
-        </>
-      )
+      const humanReadableDescription = <MatcherTitle matcher={matcher} isFirst={isFirst} />
 
       return (
         <div

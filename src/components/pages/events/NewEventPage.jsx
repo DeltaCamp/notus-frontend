@@ -9,6 +9,8 @@ import { CheckCircle, PlusCircle } from 'react-feather'
 import { toast } from 'react-toastify'
 import { graphql } from 'react-apollo'
 
+import { EventTitle } from '~/components/events/EventTitle'
+import { FrequencyTitle } from '~/components/events/FrequencyTitle'
 import { ContractForm } from '~/components/forms/ContractForm'
 import { ScopeSelect } from '~/components/ScopeSelect'
 import { AbiEventSelect } from '~/components/AbiEventSelect'
@@ -20,200 +22,242 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { createEventMutation } from '~/mutations/createEventMutation'
 import { eventQuery } from '~/queries/eventQuery'
-import { abiEventsQuery } from '~/queries/abiEventsQuery'
 import { altBrandColor, brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { IsAuthed } from '~/components/IsAuthed'
 import * as routes from '~/../config/routes'
 import {
-  SCOPES,
-  SCOPE_LABELS
+  SCOPES
 } from '~/constants'
 
 export const NewEventPage = 
   IsAuthed(
-    graphql(abiEventsQuery, { name: 'abiEventsQuery' })(
-      graphql(eventQuery, {
-        name: 'eventData',
-        skip: (props) => !props.match.params.parentEventId,
-        options: (props) => ({
-          variables: { id: parseInt(props.match.params.parentEventId, 10) }
-        })
+    graphql(eventQuery, {
+      name: 'eventData',
+      skip: (props) => !props.match.params.parentEventId,
+      options: (props) => ({
+        variables: { id: parseInt(props.match.params.parentEventId, 10) }
+      })
+    })(
+      graphql(createEventMutation, {
+        name: 'createEventMutation'
       })(
-        graphql(createEventMutation, {
-          name: 'createEventMutation'
-        })(
-          class _NewEventPage extends Component {
-            state = {
-              event: {
-                scope: 0,
-                abiEventId: null,
-                isPublic: false,
-                // frequency: '-1',
-                matchers: [
-                  {
-                    operand: "0",
-                    operandDataType: 0,
-                    operator: 2,
-                    order: 1,
-                    source: "transaction.value"
-                  }
-                ]
-              },
-              editMatcherIndex: null,
-              newEventTitle: '',
-              showEventForm: false,
-              showAddContract: false
-            }
-
-            static propTypes = {
-              match: PropTypes.object.isRequired
-            }
-
-            static contextTypes = {
-              router: PropTypes.object.isRequired
-            }
-
-            componentDidUpdate(prevProps) {
-              let recipe
-
-              if (
-                prevProps.eventData
-                && (prevProps.eventData.event !== this.props.eventData.event)
-              ) {
-                recipe = this.props.eventData.event
-
-                const matchers = recipe.matchers.map(matcher => deepCloneMatcher(matcher))
-
-                const event = {
-                  isPublic: false,
-                  matchers: orderBy(matchers, 'order'),
-                  parentId: parseInt(recipe.id, 10)
+        class _NewEventPage extends Component {
+          state = {
+            event: {
+              scope: 0,
+              abiEventId: null,
+              isPublic: false,
+              title: '',
+              // frequency: '-1',
+              matchers: [
+                {
+                  operand: "0",
+                  operandDataType: 0,
+                  operator: 2,
+                  order: 1,
+                  source: "transaction.value"
                 }
+              ]
+            },
+            editMatcherIndex: null,
+            newEventTitle: '',
+            showEventForm: false,
+            showAddContract: false
+          }
 
-                this.setState({
-                  event: {
-                    ...this.state.event,
-                    ...event
-                  }
-                })
-              }
-            }
+          static propTypes = {
+            match: PropTypes.object.isRequired
+          }
 
-            onDragEnd = (result) => {
-              // dropped outside the list
-              if (!result.destination) {
-                return
-              }
+          static contextTypes = {
+            router: PropTypes.object.isRequired
+          }
 
-              const matchers = arrayMove(
-                this.state.event.matchers,
-                result.source.index,
-                result.destination.index
-              )
+          componentDidUpdate(prevProps) {
+            let recipe
 
-              this.setState({
-                event: {
-                  ...this.state.event,
-                  matchers
-                }
-              })
-            }
+            if (
+              prevProps.eventData
+              && (prevProps.eventData.event !== this.props.eventData.event)
+            ) {
+              recipe = this.props.eventData.event
 
-            generateTitle = () => {
-              const matcherTitle = this.state.event.matchers.map((matcher) => {
-                return `${matcher.source} is ${matcher.operand} and `
-              })
-              return `${this.state.event.title} where ${matcherTitle}`
-            }
-
-            handleSaveEvent = (e) => {
-              e.preventDefault()
+              const matchers = recipe.matchers.map(matcher => deepCloneMatcher(matcher))
 
               const event = {
+                isPublic: false,
+                matchers: orderBy(matchers, 'order'),
+                parentId: parseInt(recipe.id, 10)
+              }
+
+              this.setState({
+                event: {
+                  ...this.state.event,
+                  ...event
+                }
+              })
+            }
+          }
+
+          onDragEnd = (result) => {
+            // dropped outside the list
+            if (!result.destination) {
+              return
+            }
+
+            const matchers = arrayMove(
+              this.state.event.matchers,
+              result.source.index,
+              result.destination.index
+            )
+
+            this.setState({
+              event: {
                 ...this.state.event,
-                title: this.state.newEventTitle || this.generateTitle()
+                matchers
               }
+            })
+          }
 
-              this.props.createEventMutation({
-                variables: {
-                  event
-                },
-                refetchQueries: [
-                  'eventsQuery',
-                  'publicEventsQuery',
-                ],
-              }).then((mutationResult) => {
-                toast.success('Successfully saved event!')
-                const eventId = mutationResult.data.createEvent.id
-                const newEventLink = formatRoute(routes.EVENT, { eventId })
+          generateTitle = () => {
+            const matcherTitle = this.state.event.matchers.map((matcher) => {
+              return `${matcher.source} is ${matcher.operand} and `
+            })
+            return `${this.state.event.title} where ${matcherTitle}`
+          }
 
-                this.props.history.push(newEventLink)
-              }).catch(error => {
-                console.error(error)
-              })
+          handleSaveEvent = (e) => {
+            e.preventDefault()
+
+            this.props.createEventMutation({
+              variables: {
+                event: this.state.event
+              },
+              refetchQueries: [
+                'eventsQuery',
+                'publicEventsQuery',
+              ],
+            }).then((mutationResult) => {
+              toast.success('Successfully saved event!')
+              const eventId = mutationResult.data.createEvent.id
+              const newEventLink = formatRoute(routes.EVENT, { eventId })
+
+              this.props.history.push(newEventLink)
+            }).catch(error => {
+              console.error(error)
+            })
+          }
+
+          handleSetEditMatcher = (editMatcherIndex) => {
+            this.setState({
+              editMatcherIndex
+            })
+          }
+
+          handleCancelEditingMatcher = (e) => {
+            e.preventDefault()
+
+            this.handleSetEditMatcher(null)
+          }
+
+          showAddContract = (e) => {
+            e.preventDefault()
+            this.setState({
+              showAddContract: true
+            })
+          }
+
+          hideAddContract = () => {
+            this.setState({
+              showAddContract: false
+            })
+          }
+
+          handleOnCreateAbi = (abi) => {
+            let event = {...this.state.event}
+            if (abi.abiEvents.length) {
+              event.abiEventId = abi.abiEvents[0].id
             }
+            
+            this.setState({
+              showAddContract: false,
+              event
+            })
+          }
 
-            handleSetEditMatcher = (editMatcherIndex) => {
-              this.setState({
-                editMatcherIndex
-              })
-            }
+          showEventForm = () => {
+            this.setState({ showEventForm: true })
+          }
 
-            handleCancelEditingMatcher = (e) => {
-              e.preventDefault()
+          hideEventForm = () => {
+            this.setState({ showEventForm: false })
+          }
 
-              this.handleSetEditMatcher(null)
-            }
+          isEditingMatcher = () => {
+            return this.state.editMatcherIndex !== null
+          }
 
-            showAddContract = (e) => {
-              e.preventDefault()
-              this.setState({
-                showAddContract: true
-              })
-            }
+          recipeSentence = (title) => {
+            if (!title) { return '' }
+            const firstLetter = title.charAt(0)
+            const startsWithVowel = /[aeiou]/i.test(firstLetter)
 
-            hideAddContract = () => {
-              this.setState({
-                showAddContract: false
-              })
-            }
+            return startsWithVowel ? `an ${title}` : `a ${title}`
+          }
 
-            handleOnCreateAbi = (abi) => {
-              let event = {...this.state.event}
-              if (abi.abiEvents.length) {
-                event.abiEventId = abi.abiEvents[0].id
+          onChangeMatcher = (matcher) => {
+            const matchers = this.state.event.matchers.slice()
+            matchers[this.state.editMatcherIndex] = matcher
+
+            this.setState({
+              event: {
+                ...this.state.event,
+                matchers
               }
-              
-              this.setState({
-                showAddContract: false,
-                event
-              })
+            })
+          }
+
+          onChangeScope = (option) => {
+            this.setState({
+              event: {
+                ...this.state.event,
+                scope: option.value
+              }
+            })
+          }
+
+          onChangeAbiEvent = (option) => {
+            this.setState({
+              event: {
+                ...this.state.event,
+                abiEventId: parseInt(option.value, 10)
+              }
+            })
+          }
+
+          handleAddMatcher = () => {
+            const newMatcher = {
+              operand: "0",
+              operandDataType: 0,
+              operator: 2,
+              order: 1,
+              source: "transaction.value"
             }
 
-            showEventForm = () => {
-              this.setState({ showEventForm: true })
-            }
+            this.setState({
+              event: {
+                ...this.state.event,
+                matchers: this.state.event.matchers.concat(newMatcher)
+              }
+            })
+          }
 
-            hideEventForm = () => {
-              this.setState({ showEventForm: false })
-            }
+          handleRemoveMatcher = (matcherIndex) => {
+            const matchers = this.state.event.matchers
 
-            isEditingMatcher = () => {
-              return this.state.editMatcherIndex !== null
-            }
-
-            recipeSentence = (title) => {
-              if (!title) { return '' }
-              const firstLetter = title.charAt(0)
-              const startsWithVowel = /[aeiou]/i.test(firstLetter)
-
-              return startsWithVowel ? `an ${title}` : `a ${title}`
-            }
-
-            onChangeMatcher = (matcher) => {
-              const matchers = this.state.event.matchers.slice()
-              matchers[this.state.editMatcherIndex] = matcher
+            if (matchers.length > 1) {
+              matchers.splice(matcherIndex, 1)
 
               this.setState({
                 event: {
@@ -221,295 +265,228 @@ export const NewEventPage =
                   matchers
                 }
               })
+            } else {
+              toast.error('Each event needs at least one matcher.')
+            }
+          }
+          
+          render () {
+            let colorClass = 'is-dark'
+            let altColorClass = 'is-blue'
+            let variableForm = null
+
+            const { eventData } = this.props
+
+            const editMatcher = this.isEditingMatcher()
+              ? this.state.event.matchers[this.state.editMatcherIndex]
+              : null
+
+            let recipe = {
+              title: 'event'
             }
 
-            onChangeScope = (option) => {
-              this.setState({
-                event: {
-                  ...this.state.event,
-                  scope: option.value
-                }
-              })
-            }
-
-            onChangeAbiEvent = (option) => {
-              this.setState({
-                event: {
-                  ...this.state.event,
-                  abiEventId: parseInt(option.value, 10)
-                }
-              })
-            }
-
-            handleAddMatcher = () => {
-              const newMatcher = {
-                operand: "0",
-                operandDataType: 0,
-                operator: 2,
-                order: 1,
-                source: "transaction.value"
-              }
-
-              this.setState({
-                event: {
-                  ...this.state.event,
-                  matchers: this.state.event.matchers.concat(newMatcher)
-                }
-              })
-            }
-
-            handleRemoveMatcher = (matcherIndex) => {
-              const matchers = this.state.event.matchers
-
-              if (matchers.length > 1) {
-                matchers.splice(matcherIndex, 1)
-
-                this.setState({
-                  event: {
-                    ...this.state.event,
-                    matchers
-                  }
-                })
+            if (eventData) {
+              if (eventData.loading) {
+                return null
               } else {
-                toast.error('Each event needs at least one matcher.')
-              }
-            }
-            
-            render () {
-              let colorClass = 'is-dark'
-              let altColorClass = 'is-blue'
-              let variableForm = null
-
-              const { eventData, abiEventsQuery } = this.props
-              const { abiEvents, loading, error } = abiEventsQuery
-
-              const editMatcher = this.isEditingMatcher()
-                ? this.state.event.matchers[this.state.editMatcherIndex]
-                : null
-
-              let recipe = {
-                title: 'event'
-              }
-
-              if (eventData) {
-                if (eventData.loading) {
+                if (eventData.error) {
+                  console.warn(eventData.error)
                   return null
                 } else {
-                  if (eventData.error) {
-                    console.warn(eventData.error)
-                    return null
-                  } else {
-                    recipe = eventData.event
+                  recipe = eventData.event
 
-                    if (recipe) {
-                      colorClass = brandColor(recipe.id)
-                      altColorClass = altBrandColor(recipe.id + 1)
-                    }
+                  if (recipe) {
+                    colorClass = brandColor(recipe.id)
+                    altColorClass = altBrandColor(recipe.id + 1)
                   }
                 }
               }
+            }
 
-              if (editMatcher) {
-                variableForm = (
-                  <form className='form drawer-form'>
-                    <MatcherForm
-                      key={`matcher-${this.state.matcherIndex}`}
-                      matcher={editMatcher}
-                      onChange={
-                        (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
-                      }
-                    />
+            if (editMatcher) {
+              variableForm = (
+                <form className='form drawer-form'>
+                  <MatcherForm
+                    key={`matcher-${this.state.matcherIndex}`}
+                    matcher={editMatcher}
+                    onChange={
+                      (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
+                    }
+                  />
 
-                    <div className='buttons'>
-                      <button
-                        className='button has-icon has-stroke-green'
-                        onClick={this.handleCancelEditingMatcher}
+                  <div className='buttons'>
+                    <button
+                      className='button has-icon has-stroke-green'
+                      onClick={this.handleCancelEditingMatcher}
+                    >
+                      <CheckCircle
+                        className='icon__button has-stroke-green'
+                      />
+                    </button>
+                  </div>
+
+                </form>
+              )
+            }
+
+            const matcherSentences = (
+              <>
+                <div className='event-box__variable-wrapper' onClick={this.showEventForm}>
+                  <div className='event-box__variable'>
+                    <span className="event-box__text">
+                      <FrequencyTitle frequency={this.state.event.frequency} /> <EventTitle event={this.state.event} /> occurs
+                    </span>
+                  </div>
+                </div>
+
+
+                {/* <MatcherDragDropContext 
+
+                /> */}
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                  <Droppable droppableId="droppable">
+                    {(provided, snapshot) => (
+                      <div
+                        {...provided.droppableProps}
+                        ref={provided.innerRef}
                       >
-                        <CheckCircle
-                          className='icon__button has-stroke-green'
-                        />
-                      </button>
-                    </div>
+                        {this.state.event.matchers.map((eventMatcher, index) => (
+                          <Draggable key={`event-matcher-${index}`} draggableId={index+1} index={index}>
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <EventMatcher
+                                  key={`event-matcher-${index}`}
+                                  matcher={eventMatcher}
+                                  index={index}
+                                  handleSetEditMatcher={this.handleSetEditMatcher}
+                                  handleRemoveMatcher={this.handleRemoveMatcher}
+                                  isFirst={index === 0}
+                                  isActive={!!editMatcher && eventMatcher === editMatcher}
+                                />
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+                </DragDropContext>
+              </>
+            )
 
+            let abiEventSelect, addContract
+            if (this.state.event.scope === SCOPES.CONTRACT_EVENT) {
+              abiEventSelect =
+                <AbiEventSelect
+                  value={this.state.event.abiEventId}
+                  onChange={this.onChangeAbiEvent}
+                  />
+              addContract = <button onClick={this.showAddContract} className='button'>add contract</button>
+            }
+
+            return (
+              <div className='is-positioned-absolutely'>
+                <Helmet
+                  title='Create New Event'
+                />
+
+                <ScrollToTop />
+
+                <Drawer show={this.isEditingMatcher()} onClose={this.handleCancelEditingMatcher}>
+                  {variableForm}
+                </Drawer>
+
+                <Drawer show={this.state.showEventForm} onClose={this.hideEventForm}>
+                  <form className='form drawer-form'>
+                    <ScopeSelect value={this.state.event.scope} onChange={this.onChangeScope} />
+                    {abiEventSelect}
+                    {addContract}
                   </form>
-                )
-              }
+                </Drawer>
 
-              const frequencyWord = (this.state.event.frequency === '-1') ? 'Every time' : 'Next time'
+                <Modal isOpen={this.state.showAddContract} handleClose={this.hideAddContract}>
+                  {
+                    this.state.showAddContract && 
+                    <ContractForm onCancel={this.hideAddContract} onCreate={this.handleOnCreateAbi} />
+                  }
+                </Modal>
 
-              let abiEvent = null
-              if (this.state.event.scope === SCOPES.CONTRACT_EVENT && !!this.state.event.abiEventId && abiEvents) {
-                abiEvent = abiEvents.find(abiEvent => {
-                  return parseInt(abiEvent.id, 10) === this.state.event.abiEventId
-                })
-              }
-
-              let title
-              if (abiEvent) {
-                title = `${abiEvent.abi.name} ${abiEvent.name}`
-              } else {
-                title = SCOPE_LABELS[this.state.event.scope]
-              }
-
-              const matcherSentences = (
-                <>
-                  <div className='event-box__variable-wrapper' onClick={this.showEventForm}>
-                    <div className='event-box__variable'>
-                      <span className="event-box__text">
-                        {frequencyWord} {this.recipeSentence(title)} occurs
-                      </span>
+                <section className='section section--main-content'>
+                  <div className={`container-fluid pb20 is-dark`}>
+                    <div className='container'>
+                      <div className='row'>
+                        <div className='col-xs-12 has-text-centered is-size-4'>
+                          <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
+                            {recipe.title}
+                          </h6>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
+                  <div className={`event-box event-box__header color-block ${colorClass}`}>
+                    <div className={`container-fluid pt20 pb20`}>
+                      <div className='container'>
+                        <div className='row'>
+                          <div className='col-xs-12 col-xl-12 col-start-xl-2 is-size-4'>
+                            {matcherSentences}
 
-                  {/* <MatcherDragDropContext 
-
-                  /> */}
-                  <DragDropContext onDragEnd={this.onDragEnd}>
-                    <Droppable droppableId="droppable">
-                      {(provided, snapshot) => (
-                        <div
-                          {...provided.droppableProps}
-                          ref={provided.innerRef}
-                        >
-                          {this.state.event.matchers.map((eventMatcher, index) => (
-                            <Draggable key={`event-matcher-${index}`} draggableId={index+1} index={index}>
-                              {(provided, snapshot) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                >
-                                  <EventMatcher
-                                    key={`event-matcher-${index}`}
-                                    matcher={eventMatcher}
-                                    index={index}
-                                    handleSetEditMatcher={this.handleSetEditMatcher}
-                                    handleRemoveMatcher={this.handleRemoveMatcher}
-                                    isFirst={index === 0}
-                                    isActive={!!editMatcher && eventMatcher === editMatcher}
-                                  />
-                                </div>
-                              )}
-                            </Draggable>
-                          ))}
-                          {provided.placeholder}
+                            <br />
+                            <button
+                              className='button has-icon has-icon__transparent has-stroke-light is-lowercase has-text-light'
+                              onClick={this.handleAddMatcher}
+                            >
+                              <PlusCircle
+                                className='icon__button has-stroke-light'
+                              /> &nbsp; add matcher
+                            </button>
+                          </div>
                         </div>
-                      )}
-                    </Droppable>
-                  </DragDropContext>
-                </>
-              )
+                      </div>
+                    </div>
+                  </div>
 
-              let abiEventSelect, addContract
-              if (this.state.event.scope === SCOPES.CONTRACT_EVENT) {
-                abiEventSelect =
-                  <AbiEventSelect
-                    value={this.state.event.abiEventId}
-                    onChange={this.onChangeAbiEvent}
-                    />
-                addContract = <button onClick={this.showAddContract} className='button'>add contract</button>
-              }
-
-              return (
-                <div className='is-positioned-absolutely'>
-                  <Helmet
-                    title='Create New Event'
-                  />
-
-                  <ScrollToTop />
-
-                  <Drawer show={this.isEditingMatcher()} onClose={this.handleCancelEditingMatcher}>
-                    {variableForm}
-                  </Drawer>
-
-                  <Drawer show={this.state.showEventForm} onClose={this.hideEventForm}>
-                    <form className='form drawer-form'>
-                      <ScopeSelect value={this.state.event.scope} onChange={this.onChangeScope} />
-                      {abiEventSelect}
-                      {addContract}
-                    </form>
-                  </Drawer>
-
-                  <Modal isOpen={this.state.showAddContract} handleClose={this.hideAddContract}>
-                    {
-                      this.state.showAddContract && 
-                      <ContractForm onCancel={this.hideAddContract} onCreate={this.handleOnCreateAbi} />
-                    }
-                  </Modal>
-
-                  <section className='section section--main-content'>
-                    <div className={`container-fluid pb20 is-dark`}>
+                  <div className={`event-box event-box__footer color-block ${altColorClass}`}>
+                    <div className={`container-fluid`}>
                       <div className='container'>
                         <div className='row'>
                           <div className='col-xs-12 has-text-centered is-size-4'>
-                            <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                              {recipe.title}
-                            </h6>
+                            {/* ... then turn on my Phillips Hue lightbulb */}
+                            ... then send me an email&nbsp;
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    <div className={`event-box event-box__header color-block ${colorClass}`}>
-                      <div className={`container-fluid pt20 pb20`}>
-                        <div className='container'>
-                          <div className='row'>
-                            <div className='col-xs-12 col-xl-12 col-start-xl-2 is-size-4'>
-                              {matcherSentences}
-
-                              <br />
-                              <button
-                                className='button has-icon has-icon__transparent has-stroke-light is-lowercase has-text-light'
-                                onClick={this.handleAddMatcher}
-                              >
-                                <PlusCircle
-                                  className='icon__button has-stroke-light'
-                                /> &nbsp; add matcher
-                              </button>
-                            </div>
+                  <div className={`is-white-ter pt30 pb30`}>
+                    <div className={`container-fluid`}>
+                      <div className='container'>
+                        <div className='row'>
+                          <div className='col-xs-12 has-text-centered is-size-4'>
+                            <button
+                              onClick={this.handleSaveEvent}
+                              className='button is-success'
+                            >
+                              {!this.state.event.createdAt ? 'Create' : 'Save'} Event
+                            </button>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
+                </section>
 
-                    <div className={`event-box event-box__footer color-block ${altColorClass}`}>
-                      <div className={`container-fluid`}>
-                        <div className='container'>
-                          <div className='row'>
-                            <div className='col-xs-12 has-text-centered is-size-4'>
-                              {/* ... then turn on my Phillips Hue lightbulb */}
-                              ... then send me an email&nbsp;
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className={`is-white-ter pt30 pb30`}>
-                      <div className={`container-fluid`}>
-                        <div className='container'>
-                          <div className='row'>
-                            <div className='col-xs-12 has-text-centered is-size-4'>
-                              <button
-                                onClick={this.handleSaveEvent}
-                                className='button is-success'
-                              >
-                                {!this.state.event.createdAt ? 'Create' : 'Save'} Event
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-
-                  <FooterContainer />
-                </div>
-              )
-            }
+                <FooterContainer />
+              </div>
+            )
           }
-        )
+        }
       )
     )
   )

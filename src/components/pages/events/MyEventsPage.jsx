@@ -54,13 +54,13 @@ export const MyEventsPage =
               ? (
                 <>
                   <h2 className='is-size-2 mt75 has-text-weight-bold'>
-                    You have no active events.
+                    You haven't created any events.
                   </h2>
                   <Link
                     className='button mt20 is-purple'
                     to={routes.NEW_EVENT}
                   >
-                    Create a Custom Event
+                    Create an Event
                   </Link>
                 </>
               ) : (

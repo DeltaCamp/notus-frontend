@@ -21,6 +21,7 @@ import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventQuery } from '~/queries/eventQuery'
 import { brandColor } from '~/utils/brandColors'
 import { omitDeep } from '~/utils/omitDeep'
+import { EventDescription } from '~/components/events/EventDescription'
 import * as routes from '~/../config/routes'
 
 const eventDto = (event) => {
@@ -226,7 +227,7 @@ export const EventPage =
                             <div className='row'>
                               <div className='col-xs-12 has-text-centered is-size-4'>
                                 <h5 className='is-size-5 has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                                  {event.title}
+                                  {event.title || <EventDescription event={event} brief={true} />}
                                 </h5>
                               </div>
                               </div>

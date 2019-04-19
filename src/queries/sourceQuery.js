@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
 export const sourceQuery = gql`
-  query sourceQuery(id: $id) {
-    sources {
+  query sourceQuery($source: String!) {
+    source(source: $source) {
       source
       title
       dataType
