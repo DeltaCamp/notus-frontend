@@ -6,7 +6,7 @@ export const NotusSelect =
     return <Select
       {...props}
       menuPlacement='auto'
-      className='react-select'
+      className={`react-select ${props.className}`}
       classNamePrefix='react-select'
     />
       

@@ -11,10 +11,6 @@ $addonsFormHeight: 57px;
   box-shadow: none;
 }
 
-.form {
-  // padding: 0 0 8rem;
-}
-
 .field:not(:last-child) {
   margin-bottom: 1rem;
 }
@@ -62,13 +58,23 @@ $hasAddonsformColor: white;
   font-weight: 700;
   height: 60px;
   margin: 0;
-  padding: 4px 25px 5px;
+  padding: 4px 20px 5px;
   transition: all 200ms ease-in-out;
 
   @media screen and (max-width: $mobile) {
     font-size: 0.875rem;
     height: 50px;
     padding: 4px 10px 5px;
+  }
+}
+
+.form .textarea {
+  border-radius: 5px;
+  height: 260px;
+  padding-top: 20px;
+
+  @media screen and (max-width: $mobile) {
+    height: 160px;
   }
 }
 
@@ -122,10 +128,6 @@ textarea.textarea,
   @media screen and (max-width: $mobile) {
     flex: 0 0 50%;
   }
-}
-
-textarea.textarea {
-  height: auto;
 }
 
 form.is-active button.button,
@@ -240,10 +242,10 @@ label.radio,
   color: white;
 }
 
-.has-bg .form .button,
-.has-bg__dark .form .button {
-  border: 3px solid black;
-}
+// .has-bg .form .button,
+// .has-bg__dark .form .button {
+//   border: 3px solid black;
+// }
 
 .field.has-addons {
   @media screen and (max-width: $mobile) {
@@ -342,7 +344,7 @@ label.radio,
 .react-select__control {
   border-radius: 100px !important;
   cursor: pointer !important;
-  padding: 0 5px 0;
+  padding: 0 10px 0;
 }
 
 .react-select__indicator-separator {

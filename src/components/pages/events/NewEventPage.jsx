@@ -275,6 +275,7 @@ export const NewEventPage =
             let colorClass = 'is-dark'
             let altColorClass = 'is-blue'
             let variableForm = null
+            let abiEventSelect, addContract
 
             const { eventData } = this.props
 
@@ -380,14 +381,20 @@ export const NewEventPage =
               </>
             )
 
-            let abiEventSelect, addContract
             if (this.state.event.scope === SCOPES.CONTRACT_EVENT) {
               abiEventSelect =
                 <AbiEventSelect
+                  placeholder='Choose an existing contract ...'
                   value={this.state.event.abiEventId}
                   onChange={this.onChangeAbiEvent}
-                  />
-              addContract = <button onClick={this.showAddContract} className='button'>add contract</button>
+                  className='is-wide has-margin-right-auto'
+                />
+              addContract = <button
+                onClick={this.showAddContract}
+                className='button is-link'
+              >
+                Add a New Contract
+              </button>
             }
 
             return (
@@ -398,22 +405,35 @@ export const NewEventPage =
 
                 <ScrollToTop />
 
-                <Drawer show={this.isEditingMatcher()} onClose={this.handleCancelEditingMatcher}>
+                <Drawer
+                  show={this.isEditingMatcher()}
+                  onClose={this.handleCancelEditingMatcher}
+                >
                   {variableForm}
                 </Drawer>
 
                 <Drawer show={this.state.showEventForm} onClose={this.hideEventForm}>
                   <form className='form drawer-form'>
-                    <ScopeSelect value={this.state.event.scope} onChange={this.onChangeScope} />
+                    <ScopeSelect
+                      value={this.state.event.scope}
+                      onChange={this.onChangeScope}
+                    />
                     {abiEventSelect}
                     {addContract}
                   </form>
                 </Drawer>
 
-                <Modal isOpen={this.state.showAddContract} handleClose={this.hideAddContract}>
+                <Modal
+                  isOpen={this.state.showAddContract}
+                  handleClose={this.hideAddContract}
+                  isLarge={true}
+                >
                   {
                     this.state.showAddContract && 
-                    <ContractForm onCancel={this.hideAddContract} onCreate={this.handleOnCreateAbi} />
+                    <ContractForm
+                      onCancel={this.hideAddContract}
+                      onCreate={this.handleOnCreateAbi}
+                    />
                   }
                 </Modal>
 

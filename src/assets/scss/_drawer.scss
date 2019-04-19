@@ -14,7 +14,7 @@
 }
 
 .drawer__clickbox {
-  background-color: rgba(10, 0, 50, 0.4);
+  background-color: rgba(10, 15, 40, 0.6);
   cursor: pointer;
   height: 100%;
   left: 0;
@@ -84,6 +84,14 @@
 
   @media screen and (max-width: $tablet - 203px) {
     min-width: 100%;
+    width: 100%;
+  }
+}
+
+.drawer .form .react-select.is-wide {
+  width: 340px;
+
+  @media screen and (max-width: $tablet) {
     width: 100%;
   }
 }

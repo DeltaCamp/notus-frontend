@@ -74,11 +74,11 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
 
       return (
         <form className='form' onSubmit={this.onSubmit}>
-
           <div className='field'>
             <ABIUpload onAbi={this.handleAbi} onError={this.handleAbiError} />
           </div>
 
+          <hr />
           
           <div className='field'>
             <input
@@ -86,23 +86,33 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
               type='text'
               value={this.state.name}
               onChange={this.onChangeName}
-              placeholder={`Name`}
+              placeholder={`Contract Name`}
             />
           </div>
 
-          <textarea className='textarea' value={this.state.abi} onChange={(e) => this.setState({abi: e.target.value}) } />
+          <textarea
+            className='textarea'
+            value={this.state.abi}
+            onChange={(e) => this.setState({ abi: e.target.value }) }
+            placeholder={`Paste Contract ABI here or upload file above ...`}
+          />
 
-          <button
-            className='button has-icon has-stroke-green'
-            onClick={this.onSubmit}
-          >
-            <CheckCircle
-              className='icon__button has-stroke-green'
-            />
-          </button>
-
-          <button onClick={this.props.onCancel} className='button'>Cancel</button>
-
+          <div className="buttons mt30 has-text-right has-margin-left-auto is-block">
+            <button
+              onClick={this.props.onCancel}
+              className='button is-outlined is-light'
+            >
+              Cancel
+            </button>
+            <button
+              className='button is-success has-stroke-white'
+              onClick={this.onSubmit}
+            >
+              <CheckCircle
+                className='has-stroke-white'
+              />&nbsp;Save
+            </button>
+          </div>
         </form>
       )
     }

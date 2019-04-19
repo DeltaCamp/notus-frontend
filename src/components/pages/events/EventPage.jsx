@@ -104,6 +104,7 @@ export const EventPage =
                     'publicEventsQuery',
                   ],
                 }).then(() => {
+                  toast.dismiss()
                   toast.success('Successfully deleted event')
                   this.props.history.push(routes.MY_EVENTS)
                 }).catch(error => {
@@ -203,6 +204,7 @@ export const EventPage =
                     <Modal
                       isOpen={this.state.isConfirmingDelete}
                       handleClose={this.handleCloseConfirmDeleteModal}
+                      isSmall={true}
                     >
                       <div className='has-text-centered'>
                         <h5 className='is-size-5 has-text-weight-normal'>

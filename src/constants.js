@@ -18,9 +18,9 @@ export const SCOPES = {
 }
 
 export const SCOPE_LABELS = {
-  [SCOPES.TRANSACTION]: 'transaction',
-  [SCOPES.BLOCK]: 'block',
-  [SCOPES.CONTRACT_EVENT]: 'contract event'
+  [SCOPES.TRANSACTION]: 'Transaction',
+  [SCOPES.BLOCK]: 'Block',
+  [SCOPES.CONTRACT_EVENT]: 'Contract Event'
 }
 
 export const OPERATORS = {

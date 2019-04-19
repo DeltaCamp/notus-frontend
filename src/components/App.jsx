@@ -45,7 +45,7 @@ export const App = withRouter(hot(module)(
             className='notus-toast'
             position='top-center'
             hideProgressBar={true}
-            autoClose={4000}
+            autoClose={3000}
             transition={Slide}
           />
 
