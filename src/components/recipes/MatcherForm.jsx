@@ -11,7 +11,8 @@ import { OPERAND_DATA_TYPE_LABELS } from '~/constants'
 export class MatcherForm extends PureComponent {
   static propTypes = {
     matcher: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    scope: PropTypes.number
   }
 
   onChangeSource = (option) => {
@@ -45,7 +46,7 @@ export class MatcherForm extends PureComponent {
   }
 
   render () {
-    const { matcher } = this.props
+    const { matcher, scope } = this.props
 
     let operandInput, operandDataTypeSelect, abiEventInputSelect
 
@@ -76,6 +77,7 @@ export class MatcherForm extends PureComponent {
         <SourceSelect
           value={matcher.source}
           onChange={this.onChangeSource}
+          scope={scope}
         />
         {abiEventInputSelect}
         <OperatorSelect

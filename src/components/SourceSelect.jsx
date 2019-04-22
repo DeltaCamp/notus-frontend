@@ -1,31 +1,47 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { NotusSelect } from '~/components/forms/NotusSelect'
 import { graphql } from 'react-apollo'
 import { sourcesQuery } from '~/queries/sourcesQuery'
+import { isValidScopeSource } from '~/utils/isValidScopeSource'
 
-export const SourceSelect = graphql(sourcesQuery, { name: 'sourcesQuery' })(
-  function (props) {
-    const { sources, loading, error } = props.sourcesQuery
+export const SourceSelect = graphql(sourcesQuery, {
+  name: 'sourcesQuery',
+  props: ({ sourcesQuery, ownProps }) => {
+    const { scope } = ownProps
+    const { sources, loading, error } = sourcesQuery
 
     let options = []
-    if (error) {
-      return `Error: ${error}`
-    } else if (!loading) {
+    if (!loading && !error) {
       options = sources.map(source => {
         return {
           label: source.title,
           value: source.source,
           dataType: source.dataType
         }
+      }).filter(option => {
+        return isValidScopeSource(scope, option.value)
       })
     }
 
-    let selectedOption
-    if (props.value) {
-      selectedOption = options.find(option => option.value === props.value)
-      props = {...props, value: selectedOption}
+    return {
+      options
     }
+  }
+})(
+  class _SourceSelect extends Component {
+    render () {
+      let props = this.props
+      const { value, options } = props
 
-    return <NotusSelect {...props} options={options} />
+      console.log(this.props)
+
+      let selectedOption
+      if (value && options) {
+        selectedOption = options.find(option => option.value === value)
+        props = {...this.props, value: selectedOption}
+      }
+
+      return <NotusSelect {...props} options={options} />
+    }
   }
 )

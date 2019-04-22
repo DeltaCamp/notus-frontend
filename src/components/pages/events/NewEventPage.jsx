@@ -11,6 +11,7 @@ import { CheckCircle, PlusCircle } from 'react-feather'
 import { toast } from 'react-toastify'
 import { graphql } from 'react-apollo'
 
+import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { FrequencyTitle } from '~/components/events/FrequencyTitle'
@@ -214,10 +215,19 @@ export const NewEventPage =
           }
 
           onChangeScope = (option) => {
+            let matchers = this.state.event.matchers.map(matcher => {
+              var clone = {...matcher}
+              if (!isValidScopeSource(option.value, matcher.source)) {
+                clone.source = 'block.number'
+              }
+              return clone
+            })
+
             this.setState({
               event: {
                 ...this.state.event,
-                scope: option.value
+                scope: option.value,
+                matchers
               }
             })
           }
@@ -303,6 +313,7 @@ export const NewEventPage =
               variableForm = (
                 <form className='form drawer-form'>
                   <MatcherForm
+                    scope={this.state.event.scope}
                     key={`matcher-${this.state.matcherIndex}`}
                     matcher={editMatcher}
                     onChange={
