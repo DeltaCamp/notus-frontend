@@ -6,8 +6,7 @@ import { isValidScopeSource } from '~/utils/isValidScopeSource'
 
 export const SourceSelect = graphql(sourcesQuery, {
   name: 'sourcesQuery',
-  props: ({ sourcesQuery, ownProps }) => {
-    const { scope } = ownProps
+  props: ({ sourcesQuery }) => {
     const { sources, loading, error } = sourcesQuery
 
     let options = []
@@ -18,8 +17,6 @@ export const SourceSelect = graphql(sourcesQuery, {
           value: source.source,
           dataType: source.dataType
         }
-      }).filter(option => {
-        return isValidScopeSource(scope, option.value)
       })
     }
 
@@ -31,15 +28,22 @@ export const SourceSelect = graphql(sourcesQuery, {
   class _SourceSelect extends Component {
     render () {
       let props = this.props
-      const { value, options } = props
+      const { scope, value, options } = props
+
+      let validOptions = (options || []).filter(option => {
+        return isValidScopeSource(scope, option.value)
+      })
 
       let selectedOption
-      if (value && options) {
-        selectedOption = options.find(option => option.value === value)
+      if (value && validOptions) {
+        selectedOption = validOptions.find(option => option.value === value)
+        if (!selectedOption) {
+          selectedOption = validOptions[0]
+        }
         props = {...this.props, value: selectedOption}
       }
 
-      return <NotusSelect {...props} options={options} />
+      return <NotusSelect {...props} options={validOptions} />
     }
   }
 )

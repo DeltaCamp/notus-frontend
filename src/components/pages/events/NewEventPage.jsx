@@ -379,6 +379,7 @@ export const NewEventPage =
                       <MatcherForm
                         key={`matcher-${this.state.matcherIndex}`}
                         matcher={editMatcher}
+                        scope={this.state.event.scope}
                         onChange={
                           (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
                         }
