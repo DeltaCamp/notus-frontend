@@ -73,12 +73,16 @@ export const EventCard =
 
         handleEventCardClick = (e) => {
           e.preventDefault()
-
-          toast('You will need to sign up (or sign in) to create events.')
+          
+          const { currentUserData } = this.props
 
           this.setState({
             redirect: true
           })
+
+          if (currentUserData && !currentUserData.currentUser) {
+            toast('You will need to sign up (or sign in) to create events.')
+          }
         }
         
         handleActivate = (e) => {
