@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
+import * as routes from '~/../config/routes'
 
 export const Footer = class _Footer extends Component {
   render () {
@@ -10,20 +12,30 @@ export const Footer = class _Footer extends Component {
         <footer className='footer has-text-centered'>
           <div className='footer--primary'>
             <ul className='footer-list'>
-              <li className='list-item is-inline-block'><a href="about">About</a></li>
-              <li className='list-item is-inline-block'><a href="mailto:help@notus.network">Help</a></li>
+              <li className='list-item is-inline-block'>
+                <Link to={routes.ABOUT_PAGE}>About</Link>
+              </li>
+              <li className='list-item is-inline-block'>
+                <a href="mailto:support@notus.network">Support</a>
+              </li>
               <li className='list-item is-inline-block'>
                 <a
-                  href='https://github.com/notifyus'
+                  href='https://discord.gg/WXMDXqb'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  Open Source
+                  Community
                 </a>
               </li>
-              <li className='list-item is-inline-block'><a href="terms">Terms</a></li>
-              <li className='list-item is-inline-block'><a href="privacy">Privacy</a></li>
-              <li className='list-item is-inline-block'><a href="trust">Trust</a></li>
+              <li className='list-item is-inline-block'>
+                <Link to={routes.TERMS_PAGE}>Terms</Link>
+              </li>
+              <li className='list-item is-inline-block'>
+                <Link to={routes.PRIVACY_PAGE}>Privacy</Link>
+              </li>
+              <li className='list-item is-inline-block'>
+                <a href='https://twitter.com/notusnotifications'>Feedback</a>
+              </li>
             </ul>
 
             <div className='footer-brand pt75'>
