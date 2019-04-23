@@ -29,7 +29,7 @@ export const EventDescription = function ({event, brief = false}) {
       <FrequencyTitle frequency={event.frequency} key='frequency-title' />&nbsp;
       <EventTitle event={event} key='event-title' />&nbsp;
       occurs&nbsp;
-      {matchers}
+      {matchers} then send me an email
     </>
   )
 }
