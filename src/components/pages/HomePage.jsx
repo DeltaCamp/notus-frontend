@@ -35,7 +35,7 @@ export class HomePage extends Component {
         </header>
         <section className='section'>
           <div className='container'>
-            <div className='row pb100'>
+            <div className='row pb100 pt50'>
               <div className='col-xs-10 col-md-9'>
                 <div id="about"></div>
                 <h5 className='is-size-5'>
