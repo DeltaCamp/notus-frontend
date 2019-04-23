@@ -79,7 +79,6 @@ export class MatcherForm extends PureComponent {
           onChange={this.onChangeSource}
           scope={scope}
           autoFocus
-          menuIsOpen
         />
         {abiEventInputSelect}
         <OperatorSelect
