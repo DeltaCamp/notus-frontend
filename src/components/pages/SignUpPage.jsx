@@ -157,9 +157,11 @@ export const SignUpPage =
                   <hr />
 
                   <div className='has-text-centered pb100'>
-                    Already have an account you lost the password to?
+                    Already have an account?
                     <br />
-                    <Link to={routes.PASSWORD_RESET}>
+                    <Link to={routes.SIGNIN}>
+                      Sign In
+                    </Link> or <Link to={routes.PASSWORD_RESET}>
                       Reset your Password
                     </Link>
                     {/* <br />Check your email for the API key originally sent to you. */}

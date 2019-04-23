@@ -21,8 +21,6 @@ export const DiscoverEventsPage =
           this.setState({
             searchValue: e.target.value
           })
-
-
         }
 
         render () {

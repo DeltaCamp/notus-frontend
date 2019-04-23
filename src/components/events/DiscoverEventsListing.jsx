@@ -44,8 +44,15 @@ export const DiscoverEventsListing =
         //   />
         // ))
 
+        
+        if (this.props.limit && filteredEvents.length > 10) {
+          filteredEvents = filteredEvents.slice(0, 10)
+        }
+        // console.log(filteredEvents)
+        // filteredEvents = filteredEvents.concat(filteredEvents).concat(filteredEvents).concat(filteredEvents).concat(filteredEvents)
+
         return (
-          filteredEvents.length ?
+          filteredEvents.length > 0 ?
               <div className='listing-grid'>
                 {filteredEvents}
               </div>

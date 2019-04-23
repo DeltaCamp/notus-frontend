@@ -432,11 +432,23 @@
 
 
 // EVENT HISTORY
-
 .event-history__action-description {
   display: inline-flex;
 }
 
 .event-history__date {
   display: inline-flex;
+}
+
+// HOMEPAGE EVENT CARD / DISCOVERY
+.home .listing-grid {
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+}
+
+.home .event-card {
+  border-radius: 0;
+  border-width: 0 !important;
+  margin: 0;
+  width: 100%;
 }
