@@ -8,7 +8,6 @@ export const matcherFragment = gql`
     abiEventInputId
     operator
     operand
-    operandDataType
     createdAt
     updatedAt
   }

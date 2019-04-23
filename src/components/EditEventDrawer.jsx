@@ -44,7 +44,8 @@ export class EditEventDrawer extends PureComponent {
   handleOnCreateAbi = (abi) => {
     this.setState({
       showAddContract: false
-    }, this.props.onCreateAbi)
+    })
+    this.props.onCreateAbi(abi)
   }
 
   render () {

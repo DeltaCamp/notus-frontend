@@ -51,8 +51,7 @@ export const EditEventPage =
                   // frequency: '-1',
                   matchers: [
                     {
-                      operand: "0",
-                      operandDataType: 0,
+                      operand: "",
                       operator: 2,
                       order: 1,
                       source: "transaction.value"
@@ -277,8 +276,7 @@ export const EditEventPage =
 
               handleAddMatcher = () => {
                 const newMatcher = {
-                  operand: "0",
-                  operandDataType: 0,
+                  operand: "",
                   operator: 2,
                   order: 1,
                   source: "transaction.value"

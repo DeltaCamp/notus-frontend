@@ -49,12 +49,6 @@ export const MatcherForm = graphql(sourcesQuery, {
       this.props.onChange(clone)
     }
 
-    onChangeOperandDataType = (option) => {
-      const clone = deepCloneMatcher(this.props.matcher)
-      clone.operandDataType = option.value
-      this.props.onChange(clone)
-    }
-
     onChangeOperand = (e) => {
       const clone = deepCloneMatcher(this.props.matcher)
       clone.operand = e.target.value
@@ -72,7 +66,7 @@ export const MatcherForm = graphql(sourcesQuery, {
       const { abiEventId, matcher, scope } = this.props
       const abiEventInputId = matcher.abiEventInputId || (matcher.abiEventInput || {}).id
 
-      let operandInput, operandDataTypeSelect
+      let operandInput
 
       if (matcher.operator !== 0) {
         operandInput =
@@ -81,12 +75,7 @@ export const MatcherForm = graphql(sourcesQuery, {
             type='text'
             value={matcher.operand}
             onChange={this.onChangeOperand}
-            placeholder={`Enter ${OPERAND_DATA_TYPE_LABELS[matcher.operandDataType]}`}
-          />
-        operandDataTypeSelect =
-          <OperandDataTypeSelect
-            value={matcher.operandDataType}
-            onChange={this.onChangeOperandDataType}
+            placeholder={`Enter a value`}
           />
       }
 
@@ -107,7 +96,6 @@ export const MatcherForm = graphql(sourcesQuery, {
             onChange={this.onChangeOperator}
           />
           {operandInput}
-          {operandDataTypeSelect}
         </>
       )
     }

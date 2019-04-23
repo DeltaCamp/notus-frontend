@@ -8,8 +8,7 @@ export const MatcherTitle = function ({ isFirst, isLast, matcher }) {
     source,
     abiEventInputId,
     operator,
-    operand,
-    operandDataType
+    operand
   } = matcher
 
   const andWord = isFirst ? 'where' : 'and'
@@ -17,7 +16,7 @@ export const MatcherTitle = function ({ isFirst, isLast, matcher }) {
 
   return (
     <span>
-      {andWord} the <SourceTitle source={source} abiEventInputId={abiEventInputId} /> {OPERATOR_LABELS[operator]} {operand} {OPERAND_DATA_TYPE_LABELS[operandDataType]} {lastWord}
+      {andWord} the <SourceTitle source={source} abiEventInputId={abiEventInputId} /> {OPERATOR_LABELS[operator]} {operand} {lastWord}
     </span>
   )
 }
