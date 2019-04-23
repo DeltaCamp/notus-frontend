@@ -72,15 +72,24 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
             <>
               <NavLink
                 exact
-                className='navbar-item bold hide-not-home'
+                className='navbar-item bold hide-not-home button'
                 to={routes.MY_EVENTS}
+                onClick={this.closeMobileNav}
+                activeClassName="is-active"
+              >
+                Go To App
+              </NavLink>
+              <NavLink
+                exact
+                className='navbar-item hide-on-home'
+                to={routes.ACCOUNT_SETTINGS}
                 onClick={this.closeMobileNav}
                 activeClassName="is-active"
               >
                 Your Account
               </NavLink>
               <button
-                className='navbar-item button is-small'
+                className='navbar-item button hide-on-home'
                 onClick={this.handleSignOut}
               >
                 Sign Out
