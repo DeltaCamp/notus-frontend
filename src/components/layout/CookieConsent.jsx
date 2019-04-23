@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
-import { Activity, Power, Search, Send, Star } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { storage } from '~/apollo/storage'
 import * as routes from '~/../config/routes'
@@ -57,10 +56,10 @@ export const CookieConsent = ReactTimeout(
             We use cookies to store your session and for analytics / error reporting. You consent to our cookie usage if you continue to use the <a href='https://notus.network'>notus.network</a> site. Please refer to the <Link to={routes.PRIVACY_PAGE}>privacy policy</Link> for more information.
 
             <button
-              className='button is-link is-xsmall'
+              className='button is-link is-small'
               onClick={this.handleAccept}
             >
-              <Activity />&nbsp;Ok, got it!
+              Ok, got it!
             </button>
           </div>
         </div>
