@@ -26,6 +26,7 @@ export class HomePage extends Component {
           <div className='container'>
             <div className='row pb100'>
               <div className='col-xs-10 col-md-9'>
+                <div id="about"></div>
                 <h5 className='is-size-5'>
                   Notify your app's users when you need their attention.
                 </h5>

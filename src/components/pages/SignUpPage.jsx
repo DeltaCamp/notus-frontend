@@ -148,15 +148,15 @@ export const SignUpPage =
                     >
                       {state => thankYou}
                     </CSSTransition>
-                    {/* <footer className='card-footer has-text-centered'>
-                      Signing up signifies you have read and agree to the<a href='/terms'>Terms of Service</a>{' '}
-                      and&nbsp;<a href='/privacy'>Privacy Policy</a>.
-                    </footer> */}
                   </section>
 
-                  <br />
+                  <div className='has-text-centered mt50'>
+                    By signing up you are agreeing to the Notus <Link to={routes.TERMS_PAGE}>Terms</Link> &amp; <Link to={routes.PRIVACY_PAGE}>Privacy Policy</Link>.
+                  </div>
 
-                  <div className='card-footer has-text-centered'>
+                  <hr />
+
+                  <div className='has-text-centered pb100'>
                     Already have an account you lost the password to?
                     <br />
                     <Link to={routes.PASSWORD_RESET}>

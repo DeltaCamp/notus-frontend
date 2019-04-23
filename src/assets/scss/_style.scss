@@ -726,3 +726,49 @@ hr {
 .has-margin-right-auto {
   margin-right: auto !important;
 }
+
+.cookie-consent {
+  background-color: $dark;
+  bottom: 0;
+  color: white;
+  left: 0;
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+  padding: 2rem 0;
+  position: fixed;
+  right: 0;
+  z-index: 300000;
+}
+
+.cookie-consent-enter {
+  opacity: 1;
+}
+
+.cookie-consent--inner {
+  font-size: 1.2rem;
+  margin: 0 auto;
+  max-width: 1214px;
+}
+
+.cookie-consent--inner a {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.cookie-consent--inner a:hover,
+.cookie-consent--inner a:active,
+.cookie-consent--inner a:focus {
+  color: white;
+}
+
+.cookie-consent .button {
+  display: block;
+  margin: 1rem 0 0 0;
+}
+
+.cookie-consent-exit {
+  bottom: -600px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 200ms ease-in;
+}
