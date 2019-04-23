@@ -43,7 +43,7 @@ export const App = withRouter(hot(module)(
         <BodyClass {...this.props}>
           <ToastContainer
             className='notus-toast'
-            position='top-center'
+            position='bottom-center'
             hideProgressBar={true}
             autoClose={3000}
             transition={Slide}
@@ -63,6 +63,7 @@ export const App = withRouter(hot(module)(
               <Switch location={this.props.location}>
                 <Route exact path={routes.HOME} component={HomePage} />
 
+                <Route exact path={routes.EDIT_EVENT} component={NewEventPage} />
                 <Route exact path={routes.NEW_EVENT} component={NewEventPage} />
                 <Route exact path={routes.NEW_EVENT_FROM_PARENT} component={NewEventPage} />
                 <Route exact path={routes.MY_EVENTS} component={MyEventsPage} />

@@ -86,6 +86,7 @@ export const MyEventsPage =
                 } else {
                   events = eventsData.events.map((event) => (
                     <EventCard
+                      {...this.props}
                       key={`event-${event.id}`}
                       event={event}
                       editable={true}

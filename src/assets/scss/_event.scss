@@ -48,6 +48,10 @@
   padding: 0.75rem 1.5rem;
 }
 
+.is-warning .event-card__footer {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
 .event-card__footer .event-card__author {
   display: inline-flex;
 }
@@ -94,6 +98,28 @@
 .event-card:hover .dropdown .button.has-icon:hover circle,
 .event-card:hover .dropdown .button.has-icon:hover svg {
   stroke: white;
+}
+
+.event-card.is-warning:hover .dropdown .button.has-icon path,
+.event-card.is-warning:hover .dropdown .button.has-icon rect,
+.event-card.is-warning:hover .dropdown .button.has-icon circle,
+.event-card.is-warning:hover .dropdown .button.has-icon svg {
+  stroke: rgba(0, 0, 0, 0.5);
+}
+
+.event-card.is-warning:hover .dropdown .button.has-icon:active path,
+.event-card.is-warning:hover .dropdown .button.has-icon:active rect,
+.event-card.is-warning:hover .dropdown .button.has-icon:active circle,
+.event-card.is-warning:hover .dropdown .button.has-icon:active svg,
+.event-card.is-warning:hover .dropdown .button.has-icon:focus path,
+.event-card.is-warning:hover .dropdown .button.has-icon:focus rect,
+.event-card.is-warning:hover .dropdown .button.has-icon:focus circle,
+.event-card.is-warning:hover .dropdown .button.has-icon:focus svg,
+.event-card.is-warning:hover .dropdown .button.has-icon:hover path,
+.event-card.is-warning:hover .dropdown .button.has-icon:hover rect,
+.event-card.is-warning:hover .dropdown .button.has-icon:hover circle,
+.event-card.is-warning:hover .dropdown .button.has-icon:hover svg {
+  stroke: black;
 }
 
 .event-card .dropdown-menu {
@@ -318,10 +344,54 @@
   color: white !important;
 }
 
+.color-block.is-warning .event-box__variable {
+  background: rgba(255, 255, 255, 0.4);
+}
+
 .color-block.is-warning .event-box__variable:hover,
 .color-block.is-primary .event-box__variable:hover {
   background: rgba(255, 255, 255, 1);
   color: black;
+}
+
+.color-block.is-warning .event-box__variable {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.color-block.is-warning .event-box__variable:hover {
+  border-color: rgba(0, 0, 0, 0.8);
+}
+
+.color-block.is-warning .has-text-light {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.color-block.is-warning .has-text-light:hover {
+  color: rgba(0, 0, 0, 1.0) !important;
+}
+
+.color-block.is-warning .has-stroke-light svg {
+  stroke: rgba(0, 0, 0, 0.7);
+}
+
+.color-block.is-warning .has-stroke-light:hover svg {
+  stroke: rgba(0, 0, 0, 1.0);
+}
+
+.color-block.is-warning .drag-handle line,
+.color-block.is-warning .drag-handle path,
+.color-block.is-warning .drag-handle rect,
+.color-block.is-warning .drag-handle circle,
+.color-block.is-warning .drag-handle svg {
+  stroke: rgba(0, 0, 0, 0.5);
+}
+
+.color-block.is-warning .drag-handle:hover line,
+.color-block.is-warning .drag-handle:hover path,
+.color-block.is-warning .drag-handle:hover rect,
+.color-block.is-warning .drag-handle:hover circle,
+.color-block.is-warning .drag-handle:hover svg {
+  stroke: black;
 }
 
 // This could let us animate the width of the button boxes on the event form so it doesn't jump around

@@ -18,9 +18,10 @@ export const DiscoverEventsListing =
             // console.log(this.props.publicEventsData)
             events = this.props.publicEventsData.publicEvents.map((event) => (
               <EventCard
+                {...this.props}
                 key={`event-${event.id}`}
                 event={event}
-                linkTo={formatRoute(routes.NEW_EVENT_FROM_PARENT, { parentEventId: event.id })}
+                linkTo={formatRoute(routes.NEW_EVENT_FROM_PARENT, { eventId: event.id })}
               />
             ))
           }

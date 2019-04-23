@@ -4,9 +4,10 @@ import Helmet from 'react-helmet'
 import classnames from 'classnames'
 import {
   AlertTriangle,
+  CheckCircle,
+  Edit,
   PlusCircle,
   StopCircle,
-  CheckCircle
 } from 'react-feather'
 import { formatRoute } from 'react-router-named-routes'
 import { Link } from 'react-router-dom'
@@ -51,6 +52,15 @@ export const EventPage =
 
               static contextTypes = {
                 router: PropTypes.object.isRequired
+              }
+
+              handleEdit = (e) => {
+                e.preventDefault()
+
+                const event = this.props.eventData.event
+                const editPath = formatRoute(routes.EDIT_EVENT, { eventId: event.id })
+
+                this.props.history.push(editPath)
               }
 
               handleActivate = (e) => {
@@ -143,7 +153,7 @@ export const EventPage =
 
                 if (!isEventAuthor) {
                   const createEventFromParentRoute = formatRoute(
-                    routes.NEW_EVENT_FROM_PARENT, { parentEventId: event.id }
+                    routes.NEW_EVENT_FROM_PARENT, { eventId: event.id }
                   )
 
                   notEventAuthorButtons = (
@@ -157,6 +167,17 @@ export const EventPage =
                 } else {
                   eventAuthorButtons = (
                     <>
+                      <button
+                        className={classnames(
+                          'button',
+                          'is-small',
+                          'is-outlined',
+                          'is-link'
+                        )}
+                        onClick={this.handleEdit}
+                      >
+                        <Edit /> &nbsp;Edit
+                      </button>
                       <button
                         className={classnames(
                           'button',

@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'
+import { formatRoute } from 'react-router-named-routes'
 import {
   AlertTriangle,
   StopCircle,
-  CheckCircle
+  CheckCircle,
+  Edit
 } from 'react-feather'
 import { toast } from 'react-toastify'
 import { Settings } from 'react-feather'
@@ -14,6 +16,7 @@ import { currentUserQuery } from '~/queries/currentUserQuery'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { brandColor } from '~/utils/brandColors'
 import { EventDescription } from '~/components/events/EventDescription'
+import * as routes from '~/../config/routes'
 
 export const EventCard = 
   graphql(currentUserQuery, { name: 'currentUserData' })(
@@ -33,7 +36,16 @@ export const EventCard =
           }
         }
 
-        handleEditClick = (e) => {
+        handleEdit = (e) => {
+          e.preventDefault()
+
+          const event = this.props.event
+          const editPath = formatRoute(routes.EDIT_EVENT, { eventId: event.id })
+          
+          this.props.history.push(editPath)
+        }
+
+        handleMenuClick = (e) => {
           e.preventDefault()
 
           if (this.state.editDropdownActive) {
@@ -109,13 +121,19 @@ export const EventCard =
                 <div className='dropdown-trigger'>
                   <button
                     className='button has-icon has-icon__transparent'
-                    onClick={this.handleEditClick}
+                    onClick={this.handleMenuClick}
                   >
                     <Settings />
                   </button>
                 </div>
                 <div className='dropdown-menu' id='dropdown-menu6' role='menu'>
                   <div className='dropdown-content'>
+                    <div
+                      className='dropdown-item'
+                      onClick={this.handleEdit}
+                    >
+                      <Edit /> &nbsp;Edit
+                    </div>
                     <div
                       className='dropdown-item'
                       onClick={this.handleActivate}
