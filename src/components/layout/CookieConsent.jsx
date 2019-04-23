@@ -41,7 +41,6 @@ export const CookieConsent = ReactTimeout(
     }
 
     render () {
-      console.log(this.state.hidden)
       return (
         <div
           className={classnames(

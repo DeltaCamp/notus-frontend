@@ -11,7 +11,7 @@ import {
 import { toast } from 'react-toastify'
 import { Settings } from 'react-feather'
 import { graphql } from 'react-apollo'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { brandColor } from '~/utils/brandColors'
@@ -71,6 +71,16 @@ export const EventCard =
           document.addEventListener('mousedown', this.handleClick, false)
         }
 
+        handleEventCardClick = (e) => {
+          e.preventDefault()
+
+          toast('You will need to sign up (or sign in) to create events.')
+
+          this.setState({
+            redirect: true
+          })
+        }
+        
         handleActivate = (e) => {
           e.preventDefault()
 
@@ -97,15 +107,29 @@ export const EventCard =
           })
         }
 
+        author = () => {
+          const { currentUserData, event } = this.props
+          const { currentUser } = currentUserData
+          const { user } = event
+
+          if (currentUser && (currentUser.id === parseInt(user.id, 10))) {
+            return 'you'
+          } else {
+            return (user.name || user.email)
+          }
+        }
+
         render () {
           let editDropdown
 
           const { currentUserData, editable, event } = this.props
-          const { currentUser } = currentUserData
-          const { user } = event
 
-          if (!currentUser) {
-            return null
+          if (this.state.redirect) {
+            if (currentUserData && currentUserData.currentUser) {
+              return <Redirect to={this.props.linkTo} />
+            } else {
+              return <Redirect to={routes.SIGNUP} />
+            }
           }
 
           if (editable) {
@@ -159,11 +183,10 @@ export const EventCard =
           }
 
           return (
-            <Link
+            <button
               key={`event-${event.id}`}
-              to={this.props.linkTo}
+              onClick={this.handleEventCardClick}
               ref={node => {this.node = node}}
-
               className={classnames(
                 'button',
                 'event-card',
@@ -175,8 +198,6 @@ export const EventCard =
                 }
               )}
             >
-              
-
               <div className="event-card__header">
                 <p className='event-card__title is-size-5'>
                   {event.title || <EventDescription event={event} brief={true} />}
@@ -186,13 +207,13 @@ export const EventCard =
 
               <div className='event-card__footer'>
                 <p className='event-card__author is-size-7'>
-                  by {currentUser.id === parseInt(user.id, 10) ? 'you' : user.name || user.email}
+                  by {this.author()}
                 </p>
                 <div className='event-card__icons has-text-right'>
                   {editable ? editDropdown : ''}
                 </div>
               </div>
-            </Link>
+            </button>
           )
         }
       }
