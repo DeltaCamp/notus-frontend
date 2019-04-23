@@ -9,8 +9,11 @@ export const AbiEventSelect = graphql(abiEventsQuery, { name: 'abiEventsQuery' }
     const { abiEventsQuery } = props
     const { abiEvents, loading, error } = abiEventsQuery
 
-    let options
-    if (!loading && !error) {
+    let options = []
+
+    if (error) {
+      console.error(error)
+    } else if (!loading) {
       options = abiEvents.map(abiEvent => {
         return {
           label: `${abiEvent.abi.name} ${abiEvent.name}`,
@@ -18,8 +21,6 @@ export const AbiEventSelect = graphql(abiEventsQuery, { name: 'abiEventsQuery' }
           abiEvent
         }
       })
-    } else {
-      options = []
     }
 
     const value = options.find(option => option.value === props.value)

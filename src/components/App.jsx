@@ -10,7 +10,7 @@ import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
 import { EventPage } from '~/components/pages/events/EventPage'
 import { MyEventsPage } from '~/components/pages/events/MyEventsPage'
-import { NewEventPage } from '~/components/pages/events/NewEventPage'
+import { EditEventPage } from '~/components/pages/events/EditEventPage'
 import { PasswordResetPage } from '~/components/pages/PasswordResetPage'
 import { SignInPage } from '~/components/pages/SignInPage'
 import { SignUpPage } from '~/components/pages/SignUpPage'
@@ -63,9 +63,9 @@ export const App = withRouter(hot(module)(
               <Switch location={this.props.location}>
                 <Route exact path={routes.HOME} component={HomePage} />
 
-                <Route exact path={routes.EDIT_EVENT} component={NewEventPage} />
-                <Route exact path={routes.NEW_EVENT} component={NewEventPage} />
-                <Route exact path={routes.NEW_EVENT_FROM_PARENT} component={NewEventPage} />
+                <Route exact path={routes.EDIT_EVENT} component={EditEventPage} />
+                <Route exact path={routes.NEW_EVENT} component={EditEventPage} />
+                <Route exact path={routes.NEW_EVENT_FROM_PARENT} component={EditEventPage} />
                 <Route exact path={routes.MY_EVENTS} component={MyEventsPage} />
                 <Route exact path={routes.DISCOVER_EVENTS} component={DiscoverEventsPage} />
                 <Route exact path={routes.EVENT} component={EventPage} />

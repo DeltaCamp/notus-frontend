@@ -7,21 +7,17 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { formatRoute } from 'react-router-named-routes'
 import { orderBy } from 'lodash'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import { CheckCircle, PlusCircle } from 'react-feather'
+import { PlusCircle } from 'react-feather'
 import { toast } from 'react-toastify'
 import { graphql } from 'react-apollo'
 
+import { EditEventDrawer } from '~/components/EditEventDrawer'
+import { EditMatcherDrawer } from '~/components/EditMatcherDrawer'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { FrequencyTitle } from '~/components/events/FrequencyTitle'
-import { ContractForm } from '~/components/forms/ContractForm'
-import { ScopeSelect } from '~/components/ScopeSelect'
-import { AbiEventSelect } from '~/components/AbiEventSelect'
-import { Modal } from '~/components/Modal'
-import { Drawer } from '~/components/Drawer'
 import { EventMatcher } from '~/components/events/EventMatcher'
-import { MatcherForm } from '~/components/recipes/MatcherForm'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { createEventMutation } from '~/mutations/createEventMutation'
@@ -32,11 +28,8 @@ import { altBrandColor, brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { IsAuthed } from '~/components/IsAuthed'
 import * as routes from '~/../config/routes'
-import {
-  SCOPES
-} from '~/constants'
 
-export const NewEventPage = 
+export const EditEventPage = 
   IsAuthed(
     graphql(eventQuery, {
       name: 'eventData',
@@ -48,7 +41,7 @@ export const NewEventPage =
       graphql(createEventMutation, { name: 'createEventMutation' })(
         graphql(updateEventMutation, { name: 'updateEventMutation' })(
           graphql(updateMatcherMutation, { name: 'updateMatcherMutation' })(
-            ReactTimeout(class _NewEventPage extends Component {
+            ReactTimeout(class _EditEventPage extends Component {
               state = {
                 event: {
                   scope: 0,
@@ -68,7 +61,6 @@ export const NewEventPage =
                 },
                 editMatcherIndex: null,
                 showEventForm: false,
-                showAddContract: false
               }
 
               static propTypes = {
@@ -192,19 +184,6 @@ export const NewEventPage =
                 this.handleSetEditMatcher(null)
               }
 
-              showAddContract = (e) => {
-                e.preventDefault()
-                this.setState({
-                  showAddContract: true
-                })
-              }
-
-              hideAddContract = () => {
-                this.setState({
-                  showAddContract: false
-                })
-              }
-
               handleOnCreateAbi = (abi) => {
                 let event = {...this.state.event}
                 if (abi.abiEvents.length) {
@@ -212,7 +191,6 @@ export const NewEventPage =
                 }
                 
                 this.setState({
-                  showAddContract: false,
                   event
                 })
               }
@@ -242,15 +220,6 @@ export const NewEventPage =
 
                 this.setState({ showEventForm: false })
               }
-
-              // onChangeScope = (option) => {
-              //   this.setState({
-              //     event: {
-              //       ...this.state.event,
-              //       scope: option.value
-              //     }
-              //   })
-              // }
 
               onChangeScope = (option) => {
                 const matchers = this.state.event.matchers.map(matcher => {
@@ -342,8 +311,6 @@ export const NewEventPage =
               render () {
                 let colorClass = 'is-dark'
                 let altColorClass = 'is-blue'
-                let variableForm = null
-                let abiEventSelect, addContract
 
                 const { eventData } = this.props
 
@@ -371,33 +338,6 @@ export const NewEventPage =
                       }
                     }
                   }
-                }
-
-                if (editMatcher) {
-                  variableForm = (
-                    <form className='form drawer-form'>
-                      <MatcherForm
-                        key={`matcher-${this.state.matcherIndex}`}
-                        matcher={editMatcher}
-                        scope={this.state.event.scope}
-                        onChange={
-                          (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
-                        }
-                      />
-
-                      <div className='buttons'>
-                        <button
-                          className='button has-icon has-stroke-green'
-                          onClick={this.handleCloseMatcherEdit}
-                        >
-                          <CheckCircle
-                            className='icon__button has-stroke-green'
-                          />
-                        </button>
-                      </div>
-
-                    </form>
-                  )
                 }
 
                 const matcherSentences = (
@@ -463,22 +403,6 @@ export const NewEventPage =
                   </>
                 )
 
-                if (this.state.event.scope === SCOPES.CONTRACT_EVENT) {
-                  abiEventSelect =
-                    <AbiEventSelect
-                      placeholder='Choose an existing contract ...'
-                      value={this.state.event.abiEventId}
-                      onChange={this.onChangeAbiEvent}
-                      className='is-wide has-margin-right-auto'
-                    />
-                  addContract = <button
-                    onClick={this.showAddContract}
-                    className='button is-pink is-outlined'
-                  >
-                    Or Add a New Contract
-                  </button>
-                }
-
                 return (
                   <div className='is-positioned-absolutely'>
                     <Helmet
@@ -487,53 +411,22 @@ export const NewEventPage =
 
                     <ScrollToTop />
 
-                    <Drawer
-                      show={this.isEditingMatcher()}
-                      onClose={this.handleCloseMatcherEdit}
-                    >
-                      {variableForm}
-                    </Drawer>
-
-                    <Drawer
-                      show={this.state.showEventForm}
+                    <EditEventDrawer
+                      event={this.state.event}
+                      onChangeScope={this.onChangeScope}
+                      onChangeAbiEvent={this.onChangeAbiEvent}
+                      onCreateAbi={this.handleOnCreateAbi}
+                      isOpen={this.state.showEventForm}
                       onClose={this.handleHideEventForm}
-                    >
-                      <form className='form drawer-form'>
-                        <div className='buttons'>
-                          <ScopeSelect
-                            value={this.state.event.scope}
-                            onChange={this.onChangeScope}
-                          />
-                          {abiEventSelect}
-                        </div>
-                        {addContract}
+                    />
 
-                        <div className='buttons'>
-                          <button
-                            className='button has-icon has-stroke-green'
-                            onClick={this.handleHideEventForm}
-                          >
-                            <CheckCircle
-                              className='icon__button has-stroke-green'
-                            />
-                          </button>
-                        </div>
-                      </form>
-                    </Drawer>
-
-                    <Modal
-                      isOpen={this.state.showAddContract}
-                      handleClose={this.hideAddContract}
-                      isLarge={true}
-                    >
-                      {
-                        this.state.showAddContract && 
-                        <ContractForm
-                          onCancel={this.hideAddContract}
-                          onCreate={this.handleOnCreateAbi}
-                        />
-                      }
-                    </Modal>
+                    <EditMatcherDrawer
+                      isOpen={this.isEditingMatcher()}
+                      matcher={editMatcher}
+                      onClose={this.handleCloseMatcherEdit}
+                      scope={this.state.event.scope}
+                      onChangeMatcher={(updatedMatcher) => this.onChangeMatcher(updatedMatcher)}
+                    />
 
                     <section className='section section--main-content'>
                       <div className={`container-fluid pb20 is-dark`}>
