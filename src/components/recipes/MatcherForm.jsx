@@ -7,9 +7,8 @@ import { SourceSelect } from '~/components/SourceSelect'
 import { OperatorSelect } from '~/components/OperatorSelect'
 import { OperandDataTypeSelect } from '~/components/OperandDataTypeSelect'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
-import { AbiEventInputSelect } from '~/components/AbiEventInputSelect'
 import { isValidDataTypeOperator } from '~/utils/isValidDataTypeOperator'
-import { OPERATORS, OPERAND_DATA_TYPE_LABELS } from '~/constants'
+import { SOURCES, OPERATORS, OPERAND_DATA_TYPE_LABELS } from '~/constants'
 
 export const MatcherForm = graphql(sourcesQuery, {
   name: 'sourcesQuery'  
@@ -18,16 +17,26 @@ export const MatcherForm = graphql(sourcesQuery, {
     static propTypes = {
       matcher: PropTypes.object.isRequired,
       onChange: PropTypes.func.isRequired,
-      scope: PropTypes.number
+      scope: PropTypes.number,
+      eventAbiEventId: PropTypes.number
     }
 
     onChangeSource = (option) => {
       const clone = deepCloneMatcher(this.props.matcher)
       clone.source = option.value
 
-      const { sources } = this.props.sourcesQuery
-      const source = sources.find(s => s.source === option.value)
-      if (!isValidDataTypeOperator(source.dataType, clone.operator)) {
+      let sourceDataType
+      if (option.value === SOURCES.CONTRACT_EVENT_INPUT) {
+        const { abiEventInput } = option
+        sourceDataType = abiEventInput.type
+        clone.abiEventInputId = parseInt(abiEventInput.id, 10)
+      } else {
+        const { sources } = this.props.sourcesQuery
+        const source = sources.find(s => s.source === option.value)
+        sourceDataType = source.dataType
+      }
+
+      if (!isValidDataTypeOperator(sourceDataType, clone.operator)) {
         clone.operator = OPERATORS.EQ
       }
 
@@ -52,16 +61,18 @@ export const MatcherForm = graphql(sourcesQuery, {
       this.props.onChange(clone)
     }
 
-    onChangeabiEventInput = (abiEventInput) => {
+    onChangeAbiEventInput = (abiEventInput) => {
       const clone = deepCloneMatcher(this.props.matcher)
       clone.abiEventInput = abiEventInput
+      console.log(abiEventInput)
       this.props.onChange(clone)
     }
 
     render () {
-      const { matcher, scope } = this.props
+      const { abiEventId, matcher, scope } = this.props
+      const abiEventInputId = matcher.abiEventInputId || (matcher.abiEventInput || {}).id
 
-      let operandInput, operandDataTypeSelect, abiEventInputSelect
+      let operandInput, operandDataTypeSelect
 
       if (matcher.operator !== 0) {
         operandInput =
@@ -79,23 +90,19 @@ export const MatcherForm = graphql(sourcesQuery, {
           />
       }
 
-      if (matcher.source === 'abiEventInput') {
-        abiEventInputSelect = (
-          <AbiEventInputSelect value={matcher.abiEventInput} onChange={this.onChangeabiEventInput} />
-        )
-      }
-
       return (
         <>
           <SourceSelect
+            abiEventId={abiEventId}
+            abiEventInputId={abiEventInputId}
             value={matcher.source}
             onChange={this.onChangeSource}
             scope={scope}
             autoFocus
           />
-          {abiEventInputSelect}
           <OperatorSelect
             source={matcher.source}
+            abiEventInputId={abiEventInputId}
             value={matcher.operator}
             onChange={this.onChangeOperator}
           />

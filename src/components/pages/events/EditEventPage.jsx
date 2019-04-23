@@ -85,7 +85,7 @@ export const EditEventPage =
                   && this.state.freshlyMounted
                 ) {
                   const event = this.props.eventData.event
-                  let { id, parentId, isPublic, scope } = event
+                  let { id, parentId, isPublic, scope, abiEventId } = event
 
                   const matchers = event.matchers.map(
                     matcher => deepCloneMatcher(matcher, this.isCreating())
@@ -104,13 +104,14 @@ export const EditEventPage =
                     parentId,
                     isPublic,
                     scope,
+                    abiEventId,
                     matchers: orderBy(matchers, 'order')
                   }
 
                   this.setState({
                     event: newEventObject,
                     freshlyMounted: false
-                  }, () => { console.log(this.state.event)})
+                  })
                 }
               }
 
@@ -424,6 +425,7 @@ export const EditEventPage =
                       isOpen={this.isEditingMatcher()}
                       matcher={editMatcher}
                       onClose={this.handleCloseMatcherEdit}
+                      abiEventId={this.state.event.abiEventId}
                       scope={this.state.event.scope}
                       onChangeMatcher={(updatedMatcher) => this.onChangeMatcher(updatedMatcher)}
                     />

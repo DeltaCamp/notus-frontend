@@ -8,6 +8,7 @@ import { MatcherForm } from '~/components/recipes/MatcherForm'
 export class EditMatcherDrawer extends PureComponent {
   static propTypes = {
     scope: PropTypes.number,
+    abiEventId: PropTypes.number,
     matcher: PropTypes.object,
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
@@ -24,6 +25,7 @@ export class EditMatcherDrawer extends PureComponent {
           <form className='form drawer-form'>
             <MatcherForm
               matcher={this.props.matcher}
+              abiEventId={this.props.abiEventId}
               scope={this.props.scope}
               onChange={this.props.onChangeMatcher}
             />

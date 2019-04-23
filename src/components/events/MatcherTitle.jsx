@@ -6,6 +6,7 @@ import { OPERATOR_LABELS, OPERAND_DATA_TYPE_LABELS } from '~/constants'
 export const MatcherTitle = function ({ isFirst, isLast, matcher }) {
   const {
     source,
+    abiEventInputId,
     operator,
     operand,
     operandDataType
@@ -16,7 +17,7 @@ export const MatcherTitle = function ({ isFirst, isLast, matcher }) {
 
   return (
     <span>
-      {andWord} the <SourceTitle source={source} /> {OPERATOR_LABELS[operator]} {operand} {OPERAND_DATA_TYPE_LABELS[operandDataType]} {lastWord}
+      {andWord} the <SourceTitle source={source} abiEventInputId={abiEventInputId} /> {OPERATOR_LABELS[operator]} {operand} {OPERAND_DATA_TYPE_LABELS[operandDataType]} {lastWord}
     </span>
   )
 }

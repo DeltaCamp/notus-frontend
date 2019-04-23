@@ -11,6 +11,10 @@ export const INFO = 'info'
 export const WARNING = 'warning'
 export const DANGER = 'danger'
 
+export const SOURCES = {
+  CONTRACT_EVENT_INPUT: 'abiEventInput'
+}
+
 export const SCOPES = {
   TRANSACTION: 0,
   BLOCK: 1,

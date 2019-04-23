@@ -39,28 +39,6 @@ export class HomePage extends Component {
                 <p>
                   <a href='https://docs.notus.network'>Read the Developer Documentation</a>
                 </p>
-                {/* <Query query={web3Queries.networkIdQuery}>
-                  {({ data }) => {
-                    const wrongNetwork = data && data.networkId && allowedNetworkIds().indexOf(data.networkId) === -1
-
-                    if (wrongNetwork) {
-                      return <ErrorMessage errorMessage={
-                        `No hooks available on the currently selected Ethereum network. (Wrong network?)`
-                      } />
-                    } else {
-                      return (
-                        <>
-                          <h5 className='is-size-5 has-text-grey-dark is-uppercase has-text-weight-bold'>
-                            Your WebHooks
-                          </h5>
-                          <br />
-
-                          <HooksList location={this.props.location} />
-                        </>
-                      )
-                    }
-                  }}
-                </Query> */}
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ export const abiEventsQuery = gql`
       id
       name
       abi {
+        id
         name
       }
       abiEventInputs {

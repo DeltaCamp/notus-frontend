@@ -12,9 +12,6 @@ export const ABIUpload = class _ABIUpload extends PureComponent {
   }
 
   handleDrop = (acceptedFiles) => {
-
-    console.log(acceptedFiles)
-
     const reader = new FileReader()
     reader.onabort = () => console.log('file reading was aborted')
     reader.onerror = () => this.props.onError('could not load file', acceptedFiles)

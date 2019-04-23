@@ -31,30 +31,6 @@ export const EventMatcher =
       this.props.handleRemoveMatcher(this.props.index)
     }
 
-    // convertTemplate = (matcher) => {
-    //   let {
-    //     operand,
-    //     operator,
-    //     source
-    //   } = matcher
-
-    //   // operandDataType is units: ether, gwei, etc
-
-    //   // console.log('template lookup is: ', `templates.${source}.${operator}`)
-    //   const template = CONSTANTS.en.templates[source][operator]
-
-
-    //   if (!template) {
-    //     return operand
-    //   }
-
-    //   if (operand === '') {
-    //     return template
-    //   }
-
-    //   return template.replace(/(\[.*\])/, operand)
-    // }
-
     render () {
       const {
         isFirst,
