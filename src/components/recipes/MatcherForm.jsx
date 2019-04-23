@@ -5,10 +5,9 @@ import { graphql } from 'react-apollo'
 import { sourcesQuery } from '~/queries/sourcesQuery'
 import { SourceSelect } from '~/components/SourceSelect'
 import { OperatorSelect } from '~/components/OperatorSelect'
-import { OperandDataTypeSelect } from '~/components/OperandDataTypeSelect'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidDataTypeOperator } from '~/utils/isValidDataTypeOperator'
-import { SOURCES, OPERATORS, OPERAND_DATA_TYPE_LABELS } from '~/constants'
+import { SOURCES, OPERATORS } from '~/constants'
 
 export const MatcherForm = graphql(sourcesQuery, {
   name: 'sourcesQuery'  

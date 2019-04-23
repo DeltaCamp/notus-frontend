@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { SourceTitle } from '~/components/SourceTitle'
-import { OPERATOR_LABELS, OPERAND_DATA_TYPE_LABELS } from '~/constants'
+import { OPERATOR_LABELS } from '~/constants'
 
 export const MatcherTitle = function ({ isFirst, isLast, matcher }) {
   const {

@@ -45,28 +45,6 @@ export const OPERATOR_LABELS = {
   [OPERATORS.GTE]: 'is greater than or equal to',
 }
 
-export const OPERAND_DATA_TYPES = {
-  WEI: 0,
-  KWEI: 1,
-  MWEI: 2,
-  GWEI: 3,
-  MICROETHER: 4,
-  MILLIETHER: 5,
-  ETHER: 6,
-  NUMBER: 7
-}
-
-export const OPERAND_DATA_TYPE_LABELS = {
-  [OPERAND_DATA_TYPES.WEI]: 'Wei',
-  [OPERAND_DATA_TYPES.KWEI]: 'Kwei (babbage)',
-  [OPERAND_DATA_TYPES.MWEI]: 'Mwei (lovelace)',
-  [OPERAND_DATA_TYPES.GWEI]: 'Gwei (shannon)',
-  [OPERAND_DATA_TYPES.MICROETHER]: 'Microether (szabo)',
-  [OPERAND_DATA_TYPES.MILLIETHER]: 'Milliether (finney)',
-  [OPERAND_DATA_TYPES.ETHER]: 'Ether',
-  [OPERAND_DATA_TYPES.NUMBER]: 'Number',
-}
-
 export const FREQUENCIES = {
   EVERY_TIME: '0',
   ONLY_ONCE: '1'
