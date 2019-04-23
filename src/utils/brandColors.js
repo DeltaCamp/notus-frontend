@@ -3,7 +3,7 @@ const classes = [
   'is-success',
   'is-purple',
   'is-info',
-  'is-fun',
+  'is-pink',
   'is-warning',
   // 'is-danger',
   // 'is-primary',

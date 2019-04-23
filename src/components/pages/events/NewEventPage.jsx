@@ -472,7 +472,7 @@ export const NewEventPage =
                     />
                   addContract = <button
                     onClick={this.showAddContract}
-                    className='button is-fun is-outlined'
+                    className='button is-pink is-outlined'
                   >
                     Or Add a New Contract
                   </button>

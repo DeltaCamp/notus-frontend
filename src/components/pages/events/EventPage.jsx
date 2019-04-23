@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import classnames from 'classnames'
 import {
   AlertTriangle,
+  Cast,
   CheckCircle,
   Edit,
   PlusCircle,
@@ -79,9 +80,34 @@ export const EventPage =
                     'eventsQuery',
                     'publicEventsQuery',
                   ],
-                }).then((mutationResult) => {
+                }).then(({ data: { updateEvent } }) => {
                   toast.dismiss()
-                  toast.success(`Event ${event.isActive ? 'deactivated' : 're-activated'}`)
+                  toast.success(`Event ${updateEvent.isActive ? 're-activated' : 'deactivated'}`)
+                }).catch(error => {
+                  toast.error('Error while updating event')
+                  console.error(error)
+                })
+              }
+
+              handlePublish = (e) => {
+                e.preventDefault()
+
+                const event = this.props.eventData.event
+
+                this.props.updateEventMutation({
+                  variables: {
+                    event: {
+                      id: event.id,
+                      isPublic: !event.isPublic
+                    }
+                  },
+                  refetchQueries: [
+                    'eventsQuery',
+                    'publicEventsQuery',
+                  ],
+                }).then(({ data: { updateEvent } }) => {
+                  toast.dismiss()
+                  toast.success(`Event ${updateEvent.isPublic ? 'published' : 'made private'}`)
                 }).catch(error => {
                   toast.error('Error while updating event')
                   console.error(error)
@@ -177,6 +203,21 @@ export const EventPage =
                         onClick={this.handleEdit}
                       >
                         <Edit /> &nbsp;Edit
+                      </button>
+                      <button
+                        className={classnames(
+                          'button',
+                          'is-small',
+                          'is-outlined',
+                          'is-pink'
+                        )}
+                        onClick={this.handlePublish}
+                      >
+                        
+                        {event.isPublic
+                          ? (<><Cast /> &nbsp;Make Private</>)
+                          : (<><Cast /> &nbsp;Make Public</>)
+                        }
                       </button>
                       <button
                         className={classnames(
