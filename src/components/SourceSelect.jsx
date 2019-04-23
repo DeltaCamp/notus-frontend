@@ -33,8 +33,6 @@ export const SourceSelect = graphql(sourcesQuery, {
       let props = this.props
       const { value, options } = props
 
-      console.log(this.props)
-
       let selectedOption
       if (value && options) {
         selectedOption = options.find(option => option.value === value)
