@@ -181,9 +181,13 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
                 </div>
               </section>
 
-              <br />
+              <div className='has-text-centered mt50'>
+                By continuing you are agreeing to the Notus <Link to={routes.TERMS_PAGE}>Terms</Link> &amp; <Link to={routes.PRIVACY_PAGE}>Privacy Policy</Link>.
+              </div>
 
-              <div className='card-footer has-text-centered'>
+              <hr />
+
+              <div className='card-footer has-text-centered pb100'>
                 <p className='has-text-weight-bold'>
                   {message}
                 </p>

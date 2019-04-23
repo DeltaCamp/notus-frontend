@@ -8,6 +8,8 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
+import { PrivacyPage } from '~/components/pages/PrivacyPage'
+import { TermsPage } from '~/components/pages/TermsPage'
 import { EventPage } from '~/components/pages/events/EventPage'
 import { MyEventsPage } from '~/components/pages/events/MyEventsPage'
 import { EditEventPage } from '~/components/pages/events/EditEventPage'
@@ -18,6 +20,7 @@ import { ConfirmAndSetPasswordPage } from '~/components/pages/ConfirmAndSetPassw
 import { AppConfirmPage } from '~/components/pages/AppConfirmPage'
 import { AppUserConfirmPage } from '~/components/pages/AppUserConfirmPage'
 import { Nav } from '~/components/layout/Nav'
+import { CookieConsent } from '~/components/layout/CookieConsent'
 import { FourOhFour } from '~/components/pages/FourOhFour'
 import * as routes from '~/../config/routes'
 import { DiscoverEventsPage } from './pages/events/DiscoverEventsPage';
@@ -53,6 +56,8 @@ export const App = withRouter(hot(module)(
 
           <Nav />
 
+          <CookieConsent />
+
           <TransitionGroup>
             <CSSTransition
               key={this.props.location.key}
@@ -62,6 +67,8 @@ export const App = withRouter(hot(module)(
             >
               <Switch location={this.props.location}>
                 <Route exact path={routes.HOME} component={HomePage} />
+                <Route exact path={routes.PRIVACY_PAGE} component={PrivacyPage} />
+                <Route exact path={routes.TERMS_PAGE} component={TermsPage} />
 
                 <Route exact path={routes.EDIT_EVENT} component={EditEventPage} />
                 <Route exact path={routes.NEW_EVENT} component={EditEventPage} />
