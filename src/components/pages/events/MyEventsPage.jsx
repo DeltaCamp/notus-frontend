@@ -188,9 +188,8 @@ export const MyEventsPage =
 
                                 <br />
 
-                                <div className='listing-grid'>
-                                  <DiscoverEventsListing />
-                                </div>
+                                
+                                <DiscoverEventsListing />
                               </div>
                             </div>
                           </div>

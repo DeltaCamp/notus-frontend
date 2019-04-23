@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
-import { NotusSelect } from '~/components/forms/NotusSelect'
 import { graphql } from 'react-apollo'
 import { IsAuthed } from '~/components/IsAuthed'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
@@ -12,7 +11,19 @@ export const DiscoverEventsPage =
   IsAuthed(
     graphql(currentUserQuery, { name: 'currentUserData' })(
       class _DiscoverEventsPage extends Component {
-        state = {}
+        state = {
+          searchValue: ''
+        }
+
+        handleSearchInputChange = (e) => {
+          e.preventDefault()
+
+          this.setState({
+            searchValue: e.target.value
+          })
+
+
+        }
 
         render () {
           return (
@@ -31,20 +42,23 @@ export const DiscoverEventsPage =
                         Search for a template to base a new event off of:
                       </h4>
 
-                      <NotusSelect
-                        placeholder='Search ...'
-                        value={this.state.searchValue}
-                        onChange={(e) => this.setState({
-                          searchValue: e.target.value
-                        })}
-                        className='mt20'
-                      />
+                      <div className="form">
+                        <input
+                          type='text'
+                          placeholder='Search ...'
+                          value={this.state.searchValue}
+                          onChange={this.handleSearchInputChange}
+                          className='input mt20'
+                        />
+                      </div>
                     </div>
                   </div>
                   <div className='row'>
                     <div className='col-xs-12 has-text-centered mt50'>
-                      <div className='listing-grid mt30'>
-                        <DiscoverEventsListing />
+                      <div className='mt30'>
+                        <DiscoverEventsListing
+                          searchValue={this.state.searchValue}
+                        />
                       </div>
                     </div>
                   </div>

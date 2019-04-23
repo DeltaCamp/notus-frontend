@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
+import { Activity, Power, Search, Send, Star } from 'react-feather'
 import { toast } from 'react-toastify'
 import { withRouter } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'
@@ -77,7 +78,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 onClick={this.closeMobileNav}
                 activeClassName="is-active"
               >
-                Go To App
+                <Send />&nbsp;Go To App
               </NavLink>
               <NavLink
                 exact
@@ -86,13 +87,13 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 onClick={this.closeMobileNav}
                 activeClassName="is-active"
               >
-                Your Account
+                <Star />&nbsp;Your Account
               </NavLink>
               <button
                 className='navbar-item button hide-on-home'
                 onClick={this.handleSignOut}
               >
-                Sign Out
+                <Power />&nbsp;Sign Out
               </button>
             </>
           )
@@ -106,7 +107,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 onClick={this.closeMobileNav}
                 activeClassName="is-active"
               >
-                My Events
+                <Activity />&nbsp;My Events
               </NavLink>
               <NavLink
                 exact
@@ -115,7 +116,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 onClick={this.closeMobileNav}
                 activeClassName="is-active"
               >
-                Discover Events
+                <Search />&nbsp;Discover Events
               </NavLink>
             </>
         }
