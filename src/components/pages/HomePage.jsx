@@ -1,9 +1,25 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { FooterContainer } from '~/components/layout/Footer'
+import {
+  Facebook,
+  FastForward,
+  Instagram,
+  Mail,
+  MessageCircle,
+  Send,
+  Slack,
+  Smartphone,
+  TrendingUp,
+  Twitter,
+  Watch,
+  Zap
+} from 'react-feather'
 import { LandingHero } from '~/components/hooks/LandingHero'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
 // import { CodeBox } from '~/components/CodeBox'
+import * as routes from '~/../config/routes'
 
 export class HomePage extends Component {
   state = {
@@ -35,9 +51,11 @@ export class HomePage extends Component {
         </header>
         <section className='section'>
           <div className='container'>
-            <div className='row pb100 pt50'>
-              <div className='col-xs-10 col-md-9'>
+            <div className='row pb100'>
+              <div className='col-xs-12 col-md-8 col-start-md-5'>
                 <div id="about"></div>
+
+                <Zap /> &nbsp; <TrendingUp /> &nbsp; <FastForward /> &nbsp; <Twitter /> &nbsp; <Facebook /> &nbsp; <Instagram /> &nbsp; <MessageCircle /> &nbsp; <Slack /> &nbsp; <Send /> &nbsp; <Mail /> &nbsp; <Smartphone /> &nbsp; <Watch />
                 <h5 className='is-size-5'>
                   Notify your app's users when you need their attention.
                 </h5>
@@ -51,6 +69,32 @@ export class HomePage extends Component {
                 <p>
                   <a href='https://docs.notus.network'>Read the Developer Documentation</a>
                 </p>
+              </div>
+            </div>
+          </div>
+
+          <div className='container-fluid is-dark has-text-white pb100 pt100 color-block'>
+            <div className='container'>
+              <div className='row'>
+                <div className='col-xs-12 col-md-8 col-start-md-3'>
+                  <div id="about"></div>
+
+                  <h1 className='is-size-1'>
+                    Automate your experience. 
+                  </h1>
+                  <h4 className='is-size-4'>
+                    Use common events &amp; actions created by the community, or build your own trigger and response system.
+                  </h4>
+
+                  <br />
+
+                  <Link
+                    className='button is-small is-light is-outlined'
+                    to={routes.SIGNUP}
+                  >
+                    Let's Get Started
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
