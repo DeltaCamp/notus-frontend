@@ -49,7 +49,7 @@ export const DiscoverEventsListing =
           filteredEvents = filteredEvents.slice(0, 10)
         }
         // console.log(filteredEvents)
-        // filteredEvents = filteredEvents.concat(filteredEvents).concat(filteredEvents).concat(filteredEvents).concat(filteredEvents)
+        filteredEvents = filteredEvents.concat(filteredEvents).concat(filteredEvents).concat(filteredEvents).concat(filteredEvents)
 
         return (
           filteredEvents.length > 0 ?

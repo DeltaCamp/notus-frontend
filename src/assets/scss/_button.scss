@@ -252,11 +252,59 @@ button.button.is-small:active {
 }
 
 .has-stroke-green {
-  stroke: $success;
+  stroke: $green;
 }
 
 .has-stroke-red {
+  stroke: $red;
+}
+
+.has-stroke-blue {
+  stroke: $blue;
+}
+
+.has-stroke-pink {
+  stroke: $pink;
+}
+
+.has-stroke-purple {
+  stroke: $purple;
+}
+
+.has-stroke-orange {
+  stroke: $orange;
+}
+
+.has-stroke-cyan {
+  stroke: $cyan;
+}
+
+.has-stroke-primary {
+  stroke: $primary;
+}
+
+.has-stroke-link {
+  stroke: $link;
+}
+
+.has-stroke-info {
+  stroke: $info;
+}
+
+.has-stroke-danger {
   stroke: $danger;
+}
+
+.has-stroke-warning {
+  stroke: $warning;
+}
+
+.has-stroke-grey {
+  stroke: $grey;
+}
+
+.has-stroke-dark {
+  stroke: $dark;
 }
 
 .has-stroke-light {

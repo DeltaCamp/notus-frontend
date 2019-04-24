@@ -10,7 +10,7 @@
   text-align: left;
   text-transform: none;
   transform: scale3d(1.0, 1.0, 1.0);
-  transition: transform 75ms ease-in-out;
+  transition: all 100ms ease-in-out !important;
   will-change: transform;
   white-space: initial;
 

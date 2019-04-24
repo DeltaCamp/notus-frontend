@@ -34,7 +34,7 @@ export const Footer = class _Footer extends Component {
                 <Link to={routes.PRIVACY_PAGE}>Privacy</Link>
               </li>
               <li className='list-item is-inline-block'>
-                <a href='https://twitter.com/notusnotifications'>Feedback</a>
+                <a href='https://twitter.com/NotusEvents'>Feedback</a>
               </li>
             </ul>
 
