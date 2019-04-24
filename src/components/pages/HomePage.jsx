@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { FooterContainer } from '~/components/layout/Footer'
+import Vivus from 'vivus'
 import {
   Facebook,
   FastForward,
@@ -24,6 +25,80 @@ import * as routes from '~/../config/routes'
 export class HomePage extends Component {
   state = {
     searchValue: ''
+  }
+
+  componentDidMount () {
+    new Vivus(
+      'zap',
+      {
+        duration: 200, pathTimingFunction: Vivus.EASE_OUT
+      }
+    )
+    new Vivus(
+      'trending',
+      {
+        delay: 20, duration: 100, type: 'oneByOne', pathTimingFunction: Vivus.EASE_OUT
+      }
+    )
+    new Vivus(
+      'ffwd',
+      {
+        delay: 40, duration: 100, type: 'delayed'
+      }
+    )
+    new Vivus(
+      'twitter',
+      {
+        delay: 60, duration: 100, type: 'sync', pathTimingFunction: Vivus.EASE_OUT
+      }
+    )
+    new Vivus(
+      'facebook',
+      {
+        duration: 200, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
+      }
+    )
+    new Vivus(
+      'instagram',
+      {
+        duration: 200, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
+      }
+    )
+    new Vivus(
+      'slack',
+      {
+        duration: 200, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
+      }
+    )
+    new Vivus(
+      'message-circle', {
+        duration: 100, type: 'delayed'
+      }
+    )
+    new Vivus(
+      'send',
+      {
+        duration: 100, type: 'delayed'
+      }
+    )
+    new Vivus(
+      'mail',
+      {
+        duration: 100, type: 'delayed'
+      }
+    )
+    new Vivus(
+      'smartphone',
+          {
+        duration: 100, type: 'delayed'
+      }
+    )
+    new Vivus(
+      'watch',
+      {
+        duration: 100, type: 'delayed'
+      }
+    )
   }
 
   handleSearchInputChange = (e) => {
@@ -53,9 +128,9 @@ export class HomePage extends Component {
           <div className='container'>
             <div className='row pb100'>
               <div className='col-xs-12 col-md-8 col-start-md-5'>
-                <div id="about"></div>
+                <div id='about'></div>
 
-                <Zap /> &nbsp; <TrendingUp /> &nbsp; <FastForward /> &nbsp; <Twitter /> &nbsp; <Facebook /> &nbsp; <Instagram /> &nbsp; <MessageCircle /> &nbsp; <Slack /> &nbsp; <Send /> &nbsp; <Mail /> &nbsp; <Smartphone /> &nbsp; <Watch />
+                <Zap id='zap' /> &nbsp; <TrendingUp id='trending' /> &nbsp; <FastForward id='ffwd' /> &nbsp; <Twitter id='twitter' /> &nbsp; <Facebook id='facebook' /> &nbsp; <Instagram id='instagram' /> &nbsp; <Slack id='slack' /> &nbsp; <MessageCircle id='message-circle' /> &nbsp; <Send id='send' /> &nbsp; <Mail id='mail' /> &nbsp; <Smartphone id='smartphone' /> &nbsp; <Watch id='watch' />
                 <h5 className='is-size-5'>
                   Notify your app's users when you need their attention.
                 </h5>
@@ -77,7 +152,7 @@ export class HomePage extends Component {
             <div className='container'>
               <div className='row'>
                 <div className='col-xs-12 col-md-8 col-start-md-3'>
-                  <div id="about"></div>
+                  <div id='about'></div>
 
                   <h1 className='is-size-1'>
                     Automate your experience. 
