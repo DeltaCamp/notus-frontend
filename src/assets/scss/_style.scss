@@ -777,3 +777,23 @@ hr {
   pointer-events: none;
   transition: all 200ms ease-in;
 }
+
+svg.is-small {
+  height: 32px;
+  width: 32px;
+}
+
+svg.is-medium {
+  height: 48px;
+  width: 48px;
+}
+
+svg.is-large {
+  height: 64px;
+  width: 64px;
+}
+
+.home .color-block {
+  // transform: skewY(-2deg);
+  // transform-origin: 1150px;
+}
