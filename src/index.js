@@ -10,6 +10,8 @@ import { AppErrorBoundary } from '~/components/AppErrorBoundary'
 import 'react-toastify/dist/ReactToastify.css'
 import './index.scss'
 
+import 'animate.css/animate.min.css'
+
 window.addEventListener('load', async () => {
   try {
     const client = await apolloClient()

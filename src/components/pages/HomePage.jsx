@@ -3,20 +3,27 @@ import { Link } from 'react-router-dom'
 import { FooterContainer } from '~/components/layout/Footer'
 import Vivus from 'vivus'
 import {
+  Facebook,
   FastForward,
   GitBranch,
   GitCommit,
   GitMerge,
   Instagram,
   Mail,
+  MessageCircle,
+  Send,
   Slack,
+  Smartphone,
   TrendingUp,
-  Twitter
+  Twitter,
+  Watch,
+  Zap
 } from 'react-feather'
 import { SignupForm } from '~/components/SignupForm'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { LandingHero } from '~/components/LandingHero'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
+// import { CodeBox } from '~/components/CodeBox'
 import * as routes from '~/../config/routes'
 
 export class HomePage extends Component {
@@ -24,7 +31,7 @@ export class HomePage extends Component {
     searchValue: ''
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // new Vivus(
     //   'zap',
     //   {
@@ -86,7 +93,7 @@ export class HomePage extends Component {
     //     duration: 100, type: 'delayed'
     //   }
     // )
-    
+
     // new Vivus(
     //   'smartphone',
     //       {
@@ -120,7 +127,7 @@ export class HomePage extends Component {
       }
     )
 
-    
+
   }
 
   handleSearchInputChange = (e) => {
@@ -135,11 +142,11 @@ export class HomePage extends Component {
     this.setState({ success: true })
   }
 
-  render () {
+  render() {
     return (
       <div className='is-positioned-absolutely'>
         <ScrollToTop />
-        
+
         <header className='header'>
           <LandingHero
             setSuccess={this.setSuccess}
@@ -180,7 +187,7 @@ export class HomePage extends Component {
                   id='watch'
                   className='is-large has-stroke-green ml20'
                 /> */}
-                <h5 className='is-size-5'>
+                <h5 className='is-size-5 animated pulse delay-2s'>
                   Notify your app's users when you need their attention.
                 </h5>
                 <br />
@@ -215,7 +222,7 @@ export class HomePage extends Component {
                   <br />
 
                   <h3 className='is-size-3'>
-                    Automate your life. 
+                    Automate your life.
                   </h3>
                   <h5 className='is-size-5'>
                     Use common events &amp; actions created by the Notus community, or build your own trigger &amp; response system.
@@ -251,7 +258,7 @@ export class HomePage extends Component {
                     style={{ maxWidth: 600 }}
                   />
                 </div>
-                
+
                 <div className='mt75 pb100'>
                   <DiscoverEventsListing
                     searchValue={this.state.searchValue}
@@ -284,7 +291,7 @@ export class HomePage extends Component {
                   <br />
 
                   <p>
-                    Use Notus' webhook feature to have any event trigger your own custom code. 
+                    Use Notus' webhook feature to have any event trigger your own custom code.
                   </p>
 
                   <br />
@@ -312,15 +319,15 @@ export class HomePage extends Component {
                 </h2>
 
                 <h6 className='is-size-6'>
-                  Notus is always free to try: 
+                  Notus is always free to try:
                 </h6>
 
-                  <div className='mt30'>
-                    <SignupForm
-                      setSuccess={this.setSuccess}
-                      success={this.state.success}
-                    />
-                  </div>
+                <div className='mt30'>
+                  <SignupForm
+                    setSuccess={this.setSuccess}
+                    success={this.state.success}
+                  />
+                </div>
 
               </div>
             </div>
