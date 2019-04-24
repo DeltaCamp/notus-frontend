@@ -157,17 +157,19 @@ export const EventPage =
 
                 const { eventData, currentUserData } = this.props
                 
+                const error = eventData.error || currentUserData.error
+                const loading = eventData.loading || currentUserData.loading
 
                 if (eventData) {
-                  if (eventData.loading) {
+                  if (loading) {
                     return null
                   } else {
-                    if (eventData.error) {
+                    if (error) {
                       console.warn(eventData.error)
                       return null
                     } else {
                       event = eventData.event
-                      isEventAuthor = (currentUserData.currentUser.id === parseInt(event.user.id, 10))
+                      isEventAuthor = (currentUserData.currentUser && currentUserData.currentUser.id === parseInt(event.user.id, 10))
                       
 
                       colorClass = brandColor(event.id)
