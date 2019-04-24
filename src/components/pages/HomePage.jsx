@@ -13,8 +13,9 @@ import {
   TrendingUp,
   Twitter
 } from 'react-feather'
-import { LandingHero } from '~/components/hooks/LandingHero'
+import { SignupForm } from '~/components/SignupForm'
 import { ScrollToTop } from '~/components/ScrollToTop'
+import { LandingHero } from '~/components/LandingHero'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
 import * as routes from '~/../config/routes'
 
@@ -158,7 +159,7 @@ export class HomePage extends Component {
                 /> */}
                 <TrendingUp
                   id='trending'
-                  className='is-large has-stroke-green'
+                  className='is-large has-stroke-orange'
                 />
                 <FastForward
                   id='ffwd'
@@ -185,7 +186,7 @@ export class HomePage extends Component {
                 <br />
                 <p>
                   Notus allows you to react to Ethereum smart contract events by triggering actions and allowing you to run anything you like.
-                  <br /><br />For example, you could have a webhook that says when <strong>a new Auction Contract is ready</strong> to be bid on, you or your app's users could receive an <strong>SMS</strong>, an <strong>email</strong>, and a <strong>msg in Slack</strong> about it.
+                  <br /><br />For example, you could have a webhook that says when <strong>a new Auction is ready</strong> to be bid on, you or your app's users could receive an <strong>SMS</strong>, an <strong>email</strong>, and a <strong>msg in Slack</strong> with the auction details.
                 </p>
                 <br />
 
@@ -299,8 +300,32 @@ export class HomePage extends Component {
               </div>
             </div>
           </div>
+
         </section>
 
+        <div className='container-fluid color-block is-primary pt100'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-xs-12 col-md-8 col-start-md-3 has-text-centered pt50'>
+                <h2 className='is-size-2'>
+                  Ready to get started?
+                </h2>
+
+                <h6 className='is-size-6'>
+                  Notus is always free to try: 
+                </h6>
+
+                  <div className='mt30'>
+                    <SignupForm
+                      setSuccess={this.setSuccess}
+                      success={this.state.success}
+                    />
+                  </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
         <FooterContainer />
       </div>
     )

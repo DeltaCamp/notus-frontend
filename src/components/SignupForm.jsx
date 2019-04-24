@@ -81,10 +81,10 @@ export const SignupForm =
     render () {
       const thankYou = (
         <div className='accordion accordion--signup-thank-you'>
-          <p className='signup-message-homepage'>
+          <p className='signup-message'>
             <Mail className='icon--signup' />
             Thanks! We've invited: <strong>'{this.state.email}'</strong>
-            <span className='is-size-7 has-text-light'>
+            <span className='is-size-7 signup-message--footer'>
               (Can't find it? Check your spam and 'Updates' folders as well!)
             </span>
           </p>
@@ -123,7 +123,7 @@ export const SignupForm =
                   onMouseOut={this.deactivate}
                 >
                   Get Started
-                  </button>
+                </button>
               </div>
             </div>
             {/* <div className='control checkbox'>

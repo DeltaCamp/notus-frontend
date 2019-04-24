@@ -289,8 +289,9 @@ label.radio,
 .field.has-addons .button:hover,
 .field.has-addons .button:focus,
 .field.has-addons .button:active {
-  border-color: $cyan;
+  border-color: $yellow;
   border-width: 5px;
+  color: $yellow;
   transform: scale3d(1, 1, 1);
 }
 
@@ -338,6 +339,11 @@ label.radio,
 .accordion--signup-form.accordion-enter-active,
 .accordion--signup-form.accordion-enter-done {
   height: 220px;
+}
+
+.color-block.is-primary .accordion--signup-thank-you.accordion-enter-active,
+.color-block.is-primary .accordion--signup-thank-you.accordion-enter-done {
+  height: 320px;
 }
 
 // REACT SELECT OVERRIDES
