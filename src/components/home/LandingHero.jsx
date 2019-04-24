@@ -20,7 +20,10 @@ export const LandingHero = ({ setSuccess, success }) => {
               </h6>
 
               <div className='mt30'>
-                <SignupForm setSuccess={setSuccess} />
+                <SignupForm
+                  setSuccess={setSuccess}
+                  autoFocus
+                />
               </div>
             </div>
 

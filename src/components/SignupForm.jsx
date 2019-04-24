@@ -21,7 +21,7 @@ export const SignupForm =
       const { mobileOS } = getSystemInfo()
       const touch = (mobileOS === 'iOS' || mobileOS === 'Android')
 
-      if (!touch) {
+      if (!touch && this.props.autoFocus) {
         this.inputRef.current.focus()
       }
     }

@@ -321,6 +321,31 @@ label.radio,
   fill: $yellow;
 }
 
+input.input.is-dark {
+  background-color: lighten($dark, 10%);
+  color: white;
+  text-align: center;
+}
+
+input.input.is-dark:hover,
+input.input.is-dark:focus,
+input.input.is-dark:active {
+  background-color: lighten($dark, 5%);
+}
+
+input.input.is-large {
+  font-size: 2rem;
+  height: 100px;
+  padding: 1rem;
+}
+
+input.input.is-large:hover,
+input.input.is-large:focus,
+input.input.is-large:active {
+  transform: scale3d(1.05, 1.05, 1);
+}
+
+// Accordion
 .event-name-accordion.accordion-enter-active,
 .event-name-accordion.accordion-enter-done {
   height: 180px;
@@ -347,7 +372,6 @@ label.radio,
 }
 
 // REACT SELECT OVERRIDES
-
 .react-select .react-select__control {
   border-radius: 100px !important;
   border-width: 4px;

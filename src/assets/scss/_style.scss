@@ -693,8 +693,7 @@ hr {
 }
 
 .color-block.is-primary {
-  background-color: $cyan;
-  // color: black;
+  background-color: lighten($cyan, 15%);
   color: $purple;
 }
 
@@ -813,4 +812,41 @@ svg.is-large {
 .home .color-block {
   // transform: skewY(-2deg);
   // transform-origin: 1150px;
+}
+
+.bottom-svg, .top-svg {
+  position: absolute;
+  left: 0;
+  height: 8em;
+  width: 100%;
+}
+
+.bottom-svg {
+  bottom: 0;
+  margin-bottom: -1px;
+}
+
+.top-svg {
+  top: -8em;
+  margin-top: 1px;
+}
+
+svg {
+  overflow: visible;
+}
+
+.is-positioned-relatively {
+  position: relative;
+}
+
+.has-fill-dark {
+  fill: $dark;
+}
+
+.has-fill-light {
+  fill: $light;
+}
+
+.has-fill-purple {
+  fill: $purple;
 }
