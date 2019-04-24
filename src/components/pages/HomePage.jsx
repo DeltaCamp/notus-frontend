@@ -3,26 +3,19 @@ import { Link } from 'react-router-dom'
 import { FooterContainer } from '~/components/layout/Footer'
 import Vivus from 'vivus'
 import {
-  Facebook,
   FastForward,
   GitBranch,
   GitCommit,
   GitMerge,
   Instagram,
   Mail,
-  MessageCircle,
-  Send,
   Slack,
-  Smartphone,
   TrendingUp,
-  Twitter,
-  Watch,
-  Zap
+  Twitter
 } from 'react-feather'
 import { LandingHero } from '~/components/hooks/LandingHero'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
-// import { CodeBox } from '~/components/CodeBox'
 import * as routes from '~/../config/routes'
 
 export class HomePage extends Component {

@@ -36,20 +36,10 @@ export const DiscoverEventsListing =
             linkTo={formatRoute(routes.NEW_EVENT_FROM_PARENT, { eventId: event.id })}
           />
         ))
-
-        // events = RECIPES.map((event) => (
-        //   <EventCard
-        //     key={`event-${event.id}`}
-        //     event={event}
-        //   />
-        // ))
-
         
         if (this.props.limit && filteredEvents.length > 10) {
           filteredEvents = filteredEvents.slice(0, 10)
         }
-        // console.log(filteredEvents)
-        filteredEvents = filteredEvents.concat(filteredEvents).concat(filteredEvents).concat(filteredEvents).concat(filteredEvents)
 
         return (
           filteredEvents.length > 0 ?
