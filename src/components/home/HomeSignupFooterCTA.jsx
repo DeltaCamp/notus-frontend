@@ -7,7 +7,7 @@ export class HomeSignupFooterCTA extends Component {
 
   render() {
     return (
-      <div className='container-fluid color-block is-primary pt100 pb100 is-positioned-relatively'>
+      <div className='container-fluid color-block is-primary pt50 pb100 is-positioned-relatively'>
         <SlantSVG
           position='top'
           polygonClass='has-fill-cyan'

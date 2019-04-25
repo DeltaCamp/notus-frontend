@@ -6,7 +6,7 @@ import * as routes from '~/../config/routes'
 export const LeverageTheCommunity = () => {
   
   return (
-    <div className='container-fluid is-purple pb100 pt50 color-block is-positioned-relatively'>
+    <div className='container-fluid is-purple pb50 pt50 color-block is-positioned-relatively'>
       <div className='container'>
         <div className='row'>
           <div className='col-xs-12 col-md-8 col-start-md-3'>

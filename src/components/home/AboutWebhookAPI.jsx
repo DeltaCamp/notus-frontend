@@ -111,7 +111,7 @@ export class AboutWebhookAPI extends Component {
     return (
       <div className='container-fluid is-purple has-text-white pb100 pt100 color-block has-bg has-bg__dark is-positioned-relatively'>
         <div className='container pb100 pt100'>
-          <div className='row pt100'>
+          <div className='row pt50'>
             <div className='col-xs-12 col-md-8 col-start-md-3'>
               <GitBranch id='git-branch' className='is-large' />
               <GitCommit id='git-commit' className='is-large ml30' />
