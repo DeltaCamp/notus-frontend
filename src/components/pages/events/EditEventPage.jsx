@@ -231,26 +231,6 @@ export const EditEventPage =
                 this.setState({ showEventForm: false })
               }
 
-              onChangeScope = (option) => {
-                const matchers = this.state.event.matchers.map(matcher => {
-                  let clone = {...matcher}
-
-                  if (!isValidScopeSource(option.value, matcher.source)) {
-                    clone.source = 'block.number'
-                  }
-
-                  return clone
-                })
-
-                this.setState({
-                  event: {
-                    ...this.state.event,
-                    scope: option.value,
-                    matchers
-                  }
-                })
-              }
-
               isEditingMatcher = () => {
                 return this.state.editMatcherIndex !== null
               }
@@ -275,11 +255,23 @@ export const EditEventPage =
                 })
               }
 
-              onChangeAbiEvent = (option) => {
+              onChangeScopeAndAbiEventId = ({ scope, abiEventId }) => {
+                const matchers = this.state.event.matchers.map(matcher => {
+                  let clone = {...matcher}
+
+                  if (!isValidScopeSource(scope, matcher.source)) {
+                    clone.source = 'block.number'
+                  }
+
+                  return clone
+                })
+
                 this.setState({
                   event: {
                     ...this.state.event,
-                    abiEventId: parseInt(option.value, 10)
+                    matchers,
+                    scope,
+                    abiEventId: parseInt(abiEventId, 10)
                   }
                 })
               }
@@ -420,8 +412,7 @@ export const EditEventPage =
 
                     <EditEventDrawer
                       event={this.state.event}
-                      onChangeScope={this.onChangeScope}
-                      onChangeAbiEvent={this.onChangeAbiEvent}
+                      onChangeScopeAndAbiEventId={this.onChangeScopeAndAbiEventId}
                       onCreateAbi={this.handleOnCreateAbi}
                       isOpen={this.state.showEventForm}
                       onClose={this.handleHideEventForm}

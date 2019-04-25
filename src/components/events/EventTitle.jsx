@@ -5,7 +5,6 @@ import { MatcherTitle } from '~/components/events/MatcherTitle'
 import { FrequencyTitle } from '~/components/events/FrequencyTitle'
 
 export const EventTitle = function ({event, brief = false}) {
-  console.log(event)
   if (event.title)
     return event.title
     

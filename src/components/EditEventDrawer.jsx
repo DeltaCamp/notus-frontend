@@ -4,18 +4,13 @@ import { CheckCircle } from 'react-feather'
 
 import { Modal } from '~/components/Modal'
 import { ContractForm } from '~/components/forms/ContractForm'
-import { AbiEventSelect } from '~/components/AbiEventSelect'
-import { ScopeSelect } from '~/components/ScopeSelect'
+import { ScopeAndAbiEventSelect } from '~/components/forms/ScopeAndAbiEventSelect'
 import { Drawer } from '~/components/Drawer'
-import {
-  SCOPES
-} from '~/constants'
 
 export class EditEventDrawer extends PureComponent {
   static propTypes = {
     event: PropTypes.object.isRequired,
-    onChangeScope: PropTypes.func.isRequired,
-    onChangeAbiEvent: PropTypes.func.isRequired,
+    onChangeScopeAndAbiEventId: PropTypes.func.isRequired,
     onCreateAbi: PropTypes.func.isRequired,
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired
@@ -29,7 +24,6 @@ export class EditEventDrawer extends PureComponent {
   }
 
   showAddContract = (e) => {
-    e.preventDefault()
     this.setState({
       showAddContract: true
     })
@@ -49,24 +43,6 @@ export class EditEventDrawer extends PureComponent {
   }
 
   render () {
-    let abiEventSelect, addContract
-
-    if (this.props.event.scope === SCOPES.CONTRACT_EVENT) {
-      abiEventSelect =
-        <AbiEventSelect
-          placeholder='Choose an existing contract ...'
-          value={this.props.event.abiEventId}
-          onChange={this.props.onChangeAbiEvent}
-          className='is-wide has-margin-right-auto'
-        />
-      addContract = <button
-        onClick={this.showAddContract}
-        className='button is-pink is-outlined'
-      >
-        Or Add a New Contract
-      </button>
-    }
-
     return (
       <>
         <Modal
@@ -88,13 +64,13 @@ export class EditEventDrawer extends PureComponent {
         >
           <form className='form drawer-form'>
             <div className='buttons'>
-              <ScopeSelect
-                value={this.props.event.scope}
-                onChange={this.props.onChangeScope}
+              <ScopeAndAbiEventSelect
+                scope={this.props.event.scope}
+                abiEventId={this.props.event.abiEventId}
+                onChangeScopeAndAbiEvent={this.props.onChangeScopeAndAbiEventId}
+                onAddAbiEvent={this.showAddContract}
               />
-              {abiEventSelect}
             </div>
-            {addContract}
 
             <div className='buttons'>
               <button

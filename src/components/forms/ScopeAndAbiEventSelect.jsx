@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import { graphql } from 'react-apollo'
+import PropTypes from 'prop-types'
 
 import { NotusSelect } from '~/components/forms/NotusSelect'
 import { abiEventsQuery } from '~/queries/abiEventsQuery'
 import { SCOPES, SCOPE_LABELS } from '~/constants'
 
+const debug = require('debug')('notus:ScopeAndAbiEventSelect')
 const NEW_ABI_VALUE = '__ADD_NEW_ABI'
 
 export const ScopeAndAbiEventSelect = graphql(abiEventsQuery, { name: 'abiEventsQuery' })(
@@ -16,7 +18,7 @@ export const ScopeAndAbiEventSelect = graphql(abiEventsQuery, { name: 'abiEvents
       onAddAbiEvent: PropTypes.func.isRequired
     }
 
-    onChange (option) {
+    onChange = (option) => {
       if (option.value === NEW_ABI_VALUE) {
         this.props.onAddAbiEvent()
       } else if (option.abiEvent) {
@@ -51,16 +53,12 @@ export const ScopeAndAbiEventSelect = graphql(abiEventsQuery, { name: 'abiEvents
         options: scopeOptions
       }
 
-      const { abiEventsQuery } = props
+      const { abiEventsQuery } = this.props
       const { abiEvents, loading, error } = abiEventsQuery
       let abiEventOptions = [{
         label: 'Add new abi...',
         value: NEW_ABI_VALUE
       }]
-      const abiEventGroup = {
-        label: 'Contract Event',
-        options: abiEventOptions
-      }
       if (error) {
         console.error(error)
       } else if (!loading) {
@@ -72,15 +70,23 @@ export const ScopeAndAbiEventSelect = graphql(abiEventsQuery, { name: 'abiEvents
           }
         }))
       }
+      const abiEventGroup = {
+        label: 'Contract Event',
+        options: abiEventOptions
+      }
 
       let value
       if (scope === SCOPES.CONTRACT_EVENT) {
-        value = abiEventOptions.find(abiEventOption => abiEventOption.abiEvent.id === abiEventId)
+        value = abiEventOptions.find(abiEventOption => {
+          return abiEventOption.abiEvent && parseInt(abiEventOption.abiEvent.id, 10) === parseInt(abiEventId, 10)
+        })
       } else {
         value = scopeOptions.find(option => option.value === scope)
       }
 
-      return <NotusSelect {...props} value={value} options={[scopeGroup, abiEventGroup]} onChange={this.onChange} />
+      debug(`Scope: ${scope} abiEventId: ${abiEventId} value: `, value)
+
+      return <NotusSelect {...this.props} value={value} options={[scopeGroup, abiEventGroup]} onChange={this.onChange} />
     }
   }
 )
