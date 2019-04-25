@@ -8,6 +8,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
 import { HomePage } from '~/components/pages/HomePage'
+import { AboutPage } from '~/components/pages/AboutPage'
 import { PrivacyPage } from '~/components/pages/PrivacyPage'
 import { TermsPage } from '~/components/pages/TermsPage'
 import { EventPage } from '~/components/pages/events/EventPage'
@@ -67,6 +68,7 @@ export const App = withRouter(hot(module)(
             >
               <Switch location={this.props.location}>
                 <Route exact path={routes.HOME} component={HomePage} />
+                <Route exact path={routes.ABOUT_PAGE} component={AboutPage} />
                 <Route exact path={routes.PRIVACY_PAGE} component={PrivacyPage} />
                 <Route exact path={routes.TERMS_PAGE} component={TermsPage} />
 

@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import * as routes from '~/../config/routes'
 
 export const NotifyDappUsers = () => {
   
@@ -36,12 +38,12 @@ export const NotifyDappUsers = () => {
           {/* <p>
                 <a href='https://docs.notus.network'>Read the Developer Documentation</a>
               </p> */}
-          <a
-            href='faq'
+          <Link
+            to={routes.ABOUT_PAGE}
             className='button is-dark is-small'
           >
             Learn More about Notus
-          </a>
+          </Link>
         </div>
       </div>
     </div>

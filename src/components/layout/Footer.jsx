@@ -13,7 +13,7 @@ export const Footer = class _Footer extends Component {
           <div className='footer--primary'>
             <ul className='footer-list'>
               <li className='list-item is-inline-block'>
-                <a href='/#about'>About</a>
+                <Link to={routes.ABOUT_PAGE}>About</Link>
               </li>
               <li className='list-item is-inline-block'>
                 <a href="mailto:support@notus.network">Support</a>

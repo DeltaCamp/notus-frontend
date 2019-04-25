@@ -77,8 +77,20 @@ h6 {
   font-weight: 500;
 }
 
+p {
+  margin-bottom: 1.25rem;
+}
+
 .has-text-weight-extrabold {
   font-weight: 800;
+}
+
+.is-size-xlarge {
+  font-size: 4.5rem !important;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 3.5rem !important;
+  }
 }
 
 .is-size-1 {
