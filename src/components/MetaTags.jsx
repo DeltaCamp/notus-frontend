@@ -14,16 +14,17 @@ export const MetaTags = class _MetaTags extends PureComponent {
   render () {
     const location = this.props.location || {}
 
-    const logoPath = '/none.svg'
+    const facebookShareImage = 'facebook_share_image_1200x630.png'
+    const twitterShareImage = 'twitter_share_image_800_418.png'
     const siteTitle = 'Notus for Ethereum'
-    const siteURL = 'https://notus.netlify.com.com'
+    const siteURL = 'https://notus.network'
     const siteDescription = `Notus enables you to listen in on Ethereum and receive notifications in response. Whether it's token transfers or contract activity, Notus has your back.`
-    const twitterHandle = 'teamdeltacamp'
-    const ownerCoName = 'Delta Camp'
-    const author = 'Delta Camp & Jake Caban-Tomski'
+    const twitterHandle = 'NotusEvents'
+    const ownerCoName = 'Notus'
+    const author = 'Notus'
     const keywords = 'deltacamp delta camp notus ethereum smart contract notifications'
     const themeColor = '#ffffff'
-    const googleFontsURL = 'https://fonts.googleapis.com/css?family=Vollkorn:300,400,500,700|Roboto+Mono:300,400,700,900'
+    const googleFontsURL = 'https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,700,900'
     const year = (new Date()).getFullYear()
 
     return (
@@ -84,7 +85,11 @@ export const MetaTags = class _MetaTags extends PureComponent {
           },
           {
             property: 'og:image',
-            content: `${siteURL}${logoPath}`
+            content: `${siteURL}/${facebookShareImage}`
+          },
+          {
+            property: 'og:rich_attachment',
+            content: `true`
           },
           {
             property: 'twitter:title',
@@ -92,19 +97,23 @@ export const MetaTags = class _MetaTags extends PureComponent {
           },
           {
             property: 'twitter:card',
-            content: 'summary'
+            content: 'summary_large_image'
           },
           {
             property: 'twitter:site',
             content: `@${twitterHandle}`
           },
           {
-            property: 'twitter:image',
-            content: `${siteURL}${logoPath}`
+            property: 'twitter:image:src',
+            content: `${siteURL}/${twitterShareImage}`
           },
           {
             property: 'twitter:url',
             content: `https://twitter.com/${twitterHandle}`
+          },
+          {
+            property: 'twitter:creator',
+            content: `@${twitterHandle}`
           }
         ]}
       />
