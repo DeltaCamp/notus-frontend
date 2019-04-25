@@ -347,10 +347,6 @@ export const EventPage =
 
                       <ScrollToTop />
 
-                      <h6 className='is-size-6 has-text-weight-light'>
-                        This will show up for other Notus customers sitewide
-                          </h6>
-
                       <Modal
                         isOpen={this.state.isConfirmingDelete}
                         handleClose={this.handleCloseConfirmDeleteModal}
@@ -422,17 +418,30 @@ export const EventPage =
                                 
                                 {eventAuthorButtons}
                               </div>
-
-                              {event.isActive
+                              <br />
+                              {event.isPublic
                                 ? (
-                                  <p>
-                                    <strong>Active:</strong> currently triggering actions when transactions/blocks/contract events occurs.
-                                  </p>
+                                  <>
+                                    <strong>Published:</strong> This will show up as a useable event for other Notus customers sitewide.
+                                  </>
                                 )
                                 : (
-                                  <p>
+                                  <>
+                                    <strong>Private:</strong> Only you will be able to see this event.
+                                  </>
+                                )
+                              }
+                              <br />
+                              {event.isActive
+                                ? (
+                                  <>
+                                    <strong>Active:</strong> currently triggering actions when transactions/blocks/contract events occurs.
+                                  </>
+                                )
+                                : (
+                                  <>
                                     <strong>Not Active:</strong> Currently not firing when events occur.
-                                  </p>
+                                  </>
                                 )
                               }
                             </div>
