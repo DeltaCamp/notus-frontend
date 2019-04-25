@@ -35,7 +35,7 @@ export class HomeDiscoverEvents extends Component {
 
         <div className='container'>
           <div className='row pb100'>
-            <div className='col-xs-12 has-text-centered mt50 pb100'>
+            <div className='col-xs-12 has-text-centered mt50'>
               <h4 className='is-size-4 has-text-weight-bold mt75'>
                 Discover common use cases to base your events on:
               </h4>
@@ -49,15 +49,15 @@ export class HomeDiscoverEvents extends Component {
                   className='input mt20 is-dark is-large'
                 />
               </div>
-    
-              <div className='mt75'>
-                <DiscoverEventsListing
-                  searchValue={this.state.searchValue}
-                  limit
-                />
-              </div>
             </div>
           </div>
+        </div>
+
+        <div className='mb75 pb100'>
+          <DiscoverEventsListing
+            searchValue={this.state.searchValue}
+            limit
+          />
         </div>
 
         <SlantSVG

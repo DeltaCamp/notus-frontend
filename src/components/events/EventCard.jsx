@@ -187,7 +187,7 @@ export const EventCard =
           }
 
           return (
-            <button
+            <div
               key={`event-${event.id}`}
               onClick={this.handleEventCardClick}
               ref={node => {this.node = node}}
@@ -208,7 +208,6 @@ export const EventCard =
                 </p>
               </div>
 
-
               <div className='event-card__footer'>
                 <p className='event-card__author is-size-7'>
                   by {this.author()}
@@ -217,7 +216,7 @@ export const EventCard =
                   {editable ? editDropdown : ''}
                 </div>
               </div>
-            </button>
+            </div>
           )
         }
       }

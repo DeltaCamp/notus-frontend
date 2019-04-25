@@ -10,7 +10,7 @@ export const DiscoverEventsListing =
     class _DiscoverEventsListing extends PureComponent {
       render () {
         const { searchValue } = this.props
-        const searchRegExp = new RegExp(searchValue, 'i')
+        const searchRegExp = new RegExp(searchValue.trim(), 'i')
 
         if (this.props.publicEventsData.loading) {
           return 'Loading ...'

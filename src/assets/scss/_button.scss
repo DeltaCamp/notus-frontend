@@ -329,6 +329,18 @@ button.button.is-small:active {
   margin-bottom: 0.5rem !important;
 }
 
-.button:hover[disabled] {
-  transform: scale3d(1.0, 1.0, 1.0);
+button:hover[disabled],
+button:focus[disabled],
+button:active[disabled],
+.button:hover[disabled],
+.button:focus[disabled],
+.button:active[disabled] {
+  box-shadow: none !important;
+  transform: scale3d(1.0, 1.0, 1.0) !important;
+}
+
+.buttons-right {
+  flex-direction: column;
+  align-content: flex-end;
+  display: flex;
 }
