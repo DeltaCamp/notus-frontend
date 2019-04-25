@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { FooterContainer } from '~/components/layout/Footer'
 import { LandingHero } from '~/components/home/LandingHero'
-import { NotifyDappUsers } from '~/components/home/NotifyDappUsers'
+import { EthereumNotifications } from '~/components/home/EthereumNotifications'
 import { LeverageTheCommunity } from '~/components/home/LeverageTheCommunity'
 import { HomeDiscoverEvents } from '~/components/home/HomeDiscoverEvents'
 import { HomeBetaNotice } from '~/components/home/HomeBetaNotice'
-import { AboutWebhookAPI } from '~/components/home/AboutWebhookAPI'
+import { CustomActions } from '~/components/home/CustomActions'
 import { HomeSignupFooterCTA } from '~/components/home/HomeSignupFooterCTA'
 
 export class HomePage extends Component {
@@ -25,11 +25,9 @@ export class HomePage extends Component {
           />
         </header>
         <section className='section'>
-          <NotifyDappUsers />
+          <EthereumNotifications />
           <HomeDiscoverEvents />
           <HomeBetaNotice />
-          <LeverageTheCommunity />
-          <AboutWebhookAPI />
         </section>
 
         <HomeSignupFooterCTA

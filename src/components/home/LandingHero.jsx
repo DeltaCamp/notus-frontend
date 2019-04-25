@@ -11,12 +11,11 @@ export const LandingHero = ({ setSuccess, success }) => {
           
             <div className='col-xs-12 col-lg-8'>
               <h1 className='hero--title'>
-                Ethereum notifications made simple.
+                Ethereum Notifications
               </h1>
 
               <h6 className='is-size-6 hero--description-text'>
-                {/* /texts/emails/slacks */}
-                Notus enables you to listen in on Ethereum. Whether it's token transfers or contract activity, Notus has your back.
+                Get notified when things happen.  Listen for account activity, new Augur markets, token transfers, or anything else.  Notus has presets for all the most popular Ethereum dapps, or you can customize your own.
               </h6>
 
               <div className='mt30'>

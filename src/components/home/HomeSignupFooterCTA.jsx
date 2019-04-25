@@ -17,12 +17,8 @@ export class HomeSignupFooterCTA extends Component {
           <div className='row'>
             <div className='col-xs-12 col-md-8 col-start-md-3 has-text-centered pt50'>
               <h4 className='is-size-4 has-text-weight-bold'>
-                Ready for a test drive?
+                Give it a try
               </h4>
-
-              <h6 className='is-size-6 has-text-dark'>
-                Notus is always free to try:
-              </h6>
 
               <div className='mt30'>
                 <SignupForm
