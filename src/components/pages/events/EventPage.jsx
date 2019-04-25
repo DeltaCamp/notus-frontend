@@ -47,8 +47,7 @@ export const EventPage =
               class _EventPage extends Component {
                 state = {
                   newEventTitle: '',
-                  isConfirmingDelete: false,
-                  isInputtingTitle: false
+                  isConfirmingDelete: false
                 }
 
                 static propTypes = {
@@ -69,7 +68,22 @@ export const EventPage =
                 }
 
                 handleSubmitTitle = (newEventTitle) => {
-                  console.log('new title is', newEventTitle)
+                  const variables = {
+                    event: {
+                      id: this.props.eventData.event.id,
+                      title: newEventTitle
+                    }
+                  }
+                  const successCallback = ({ data: { updateEvent } }) => {
+                    this.setState({
+                      event: {
+                        ...this.state.event,
+                        ...updateEvent
+                      }
+                    })
+                    toast.success('Updated event title!')
+                  }
+                  this.runUpdateEventMutation(variables, successCallback)
                 }
 
                 handleActivate = (e) => {
@@ -102,11 +116,24 @@ export const EventPage =
 
                   const event = this.props.eventData.event
 
-                  if (event.title) {
-                    this.doPublish()
-                  } else {
-                    this.setState({ isInputtingTitle: true })
-                  }
+                  this.props.updateEventMutation({
+                    variables: {
+                      event: {
+                        id: event.id,
+                        isPublic: !event.isPublic
+                      }
+                    },
+                    refetchQueries: [
+                      'eventsQuery',
+                      'publicEventsQuery',
+                    ],
+                  }).then(({ data: { updateEvent } }) => {
+                    toast.dismiss()
+                    toast.success(`Event ${updateEvent.isPublic ? 'published' : 'made private'}`)
+                  }).catch(error => {
+                    toast.error('Error while updating event')
+                    console.error(error)
+                  })
                 }
 
                 handleCloseInputTitleModal = (e) => {
@@ -158,27 +185,21 @@ export const EventPage =
                   })
                 }
 
-                doPublish = () => {
-                  const event = this.props.eventData.event
+                runUpdateEventMutation(variables, successCallback, errorCallback) {
+                  if (!errorCallback) {
+                    errorCallback = error => {
+                      console.error(error)
+                    }
+                  }
 
                   this.props.updateEventMutation({
-                    variables: {
-                      event: {
-                        id: event.id,
-                        isPublic: !event.isPublic
-                      }
-                    },
+                    variables,
                     refetchQueries: [
+                      // only refetch the event we just updated (1 record)
                       'eventsQuery',
                       'publicEventsQuery',
                     ],
-                  }).then(({ data: { updateEvent } }) => {
-                    toast.dismiss()
-                    toast.success(`Event ${updateEvent.isPublic ? 'published' : 'made private'}`)
-                  }).catch(error => {
-                    toast.error('Error while updating event')
-                    console.error(error)
-                  })
+                  }).then(successCallback).catch(errorCallback)
                 }
 
                 handleOpenConfirmDeleteModal = (e) => {
@@ -326,45 +347,9 @@ export const EventPage =
 
                       <ScrollToTop />
 
-                      <Modal
-                        isOpen={this.state.isInputtingTitle}
-                        handleClose={this.handleCloseInputTitleModal}
-                      >
-                        <div className='has-text-centered'>
-                          <h5 className='is-size-5 has-text-weight-semibold'>
-                            Please give this event a custom name
-                          </h5>
-                          <h6 className='is-size-6 has-text-weight-light'>
-                            This will show up for other Notus customers sitewide
+                      <h6 className='is-size-6 has-text-weight-light'>
+                        This will show up for other Notus customers sitewide
                           </h6>
-                          <br />
-                          <br />
-                          <form
-                            className='form'
-                            onSubmit={this.handleSaveTitleAndPublish}
-                          >
-                            <input
-                              type='text'
-                              className='input'
-                              required
-                              onChange={this.handleNewEventTitleChange}
-                              value={this.state.newEventTitle}
-                            />
-                            <br />
-                            <br />
-                            <div className='buttons buttons-right'>
-                              <button
-                                className='button is-success'
-                                onClick={this.handleSaveTitleAndPublish}
-                                disabled={this.state.isSaving}
-                              >
-                                Save Title
-                              </button>
-                            </div>
-                          </form>
-
-                        </div>
-                      </Modal>
 
                       <Modal
                         isOpen={this.state.isConfirmingDelete}

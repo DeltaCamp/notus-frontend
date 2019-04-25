@@ -97,7 +97,7 @@ export const EditEventPage =
                         ...this.state.event,
                         ...updateEvent
                       }
-                    }, () => { console.warn(this.state.event)})
+                    })
                     toast.success('Updated event title!')
                   }
                   this.runUpdateEventMutation(variables, successCallback)

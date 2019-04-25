@@ -3,17 +3,16 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 export class EventTitle extends Component {
-  state = {
-    newEventTitle: '',
-    isEditing: false
-  }
-
   static propTypes = {
     handleSubmitTitle: PropTypes.func.isRequired
   }
 
   constructor(props) {
     super(props)
+    this.state = {
+      isEditing: false,
+      newEventTitle: this.props.event.title
+    }
     this.inputRef = React.createRef()
   }
 
@@ -21,7 +20,6 @@ export class EventTitle extends Component {
     e.preventDefault()
 
     this.setState({
-      newEventTitle: this.props.event.title,
       isEditing: !this.state.isEditing
     }, () => {
       this.inputRef.current.setSelectionRange(
@@ -81,6 +79,7 @@ export class EventTitle extends Component {
       content = (
         <form onSubmit={this.handleSubmit} className='form'>
           <input
+            type='text'
             ref={this.inputRef}
             onBlur={this.handleSubmit}
             onChange={this.handleChange}
