@@ -693,7 +693,7 @@ hr {
 }
 
 .color-block.is-primary {
-  background-color: lighten($cyan, 15%);
+  background-color: lighten($cyan, 20%);
   color: $purple;
 }
 
@@ -868,9 +868,13 @@ svg {
 }
 
 .has-fill-cyan {
-  fill: lighten($cyan, 15%);
+  fill: lighten($cyan, 20%);
 }
 
 .has-fill-purple {
   fill: $purple;
+}
+
+.has-fill-pink {
+  fill: $pink;
 }

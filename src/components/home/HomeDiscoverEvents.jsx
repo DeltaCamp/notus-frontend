@@ -62,7 +62,7 @@ export class HomeDiscoverEvents extends Component {
 
         <SlantSVG
           position='bottom'
-          polygonClass='has-fill-purple'
+          polygonClass='has-fill-pink'
         />
       </div>
     )

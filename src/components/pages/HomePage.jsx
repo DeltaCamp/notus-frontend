@@ -4,6 +4,7 @@ import { LandingHero } from '~/components/home/LandingHero'
 import { NotifyDappUsers } from '~/components/home/NotifyDappUsers'
 import { LeverageTheCommunity } from '~/components/home/LeverageTheCommunity'
 import { HomeDiscoverEvents } from '~/components/home/HomeDiscoverEvents'
+import { HomeBetaNotice } from '~/components/home/HomeBetaNotice'
 import { AboutWebhookAPI } from '~/components/home/AboutWebhookAPI'
 import { HomeSignupFooterCTA } from '~/components/home/HomeSignupFooterCTA'
 
@@ -26,6 +27,7 @@ export class HomePage extends Component {
         <section className='section'>
           <NotifyDappUsers />
           <HomeDiscoverEvents />
+          <HomeBetaNotice />
           <LeverageTheCommunity />
           <AboutWebhookAPI />
         </section>
