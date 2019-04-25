@@ -15,7 +15,6 @@ import { Redirect } from 'react-router-dom'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { brandColor } from '~/utils/brandColors'
-import { EventDescription } from '~/components/events/EventDescription'
 import * as routes from '~/../config/routes'
 
 export const EventCard = 
@@ -204,7 +203,7 @@ export const EventCard =
             >
               <div className="event-card__header">
                 <p className='event-card__title is-size-5'>
-                  {event.title || <EventDescription event={event} brief={true} />}
+                  {event.title}
                 </p>
               </div>
 

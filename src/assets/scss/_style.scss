@@ -671,10 +671,18 @@ hr {
 }
 
 
+.color-block.is-saturated-60 {
+  filter: saturate(60%);
+}
 
+.color-block.is-saturated-80 {
+  filter: saturate(80%);
+}
 
+.color-block.is-grey,
 .color-block.is-blue,
 .color-block.is-dark,
+.color-block.is-dark-colored,
 .color-block.is-info,
 .color-block.is-pink,
 .color-block.is-success,
@@ -690,6 +698,14 @@ hr {
 
 .color-block.is-blue {
   background-color: $blue;
+}
+
+.color-block.is-grey {
+  background-color: $grey;
+}
+
+.color-block.is-dark-colored {
+  background-color: darken($blue, 25%);
 }
 
 .color-block.is-dark {

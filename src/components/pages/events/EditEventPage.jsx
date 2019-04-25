@@ -13,20 +13,21 @@ import { graphql } from 'react-apollo'
 
 import { EditEventDrawer } from '~/components/EditEventDrawer'
 import { EditMatcherDrawer } from '~/components/EditMatcherDrawer'
-import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
-import { FrequencyTitle } from '~/components/events/FrequencyTitle'
 import { EventMatcher } from '~/components/events/EventMatcher'
+import { FrequencyTitle } from '~/components/events/FrequencyTitle'
+import { SourceDescription } from '~/components/events/SourceDescription'
 import { FooterContainer } from '~/components/layout/Footer'
+import { IsAuthed } from '~/components/IsAuthed'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { createEventMutation } from '~/mutations/createEventMutation'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { updateMatcherMutation } from '~/mutations/updateMatcherMutation'
 import { eventQuery } from '~/queries/eventQuery'
-import { altBrandColor, brandColor } from '~/utils/brandColors'
+import { brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
-import { IsAuthed } from '~/components/IsAuthed'
+import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import * as routes from '~/../config/routes'
 
 export const EditEventPage = 
@@ -47,7 +48,7 @@ export const EditEventPage =
                   scope: 0,
                   abiEventId: undefined,
                   isPublic: false,
-                  title: '',
+                  // title: '',
                   // frequency: '-1',
                   matchers: [
                     {
@@ -84,7 +85,14 @@ export const EditEventPage =
                   && this.state.freshlyMounted
                 ) {
                   const event = this.props.eventData.event
-                  let { id, parentId, isPublic, scope, abiEventId } = event
+                  let {
+                    id,
+                    parentId,
+                    isPublic,
+                    scope,
+                    abiEventId,
+                    title
+                  } = event
 
                   const matchers = event.matchers.map(
                     matcher => deepCloneMatcher(matcher, this.isCreating())
@@ -95,6 +103,7 @@ export const EditEventPage =
                     parentId = parseInt(event.id, 10)
                     isPublic = false
                     id = undefined
+                    title = event.title
                   }
 
                   const newEventObject = {
@@ -104,6 +113,7 @@ export const EditEventPage =
                     isPublic,
                     scope,
                     abiEventId,
+                    title,
                     matchers: orderBy(matchers, 'order')
                   }
 
@@ -308,8 +318,7 @@ export const EditEventPage =
               }
               
               render () {
-                let colorClass = 'is-dark'
-                let altColorClass = 'is-blue'
+                let colorClass = 'is-dark-colored'
 
                 const { eventData } = this.props
 
@@ -318,7 +327,7 @@ export const EditEventPage =
                   : null
 
                 let recipe = {
-                  title: 'new event'
+                  // title: 'new event - this event needs a title'
                 }
 
                 if (eventData) {
@@ -333,7 +342,6 @@ export const EditEventPage =
 
                       if (recipe) {
                         colorClass = brandColor(recipe.id)
-                        altColorClass = altBrandColor(recipe.id + 1)
                       }
                     }
                   }
@@ -344,7 +352,7 @@ export const EditEventPage =
                     <div className='event-box__variable-wrapper' onClick={this.showEventForm}>
                       <div className='event-box__variable'>
                         <span className="event-box__text">
-                          <FrequencyTitle frequency={this.state.event.frequency} /> <EventTitle event={this.state.event} /> occurs
+                          <FrequencyTitle frequency={this.state.event.frequency} /> <SourceDescription event={this.state.event} /> occurs
                         </span>
                       </div>
                     </div>
@@ -429,19 +437,19 @@ export const EditEventPage =
                     />
 
                     <section className='section section--main-content'>
-                      <div className={`container-fluid pb20 is-dark`}>
+                      <div className={`container-fluid pb20 ${colorClass} color-block`}>
                         <div className='container'>
                           <div className='row'>
                             <div className='col-xs-12 has-text-centered is-size-4'>
-                              <h6 className='is-size-6 has-text-grey-lighter has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                                {recipe.title}
+                              <h6 className='is-size-6 has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
+                                <EventTitle event={this.state.event} />
                               </h6>
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <div className={`event-box event-box__header color-block ${colorClass}`}>
+                      <div className={`event-box event-box__header color-block ${colorClass} is-saturated-80`}>
                         <div className={`container-fluid pt20 pb20`}>
                           <div className='container'>
                             <div className='row'>
@@ -462,7 +470,7 @@ export const EditEventPage =
                         </div>
                       </div>
 
-                      <div className={`event-box event-box__footer color-block ${altColorClass}`}>
+                      <div className={`event-box event-box__footer color-block ${colorClass} is-saturated-60`}>
                         <div className={`container-fluid`}>
                           <div className='container'>
                             <div className='row'>

@@ -1,30 +1,38 @@
 import React from 'react'
 
-import { AbiEventName } from '~/components/AbiEventName'
-import { addArticle } from '~/utils/addArticle'
+import { SourceDescription } from '~/components/events/SourceDescription'
+import { MatcherTitle } from '~/components/events/MatcherTitle'
+import { FrequencyTitle } from '~/components/events/FrequencyTitle'
 
-import { SCOPES, SCOPE_LABELS } from '~/constants'
-
-export const EventTitle = function ({ event }) {
-
-  let abiEventId
-  if (event.scope === SCOPES.CONTRACT_EVENT) {
-    abiEventId = event.abiEventId
-    if (event.abiEvent) {
-      abiEventId = event.abiEvent.id
+export const EventTitle = function ({event, brief = false}) {
+  console.log(event)
+  if (event.title)
+    return event.title
+    
+  let matchers
+  if (brief) {
+    const matcher = event.matchers[0]
+    let ellipses
+    if (event.matchers.length > 1) {
+      ellipses = <span>&nbsp;...</span>
     }
-  }
-
-  let title
-  if (abiEventId) {
-    title = <AbiEventName addArticle={true} abiEventId={abiEventId} />
+    matchers =
+      <span key='matcher'>
+        <MatcherTitle matcher={matcher} isFirst={true} />
+        {ellipses}
+      </span>
   } else {
-    title = addArticle(SCOPE_LABELS[event.scope])
+    matchers = event.matchers.map((matcher, index) => {
+      return <MatcherTitle key={`matcher-${index}`} matcher={matcher} isFirst={index === 0} />
+    })
   }
 
   return (
-    <span>
-      {title}
-    </span>
+    <>
+      <FrequencyTitle frequency={event.frequency} key='frequency-title' />&nbsp;
+      <SourceDescription event={event} key='source-description' />&nbsp;
+      occurs&nbsp;
+      {matchers} then send me an email
+    </>
   )
 }

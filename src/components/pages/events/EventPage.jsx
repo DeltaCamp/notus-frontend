@@ -3,7 +3,6 @@ import ReactTimeout from 'react-timeout'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import classnames from 'classnames'
-import { rollbar } from '~/../config/rollbar'
 import {
   AlertTriangle,
   Cast,
@@ -16,6 +15,7 @@ import { formatRoute } from 'react-router-named-routes'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { toast } from 'react-toastify'
+import { EventTitle } from '~/components/events/EventTitle'
 import { IsAuthed } from '~/components/IsAuthed'
 import { Modal } from '~/components/Modal'
 import { FooterContainer } from '~/components/layout/Footer'
@@ -26,7 +26,6 @@ import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventQuery } from '~/queries/eventQuery'
 import { brandColor } from '~/utils/brandColors'
 import * as routes from '~/../config/routes'
-import { EventDescription } from '~/components/events/EventDescription'
 
 export const EventPage = 
   IsAuthed(
@@ -419,13 +418,13 @@ export const EventPage =
                         >
                           <div className='row'>
                             <div className='col-xs-12'>
-                            <div className='container'>
-                              <div className='row'>
-                                <div className='col-xs-12 has-text-centered is-size-4'>
-                                  <h5 className='is-size-5 has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                                    {event.title || <EventDescription event={event} brief={true} />}
-                                  </h5>
-                                </div>
+                              <div className='container'>
+                                <div className='row'>
+                                  <div className='col-xs-12 has-text-centered is-size-4'>
+                                    <h6 className='is-size-6 has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
+                                      <EventTitle event={event} />
+                                    </h6>
+                                  </div>
                                 </div>
                               </div>
                             </div>
