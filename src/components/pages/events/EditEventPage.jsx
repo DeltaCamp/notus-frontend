@@ -87,13 +87,19 @@ export const EditEventPage =
                 } else {
                   const variables = {
                     event: {
+                      id: this.state.event.id,
                       title: newEventTitle
                     }
                   }
-                  const successCallback = (mutationResult) => {
+                  const successCallback = ({ data: { updateEvent } }) => {
+                    this.setState({
+                      event: {
+                        ...this.state.event,
+                        ...updateEvent
+                      }
+                    }, () => { console.warn(this.state.event)})
                     toast.success('Updated event title!')
                   }
-                  console.log(variables)
                   this.runUpdateEventMutation(variables, successCallback)
                 }
               }
@@ -204,6 +210,7 @@ export const EditEventPage =
                       matcher: this.state.event.matchers[this.state.editMatcherIndex]
                     },
                     refetchQueries: [
+                      // only refetch the event or matcher we just created (1 record)
                       'eventsQuery',
                       'publicEventsQuery',
                     ],
@@ -242,6 +249,7 @@ export const EditEventPage =
                 this.props.updateEventMutation({
                   variables,
                   refetchQueries: [
+                    // only refetch the event we just updated (1 record)
                     'eventsQuery',
                     'publicEventsQuery',
                   ],
