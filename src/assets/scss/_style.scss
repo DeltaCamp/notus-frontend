@@ -814,7 +814,9 @@ svg.is-large {
   // transform-origin: 1150px;
 }
 
-.bottom-svg, .top-svg {
+.bottom-svg,
+.top-svg,
+.overflow-bottom-svg {
   position: absolute;
   left: 0;
   height: 8em;
@@ -831,6 +833,12 @@ svg.is-large {
   margin-top: 1px;
 }
 
+.overflow-bottom-svg {
+  bottom: -8em;
+  margin-bottom: 2px;
+  z-index: 100;
+}
+
 svg {
   overflow: visible;
 }
@@ -839,12 +847,28 @@ svg {
   position: relative;
 }
 
+.has-fill-white {
+  fill: white;
+}
+
+.has-fill-footer {
+  fill: $footer-background-color;
+}
+
 .has-fill-dark {
   fill: $dark;
 }
 
+.has-fill-primary {
+  fill: lighten($primary, 15%);
+}
+
 .has-fill-light {
   fill: $light;
+}
+
+.has-fill-cyan {
+  fill: lighten($cyan, 15%);
 }
 
 .has-fill-purple {

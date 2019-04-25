@@ -337,6 +337,24 @@ input.input.is-large {
   font-size: 2rem;
   height: 100px;
   padding: 1rem;
+  max-width: 800px;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 1.5rem;
+    height: 80px;
+    padding: 0.25rem;
+    max-width: 460px;
+  }
+
+  @media screen and (max-width: $mobile) {
+    font-size: 1.25rem;
+    padding: 0.25rem;
+    max-width: 380px;
+  }
+
+  @media screen and (max-width: $mobile - 100px) {
+    max-width: 280px;
+  }
 }
 
 input.input.is-large:hover,

@@ -1,7 +1,11 @@
 .footer {
-  background-color: darken(white, 2%);
+  background-color: $footer-background-color;
   border-top: 3px solid whitesmoke;
   padding: 3rem 2rem;
+}
+
+.home .footer {
+  border: none;
 }
 
 .footer-brand svg {

@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { SlantSVG } from '~/components/home/SlantSVG'
 import * as routes from '~/../config/routes'
 
 export const LeverageTheCommunity = () => {
   
   return (
-    <div className='container-fluid is-purple pb100 pt50 color-block'>
+    <div className='container-fluid is-purple pb100 pt50 color-block is-positioned-relatively'>
       <div className='container'>
         <div className='row'>
           <div className='col-xs-12 col-md-8 col-start-md-3'>
@@ -35,6 +36,18 @@ export const LeverageTheCommunity = () => {
           </div>
         </div>
       </div>
+
+      <svg
+        className='overflow-bottom-svg'
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 100 100'
+        preserveAspectRatio='none'
+      >
+        <polygon
+          points='0,100 0,0 100,0'
+          className='has-fill-purple'
+        />
+      </svg>
     </div>
   )
 }
