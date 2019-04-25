@@ -3,6 +3,7 @@ import ReactTimeout from 'react-timeout'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import classnames from 'classnames'
+import { rollbar } from '~/../config/rollbar'
 import {
   AlertTriangle,
   Cast,
