@@ -12,7 +12,6 @@ import { toast } from 'react-toastify'
 import { graphql } from 'react-apollo'
 
 import { EditEventDrawer } from '~/components/EditEventDrawer'
-import { EditMatcherDrawer } from '~/components/EditMatcherDrawer'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { EventMatcher } from '~/components/events/EventMatcher'
@@ -353,9 +352,9 @@ export const EditEventPage =
 
                 const { eventData } = this.props
 
-                const editMatcher = this.isEditingMatcher()
-                  ? this.state.event.matchers[this.state.editMatcherIndex]
-                  : null
+                // const editMatcher = this.isEditingMatcher()
+                //   ? this.state.event.matchers[this.state.editMatcherIndex]
+                //   : null
 
                 let recipe = {
                 }
@@ -418,13 +417,17 @@ export const EditEventPage =
                                         >
                                           <EventMatcher
                                             key={`event-matcher-${index}`}
-                                            matcher={eventMatcher}
+                                            isFirst={index === 0}
                                             index={index}
                                             handleSetEditMatcher={this.handleSetEditMatcher}
                                             handleRemoveMatcher={this.handleRemoveMatcher}
-                                            isFirst={index === 0}
-                                            isActive={!!editMatcher && eventMatcher === editMatcher}
+                                            matcher={eventMatcher}
+                                            event={this.state.event}
+                                            onChangeMatcher={
+                                              (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
+                                            }
                                           />
+                                          {/* editMatcher={editMatcher} */}
                                         </div>
                                       </div>
                                     </CSSTransition>
@@ -456,14 +459,14 @@ export const EditEventPage =
                       onClose={this.handleHideEventForm}
                     />
 
-                    <EditMatcherDrawer
+                    {/* <EditMatcherDrawer
                       isOpen={this.isEditingMatcher()}
                       matcher={editMatcher}
                       onClose={this.handleCloseMatcherEdit}
                       abiEventId={this.state.event.abiEventId}
                       scope={this.state.event.scope}
                       onChangeMatcher={(updatedMatcher) => this.onChangeMatcher(updatedMatcher)}
-                    />
+                    /> */}
 
                     <section className='section section--main-content'>
                       <div className={`container-fluid pb20 ${colorClass} color-block`}>
@@ -481,7 +484,9 @@ export const EditEventPage =
                         </div>
                       </div>
 
-                      <div className={`event-box event-box__header color-block ${colorClass} is-brightness-92`}>
+                      <div className={`event-box event-box__header color-block ${colorClass} is-top-layer`}>
+                        <div className='is-brightness-70 is-full-width-background' />
+
                         <div className={`container-fluid pt20 pb20`}>
                           <div className='container'>
                             <div className='row'>
@@ -502,7 +507,9 @@ export const EditEventPage =
                         </div>
                       </div>
 
-                      <div className={`event-box event-box__footer color-block ${colorClass} is-brightness-85`}>
+                      <div className={`event-box event-box__footer color-block ${colorClass}`}>
+                        <div className='is-brightness-40 is-full-width-background' />
+
                         <div className={`container-fluid`}>
                           <div className='container'>
                             <div className='row'>

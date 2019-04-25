@@ -671,13 +671,25 @@ hr {
   stroke: white;
 }
 
-
-.color-block.is-brightness-85 {
-  filter: brightness(85%);
+.is-full-width-background {
+  height: 100%;
+  left: 0;
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
-.color-block.is-brightness-92{
-  filter: brightness(92%);
+.is-brightness-70 {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.is-brightness-40 {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.is-top-layer {
+  z-index: 3;
 }
 
 .color-block.is-grey,

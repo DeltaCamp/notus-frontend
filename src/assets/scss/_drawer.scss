@@ -76,12 +76,13 @@
   }
 }
 
-.drawer .form .select,
-.drawer .form .react-select {
+.select,
+.react-select {
   border-width: 0;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   min-width: 230px;
+  max-width: 350px;
 
   @media screen and (max-width: $tablet - 203px) {
     min-width: 100%;
@@ -89,7 +90,7 @@
   }
 }
 
-.drawer .form .react-select.is-wide {
+.react-select.is-wide {
   width: 350px;
 
   @media screen and (max-width: $tablet) {
@@ -97,12 +98,12 @@
   }
 }
 
-.drawer .form .input {
+.form .input {
   height: 60px !important;
 }
 
-.drawer .form .select select,
-.drawer .form .react-select {
+.select select,
+.react-select {
   height: 60px !important;
   line-height: 2;
 }
@@ -120,22 +121,22 @@
   margin-right: 4px;
 }
 
-.drawer .form .input,
-.drawer .form .react-select,
-.drawer .form .buttons {
+.form .input,
+.form .react-select,
+.form .buttons {
   display: flex;
   margin: 0 5px;
 }
 
-.drawer .form .input:first-child,
-.drawer .form .react-select:first-child,
-.drawer .form .buttons:first-child {
+.form .input:first-child,
+.form .react-select:first-child,
+.form .buttons:first-child {
   margin-left: 0;
 }
 
-.drawer .form .input:last-child,
-.drawer .form .react-select:last-child,
-.drawer .form .buttons:last-child {
+.form .input:last-child,
+.form .react-select:last-child,
+.form .buttons:last-child {
   margin-right: 0;
 }
 

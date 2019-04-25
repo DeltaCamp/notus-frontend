@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
-import classnames from 'classnames'
-import { Edit, XCircle, Menu } from 'react-feather'
 import PropTypes from 'prop-types'
-
-import { MatcherTitle } from '~/components/events/MatcherTitle'
+import { Edit, XCircle, Menu } from 'react-feather'
+import { SourceTitle } from '~/components/SourceTitle'
+import { OPERATOR_LABELS } from '~/constants'
 
 const DragHandle = (() => <span className='drag-handle is-hidden-touch'>
   <Menu />
@@ -13,21 +12,22 @@ export const EventMatcher =
   class _EventMatcher extends PureComponent {
 
     static propTypes = {
+      editMatcher: PropTypes.object,
       isFirst: PropTypes.bool.isRequired,
-      matcher: PropTypes.object.isRequired,
       index: PropTypes.number.isRequired,
       handleSetEditMatcher: PropTypes.func.isRequired,
       handleRemoveMatcher: PropTypes.func.isRequired,
-      isActive: PropTypes.bool.isRequired
+      matcher: PropTypes.object.isRequired,
+      onChangeMatcher: PropTypes.func.isRequired
     }
 
-    handleEdit = (e) => {
-      e.preventDefault()
+    handleEdit = () => {
       this.props.handleSetEditMatcher(this.props.index)
     }
 
     handleRemove = (e) => {
       e.preventDefault()
+
       this.props.handleRemoveMatcher(this.props.index)
     }
 
@@ -37,30 +37,44 @@ export const EventMatcher =
         matcher
       } = this.props
       
-      const humanReadableDescription = <MatcherTitle matcher={matcher} isFirst={isFirst} />
+      const {
+        operator,
+        operand
+      } = matcher
+
+      const andWord = isFirst ? 'where' : 'and'
 
       return (
-        <div
-          className={classnames(
-            `event-box__variable-wrapper`,
-            {
-              'is-active': this.props.isActive
-            }
-          )}
-        >
+        <div className='event-box__variable-wrapper'>
           <DragHandle />
+
+          {andWord} the <SourceTitle
+            abiEventInputId={matcher.abiEventInputId}
+            event={this.props.event}
+            handleEdit={this.handleEdit}
+            matcher={matcher}
+            onChange={this.props.onChangeMatcher}
+            scope={this.props.scope}
+          /> 
           <button
-            className={classnames(
-              `event-box__variable`,
-              {
-                'is-active': this.props.isActive
-              }
-            )}
+            className='event-box__variable'
+            onClick={this.handleEdit}
+          >
+            {OPERATOR_LABELS[operator]} 
+          </button>
+          <button
+            className='event-box__variable'
+            onClick={this.handleEdit}
+          >
+            {operand || '?'}
+          </button>
+
+          {/* <button
+            className='event-box__variable'
             onClick={this.handleEdit}
           >
             {humanReadableDescription}
-            {/* {this.convertTemplate(matcher)} */}
-          </button>
+          </button> */}
 
           <span className="icons">
             <button
@@ -85,3 +99,12 @@ export const EventMatcher =
       )
     }
   }
+
+//   < EditMatcherDrawer
+// isOpen = { this.isEditingMatcher() }
+// matcher = { editMatcher }
+// onClose = { this.handleCloseMatcherEdit }
+// abiEventId = { this.state.event.abiEventId }
+// scope = { this.state.event.scope }
+// onChangeMatcher = {(updatedMatcher) => this.onChangeMatcher(updatedMatcher)}
+// />

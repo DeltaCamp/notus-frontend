@@ -98,7 +98,12 @@ export const SourceSelect = graphql(sourcesQuery, {
           props = {...this.props, value: selectedOption}
         }
 
-        return <NotusSelect {...props} options={validOptions} onChange={this.onChange} />
+        return <NotusSelect
+          {...props}
+          options={validOptions}
+          onChange={this.onChange}
+          menuIsOpen
+        />
       }
     }
   )
