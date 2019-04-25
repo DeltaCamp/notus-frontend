@@ -221,8 +221,7 @@ export const EventPage =
                 }
 
                 render () {
-                  let event,
-                    colorClass,
+                  let colorClass,
                     isEventAuthor,
                     eventAuthorButtons,
                     notEventAuthorButtons
@@ -232,24 +231,19 @@ export const EventPage =
                   const error = eventData.error || currentUserData.error
                   const loading = eventData.loading || currentUserData.loading
 
-                  if (eventData) {
-                    if (loading) {
-                      return null
-                    } else {
-                      if (error) {
-                        console.warn(eventData.error)
-                        return null
-                      } else {
-                        event = eventData.event
-                        isEventAuthor = (currentUserData.currentUser && currentUserData.currentUser.id === parseInt(event.user.id, 10))
-                        
+                  const { event } = eventData || {}
 
-                        colorClass = brandColor(event.id)
-                      }
-                    }
+                  if (loading) {
+                    return null
+                  } else if (error) {
+                    console.error(eventData.error)
+                    return null
+                  } else if (!event) {
+                    return null  
                   }
 
-                  if (!event) { return null }
+                  isEventAuthor = (currentUserData.currentUser && currentUserData.currentUser.id === parseInt(event.user.id, 10))
+                  colorClass = brandColor(event.id)
 
                   if (!isEventAuthor) {
                     const createEventFromParentRoute = formatRoute(
