@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import {
+  Twitter,
+} from 'react-feather'
 import { withRouter } from 'react-router'
 import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
 import * as routes from '~/../config/routes'
@@ -16,15 +19,12 @@ export const Footer = class _Footer extends Component {
                 <Link to={routes.ABOUT_PAGE}>About</Link>
               </li>
               <li className='list-item is-inline-block'>
-                <a href="mailto:support@notus.network">Support</a>
-              </li>
-              <li className='list-item is-inline-block'>
                 <a
                   href='https://discord.gg/WXMDXqb'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  Community
+                  Discord
                 </a>
               </li>
               <li className='list-item is-inline-block'>
@@ -33,9 +33,7 @@ export const Footer = class _Footer extends Component {
               <li className='list-item is-inline-block'>
                 <Link to={routes.PRIVACY_PAGE}>Privacy</Link>
               </li>
-              <li className='list-item is-inline-block'>
-                <a href='https://twitter.com/NotusEvents'>Feedback</a>
-              </li>
+              
             </ul>
 
             <div className='footer-brand pt75'>
@@ -48,6 +46,10 @@ export const Footer = class _Footer extends Component {
                       <p className='is-size-7'>
                         Notus makes it easy to listen for Ethereum smart contract events and triggering webhooks or sending messages in response.
                       </p>
+
+                      <br />
+                      <a href='https://twitter.com/NotusEvents'><Twitter id='twitter' className='is-large' /></a>
+
                     </div>
                   </div>
                 </div>

@@ -165,6 +165,13 @@ export const MyEventsPage =
                   <section className='section section--main-content'>
                     <div className='container'>
                       <div className='row'>
+                        <div className='col-xs-12'>
+                          <h4 className='is-size-4 has-text-weight-bold mt75 has-text-centered'>
+                            My Events
+                          </h4>
+                        </div>
+                      </div>
+                      <div className='row'>
                         <div className='col-xs-12 has-text-centered'>
                           {eventsOrBlankState}
                         </div>

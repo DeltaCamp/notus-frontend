@@ -37,7 +37,7 @@ export const DiscoverEventsPage =
                   <div className='row'>
                     <div className='col-xs-12 col-sm-8 col-start-sm-3 has-text-centered'>
                       <h4 className='is-size-4 has-text-weight-bold mt75'>
-                        Search for a template to base a new event off of:
+                        Discover Events
                       </h4>
 
                       <div className="form">
