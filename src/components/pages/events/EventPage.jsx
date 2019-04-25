@@ -134,7 +134,6 @@ export const EventPage =
                     variables: {
                       event: {
                         id: event.id,
-                        title: this.state.newEventTitle,
                         isPublic: true
                       }
                     },
@@ -143,28 +142,20 @@ export const EventPage =
                       'publicEventsQuery',
                     ],
                   }).then(({ data: { updateEvent } }) => {
-                    toast.success(`Event title updated and published`)
+                    toast.success(`Event published!`)
                     this.handleCloseInputTitleModal()
 
                     this.props.setTimeout(() => {
                       this.setState({ isSaving: false })
                     }, 1000)
                   }).catch(error => {
-                    toast.error('Error while updating event title and publishing')
+                    toast.error('Error while publishing event')
                     console.error(error)
 
                     this.props.setTimeout(() => {
                       this.setState({ isSaving: false })
                     }, 1000)
                   })
-                }
-
-                handleNewEventTitleChange = (e) => {
-                  if (/^[a-z0-9- '()]+$/i.test(e.target.value)) {
-                    this.setState({
-                      newEventTitle: e.target.value
-                    })
-                  }
                 }
 
                 doPublish = () => {

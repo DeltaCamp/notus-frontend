@@ -38,6 +38,11 @@ export class EventTitle extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
+    if (this.state.newEventTitle.length <= 5) {
+      console.error('need more than 5 chars!')
+      return false
+    }
+
     this.props.handleSubmitTitle(this.state.newEventTitle)
 
     this.setState({
