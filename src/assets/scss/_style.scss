@@ -15,7 +15,8 @@ select:-internal-autofill-selected {
 }
 
 ::selection {
-  background-color: $cyan;
+  // background-color: $cyan;
+  background-color: darken($blue, 10%);
   color: white;
 }
 
@@ -671,12 +672,12 @@ hr {
 }
 
 
-.color-block.is-saturated-60 {
-  filter: saturate(60%);
+.color-block.is-brightness-85 {
+  filter: brightness(85%);
 }
 
-.color-block.is-saturated-80 {
-  filter: saturate(80%);
+.color-block.is-brightness-92{
+  filter: brightness(92%);
 }
 
 .color-block.is-grey,

@@ -68,6 +68,10 @@ export const EventPage =
                   this.props.history.push(editPath)
                 }
 
+                handleSubmitTitle = (newEventTitle) => {
+                  console.log('new title is', newEventTitle)
+                }
+
                 handleActivate = (e) => {
                   e.preventDefault()
 
@@ -156,7 +160,7 @@ export const EventPage =
                 }
 
                 handleNewEventTitleChange = (e) => {
-                  if (/^[a-z0-9- ]+$/i.test(e.target.value)) {
+                  if (/^[a-z0-9- '()]+$/i.test(e.target.value)) {
                     this.setState({
                       newEventTitle: e.target.value
                     })
@@ -422,7 +426,10 @@ export const EventPage =
                                 <div className='row'>
                                   <div className='col-xs-12 has-text-centered is-size-4'>
                                     <h6 className='is-size-6 has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                                      <EventTitle event={event} />
+                                      <EventTitle
+                                        event={event}
+                                        handleSubmitTitle={this.handleSubmitTitle}
+                                      />
                                     </h6>
                                   </div>
                                 </div>

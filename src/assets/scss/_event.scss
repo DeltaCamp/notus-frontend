@@ -204,6 +204,13 @@
 }
 
 .event-box__variable-wrapper {
+  min-height: 3.75rem;
+}
+
+.event-box__variable-wrapper .form .input {
+  font-size: inherit;
+  margin: 0.25rem auto 0 auto;
+  max-width: 600px;
 }
 
 .event-box__variable-wrapper .icons {
@@ -246,19 +253,20 @@
   margin: 0.5rem 1rem 0.5rem 0.25rem;
   padding: 0.5rem 1rem 0.25rem;
   position: relative;
-  font-size: 1.5rem;
+  // font-size: 1.5rem;
+  font-size: inherit;
   font-weight: 600;
   text-align: left;
   transition: all 275ms ease-in-out;
-  width: 880px;
+  // width: 880px;
 
   @media screen and (max-width: $widescreen) {
-    font-size: 1.25rem;
+    // font-size: 1.25rem;
     width: 100%;
   }
 
   @media screen and (max-width: $mobile) {
-    font-size: 1rem;
+    // font-size: 1rem;
   }
 }
 

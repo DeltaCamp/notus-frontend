@@ -49,6 +49,7 @@ export const EditEventPage =
                   abiEventId: undefined,
                   isPublic: false,
                   // title: '',
+                  title: 'new event - this event needs a title',
                   // frequency: '-1',
                   matchers: [
                     {
@@ -73,6 +74,28 @@ export const EditEventPage =
 
               componentDidMount() {
                 this.setState({ freshlyMounted: true })
+              }
+
+              handleSubmitTitle = (newEventTitle) => {
+                if (this.isCreating()) {
+                  this.setState({
+                    event: {
+                      ...this.state.event,
+                      title: newEventTitle
+                    }
+                  })
+                } else {
+                  const variables = {
+                    event: {
+                      title: newEventTitle
+                    }
+                  }
+                  const successCallback = (mutationResult) => {
+                    toast.success('Updated event title!')
+                  }
+                  console.log(variables)
+                  this.runUpdateEventMutation(variables, successCallback)
+                }
               }
 
               isCreating = () => {
@@ -209,23 +232,33 @@ export const EditEventPage =
                 this.setState({ showEventForm: true })
               }
 
+              runUpdateEventMutation(variables, successCallback, errorCallback) {
+                if (!errorCallback) {
+                  errorCallback = error => {
+                    console.error(error)
+                  }
+                }
+
+                this.props.updateEventMutation({
+                  variables,
+                  refetchQueries: [
+                    'eventsQuery',
+                    'publicEventsQuery',
+                  ],
+                }).then(successCallback).catch(errorCallback)
+              }
+
               handleHideEventForm = (e) => {
                 e.preventDefault()
 
                 if (!this.isCreating()) {
-                  this.props.updateEventMutation({
-                    variables: {
-                      event: this.state.event
-                    },
-                    refetchQueries: [
-                      'eventsQuery',
-                      'publicEventsQuery',
-                    ],
-                  }).then((mutationResult) => {
+                  const variables = {
+                    event: this.state.event
+                  }
+                  const successCallback = (mutationResult) => {
                     toast.success('Updated event scope!')
-                  }).catch(error => {
-                    console.error(error)
-                  })
+                  }
+                  this.runUpdateEventMutation(variables, successCallback)
                 }
 
                 this.setState({ showEventForm: false })
@@ -319,7 +352,6 @@ export const EditEventPage =
                   : null
 
                 let recipe = {
-                  // title: 'new event - this event needs a title'
                 }
 
                 if (eventData) {
@@ -432,15 +464,18 @@ export const EditEventPage =
                         <div className='container'>
                           <div className='row'>
                             <div className='col-xs-12 has-text-centered is-size-4'>
-                              <h6 className='is-size-6 has-text-centered is-uppercase has-text-weight-bold mt20 pt20 pb20'>
-                                <EventTitle event={this.state.event} />
+                              <h6 className='is-size-6 has-text-centered is-uppercase has-text-weight-bold pt30'>
+                                <EventTitle
+                                  event={this.state.event}
+                                  handleSubmitTitle={this.handleSubmitTitle}
+                                />
                               </h6>
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <div className={`event-box event-box__header color-block ${colorClass} is-saturated-80`}>
+                      <div className={`event-box event-box__header color-block ${colorClass} is-brightness-92`}>
                         <div className={`container-fluid pt20 pb20`}>
                           <div className='container'>
                             <div className='row'>
@@ -461,7 +496,7 @@ export const EditEventPage =
                         </div>
                       </div>
 
-                      <div className={`event-box event-box__footer color-block ${colorClass} is-saturated-60`}>
+                      <div className={`event-box event-box__footer color-block ${colorClass} is-brightness-85`}>
                         <div className={`container-fluid`}>
                           <div className='container'>
                             <div className='row'>
