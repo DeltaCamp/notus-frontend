@@ -2,18 +2,28 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-export class EventTitle extends Component {
-  state = {
-    newEventTitle: '',
-    isEditing: false
-  }
+const DEFAULT_TITLE = 'New Event - Give this event a title'
 
+export class EventTitle extends Component {
   static propTypes = {
     handleSubmitTitle: PropTypes.func.isRequired
   }
 
+  // esc key should revert
+  // mouse clickable checkbox and x to revert ?
+  // select all works but then can't backspace?
+
   constructor(props) {
     super(props)
+    
+    const newEventTitle = this.props.event.title && this.props.event.title.length
+      ? this.props.event.title
+      : ''
+    
+    this.state = {
+      isEditing: false,
+      newEventTitle
+    }
     this.inputRef = React.createRef()
   }
 
@@ -21,7 +31,6 @@ export class EventTitle extends Component {
     e.preventDefault()
 
     this.setState({
-      newEventTitle: this.props.event.title,
       isEditing: !this.state.isEditing
     }, () => {
       this.inputRef.current.setSelectionRange(
@@ -30,10 +39,6 @@ export class EventTitle extends Component {
       )
     })
   }
-
-  // esc key reverts
-  // mouse check and x ?
-
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -54,8 +59,9 @@ export class EventTitle extends Component {
     e.preventDefault()
 
     const titleRegEx = /^[a-z0-9- '()]+$/i
+    const isValid = titleRegEx.test(e.target.value)
 
-    if (titleRegEx.test(e.target.value)) {
+    if (isValid) {
       this.setState({
         newEventTitle: e.target.value
       })
@@ -73,7 +79,7 @@ export class EventTitle extends Component {
         )}
         onClick={this.handleEditTitle}
       >
-        {this.props.event.title}
+        {this.props.event.title || DEFAULT_TITLE}
       </button>
     )
 
@@ -81,6 +87,7 @@ export class EventTitle extends Component {
       content = (
         <form onSubmit={this.handleSubmit} className='form'>
           <input
+            type='text'
             ref={this.inputRef}
             onBlur={this.handleSubmit}
             onChange={this.handleChange}

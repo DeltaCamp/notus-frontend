@@ -48,8 +48,6 @@ export const EditEventPage =
                   scope: 0,
                   abiEventId: undefined,
                   isPublic: false,
-                  // title: '',
-                  title: 'new event - this event needs a title',
                   // frequency: '-1',
                   matchers: [
                     {
@@ -97,7 +95,7 @@ export const EditEventPage =
                         ...this.state.event,
                         ...updateEvent
                       }
-                    }, () => { console.warn(this.state.event)})
+                    })
                     toast.success('Updated event title!')
                   }
                   this.runUpdateEventMutation(variables, successCallback)
