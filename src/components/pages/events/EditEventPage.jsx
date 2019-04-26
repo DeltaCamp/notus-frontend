@@ -174,6 +174,8 @@ export const EditEventPage =
               handleSaveEvent = (e) => {
                 e.preventDefault()
 
+                console.log(this.state.event)
+
                 this.props.createEventMutation({
                   variables: {
                     event: this.state.event
@@ -521,16 +523,16 @@ export const EditEventPage =
                         <div className={`container-fluid pt20 pb20`}>
                           <div className='container'>
                             <div className='row'>
-                              <div className='col-xs-12 col-xl-12 col-start-xl-2 is-size-4'>
+                              <div className='col-xs-12 col-xl-10 col-start-xl-2 is-size-4'>
                                 {matcherSentences}
 
                                 <button
-                                  className='button has-icon has-icon__transparent has-stroke-light is-lowercase has-text-light ml45 mt10'
+                                  className='button has-icon  mt10 pl10 pr10 is-link'
                                   onClick={this.handleAddMatcher}
                                 >
                                   <PlusCircle
                                     className='icon__button has-stroke-light'
-                                  /> &nbsp; add matcher
+                                  /> &nbsp; add rule
                                 </button>
                               </div>
                             </div>
@@ -563,7 +565,7 @@ export const EditEventPage =
                                     className='button is-success'
                                     disabled={this.state.isCreating}
                                   >
-                                    Create Event
+                                    <PlusCircle />&nbsp;Create Event
                                   </button>
                                 </div>
                               </div>

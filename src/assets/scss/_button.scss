@@ -208,10 +208,16 @@ button.button.is-small:active {
 .button.has-icon {
   // background-color: white;
   border-radius: 10px;
-  border: 0;
+  border: 3px solid transparent;
   height: 44px;
   min-width: 44px;
   padding: 0;
+}
+
+.button.has-icon:hover,
+.button.has-icon:active,
+.button.has-icon:focus, {
+  border: 3px solid rgba(255, 255, 255, 1);
 }
 
 .has-bg .button.is-pink.is-outlined {

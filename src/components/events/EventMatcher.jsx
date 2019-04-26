@@ -38,7 +38,7 @@ export const EventMatcher =
         matcher
       } = this.props
       
-      const andWord = isFirst ? 'where' : 'and'
+      const andWord = isFirst ? 'where' : '... and'
 
       return (
         <div className='event-box__variable-wrapper event-box__variable-wrapper__matcher'>

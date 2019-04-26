@@ -258,9 +258,10 @@
 }
 
 .event-box__variable {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
   border: none;
-  border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+  // border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+  border: 3px solid transparent;
   border-radius: 6px;
   color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
@@ -292,10 +293,12 @@
 .event-box__variable:active,
 .event-box__variable:focus,
 .event-box__variable.is-active {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
   border-color: white;
+  // border-bottom: 3px solid r
+  border: 3px solid rgba(255, 255, 255, 0.8);
   color: white;
-  transform: scale3d(1.01, 1.01, 1.01);
+  // transform: scale3d(1.02, 1.02, 1.02);
 }
 
 .event-box__variable.is-active {
