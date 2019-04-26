@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import Helmet from 'react-helmet'
 import arrayMove from 'array-move'
 import ReactTimeout from 'react-timeout'
@@ -12,7 +13,6 @@ import { toast } from 'react-toastify'
 import { graphql } from 'react-apollo'
 
 import { EditEventDrawer } from '~/components/EditEventDrawer'
-import { EditMatcherDrawer } from '~/components/EditMatcherDrawer'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { EventMatcher } from '~/components/events/EventMatcher'
@@ -199,28 +199,28 @@ export const EditEventPage =
                 })
               }
 
-              handleCloseMatcherEdit = (e) => {
-                e.preventDefault()
+              // handleCloseMatcherEdit = (e) => {
+              //   e.preventDefault()
 
-                if (!this.isCreating()) {
-                  this.props.updateMatcherMutation({
-                    variables: {
-                      matcher: this.state.event.matchers[this.state.editMatcherIndex]
-                    },
-                    refetchQueries: [
-                      // only refetch the event or matcher we just created (1 record)
-                      'eventsQuery',
-                      'publicEventsQuery',
-                    ],
-                  }).then((mutationResult) => {
-                    toast.success('Updated event matcher!')
-                  }).catch(error => {
-                    console.error(error)
-                  })
-                }
+              //   if (!this.isCreating()) {
+              //     this.props.updateMatcherMutation({
+              //       variables: {
+              //         matcher: this.state.event.matchers[this.state.editMatcherIndex]
+              //       },
+              //       refetchQueries: [
+              //         // only refetch the event or matcher we just created (1 record)
+              //         'eventsQuery',
+              //         'publicEventsQuery',
+              //       ],
+              //     }).then((mutationResult) => {
+              //       toast.success('Updated event matcher!')
+              //     }).catch(error => {
+              //       console.error(error)
+              //     })
+              //   }
 
-                this.handleSetEditMatcher(null)
-              }
+              //   this.handleSetEditMatcher(null)
+              // }
 
               handleOnCreateAbi = (abi) => {
                 let event = {...this.state.event}
@@ -286,12 +286,32 @@ export const EditEventPage =
                 const matchers = this.state.event.matchers.slice()
                 matchers[this.state.editMatcherIndex] = matcher
 
+
                 this.setState({
                   event: {
                     ...this.state.event,
                     matchers
                   }
                 })
+
+                if (!this.isCreating()) {
+                  this.props.updateMatcherMutation({
+                    variables: {
+                      matcher: matchers[this.state.editMatcherIndex]
+                    },
+                    refetchQueries: [
+                      // only refetch the event or matcher we just created (1 record)
+                      'eventsQuery',
+                      'publicEventsQuery',
+                    ],
+                  }).then((mutationResult) => {
+                    toast.success('Updated event matcher!')
+                  }).catch(error => {
+                    console.error(error)
+                  })
+                }
+
+                this.handleSetEditMatcher(null)
               }
 
               onChangeScopeAndAbiEventId = ({ scope, abiEventId }) => {
@@ -353,9 +373,9 @@ export const EditEventPage =
 
                 const { eventData } = this.props
 
-                const editMatcher = this.isEditingMatcher()
-                  ? this.state.event.matchers[this.state.editMatcherIndex]
-                  : null
+                // const editMatcher = this.isEditingMatcher()
+                //   ? this.state.event.matchers[this.state.editMatcherIndex]
+                //   : null
 
                 let recipe = {
                 }
@@ -396,41 +416,52 @@ export const EditEventPage =
                             ref={provided.innerRef}
                           >
                             {this.state.event.matchers.map((eventMatcher, index) => (
-                              <Draggable
+                              <div
                                 key={`event-matcher-${index}`}
-                                draggableId={index+1}
-                                index={index}
-                                
-                              >
-                                {(provided, snapshot) => (
-                                  <TransitionGroup>
-                                    <CSSTransition
-                                      key={`event-matcher-css-transition-${index}`}
-                                      timeout={{ enter: 150, exit: 1000 }}
-                                      classNames='fade'
-                                      appear
-                                    >
-                                      <div className='fade-enter'>
-                                        <div
-                                          ref={provided.innerRef}
-                                          {...provided.draggableProps}
-                                          {...provided.dragHandleProps}
-                                        >
-                                          <EventMatcher
-                                            key={`event-matcher-${index}`}
-                                            matcher={eventMatcher}
-                                            index={index}
-                                            handleSetEditMatcher={this.handleSetEditMatcher}
-                                            handleRemoveMatcher={this.handleRemoveMatcher}
-                                            isFirst={index === 0}
-                                            isActive={!!editMatcher && eventMatcher === editMatcher}
-                                          />
-                                        </div>
-                                      </div>
-                                    </CSSTransition>
-                                  </TransitionGroup>
+                                className={classnames(
+                                  {
+                                    'matcher-row--is-active': index === this.state.editMatcherIndex
+                                  }
                                 )}
-                              </Draggable>
+                              >
+                                <Draggable
+                                  draggableId={index+1}
+                                  index={index}
+                                >
+                                  {(provided, snapshot) => (
+                                    <TransitionGroup>
+                                      <CSSTransition
+                                        key={`event-matcher-css-transition-${index}`}
+                                        timeout={{ enter: 150, exit: 1000 }}
+                                        classNames='fade'
+                                        appear
+                                      >
+                                        <div className='fade-enter'>
+                                          <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                          >
+                                            <EventMatcher
+                                              key={`event-matcher-${index}`}
+                                              isFirst={index === 0}
+                                              index={index}
+                                              handleSetEditMatcher={this.handleSetEditMatcher}
+                                              handleRemoveMatcher={this.handleRemoveMatcher}
+                                              matcher={eventMatcher}
+                                              event={this.state.event}
+                                              onChangeMatcher={
+                                                (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
+                                              }
+                                            />
+                                            {/* editMatcher={editMatcher} */}
+                                          </div>
+                                        </div>
+                                      </CSSTransition>
+                                    </TransitionGroup>
+                                  )}
+                                </Draggable>
+                              </div>
                             ))}
                             {provided.placeholder}
                           </div>
@@ -456,14 +487,14 @@ export const EditEventPage =
                       onClose={this.handleHideEventForm}
                     />
 
-                    <EditMatcherDrawer
+                    {/* <EditMatcherDrawer
                       isOpen={this.isEditingMatcher()}
                       matcher={editMatcher}
                       onClose={this.handleCloseMatcherEdit}
                       abiEventId={this.state.event.abiEventId}
                       scope={this.state.event.scope}
                       onChangeMatcher={(updatedMatcher) => this.onChangeMatcher(updatedMatcher)}
-                    />
+                    /> */}
 
                     <section className='section section--main-content'>
                       <div className={`container-fluid pb20 ${colorClass} color-block`}>
@@ -481,7 +512,9 @@ export const EditEventPage =
                         </div>
                       </div>
 
-                      <div className={`event-box event-box__header color-block ${colorClass} is-brightness-92`}>
+                      <div className={`event-box event-box__header color-block ${colorClass} is-top-layer`}>
+                        <div className='is-brightness-70 is-full-width-background' />
+
                         <div className={`container-fluid pt20 pb20`}>
                           <div className='container'>
                             <div className='row'>
@@ -502,7 +535,9 @@ export const EditEventPage =
                         </div>
                       </div>
 
-                      <div className={`event-box event-box__footer color-block ${colorClass} is-brightness-85`}>
+                      <div className={`event-box event-box__footer color-block ${colorClass}`}>
+                        <div className='is-brightness-40 is-full-width-background' />
+
                         <div className={`container-fluid`}>
                           <div className='container'>
                             <div className='row'>

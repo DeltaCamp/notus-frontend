@@ -394,7 +394,7 @@ input.input.is-large:active {
   border-radius: 100px !important;
   border-width: 4px;
   cursor: pointer !important;
-  padding: 0 10px 0;
+  padding: 0;
 }
 
 .react-select__indicator-separator {
@@ -407,17 +407,21 @@ input.input.is-large:active {
   margin-bottom: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  z-index: 30000;
 }
 
 .react-select__menu-list {
   text-align: left;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
+  z-index: 30000;
 }
 
 .react-select .react-select__option {
   color: black;
   cursor: pointer;
+  font-size: 1rem;
   margin: 5px;
   padding: 0 10px;
 }

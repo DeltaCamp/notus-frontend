@@ -72,7 +72,7 @@ export const EventCard =
 
         handleEventCardClick = (e) => {
           e.preventDefault()
-          
+         
           const { currentUserData } = this.props
 
           this.setState({
@@ -146,12 +146,12 @@ export const EventCard =
                 )
               }>
                 <div className='dropdown-trigger'>
-                  <button
+                  <div
                     className='button has-icon has-icon__transparent'
                     onClick={this.handleMenuClick}
                   >
                     <Settings />
-                  </button>
+                  </div>
                 </div>
                 <div className='dropdown-menu' id='dropdown-menu6' role='menu'>
                   <div className='dropdown-content'>
@@ -186,7 +186,7 @@ export const EventCard =
           }
 
           return (
-            <div
+            <button
               key={`event-${event.id}`}
               onClick={this.handleEventCardClick}
               ref={node => {this.node = node}}
@@ -215,7 +215,7 @@ export const EventCard =
                   {editable ? editDropdown : ''}
                 </div>
               </div>
-            </div>
+            </button>
           )
         }
       }

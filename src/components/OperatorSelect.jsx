@@ -75,7 +75,12 @@ export const OperatorSelect = graphql(sourceQuery, {
 
         const isDisabled = options.length === 1
 
-        return <NotusSelect {...props} options={options} isDisabled={isDisabled} />
+        return <NotusSelect
+          {...props}
+          options={options}
+          isDisabled={isDisabled}
+          menuIsOpen
+        />
       }
     }
   )

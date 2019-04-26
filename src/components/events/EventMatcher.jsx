@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
-import classnames from 'classnames'
-import { Edit, XCircle, Menu } from 'react-feather'
 import PropTypes from 'prop-types'
-
-import { MatcherTitle } from '~/components/events/MatcherTitle'
+import { XCircle, Menu } from 'react-feather'
+import { MatcherOperand } from '~/components/events/MatcherOperand'
+import { MatcherOperator } from '~/components/events/MatcherOperator'
+import { MatcherSource } from '~/components/events/MatcherSource'
 
 const DragHandle = (() => <span className='drag-handle is-hidden-touch'>
   <Menu />
@@ -13,21 +13,22 @@ export const EventMatcher =
   class _EventMatcher extends PureComponent {
 
     static propTypes = {
+      editMatcher: PropTypes.object,
       isFirst: PropTypes.bool.isRequired,
-      matcher: PropTypes.object.isRequired,
       index: PropTypes.number.isRequired,
       handleSetEditMatcher: PropTypes.func.isRequired,
       handleRemoveMatcher: PropTypes.func.isRequired,
-      isActive: PropTypes.bool.isRequired
+      matcher: PropTypes.object.isRequired,
+      onChangeMatcher: PropTypes.func.isRequired
     }
 
-    handleEdit = (e) => {
-      e.preventDefault()
+    handleEdit = () => {
       this.props.handleSetEditMatcher(this.props.index)
     }
 
     handleRemove = (e) => {
       e.preventDefault()
+
       this.props.handleRemoveMatcher(this.props.index)
     }
 
@@ -37,40 +38,45 @@ export const EventMatcher =
         matcher
       } = this.props
       
-      const humanReadableDescription = <MatcherTitle matcher={matcher} isFirst={isFirst} />
+      const andWord = isFirst ? 'where' : 'and'
 
       return (
-        <div
-          className={classnames(
-            `event-box__variable-wrapper`,
-            {
-              'is-active': this.props.isActive
-            }
-          )}
-        >
+        <div className='event-box__variable-wrapper'>
           <DragHandle />
-          <button
-            className={classnames(
-              `event-box__variable`,
-              {
-                'is-active': this.props.isActive
-              }
-            )}
-            onClick={this.handleEdit}
-          >
-            {humanReadableDescription}
-            {/* {this.convertTemplate(matcher)} */}
-          </button>
+
+          {andWord} the
+          
+          <MatcherSource
+            abiEventInputId={matcher.abiEventInputId}
+            event={this.props.event}
+            handleEdit={this.handleEdit}
+            matcher={matcher}
+            onChange={this.props.onChangeMatcher}
+            scope={this.props.scope}
+          />
+
+          <MatcherOperator
+            event={this.props.event}
+            handleEdit={this.handleEdit}
+            matcher={matcher}
+            onChange={this.props.onChangeMatcher}
+          />
+          
+          <MatcherOperand
+            handleEdit={this.handleEdit}
+            matcher={matcher}
+            onChange={this.props.onChangeMatcher}
+          />
 
           <span className="icons">
-            <button
+            {/* <button
               className='button has-icon has-icon__transparent has-stroke-light edit is-hidden-touch'
               onClick={this.handleEdit}
             >
               <Edit
                 className='icon__button has-stroke-light'
               />
-            </button>
+            </button> */}
 
             <button
               className='button has-icon has-icon__transparent has-stroke-light'
