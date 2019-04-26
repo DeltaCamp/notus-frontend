@@ -87,7 +87,7 @@ export class MatcherOperand extends Component {
           )
           : (
             <button
-              className='event-box__variable'
+              className='event-box__variable has-text-input'
               onClick={this.handleStartEdit}
             >
               {matcher.operand || '?'}

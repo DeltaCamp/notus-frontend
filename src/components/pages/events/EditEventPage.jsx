@@ -163,19 +163,80 @@ export const EditEventPage =
                   result.destination.index
                 )
 
+                matchers.forEach((matcher, index) => {
+                  matcher.order = index
+                })
+
                 this.setState({
                   event: {
                     ...this.state.event,
                     matchers
                   }
                 })
+
+                if (!this.isCreating()) {
+                  const variables = {
+                    event: {
+                      id: this.state.event.id,
+                      matchers
+                    }
+                  }
+                  const successCallback = ({ data: { updateEvent } }) => {
+                    // this.setState({
+                    //   event: {
+                    //     ...this.state.event,
+                    //     ...updateEvent
+                    //   }
+                    // })
+                    toast.success('Updated rule matcher positions')
+                  }
+                  const errorCallback = ({ data: { updateEvent } }) => {
+                    // TODO: implement fail state and reverse position of matchers!
+                  }
+                  this.runUpdateEventMutation(variables, successCallback)
+                }
+
+                // if (!this.isCreating()) {
+                //   const variables = {
+                //     event: {
+                //       id: this.state.event.id,
+                //       matchers
+                //     }
+                //   }
+                //   const successCallback = ({ data: { updateEvent } }) => {
+                //     // this.setState({
+                //     //   event: {
+                //     //     ...this.state.event,
+                //     //     ...updateEvent
+                //     //   }
+                //     // })
+                //     toast.success('Updated matcher positions!')
+                //   }
+                //   const errorCallback = ({ data: { updateEvent } }) => {
+                //     // TODO: implement fail state and reverse position of matchers!
+                //   }
+                //   this.runUpdateEventMutation(variables, successCallback)
+                // }
               }
 
               handleSaveEvent = (e) => {
                 e.preventDefault()
 
-                console.log(this.state.event)
+                const { matchers } = this.state.event
 
+                matchers.forEach((matcher, index) => {
+                  matcher.order = index
+                })
+
+                this.setState({
+                  event: {
+                    ...this.state.event,
+                    matchers
+                  }
+                }, this.doCreate)
+              }
+
+              doCreate = () => {
                 this.props.createEventMutation({
                   variables: {
                     event: this.state.event

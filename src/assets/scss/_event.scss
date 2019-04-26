@@ -260,19 +260,17 @@
 .event-box__variable {
   background: rgba(255, 255, 255, 0.12);
   border: none;
-  // border-bottom: 3px solid rgba(255, 255, 255, 0.3);
   border: 3px solid transparent;
   border-radius: 6px;
   color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
   display: inline-block;
   font-size: 1.35rem;
-  // font-size: inherit;
   font-weight: 600;
   height: 47px;
   line-height: 1;
   margin: 0.5rem 0.5rem 0;
-  padding: 0.5rem 1rem 0.25rem;
+  padding: 0.5rem 0.75rem 0.25rem;
   position: relative;
   text-align: left;
   transition: all 275ms ease-in-out;
@@ -295,19 +293,20 @@
 .event-box__variable.is-active {
   background: rgba(255, 255, 255, 0.25);
   border-color: white;
-  // border-bottom: 3px solid r
   border: 3px solid rgba(255, 255, 255, 0.8);
   color: white;
-  // transform: scale3d(1.02, 1.02, 1.02);
 }
 
 .event-box__variable.is-active {
   background: rgba(255, 255, 255, 0.4);
 }
 
+.event-box__variable.has-react-select {
+  width: 250px;
+}
+
 .event-box__variable.has-text-input {
-  min-width: 100px;
-  max-width: 300px;
+  width: auto !important;
 }
 
 .event-box__variable .input {
@@ -462,7 +461,24 @@
 }
 
 .color-block.is-warning .event-box__variable {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.color-block.is-warning .event-box__variable-wrapper__matcher {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.color-block.is-warning .event-box__variable-wrapper__matcher:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.color-block.is-warning .event-box__variable .input {
+  color: black;
+}
+
+.color-block.is-warning .react-select__single-value,
+.color-block.is-warning .react-select__input {
+  color: black;
 }
 
 .color-block.is-warning .event-box__variable:hover,
@@ -471,12 +487,7 @@
   color: black;
 }
 
-.color-block.is-warning .event-box__variable {
-  border-color: rgba(0, 0, 0, 0.3);
-}
-
 .color-block.is-warning .event-box__variable:hover {
-  border-color: rgba(0, 0, 0, 0.8);
 }
 
 .color-block.is-warning .has-text-light {
