@@ -98,7 +98,7 @@ export const EventCard =
             },
             refetchQueries: [
               'eventsQuery',
-              'publicEventsQuery',
+              'eventsQuery',
             ],
           }).then((mutationResult) => {
             this.deactivateEditMenu()

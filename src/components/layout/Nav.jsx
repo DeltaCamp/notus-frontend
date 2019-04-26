@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
-import { Activity, Power, Search, Send, Star } from 'react-feather'
+import { Activity, Power, Search, Send } from 'react-feather'
 import { toast } from 'react-toastify'
 import { withRouter } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'

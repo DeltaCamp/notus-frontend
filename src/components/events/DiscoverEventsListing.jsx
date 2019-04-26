@@ -1,29 +1,29 @@
 import React, { PureComponent } from 'react'
 import { formatRoute } from 'react-router-named-routes'
 import { graphql } from 'react-apollo'
-import { publicEventsQuery } from '~/queries/publicEventsQuery'
+import { eventsQuery } from '~/queries/eventsQuery'
 import { EventCard } from '~/components/events/EventCard'
 import * as routes from '~/../config/routes'
 
 export const DiscoverEventsListing =
-  graphql(publicEventsQuery, { name: 'publicEventsData' })(
+  graphql(eventsQuery, { name: 'eventsData' })(
     class _DiscoverEventsListing extends PureComponent {
       render () {
         const { searchValue } = this.props
 
-        if (this.props.publicEventsData.loading) {
+        if (this.props.eventsData.loading) {
           return 'Loading ...'
-        } else if (this.props.publicEventsData.error) {
-          console.error(this.props.publicEventsData.error)
+        } else if (this.props.eventsData.error) {
+          console.error(this.props.eventsData.error)
           return null
         }
 
-        const { publicEvents } = this.props.publicEventsData
-        let filteredEvents = publicEvents
+        const { events } = this.props.eventsData.events
+        let filteredEvents = events
 
         if (searchValue && searchValue.length) {
           const searchRegExp = new RegExp(searchValue.trim(), 'i')
-          filteredEvents = publicEvents.filter((event) => (
+          filteredEvents = events.filter((event) => (
             searchRegExp.test(event.title)
           ))
         }

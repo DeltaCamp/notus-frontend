@@ -100,7 +100,7 @@ export const EventPage =
                     },
                     refetchQueries: [
                       'eventsQuery',
-                      'publicEventsQuery',
+                      'eventsQuery',
                     ],
                   }).then(({ data: { updateEvent } }) => {
                     toast.dismiss()
@@ -125,7 +125,7 @@ export const EventPage =
                     },
                     refetchQueries: [
                       'eventsQuery',
-                      'publicEventsQuery',
+                      'eventsQuery',
                     ],
                   }).then(({ data: { updateEvent } }) => {
                     toast.dismiss()
@@ -166,7 +166,7 @@ export const EventPage =
                     },
                     refetchQueries: [
                       'eventsQuery',
-                      'publicEventsQuery',
+                      'eventsQuery',
                     ],
                   }).then(({ data: { updateEvent } }) => {
                     toast.success(`Event published!`)
@@ -197,7 +197,7 @@ export const EventPage =
                     refetchQueries: [
                       // only refetch the event we just updated (1 record)
                       'eventsQuery',
-                      'publicEventsQuery',
+                      'eventsQuery',
                     ],
                   }).then(successCallback).catch(errorCallback)
                 }
@@ -225,7 +225,7 @@ export const EventPage =
                     },
                     refetchQueries: [
                       'eventsQuery',
-                      'publicEventsQuery',
+                      'eventsQuery',
                     ],
                   }).then(() => {
                     toast.dismiss()

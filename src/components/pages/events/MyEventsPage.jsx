@@ -46,7 +46,7 @@ export const MyEventsPage =
                 },
                 refetchQueries: [
                   'eventsQuery',
-                  'publicEventsQuery',
+                  'eventsQuery',
                 ],
               }).then(() => {
                 toast.dismiss()
@@ -84,7 +84,7 @@ export const MyEventsPage =
                   console.error(eventsData.error)
                   return 'There was an error while fetching your events'
                 } else {
-                  events = eventsData.events.map((event) => (
+                  events = eventsData.events.events.map((event) => (
                     <EventCard
                       {...this.props}
                       key={`event-${event.id}`}

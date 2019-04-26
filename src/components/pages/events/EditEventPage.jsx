@@ -180,7 +180,7 @@ export const EditEventPage =
                   },
                   refetchQueries: [
                     'eventsQuery',
-                    'publicEventsQuery',
+                    'eventsQuery',
                   ],
                 }).then((mutationResult) => {
                   toast.success('Successfully saved event!')
@@ -210,7 +210,7 @@ export const EditEventPage =
               //       refetchQueries: [
               //         // only refetch the event or matcher we just created (1 record)
               //         'eventsQuery',
-              //         'publicEventsQuery',
+              //         'eventsQuery',
               //       ],
               //     }).then((mutationResult) => {
               //       toast.success('Updated event matcher!')
@@ -249,7 +249,7 @@ export const EditEventPage =
                   refetchQueries: [
                     // only refetch the event we just updated (1 record)
                     'eventsQuery',
-                    'publicEventsQuery',
+                    'eventsQuery',
                   ],
                 }).then(successCallback).catch(errorCallback)
               }
@@ -302,7 +302,7 @@ export const EditEventPage =
                     refetchQueries: [
                       // only refetch the event or matcher we just created (1 record)
                       'eventsQuery',
-                      'publicEventsQuery',
+                      'eventsQuery',
                     ],
                   }).then((mutationResult) => {
                     toast.success('Updated event matcher!')
