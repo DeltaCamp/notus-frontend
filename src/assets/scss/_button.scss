@@ -206,7 +206,8 @@ button.button.is-small:active {
 .has-bg .button.has-icon,
 .has-bg__dark .button.has-icon,
 .button.has-icon {
-  background-color: white;
+  // background-color: white;
+  border-radius: 10px;
   border: 0;
   height: 44px;
   min-width: 44px;
@@ -340,7 +341,9 @@ button:active[disabled],
 }
 
 .buttons-right {
-  flex-direction: column;
   align-content: flex-end;
+  flex-direction: column;
   display: flex;
+  // margin: 0 0 0 auto;
+  margin-left: auto;
 }

@@ -41,7 +41,7 @@ export const EventMatcher =
       const andWord = isFirst ? 'where' : 'and'
 
       return (
-        <div className='event-box__variable-wrapper event-box__has-small-text'>
+        <div className='event-box__variable-wrapper event-box__variable-wrapper__matcher'>
           <DragHandle />
 
           {andWord} the
@@ -68,7 +68,7 @@ export const EventMatcher =
             onChange={this.props.onChangeMatcher}
           />
 
-          <span className="icons">
+          <div className='buttons buttons-right'>
             {/* <button
               className='button has-icon has-icon__transparent has-stroke-light edit is-hidden-touch'
               onClick={this.handleEdit}
@@ -78,15 +78,16 @@ export const EventMatcher =
               />
             </button> */}
 
+{/* has-icon__transparent has-stroke-light  */}
             <button
-              className='button has-icon has-icon__transparent has-stroke-light'
+              className='button has-icon is-danger' 
               onClick={this.handleRemove}
             >
               <XCircle
                 className='icon__button has-stroke-light'
               />
             </button>
-          </span>
+          </div>
         </div>
       )
     }

@@ -653,7 +653,7 @@ hr {
 
 .drag-handle {
   cursor: grab;
-  margin-left: 2rem;
+  margin-left: 1rem;
   margin-right: 1rem;
 }
 
@@ -922,4 +922,8 @@ svg {
 
 .is-underlined {
   text-decoration: underline;
+}
+
+.is-inline-flex {
+  display: inline-flex;
 }
