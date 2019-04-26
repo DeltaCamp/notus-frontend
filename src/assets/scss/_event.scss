@@ -215,9 +215,12 @@
   padding-left: 0.5rem;
 }
 
+.event-box__variable-wrapper .drag-handle {
+  opacity: 0.4;
+}
+
 .event-box__variable-wrapper .has-icon,
 .event-box__variable-wrapper .drag-handle {
-  opacity: 0.001;
   pointer-events: none;
   transition: opacity 200ms ease-in-out;
   will-change: opacity;
@@ -239,6 +242,15 @@
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
   font-size: 1.42rem;
+
+  align-items: baseline;
+  display: flex;
+  justify-content: flex-start;
+  padding-right: 1rem;
+}
+
+.event-box__variable-wrapper__matcher > * {
+  display: inline-flex;
 }
 
 .event-box__variable-wrapper__matcher:hover {
