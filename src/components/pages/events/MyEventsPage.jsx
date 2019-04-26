@@ -21,7 +21,17 @@ export const MyEventsPage =
   IsAuthed(
     graphql(currentUserQuery, { name: 'currentUserData' })(
       graphql(deleteEventMutation, { name: 'deleteEventMutation' })(
-        graphql(eventsQuery, { name: 'eventsData' })(
+        graphql(eventsQuery, {
+          name: 'eventsData',
+          skip: (props) => !props.currentUserData.currentUser,
+          options: (props) => ({
+            variables: {
+              eventsQuery: {
+                userId: props.currentUserData.currentUser.id
+              }
+            }
+          })
+        })(
           class _MyEventsPage extends PureComponent {
             state = {
               isConfirmingDelete: false

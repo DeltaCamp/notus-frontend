@@ -6,7 +6,16 @@ import { EventCard } from '~/components/events/EventCard'
 import * as routes from '~/../config/routes'
 
 export const DiscoverEventsListing =
-  graphql(eventsQuery, { name: 'eventsData' })(
+  graphql(eventsQuery, {
+    name: 'eventsData',
+    options: {
+      variables: {
+        eventsQuery: {
+          isPublic: true
+        }
+      }
+    }
+  })(
     class _DiscoverEventsListing extends PureComponent {
       render () {
         const { searchValue } = this.props
