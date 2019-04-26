@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Edit, XCircle, Menu } from 'react-feather'
-import { SourceTitle } from '~/components/SourceTitle'
-import { OPERATOR_LABELS } from '~/constants'
+import { MatcherOperator } from '~/components/events/MatcherOperator'
+import { MatcherSource } from '~/components/events/MatcherSource'
 
 const DragHandle = (() => <span className='drag-handle is-hidden-touch'>
   <Menu />
@@ -37,10 +37,7 @@ export const EventMatcher =
         matcher
       } = this.props
       
-      const {
-        operator,
-        operand
-      } = matcher
+      const { operand } = matcher
 
       const andWord = isFirst ? 'where' : 'and'
 
@@ -48,20 +45,24 @@ export const EventMatcher =
         <div className='event-box__variable-wrapper'>
           <DragHandle />
 
-          {andWord} the <SourceTitle
+          {andWord} the
+          
+          <MatcherSource
             abiEventInputId={matcher.abiEventInputId}
             event={this.props.event}
             handleEdit={this.handleEdit}
             matcher={matcher}
             onChange={this.props.onChangeMatcher}
             scope={this.props.scope}
-          /> 
-          <button
-            className='event-box__variable'
-            onClick={this.handleEdit}
-          >
-            {OPERATOR_LABELS[operator]} 
-          </button>
+          />
+
+          <MatcherOperator
+            event={this.props.event}
+            handleEdit={this.handleEdit}
+            matcher={matcher}
+            onChange={this.props.onChangeMatcher}
+          />
+          
           <button
             className='event-box__variable'
             onClick={this.handleEdit}
@@ -99,12 +100,3 @@ export const EventMatcher =
       )
     }
   }
-
-//   < EditMatcherDrawer
-// isOpen = { this.isEditingMatcher() }
-// matcher = { editMatcher }
-// onClose = { this.handleCloseMatcherEdit }
-// abiEventId = { this.state.event.abiEventId }
-// scope = { this.state.event.scope }
-// onChangeMatcher = {(updatedMatcher) => this.onChangeMatcher(updatedMatcher)}
-// />

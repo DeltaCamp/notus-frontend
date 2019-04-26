@@ -8,6 +8,7 @@ export const NotusSelect =
       menuPlacement='auto'
       className={`react-select ${props.className || ''}`}
       classNamePrefix='react-select'
+      autoFocus
     />
       
   }

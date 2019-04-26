@@ -198,28 +198,28 @@ export const EditEventPage =
                 })
               }
 
-              handleCloseMatcherEdit = (e) => {
-                e.preventDefault()
+              // handleCloseMatcherEdit = (e) => {
+              //   e.preventDefault()
 
-                if (!this.isCreating()) {
-                  this.props.updateMatcherMutation({
-                    variables: {
-                      matcher: this.state.event.matchers[this.state.editMatcherIndex]
-                    },
-                    refetchQueries: [
-                      // only refetch the event or matcher we just created (1 record)
-                      'eventsQuery',
-                      'publicEventsQuery',
-                    ],
-                  }).then((mutationResult) => {
-                    toast.success('Updated event matcher!')
-                  }).catch(error => {
-                    console.error(error)
-                  })
-                }
+              //   if (!this.isCreating()) {
+              //     this.props.updateMatcherMutation({
+              //       variables: {
+              //         matcher: this.state.event.matchers[this.state.editMatcherIndex]
+              //       },
+              //       refetchQueries: [
+              //         // only refetch the event or matcher we just created (1 record)
+              //         'eventsQuery',
+              //         'publicEventsQuery',
+              //       ],
+              //     }).then((mutationResult) => {
+              //       toast.success('Updated event matcher!')
+              //     }).catch(error => {
+              //       console.error(error)
+              //     })
+              //   }
 
-                this.handleSetEditMatcher(null)
-              }
+              //   this.handleSetEditMatcher(null)
+              // }
 
               handleOnCreateAbi = (abi) => {
                 let event = {...this.state.event}
@@ -285,12 +285,32 @@ export const EditEventPage =
                 const matchers = this.state.event.matchers.slice()
                 matchers[this.state.editMatcherIndex] = matcher
 
+
                 this.setState({
                   event: {
                     ...this.state.event,
                     matchers
                   }
                 })
+
+                if (!this.isCreating()) {
+                  this.props.updateMatcherMutation({
+                    variables: {
+                      matcher: matchers[this.state.editMatcherIndex]
+                    },
+                    refetchQueries: [
+                      // only refetch the event or matcher we just created (1 record)
+                      'eventsQuery',
+                      'publicEventsQuery',
+                    ],
+                  }).then((mutationResult) => {
+                    toast.success('Updated event matcher!')
+                  }).catch(error => {
+                    console.error(error)
+                  })
+                }
+
+                this.handleSetEditMatcher(null)
               }
 
               onChangeScopeAndAbiEventId = ({ scope, abiEventId }) => {

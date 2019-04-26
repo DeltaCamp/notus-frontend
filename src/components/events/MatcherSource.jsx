@@ -24,7 +24,7 @@ const abiEventInputQuery = gql`
   ${abiEventInputFragment}
 `
 
-export const SourceTitle = graphql(sourcesQuery, {
+export const MatcherSource = graphql(sourcesQuery, {
   name: 'sourcesQuery'
 })(
   graphql(sourceQuery, {
@@ -46,7 +46,7 @@ export const SourceTitle = graphql(sourcesQuery, {
         }
       })
     }) (
-      class _SourceTitle extends Component {
+      class _MatcherSource extends Component {
         state = {
           isEditing: false
         }
@@ -60,7 +60,7 @@ export const SourceTitle = graphql(sourcesQuery, {
           scope: PropTypes.number
         }
 
-        handleEdit = (e) => {
+        handleStartEdit = (e) => {
           e.preventDefault()
 
           this.setState({
@@ -149,7 +149,7 @@ export const SourceTitle = graphql(sourcesQuery, {
                 : (
                   <button
                     className='event-box__variable'
-                    onClick={this.handleEdit}
+                    onClick={this.handleStartEdit}
                   >
                     {this.sourceWords()}
                   </button>
