@@ -159,7 +159,7 @@ export const MatcherSource = graphql(sourcesQuery, {
                 ? (
                   <div
                     ref={node => { this.node = node }}
-                    className='event-box__variable'
+                    className='event-box__variable has-react-select'
                     onKeyUp={this.handleKeyUp}
                   >
                     <SourceSelect
@@ -174,7 +174,7 @@ export const MatcherSource = graphql(sourcesQuery, {
                 )
                 : (
                   <button
-                    className='event-box__variable'
+                    className='event-box__variable has-react-select'
                     onClick={this.handleStartEdit}
                   >
                     {this.sourceWords()}

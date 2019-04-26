@@ -38,7 +38,7 @@ export const EventMatcher =
         matcher
       } = this.props
       
-      const andWord = isFirst ? 'where' : 'and'
+      const andWord = isFirst ? 'where' : '... and'
 
       return (
         <div className='event-box__variable-wrapper event-box__variable-wrapper__matcher'>
@@ -69,16 +69,6 @@ export const EventMatcher =
           />
 
           <div className='buttons buttons-right'>
-            {/* <button
-              className='button has-icon has-icon__transparent has-stroke-light edit is-hidden-touch'
-              onClick={this.handleEdit}
-            >
-              <Edit
-                className='icon__button has-stroke-light'
-              />
-            </button> */}
-
-{/* has-icon__transparent has-stroke-light  */}
             <button
               className='button has-icon is-danger' 
               onClick={this.handleRemove}

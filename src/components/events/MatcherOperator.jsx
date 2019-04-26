@@ -71,7 +71,7 @@ export class MatcherOperator extends Component {
           ? (
             <div
               ref={node => { this.node = node }}
-              className='event-box__variable'
+              className='event-box__variable has-react-select'
               onKeyUp={this.handleKeyUp}
             >
               <OperatorSelect
@@ -85,7 +85,7 @@ export class MatcherOperator extends Component {
           )
           : (
             <button
-              className='event-box__variable'
+              className='event-box__variable has-react-select'
               onClick={this.handleStartEdit}
             >
               {OPERATOR_LABELS[operator]}

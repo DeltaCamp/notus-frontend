@@ -176,10 +176,6 @@ a.is-dark {
   width: 100%;
 }
 
-.button-has-icon .has-text-link {
-  margin-left: 0.5rem;
-}
-
 a {
   transition: all 200ms ease-in-out;
 }
@@ -192,10 +188,6 @@ a {
 
 .has-hover-border:hover {
   border-bottom-color: rgba(5, 110, 220, 0.5);
-}
-
-.button-has-icon {
-  border: 0;
 }
 
 @media screen and (max-width: $tablet) {
@@ -541,6 +533,62 @@ hr {
 
 .pt10 {
   padding-top: 10px !important;
+}
+
+.pl100 {
+  padding-left: 100px !important;
+}
+
+.pl75 {
+  padding-left: 75px !important;
+}
+
+.pl50 {
+  padding-left: 50px !important;
+}
+
+.pl30 {
+  padding-left: 30px !important;
+}
+
+.pl20 {
+  padding-left: 20px !important;
+}
+
+.pl10 {
+  padding-left: 10px !important;
+}
+
+.pl10 {
+  padding-left: 10px !important;
+}
+
+.pr100 {
+  padding-right: 100px !important;
+}
+
+.pr75 {
+  padding-right: 75px !important;
+}
+
+.pr50 {
+  padding-right: 50px !important;
+}
+
+.pr30 {
+  padding-right: 30px !important;
+}
+
+.pr20 {
+  padding-right: 20px !important;
+}
+
+.pr10 {
+  padding-right: 10px !important;
+}
+
+.pr10 {
+  padding-right: 10px !important;
 }
 
 

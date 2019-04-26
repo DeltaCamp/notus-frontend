@@ -4,7 +4,7 @@ const classes = [
   'is-warning',
   'is-purple',
   // 'is-info',
-  'is-pink',
+  // 'is-pink',
   // 'is-danger',
   // 'is-primary',
 ]
