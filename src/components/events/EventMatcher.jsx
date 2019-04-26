@@ -69,16 +69,6 @@ export const EventMatcher =
           />
 
           <div className='buttons buttons-right'>
-            {/* <button
-              className='button has-icon has-icon__transparent has-stroke-light edit is-hidden-touch'
-              onClick={this.handleEdit}
-            >
-              <Edit
-                className='icon__button has-stroke-light'
-              />
-            </button> */}
-
-{/* has-icon__transparent has-stroke-light  */}
             <button
               className='button has-icon is-danger' 
               onClick={this.handleRemove}
