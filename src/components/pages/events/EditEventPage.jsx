@@ -499,6 +499,7 @@ export const EditEventPage =
                             )}
                           >
                             <Draggable
+                              key={`event-matcher-draggable-${index}`}
                               draggableId={index+1}
                               index={index}
                             >
