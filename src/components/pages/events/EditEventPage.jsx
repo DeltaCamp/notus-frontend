@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import Helmet from 'react-helmet'
 import arrayMove from 'array-move'
 import ReactTimeout from 'react-timeout'
@@ -415,45 +416,52 @@ export const EditEventPage =
                             ref={provided.innerRef}
                           >
                             {this.state.event.matchers.map((eventMatcher, index) => (
-                              <Draggable
-                                key={`event-matcher-${index}`}
-                                draggableId={index+1}
-                                index={index}
-                                
-                              >
-                                {(provided, snapshot) => (
-                                  <TransitionGroup>
-                                    <CSSTransition
-                                      key={`event-matcher-css-transition-${index}`}
-                                      timeout={{ enter: 150, exit: 1000 }}
-                                      classNames='fade'
-                                      appear
-                                    >
-                                      <div className='fade-enter'>
-                                        <div
-                                          ref={provided.innerRef}
-                                          {...provided.draggableProps}
-                                          {...provided.dragHandleProps}
-                                        >
-                                          <EventMatcher
-                                            key={`event-matcher-${index}`}
-                                            isFirst={index === 0}
-                                            index={index}
-                                            handleSetEditMatcher={this.handleSetEditMatcher}
-                                            handleRemoveMatcher={this.handleRemoveMatcher}
-                                            matcher={eventMatcher}
-                                            event={this.state.event}
-                                            onChangeMatcher={
-                                              (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
-                                            }
-                                          />
-                                          {/* editMatcher={editMatcher} */}
-                                        </div>
-                                      </div>
-                                    </CSSTransition>
-                                  </TransitionGroup>
+                              <div
+                                className={classnames(
+                                  {
+                                    'matcher-row--is-active': index === this.state.editMatcherIndex
+                                  }
                                 )}
-                              </Draggable>
+                              >
+                                <Draggable
+                                  key={`event-matcher-${index}`}
+                                  draggableId={index+1}
+                                  index={index}
+                                >
+                                  {(provided, snapshot) => (
+                                    <TransitionGroup>
+                                      <CSSTransition
+                                        key={`event-matcher-css-transition-${index}`}
+                                        timeout={{ enter: 150, exit: 1000 }}
+                                        classNames='fade'
+                                        appear
+                                      >
+                                        <div className='fade-enter'>
+                                          <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                          >
+                                            <EventMatcher
+                                              key={`event-matcher-${index}`}
+                                              isFirst={index === 0}
+                                              index={index}
+                                              handleSetEditMatcher={this.handleSetEditMatcher}
+                                              handleRemoveMatcher={this.handleRemoveMatcher}
+                                              matcher={eventMatcher}
+                                              event={this.state.event}
+                                              onChangeMatcher={
+                                                (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
+                                              }
+                                            />
+                                            {/* editMatcher={editMatcher} */}
+                                          </div>
+                                        </div>
+                                      </CSSTransition>
+                                    </TransitionGroup>
+                                  )}
+                                </Draggable>
+                              </div>
                             ))}
                             {provided.placeholder}
                           </div>

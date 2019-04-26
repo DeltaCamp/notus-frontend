@@ -407,13 +407,15 @@ input.input.is-large:active {
   margin-bottom: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  z-index: 30000;
 }
 
 .react-select__menu-list {
   text-align: left;
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 1892373982749;
+  position: relative;
+  z-index: 30000;
 }
 
 .react-select .react-select__option {

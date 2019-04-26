@@ -252,7 +252,7 @@
   top: -0.1rem;
   position: relative;
   max-height: 60px;
-  margin: 0.5rem 1rem 0.5rem 0.25rem;
+  margin: 0.5rem 1rem;
   padding: 0.5rem 1rem 0.25rem;
   position: relative;
   // font-size: 1.5rem;
@@ -261,6 +261,7 @@
   text-align: left;
   transition: all 275ms ease-in-out;
   // width: 880px;
+  // z-index: 2;
 
   @media screen and (max-width: $widescreen) {
     // font-size: 1.25rem;
@@ -288,6 +289,7 @@
 
 .event-box__variable .react-select {
   top: -6px;
+  z-index: 12039812904;
 }
 
 .event-box__variable .react-select,
@@ -299,7 +301,7 @@
 
 .event-box__variable .react-select__single-value {
   color: white;
-  font-size: 1.25rem;
+  font-size: 1.7rem;
 }
 
 .event-box__variable .react-select__input,
@@ -504,4 +506,9 @@
   border-width: 0 !important;
   margin: 0;
   width: 100%;
+}
+
+.matcher-row--is-active {
+  position: relative;
+  z-index: 30001;
 }
