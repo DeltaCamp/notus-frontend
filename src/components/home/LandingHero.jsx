@@ -15,7 +15,7 @@ export const LandingHero = ({ setSuccess, success }) => {
               </h1>
 
               <h6 className='is-size-6 hero--description-text'>
-                Get notified when things happen.  Listen for account activity, new Augur markets, token transfers, or anything else.  Notus has presets for all the most popular Ethereum dapps, or you can customize your own.
+                Get notified about account activity, new Augur markets, token transfers, or anything else.  Notus has presets for all the most popular Ethereum dapps, or you can customize your own.
               </h6>
 
               <div className='mt30'>
