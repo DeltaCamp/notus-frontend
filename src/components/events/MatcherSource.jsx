@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
+import ReactDOM from 'react-dom'
+import { graphql } from 'react-apollo'
 
 import { SourceSelect } from '~/components/SourceSelect'
 import { abiEventInputFragment } from '~/fragments/abiEventInputFragment'
@@ -9,7 +10,7 @@ import { sourceQuery } from '~/queries/sourceQuery'
 import { sourcesQuery } from '~/queries/sourcesQuery'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidDataTypeOperator } from '~/utils/isValidDataTypeOperator'
-import { SOURCES, OPERATORS } from '~/constants'
+import { KEYS, SOURCES, OPERATORS } from '~/constants'
 
 const abiEventInputQuery = gql`
   query abiEventInputQuery($id: Float!) {
@@ -68,6 +69,8 @@ export const MatcherSource = graphql(sourcesQuery, {
           })
 
           this.props.handleEdit()
+
+          document.addEventListener('mousedown', this.handleClickAnywhere, false)
         }
 
         handleChangeSource = (option) => {
@@ -91,9 +94,13 @@ export const MatcherSource = graphql(sourcesQuery, {
 
           this.props.onChange(clone)
 
-          this.setState({
-            isEditing: false
-          })
+          this.handleStopEditing()
+        }
+
+        handleKeyUp = (e) => {
+          if (e.keyCode === KEYS.escape) {
+            this.handleStopEditing()
+          }
         }
 
         sourceWords = () => {
@@ -121,6 +128,21 @@ export const MatcherSource = graphql(sourcesQuery, {
           return content
         }
 
+        handleClickAnywhere = (e) => {
+          const domNode = ReactDOM.findDOMNode(this.node)
+
+          if (domNode && !domNode.contains(e.target)) {
+            this.handleStopEditing()
+          }
+        }
+
+        handleStopEditing = () => {
+          this.setState({
+            isEditing: false
+          })
+          document.removeEventListener('mousedown', this.handleClickAnywhere, false)
+        }
+
         render () {
           const {
             abiEventId,
@@ -135,14 +157,18 @@ export const MatcherSource = graphql(sourcesQuery, {
             <>
               {this.state.isEditing
                 ? (
-                  <div className="event-box__variable">
+                  <div
+                    ref={node => { this.node = node }}
+                    className='event-box__variable'
+                    onKeyUp={this.handleKeyUp}
+                  >
                     <SourceSelect
                       abiEventId={abiEventId}
                       abiEventInputId={abiEventInputId}
                       value={matcher.source}
                       onChange={this.handleChangeSource}
                       scope={scope}
-                      autoFocus
+                      menuIsOpen={this.state.isEditing}
                     />
                   </div>
                 )

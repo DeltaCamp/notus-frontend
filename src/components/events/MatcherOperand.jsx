@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
+import { KEYS } from '~/constants'
 
 export class MatcherOperand extends Component {
   state = {
@@ -46,9 +47,9 @@ export class MatcherOperand extends Component {
   }
 
   handleKeyUp = (e) => {
-    if (e.keyCode === 27) { // esc
+    if (e.keyCode === KEYS.escape) {
       this.handleCancel()
-    } else if (e.keyCode === 13) { // enter
+    } else if (e.keyCode === KEYS.enter) {
       this.handleSubmit()
     }
   }

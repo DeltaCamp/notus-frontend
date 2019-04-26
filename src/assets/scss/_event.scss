@@ -239,11 +239,11 @@
 }
 
 .event-box__variable {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border: none;
-  border-bottom: 4px dotted rgba(255, 255, 255, 0.2);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.3);
   border-radius: 6px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
   display: inline-block;
   font-size: 1.35rem;
@@ -269,7 +269,7 @@
 .event-box__variable:active,
 .event-box__variable:focus,
 .event-box__variable.is-active {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
   border-color: white;
   color: white;
   transform: scale3d(1.01, 1.01, 1.01);

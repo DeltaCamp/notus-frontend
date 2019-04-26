@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ReactDOM from 'react-dom'
 
 import { OperatorSelect } from '~/components/OperatorSelect'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
-import { OPERATOR_LABELS } from '~/constants'
+import { KEYS, OPERATOR_LABELS } from '~/constants'
 
 export class MatcherOperator extends Component {
   state = {
@@ -27,6 +28,8 @@ export class MatcherOperator extends Component {
     })
 
     this.props.handleEdit()
+
+    document.addEventListener('mousedown', this.handleClickAnywhere, false)
   }
 
   onChangeOperator = (option) => {
@@ -34,9 +37,28 @@ export class MatcherOperator extends Component {
     clone.operator = option.value
     this.props.onChange(clone)
     
+    this.handleStopEditing()
+  }
+
+  handleClickAnywhere = (e) => {
+    const domNode = ReactDOM.findDOMNode(this.node)
+
+    if (domNode && !domNode.contains(e.target)) {
+      this.handleStopEditing()
+    }
+  }
+
+  handleStopEditing = () => {
     this.setState({
       isEditing: false
     })
+    document.removeEventListener('mousedown', this.handleClickAnywhere, false)
+  }
+
+  handleKeyUp = (e) => {
+    if (e.keyCode === KEYS.escape) {
+      this.handleStopEditing()
+    }
   }
 
   render () {
@@ -47,12 +69,17 @@ export class MatcherOperator extends Component {
       <>
         {this.state.isEditing
           ? (
-            <div className="event-box__variable">
+            <div
+              ref={node => { this.node = node }}
+              className='event-box__variable'
+              onKeyUp={this.handleKeyUp}
+            >
               <OperatorSelect
                 source={matcher.source}
                 abiEventInputId={abiEventInputId}
                 value={matcher.operator}
                 onChange={this.onChangeOperator}
+                menuIsOpen={this.state.isEditing}
               />
             </div>
           )

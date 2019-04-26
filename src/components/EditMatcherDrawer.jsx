@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { CheckCircle } from 'react-feather'
 
 import { Drawer } from '~/components/Drawer'
-import { MatcherForm } from '~/components/recipes/MatcherForm'
+// import { MatcherForm } from '~/components/recipes/MatcherForm'
 
 export class EditMatcherDrawer extends PureComponent {
   static propTypes = {
@@ -23,12 +23,12 @@ export class EditMatcherDrawer extends PureComponent {
       >
         {this.props.matcher &&
           <form className='form drawer-form'>
-            <MatcherForm
+            {/* <MatcherForm
               matcher={this.props.matcher}
               abiEventId={this.props.abiEventId}
               scope={this.props.scope}
               onChange={this.props.onChangeMatcher}
-            />
+            /> */}
 
             <div className='buttons'>
               <button

@@ -79,7 +79,6 @@ export const OperatorSelect = graphql(sourceQuery, {
           {...props}
           options={options}
           isDisabled={isDisabled}
-          menuIsOpen
         />
       }
     }

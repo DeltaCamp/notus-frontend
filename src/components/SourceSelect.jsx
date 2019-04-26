@@ -102,7 +102,6 @@ export const SourceSelect = graphql(sourcesQuery, {
           {...props}
           options={validOptions}
           onChange={this.onChange}
-          menuIsOpen
         />
       }
     }

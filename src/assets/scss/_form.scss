@@ -411,6 +411,10 @@ input.input.is-large:active {
   z-index: 30000;
 }
 
+.react-select .react-select__menu-notice {
+  font-size: 1rem;
+}
+
 .react-select .react-select__option {
   color: black;
   cursor: pointer;
@@ -420,12 +424,12 @@ input.input.is-large:active {
 }
 
 .react-select__option.react-select__option--is-focused {
-  background-color: lighten($cyan, 30%);
+  background-color: lighten($cyan, 22%);
   border-radius: 5px;
 }
 
 .react-select__option.react-select__option--is-selected {
-  background-color: $cyan;
+  background-color: darken($cyan, 15%);
   border-radius: 5px;
   color: black !important;
 }
