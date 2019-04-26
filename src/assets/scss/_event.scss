@@ -30,11 +30,6 @@
   transform: scale3d(1.1, 1.1, 1.0);
 }
 
-// .event-card--has-border,
-// .event-card--has-border:hover {
-//   border: 5px solid white;
-// }
-
 .event-card__header {
   height: 220px;
   padding: 1.5rem;
@@ -175,12 +170,10 @@
   }
 
   @media screen and (max-width: $widescreen) {
-    // line-height: 4;
     padding: 1.5rem 0;
   }
 
   @media screen and (max-width: $tablet) {
-    // line-height: 2;
   }
 }
 
@@ -253,27 +246,22 @@
   color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
   display: inline-block;
-  // top: -0.1rem;
+  font-size: 1.35rem;
+  // font-size: inherit;
+  font-weight: 600;
+  height: 47px;
   line-height: 1;
-  max-height: 60px;
   margin: 0.5rem 0.5rem;
   padding: 0.5rem 1rem 0.25rem;
   position: relative;
-  // font-size: 1.5rem;
-  font-size: inherit;
-  font-weight: 600;
   text-align: left;
   transition: all 275ms ease-in-out;
-  // width: 880px;
-  // z-index: 2;
 
   @media screen and (max-width: $widescreen) {
-    // font-size: 1.25rem;
     width: 100%;
   }
 
   @media screen and (max-width: $mobile) {
-    // font-size: 1rem;
   }
 }
 
@@ -314,7 +302,10 @@
 .event-box__variable .react-select {
   line-height: inherit;
   font-size: inherit;
-  top: -6px;
+}
+
+.event-box__variable .react-select__control {
+  min-height: 23px !important;
 }
 
 .event-box__variable .react-select,
@@ -326,29 +317,28 @@
 
 .event-box__variable .react-select__single-value {
   color: white;
-  // font-size: 1.7rem;
 }
 
 .event-box__variable .react-select__input {
   color: white;
-  // font-size: 1.7rem;
 }
 
 .event-box__variable .react-select__input input {
-  font-weight: 700;
+  font-weight: 600;
   line-height: inherit;
   font-size: inherit;
 }
 
 .event-box__variable .select select,
 .event-box__variable .react-select {
-  height: 45px !important;
+  height: 100% !important;
   line-height: inherit;
   font-size: inherit;
 }
 
 .event-box__variable .react-select__value-container {
   padding: 0;
+  overflow: visible;
 }
 
 .event-box__variable .react-select__indicator svg,
@@ -360,6 +350,21 @@
 .event-box__variable .react-select__indicator:hover svg,
 .event-box__variable .react-select__dropdown-indicator:hover svg {
   fill: white;
+}
+
+.event-box__variable .react-select,
+.event-box__variable .react-select__control,
+.event-box__variable .react-select__single-value,
+.event-box__variable .react-select__value-container,
+.event-box__variable .react-select__indicators,
+.event-box__variable .react-select__dropdown-indicator,
+.react-select__value-container div:last-child,
+.react-select__value-container .react-select__input input {
+  height: 23px !important;
+}
+
+.react-select__value-container div:last-child {
+  line-height: 0.1;
 }
 
 .event-box__action {
@@ -479,43 +484,6 @@
 .color-block.is-warning .drag-handle:hover svg {
   stroke: black;
 }
-
-// This could let us animate the width of the button boxes on the event form so it doesn't jump around
-// when typing:
-// <span
-//             name={'oldamount'}
-//             className={classnames(
-//               'event-box__variable-value',
-//               'animate-content', 
-//               'animate-content-enter',
-//               {
-//                 'animate-content-enter': Math.random(1) > 0.5 ? true : false
-//               }
-//             )}
-//             title={this.state.event.amount}
-//           >
-//           </span>
-// @keyframes changeLetter {
-//   0% {
-//     content: attr(name);
-//   }
-//   50% {
-//     color: orange;
-//   }
-//   100% {
-//     content: attr(title);
-//   }
-// }
-
-// .animate-content::after {
-//   content: attr(name);
-// }
-
-// .animate-content-enter::after {
-//   animation: changeLetter 250ms normal forwards ease-in-out;
-// }
-
-
 
 // EVENT HISTORY
 .event-history__action-description {
