@@ -241,6 +241,10 @@
   transition-duration: 600ms;
 }
 
+.event-box__has-small-text {
+  font-size: 1.42rem;
+}
+
 .event-box__variable {
   background: rgba(255, 255, 255, 0.1);
   border: none;
@@ -249,8 +253,8 @@
   color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
   display: inline-block;
-  top: -0.1rem;
-  position: relative;
+  // top: -0.1rem;
+  line-height: 1;
   max-height: 60px;
   margin: 0.5rem 0.5rem;
   padding: 0.5rem 1rem 0.25rem;
@@ -288,23 +292,28 @@
 }
 
 .event-box__variable.has-text-input {
-  max-width: 200px;
+  min-width: 100px;
+  max-width: 300px;
 }
 
 .event-box__variable .input {
   background-color: transparent;
   border: none;
   color: white;
-  font-size: 1.7rem;
-  font-weight: 700;
-  padding: 0;
+  font-size: inherit;
+  font-weight: 600;
   height: 100%;
+  line-height: inherit;
+  padding: 0;
+  transition: all 50ms ease-in-out;
 }
 
 .event-box__variable .input:hover {
 }
 
 .event-box__variable .react-select {
+  line-height: inherit;
+  font-size: inherit;
   top: -6px;
 }
 
@@ -317,21 +326,25 @@
 
 .event-box__variable .react-select__single-value {
   color: white;
-  font-size: 1.7rem;
+  // font-size: 1.7rem;
 }
 
 .event-box__variable .react-select__input {
   color: white;
-  font-size: 1.7rem;
+  // font-size: 1.7rem;
 }
 
 .event-box__variable .react-select__input input {
   font-weight: 700;
+  line-height: inherit;
+  font-size: inherit;
 }
 
 .event-box__variable .select select,
 .event-box__variable .react-select {
   height: 45px !important;
+  line-height: inherit;
+  font-size: inherit;
 }
 
 .event-box__variable .react-select__value-container {

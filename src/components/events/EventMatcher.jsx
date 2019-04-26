@@ -41,7 +41,7 @@ export const EventMatcher =
       const andWord = isFirst ? 'where' : 'and'
 
       return (
-        <div className='event-box__variable-wrapper'>
+        <div className='event-box__variable-wrapper event-box__has-small-text'>
           <DragHandle />
 
           {andWord} the

@@ -79,8 +79,8 @@ export class MatcherOperand extends Component {
                 onChange={this.handleChange}
                 onBlur={this.handleSubmit}
                 onKeyUp={this.handleKeyUp}
-                placeholder={``}
                 autoFocus
+                style={{ width: ((this.state.newOperand.length + 1) * 16) }}
               />
             </div>
           )

@@ -400,11 +400,14 @@ export const EditEventPage =
                 const matcherSentences = (
                   <>
                     <div className='event-box__variable-wrapper' onClick={this.showEventForm}>
-                      <div className='event-box__variable'>
-                        <span className="event-box__text">
-                          <FrequencyTitle frequency={this.state.event.frequency} /> <SourceDescription event={this.state.event} /> occurs
-                        </span>
-                      </div>
+                      <button className='event-box__variable'>
+                        <FrequencyTitle frequency={this.state.event.frequency} />
+                      </button>
+
+                      <button className='event-box__variable'>
+                        <SourceDescription event={this.state.event} />
+                      </button>
+                      occurs
                     </div>
 
 
