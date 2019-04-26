@@ -188,9 +188,9 @@ export const EditEventPage =
               const successCallback = ({ data: { updateEvent } }) => {
                 toast.success('Updated rule matcher positions')
               }
-              const errorCallback = ({ data: { updateEvent } }) => {
+              // const errorCallback = ({ data: { updateEvent } }) => {
                 // TODO: implement fail state and reverse position of matchers!
-              }
+              // }
               this.runUpdateEventMutation(variables, successCallback)
             }
           }
