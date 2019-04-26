@@ -252,7 +252,7 @@
   top: -0.1rem;
   position: relative;
   max-height: 60px;
-  margin: 0.5rem 1rem;
+  margin: 0.5rem 0.5rem;
   padding: 0.5rem 1rem 0.25rem;
   position: relative;
   // font-size: 1.5rem;
@@ -287,9 +287,25 @@
   background: rgba(255, 255, 255, 0.4);
 }
 
+.event-box__variable.has-text-input {
+  max-width: 200px;
+}
+
+.event-box__variable .input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 700;
+  padding: 0;
+  height: 100%;
+}
+
+.event-box__variable .input:hover {
+}
+
 .event-box__variable .react-select {
   top: -6px;
-  z-index: 12039812904;
 }
 
 .event-box__variable .react-select,
@@ -304,11 +320,13 @@
   font-size: 1.7rem;
 }
 
-.event-box__variable .react-select__input,
-.event-box__variable .react-select__input input {
+.event-box__variable .react-select__input {
   color: white;
+  font-size: 1.7rem;
+}
+
+.event-box__variable .react-select__input input {
   font-weight: 700;
-  font-size: 1rem;
 }
 
 .event-box__variable .select select,

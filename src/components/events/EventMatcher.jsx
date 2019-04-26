@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Edit, XCircle, Menu } from 'react-feather'
+import { XCircle, Menu } from 'react-feather'
+import { MatcherOperand } from '~/components/events/MatcherOperand'
 import { MatcherOperator } from '~/components/events/MatcherOperator'
 import { MatcherSource } from '~/components/events/MatcherSource'
 
@@ -37,8 +38,6 @@ export const EventMatcher =
         matcher
       } = this.props
       
-      const { operand } = matcher
-
       const andWord = isFirst ? 'where' : 'and'
 
       return (
@@ -63,29 +62,21 @@ export const EventMatcher =
             onChange={this.props.onChangeMatcher}
           />
           
-          <button
-            className='event-box__variable'
-            onClick={this.handleEdit}
-          >
-            {operand || '?'}
-          </button>
-
-          {/* <button
-            className='event-box__variable'
-            onClick={this.handleEdit}
-          >
-            {humanReadableDescription}
-          </button> */}
+          <MatcherOperand
+            handleEdit={this.handleEdit}
+            matcher={matcher}
+            onChange={this.props.onChangeMatcher}
+          />
 
           <span className="icons">
-            <button
+            {/* <button
               className='button has-icon has-icon__transparent has-stroke-light edit is-hidden-touch'
               onClick={this.handleEdit}
             >
               <Edit
                 className='icon__button has-stroke-light'
               />
-            </button>
+            </button> */}
 
             <button
               className='button has-icon has-icon__transparent has-stroke-light'

@@ -417,6 +417,7 @@ export const EditEventPage =
                           >
                             {this.state.event.matchers.map((eventMatcher, index) => (
                               <div
+                                key={`event-matcher-${index}`}
                                 className={classnames(
                                   {
                                     'matcher-row--is-active': index === this.state.editMatcherIndex
@@ -424,7 +425,6 @@ export const EditEventPage =
                                 )}
                               >
                                 <Draggable
-                                  key={`event-matcher-${index}`}
                                   draggableId={index+1}
                                   index={index}
                                 >
