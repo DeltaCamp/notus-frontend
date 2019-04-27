@@ -11,6 +11,7 @@ import { HomePage } from '~/components/pages/HomePage'
 import { AboutPage } from '~/components/pages/AboutPage'
 import { PrivacyPage } from '~/components/pages/PrivacyPage'
 import { TermsPage } from '~/components/pages/TermsPage'
+import { SupportPage } from '~/components/pages/SupportPage'
 import { EventPage } from '~/components/pages/events/EventPage'
 import { MyEventsPage } from '~/components/pages/events/MyEventsPage'
 import { EditEventPage } from '~/components/pages/events/EditEventPage'
@@ -71,6 +72,7 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.ABOUT_PAGE} component={AboutPage} />
                 <Route exact path={routes.PRIVACY_PAGE} component={PrivacyPage} />
                 <Route exact path={routes.TERMS_PAGE} component={TermsPage} />
+                <Route exact path={routes.SUPPORT_PAGE} component={SupportPage} />
 
                 <Route exact path={routes.EDIT_EVENT} component={EditEventPage} />
                 <Route exact path={routes.NEW_EVENT} component={EditEventPage} />

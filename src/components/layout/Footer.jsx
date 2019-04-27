@@ -33,7 +33,9 @@ export const Footer = class _Footer extends Component {
               <li className='list-item is-inline-block'>
                 <Link to={routes.PRIVACY_PAGE}>Privacy</Link>
               </li>
-              
+              <li className='list-item is-inline-block'>
+                <Link to={routes.SUPPORT_PAGE}>Support</Link>
+              </li>
             </ul>
 
             <div className='footer-brand pt75'>
