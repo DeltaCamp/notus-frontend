@@ -98,8 +98,14 @@ body.home .navbar-start .navbar-item {
 }
 
 .navbar-brand svg path {
-  fill: black;
-  transition: fill 150ms ease-in;
+  // fill: black;
+  transition: fill 100ms ease-in-out;
+}
+
+.navbar-brand svg:hover path {
+  fill: $cyan;
+  stroke: black;
+  stroke-width: 3px;
 }
 
 .navbar-brand svg {
