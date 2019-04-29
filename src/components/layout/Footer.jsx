@@ -5,7 +5,7 @@ import {
 } from 'react-feather'
 import { withRouter } from 'react-router'
 // import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
-import NotusLogo from '~/assets/images/notus5.svg'
+import NotusLogo from '~/assets/images/notus7.svg'
 import * as routes from '~/../config/routes'
 
 export const Footer = class _Footer extends Component {

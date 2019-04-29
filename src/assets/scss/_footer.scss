@@ -13,14 +13,12 @@
 }
 
 .footer-brand svg path {
-  // fill: black;
-  transition: fill 100ms ease-in-out;
+  transition: all 700ms ease-in;
 }
 
 .footer-brand svg:hover path {
-  fill: $cyan;
-  stroke: black;
-  stroke-width: 3px;
+  fill: $purple;
+  transition: all 150ms ease-in;
 }
 
 .footer-brand .twitter-svg {
