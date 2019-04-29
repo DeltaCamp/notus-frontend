@@ -298,25 +298,28 @@ export const EditEventButtons =
                       'buttons',
                       activeClasses
                     )}>
-                      {notEventAuthorButtons}
-                      
-                      {eventAuthorButtons}
-
-                      {this.props.isCreateMode() &&
-                        <button
-                          onClick={this.handleSaveEvent}
-                          className='button is-success'
-                          disabled={this.props.isSubmitting}
-                        >
-                          <PlusCircle />&nbsp;Create Event
-                        </button>
+                      {this.props.isCreateMode()
+                        ? (
+                          <button
+                            onClick={this.handleSaveEvent}
+                            className='button is-success'
+                            disabled={this.props.isSubmitting}
+                          >
+                            <PlusCircle />&nbsp;Create Event
+                          </button>
+                        )
+                        : (
+                          <>
+                            {notEventAuthorButtons}
+                            {eventAuthorButtons}
+                            <div className='is-size-7'>
+                              {eventPublishedState}
+                              <br />
+                              {eventActiveState}
+                            </div>
+                          </>
+                        )
                       }
-                    </div>
-
-                    <div className='is-size-6'>
-                      {eventPublishedState}
-                      <br />
-                      {eventActiveState}
                     </div>
                   </>
                 )
