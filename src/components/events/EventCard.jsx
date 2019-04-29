@@ -199,14 +199,16 @@ export const EventCard =
                 </p>
               </div>
 
-              <div className='event-card__footer'>
-                <p className='event-card__author is-size-7'>
-                  by {this.author()}
-                </p>
-                <div className='event-card__icons has-text-right'>
-                  {editable ? editDropdown : ''}
+              {!this.props.isSmall &&
+                <div className='event-card__footer'>
+                  <p className='event-card__author is-size-7'>
+                    by {this.author()}
+                  </p>
+                  <div className='event-card__icons has-text-right'>
+                    {editable ? editDropdown : ''}
+                  </div>
                 </div>
-              </div>
+              }
             </Link>
           )
         }

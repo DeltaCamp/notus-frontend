@@ -142,7 +142,7 @@ button[disabled] {
 .button.is-purple:hover,
 .button.is-purple:active {
   background-color: $purple;
-  border: none;
+  // border: none;
   color: white;
 }
 
@@ -181,11 +181,11 @@ button[disabled] {
 button.button.is-small:active {
   box-shadow: 0 0 50px rgba(255, 255, 255, 0.7);
   color: white;
-  transform: scale3d(1.07, 1.07, 1.07);
+  // transform: scale3d(1.07, 1.07, 1.07);
 }
 
 .button:hover:not(.is-text) {
-  transform: scale3d(1.06, 1.06, 1.0);
+  // transform: scale3d(1.06, 1.06, 1.0);
 }
 
 .button.is-outlined {
@@ -345,7 +345,7 @@ button:active[disabled],
 .button:focus[disabled],
 .button:active[disabled] {
   box-shadow: none !important;
-  transform: scale3d(1.0, 1.0, 1.0) !important;
+  // transform: scale3d(1.0, 1.0, 1.0) !important;
 }
 
 .buttons-right {

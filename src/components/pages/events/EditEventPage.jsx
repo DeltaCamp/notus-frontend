@@ -12,6 +12,7 @@ import { toast } from 'react-toastify'
 
 import { EditEventButtons } from '~/components/events/EditEventButtons'
 import { EditEventDrawer } from '~/components/EditEventDrawer'
+import { EventHistory } from '~/components/events/EventHistory'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { EventMatcher } from '~/components/events/EventMatcher'
@@ -112,7 +113,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         parentId = parseInt(event.id, 10)
         isPublic = false
         id = undefined
-        title = event.title
+        title = `Give this new event a title`
       }
 
       const newEventObject = {
@@ -201,7 +202,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     }).then((mutationResult) => {
       toast.success('Successfully saved event')
       const eventId = mutationResult.data.createEvent.id
-      const newEventLink = formatRoute(routes.EVENT, { eventId })
+      const newEventLink = formatRoute(routes.EDIT_EVENT, { eventId })
 
       this.props.history.push(newEventLink)
     }).catch(error => {
@@ -540,6 +541,9 @@ export const EditEventPage = class _EditEventPage extends Component {
               <div className='row'>
                 <div className='col-xs-12 has-text-centered is-size-4'>
                   <h6 className='is-size-6 has-text-centered is-uppercase has-text-weight-bold pt30'>
+                    {recipe && this.isCreateMode() &&
+                      <span>Creating a new event based on '{recipe.title}'</span>
+                    }
                     <EventTitle
                       event={this.state.event}
                       handleSubmitTitle={this.handleSubmitTitle}
@@ -603,6 +607,8 @@ export const EditEventPage = class _EditEventPage extends Component {
               </div>
             </div>
           </div>
+
+          {/* <EventHistory /> */}
         </section>
 
         <FooterContainer />

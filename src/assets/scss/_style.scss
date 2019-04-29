@@ -15,8 +15,7 @@ select:-internal-autofill-selected {
 }
 
 ::selection {
-  // background-color: $cyan;
-  background-color: darken($blue, 10%);
+  background-color: $blue;
   color: white;
 }
 
@@ -704,6 +703,18 @@ hr {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 }
+
+.listing-grid.listing-grid--table {
+  grid-template-columns: auto;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+
+  @media screen and (max-width: $tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+// .event-card--small
 
 .drag-handle {
   cursor: grab;

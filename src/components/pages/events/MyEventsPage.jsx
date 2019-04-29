@@ -104,7 +104,7 @@ export const MyEventsPage =
                       event={event}
                       editable={true}
                       isSmall={true}
-                      linkTo={formatRoute(routes.EVENT, { eventId: event.id })}
+                      linkTo={formatRoute(routes.EDIT_EVENT, { eventId: event.id })}
                       handleOpenConfirmDeleteModal={this.handleOpenConfirmDeleteModal}
                     />
                   ))
@@ -134,7 +134,7 @@ export const MyEventsPage =
                         <PlusCircle /> &nbsp;Create a Custom Event
                       </Link>
                     </div>
-                    <div className='listing-grid mt75'>
+                    <div className='listing-grid listing-grid--table mt75'>
                       {events}
                     </div>
                   </>

@@ -1,16 +1,16 @@
 // EVENT CARD
 
-.event-card {
+.button.event-card {
   border-radius: 15px;
-  border: 5px solid white !important;
+  border: 5px solid white;
   display: inline-block;
   height: 300px;
   line-height: 1.3;
   padding: 0;
   text-align: left;
   text-transform: none;
-  transform: scale3d(1.0, 1.0, 1.0);
-  transition: all 100ms ease-in-out !important;
+  // transform: scale3d(1.0, 1.0, 1.0);
+  transition: all 100ms ease-in-out;
   will-change: transform;
   white-space: initial;
 
@@ -26,8 +26,8 @@
   width: 100%;
 }
 
-.event-card:hover {
-  transform: scale3d(1.1, 1.1, 1.0);
+.button.event-card:hover {
+  // transform: scale3d(1.1, 1.1, 1.0);
 }
 
 .event-card__header {
@@ -43,22 +43,28 @@
   padding: 0.75rem 1.5rem;
 }
 
-.is-warning .event-card__footer {
+.button.event-card.is-warning .event-card__footer {
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+.button.event-card.is-warning:hover,
+.button.event-card.is-warning:active,
+.button.event-card.is-warning:focus {
+  border: 5px solid white;
 }
 
 .event-card__footer .event-card__author {
   display: inline-flex;
 }
 
-.event-card .event-card__icons {
+.button.event-card .event-card__icons {
   display: inline-flex;
   margin: 0 0 0 auto;
   top: -0.5rem;
   position: relative;
 }
 
-.event-card .dropdown {
+.button.event-card .dropdown {
   min-width: 100%;
   opacity: 0.001;
   pointer-events: none;
@@ -67,92 +73,118 @@
   will-change: opacity;
 }
 
-.event-card:hover .dropdown {
+.button.event-card:hover .dropdown {
   opacity: 0.7;
   pointer-events: initial;
   transition-duration: 600ms;
 }
 
-.event-card:hover .dropdown:hover,
-.event-card:hover .is-active {
+.button.event-card:hover .dropdown:hover,
+.button.event-card:hover .is-active {
   opacity: 1;
   pointer-events: initial;
   transition-duration: 600ms;
 }
 
-.event-card:hover .dropdown .button.has-icon:active path,
-.event-card:hover .dropdown .button.has-icon:active rect,
-.event-card:hover .dropdown .button.has-icon:active circle,
-.event-card:hover .dropdown .button.has-icon:active svg,
-.event-card:hover .dropdown .button.has-icon:focus path,
-.event-card:hover .dropdown .button.has-icon:focus rect,
-.event-card:hover .dropdown .button.has-icon:focus circle,
-.event-card:hover .dropdown .button.has-icon:focus svg,
-.event-card:hover .dropdown .button.has-icon:hover path,
-.event-card:hover .dropdown .button.has-icon:hover rect,
-.event-card:hover .dropdown .button.has-icon:hover circle,
-.event-card:hover .dropdown .button.has-icon:hover svg {
+.button.event-card:hover .dropdown .button.has-icon:active path,
+.button.event-card:hover .dropdown .button.has-icon:active rect,
+.button.event-card:hover .dropdown .button.has-icon:active circle,
+.button.event-card:hover .dropdown .button.has-icon:active svg,
+.button.event-card:hover .dropdown .button.has-icon:focus path,
+.button.event-card:hover .dropdown .button.has-icon:focus rect,
+.button.event-card:hover .dropdown .button.has-icon:focus circle,
+.button.event-card:hover .dropdown .button.has-icon:focus svg,
+.button.event-card:hover .dropdown .button.has-icon:hover path,
+.button.event-card:hover .dropdown .button.has-icon:hover rect,
+.button.event-card:hover .dropdown .button.has-icon:hover circle,
+.button.event-card:hover .dropdown .button.has-icon:hover svg {
   stroke: white;
 }
 
-.event-card.is-warning:hover .dropdown .button.has-icon path,
-.event-card.is-warning:hover .dropdown .button.has-icon rect,
-.event-card.is-warning:hover .dropdown .button.has-icon circle,
-.event-card.is-warning:hover .dropdown .button.has-icon svg {
+.button.event-card.is-warning:hover .dropdown .button.has-icon path,
+.button.event-card.is-warning:hover .dropdown .button.has-icon rect,
+.button.event-card.is-warning:hover .dropdown .button.has-icon circle,
+.button.event-card.is-warning:hover .dropdown .button.has-icon svg {
   stroke: rgba(0, 0, 0, 0.5);
 }
 
-.event-card.is-warning:hover .dropdown .button.has-icon:active path,
-.event-card.is-warning:hover .dropdown .button.has-icon:active rect,
-.event-card.is-warning:hover .dropdown .button.has-icon:active circle,
-.event-card.is-warning:hover .dropdown .button.has-icon:active svg,
-.event-card.is-warning:hover .dropdown .button.has-icon:focus path,
-.event-card.is-warning:hover .dropdown .button.has-icon:focus rect,
-.event-card.is-warning:hover .dropdown .button.has-icon:focus circle,
-.event-card.is-warning:hover .dropdown .button.has-icon:focus svg,
-.event-card.is-warning:hover .dropdown .button.has-icon:hover path,
-.event-card.is-warning:hover .dropdown .button.has-icon:hover rect,
-.event-card.is-warning:hover .dropdown .button.has-icon:hover circle,
-.event-card.is-warning:hover .dropdown .button.has-icon:hover svg {
+.button.event-card.is-warning:hover .dropdown .button.has-icon:active path,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:active rect,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:active circle,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:active svg,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:focus path,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:focus rect,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:focus circle,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:focus svg,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:hover path,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:hover rect,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:hover circle,
+.button.event-card.is-warning:hover .dropdown .button.has-icon:hover svg {
   stroke: black;
 }
 
-.event-card .dropdown-menu {
+.button.event-card .dropdown-menu {
   min-width: 180px;
 }
 
-.event-card .dropdown-content {
+.button.event-card .dropdown-content {
   box-shadow: 2px 7px 14px rgba(50, 50, 93, .1), -2px -3px 6px rgba(30, 40, 70, .05);
 }
 
-.event-card .dropdown-item {
+.button.event-card .dropdown-item {
   display: inline-flex;
   width: 100%;
 }
 
-.event-card .dropdown-item:hover {
+.button.event-card .dropdown-item:hover {
   background-color: lighten($cyan, 20%);
 }
 
-.event-card--small {
-  border-radius: 15px;
-  height: 220px;
+.button.event-card.event-card--small {
+  border-radius: 6px;
+  border-width: 2px;
+  height: 80px;
+  margin: 0;
 }
 
-.event-card--small .event-card__header {
+.button.event-card.event-card--small:hover,
+.button.event-card.event-card--small:focus,
+.button.event-card.event-card--small:active {
+  border: 4px solid white;
+}
+
+.button.is-link.event-card.event-card--small:hover,
+.button.is-link.event-card.event-card--small:focus,
+.button.is-link.event-card.event-card--small:active {
+  border-color: lighten($link, 10%);
+}
+
+.button.is-purple.event-card.event-card--small:hover,
+.button.is-purple.event-card.event-card--small:focus,
+.button.is-purple.event-card.event-card--small:active {
+  border-color: lighten($purple, 20%);
+}
+
+.button.is-warning.event-card.event-card--small:hover,
+.button.is-warning.event-card.event-card--small:focus,
+.button.is-warning.event-card.event-card--small:active {
+  border-color: darken($warning, 5%);
+}
+
+.button.event-card.event-card--small .event-card__header {
   height: 150px;
   padding-bottom: 1rem;
   padding-top: 1rem;
 }
 
-.event-card--small .event-card__footer {
+.button.event-card.event-card--small .event-card__footer {
   height: 44px;
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
 }
 
-.event-card--small .is-size-5 {
-  font-size: 1rem !important;
+.button.event-card.event-card--small .is-size-5 {
+  font-size: 1rem;
 }
 
 
