@@ -8,30 +8,38 @@ import * as routes from '~/../config/routes'
 export const DiscoverEventsListing =
   graphql(eventsQuery, {
     name: 'eventsData',
-    options: {
-      fetchPolicy: 'cache-and-network',
-      variables: {
-        eventsQuery: {
-          isPublic: true,
-          skip: 0,
-          take: 1
+    options: (props) => {
+      const eventsQuery = {
+        isPublic: true,
+        skip: 0,
+        take: 2,
+        searchTerms: props.searchValue
+      }
+      return {
+        fetchPolicy: 'cache-and-network',
+        variables: {
+          eventsQuery
         }
       }
     }
   })(
     class _DiscoverEventsListing extends PureComponent {
       fetchMore = () => {
-        const { eventsData } = this.props
+        const { eventsData, searchValue } = this.props
         const { fetchMore, events } = eventsData || {}
         const { skip, take } = events || {}
+        const eventsQuery = {
+          take,
+          skip: (skip + take),
+          isPublic: true
+        }
+        if (searchValue) {
+          eventsQuery.searchTerms = searchValue
+        }
         if (fetchMore) {
           fetchMore({
             variables: {
-              eventsQuery: {
-                take,
-                skip: (skip + take),
-                isPublic: true
-              }
+              eventsQuery
             },
             updateQuery: (prev, { fetchMoreResult }) => {
               if (!fetchMoreResult) return prev;
@@ -48,38 +56,24 @@ export const DiscoverEventsListing =
 
       render () {
         let loadMore
-        const { searchValue } = this.props
+        const { searchValue, eventsData } = this.props
+        const { error } = eventsData || {}
+        const eventsQuery = eventsData ? eventsData.events : {}
+        const { events, skip, take, totalCount } = eventsQuery || {}
 
-        if (this.props.eventsData.loading) {
-          return 'Loading ...'
-        } else if (this.props.eventsData.error) {
-          console.error(this.props.eventsData.error)
-          return null
+        if (error) {
+          console.error(error)
         }
 
-        const { events, skip, take, totalCount } = this.props.eventsData.events
-        let filteredEvents = events
-
-        if (searchValue && searchValue.length) {
-          const searchRegExp = new RegExp(searchValue.trim(), 'i')
-          filteredEvents = events.filter((event) => (
-            searchRegExp.test(event.title)
-          ))
-        }
-
-        filteredEvents = filteredEvents.map((event) => (
+        let eventCards = events ? events.map((event) => (
           <EventCard
             {...this.props}
             key={`event-${event.id}`}
             event={event}
             linkTo={formatRoute(routes.NEW_EVENT_FROM_PARENT, { eventId: event.id })}
           />
-        ))
+        )) : []
         
-        if (this.props.limit && filteredEvents.length > 10) {
-          filteredEvents = filteredEvents.slice(0, 10)
-        }
-
         if (skip + take < totalCount) {
           loadMore = <p>
             <button
@@ -91,9 +85,9 @@ export const DiscoverEventsListing =
 
         return <>
           {(
-            filteredEvents.length > 0 ?
+            eventCards.length > 0 ?
                 <div className='listing-grid'>
-                  {filteredEvents}
+                  {eventCards}
                 </div>
               : (
                 <div className='has-text-centered'>
