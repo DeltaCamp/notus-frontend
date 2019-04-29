@@ -16,6 +16,10 @@ import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventsQuery } from '~/queries/eventsQuery'
 import { EventCard } from '~/components/events/EventCard'
 import * as routes from '~/../config/routes'
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
 
 export const MyEventsPage =
   IsAuthed(
@@ -89,18 +93,26 @@ export const MyEventsPage =
             }
 
             fetchMore = () => {
-              const { eventsData } = this.props
-              const { fetchMore, skip, take } = eventsData || {}
+              const { eventsData, currentUserData } = this.props
+              const { currentUser } = currentUserData
+              const { fetchMore, events } = eventsData || {}
+              const { skip, take } = events || {}
               if (fetchMore) {
                 fetchMore({
                   variables: {
-                    skip: (skip + take),
-                    take
+                    eventsQuery: {
+                      take,
+                      skip: (skip + take),
+                      userId: currentUser.id
+                    }
                   },
                   updateQuery: (prev, { fetchMoreResult }) => {
                     if (!fetchMoreResult) return prev;
                     return Object.assign({}, prev, {
-                      events: [...prev.events, ...fetchMoreResult.events]
+                      events: {
+                        ...fetchMoreResult.events,
+                        events: [...prev.events.events, ...fetchMoreResult.events.events]
+                      }
                     });
                   }
                 })
@@ -108,33 +120,48 @@ export const MyEventsPage =
             }
 
             render () {
+              let loadMore
               const { eventsData } = this.props
-              let events = []
 
-              const { loading, fetchMore, error } = eventsData || {}
+              const { loading, error, events } = eventsData || {}
+              const { skip, take, totalCount } = events || {}
 
-              const notLoading = !loading
+              let eventEvents = events ? events.events : []
 
-              if (notLoading) {
-                if (eventsData.error) {
-                  console.error(eventsData.error)
-                  return 'There was an error while fetching your events'
-                } else {
-                  events = eventsData.events.events.map((event) => (
+              if (error) {
+                console.error(error)
+                return 'There was an error while fetching your events'
+              }
+
+              let eventCards = <>
+                <TransitionGroup className="todo-list">
+                {eventEvents.map((event) => (
+                  <CSSTransition
+                    key={`event-${event.id}`}
+                    timeout={500}
+                    classNames="fade"
+                  >
                     <EventCard
                       {...this.props}
-                      key={`event-${event.id}`}
                       event={event}
                       editable={true}
                       isSmall={true}
                       linkTo={formatRoute(routes.EDIT_EVENT, { eventId: event.id })}
                       handleOpenConfirmDeleteModal={this.handleOpenConfirmDeleteModal}
                     />
-                  ))
-                }
+                  </CSSTransition>
+                ))}
+                </TransitionGroup>
+              </>
+
+
+              if (skip + take < totalCount) {
+                loadMore = <p>
+                  <button className='button' onClick={this.fetchMore}>Load More</button>
+                </p>
               }
 
-              const eventsOrBlankState = (notLoading && events.length === 0) 
+              const eventsOrBlankState = eventEvents.length === 0
                 ? (
                   <>
                     <h2 className='is-size-2 mt75 has-text-weight-bold'>
@@ -158,12 +185,10 @@ export const MyEventsPage =
                       </Link>
                     </div>
                     <div className='listing-grid listing-grid--table mt75'>
-                      {events}
+                      {eventCards}
                     </div>
                     <br />
-                    <p>
-                      <button onClick={this.fetchMore}>Load More</button>
-                    </p>
+                    {loadMore}
                   </>
                 )
 

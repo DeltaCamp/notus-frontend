@@ -5,6 +5,8 @@ export const eventsQuery = gql`
   query eventsQuery($eventsQuery: EventsQuery) {
     events(eventsQuery: $eventsQuery) {
       totalCount
+      skip
+      take
       events {
         ...eventFragment
       }
