@@ -12,7 +12,6 @@ import { toast } from 'react-toastify'
 
 import { EditEventButtons } from '~/components/events/EditEventButtons'
 import { EditEventDrawer } from '~/components/EditEventDrawer'
-import { EventHistory } from '~/components/events/EventHistory'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { EventMatcher } from '~/components/events/EventMatcher'
@@ -542,7 +541,7 @@ export const EditEventPage = class _EditEventPage extends Component {
                 <div className='col-xs-12 has-text-centered is-size-4'>
                   <h6 className='is-size-6 has-text-centered is-uppercase has-text-weight-bold pt30'>
                     {recipe && this.isCreateMode() &&
-                      <span>Creating a new event based on '{recipe.title}'</span>
+                      <span>Creating a new event{recipe.title ? `based on '${recipe.title}'` : ''}</span>
                     }
                     <EventTitle
                       event={this.state.event}
@@ -601,6 +600,7 @@ export const EditEventPage = class _EditEventPage extends Component {
                       eventData={eventData}
                       isCreateMode={this.isCreateMode}
                       isSubmitting={this.state.isSubmitting}
+                      handleSaveEvent={this.handleSaveEvent}
                     />
                   </div>
                 </div>

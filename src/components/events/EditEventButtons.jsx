@@ -279,7 +279,7 @@ export const EditEventButtons =
                         <br/>
                         <div className='buttons'>
                           <button
-                            className='button is-small is-light'
+                            className='button is-small is-outlined is-light'
                             onClick={this.handleCloseConfirmDeleteModal}
                           >
                             No
@@ -301,7 +301,7 @@ export const EditEventButtons =
                       {this.props.isCreateMode()
                         ? (
                           <button
-                            onClick={this.handleSaveEvent}
+                            onClick={this.props.handleSaveEvent}
                             className='button is-success'
                             disabled={this.props.isSubmitting}
                           >
