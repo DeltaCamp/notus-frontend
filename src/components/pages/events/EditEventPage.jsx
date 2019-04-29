@@ -542,7 +542,9 @@ export const EditEventPage = class _EditEventPage extends Component {
                 <div className='col-xs-12 has-text-centered is-size-4'>
                   <h6 className='is-size-6 has-text-centered is-uppercase has-text-weight-bold pt30'>
                     {recipe && this.isCreateMode() &&
-                      <span>Creating a new event{recipe.title ? `based on '${recipe.title}'` : ''}</span>
+                      <>
+                        Creating a new event{recipe.title ? ` based on "${recipe.title}"` : ''}
+                      </>
                     }
                     <EventTitle
                       event={this.state.event}
@@ -564,12 +566,12 @@ export const EditEventPage = class _EditEventPage extends Component {
                     {matcherSentences}
 
                     <button
-                      className='button has-icon  mt10 pl10 pr10 is-link'
+                      className='button has-icon  mt10 pl10 pr10 is-light'
                       onClick={this.handleAddMatcher}
                     >
                       <PlusCircle
-                        className='icon__button has-stroke-light'
-                      /> &nbsp; Add New Rule
+                        className='icon__button has-stroke-info'
+                      /> &nbsp; Add Matcher
                     </button>
                   </div>
                 </div>

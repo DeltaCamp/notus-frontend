@@ -100,13 +100,25 @@ button[disabled] {
 }
 
 .button.is-light {
+  transition: all 70ms ease-in-out;
 }
 
 .button.is-light:hover,
 .button.is-light:focus,
 .button.is-light:active {
-  background-color: lighten(saturate($light, 100%), 2%);
-  color: $dark !important;
+  // background-color: lighten(saturate($light, 100%), 2%);
+  // color: $dark !important;
+
+  background-color: $dark;
+  color: white !important;
+  border-color: $dark !important;
+  transition: all 70ms ease-in-out;
+}
+
+.button.is-light:hover svg,
+.button.is-light:focus svg,
+.button.is-light:active svg {
+  stroke: white;
 }
 
 .button.is-success.is-outlined {
@@ -141,14 +153,12 @@ button[disabled] {
 }
 
 .button.is-purple,
-.button.is-purple:hover,
-.button.is-purple:active {
+.button.is-purple:active,
+.button.is-purple:focus {
   background-color: $purple;
-  // border: none;
   color: white;
 }
 
-.button.is-purple:hover,
 .button.is-purple:active {
   background-color: lighten($purple, 10%);
 }

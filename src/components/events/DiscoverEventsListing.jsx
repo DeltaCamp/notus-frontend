@@ -83,7 +83,7 @@ export const DiscoverEventsListing =
         if (skip + take < totalCount) {
           loadMore = <p>
             <button
-              className='button is-small is-light'
+              className='button is-small is-light mt30'
               onClick={this.fetchMore}
             >Load More</button>
           </p>

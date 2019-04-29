@@ -5,8 +5,10 @@ import { formatRoute } from 'react-router-named-routes'
 import {
   AlertTriangle,
   StopCircle,
+  Cast,
   CheckCircle,
   Edit,
+  Lock,
   Mail,
   User
 } from 'react-feather'
@@ -193,15 +195,21 @@ export const EventCard =
                 }
               )}
             >
-              <div className="event-card__header">
+              <div className='event-card__header'>
                 <p className='event-card__title is-size-5'>
                   {event.title}
                 </p>
+
+                <div className='event-card__icons is-size-7'>
+                  {event.isPublic
+                    ? (<><Cast /> &nbsp;Public</>)
+                    : (<><Lock /> &nbsp;Private</>)
+                  }
+                </div>
               </div>
 
               <div className='event-card__footer event-card__author is-size-7'>
                 <div className='event-card__icons'>
-                  
                   <User /> &nbsp;by {this.author()}
                 </div>
                 <div className='event-card__icons has-text-right'>

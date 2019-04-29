@@ -1,11 +1,11 @@
 const classes = [
   'is-link',
-  // 'is-success',
-  'is-orange',
+  'is-dark',
+  'is-danger',
+  'is-info',
   'is-purple',
   // 'is-info',
   // 'is-pink',
-  // 'is-danger',
   // 'is-primary',
 ]
 

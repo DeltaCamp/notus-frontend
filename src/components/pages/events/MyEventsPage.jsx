@@ -32,7 +32,7 @@ export const MyEventsPage =
             fetchPolicy: 'cache-and-network',
             variables: {
               eventsQuery: {
-                take: 1,
+                take: 3,
                 skip: 0,
                 userId: props.currentUserData.currentUser.id
               }
@@ -111,9 +111,12 @@ export const MyEventsPage =
                     return Object.assign({}, prev, {
                       events: {
                         ...fetchMoreResult.events,
-                        events: [...prev.events.events, ...fetchMoreResult.events.events]
+                        events: [
+                          ...prev.events.events,
+                          ...fetchMoreResult.events.events
+                        ]
                       }
-                    });
+                    })
                   }
                 })
               }
@@ -156,12 +159,11 @@ export const MyEventsPage =
 
 
               if (skip + take < totalCount) {
-                loadMore = <p>
+                loadMore = 
                   <button
-                    className='button is-small is-info'
+                    className='button is-small is-info mt30'
                     onClick={this.fetchMore}
                   >Load More</button>
-                </p>
               }
 
               const eventsOrBlankState = eventEvents.length === 0
@@ -190,7 +192,6 @@ export const MyEventsPage =
 
                     {eventCards}
 
-                    <br />
                     {loadMore}
                   </>
                 )

@@ -18,7 +18,8 @@
 }
 
 .event-card__title {
-  height: 100%;
+  height: 68%;
+  overflow: hidden;
   width: 100%;
 }
 
@@ -34,16 +35,6 @@
   height: 54px;
   margin-top: 0rem;
   padding: 0.75rem 1.5rem;
-}
-
-.button.event-card.is-warning .event-card__footer {
-  background-color: rgba(255, 255, 255, 0.5);
-}
-
-.button.event-card.is-warning:hover,
-.button.event-card.is-warning:active,
-.button.event-card.is-warning:focus {
-  border: 5px solid white;
 }
 
 .button.event-card .event-card__icons {
@@ -97,28 +88,6 @@
   stroke: white;
 }
 
-.button.event-card.is-warning:hover .dropdown .button.has-icon path,
-.button.event-card.is-warning:hover .dropdown .button.has-icon rect,
-.button.event-card.is-warning:hover .dropdown .button.has-icon circle,
-.button.event-card.is-warning:hover .dropdown .button.has-icon svg {
-  stroke: rgba(0, 0, 0, 0.5);
-}
-
-.button.event-card.is-warning:hover .dropdown .button.has-icon:active path,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:active rect,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:active circle,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:active svg,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:focus path,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:focus rect,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:focus circle,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:focus svg,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:hover path,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:hover rect,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:hover circle,
-.button.event-card.is-warning:hover .dropdown .button.has-icon:hover svg {
-  stroke: black;
-}
-
 .button.event-card .dropdown-menu {
   min-width: 180px;
 }
@@ -148,6 +117,23 @@
   border: 4px solid #444;
 }
 
+.button.is-danger.event-card.event-card--small:hover,
+.button.is-danger.event-card.event-card--small:active,
+.button.is-danger.event-card.event-card--small:focus {
+  border-color: saturate($red, 100%);
+}
+
+.button.is-dark.event-card.event-card--small:active,
+.button.is-dark.event-card.event-card--small:focus {
+  background-color: lighten($dark, 10%);
+}
+
+.button.is-info.event-card.event-card--small:hover,
+.button.is-info.event-card.event-card--small:focus,
+.button.is-info.event-card.event-card--small:active {
+  border-color: lighten($info, 10%);
+}
+
 .button.is-link.event-card.event-card--small:hover,
 .button.is-link.event-card.event-card--small:focus,
 .button.is-link.event-card.event-card--small:active {
@@ -158,12 +144,6 @@
 .button.is-purple.event-card.event-card--small:focus,
 .button.is-purple.event-card.event-card--small:active {
   border-color: lighten($purple, 20%);
-}
-
-.button.is-warning.event-card.event-card--small:hover,
-.button.is-warning.event-card.event-card--small:focus,
-.button.is-warning.event-card.event-card--small:active {
-  border-color: darken($warning, 5%);
 }
 
 .button.event-card.event-card--small .event-card__header {
@@ -248,12 +228,12 @@
 .event-box__variable-wrapper .has-icon,
 .event-box__variable-wrapper .drag-handle {
   pointer-events: none;
-  transition: opacity 200ms ease-in-out;
+  // transition: all 200ms ease-in-out;
   will-change: opacity;
 }
 
 .event-box__variable-wrapper:hover .has-icon.remove {
-  transition-duration: 1000ms;
+  // transition-duration: 1000ms;
 }
 
 .event-box__variable-wrapper:hover .has-icon,
@@ -261,7 +241,7 @@
 .event-box__variable-wrapper:hover .drag-handle {
   opacity: 1;
   pointer-events: initial;
-  transition-duration: 600ms;
+  // transition-duration: 600ms;
 }
 
 .event-box__variable-wrapper__matcher {
@@ -466,12 +446,6 @@
 
 
 // overrides
-.color-block.is-warning .event-box__text,
-.color-block.is-warning .event-box__variable,
-.color-block.is-warning .hint {
-  color: black;
-}
-
 .color-block.is-primary .event-box__text,
 .color-block.is-primary .event-box__variable,
 .color-block.is-primary .hint {
@@ -486,66 +460,9 @@
   color: white !important;
 }
 
-.color-block.is-warning .event-box__variable {
-  background: rgba(255, 255, 255, 0.6);
-}
-
-.color-block.is-warning .event-box__variable-wrapper__matcher {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.color-block.is-warning .event-box__variable-wrapper__matcher:hover {
-  background-color: rgba(255, 255, 255, 0.35);
-}
-
-.color-block.is-warning .event-box__variable .input {
-  color: black;
-}
-
-.color-block.is-warning .react-select__single-value,
-.color-block.is-warning .react-select__input {
-  color: black;
-}
-
-.color-block.is-warning .event-box__variable:hover,
 .color-block.is-primary .event-box__variable:hover {
   background: rgba(255, 255, 255, 1);
   color: black;
-}
-
-.color-block.is-warning .event-box__variable:hover {
-}
-
-.color-block.is-warning .has-text-light {
-  color: rgba(0, 0, 0, 0.7) !important;
-}
-
-.color-block.is-warning .has-text-light:hover {
-  color: rgba(0, 0, 0, 1.0) !important;
-}
-
-.color-block.is-warning .has-stroke-light svg {
-  stroke: rgba(0, 0, 0, 0.7);
-}
-
-.color-block.is-warning .has-stroke-light:hover svg {
-  stroke: rgba(0, 0, 0, 1.0);
-}
-
-.color-block.is-warning .drag-handle line,
-.color-block.is-warning .drag-handle path,
-.color-block.is-warning .drag-handle rect,
-.color-block.is-warning .drag-handle circle,
-.color-block.is-warning .drag-handle svg {
-  stroke: rgba(0, 0, 0, 0.5);
-}
-
-.color-block.is-warning .drag-handle:hover line,
-.color-block.is-warning .drag-handle:hover path,
-.color-block.is-warning .drag-handle:hover rect,
-.color-block.is-warning .drag-handle:hover circle,
-.color-block.is-warning .drag-handle:hover svg {
-  stroke: black;
 }
 
 // EVENT HISTORY

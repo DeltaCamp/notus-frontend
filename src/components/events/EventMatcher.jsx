@@ -70,11 +70,11 @@ export const EventMatcher =
 
           <div className='buttons buttons-right'>
             <button
-              className='button has-icon is-danger' 
+              className='button has-icon is-light' 
               onClick={this.handleRemove}
             >
               <XCircle
-                className='icon__button has-stroke-light'
+                className='icon__button has-stroke-red'
               />
             </button>
           </div>
