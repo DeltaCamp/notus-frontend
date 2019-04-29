@@ -98,8 +98,12 @@ body.home .navbar-start .navbar-item {
 }
 
 .navbar-brand svg path {
-  fill: black;
-  transition: fill 150ms ease-in;
+  transition: all 700ms ease-in;
+}
+
+.navbar-brand svg:hover path {
+  fill: $purple;
+  transition: all 150ms ease-in;
 }
 
 .navbar-brand svg {

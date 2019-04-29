@@ -13,7 +13,27 @@
 }
 
 .footer-brand svg path {
+  transition: all 700ms ease-in;
+}
+
+.footer-brand svg:hover path {
+  fill: $purple;
+  transition: all 150ms ease-in;
+}
+
+.footer-brand .twitter-svg {
+  height: 50px;
+}
+
+.footer-brand .twitter-svg path {
   fill: black;
+  stroke: none;
+}
+
+.footer-brand .twitter-svg:hover path {
+  fill: black;
+  stroke: $cyan;
+  stroke-width: 0.05rem;
 }
 
 .footer-item--copyright {

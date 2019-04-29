@@ -22,7 +22,7 @@ export const AboutPage =
                     About Notus
                   </h1> */}
                   <h1 className="is-size-xlarge has-text-weight-bold">
-                    Our mission is to connect people to distributed ledgers.
+                    Our mission is to connect people to the future of finance.
                   </h1>
                   {/* <h2 className="is-size-2 has-text-weight-bold">
                     Our mission is to connect people to distributed ledgers.

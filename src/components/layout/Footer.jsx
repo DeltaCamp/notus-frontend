@@ -4,7 +4,8 @@ import {
   Twitter,
 } from 'react-feather'
 import { withRouter } from 'react-router'
-import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
+// import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
+import NotusLogo from '~/assets/images/notus7.svg'
 import * as routes from '~/../config/routes'
 
 export const Footer = class _Footer extends Component {
@@ -33,7 +34,9 @@ export const Footer = class _Footer extends Component {
               <li className='list-item is-inline-block'>
                 <Link to={routes.PRIVACY_PAGE}>Privacy</Link>
               </li>
-              
+              <li className='list-item is-inline-block'>
+                <Link to={routes.SUPPORT_PAGE}>Support</Link>
+              </li>
             </ul>
 
             <div className='footer-brand pt75'>
@@ -41,15 +44,22 @@ export const Footer = class _Footer extends Component {
                 <div className='container'>
                   <div className='row pb50'>
                     <div className='col-xs-12 col-md-6 col-start-md-4'>
-                      <NotusLogo />
+                      <Link
+                        to={routes.HOME}
+                        onClick={this.closeMobileNav}
+                      >
+                        <NotusLogo />
+                      </Link>
 
                       <p className='is-size-7'>
                         Notus makes it easy to listen for Ethereum smart contract events and triggering webhooks or sending messages in response.
                       </p>
 
                       <br />
-                      <a href='https://twitter.com/NotusEvents'><Twitter id='twitter' className='is-large' /></a>
 
+                      <a href='https://twitter.com/NotusEvents'>
+                        <Twitter id='twitter' className='is-large twitter-svg' />
+                      </a>
                     </div>
                   </div>
                 </div>

@@ -327,6 +327,8 @@ button.button.is-small:active {
 }
 
 .buttons .button:not(:last-child):not(.is-fullwidth) {
+  margin-right: 1rem;
+
   @media screen and (max-width: $tablet) {
     margin-right: 0;
   }

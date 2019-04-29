@@ -144,47 +144,6 @@ export const EventPage =
                   this.setState({ isInputtingTitle: false })
                 }
 
-                handleSaveTitleAndPublish = (e) => {
-                  e.preventDefault()
-
-                  if (this.state.newEventTitle.length <= 5) {
-                    return false
-                  }
-
-                  // if newEventTitle is valid then do this, otherwise
-                  // show an error msg!
-                  this.setState({ isSaving: true })
-
-                  const event = this.props.eventData.event
-
-                  this.props.updateEventMutation({
-                    variables: {
-                      event: {
-                        id: event.id,
-                        isPublic: true
-                      }
-                    },
-                    refetchQueries: [
-                      'eventsQuery',
-                      'eventsQuery',
-                    ],
-                  }).then(({ data: { updateEvent } }) => {
-                    toast.success(`Event published!`)
-                    this.handleCloseInputTitleModal()
-
-                    this.props.setTimeout(() => {
-                      this.setState({ isSaving: false })
-                    }, 1000)
-                  }).catch(error => {
-                    toast.error('Error while publishing event')
-                    console.error(error)
-
-                    this.props.setTimeout(() => {
-                      this.setState({ isSaving: false })
-                    }, 1000)
-                  })
-                }
-
                 runUpdateEventMutation(variables, successCallback, errorCallback) {
                   if (!errorCallback) {
                     errorCallback = error => {
