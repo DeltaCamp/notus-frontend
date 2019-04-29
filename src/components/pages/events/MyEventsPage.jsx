@@ -28,6 +28,8 @@ export const MyEventsPage =
             fetchPolicy: 'cache-and-network',
             variables: {
               eventsQuery: {
+                take: 1,
+                skip: 0,
                 userId: props.currentUserData.currentUser.id
               }
             }
@@ -86,11 +88,32 @@ export const MyEventsPage =
               })
             }
 
+            fetchMore = () => {
+              const { eventsData } = this.props
+              const { fetchMore, skip, take } = eventsData || {}
+              if (fetchMore) {
+                fetchMore({
+                  variables: {
+                    skip: (skip + take),
+                    take
+                  },
+                  updateQuery: (prev, { fetchMoreResult }) => {
+                    if (!fetchMoreResult) return prev;
+                    return Object.assign({}, prev, {
+                      events: [...prev.events, ...fetchMoreResult.events]
+                    });
+                  }
+                })
+              }
+            }
+
             render () {
               const { eventsData } = this.props
               let events = []
 
-              const notLoading = eventsData && !eventsData.loading
+              const { loading, fetchMore, error } = eventsData || {}
+
+              const notLoading = !loading
 
               if (notLoading) {
                 if (eventsData.error) {
@@ -137,6 +160,10 @@ export const MyEventsPage =
                     <div className='listing-grid listing-grid--table mt75'>
                       {events}
                     </div>
+                    <br />
+                    <p>
+                      <button onClick={this.fetchMore}>Load More</button>
+                    </p>
                   </>
                 )
 

@@ -12,7 +12,8 @@ export const DiscoverEventsListing =
       fetchPolicy: 'cache-and-network',
       variables: {
         eventsQuery: {
-          isPublic: true
+          isPublic: true,
+          take: 1
         }
       }
     }
