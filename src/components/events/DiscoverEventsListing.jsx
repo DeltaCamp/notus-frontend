@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import { formatRoute } from 'react-router-named-routes'
 import { graphql } from 'react-apollo'
+
 import { eventsQuery } from '~/queries/eventsQuery'
 import { EventCard } from '~/components/events/EventCard'
 import * as routes from '~/../config/routes'
@@ -12,8 +14,10 @@ export const DiscoverEventsListing =
       const eventsQuery = {
         isPublic: true,
         skip: 0,
-        take: 2,
-        searchTerms: props.searchValue
+        take: 2
+      }
+      if (props.searchValue && props.searchValue.trim()) {
+       eventsQuery.searchTerms = props.searchValue.trim()
       }
       return {
         fetchPolicy: 'cache-and-network',
@@ -24,6 +28,14 @@ export const DiscoverEventsListing =
     }
   })(
     class _DiscoverEventsListing extends PureComponent {
+      static propTypes = {
+        showLoadMore: PropTypes.bool
+      }
+
+      static defaultProps = {
+        showLoadMore: true
+      }
+
       fetchMore = () => {
         const { eventsData, searchValue } = this.props
         const { fetchMore, events } = eventsData || {}
@@ -74,7 +86,7 @@ export const DiscoverEventsListing =
           />
         )) : []
         
-        if (skip + take < totalCount) {
+        if (this.props.showLoadMore && skip + take < totalCount) {
           loadMore = <p>
             <button
               className='button is-small is-light mt30'

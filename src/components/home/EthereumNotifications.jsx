@@ -34,7 +34,12 @@ export const EthereumNotifications = () => {
           <br />
 
           <h5 className='is-size-6'>
-            Trigger actions when an event occurs.  Use webhooks to send a Slack message, update an Oracle, or whatever you can dream up.
+            Trigger actions when an event occurs.
+            <ul className='list'>
+              <li>Send a Slack message</li>
+              <li>Update an Oracle</li>
+              <li>Do whatever you can dream up</li>
+            </ul>
           </h5>
 
           <br />

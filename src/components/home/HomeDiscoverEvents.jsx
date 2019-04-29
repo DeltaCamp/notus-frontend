@@ -34,8 +34,8 @@ export class HomeDiscoverEvents extends Component {
         />
 
         <div className='container'>
-          <div className='row pb100'>
-            <div className='col-xs-12 has-text-centered mt50'>
+          <div className='row pb50'>
+            <div className='col-xs-12 col-sm-10 col-start-sm-2 has-text-centered'>
               <h4 className='is-size-4 has-text-weight-bold mt75'>
                 Share and Discover
               </h4>
@@ -54,13 +54,12 @@ export class HomeDiscoverEvents extends Component {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className='mb75 pb100'>
-          <DiscoverEventsListing
-            searchValue={this.state.searchValue}
-            limit
-          />
+          <div className='pb100'>
+            <DiscoverEventsListing
+              searchValue={this.state.searchValue}
+              showLoadMore={false}
+            />
+          </div>
         </div>
 
         <SlantSVG

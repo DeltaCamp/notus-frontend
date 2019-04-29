@@ -14,7 +14,13 @@ export class HomeBetaNotice extends Component {
               </h1>
               <h5 className='is-size-6 mt30'>
                 We want your feedback so that we can make Notus as great as possible.
-                Join the conversation on our <DiscordLink className='has-text-white is-underlined'>Discord</DiscordLink> channel, or send an email to <a href="mailto:support@notus.network" className='has-text-white is-underlined'>support@notus.network</a>
+              </h5>
+              <h5 className='is-size-6 mt30'>
+                Join the conversation on our <DiscordLink className='has-text-white is-underlined'>Discord</DiscordLink> channel
+                <br />
+                – or –
+                <br />
+                send an email to <a href="mailto:support@notus.network" className='has-text-white is-underlined'>support@notus.network</a>
               </h5>
             </div>
           </div>

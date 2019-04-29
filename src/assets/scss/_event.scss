@@ -2,7 +2,7 @@
 
 .button.event-card {
   border-radius: 15px;
-  border: 5px solid white;
+  border: 4px solid transparent;
   display: inline-block;
   font-weight: 600;
   height: 300px;
@@ -111,38 +111,38 @@
   margin: 0;
 }
 
-.button.event-card.event-card--small:hover,
-.button.event-card.event-card--small:focus,
-.button.event-card.event-card--small:active {
+.button.event-card:hover,
+.button.event-card:focus,
+.button.event-card:active {
   border: 4px solid #444;
 }
 
-.button.is-danger.event-card.event-card--small:hover,
-.button.is-danger.event-card.event-card--small:active,
-.button.is-danger.event-card.event-card--small:focus {
+.button.is-danger.event-card:hover,
+.button.is-danger.event-card:active,
+.button.is-danger.event-card:focus {
   border-color: saturate($red, 100%);
 }
 
-.button.is-dark.event-card.event-card--small:active,
-.button.is-dark.event-card.event-card--small:focus {
+.button.is-dark.event-card:active,
+.button.is-dark.event-card:focus {
   background-color: lighten($dark, 10%);
 }
 
-.button.is-info.event-card.event-card--small:hover,
-.button.is-info.event-card.event-card--small:focus,
-.button.is-info.event-card.event-card--small:active {
+.button.is-info.event-card:hover,
+.button.is-info.event-card:focus,
+.button.is-info.event-card:active {
   border-color: lighten($info, 10%);
 }
 
-.button.is-link.event-card.event-card--small:hover,
-.button.is-link.event-card.event-card--small:focus,
-.button.is-link.event-card.event-card--small:active {
+.button.is-link.event-card:hover,
+.button.is-link.event-card:focus,
+.button.is-link.event-card:active {
   border-color: lighten($link, 10%);
 }
 
-.button.is-purple.event-card.event-card--small:hover,
-.button.is-purple.event-card.event-card--small:focus,
-.button.is-purple.event-card.event-card--small:active {
+.button.is-purple.event-card:hover,
+.button.is-purple.event-card:focus,
+.button.is-purple.event-card:active {
   border-color: lighten($purple, 20%);
 }
 
@@ -475,16 +475,17 @@
 }
 
 // HOMEPAGE EVENT CARD / DISCOVERY
-.home .listing-grid {
-  grid-column-gap: 0;
-  grid-row-gap: 0;
-}
+// .home .listing-grid {
+//   grid-column-gap: 0;
+//   grid-row-gap: 0;
+// }
 
 .home .event-card {
-  border-radius: 0;
-  border-width: 0 !important;
-  margin: 0;
-  width: 100%;
+//   border-radius: 0;
+  // border-width: 0 !important;
+  // border-color: transparent;
+//   margin: 0;
+//   width: 100%;
 }
 
 .matcher-row--is-active {
