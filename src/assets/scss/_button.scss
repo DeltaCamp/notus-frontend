@@ -21,7 +21,7 @@ button[disabled] {
 .button {
   background-color: black;
   border-radius: 100px;
-  border-width: 0;
+  border-width: 5px;
   height: auto;
   font-size: 1.25rem;
   font-weight: 700;
@@ -68,12 +68,14 @@ button[disabled] {
 .button.is-pink {
   background-color: $pink;
   color: white;
+  border-color: $pink;
 }
 
 .button.is-pink:hover,
 .button.is-pink:focus,
 .button.is-pink:active {
   background-color: lighten(saturate($pink, 100%), 10%);
+  border-color: $pink;
 }
 
 .button.is-primary {

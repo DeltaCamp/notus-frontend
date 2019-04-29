@@ -22,6 +22,7 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
+import { showErrorMessage } from '~/utils/showErrorMessage'
 import * as routes from '~/../config/routes'
 
 export const EditEventPage = class _EditEventPage extends Component {
@@ -206,7 +207,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       this.props.history.push(newEventLink)
     }).catch(error => {
       console.error(error)
-      toast.error(error.message)
+      showErrorMessage(error)
     })
   }
 

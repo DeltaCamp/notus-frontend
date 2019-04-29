@@ -992,3 +992,13 @@ svg {
 .is-inline-flex {
   display: inline-flex;
 }
+
+.__react_component_tooltip {
+  font-size: 0.825rem;
+  font-weight: 500;
+  z-index: 60000;
+}
+
+.__react_component_tooltip.show {
+  opacity: 1;
+}

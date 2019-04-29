@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import ReactTooltip from 'react-tooltip'
+import ReactTimeout from 'react-timeout'
 
 import { KEYS } from '~/constants'
 
 const DEFAULT_TITLE = 'New Event - Give this event a title'
 
-export class EventTitle extends Component {
+export const EventTitle = ReactTimeout(class extends Component {
   static propTypes = {
     handleSubmitTitle: PropTypes.func.isRequired
   }
@@ -29,6 +32,10 @@ export class EventTitle extends Component {
     this.inputRef = React.createRef()
   }
 
+  componentDidUpdate = () => {
+    this.props.setTimeout(ReactTooltip.rebuild)
+  }
+
   handleEditTitle = (e) => {
     e.preventDefault()
 
@@ -42,11 +49,22 @@ export class EventTitle extends Component {
     })
   }
 
+  showErrorTooltip = () => {
+    ReactTooltip.show(ReactDOM.findDOMNode(this.refs.errorTooltip))
+  }
+
+  hideErrorTooltip = () => {
+    ReactTooltip.hide(ReactDOM.findDOMNode(this.refs.errorTooltip))
+  }
+
   handleSubmit = (e) => {
     e.preventDefault()
 
     if (this.state.newTitle.length <= 5) {
       console.error('need more than 5 chars!')
+
+      this.showErrorTooltip()
+
       return false
     }
 
@@ -60,6 +78,8 @@ export class EventTitle extends Component {
 
     const titleRegEx = /^[a-z0-9- '()]+$/i
     const isValid = titleRegEx.test(e.target.value)
+
+    this.hideErrorTooltip()
 
     if (isValid) {
       this.setState({
@@ -98,6 +118,8 @@ export class EventTitle extends Component {
           className='form'
           onKeyUp={this.handleKeyUp}
         >
+          <div ref='errorTooltip' data-tip='Please enter at least 5 characters for the event title.' />
+          
           <input
             type='text'
             ref={this.inputRef}
@@ -120,3 +142,5 @@ export class EventTitle extends Component {
     )
   }
 }
+
+)

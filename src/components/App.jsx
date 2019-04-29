@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import * as WebFont from 'webfontloader'
+import ReactTooltip from 'react-tooltip'
 import { Slide, ToastContainer } from 'react-toastify'
 import { hot } from 'react-hot-loader'
 import { Route, Switch, withRouter } from 'react-router-dom'
@@ -45,6 +46,8 @@ export const App = withRouter(hot(module)(
     render () {
       return (
         <BodyClass {...this.props}>
+          <ReactTooltip place='top' type='light' effect='solid' />
+
           <ToastContainer
             className='notus-toast'
             position='bottom-center'

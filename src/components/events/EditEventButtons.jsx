@@ -196,7 +196,7 @@ export const EditEventButtons =
                           className={classnames(
                             'button',
                             'is-small',
-                            'is-pink'
+                            'is-link'
                           )}
                           onClick={this.handlePublishClick}
                         >
