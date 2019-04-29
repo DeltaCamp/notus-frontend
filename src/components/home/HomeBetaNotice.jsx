@@ -6,10 +6,10 @@ export class HomeBetaNotice extends Component {
   render () {
     return (
       <div className='container-fluid is-pink pb100 color-block is-positioned-relatively'>
-        <div className='container pb100'>
-          <div className='row pb100'>
-            <div className='col-xs-12 col-md-8 col-start-md-3 has-text-centered mt50'>
-              <h1 className='is-size-1 has-text-weight-bold mt75'>
+        <div className='container pb50'>
+          <div className='row'>
+            <div className='col-xs-12 col-md-8 col-start-md-3 has-text-centered'>
+              <h1 className='is-size-1 has-text-weight-bold'>
                 Get Involved
               </h1>
               <h5 className='is-size-6 mt30'>

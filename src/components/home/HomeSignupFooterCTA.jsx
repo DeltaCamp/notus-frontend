@@ -15,7 +15,7 @@ export class HomeSignupFooterCTA extends Component {
 
         <div className='container'>
           <div className='row'>
-            <div className='col-xs-12 col-md-8 col-start-md-3 has-text-centered pt50'>
+            <div className='col-xs-12 col-md-8 col-start-md-3 has-text-centered'>
               <h4 className='is-size-4 has-text-weight-bold'>
                 Give it a try
               </h4>
