@@ -135,22 +135,22 @@ export const MyEventsPage =
 
               let eventCards = <>
                 <TransitionGroup className='listing-grid mt75'>
-                    {eventEvents.map((event) => (
-                      <CSSTransition
-                        key={`event-${event.id}`}
-                        timeout={300}
-                        classNames="fade"
-                      >
-                        <EventCard
-                          {...this.props}
-                          event={event}
-                          editable={true}
-                          isSmall={true}
-                          linkTo={formatRoute(routes.EDIT_EVENT, { eventId: event.id })}
-                          handleOpenConfirmDeleteModal={this.handleOpenConfirmDeleteModal}
-                        />
-                      </CSSTransition>
-                    ))}
+                  {eventEvents.map((event) => (
+                    <CSSTransition
+                      key={`event-${event.id}`}
+                      timeout={300}
+                      classNames="fade"
+                    >
+                      <EventCard
+                        {...this.props}
+                        event={event}
+                        editable={true}
+                        isSmall={true}
+                        linkTo={formatRoute(routes.EDIT_EVENT, { eventId: event.id })}
+                        handleOpenConfirmDeleteModal={this.handleOpenConfirmDeleteModal}
+                      />
+                    </CSSTransition>
+                  ))}
                 </TransitionGroup>
               </>
 

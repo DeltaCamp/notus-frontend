@@ -6,7 +6,9 @@ import {
   AlertTriangle,
   StopCircle,
   CheckCircle,
-  Edit
+  Edit,
+  Mail,
+  User
 } from 'react-feather'
 import { toast } from 'react-toastify'
 import { Settings } from 'react-feather'
@@ -197,16 +199,22 @@ export const EventCard =
                 </p>
               </div>
 
-              {!this.props.isSmall &&
-                <div className='event-card__footer'>
-                  <p className='event-card__author is-size-7'>
-                    by {this.author()}
-                  </p>
-                  <div className='event-card__icons has-text-right'>
-                    {editable ? editDropdown : ''}
-                  </div>
+              <div className='event-card__footer event-card__author is-size-7'>
+                <div className='event-card__icons'>
+                  
+                  <User /> &nbsp;by {this.author()}
                 </div>
-              }
+                <div className='event-card__icons has-text-right'>
+                  {/* {editable ? editDropdown : ''} */}
+                  {event.isActive
+                    ? (<><CheckCircle /> &nbsp;On</>)
+                    : (<><StopCircle /> &nbsp;Off</>)
+                  }
+                </div>
+                <div className='event-card__icons has-text-right'>
+                  Sends &nbsp;<Mail />
+                </div>
+              </div>
             </Link>
           )
         }
