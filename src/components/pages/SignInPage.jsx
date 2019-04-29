@@ -39,16 +39,6 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         }
       }
 
-      componentDidUpdate(prevProps) {
-        const { currentUser } = this.props.currentUserData
-
-        if (currentUser && !this.state.redirect) {
-          this.setState({
-            redirect: true
-          })
-        }
-      }
-
       getOneTimeKey(props) {
         const { email } = queryString.parse(props.location.search)
         return email
@@ -115,10 +105,6 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
 
       render () {
         let message, signInForm
-
-        if (this.state.redirect) {
-          return <Redirect to={routes.MY_EVENTS} />
-        }
 
         if (this.state.signingIn) {
           message = "Signing in ..."

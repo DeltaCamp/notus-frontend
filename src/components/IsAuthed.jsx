@@ -8,25 +8,14 @@ export const IsAuthed =
   (WrappedComponent) => {
     return graphql(currentUserQuery, { name: 'currentUserData' })(
       class extends Component {
-        state = {}
-        
-        componentDidUpdate() {
-          const { currentUser } = this.props.currentUserData
-
-          const isSigningOut = (this.props.history.location.pathname === '/signin')
-
-          if (!currentUser && !this.state.redirect && !isSigningOut) {
-            // toast.error('Please sign in to access this page.')
-            this.setState({ redirect: true })
-          }
-        }
-
         render () {
-          if (this.state.redirect) {
+          const { currentUser } = this.props.currentUserData
+          const isSigningOut = (this.props.history.location.pathname === '/signin')
+          if (!currentUser && !isSigningOut) {
             return <Redirect to={routes.SIGNIN} />
+          } else {
+            return <WrappedComponent {...this.props} />;
           }
-
-          return <WrappedComponent {...this.props} />;
         }
       }
     )
