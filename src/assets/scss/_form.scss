@@ -345,17 +345,11 @@ input.input.is-large {
     font-size: 1.5rem;
     height: 80px;
     padding: 0.25rem;
-    max-width: 460px;
   }
 
   @media screen and (max-width: $mobile) {
     font-size: 1.25rem;
     padding: 0.25rem;
-    max-width: 380px;
-  }
-
-  @media screen and (max-width: $mobile - 100px) {
-    max-width: 280px;
   }
 }
 
