@@ -7,6 +7,7 @@ import ReactTimeout from 'react-timeout'
 import { KEYS } from '~/constants'
 
 const DEFAULT_TITLE = 'New Event - Give this event a title'
+const TITLE_MIN_LENGTH = 8
 
 export const EventTitle = ReactTimeout(class extends Component {
   static propTypes = {
@@ -60,11 +61,8 @@ export const EventTitle = ReactTimeout(class extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    if (this.state.newTitle.length <= 5) {
-      console.error('need more than 5 chars!')
-
+    if (this.state.newTitle.length <= TITLE_MIN_LENGTH) {
       this.showErrorTooltip()
-
       return false
     }
 
@@ -118,7 +116,7 @@ export const EventTitle = ReactTimeout(class extends Component {
           className='form'
           onKeyUp={this.handleKeyUp}
         >
-          <div ref='errorTooltip' data-tip='Please enter at least 5 characters for the event title.' />
+          <div ref='errorTooltip' data-tip={`Please enter at least ${TITLE_MIN_LENGTH} characters for the event title.`} />
           
           <input
             type='text'

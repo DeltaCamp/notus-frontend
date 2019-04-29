@@ -236,7 +236,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     if (!errorCallback) {
       errorCallback = error => {
         console.error(error)
-        toast.error(error.message)
+        showErrorMessage(error)
       }
     }
 
@@ -301,7 +301,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         }).then((mutationResult) => {
           toast.success('Updated event matchers')
         }).catch(error => {
-          toast.error(error.message)
+          showErrorMessage(error)
         })
       } else {
         // order is wrong!
@@ -317,7 +317,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         }).then((mutationResult) => {
           toast.success('Added new matcher rule')
         }).catch(error => {
-          toast.error(error.message)
+          showErrorMessage(error)
         })
       }
     }
@@ -394,7 +394,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           toast.success('Successfully removed rule matcher')
         }).catch(error => {
           console.error(error)
-          toast.error(error.message)
+          showErrorMessage(error)
         })
       }
     } else {
