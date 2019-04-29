@@ -151,8 +151,7 @@ export const EditEventButtons =
                   notEventAuthorButtons,
                   event,
                   eventPublishedState,
-                  eventActiveState,
-                  activeClasses
+                  eventActiveState
 
                 const { eventData, currentUserData } = this.props
                 if (eventData) {
@@ -171,10 +170,6 @@ export const EditEventButtons =
                   }
   
                   isEventAuthor = (currentUserData.currentUser && currentUserData.currentUser.id === parseInt(event.user.id, 10))
-                  activeClasses = {
-                    'is-two-thirds-opacity': !event.isActive,
-                      'is-full-opacity': event.isActive
-                  }
   
                   if (!isEventAuthor) {
                     const createEventFromParentRoute = formatRoute(
@@ -226,11 +221,7 @@ export const EditEventButtons =
                           className={classnames(
                             'button',
                             'is-small',
-                            'is-danger',
-                            {
-                              'is-two-thirds-opacity': !event.isActive,
-                              'is-full-opacity': event.isActive
-                            }
+                            'is-danger'
                           )}
                           onClick={this.handleOpenConfirmDeleteModal}
                         >
@@ -294,10 +285,7 @@ export const EditEventButtons =
                       </div>
                     </Modal>
 
-                    <div className={classnames(
-                      'buttons',
-                      activeClasses
-                    )}>
+                    <div className='buttons'>
                       {this.props.isCreateMode()
                         ? (
                           <button

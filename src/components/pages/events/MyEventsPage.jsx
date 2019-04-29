@@ -134,30 +134,33 @@ export const MyEventsPage =
               }
 
               let eventCards = <>
-                <TransitionGroup className="todo-list">
-                {eventEvents.map((event) => (
-                  <CSSTransition
-                    key={`event-${event.id}`}
-                    timeout={500}
-                    classNames="fade"
-                  >
-                    <EventCard
-                      {...this.props}
-                      event={event}
-                      editable={true}
-                      isSmall={true}
-                      linkTo={formatRoute(routes.EDIT_EVENT, { eventId: event.id })}
-                      handleOpenConfirmDeleteModal={this.handleOpenConfirmDeleteModal}
-                    />
-                  </CSSTransition>
-                ))}
+                <TransitionGroup className='listing-grid mt75'>
+                    {eventEvents.map((event) => (
+                      <CSSTransition
+                        key={`event-${event.id}`}
+                        timeout={300}
+                        classNames="fade"
+                      >
+                        <EventCard
+                          {...this.props}
+                          event={event}
+                          editable={true}
+                          isSmall={true}
+                          linkTo={formatRoute(routes.EDIT_EVENT, { eventId: event.id })}
+                          handleOpenConfirmDeleteModal={this.handleOpenConfirmDeleteModal}
+                        />
+                      </CSSTransition>
+                    ))}
                 </TransitionGroup>
               </>
 
 
               if (skip + take < totalCount) {
                 loadMore = <p>
-                  <button className='button' onClick={this.fetchMore}>Load More</button>
+                  <button
+                    className='button is-small is-info'
+                    onClick={this.fetchMore}
+                  >Load More</button>
                 </p>
               }
 
@@ -184,9 +187,9 @@ export const MyEventsPage =
                         <PlusCircle /> &nbsp;Create a Custom Event
                       </Link>
                     </div>
-                    <div className='listing-grid listing-grid--table mt75'>
-                      {eventCards}
-                    </div>
+
+                    {eventCards}
+
                     <br />
                     {loadMore}
                   </>
@@ -259,7 +262,6 @@ export const MyEventsPage =
                                 </h4>
 
                                 <br />
-
                                 
                                 <DiscoverEventsListing />
                               </div>

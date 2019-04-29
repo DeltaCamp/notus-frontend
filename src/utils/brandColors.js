@@ -1,7 +1,7 @@
 const classes = [
   'is-link',
   // 'is-success',
-  'is-warning',
+  'is-orange',
   'is-purple',
   // 'is-info',
   // 'is-pink',

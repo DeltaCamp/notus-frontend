@@ -187,9 +187,7 @@ export const EventCard =
                 'event-card',
                 brandColor(event.id),
                 {
-                  'event-card--small': this.props.isSmall,
-                  'is-half-opacity': !event.isActive,
-                  'is-full-opacity': event.isActive
+                  'event-card--small': this.props.isSmall
                 }
               )}
             >

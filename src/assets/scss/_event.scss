@@ -10,8 +10,8 @@
   text-align: left;
   text-transform: none;
   // transform: scale3d(1.0, 1.0, 1.0);
-  transition: all 100ms ease-in-out;
-  will-change: transform;
+  // transition: all 100ms ease-in-out;
+  // will-change: transform;
   white-space: initial;
 
   @media screen and (max-width: $tablet) {
@@ -21,8 +21,8 @@
 
 .event-card__title {
   height: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
   width: 100%;
 }
 
@@ -141,16 +141,16 @@
 }
 
 .button.event-card.event-card--small {
-  border-radius: 6px;
-  border-width: 2px;
-  height: 80px;
+  border-radius: 10px;
+  border: 4px solid white;
+  // height: 80px;
   margin: 0;
 }
 
 .button.event-card.event-card--small:hover,
 .button.event-card.event-card--small:focus,
 .button.event-card.event-card--small:active {
-  border: 4px solid white;
+  border: 4px solid #444;
 }
 
 .button.is-link.event-card.event-card--small:hover,
@@ -172,7 +172,7 @@
 }
 
 .button.event-card.event-card--small .event-card__header {
-  height: 100%;
+  // height: 100%;
   padding-bottom: 1rem;
   padding-top: 1rem;
 }

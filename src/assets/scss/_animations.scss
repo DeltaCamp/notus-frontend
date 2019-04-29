@@ -54,16 +54,16 @@
 }
 
 .fade-enter {
-  opacity: 0.001;
+  opacity: 0.001 !important;
   // transform: scale(0) translateY(200%); // this breaks drag n drop ?
-  transition: all 150ms cubic-bezier(.32,.72,.66,1.14);
+  transition: all 300ms cubic-bezier(.32,.72,.66,1.14);
 }
 
 .fade-enter.fade-enter-active,
 .fade-enter.fade-enter-done {
-  opacity: 1;
+  opacity: 1 !important;
   // transform: scale(1) translateY(0%);  // this breaks drag n drop ?
-  transition: all 150ms cubic-bezier(.32,.72,.66,1.14);
+  transition: all 300ms cubic-bezier(.32,.72,.66,1.14);
 }
 
 .fade-enter.fade-exit {
