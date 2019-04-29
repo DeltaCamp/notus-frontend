@@ -13,11 +13,9 @@ export const SourceAsSentence = graphql(sourcesQuery,
   function (props) {
     let sentence
     const { source, loading, error } = props.sourcesQuery
-    console.log('source', source)
     if (error) {
       return `Error: ${error}`
     } else if (!loading) {
-      console.log(source)
       return source.toLowerCase()
     } else {
       return ''

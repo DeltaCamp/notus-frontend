@@ -11,7 +11,6 @@ export const eventFragment = gql`
     user {
       id
       name
-      email
     }
     abiEventId
     parent {

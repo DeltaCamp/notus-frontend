@@ -11,7 +11,7 @@ import {
 import { toast } from 'react-toastify'
 import { Settings } from 'react-feather'
 import { graphql } from 'react-apollo'
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { brandColor } from '~/utils/brandColors'
@@ -71,13 +71,9 @@ export const EventCard =
         }
 
         handleEventCardClick = (e) => {
-          e.preventDefault()
+          // e.preventDefault()
          
           const { currentUserData } = this.props
-
-          this.setState({
-            redirect: true
-          })
 
           if (currentUserData && !currentUserData.currentUser) {
             toast('You will need to sign up (or sign in) to create events.')
@@ -97,7 +93,6 @@ export const EventCard =
               }
             },
             refetchQueries: [
-              'eventsQuery',
               'eventsQuery',
             ],
           }).then((mutationResult) => {
@@ -127,13 +122,9 @@ export const EventCard =
 
           const { currentUserData, editable, event } = this.props
 
-          if (this.state.redirect) {
-            if (currentUserData && currentUserData.currentUser) {
-              return <Redirect to={this.props.linkTo} />
-            } else {
-              return <Redirect to={routes.SIGNUP} />
-            }
-          }
+          const isLoggedIn = currentUserData && currentUserData.currentUser
+
+          const linkTo = isLoggedIn ? this.props.linkTo : routes.SIGNUP
 
           if (editable) {
             editDropdown = (
@@ -186,8 +177,9 @@ export const EventCard =
           }
 
           return (
-            <button
+            <Link
               key={`event-${event.id}`}
+              to={linkTo}
               onClick={this.handleEventCardClick}
               ref={node => {this.node = node}}
               className={classnames(
@@ -215,7 +207,7 @@ export const EventCard =
                   {editable ? editDropdown : ''}
                 </div>
               </div>
-            </button>
+            </Link>
           )
         }
       }

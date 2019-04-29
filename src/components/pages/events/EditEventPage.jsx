@@ -197,7 +197,6 @@ export const EditEventPage = class _EditEventPage extends Component {
       },
       refetchQueries: [
         'eventsQuery',
-        'publicEventsQuery',
       ],
     }).then((mutationResult) => {
       toast.success('Successfully saved event')
@@ -244,8 +243,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       variables,
       refetchQueries: [
         // only refetch the event we just updated (1 record)
-        'eventsQuery',
-        'publicEventsQuery',
+        'eventsQuery'
       ],
     }).then(successCallback).catch(errorCallback)
   }
@@ -298,7 +296,6 @@ export const EditEventPage = class _EditEventPage extends Component {
           refetchQueries: [
             // only refetch the event or matcher we just updated (1 record)
             'eventsQuery',
-            'eventsQuery',
           ],
         }).then((mutationResult) => {
           toast.success('Updated event matchers')
@@ -306,7 +303,6 @@ export const EditEventPage = class _EditEventPage extends Component {
           toast.error(error.message)
         })
       } else {
-        console.log(matcher)
         // order is wrong!
         
         this.props.createMatcherMutation({
@@ -315,8 +311,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           },
           refetchQueries: [
             // only refetch the event or matcher we just created (1 record)
-            'eventsQuery',
-            'eventsQuery',
+            'eventsQuery'
           ],
         }).then((mutationResult) => {
           toast.success('Added new matcher rule')
@@ -392,8 +387,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           },
           refetchQueries: [
             // only refetch the event we just updated (1 record)
-            'eventsQuery',
-            'publicEventsQuery',
+            'eventsQuery'
           ],
         }).then((mutationResult) => {
           toast.success('Successfully removed rule matcher')

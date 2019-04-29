@@ -90,7 +90,9 @@ export const MyEventsPage =
               const { eventsData } = this.props
               let events = []
 
-              if (!eventsData.loading) {
+              const notLoading = eventsData && !eventsData.loading
+
+              if (notLoading) {
                 if (eventsData.error) {
                   console.error(eventsData.error)
                   return 'There was an error while fetching your events'
@@ -109,7 +111,7 @@ export const MyEventsPage =
                 }
               }
 
-              const eventsOrBlankState = (!eventsData.loading && events.length === 0) 
+              const eventsOrBlankState = (notLoading && events.length === 0) 
                 ? (
                   <>
                     <h2 className='is-size-2 mt75 has-text-weight-bold'>
