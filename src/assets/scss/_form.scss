@@ -46,7 +46,7 @@ $addonsFormHeight: 57px;
   top: 0.5rem;
 }
 
-$hasAddonsformColor: white;
+$hasAddonsformColor: $cyan;
 
 .form .button,
 .form .input,
@@ -141,16 +141,20 @@ form.is-active textarea.textarea,
 form.is-active textarea.textarea:hover,
 form.is-active textarea.textarea:focus,
 form.is-active textarea.textarea:active {
-  box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
+  // box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
+  // border-width: 5px;
+  border: 5px solid $cyan;
 }
 
-.has-addons input.input:hover,
-.has-addons input.input:active,
-.has-addons input.input:focus,
-.has-addons textarea.textarea:hover,
-.has-addons textarea.textarea:focus,
-.has-addons textarea.textarea:active {
-  border: 3px solid $hasAddonsformColor;
+form.has-addons.is-active input.input:hover,
+form.has-addons.is-active input.input:active,
+form.has-addons.is-active input.input:focus,
+form.has-addons.is-active textarea.textarea:hover,
+form.has-addons.is-active textarea.textarea:focus,
+form.has-addons.is-active textarea.textarea:active {
+  // border: 3px solid $hasAddonsformColor;
+  border-color: $hasAddonsformColor;
+  border-right-color: white;
 }
 
 .form .control,
@@ -230,7 +234,7 @@ label.radio,
 .has-bg textarea.textarea:focus,
 .has-bg textarea.textarea:active {
   border-color: white;
-  box-shadow: 1px 2px 30px rgba(255, 255, 255, 0.55);
+  // box-shadow: 1px 2px 30px rgba(255, 255, 255, 0.55);
 }
 
 .has-bg .label,
@@ -280,6 +284,13 @@ label.radio,
 .field.has-addons .button:hover,
 .field.has-addons .button:focus,
 .field.has-addons .button:active {
+  border-color: $cyan;
+  border-width: 5px;
+}
+
+.field.has-addons .button:hover,
+.field.has-addons .button:focus,
+.field.has-addons .button:active {
   border-color: $yellow;
   border-width: 5px;
   color: $yellow;
@@ -287,7 +298,7 @@ label.radio,
 }
 
 .has-addons input.input {
-  border-color: $hasAddonsformColor;
+  border-color: white;
 }
 
 .form.is-warning .field {

@@ -14,7 +14,7 @@ import { TermsPage } from '~/components/pages/TermsPage'
 import { SupportPage } from '~/components/pages/SupportPage'
 import { EventPage } from '~/components/pages/events/EventPage'
 import { MyEventsPage } from '~/components/pages/events/MyEventsPage'
-import { EditEventPage } from '~/components/pages/events/EditEventPage'
+import { EditEventPageWrapper } from '~/components/pages/events/EditEventPageWrapper'
 import { PasswordResetPage } from '~/components/pages/PasswordResetPage'
 import { SignInPage } from '~/components/pages/SignInPage'
 import { SignUpPage } from '~/components/pages/SignUpPage'
@@ -74,9 +74,9 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.TERMS_PAGE} component={TermsPage} />
                 <Route exact path={routes.SUPPORT_PAGE} component={SupportPage} />
 
-                <Route exact path={routes.EDIT_EVENT} component={EditEventPage} />
-                <Route exact path={routes.NEW_EVENT} component={EditEventPage} />
-                <Route exact path={routes.NEW_EVENT_FROM_PARENT} component={EditEventPage} />
+                <Route exact path={routes.EDIT_EVENT} component={EditEventPageWrapper} />
+                <Route exact path={routes.NEW_EVENT} component={EditEventPageWrapper} />
+                <Route exact path={routes.NEW_EVENT_FROM_PARENT} component={EditEventPageWrapper} />
                 <Route exact path={routes.MY_EVENTS} component={MyEventsPage} />
                 <Route exact path={routes.DISCOVER_EVENTS} component={DiscoverEventsPage} />
                 <Route exact path={routes.EVENT} component={EventPage} />
