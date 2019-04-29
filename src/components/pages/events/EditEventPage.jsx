@@ -38,6 +38,7 @@ export const EditEventPage =
       name: 'eventData',
       skip: (props) => !props.match.params.eventId,
       options: (props) => ({
+        fetchPolicy: 'cache-and-network',
         variables: { id: parseInt(props.match.params.eventId, 10) }
       })
     })(
@@ -219,7 +220,6 @@ export const EditEventPage =
               },
               refetchQueries: [
                 'eventsQuery',
-                'publicEventsQuery',
               ],
             }).then((mutationResult) => {
               toast.success('Successfully saved event')
@@ -267,7 +267,6 @@ export const EditEventPage =
               refetchQueries: [
                 // only refetch the event we just updated (1 record)
                 'eventsQuery',
-                'publicEventsQuery',
               ],
             }).then(successCallback).catch(errorCallback)
           }
@@ -415,7 +414,6 @@ export const EditEventPage =
                   refetchQueries: [
                     // only refetch the event we just updated (1 record)
                     'eventsQuery',
-                    'publicEventsQuery',
                   ],
                 }).then((mutationResult) => {
                   toast.success('Successfully removed rule matcher')

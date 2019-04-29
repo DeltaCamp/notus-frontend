@@ -25,6 +25,7 @@ export const MyEventsPage =
           name: 'eventsData',
           skip: (props) => !props.currentUserData.currentUser,
           options: (props) => ({
+            fetchPolicy: 'cache-and-network',
             variables: {
               eventsQuery: {
                 userId: props.currentUserData.currentUser.id

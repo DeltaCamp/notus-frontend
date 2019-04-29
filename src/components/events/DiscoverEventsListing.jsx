@@ -9,6 +9,7 @@ export const DiscoverEventsListing =
   graphql(eventsQuery, {
     name: 'eventsData',
     options: {
+      fetchPolicy: 'cache-and-network',
       variables: {
         eventsQuery: {
           isPublic: true

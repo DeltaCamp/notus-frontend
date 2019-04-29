@@ -225,7 +225,6 @@ export const EventPage =
                     },
                     refetchQueries: [
                       'eventsQuery',
-                      'eventsQuery',
                     ],
                   }).then(() => {
                     toast.dismiss()
