@@ -22,12 +22,12 @@ export const SourceDescription = function ({ event, handleStartEdit }) {
       abiEventId={abiEventId}
     />
   } else {
-    title = SCOPE_LABELS[event.scope]
+    title = getNounArticle(SCOPE_LABELS[event.scope])
   }
 
   return (
     <>
-      {getNounArticle(title)}
+      {title}
       <button
         className='event-box__variable has-react-select'
         onClick={handleStartEdit}
