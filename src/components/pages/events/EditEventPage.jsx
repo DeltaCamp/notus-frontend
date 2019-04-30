@@ -191,9 +191,11 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   doCreate = () => {
+    let event = { ...this.state.event }
+    delete event.frequency
     this.props.createEventMutation({
       variables: {
-        event: this.state.event
+        event
       },
       refetchQueries: [
         'eventsQuery',
@@ -411,8 +413,10 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   doGenericUpdateEvent = () => {
+    let event = { ...this.state.event }
+    delete event.frequency
     const variables = {
-      event: this.state.event
+      event
     }
     const successCallback = ({ data: { updateEvent } }) => {
       toast.success('Updated event')
