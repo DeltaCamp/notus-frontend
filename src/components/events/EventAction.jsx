@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
 // import PropTypes from 'prop-types'
 
-export const EventAction = 
+export const EventAction =
   class _EventAction extends PureComponent {
-
     // static propTypes = {
     // }
 

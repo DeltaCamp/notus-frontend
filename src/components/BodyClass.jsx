@@ -4,14 +4,13 @@ import { getSystemInfo } from '~/utils/getSystemInfo'
 
 export const BodyClass = ReactTimeout(
   class _BodyClass extends PureComponent {
-    componentDidMount() {
+    componentDidMount () {
       const { browser } = getSystemInfo()
       document.body.classList.add(browser)
 
-
       document.body.classList.add(this.sanatizePathname(this.props.location.pathname))
-      
-      // After X seconds if the font didn't load properly 
+
+      // After X seconds if the font didn't load properly
       // show the content anyway
       // This has to do with FOUT (lookitup)
       this.props.setTimeout(() => {
@@ -27,7 +26,7 @@ export const BodyClass = ReactTimeout(
       return pathname
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate (prevProps) {
       if (this.props.location.pathname !== prevProps.location.pathname) {
         const oldPathname = prevProps.location.pathname
         const newPathname = this.props.location.pathname
@@ -37,7 +36,7 @@ export const BodyClass = ReactTimeout(
       }
     }
 
-    render() {
+    render () {
       return this.props.children
     }
   }

@@ -71,11 +71,11 @@ export const AppSelect = graphql(currentUserQuery, { name: 'currentUserData' })(
                 label: optionLabel
               }
             }}
-            allowCreateWhileLoading={true}
+            allowCreateWhileLoading
             isValidNewOption={() => true}
             formatCreateLabel={(inputValue) => { return `Create new app "${inputValue}"...` }}
-            createOptionPosition="first"
-            />
+            createOptionPosition='first'
+          />
         )
       }
     }

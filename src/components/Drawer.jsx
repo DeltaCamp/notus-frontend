@@ -16,15 +16,15 @@ export class Drawer extends PureComponent {
         in={this.props.show}
       >
         {state => (
-          <>          
+          <>
             <div className='drawer has-bg has-bg__dark'>
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-md-10 col-start-md-2 has-text-centered'>
                     <div className='mt10'>
-                      
+
                       {this.props.children}
-                      
+
                     </div>
                   </div>
                 </div>

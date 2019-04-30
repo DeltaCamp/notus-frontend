@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  Twitter,
+  Twitter
 } from 'react-feather'
 import { withRouter } from 'react-router'
 // import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'

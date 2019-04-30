@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 
-export const PrivacyPage = 
+export const PrivacyPage =
   class _PrivacyPage extends Component {
     static propTypes = {
       match: PropTypes.object.isRequired
@@ -27,8 +27,8 @@ export const PrivacyPage =
             <div className='container'>
               <div className='row'>
                 <div className='col-xs-12 col-lg-8 col-start-lg-3 col-xl-8 col-start-xl-3'>
-                  <div className="content">
-                    <h4 className="is-size-4">
+                  <div className='content'>
+                    <h4 className='is-size-4'>
                       Notus Privacy Policy
                     </h4>
 
@@ -84,7 +84,7 @@ export const PrivacyPage =
                     <p>
                       Finally, we may also share your Personal Information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful request for information we receive, or to otherwise protect our rights.
                     </p>
-                    
+
                     <p>
                       Additionally, you can opt out of some of these services by visiting the Digital Advertising Alliance’s opt-out portal at:  <a href='http://optout.aboutads.info/'>http://optout.aboutads.info/</a>.
                     </p>
@@ -93,8 +93,7 @@ export const PrivacyPage =
                       <br />
                       Please note that we do not alter our Site’s data collection and use practices when we see a Do Not Track signal from your browser.
                     </p>
-                    
-                    
+
                     <p>
                       <strong>YOUR RIGHTS</strong>
                       <br />
@@ -104,7 +103,6 @@ export const PrivacyPage =
                       Additionally, if you are a European resident we note that we are processing your information in order to fulfill contracts we might have with you (for example if you make an order through the Site), or otherwise to pursue our legitimate business interests listed above.  Additionally, please note that your information will be transferred outside of Europe, including to Canada and the United States.
                     </p>
 
-                    
                     <p>
                       <strong>DATA RETENTION</strong>
                       <br />

@@ -1,4 +1,4 @@
-var Rollbar = require("rollbar")
+var Rollbar = require('rollbar')
 
 let instance
 

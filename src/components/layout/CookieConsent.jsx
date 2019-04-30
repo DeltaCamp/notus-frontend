@@ -13,24 +13,24 @@ export const CookieConsent = ReactTimeout(
       hidden: false
     }
 
-    componentDidMount() {
+    componentDidMount () {
       let cookieConsent
-      
+
       if (storage()) {
-        cookieConsent = localStorage.getItem(CONSENT_COOKIE_NAME) 
+        cookieConsent = window.localStorage.getItem(CONSENT_COOKIE_NAME)
       }
-      
+
       if (cookieConsent) {
         this.setState({ hidden: true })
       } else {
         this.props.setTimeout(this.animateIn, 2000)
       }
     }
-    
+
     handleAccept = (e) => {
       e.preventDefault()
 
-      localStorage.setItem(CONSENT_COOKIE_NAME, true)
+      window.localStorage.setItem(CONSENT_COOKIE_NAME, true)
       this.setState({ hidden: true })
     }
 
@@ -51,7 +51,7 @@ export const CookieConsent = ReactTimeout(
             }
           )}
         >
-          <div className="cookie-consent--inner">
+          <div className='cookie-consent--inner'>
             We use cookies to store your session and for analytics / error reporting. You consent to our cookie usage if you continue to use the <a href='https://notus.network'>notus.network</a> site. Please refer to the <Link to={routes.PRIVACY_PAGE}>privacy policy</Link> for more information.
 
             <button

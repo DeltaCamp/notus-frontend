@@ -37,7 +37,7 @@ export class MatcherOperator extends Component {
     const clone = deepCloneMatcher(this.props.matcher)
     clone.operator = option.value
     this.props.onChange(clone)
-    
+
     this.handleStopEditing()
   }
 
@@ -68,7 +68,7 @@ export class MatcherOperator extends Component {
   render () {
     const { matcher } = this.props
     const { abiEventInputId, operator } = matcher
-    
+
     return (
       <>
         {this.state.isEditing

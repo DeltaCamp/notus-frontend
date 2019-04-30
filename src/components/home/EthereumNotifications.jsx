@@ -4,7 +4,6 @@ import * as routes from '~/../config/routes'
 import { GitIcons } from '~/components/GitIcons'
 
 export const EthereumNotifications = () => {
-  
   return (
     <div className='container'>
       <div className='row pb100'>

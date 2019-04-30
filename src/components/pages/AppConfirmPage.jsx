@@ -7,7 +7,6 @@ import { CodeBox } from '~/components/CodeBox'
 
 export const AppConfirmPage =
   class _AppConfirmPage extends Component {
-
     static propTypes = {
       match: PropTypes.object.isRequired
     }

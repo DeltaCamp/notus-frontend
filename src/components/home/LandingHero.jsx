@@ -8,7 +8,7 @@ export const LandingHero = ({ setSuccess, success }) => {
       <div className='hero-body'>
         <div className='container'>
           <div className='row'>
-          
+
             <div className='col-xs-12 col-lg-10'>
               <h1 className='hero--title'>
                 Ethereum Notifications

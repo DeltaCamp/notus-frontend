@@ -6,7 +6,7 @@ import arrayMove from 'array-move'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { formatRoute } from 'react-router-named-routes'
 import { orderBy } from 'lodash'
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { PlusCircle } from 'react-feather'
 import { toast } from 'react-toastify'
 
@@ -33,10 +33,10 @@ export const EditEventPage = class _EditEventPage extends Component {
       runCount: -1,
       matchers: [
         {
-          operand: "",
+          operand: '',
           operator: 2,
           order: 1,
-          source: "transaction.value"
+          source: 'transaction.value'
         }
       ]
     },
@@ -52,7 +52,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     router: PropTypes.object.isRequired
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setState({ freshlyMounted: true })
   }
 
@@ -92,10 +92,10 @@ export const EditEventPage = class _EditEventPage extends Component {
     return /events\/new/.test(this.props.location.pathname)
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (
-      this.props.eventData && this.props.eventData.event
-      && this.state.freshlyMounted
+      this.props.eventData && this.props.eventData.event &&
+      this.state.freshlyMounted
     ) {
       const event = this.props.eventData.event
       let {
@@ -171,7 +171,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         toast.success('Updated matcher positions')
       }
       // const errorCallback = ({ data: { updateEvent } }) => {
-        // TODO: implement fail state and reverse position of matchers!
+      // TODO: implement fail state and reverse position of matchers!
       // }
       this.runUpdateEventMutation(variables, successCallback)
     }
@@ -202,8 +202,8 @@ export const EditEventPage = class _EditEventPage extends Component {
         event
       },
       refetchQueries: [
-        'eventsQuery',
-      ],
+        'eventsQuery'
+      ]
     }).then((mutationResult) => {
       toast.success('Successfully saved event')
       const eventId = mutationResult.data.createEvent.id
@@ -246,7 +246,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     })
   }
 
-  runUpdateEventMutation(variables, successCallback, errorCallback) {
+  runUpdateEventMutation (variables, successCallback, errorCallback) {
     if (!errorCallback) {
       errorCallback = error => {
         console.error(error)
@@ -259,7 +259,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       refetchQueries: [
         // only refetch the event we just updated (1 record)
         'eventsQuery'
-      ],
+      ]
     }).then(successCallback).catch(errorCallback)
   }
 
@@ -303,8 +303,8 @@ export const EditEventPage = class _EditEventPage extends Component {
           },
           refetchQueries: [
             // only refetch the event or matcher we just updated (1 record)
-            'eventsQuery',
-          ],
+            'eventsQuery'
+          ]
         }).then((mutationResult) => {
           toast.success('Updated event matchers')
         }).catch(error => {
@@ -312,7 +312,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         })
       } else {
         // order is wrong!
-        
+
         this.props.createMatcherMutation({
           variables: {
             matcher
@@ -320,7 +320,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           refetchQueries: [
             // only refetch the event or matcher we just created (1 record)
             'eventsQuery'
-          ],
+          ]
         }).then((mutationResult) => {
           toast.success('Added new matcher rule')
         }).catch(error => {
@@ -334,7 +334,7 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   onChangeScopeAndAbiEventId = ({ scope, abiEventId }) => {
     const matchers = this.state.event.matchers.map(matcher => {
-      let clone = {...matcher}
+      let clone = { ...matcher }
 
       if (!isValidScopeSource(scope, matcher.source)) {
         clone.source = 'block.number'
@@ -358,7 +358,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       operand: '',
       operator: 2,
       order: 1,
-      source: "transaction.value",
+      source: 'transaction.value',
       eventId: parseInt(this.state.event.id, 10) || undefined
     }
 
@@ -396,7 +396,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           refetchQueries: [
             // only refetch the event we just updated (1 record)
             'eventsQuery'
-          ],
+          ]
         }).then((mutationResult) => {
           toast.success('Successfully removed matcher')
         }).catch(error => {
@@ -473,7 +473,7 @@ export const EditEventPage = class _EditEventPage extends Component {
 
     const matcherSentences = (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable">
+        <Droppable droppableId='droppable'>
           {(provided, snapshot) => (
             <div
               {...provided.droppableProps}
@@ -490,7 +490,7 @@ export const EditEventPage = class _EditEventPage extends Component {
                 >
                   <Draggable
                     key={`event-matcher-draggable-${index}`}
-                    draggableId={index+1}
+                    draggableId={index + 1}
                     index={index}
                   >
                     {(provided, snapshot) => (

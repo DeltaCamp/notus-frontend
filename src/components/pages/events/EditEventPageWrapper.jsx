@@ -12,7 +12,7 @@ import { updateMatcherMutation } from '~/mutations/updateMatcherMutation'
 import { destroyMatcherMutation } from '~/mutations/destroyMatcherMutation'
 import { eventQuery } from '~/queries/eventQuery'
 
-export const EditEventPageWrapper = 
+export const EditEventPageWrapper =
   IsAuthed(
     graphql(eventQuery, {
       name: 'eventData',
@@ -33,6 +33,7 @@ export const EditEventPageWrapper =
                       return <EditEventPage {...this.props} />
                     }
                   }
+                  )
                 )
               )
             )
@@ -41,4 +42,3 @@ export const EditEventPageWrapper =
       )
     )
   )
-)

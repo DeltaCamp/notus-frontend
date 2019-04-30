@@ -12,7 +12,6 @@ import { showErrorMessage } from '~/utils/showErrorMessage'
 
 export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutation' })(
   class _ContractForm extends PureComponent {
-
     static propTypes = {
       onCreate: PropTypes.func.isRequired,
       onCancel: PropTypes.func.isRequired
@@ -108,7 +107,7 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
           </div>
 
           <hr />
-          
+
           <div className='field'>
             <input
               className='input'
@@ -122,7 +121,7 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
           <textarea
             className='textarea'
             value={this.state.abi}
-            onChange={(e) => this.setState({ abi: e.target.value }) }
+            onChange={(e) => this.setState({ abi: e.target.value })}
             placeholder={`Paste Contract ABI here or upload file above ...`}
           />
 

@@ -17,4 +17,3 @@ export const NEW_EVENT = '/events/new'
 export const NEW_EVENT_FROM_PARENT = '/events/new/:eventId'
 export const EDIT_EVENT = '/events/:eventId/edit'
 export const MY_EVENTS = '/events'
-

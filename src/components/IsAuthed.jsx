@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
 
-export const IsAuthed = 
+export const IsAuthed =
   (WrappedComponent) => {
     return graphql(currentUserQuery, { name: 'currentUserData' })(
       class extends Component {
@@ -14,7 +14,7 @@ export const IsAuthed =
           if (!currentUser && !isSigningOut) {
             return <Redirect to={routes.SIGNIN} />
           } else {
-            return <WrappedComponent {...this.props} />;
+            return <WrappedComponent {...this.props} />
           }
         }
       }

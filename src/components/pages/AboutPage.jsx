@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 
-export const AboutPage = 
+export const AboutPage =
   class _AboutPage extends Component {
     render () {
       return (
@@ -21,7 +21,7 @@ export const AboutPage =
                   {/* <h1 className="is-size-xlarge has-text-weight-bold">
                     About Notus
                   </h1> */}
-                  <h1 className="is-size-xlarge has-text-weight-bold">
+                  <h1 className='is-size-xlarge has-text-weight-bold'>
                     Our mission is to connect people to the future of finance.
                   </h1>
                   {/* <h2 className="is-size-2 has-text-weight-bold">
@@ -33,7 +33,7 @@ export const AboutPage =
                       className='button is-link'
                       href='#roadmap'
                     >View Roadmap</a>
-                    
+
                     <a
                       className='button is-info'
                       href='#signup'
@@ -42,7 +42,7 @@ export const AboutPage =
                 </div>
               </div>
             </div>
-            
+
             <div className='container-fluid color-block is-dark mt100'>
               <div className='container'>
                 <div className='row'>

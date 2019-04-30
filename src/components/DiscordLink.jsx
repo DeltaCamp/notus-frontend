@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function DiscordLink(props) {
+export function DiscordLink (props) {
   return (
     <a
       href='https://discord.gg/WXMDXqb'

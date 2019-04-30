@@ -46,7 +46,7 @@ export const MatcherSource = graphql(sourcesQuery, {
           id: parseInt(props.matcher.abiEventInputId, 10)
         }
       })
-    }) (
+    })(
       class _MatcherSource extends Component {
         state = {
           isEditing: false
@@ -153,10 +153,10 @@ export const MatcherSource = graphql(sourcesQuery, {
             scope
           } = this.props.event
           const { matcher } = this.props
-          
+
           // can't we get this from props?
           const abiEventInputId = matcher.abiEventInputId || (matcher.abiEventInput || {}).id
-          
+
           return (
             <>
               {this.state.isEditing

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import * as routes from '~/../config/routes'
 
 export const LeverageTheCommunity = () => {
-  
   return (
     <div className='container-fluid is-purple pb50 pt50 color-block is-positioned-relatively'>
       <div className='container'>

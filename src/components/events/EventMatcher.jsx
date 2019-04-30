@@ -5,13 +5,12 @@ import { MatcherOperand } from '~/components/events/MatcherOperand'
 import { MatcherOperator } from '~/components/events/MatcherOperator'
 import { MatcherSource } from '~/components/events/MatcherSource'
 
-const DragHandle = (() => <span className='drag-handle is-hidden-touch'>
+const DragHandle = () => <span className='drag-handle is-hidden-touch'>
   <Menu />
-</span>)
+</span>
 
-export const EventMatcher = 
+export const EventMatcher =
   class _EventMatcher extends PureComponent {
-
     static propTypes = {
       editMatcher: PropTypes.object,
       isFirst: PropTypes.bool.isRequired,
@@ -41,7 +40,7 @@ export const EventMatcher =
         isFirst,
         matcher
       } = this.props
-      
+
       const andWord = isFirst ? 'where' : '... and'
 
       return (
@@ -49,7 +48,7 @@ export const EventMatcher =
           <DragHandle />
 
           {andWord} the
-          
+
           <MatcherSource
             abiEventInputId={matcher.abiEventInputId}
             event={this.props.event}
@@ -67,7 +66,7 @@ export const EventMatcher =
             matcher={matcher}
             onChange={this.props.onChangeMatcher}
           />
-          
+
           <MatcherOperand
             handleEdit={this.handleEdit}
             matcher={matcher}
@@ -76,7 +75,7 @@ export const EventMatcher =
 
           <div className='buttons buttons-right'>
             <button
-              className='button has-icon is-light' 
+              className='button has-icon is-light'
               onClick={this.handleRemove}
             >
               <XCircle

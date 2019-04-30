@@ -18,13 +18,13 @@ export const EventTitle = ReactTimeout(class extends Component {
   // mouse clickable checkbox and x to revert ?
   // select all works but then can't backspace?
 
-  constructor(props) {
+  constructor (props) {
     super(props)
-    
+
     const newTitle = this.props.event.title && this.props.event.title.length
       ? this.props.event.title
       : ''
-    
+
     this.state = {
       isEditing: false,
       newTitle
@@ -120,7 +120,7 @@ export const EventTitle = ReactTimeout(class extends Component {
             ref='errorTooltip'
             data-tip={`Please enter at least ${TITLE_MIN_LENGTH} characters for the event title.`}
           />
-          
+
           <input
             type='text'
             ref={this.inputRef}

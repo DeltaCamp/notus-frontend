@@ -55,8 +55,8 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
               to={routes.SIGNIN}
               className='navbar-item'
               onClick={this.closeMobileNav}
-              activeClassName="is-active"
-          >
+              activeClassName='is-active'
+            >
             Sign In
             </NavLink>
             <NavLink
@@ -64,7 +64,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
               to={routes.SIGNUP}
               className='navbar-item bold'
               onClick={this.closeMobileNav}
-              activeClassName="is-active"
+              activeClassName='is-active'
             >
               Sign Up
             </NavLink>
@@ -77,11 +77,11 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 className='navbar-item bold hide-not-home button'
                 to={routes.MY_EVENTS}
                 onClick={this.closeMobileNav}
-                activeClassName="is-active"
+                activeClassName='is-active'
               >
                 <Send />&nbsp;Go To App
               </NavLink>
-              {/*<NavLink
+              {/* <NavLink
                 exact
                 className='navbar-item hide-on-home'
                 to={routes.ACCOUNT_SETTINGS}
@@ -99,7 +99,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
               </button>
             </>
           )
-            
+
           myEvents =
             <>
               <NavLink
@@ -107,7 +107,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 to={routes.MY_EVENTS}
                 className='navbar-item'
                 onClick={this.closeMobileNav}
-                activeClassName="is-active"
+                activeClassName='is-active'
               >
                 <Activity />&nbsp;My Events
               </NavLink>
@@ -116,7 +116,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 to={routes.DISCOVER_EVENTS}
                 className='navbar-item'
                 onClick={this.closeMobileNav}
-                activeClassName="is-active"
+                activeClassName='is-active'
               >
                 <Search />&nbsp;Discover Events
               </NavLink>

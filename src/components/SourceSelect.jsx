@@ -6,7 +6,7 @@ import { abiEventQuery } from '~/queries/abiEventQuery'
 import { NotusSelect } from '~/components/forms/NotusSelect'
 import { sourcesQuery } from '~/queries/sourcesQuery'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
-import { SOURCES } from '../constants';
+import { SOURCES } from '../constants'
 
 export const SourceSelect = graphql(sourcesQuery, {
   name: 'sourcesQuery',
@@ -88,18 +88,18 @@ export const SourceSelect = graphql(sourcesQuery, {
         let selectedOption
         if (value && validOptions) {
           if (value === SOURCES.CONTRACT_EVENT_INPUT) {
-            selectedOption = validOptions.find(option => 
+            selectedOption = validOptions.find(option =>
               option.abiEventInput && (parseInt(option.abiEventInput.id, 10) === abiEventInputId)
             )
           } else {
-            selectedOption = validOptions.find(option => 
+            selectedOption = validOptions.find(option =>
               option.value === value
             )
           }
           if (!selectedOption) {
             selectedOption = validOptions[0]
           }
-          props = {...this.props, value: selectedOption}
+          props = { ...this.props, value: selectedOption }
         }
 
         return <NotusSelect

@@ -18,8 +18,8 @@ import { EventCard } from '~/components/events/EventCard'
 import * as routes from '~/../config/routes'
 import {
   CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
+  TransitionGroup
+} from 'react-transition-group'
 
 export const MyEventsPage =
   IsAuthed(
@@ -63,8 +63,8 @@ export const MyEventsPage =
                 },
                 refetchQueries: [
                   'eventsQuery',
-                  'eventsQuery',
-                ],
+                  'eventsQuery'
+                ]
               }).then(() => {
                 toast.dismiss()
                 toast.success('Successfully deleted event')
@@ -75,7 +75,7 @@ export const MyEventsPage =
             }
 
             handleOpenConfirmDeleteModal = (eventId) => {
-              this.setState({ 
+              this.setState({
                 eventId,
                 isConfirmingDelete: true
               })
@@ -107,7 +107,7 @@ export const MyEventsPage =
                     }
                   },
                   updateQuery: (prev, { fetchMoreResult }) => {
-                    if (!fetchMoreResult) return prev;
+                    if (!fetchMoreResult) return prev
                     return Object.assign({}, prev, {
                       events: {
                         ...fetchMoreResult.events,
@@ -143,13 +143,13 @@ export const MyEventsPage =
                     <CSSTransition
                       key={`event-${event.id}`}
                       timeout={300}
-                      classNames="fade"
+                      classNames='fade'
                     >
                       <EventCard
                         {...this.props}
                         event={event}
-                        editable={true}
-                        isSmall={true}
+                        editable
+                        isSmall
                         linkTo={formatRoute(routes.EDIT_EVENT, { eventId: event.id })}
                         handleOpenConfirmDeleteModal={this.handleOpenConfirmDeleteModal}
                       />
@@ -158,9 +158,8 @@ export const MyEventsPage =
                 </TransitionGroup>
               </>
 
-
               if (skip + take < totalCount) {
-                loadMore = 
+                loadMore =
                   <button
                     className='button is-small is-info mt30'
                     onClick={this.fetchMore}
@@ -186,7 +185,7 @@ export const MyEventsPage =
                       <Link
                         className='button is-small mt20 is-outlined is-link'
                         to={routes.NEW_EVENT}
-                        >
+                      >
                         <PlusCircle /> &nbsp;Create a Custom Event
                       </Link>
                     </div>
@@ -208,14 +207,14 @@ export const MyEventsPage =
                   <Modal
                     isOpen={this.state.isConfirmingDelete}
                     handleClose={this.handleCloseConfirmDeleteModal}
-                    isSmall={true}
+                    isSmall
                   >
                     <div className='has-text-centered'>
                       <h5 className='is-size-5 has-text-weight-normal'>
                         Are you sure you want to delete this event?
                       </h5>
                       <br />
-                      <div className="buttons">
+                      <div className='buttons'>
                         <button
                           className='button is-small is-light'
                           onClick={this.handleCloseConfirmDeleteModal}
@@ -264,7 +263,7 @@ export const MyEventsPage =
                                 </h4>
 
                                 <br />
-                                
+
                                 <DiscoverEventsListing />
                               </div>
                             </div>
@@ -273,7 +272,6 @@ export const MyEventsPage =
                       </div>
                     </div>
                   </section>
-
 
                   <FooterContainer />
                 </div>

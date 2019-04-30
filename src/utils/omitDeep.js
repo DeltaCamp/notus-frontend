@@ -1,7 +1,7 @@
 export const omitDeep = (value, key) => {
   // if (Array.isArray(value)) {
   //   return value.map(i => omitDeep(i, key))
-  // } else 
+  // } else
   if (typeof value === 'object' && value !== null) {
     return Object.keys(value)
       .reduce(

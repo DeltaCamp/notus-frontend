@@ -18,14 +18,14 @@ import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { brandColor } from '~/utils/brandColors'
 import * as routes from '~/../config/routes'
 
-export const EventCard = 
+export const EventCard =
   graphql(currentUserQuery, { name: 'currentUserData' })(
     graphql(updateEventMutation, {
       name: 'updateEventMutation'
     })(
       class _EventCard extends Component {
         state = {
-          editDropdownActive: false  
+          editDropdownActive: false
         }
 
         handleClick = (e) => {
@@ -41,7 +41,7 @@ export const EventCard =
 
           const event = this.props.event
           const editPath = formatRoute(routes.EDIT_EVENT, { eventId: event.id })
-          
+
           this.props.history.push(editPath)
         }
 
@@ -54,33 +54,33 @@ export const EventCard =
             this.activateEditMenu()
           }
         }
-        
+
         deactivateEditMenu = () => {
           this.setState({
             editDropdownActive: false
           })
-          
+
           document.removeEventListener('mousedown', this.handleClick, false)
         }
-        
+
         activateEditMenu = () => {
           this.setState({
             editDropdownActive: true
           })
-          
+
           document.addEventListener('mousedown', this.handleClick, false)
         }
 
         handleEventCardClick = (e) => {
           // e.preventDefault()
-         
+
           const { currentUserData } = this.props
 
           if (currentUserData && !currentUserData.currentUser) {
             toast('You will need to sign up (or sign in) to create events.')
           }
         }
-        
+
         handleActivate = (e) => {
           e.preventDefault()
 
@@ -94,8 +94,8 @@ export const EventCard =
               }
             },
             refetchQueries: [
-              'eventsQuery',
-            ],
+              'eventsQuery'
+            ]
           }).then((mutationResult) => {
             this.deactivateEditMenu()
             toast.dismiss()
@@ -183,7 +183,7 @@ export const EventCard =
               key={`event-${event.id}`}
               to={linkTo}
               onClick={this.handleEventCardClick}
-              ref={node => {this.node = node}}
+              ref={node => { this.node = node }}
               className={classnames(
                 'button',
                 'event-card',

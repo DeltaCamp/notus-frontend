@@ -47,7 +47,7 @@ export const OPERATOR_LABELS = {
   [OPERATORS.LT]: 'is less than',
   [OPERATORS.GT]: 'is greater than',
   [OPERATORS.LTE]: 'is less than or equal to',
-  [OPERATORS.GTE]: 'is greater than or equal to',
+  [OPERATORS.GTE]: 'is greater than or equal to'
 }
 
 export const FREQUENCIES = {
@@ -66,7 +66,7 @@ export const en = {
       [OPERATORS.LT]: 'less than',
       [OPERATORS.GT]: 'more than',
       [OPERATORS.LTE]: 'X or less',
-      [OPERATORS.GTE]: 'X or more',
+      [OPERATORS.GTE]: 'X or more'
     }
   },
   templates: {
@@ -79,7 +79,7 @@ export const en = {
       [OPERATORS.LT]: 'less than [amount]',
       [OPERATORS.GT]: 'more than [amount]',
       [OPERATORS.LTE]: '[amount] or less',
-      [OPERATORS.GTE]: '[amount] or more',
+      [OPERATORS.GTE]: '[amount] or more'
     },
     'transaction.to': {
       [OPERATORS.EQ]: '[address]'
@@ -92,7 +92,7 @@ export const en = {
       [OPERATORS.LT]: 'less than [amount]',
       [OPERATORS.GT]: 'more than [amount]',
       [OPERATORS.LTE]: '[amount] or less',
-      [OPERATORS.GTE]: '[amount] or more',
+      [OPERATORS.GTE]: '[amount] or more'
     },
     address: {
     }

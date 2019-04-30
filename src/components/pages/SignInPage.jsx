@@ -39,7 +39,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         }
       }
 
-      getOneTimeKey(props) {
+      getOneTimeKey (props) {
         const { email } = queryString.parse(props.location.search)
         return email
       }
@@ -50,11 +50,11 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         let error
 
         if (!this.state.email) {
-          error = "Please enter your email address"
+          error = 'Please enter your email address'
         }
 
         if (!this.state.password) {
-          error = "Please enter your password"
+          error = 'Please enter your password'
         }
 
         if (error) {
@@ -77,7 +77,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
               email: this.state.email,
               password: this.state.password
             },
-            update: (proxy, { data: { signIn }}) => {
+            update: (proxy, { data: { signIn } }) => {
               if (signIn) {
                 this.props.history.push(routes.MY_EVENTS)
               }
@@ -107,7 +107,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         let message, signInForm
 
         if (this.state.signingIn) {
-          message = "Signing in ..."
+          message = 'Signing in ...'
         }
 
         signInForm =
@@ -133,10 +133,11 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
                         type='email'
                         className='input'
                         onChange={(e) => {
-                          this.setState({ 
+                          this.setState({
                             email: e.target.value,
                             error: ''
-                          }) }
+                          })
+                        }
                         }
                         value={this.state.email}
                       />
@@ -150,7 +151,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
                           this.setState({
                             password: e.target.value,
                             error: ''
-                          }) 
+                          })
                         }}
                         value={this.state.password}
                       />
@@ -161,7 +162,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
                         className='button is-small'
                       >
                         Sign In
-                    </button>
+                      </button>
                     </div>
                   </form>
                 </div>

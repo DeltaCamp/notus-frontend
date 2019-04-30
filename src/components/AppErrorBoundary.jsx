@@ -7,7 +7,7 @@ export const AppErrorBoundary = class extends Component {
   //   errorInfo: null
   // }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch (error, errorInfo) {
     rollbar.error(error)
 
     // Rollbar.configure(
@@ -28,7 +28,7 @@ export const AppErrorBoundary = class extends Component {
     // })
   }
 
-  render() {
+  render () {
     // if (this.state.errorInfo) {
     //   return (
     //     <div>Something went wrong: ${this.state.errorInfo}</div>
@@ -36,5 +36,4 @@ export const AppErrorBoundary = class extends Component {
     // }
     return this.props.children
   }
-
 }

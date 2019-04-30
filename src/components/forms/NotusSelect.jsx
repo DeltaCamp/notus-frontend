@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 
-export const NotusSelect = 
+export const NotusSelect =
 
   (props) => {
     return <Select
@@ -11,5 +11,4 @@ export const NotusSelect =
       classNamePrefix='react-select'
       autoFocus
     />
-      
   }

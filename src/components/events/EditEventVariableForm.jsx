@@ -5,14 +5,13 @@ import { VariableSelectDropdown } from '~/components/events/VariableSelectDropdo
 import * as CONSTANTS from '~/constants'
 
 export const EditEventVariableForm = class _EditEventVariableForm extends PureComponent {
-
   uint256Inputs = (variable) => {
     const selectOptions = Object.keys(CONSTANTS.OPERATORS).map((operator, index) => (
       {
         value: CONSTANTS.OPERATORS[operator],
         text: CONSTANTS.en.formFields.operators[index]
       }
-    )) 
+    ))
 
     return <>
       <VariableSelectDropdown
@@ -41,9 +40,9 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
 
     // review these datatypes:
     const variableIsStringish = (
-      variable.sourceDataType === 'address'
-      || variable.sourceDataType === 'bytes'
-      || variable.sourceDataType === 'bytes32'
+      variable.sourceDataType === 'address' ||
+      variable.sourceDataType === 'bytes' ||
+      variable.sourceDataType === 'bytes32'
     )
 
     if (variable.description === 'Frequency') {
@@ -76,7 +75,7 @@ export const EditEventVariableForm = class _EditEventVariableForm extends PureCo
 
     return inputs
   }
-  
+
   render () {
     if (!this.props.editVariable) {
       return null

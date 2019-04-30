@@ -17,7 +17,7 @@ export const DiscoverEventsListing =
         take: 2
       }
       if (props.searchValue && props.searchValue.trim()) {
-       eventsQuery.searchTerms = props.searchValue.trim()
+        eventsQuery.searchTerms = props.searchValue.trim()
       }
       return {
         fetchPolicy: 'cache-and-network',
@@ -54,13 +54,13 @@ export const DiscoverEventsListing =
               eventsQuery
             },
             updateQuery: (prev, { fetchMoreResult }) => {
-              if (!fetchMoreResult) return prev;
+              if (!fetchMoreResult) return prev
               return Object.assign({}, prev, {
                 events: {
                   ...fetchMoreResult.events,
                   events: [...prev.events.events, ...fetchMoreResult.events.events]
                 }
-              });
+              })
             }
           })
         }
@@ -85,7 +85,7 @@ export const DiscoverEventsListing =
             linkTo={formatRoute(routes.NEW_EVENT_FROM_PARENT, { eventId: event.id })}
           />
         )) : []
-        
+
         if (this.props.showLoadMore && skip + take < totalCount) {
           loadMore = <p>
             <button
@@ -103,10 +103,10 @@ export const DiscoverEventsListing =
 
         return <>
           {(
-            eventCards.length > 0 ?
-                <div className='listing-grid'>
-                  {eventCards}
-                </div>
+            eventCards.length > 0
+              ? <div className='listing-grid'>
+                {eventCards}
+              </div>
               : (
                 <div className='has-text-centered'>
                   <h2 className='has-text-centered is-size-2'>{emptyMessage}</h2>

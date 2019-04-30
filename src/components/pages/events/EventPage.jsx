@@ -27,7 +27,7 @@
 // import { brandColor } from '~/utils/brandColors'
 // import * as routes from '~/../config/routes'
 
-// export const EventPage = 
+// export const EventPage =
 //   IsAuthed(
 //     graphql(currentUserQuery, { name: 'currentUserData' })(
 //       graphql(updateEventMutation, {
@@ -90,118 +90,118 @@
 //                   e.preventDefault()
 
 //                   const event = this.props.eventData.event
-                  
-                //   this.props.updateEventMutation({
-                //     variables: {
-                //       event: {
-                //         id: event.id,
-                //         isActive: !event.isActive
-                //       }
-                //     },
-                //     refetchQueries: [
-                //       'eventsQuery',
-                //       'eventsQuery',
-                //     ],
-                //   }).then(({ data: { updateEvent } }) => {
-                //     toast.dismiss()
-                //     toast.success(`Event ${updateEvent.isActive ? 're-activated' : 'deactivated'}`)
-                //   }).catch(error => {
-                //     toast.error('Error while updating event')
-                //     console.error(error)
-                //   })
-                // }
 
-                // handlePublishClick = (e) => {
-                //   e.preventDefault()
+//   this.props.updateEventMutation({
+//     variables: {
+//       event: {
+//         id: event.id,
+//         isActive: !event.isActive
+//       }
+//     },
+//     refetchQueries: [
+//       'eventsQuery',
+//       'eventsQuery',
+//     ],
+//   }).then(({ data: { updateEvent } }) => {
+//     toast.dismiss()
+//     toast.success(`Event ${updateEvent.isActive ? 're-activated' : 'deactivated'}`)
+//   }).catch(error => {
+//     toast.error('Error while updating event')
+//     console.error(error)
+//   })
+// }
 
-                //   const event = this.props.eventData.event
+// handlePublishClick = (e) => {
+//   e.preventDefault()
 
-                //   this.props.updateEventMutation({
-                //     variables: {
-                //       event: {
-                //         id: event.id,
-                //         isPublic: !event.isPublic
-                //       }
-                //     },
-                //     refetchQueries: [
-                //       'eventsQuery',
-                //       'eventsQuery',
-                //     ],
-                //   }).then(({ data: { updateEvent } }) => {
-                //     toast.dismiss()
-                //     toast.success(`Event ${updateEvent.isPublic ? 'published' : 'made private'}`)
-                //   }).catch(error => {
-                //     toast.error('Error while updating event')
-                //     console.error(error)
-                //   })
-                // }
+//   const event = this.props.eventData.event
 
-                // handleCloseInputTitleModal = (e) => {
-                //   if (e) {
-                //     e.preventDefault()
-                //   }
+//   this.props.updateEventMutation({
+//     variables: {
+//       event: {
+//         id: event.id,
+//         isPublic: !event.isPublic
+//       }
+//     },
+//     refetchQueries: [
+//       'eventsQuery',
+//       'eventsQuery',
+//     ],
+//   }).then(({ data: { updateEvent } }) => {
+//     toast.dismiss()
+//     toast.success(`Event ${updateEvent.isPublic ? 'published' : 'made private'}`)
+//   }).catch(error => {
+//     toast.error('Error while updating event')
+//     console.error(error)
+//   })
+// }
 
-                //   this.setState({ isInputtingTitle: false })
-                // }
+// handleCloseInputTitleModal = (e) => {
+//   if (e) {
+//     e.preventDefault()
+//   }
 
-                // runUpdateEventMutation(variables, successCallback, errorCallback) {
-                //   if (!errorCallback) {
-                //     errorCallback = error => {
-                //       console.error(error)
-                //     }
-                //   }
+//   this.setState({ isInputtingTitle: false })
+// }
 
-                //   this.props.updateEventMutation({
-                //     variables,
-                //     refetchQueries: [
-                //       // only refetch the event we just updated (1 record)
-                //       'eventsQuery',
-                //       'eventsQuery',
-                //     ],
-                //   }).then(successCallback).catch(errorCallback)
-                // }
+// runUpdateEventMutation(variables, successCallback, errorCallback) {
+//   if (!errorCallback) {
+//     errorCallback = error => {
+//       console.error(error)
+//     }
+//   }
 
-                // handleOpenConfirmDeleteModal = (e) => {
-                //   e.preventDefault()
+//   this.props.updateEventMutation({
+//     variables,
+//     refetchQueries: [
+//       // only refetch the event we just updated (1 record)
+//       'eventsQuery',
+//       'eventsQuery',
+//     ],
+//   }).then(successCallback).catch(errorCallback)
+// }
 
-                //   this.setState({ isConfirmingDelete: true })
-                // }
+// handleOpenConfirmDeleteModal = (e) => {
+//   e.preventDefault()
 
-                // handleCloseConfirmDeleteModal = (e) => {
-                //   e.preventDefault()
+//   this.setState({ isConfirmingDelete: true })
+// }
 
-                //   this.setState({ isConfirmingDelete: false })
-                // }
+// handleCloseConfirmDeleteModal = (e) => {
+//   e.preventDefault()
 
-                // handleDelete = (e) => {
-                //   e.preventDefault()
+//   this.setState({ isConfirmingDelete: false })
+// }
 
-                //   const eventId = parseInt(this.props.eventData.event.id, 10)
+// handleDelete = (e) => {
+//   e.preventDefault()
 
-                //   this.props.deleteEventMutation({
-                //     variables: {
-                //       eventId
-                //     },
-                //     refetchQueries: [
-                //       'eventsQuery',
-                //     ],
-                //   }).then(() => {
-                //     toast.dismiss()
-                //     toast.success('Successfully deleted event')
-                //     this.props.history.push(routes.MY_EVENTS)
-                //   }).catch(error => {
-                //     console.error(error)
-                //   })
-                // }
+//   const eventId = parseInt(this.props.eventData.event.id, 10)
 
-                // render () {
-                //   let colorClass,
-                //     isEventAuthor,
-                //     eventAuthorButtons,
-                //     notEventAuthorButtons
+//   this.props.deleteEventMutation({
+//     variables: {
+//       eventId
+//     },
+//     refetchQueries: [
+//       'eventsQuery',
+//     ],
+//   }).then(() => {
+//     toast.dismiss()
+//     toast.success('Successfully deleted event')
+//     this.props.history.push(routes.MY_EVENTS)
+//   }).catch(error => {
+//     console.error(error)
+//   })
+// }
 
-                //   const { eventData, currentUserData } = this.props
-                  
+// render () {
+//   let colorClass,
+//     isEventAuthor,
+//     eventAuthorButtons,
+//     notEventAuthorButtons
+
+//   const { eventData, currentUserData } = this.props
+
 //                   const error = eventData.error || currentUserData.error
 //                   const loading = eventData.loading || currentUserData.loading
 
@@ -213,7 +213,7 @@
 //                     console.error(eventData.error)
 //                     return null
 //                   } else if (!event) {
-//                     return null  
+//                     return null
 //                   }
 
 //                   isEventAuthor = (currentUserData.currentUser && currentUserData.currentUser.id === parseInt(event.user.id, 10))
@@ -255,7 +255,7 @@
 //                           )}
 //                           onClick={this.handlePublishClick}
 //                         >
-                          
+
 //                           {event.isPublic
 //                             ? (<><Cast /> &nbsp;Make Private</>)
 //                             : (<><Cast /> &nbsp;Make Public</>)
@@ -296,7 +296,7 @@
 //                     </>
 //                     )
 //                   }
-                  
+
 //                   return (
 //                     <div className='is-positioned-absolutely'>
 //                       <Helmet
@@ -373,7 +373,7 @@
 //                             <div className='col-xs-12 has-text-centered'>
 //                               <div className='buttons'>
 //                                 {notEventAuthorButtons}
-                                
+
 //                                 {eventAuthorButtons}
 //                               </div>
 //                               <br />
@@ -408,9 +408,7 @@
 
 //                         <br />
 
-                        
 //                       </section>
-
 
 //                       <FooterContainer />
 //                     </div>

@@ -17,4 +17,4 @@ export const AppUserFragment = gql`
     updated_at
   }
   ${UserFragment}
-`;
+`

@@ -52,9 +52,9 @@ export const PasswordResetPage =
       let message
 
       if (this.state.isResetting) {
-        message = "Checking account ..."
+        message = 'Checking account ...'
       }
-      
+
       const thankYou = (
         <div className='accordion accordion--signup-thank-you'>
           <div className='card-content'>
@@ -84,9 +84,9 @@ export const PasswordResetPage =
             >
               <h6 className='is-size-6 has-text-centered has-text-weight-bold'>
                 {this.state.error}
-              </h6>            
+              </h6>
 
-              <div className='field mt15'>    
+              <div className='field mt15'>
                 <input
                   placeholder='Account email address'
                   autoFocus
@@ -109,7 +109,7 @@ export const PasswordResetPage =
                   className='button is-small'
                 >
                   Reset
-              </button>
+                </button>
               </div>
             </form>
           </div>

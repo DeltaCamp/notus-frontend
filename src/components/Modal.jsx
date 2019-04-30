@@ -2,10 +2,10 @@ import React from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
-export const Modal = ({ 
-  children, 
-  handleClose, 
-  isOpen, 
+export const Modal = ({
+  children,
+  handleClose,
+  isOpen,
   isSmall,
   isLarge,
   className
@@ -22,9 +22,9 @@ export const Modal = ({
         }
       )}
     >
-      <div className="modal-background" onClick={handleClose} />
-      <div className="modal-content">
-        <div className="modal-content--inner">
+      <div className='modal-background' onClick={handleClose} />
+      <div className='modal-content'>
+        <div className='modal-content--inner'>
           {children}
         </div>
       </div>

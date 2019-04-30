@@ -70,7 +70,7 @@ export const OperatorSelect = graphql(sourceQuery, {
           if (!selectedOption) {
             selectedOption = options[0]
           }
-          props = {...this.props, value: selectedOption}
+          props = { ...this.props, value: selectedOption }
         }
 
         const isDisabled = options.length === 1

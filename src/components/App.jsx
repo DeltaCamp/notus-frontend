@@ -25,7 +25,7 @@ import { Nav } from '~/components/layout/Nav'
 import { CookieConsent } from '~/components/layout/CookieConsent'
 import { FourOhFour } from '~/components/pages/FourOhFour'
 import * as routes from '~/../config/routes'
-import { DiscoverEventsPage } from './pages/events/DiscoverEventsPage';
+import { DiscoverEventsPage } from './pages/events/DiscoverEventsPage'
 
 WebFont.load({
   typekit: {
@@ -51,7 +51,7 @@ export const App = withRouter(hot(module)(
           <ToastContainer
             className='notus-toast'
             position='bottom-center'
-            hideProgressBar={true}
+            hideProgressBar
             autoClose={5000}
             transition={Slide}
           />
@@ -88,7 +88,7 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.SIGNIN} component={SignInPage} />
                 <Route exact path={routes.PASSWORD_RESET} component={PasswordResetPage} />
                 <Route exact path={routes.APP_CONFIRM} component={AppConfirmPage} />
-                
+
                 <Route component={FourOhFour} />
               </Switch>
             </CSSTransition>

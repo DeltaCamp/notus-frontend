@@ -78,7 +78,7 @@ export const EventSource = class _EventSource extends Component {
     })
 
     this.props.handleToggleEventSource()
-    
+
     document.removeEventListener('mousedown', this.handleClickAnywhere, false)
   }
 
@@ -95,7 +95,7 @@ export const EventSource = class _EventSource extends Component {
         <Modal
           isOpen={this.state.showAddContract}
           handleClose={this.hideAddContract}
-          isLarge={true}
+          isLarge
           onKeyUp={this.handleKeyUp}
         >
           {

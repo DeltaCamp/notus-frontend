@@ -51,7 +51,7 @@
 //           isLarge={true}
 //         >
 //           {
-//             this.state.showAddContract && 
+//             this.state.showAddContract &&
 //             <ContractForm
 //               onCancel={this.hideAddContract}
 //               onCreate={this.handleOnCreateAbi}

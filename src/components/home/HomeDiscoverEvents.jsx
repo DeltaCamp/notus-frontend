@@ -24,7 +24,7 @@ export class HomeDiscoverEvents extends Component {
       })
     }
   }
-  
+
   render () {
     return (
       <div className='container-fluid is-dark mt100 pb100 color-block is-positioned-relatively'>

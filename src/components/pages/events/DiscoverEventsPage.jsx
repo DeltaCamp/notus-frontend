@@ -40,7 +40,7 @@ export const DiscoverEventsPage =
                         Discover Events
                       </h4>
 
-                      <div className="form">
+                      <div className='form'>
                         <input
                           type='text'
                           placeholder='Search ...'

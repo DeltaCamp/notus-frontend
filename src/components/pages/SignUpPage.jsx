@@ -108,7 +108,7 @@ export const SignUpPage =
                   className='button is-small'
                 >
                   Sign Up
-              </button>
+                </button>
               </div>
             </form>
           </div>
@@ -139,7 +139,6 @@ export const SignUpPage =
                     >
                       {state => form}
                     </CSSTransition>
-
 
                     <CSSTransition
                       timeout={600}

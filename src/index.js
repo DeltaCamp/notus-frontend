@@ -15,7 +15,7 @@ import 'animate.css/animate.min.css'
 window.addEventListener('load', async () => {
   try {
     const client = await apolloClient()
-    
+
     let coreApp =
       <AppErrorBoundary>
         <ApolloProvider client={client}>

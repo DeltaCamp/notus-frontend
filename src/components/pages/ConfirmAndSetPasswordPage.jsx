@@ -9,10 +9,9 @@ import * as routes from '~/../config/routes'
 
 const queryString = require('query-string')
 
-export const ConfirmAndSetPasswordPage = 
+export const ConfirmAndSetPasswordPage =
   graphql(confirmUserMutation, { name: 'confirmUser' })(
     class _ConfirmAndSetPasswordPage extends PureComponent {
-
       static propTypes = {
         match: PropTypes.object.isRequired
       }
@@ -30,7 +29,7 @@ export const ConfirmAndSetPasswordPage =
         }
       }
 
-      getOneTimeKey(props) {
+      getOneTimeKey (props) {
         const { oneTimeKey } = queryString.parse(props.location.search)
         return oneTimeKey
       }
@@ -42,19 +41,19 @@ export const ConfirmAndSetPasswordPage =
 
         let oneTimeKey = this.getOneTimeKey(this.props)
         if (!oneTimeKey) {
-          error = "Missing one time key"
+          error = 'Missing one time key'
         }
 
         if (!this.state.password) {
-          error = "You must enter a password"
+          error = 'You must enter a password'
         }
 
         if (this.state.password !== this.state.passwordConfirmation) {
-          error = "The passwords do not match"
+          error = 'The passwords do not match'
         }
 
         if (this.state.password.length < 8 || this.state.passwordConfirmation.length < 8) {
-          error = "Passwords must be at least 8 characters in length"
+          error = 'Passwords must be at least 8 characters in length'
         }
 
         if (error) {
@@ -88,15 +87,15 @@ export const ConfirmAndSetPasswordPage =
         let message, createPasswordFormRow
 
         if (this.state.confirming) {
-          message = "Confirming your account ..."
+          message = 'Confirming your account ...'
         }
 
         const oneTimeKey = this.getOneTimeKey(this.props)
 
         if (!oneTimeKey) {
-          createPasswordFormRow = 
+          createPasswordFormRow =
             <div className='row'>
-            <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>
+              <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>
                 <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
                   Set Your Password
                 </h1>
@@ -110,7 +109,7 @@ export const ConfirmAndSetPasswordPage =
         } else {
           createPasswordFormRow =
             <div className='row'>
-            <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>
+              <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>
                 <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
                   Set Your Password
                 </h1>
@@ -132,7 +131,7 @@ export const ConfirmAndSetPasswordPage =
                           type='password'
                           className='input'
                           onChange={(e) => {
-                            this.setState({ 
+                            this.setState({
                               error: '',
                               password: e.target.value
                             })
@@ -146,7 +145,7 @@ export const ConfirmAndSetPasswordPage =
                           placeholder='Confirm Password'
                           className='input'
                           onChange={(e) => {
-                            this.setState({ 
+                            this.setState({
                               error: '',
                               passwordConfirmation: e.target.value
                             })
@@ -160,7 +159,7 @@ export const ConfirmAndSetPasswordPage =
                           className='button is-small'
                         >
                           Save
-                      </button>
+                        </button>
                       </div>
                     </form>
                   </div>
@@ -171,7 +170,7 @@ export const ConfirmAndSetPasswordPage =
                     {message}
                   </p>
                 </div>
-                
+
               </div>
             </div>
         }

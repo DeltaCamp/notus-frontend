@@ -1,6 +1,6 @@
 import { OPERATORS } from '~/constants'
 
-export function isValidDataTypeOperator(dataType, operator) {
+export function isValidDataTypeOperator (dataType, operator) {
   if (dataType.indexOf('int') !== -1) {
     // int / uint support all operations
     return true

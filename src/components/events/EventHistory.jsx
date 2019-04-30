@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 
-export const EventHistory = 
+export const EventHistory =
   class _EventHistory extends Component {
     render () {
       return (
@@ -14,10 +14,10 @@ export const EventHistory =
             <div className='col-xs-12 col-md-6 col-start-md-4 pb100'>
               <h5 className='is-size-5 has-text-centered is-uppercase has-text-weight-bold mt20 pt20'>
                 Event History
-                              </h5>
+              </h5>
               <p className='has-text-centered has-text-weight-bold has-text-link'>
                 Triggered 4 times:
-                              </p>
+              </p>
               <br />
 
               <table className='table is-striped is-hoverable is-fullwidth'>
@@ -28,10 +28,10 @@ export const EventHistory =
                     </td>
                     <td>
                       Jan 12<sup>th</sup>, 1994
-                                    </td>
+                    </td>
                     <td>
                       2:03pm
-                                    </td>
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -42,7 +42,7 @@ export const EventHistory =
                     </td>
                     <td>
                       4:03pm
-                                    </td>
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -50,10 +50,10 @@ export const EventHistory =
                     </td>
                     <td>
                       July 4<sup>th</sup>, 2018
-                                    </td>
+                    </td>
                     <td>
                       6:03pm
-                                    </td>
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -61,10 +61,10 @@ export const EventHistory =
                     </td>
                     <td>
                       Dec 31<sup>st</sup>, 2019
-                                    </td>
+                    </td>
                     <td>
                       1:01am
-                                    </td>
+                    </td>
                   </tr>
                 </tbody>
               </table>

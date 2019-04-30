@@ -20,7 +20,7 @@ export const SourceDescription = graphql(abiEventQuery, {
 })(function ({ abiEventQuery, event, handleStartEdit }) {
   let nounArticle,
     title
-  
+
   // let abiEventId = event.abiEventId
 
   // if (event.scope === SCOPES.CONTRACT_EVENT) {
@@ -41,7 +41,7 @@ export const SourceDescription = graphql(abiEventQuery, {
   } else {
     title = SCOPE_LABELS[event.scope]
   }
-  
+
   nounArticle = getNounArticle(title)
 
   return (

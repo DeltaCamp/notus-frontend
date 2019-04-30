@@ -1,7 +1,6 @@
 import { axiosInstance } from '~/../config/axiosInstance'
 import { storage } from '~/apollo/storage'
 import { AppUserFragment } from '~/fragments/AppUserFragment'
-import { axiosGetUserFromApi } from '~/utils/axiosGetUserFromApi'
 import { signIn } from '~/apollo/signIn'
 
 export const notusResolvers = {
@@ -13,7 +12,7 @@ export const notusResolvers = {
         .get(`${process.env.REACT_APP_NOTUS_API_URI}/app-users/${appUserId}`)
         .then(json => {
           const id = `AppUser:${json.id}`
-          return options.writeFragment({id, fragment: AppUserFragment, data: json })
+          return options.writeFragment({ id, fragment: AppUserFragment, data: json })
         })
     }
   },
@@ -28,7 +27,7 @@ export const notusResolvers = {
       })
 
       if (storage()) {
-        localStorage.removeItem('jwtToken')
+        window.localStorage.removeItem('jwtToken')
       }
     },
 

@@ -7,7 +7,7 @@ export class HookDetails extends Component {
     downloaded: false
   }
 
-  async componentDidMount() {
+  async componentDidMount () {
   }
 
   render () {

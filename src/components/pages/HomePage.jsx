@@ -13,7 +13,7 @@ export class HomePage extends Component {
     this.setState({ success: true })
   }
 
-  render() {
+  render () {
     return (
       <div className='is-positioned-absolutely'>
         <header className='header'>

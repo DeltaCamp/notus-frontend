@@ -7,7 +7,7 @@ import {
   Cast,
   CheckCircle,
   PlusCircle,
-  StopCircle,
+  StopCircle
 } from 'react-feather'
 import { formatRoute } from 'react-router-named-routes'
 import { Link } from 'react-router-dom'
@@ -20,7 +20,7 @@ import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
 
-export const EditEventButtons = 
+export const EditEventButtons =
   IsAuthed(
     graphql(currentUserQuery, { name: 'currentUserData' })(
       graphql(updateEventMutation, {
@@ -48,7 +48,7 @@ export const EditEventButtons =
                 e.preventDefault()
 
                 const event = this.props.eventData.event
-                
+
                 this.props.updateEventMutation({
                   variables: {
                     event: {
@@ -58,8 +58,8 @@ export const EditEventButtons =
                   },
                   refetchQueries: [
                     'eventsQuery',
-                    'eventsQuery',
-                  ],
+                    'eventsQuery'
+                  ]
                 }).then(({ data: { updateEvent } }) => {
                   toast.dismiss()
                   toast.success(`Event ${updateEvent.isActive ? 're-activated' : 'deactivated'}`)
@@ -83,8 +83,8 @@ export const EditEventButtons =
                   },
                   refetchQueries: [
                     'eventsQuery',
-                    'eventsQuery',
-                  ],
+                    'eventsQuery'
+                  ]
                 }).then(({ data: { updateEvent } }) => {
                   toast.dismiss()
                   toast.success(`Event ${updateEvent.isPublic ? 'published' : 'made private'}`)
@@ -94,7 +94,7 @@ export const EditEventButtons =
                 })
               }
 
-              runUpdateEventMutation(variables, successCallback, errorCallback) {
+              runUpdateEventMutation (variables, successCallback, errorCallback) {
                 if (!errorCallback) {
                   errorCallback = error => {
                     console.error(error)
@@ -106,8 +106,8 @@ export const EditEventButtons =
                   refetchQueries: [
                     // only refetch the event we just updated (1 record)
                     'eventsQuery',
-                    'eventsQuery',
-                  ],
+                    'eventsQuery'
+                  ]
                 }).then(successCallback).catch(errorCallback)
               }
 
@@ -134,8 +134,8 @@ export const EditEventButtons =
                   },
                   refetchQueries: [
                     'eventsQuery',
-                    'eventsQuery',
-                  ],
+                    'eventsQuery'
+                  ]
                 }).then(() => {
                   toast.dismiss()
                   toast.success('Successfully deleted event')
@@ -157,29 +157,34 @@ export const EditEventButtons =
                 if (eventData) {
                   const error = eventData.error || currentUserData.error
                   const loading = eventData.loading || currentUserData.loading
-  
+
                   event = eventData.event || {}
-  
+
                   if (loading) {
                     return null
                   } else if (error) {
                     console.error(eventData.error)
                     return null
                   } else if (!event) {
-                    return null  
+                    return null
                   }
-  
-                  isEventAuthor = (currentUserData.currentUser && currentUserData.currentUser.id === parseInt(event.user.id, 10))
-  
+
+                  console.log(currentUserData)
+                  console.log(currentUserData.currentUser)
+                  console.log(currentUserData.currentUser.id)
+                  console.log(event)
+                  console.log(event.user)
+                  isEventAuthor = (currentUserData.currentUser && event.user && (currentUserData.currentUser.id === parseInt(event.user.id, 10)))
+
                   if (!isEventAuthor) {
                     const createEventFromParentRoute = formatRoute(
                       routes.NEW_EVENT_FROM_PARENT, { eventId: event.id }
                     )
-  
+
                     notEventAuthorButtons = (
                       <Link
                         to={createEventFromParentRoute}
-                        className='button is-small is-primary'
+                        className='button is-small is-success'
                       >
                         <PlusCircle /> &nbsp;Create Event From This One
                       </Link>
@@ -195,7 +200,7 @@ export const EditEventButtons =
                           )}
                           onClick={this.handlePublishClick}
                         >
-                          
+
                           {event.isPublic
                             ? (<><Cast /> &nbsp;Make Private</>)
                             : (<><Cast /> &nbsp;Make Public</>)
@@ -245,19 +250,19 @@ export const EditEventButtons =
                       </>
                     )
                 }
-                  
+
                 return (
                   <>
                     <Modal
                       isOpen={this.state.isConfirmingDelete}
                       handleClose={this.handleCloseConfirmDeleteModal}
-                      isSmall={true}
+                      isSmall
                     >
                       <div className='has-text-centered'>
                         <h5 className='is-size-5 has-text-weight-normal'>
                           Are you sure you want to delete this event?
                         </h5>
-                        <br/>
+                        <br />
                         <div className='buttons'>
                           <button
                             className='button is-small is-outlined is-light'
@@ -303,7 +308,6 @@ export const EditEventButtons =
                       </div>
                     )}
 
-
                     <br />
                     <button
                       className={classnames(
@@ -315,7 +319,7 @@ export const EditEventButtons =
                       onClick={this.handleOpenConfirmDeleteModal}
                     >
                       <AlertTriangle /> &nbsp;Delete
-                      </button>
+                    </button>
                   </>
                 )
               }

@@ -17,7 +17,6 @@ const appUserConfirmPageMutation = gql`
 
 export const AppUserConfirmPage = graphql(appUserConfirmPageMutation, { name: 'confirmAppUser' })(
   class _AppUserConfirmPage extends PureComponent {
-
     static propTypes = {
       match: PropTypes.object.isRequired
     }
@@ -65,6 +64,7 @@ export const AppUserConfirmPage = graphql(appUserConfirmPageMutation, { name: 'c
           jwtToken
         })
       }).catch(error => {
+        console.error(error)
         this.setState({
           confirming: false,
           error: true
@@ -72,7 +72,7 @@ export const AppUserConfirmPage = graphql(appUserConfirmPageMutation, { name: 'c
       })
     }
 
-    getRequestKey(props) {
+    getRequestKey (props) {
       let params = queryString.parse(props.location.search)
       return params.requestKey
     }
@@ -81,9 +81,9 @@ export const AppUserConfirmPage = graphql(appUserConfirmPageMutation, { name: 'c
       let message
 
       if (this.state.confirming) {
-        message = "Confirming your subscription..."
+        message = 'Confirming your subscription...'
       } else if (this.state.error) {
-        message = "The request key is no longer valid"
+        message = 'The request key is no longer valid'
       } else if (this.state.confirmed) {
         message = `Your subscription is confirmed!  Your access key is: ${this.state.jwtToken}`
       }

@@ -1,4 +1,4 @@
-export function extractAbi(json) {
+export function extractAbi (json) {
   let name = null
   let abi = json
 
@@ -11,7 +11,7 @@ export function extractAbi(json) {
   if (json.abi) {
     abi = json.abi
   }
-  
+
   return {
     name,
     abi

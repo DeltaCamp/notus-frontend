@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { extractAbi } from '~/utils/extractAbi'
 
 export const ABIUpload = class _ABIUpload extends PureComponent {
-
   static propTypes = {
     onError: PropTypes.func.isRequired,
     onAbi: PropTypes.func.isRequired,
@@ -12,7 +11,7 @@ export const ABIUpload = class _ABIUpload extends PureComponent {
   }
 
   handleDrop = (acceptedFiles) => {
-    const reader = new FileReader()
+    const reader = new window.FileReader()
     reader.onabort = () => console.log('file reading was aborted')
     reader.onerror = () => this.props.onError('could not load file', acceptedFiles)
     reader.onload = () => {
@@ -35,18 +34,18 @@ export const ABIUpload = class _ABIUpload extends PureComponent {
   render () {
     return (
       <Dropzone
-        accept="application/json"
+        accept='application/json'
         multiple={false}
         onDrop={this.handleDrop}>
-        {({getRootProps, getInputProps, isDragActive}) => (
+        {({ getRootProps, getInputProps, isDragActive }) => (
           <section className={this.props.className || 'abi-upload'}>
             <div {...getRootProps()}>
               <input {...getInputProps()} />
               <p className='is-size-6'>
                 {
-                  isDragActive ? 
-                    <>Drop file here</> : 
-                    <>Drag &amp; drop a file or click here to upload ABI or Truffle Artifact</>
+                  isDragActive
+                    ? <>Drop file here</>
+                    : <>Drag &amp; drop a file or click here to upload ABI or Truffle Artifact</>
                 }
               </p>
             </div>

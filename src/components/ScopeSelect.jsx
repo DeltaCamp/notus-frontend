@@ -4,7 +4,6 @@ import { NotusSelect } from '~/components/forms/NotusSelect'
 import { SCOPES, SCOPE_LABELS } from '~/constants'
 
 export const ScopeSelect = function (props) {
-
   const options = [
     {
       label: SCOPE_LABELS[SCOPES.TRANSACTION],
@@ -21,7 +20,7 @@ export const ScopeSelect = function (props) {
   ]
 
   const value = options.find(option => option.value === props.value)
-  props = {...props, value}
-  
+  props = { ...props, value }
+
   return <NotusSelect {...props} options={options} />
 }

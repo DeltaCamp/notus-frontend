@@ -1,11 +1,11 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import { SlantSVG } from '~/components/home/SlantSVG'
 import { SignupForm } from '~/components/SignupForm'
 
 export class HomeSignupFooterCTA extends Component {
   state = {}
 
-  render() {
+  render () {
     return (
       <div className='container-fluid color-block is-primary pt50 pb100 is-positioned-relatively'>
         <SlantSVG
@@ -38,5 +38,4 @@ export class HomeSignupFooterCTA extends Component {
       </div>
     )
   }
-  
 }

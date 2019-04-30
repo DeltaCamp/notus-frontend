@@ -6,4 +6,4 @@ export const UserFragment = gql`
     email
     access_key_expires_at
   }
-`;
+`

@@ -20,7 +20,7 @@ export class HomeBetaNotice extends Component {
                 <br />
                 – or –
                 <br />
-                send an email to <a href="mailto:support@notus.network" className='has-text-white is-underlined'>support@notus.network</a>
+                send an email to <a href='mailto:support@notus.network' className='has-text-white is-underlined'>support@notus.network</a>
               </h5>
             </div>
           </div>

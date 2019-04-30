@@ -11,13 +11,13 @@ export const SignupForm =
       success: false
     }
 
-    constructor(props) {
+    constructor (props) {
       super(props)
 
       this.inputRef = React.createRef()
     }
 
-    componentDidMount() {
+    componentDidMount () {
       const { mobileOS } = getSystemInfo()
       const touch = (mobileOS === 'iOS' || mobileOS === 'Android')
 
@@ -46,7 +46,7 @@ export const SignupForm =
           }
         ).then(() => {
           this.props.setSuccess()
-          
+
           this.setState({
             success: true,
             isSigningUp: false
@@ -90,15 +90,15 @@ export const SignupForm =
           </p>
         </div>
       )
-      
+
       const form = (
         <div className='accordion accordion-enter-done accordion--signup-form'>
           <form
             onSubmit={this.handleSignupSubmit}
             className={`form ${this.state.active ? 'is-active' : ''}`}
           >
-            <div className="field has-addons">
-              <div className="control">
+            <div className='field has-addons'>
+              <div className='control'>
                 <input
                   ref={this.inputRef}
                   placeholder='Enter your email'
@@ -156,5 +156,5 @@ export const SignupForm =
           </CSSTransition>
         </div>
       )
+    }
   }
-}

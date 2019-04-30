@@ -9,7 +9,7 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import * as routes from '~/../config/routes'
 
 const ControlledSwitch = class extends PureComponent {
-  render() {
+  render () {
     return <Switch
       rounded
       outlined
@@ -43,17 +43,17 @@ export const RegisterWebhookForm = class _RegisterWebhookForm extends PureCompon
     }
   }
 
-  hasSentTransaction() {
+  hasSentTransaction () {
     const hookTx = this.props.hookTx
     return hookTx && hookTx.sent && !hookTx.completed
   }
 
-  registerWebhookTxError() {
+  registerWebhookTxError () {
     const hookTx = this.props.hookTx
     return hookTx && !!hookTx.error
   }
 
-  registerWebhookTxCompleted() {
+  registerWebhookTxCompleted () {
     const hookTx = this.props.hookTx
     // console.log((hookTx && !hookTx.error && hookTx.completed))
     return hookTx && !hookTx.error && hookTx.completed
@@ -93,27 +93,27 @@ export const RegisterWebhookForm = class _RegisterWebhookForm extends PureCompon
     return text
   }
 
-  isWarning() {
+  isWarning () {
     return this.needsWeb3() && !this.hasUncompletedTransaction()
   }
 
-  isDanger() {
+  isDanger () {
     return this.state.amountError || this.registerWebhookTxError() || this.notLoggedIn()
   }
 
-  isSuccess() {
+  isSuccess () {
     return this.registerWebhookTxCompleted() && !this.registerWebhookTxError()
   }
 
-  isInputDisabled() {
+  isInputDisabled () {
     return this.hasUncompletedTransaction() || this.registerWebhookTxCompleted() || this.registerWebhookTxError() || this.notLoggedIn()
   }
 
-  isButtonDisabled() {
+  isButtonDisabled () {
     return this.hasUncompletedTransaction() || this.registerWebhookTxError()// || this.notLoggedIn()
   }
 
-  formClassName() {
+  formClassName () {
     var className = ''
 
     if (this.hasUncompletedTransaction()) {
@@ -129,7 +129,7 @@ export const RegisterWebhookForm = class _RegisterWebhookForm extends PureCompon
     return className
   }
 
-  helpClassName() {
+  helpClassName () {
     var className = ''
 
     if (this.hasUncompletedTransaction()) {
@@ -145,7 +145,7 @@ export const RegisterWebhookForm = class _RegisterWebhookForm extends PureCompon
     return className
   }
 
-  registerWebhookTransaction(ipfsHashAsHex) {
+  registerWebhookTransaction (ipfsHashAsHex) {
     const txData = {
       contractName: 'Notus',
       method: 'registerWebhook',
@@ -164,10 +164,9 @@ export const RegisterWebhookForm = class _RegisterWebhookForm extends PureCompon
       // this doesn't work, currently no way to hide the modal
       // if the user rejects the tx in metamask, etc
     }
-
   }
 
-  notLoggedIn() {
+  notLoggedIn () {
     const { networkAccount } = this.props
     let notLoggedIn = true
 
@@ -223,11 +222,11 @@ export const RegisterWebhookForm = class _RegisterWebhookForm extends PureCompon
       >{this.downloadText()}</a>
   }
 
-  hasUncompletedTransaction() {
+  hasUncompletedTransaction () {
     return this.hasUncompletedRegisterWebhookTx()
   }
 
-  hasUncompletedRegisterWebhookTx() {
+  hasUncompletedRegisterWebhookTx () {
     return this.props.registerWebhookTx && !this.props.registerWebhookTx.completed
   }
 
@@ -277,7 +276,7 @@ export const RegisterWebhookForm = class _RegisterWebhookForm extends PureCompon
           </p>
 
           <label htmlFor='contract-address-input' className='label is-size-4 is-uppercase has-text-grey'>
-            I want to listen to events at this <span className='has-text-grey-darker'>contract address</span>: <span className='has-text-warning' style={{display: 'none'}}>*</span>
+            I want to listen to events at this <span className='has-text-grey-darker'>contract address</span>: <span className='has-text-warning' style={{ display: 'none' }}>*</span>
           </label>
 
           <div className='field'>
@@ -407,7 +406,7 @@ export const RegisterWebhookForm = class _RegisterWebhookForm extends PureCompon
                   <div className='control'>
                     <label htmlFor='filter-topic-2-input' className='label is-size-4 is-uppercase'>
                       Event topic #2
-                      </label>
+                    </label>
 
                     <input
                       id='filter-topic-2-input'
@@ -424,7 +423,7 @@ export const RegisterWebhookForm = class _RegisterWebhookForm extends PureCompon
                   <div className='control'>
                     <label htmlFor='filter-topic-3-input' className='label is-size-4 is-uppercase'>
                       Event topic #3
-                      </label>
+                    </label>
 
                     <input
                       id='filter-topic-3-input'
@@ -465,9 +464,9 @@ export const RegisterWebhookForm = class _RegisterWebhookForm extends PureCompon
           {state => (
             <div className='fade-enter modal has-text-centered'>
               <div className='modal-body'>
-                {this.state.uploadingToIpfs ?
-                  <span>Registering Webhook on IPFS ...</span> :
-                  <span>Registering Webhook on IPFS ... <strong className='has-text-weight-bold'>DONE!</strong></span>
+                {this.state.uploadingToIpfs
+                  ? <span>Registering Webhook on IPFS ...</span>
+                  : <span>Registering Webhook on IPFS ... <strong className='has-text-weight-bold'>DONE!</strong></span>
                 }
 
                 {!this.registerWebhookTxCompleted() && !this.state.uploadingToIpfs && !this.hasSentTransaction() &&

@@ -1,13 +1,15 @@
+/* eslint no-new: "off" */
+
 import React, { PureComponent } from 'react'
 import {
   GitBranch,
   GitCommit,
-  GitMerge,
+  GitMerge
 } from 'react-feather'
 import Vivus from 'vivus'
 
 export class GitIcons extends PureComponent {
-  componentDidMount() {
+  componentDidMount () {
     new Vivus(
       'git-branch',
       {

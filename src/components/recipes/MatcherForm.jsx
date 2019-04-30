@@ -10,7 +10,7 @@
 // import { SOURCES, OPERATORS } from '~/constants'
 
 // export const MatcherForm = graphql(sourcesQuery, {
-//   name: 'sourcesQuery'  
+//   name: 'sourcesQuery'
 // })(
 //   class _MatcherForm extends PureComponent {
 //     static propTypes = {
