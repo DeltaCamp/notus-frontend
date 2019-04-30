@@ -15,7 +15,9 @@ export const ScopeAndAbiEventSelect = graphql(abiEventsQuery, { name: 'abiEvents
       scope: PropTypes.number.isRequired,
       abiEventId: PropTypes.number,
       onChangeScopeAndAbiEvent: PropTypes.func.isRequired,
-      onAddAbiEvent: PropTypes.func.isRequired
+      onAddAbiEvent: PropTypes.func.isRequired,
+      menuIsOpen: PropTypes.bool.isRequired,
+      handleStopEditing: PropTypes.func.isRequired
     }
 
     onChange = (option) => {
@@ -32,6 +34,8 @@ export const ScopeAndAbiEventSelect = graphql(abiEventsQuery, { name: 'abiEvents
           abiEventId: null
         })
       }
+
+      this.props.handleStopEditing()
     }
 
     render () {

@@ -175,8 +175,9 @@ a.is-dark {
   width: 100%;
 }
 
-.section--main-content {
-  margin-top: 2rem;
+.section.section--main-content {
+  margin-top: 0;
+  padding-top: 0;
   min-height: 700px;
 }
 
@@ -356,10 +357,10 @@ hr {
   background-color: darken(saturate($purple, 100%), 34%);
 }
 
-.has-bg__cyan {
-  background-color: darken(saturate($purple, 100%), 21%);
-  background-blend-mode: multiply;
-}
+// .has-bg__cyan {
+//   background-color: darken(saturate($purple, 100%), 21%);
+//   background-blend-mode: multiply;
+// }
 
 .has-bg.is-blue {
   background-image: none;
@@ -989,6 +990,9 @@ svg {
   opacity: 1;
 }
 
+.is-layer-10 {
+  z-index: 10000;
+}
 ul.list {
   list-style: inside;
 }

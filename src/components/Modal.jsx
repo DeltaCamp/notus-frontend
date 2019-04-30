@@ -23,7 +23,7 @@ export const Modal = ({
       )}
     >
       <div className="modal-background" onClick={handleClose} />
-      <div className="modal-content has-bg__cyan">
+      <div className="modal-content">
         <div className="modal-content--inner">
           {children}
         </div>

@@ -11,12 +11,11 @@ import { PlusCircle } from 'react-feather'
 import { toast } from 'react-toastify'
 
 import { EditEventButtons } from '~/components/events/EditEventButtons'
-import { EditEventDrawer } from '~/components/EditEventDrawer'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { EventMatcher } from '~/components/events/EventMatcher'
 import { FrequencyTitle } from '~/components/events/FrequencyTitle'
-import { SourceDescription } from '~/components/events/SourceDescription'
+import { EventSource } from '~/components/events/EventSource'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { brandColor } from '~/utils/brandColors'
@@ -31,7 +30,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       scope: 0,
       abiEventId: undefined,
       isPublic: false,
-      // frequency: '-1',
+      frequency: -1,
       matchers: [
         {
           operand: "",
@@ -42,7 +41,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       ]
     },
     editMatcherIndex: null,
-    showEventForm: false,
+    // showEventForm: false,
   }
 
   static propTypes = {
@@ -228,9 +227,9 @@ export const EditEventPage = class _EditEventPage extends Component {
     })
   }
 
-  showEventForm = () => {
-    this.setState({ showEventForm: true })
-  }
+  // showEventForm = () => {
+  //   this.setState({ showEventForm: true })
+  // }
 
   runUpdateEventMutation(variables, successCallback, errorCallback) {
     if (!errorCallback) {
@@ -249,20 +248,29 @@ export const EditEventPage = class _EditEventPage extends Component {
     }).then(successCallback).catch(errorCallback)
   }
 
-  handleHideEventForm = (e) => {
-    e.preventDefault()
+  // handleHideEventForm = (e) => {
+  //   e.preventDefault()
 
-    if (!this.isCreateMode()) {
-      const variables = {
-        event: this.state.event
-      }
-      const successCallback = (mutationResult) => {
-        toast.success('Updated event scope')
-      }
-      this.runUpdateEventMutation(variables, successCallback)
-    }
+  //   if (!this.isCreateMode()) {
+  //     const variables = {
+  //       event: this.state.event
+  //     }
+  //     const successCallback = (mutationResult) => {
+  //       toast.success('Updated event scope')
+  //     }
+  //     this.runUpdateEventMutation(variables, successCallback)
+  //   }
 
-    this.setState({ showEventForm: false })
+  //   this.setState({ showEventForm: false })
+  // }
+
+  handleChangeFrequency = () => {
+    this.setState({
+      event: {
+        ...this.state.event,
+        frequency: this.state.event.frequency === 0 ? -1 : 0
+      }
+    })
   }
 
   isEditingMatcher = () => {
@@ -441,82 +449,95 @@ export const EditEventPage = class _EditEventPage extends Component {
       }
     }
 
+    {/* <EditEventDrawer
+          event={this.state.event}
+          onChangeScopeAndAbiEventId={this.onChangeScopeAndAbiEventId}
+          onCreateAbi={this.handleOnCreateAbi}
+          isOpen={this.state.showEventForm}
+          onClose={this.handleHideEventForm}
+        /> */}
+    const frequencyAndScopeSentences = (
+      <div className='event-box__variable-wrapper'>
+        <button
+          className='event-box__variable'
+          onClick={this.handleChangeFrequency}
+        >
+          <FrequencyTitle
+            frequency={this.state.event.frequency}
+          />
+        </button>&nbsp;
+
+        <EventSource
+          event={this.state.event}
+          onChangeScopeAndAbiEventId={this.onChangeScopeAndAbiEventId}
+          onCreateAbi={this.handleOnCreateAbi}
+        />
+        occurs
+      </div>
+    )
+
     const matcherSentences = (
-      <>
-        <div className='event-box__variable-wrapper' onClick={this.showEventForm}>
-          <button className='event-box__variable'>
-            <FrequencyTitle frequency={this.state.event.frequency} />
-          </button>
-
-          <button className='event-box__variable'>
-            <SourceDescription event={this.state.event} />
-          </button>
-          occurs
-        </div>
-
-
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <Droppable droppableId="droppable">
-            {(provided, snapshot) => (
-              <div
-                {...provided.droppableProps}
-                ref={provided.innerRef}
-              >
-                {this.state.event.matchers.map((eventMatcher, index) => (
-                  <div
-                    key={`event-matcher-${index}`}
-                    className={classnames(
-                      {
-                        'matcher-row--is-active': index === this.state.editMatcherIndex
-                      }
-                    )}
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provided, snapshot) => (
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+            >
+              {this.state.event.matchers.map((eventMatcher, index) => (
+                <div
+                  key={`event-matcher-${index}`}
+                  className={classnames(
+                    {
+                      'matcher-row--is-active': index === this.state.editMatcherIndex
+                    }
+                  )}
+                >
+                  <Draggable
+                    key={`event-matcher-draggable-${index}`}
+                    draggableId={index+1}
+                    index={index}
                   >
-                    <Draggable
-                      key={`event-matcher-draggable-${index}`}
-                      draggableId={index+1}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <TransitionGroup>
-                          <CSSTransition
-                            key={`event-matcher-css-transition-${index}`}
-                            timeout={{ enter: 150, exit: 1000 }}
-                            classNames='fade'
-                            appear
-                          >
-                            <div className='fade-enter'>
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                              >
-                                <EventMatcher
-                                  key={`event-matcher-${index}`}
-                                  isFirst={index === 0}
-                                  index={index}
-                                  handleSetEditMatcher={this.handleSetEditMatcher}
-                                  handleRemoveMatcher={this.handleRemoveMatcher}
-                                  matcher={eventMatcher}
-                                  event={this.state.event}
-                                  onChangeMatcher={
-                                    (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
-                                  }
-                                />
-                                {/* editMatcher={editMatcher} */}
-                              </div>
+                    {(provided, snapshot) => (
+                      <TransitionGroup>
+                        <CSSTransition
+                          key={`event-matcher-css-transition-${index}`}
+                          timeout={{ enter: 150, exit: 1000 }}
+                          classNames='fade'
+                          appear
+                        >
+                          <div className='fade-enter'>
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <EventMatcher
+                                key={`event-matcher-${index}`}
+                                isFirst={index === 0}
+                                index={index}
+                                handleSetEditMatcher={this.handleSetEditMatcher}
+                                handleRemoveMatcher={this.handleRemoveMatcher}
+                                matcher={eventMatcher}
+                                event={this.state.event}
+                                onChangeMatcher={
+                                  (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
+                                }
+                              />
+                              {/* editMatcher={editMatcher} */}
                             </div>
-                          </CSSTransition>
-                        </TransitionGroup>
-                      )}
-                    </Draggable>
-                  </div>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </>
+                          </div>
+                        </CSSTransition>
+                      </TransitionGroup>
+                    )}
+                  </Draggable>
+                </div>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     )
 
     return (
@@ -526,14 +547,6 @@ export const EditEventPage = class _EditEventPage extends Component {
         />
 
         <ScrollToTop />
-
-        <EditEventDrawer
-          event={this.state.event}
-          onChangeScopeAndAbiEventId={this.onChangeScopeAndAbiEventId}
-          onCreateAbi={this.handleOnCreateAbi}
-          isOpen={this.state.showEventForm}
-          onClose={this.handleHideEventForm}
-        />
 
         <section className='section section--main-content'>
           <div className={`container-fluid pb20 ${colorClass} color-block`}>
@@ -563,10 +576,11 @@ export const EditEventPage = class _EditEventPage extends Component {
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-xl-10 col-start-xl-2 is-size-4'>
+                    {frequencyAndScopeSentences}
                     {matcherSentences}
 
                     <button
-                      className='button has-icon  mt10 pl10 pr10 is-light'
+                      className='button has-icon  mt10 pl10 pr10 is-light is-small'
                       onClick={this.handleAddMatcher}
                     >
                       <PlusCircle

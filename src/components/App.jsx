@@ -62,7 +62,7 @@ export const App = withRouter(hot(module)(
 
           <CookieConsent />
 
-          <TransitionGroup>
+          <TransitionGroup className='is-positioned-relatively is-layer-10'>
             <CSSTransition
               key={this.props.location.key}
               timeout={{ enter: 400, exit: 400 }}

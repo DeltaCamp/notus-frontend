@@ -126,7 +126,8 @@ export const MyEventsPage =
               let loadMore
               const { eventsData } = this.props
 
-              const { loading, error, events } = eventsData || {}
+              // const { loading } = eventsData || {}
+              const { error, events } = eventsData || {}
               const { skip, take, totalCount } = events || {}
 
               let eventEvents = events ? events.events : []

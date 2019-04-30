@@ -1,11 +1,12 @@
 import React from 'react'
 
 import { AbiEventName } from '~/components/AbiEventName'
-import { addArticle } from '~/utils/addArticle'
+import { getNounArticle } from '~/utils/getNounArticle'
 
 import { SCOPES, SCOPE_LABELS } from '~/constants'
 
-export const SourceDescription = function ({ event }) {
+export const SourceDescription = function ({ event, handleStartEdit }) {
+  let article
 
   let abiEventId
   if (event.scope === SCOPES.CONTRACT_EVENT) {
@@ -17,14 +18,22 @@ export const SourceDescription = function ({ event }) {
 
   let title
   if (abiEventId) {
-    title = <AbiEventName addArticle={true} abiEventId={abiEventId} />
+    title = <AbiEventName
+      abiEventId={abiEventId}
+    />
   } else {
-    title = addArticle(SCOPE_LABELS[event.scope])
+    title = SCOPE_LABELS[event.scope]
   }
 
   return (
     <>
-      {title}
+      {getNounArticle(title)}
+      <button
+        className='event-box__variable has-react-select'
+        onClick={handleStartEdit}
+      >
+        {title}
+      </button>
     </>
   )
 }

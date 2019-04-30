@@ -3,17 +3,14 @@ import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 import { formatRoute } from 'react-router-named-routes'
 import {
-  AlertTriangle,
   StopCircle,
   Cast,
   CheckCircle,
-  Edit,
   Lock,
   Mail,
   User
 } from 'react-feather'
 import { toast } from 'react-toastify'
-import { Settings } from 'react-feather'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import { currentUserQuery } from '~/queries/currentUserQuery'
@@ -122,63 +119,64 @@ export const EventCard =
         }
 
         render () {
-          let editDropdown
+          // let editDropdown
+          // const { editable } = this.props
 
-          const { currentUserData, editable, event } = this.props
+          const { currentUserData, event } = this.props
 
           const isLoggedIn = currentUserData && currentUserData.currentUser
 
           const linkTo = isLoggedIn ? this.props.linkTo : routes.SIGNUP
 
-          if (editable) {
-            editDropdown = (
-              <div
-                className={classnames(
-                  'dropdown',
-                  'is-right',
-                  'is-up',
-                  { 'is-active': this.state.editDropdownActive }
-                )
-              }>
-                <div className='dropdown-trigger'>
-                  <div
-                    className='button has-icon has-icon__transparent'
-                    onClick={this.handleMenuClick}
-                  >
-                    <Settings />
-                  </div>
-                </div>
-                <div className='dropdown-menu' id='dropdown-menu6' role='menu'>
-                  <div className='dropdown-content'>
-                    <div
-                      className='dropdown-item'
-                      onClick={this.handleEdit}
-                    >
-                      <Edit /> &nbsp;Edit
-                    </div>
-                    <div
-                      className='dropdown-item'
-                      onClick={this.handleActivate}
-                    >
-                      {event.isActive
-                        ? (<><StopCircle /> &nbsp;Deactivate</>)
-                        : (<><CheckCircle /> &nbsp;Activate</>)
-                      }
-                    </div>
-                    <div
-                      className='dropdown-item'
-                      onClick={(e) => {
-                        e.preventDefault()
-                        this.props.handleOpenConfirmDeleteModal(event.id)
-                      }}
-                    >
-                      <AlertTriangle /> &nbsp;Delete
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )
-          }
+          // if (editable) {
+          //   editDropdown = (
+          //     <div
+          //       className={classnames(
+          //         'dropdown',
+          //         'is-right',
+          //         'is-up',
+          //         { 'is-active': this.state.editDropdownActive }
+          //       )
+          //     }>
+          //       <div className='dropdown-trigger'>
+          //         <div
+          //           className='button has-icon has-icon__transparent'
+          //           onClick={this.handleMenuClick}
+          //         >
+          //           <Settings />
+          //         </div>
+          //       </div>
+          //       <div className='dropdown-menu' id='dropdown-menu6' role='menu'>
+          //         <div className='dropdown-content'>
+          //           <div
+          //             className='dropdown-item'
+          //             onClick={this.handleEdit}
+          //           >
+          //             <Edit /> &nbsp;Edit
+          //           </div>
+          //           <div
+          //             className='dropdown-item'
+          //             onClick={this.handleActivate}
+          //           >
+          //             {event.isActive
+          //               ? (<><StopCircle /> &nbsp;Deactivate</>)
+          //               : (<><CheckCircle /> &nbsp;Activate</>)
+          //             }
+          //           </div>
+          //           <div
+          //             className='dropdown-item'
+          //             onClick={(e) => {
+          //               e.preventDefault()
+          //               this.props.handleOpenConfirmDeleteModal(event.id)
+          //             }}
+          //           >
+          //             <AlertTriangle /> &nbsp;Delete
+          //           </div>
+          //         </div>
+          //       </div>
+          //     </div>
+          //   )
+          // }
 
           return (
             <Link

@@ -2,7 +2,6 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 
 import { abiEventQuery } from '~/queries/abiEventQuery'
-import { addArticle as articlize } from '~/utils/addArticle'
 
 export const AbiEventName = graphql(abiEventQuery, {
   name: 'abiEventQuery',
@@ -17,7 +16,7 @@ export const AbiEventName = graphql(abiEventQuery, {
     }
   }
 })(
-  function ({ addArticle, abiEventQuery }) {
+  function ({ abiEventQuery }) {
     const { abiEvent, loading, error } = abiEventQuery
 
     if (loading) { 
@@ -27,9 +26,7 @@ export const AbiEventName = graphql(abiEventQuery, {
       return error.toString()
     } else {
       let noun = `${abiEvent.abi.name} ${abiEvent.name}`
-      if (addArticle) {
-        noun = articlize(noun)
-      }
+      
       return (
         <span>{noun}</span>
       )

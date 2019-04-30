@@ -300,15 +300,18 @@ export const EditEventButtons =
                           <>
                             {notEventAuthorButtons}
                             {eventAuthorButtons}
-                            <div className='is-size-7'>
-                              {eventPublishedState}
-                              <br />
-                              {eventActiveState}
-                            </div>
                           </>
                         )
                       }
                     </div>
+
+                    {!this.props.isCreateMode() && (
+                      <div className='is-size-7'>
+                        {eventPublishedState}
+                        <br />
+                        {eventActiveState}
+                      </div>
+                    )}
                   </>
                 )
               }

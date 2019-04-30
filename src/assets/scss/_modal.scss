@@ -4,21 +4,20 @@
 }
 
 .modal {
+  bottom: 25%;
   display: flex;
-  opacity: 0;
-  transition: opacity 300ms ease-in-out;
-  pointer-events: none;
-  z-index: 20000;
   box-shadow: 0 12px 25px rgba(10, 10, 10, .3);
   color: white;
-  position: fixed;
-  top: 15%;
+  height: 60%;
   left: 25%;
   right: 25%;
-  bottom: 25%;
-  height: 60%;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  transition: opacity 300ms ease-in-out;
+  top: 15%;
   width: 50%;
-  z-index: 20000;
+  z-index: 19998;
 
   @media screen and (max-width: $tablet) {
     display: block;
@@ -75,7 +74,6 @@
   height: 100%;
   transition: opacity .2s;
   opacity: 0;
-  z-index: 0;
   background: black;
 }
 
@@ -83,7 +81,7 @@
   pointer-events: all;
   opacity: 0.5;
   background-color: black;
-  z-index: 0;
+  z-index: 19999;
   box-shadow: 0 8px 16px rgba(10, 10, 10, .1);
   cursor: pointer;
   pointer-events: auto;
@@ -98,6 +96,7 @@
   // max-height: -webkit-fill-available;
   overflow: initial;
   width: 100%;
+  z-index: 20001;
 
   @media screen and (max-width: 768px) {
     margin: 0;
