@@ -8,6 +8,7 @@ import { metadataResolvers } from './client-state/metadataResolvers'
 import { notusResolvers } from './client-state/notusResolvers'
 import { storage } from '~/apollo/storage'
 import { axiosGetUserFromApi } from '~/utils/axiosGetUserFromApi'
+import { signIn } from '~/apollo/signIn'
 
 const debug = require('debug')('notus:apolloClient')
 
@@ -20,7 +21,6 @@ export const apolloClient = async () => {
     notusResolvers
   )
 
-  let currentUser = null
   let jwtToken = null
 
   if (storage()) {
@@ -28,19 +28,7 @@ export const apolloClient = async () => {
   }
 
   if (jwtToken) {
-    currentUser = await axiosGetUserFromApi(cache, jwtToken)
-    debug('found current user: ', currentUser, " for jwtToken: ", jwtToken)
-    if (!currentUser) {
-      localStorage.removeItem('jwtToken')
-      jwtToken = undefined
-    } else {
-      cache.writeData({
-        data: {
-          currentUser,
-          jwtToken
-        }
-      })
-    }
+    await signIn(cache, jwtToken)
   }
 
   const httpLink = createHttpLink({

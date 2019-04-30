@@ -2,6 +2,7 @@ import { axiosInstance } from '~/../config/axiosInstance'
 import { storage } from '~/apollo/storage'
 import { AppUserFragment } from '~/fragments/AppUserFragment'
 import { axiosGetUserFromApi } from '~/utils/axiosGetUserFromApi'
+import { signIn } from '~/apollo/signIn'
 
 export const notusResolvers = {
   Query: {
@@ -47,18 +48,8 @@ export const notusResolvers = {
       })
 
       const { data } = response
-      const jwtToken = data || ''
-      cache.writeData({ data: { jwtToken } })
-
-      if (storage()) {
-        localStorage.setItem('jwtToken', jwtToken)
-      }
-
-      try {
-        return await axiosGetUserFromApi(cache, jwtToken)
-      } catch (error) {
-        console.error(error)
-      }
+      const jwtToken = data
+      await signIn(cache, jwtToken)
     },
 
     confirmUser: async function (object, args, { cache }, info) {
@@ -70,7 +61,6 @@ export const notusResolvers = {
         throw new Error('You must pass a password')
       }
 
-
       const confirmResponse = await axiosInstance
         .post(`${process.env.REACT_APP_NOTUS_API_URI}/users/confirm`, {
           password
@@ -80,19 +70,10 @@ export const notusResolvers = {
           }
         })
 
-        const { data } = confirmResponse
-        const jwtToken = data || ''
-        cache.writeData({ data: { jwtToken } })
+      const { data } = confirmResponse
+      const jwtToken = data || ''
 
-        if (storage()) {
-          localStorage.setItem('jwtToken', jwtToken);
-        }
-
-        try {
-          return await axiosGetUserFromApi(cache, jwtToken)
-        } catch(error) {
-          console.error(error)
-        }
+      await signIn(cache, jwtToken)
     },
 
     confirmAppUser: async function (object, args, { cache }, info) {
