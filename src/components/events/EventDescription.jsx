@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import classnames from 'classnames'
 
 export class EventDescription extends Component {
   render () {
@@ -24,7 +23,7 @@ export class EventDescription extends Component {
     } else {
       matchers = event.matchers.map((matcher, index) => {
         return <MatcherTitle key={`matcher-${index}`} matcher={matcher} isFirst={index === 0} />
-      }
+      })
     }
 
     return (
@@ -36,4 +35,4 @@ export class EventDescription extends Component {
       </>
     )
   }
-  
+}
