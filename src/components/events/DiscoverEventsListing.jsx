@@ -67,7 +67,7 @@ export const DiscoverEventsListing =
       }
 
       render () {
-        let loadMore
+        let loadMore, emptyMessage
         const { searchValue, eventsData } = this.props
         const { error } = eventsData || {}
         const eventsQuery = eventsData ? eventsData.events : {}
@@ -95,6 +95,12 @@ export const DiscoverEventsListing =
           </p>
         }
 
+        if (searchValue) {
+          emptyMessage = <span>No events found named '{searchValue}'.</span>
+        } else {
+          emptyMessage = <span>No events found.</span>
+        }
+
         return <>
           {(
             eventCards.length > 0 ?
@@ -103,7 +109,7 @@ export const DiscoverEventsListing =
                 </div>
               : (
                 <div className='has-text-centered'>
-                  <h2 className='has-text-centered is-size-2'>No events found named '{searchValue}'.</h2>
+                  <h2 className='has-text-centered is-size-2'>{emptyMessage}</h2>
                 </div>
               )
           )}
