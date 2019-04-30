@@ -44,7 +44,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         return email
       }
 
-      handleConfirmSubmit = async (e) => {
+      handleConfirmSubmit = (e) => {
         e.preventDefault()
 
         let error
@@ -71,26 +71,23 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
           })
         }
 
-        try {
-          await this.props.signIn({
-            variables: {
-              email: this.state.email,
-              password: this.state.password
-            },
-            update: (proxy, { data: { signIn } }) => {
-              if (signIn) {
-                this.props.history.push(routes.MY_EVENTS)
-              }
-            }
-          })
-        } catch (error) {
+        this.props.signIn({
+          variables: {
+            email: this.state.email,
+            password: this.state.password
+          }
+        }).then((mutationResult) => {
+          if (mutationResult) {
+            this.props.history.push(routes.MY_EVENTS)
+          }
+        }).catch(error => {
           console.log(error)
           this.setState({
             signingIn: false,
             error: this.translateErrorMessage(error.message),
             message: error.message
           })
-        }
+        })
       }
 
       translateErrorMessage = (message) => {
