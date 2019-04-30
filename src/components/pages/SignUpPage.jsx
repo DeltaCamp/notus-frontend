@@ -105,7 +105,7 @@ export const SignUpPage =
               <div className='control form-submit has-text-centered'>
                 <button
                   type='submit'
-                  className='button is-small'
+                  className='button is-small is-dark'
                 >
                   Sign Up
                 </button>
