@@ -9,19 +9,19 @@ export class HomeBetaNotice extends Component {
         <div className='container pb50'>
           <div className='row'>
             <div className='col-xs-12 col-md-8 col-start-md-3 has-text-centered'>
-              <h1 className='is-size-1 has-text-weight-bold'>
+              <h4 className='is-size-4 has-text-weight-bold'>
                 Get Involved
-              </h1>
-              <h5 className='is-size-6 mt30'>
-                We want your feedback so that we can make Notus as great as possible.
-              </h5>
-              <h5 className='is-size-6 mt30'>
-                Join the conversation on our <DiscordLink className='has-text-white is-underlined'>Discord</DiscordLink> channel
+              </h4>
+              <h6 className='is-size-6 mt30'>
+                We want your feedback so that we can make Notus as great as possible:
+              </h6>
+              <p className='mt30'>
+                <strong>Join the conversation on our <DiscordLink className='has-text-white is-underlined'>Discord</DiscordLink> channel</strong>
                 <br />
                 – or –
                 <br />
-                send an email to <a href='mailto:support@notus.network' className='has-text-white is-underlined'>support@notus.network</a>
-              </h5>
+                <strong>Send an email to <a href='mailto:support@notus.network' className='has-text-white is-underlined'>support@notus.network</a></strong>
+              </p>
             </div>
           </div>
         </div>

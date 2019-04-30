@@ -22,7 +22,7 @@ export const SupportPage =
                     Support
                   </h1>
                   <h4 className='is-size-4 has-text-weight-bold'>
-                    Need help with a technical issue?
+                    Need help with a technical issue or assistance using the Notus service?
                   </h4>
 
                   <div className='buttons mt30'>
@@ -48,19 +48,6 @@ export const SupportPage =
                 </div>
               </div>
             </div>
-
-            <div className='container-fluid color-block is-primary mt100'>
-              <div className='container'>
-                <div className='row'>
-                  <div className='col-xs-12 col-xl-8 pt50 pb50'>
-                    <h2 className='is-size-2 has-text-weight-semibold pb20'>
-                    &nbsp;
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </section>
 
           <FooterContainer />

@@ -25,7 +25,7 @@ button[disabled] {
   height: auto;
   font-size: 1.25rem;
   font-weight: 700;
-  padding: 1rem 3rem 1rem;
+  padding: 0.5rem 2rem 0.5rem;
 
   text-transform: capitalize;
   transition: transform 400ms cubic-bezier(0.15, 0.89, 0, 1);
@@ -167,13 +167,18 @@ button[disabled] {
   color: white;
 }
 
-.button.is-purple,
-.button.is-purple:active,
-.button.is-purple:focus {
+.button.is-purple {
   background-color: $purple;
+  border-color: $purple;
   color: white;
 }
 
+.button.is-purple:hover {
+  background-color: lighten($purple, 5%);
+  border-color: lighten($purple, 10%);
+}
+
+.button.is-purple:focus,
 .button.is-purple:active {
   background-color: lighten($purple, 10%);
 }
