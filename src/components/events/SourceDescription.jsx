@@ -6,8 +6,6 @@ import { getNounArticle } from '~/utils/getNounArticle'
 import { SCOPES, SCOPE_LABELS } from '~/constants'
 
 export const SourceDescription = function ({ event, handleStartEdit }) {
-  let article
-
   let abiEventId
   if (event.scope === SCOPES.CONTRACT_EVENT) {
     abiEventId = event.abiEventId

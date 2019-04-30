@@ -1,7 +1,6 @@
 import { axiosInstance } from '~/../config/axiosInstance'
-import { currentUserQuery } from '~/queries/currentUserQuery'
 
-export const axiosGetUserFromApi = (cache, jwtToken) => {
+export const axiosGetUserFromApi = (jwtToken) => {
   axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
   
   return axiosInstance
@@ -9,16 +8,10 @@ export const axiosGetUserFromApi = (cache, jwtToken) => {
     .then(userResponse => {
       const { data } = userResponse
       data.__typename = 'User'
-      cache.writeQuery({
-        query: currentUserQuery,
-        data: {
-          currentUser: data
-        }
-      })
-
       return data
     })
     .catch(error => {
+      delete axiosInstance.defaults.headers.common['Authorization']
       console.warn('error!', error)
     })
 }

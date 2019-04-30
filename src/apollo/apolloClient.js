@@ -9,6 +9,8 @@ import { notusResolvers } from './client-state/notusResolvers'
 import { storage } from '~/apollo/storage'
 import { axiosGetUserFromApi } from '~/utils/axiosGetUserFromApi'
 
+const debug = require('debug')('notus:apolloClient')
+
 export const apolloClient = async () => {
   const cache = new InMemoryCache()
 
@@ -26,21 +28,20 @@ export const apolloClient = async () => {
   }
 
   if (jwtToken) {
-    try {
-      currentUser = await axiosGetUserFromApi(cache, jwtToken)
-    } catch (error) {
-      console.warn(error)
+    currentUser = await axiosGetUserFromApi(cache, jwtToken)
+    debug('found current user: ', currentUser, " for jwtToken: ", jwtToken)
+    if (!currentUser) {
       localStorage.removeItem('jwtToken')
-      jwtToken = null
+      jwtToken = undefined
+    } else {
+      cache.writeData({
+        data: {
+          currentUser,
+          jwtToken
+        }
+      })
     }
   }
-
-  cache.writeData({
-    data: {
-      currentUser,
-      jwtToken
-    }
-  })
 
   const httpLink = createHttpLink({
     uri: `${process.env.REACT_APP_NOTUS_API_URI}/graphql`,
@@ -58,15 +59,14 @@ export const apolloClient = async () => {
     }
   });
 
-
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
       graphQLErrors.map(({ message, locations, path }) =>
-        console.log(
+        console.warn(
           `[GraphQL error]: Message: `, message, ` Location: `, locations, ` Path: `, path
         )
       );
-    if (networkError) console.log(`[Network error]: ${networkError}`);
+    if (networkError) console.error(`[Network error]: ${networkError}`);
   });
 
   return new ApolloClient({
