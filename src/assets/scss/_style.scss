@@ -2,7 +2,7 @@
 .input::placeholder,
 .textarea::placeholder,
 .react-select .react-select__placeholder {
-  color: rgba(160, 160, 160, 1);
+  color: rgba(150, 160, 170, 1);
 }
 
 input:-internal-autofill-previewed,
@@ -793,7 +793,7 @@ hr {
 }
 
 .color-block.is-dark {
-  background-color: $dark;
+  background-color: darken($dark, 5%);
 }
 
 .color-block.is-link {
@@ -949,7 +949,7 @@ svg {
 }
 
 .has-fill-dark {
-  fill: $dark;
+  fill: darken($dark, 5%);
 }
 
 .has-fill-primary {

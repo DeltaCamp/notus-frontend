@@ -219,14 +219,19 @@ button.button.is-small:active {
   border-width: 5px;
 }
 
+.button.is-dark {
+  background-color: darken($dark, 10%);
+  border-color: darken($dark, 10%);
+}
+
 .button.is-outlined.is-dark {
-  border-color: $dark;
+  border-color: darken($dark, 10%);
 }
 
 .button.is-outlined.is-dark:hover,
 .button.is-outlined.is-dark:active,
 .button.is-outlined.is-dark:focus {
-  border-color: $dark;
+  border-color: darken($dark, 10%);
   color: white;
 }
 

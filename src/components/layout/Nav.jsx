@@ -137,7 +137,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
             )}>
               <div className='container'>
                 <div className='row navbar-menu-container'>
-                  <div className='navbar-brand col-xs-6 col-md-1'>
+                  <div className='navbar-brand col-xs-6 col-md-1 col-lg-1'>
                     <Link
                       to={routes.HOME}
                       className='navbar-item'
@@ -164,7 +164,8 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   <div id='navbar-menu' className={classnames(
                     'navbar-menu',
                     'col-xs-12',
-                    'col-md-11',
+                    'col-md-10',
+                    'col-lg-11',
                     { 'is-active': this.state.mobileNavActive }
                   )}>
                     <div className='navbar-start'>
