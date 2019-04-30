@@ -1,18 +1,25 @@
 .abi-upload {
   border: 4px dashed rgba(255, 255, 255, 0.4);
   border-radius: 6px;
-  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.5);
-  transition: all 200ms ease-in-out;
+  margin: 0 auto;
+  max-width: 600px;
+  transition: all 120ms ease-in-out;
+  text-align: center;
 }
 
 .abi-upload:hover {
   border: 4px dashed white;
-  color: white;
-  // transform: scale3d(1.01, 1.01, 1);
+  transition: all 250ms ease-in-out;
 }
 
 .abi-upload p {
-  padding: 2rem;
+  padding: 1rem;
+  transition: all 120ms ease-in-out;
+  margin-bottom: 0;
+}
+
+.abi-upload:hover p {
+  color: white;
 }

@@ -35,6 +35,11 @@ button[disabled] {
     font-size: 1rem;
     width: 100%;
   }
+
+  @media screen and (max-width: $desktop) {
+    font-size: 1rem;
+    width: 100%;
+  }
 }
 
 .button.is-xsmall {
@@ -106,12 +111,9 @@ button[disabled] {
 .button.is-light:hover,
 .button.is-light:focus,
 .button.is-light:active {
-  // background-color: lighten(saturate($light, 100%), 2%);
-  // color: $dark !important;
-
   background-color: $dark;
-  color: white !important;
-  border-color: $dark !important;
+  color: white;
+  border-color: $dark;
   transition: all 70ms ease-in-out;
 }
 
@@ -143,6 +145,19 @@ button[disabled] {
 .button.is-pink.is-outlined:focus {
   background-color: saturate($pink, 100%);
   border-color: saturate($pink, 100%);
+  color: white;
+}
+
+.button.is-light.is-outlined {
+  border-color: #ccc;
+  color: #ccc;
+}
+
+.button.is-light.is-outlined:hover,
+.button.is-light.is-outlined:focus,
+.button.is-light.is-outlined:active {
+  background-color: transparent;
+  border-color: white;
   color: white;
 }
 
@@ -341,13 +356,31 @@ button.button.is-small:active {
 .buttons .button:not(:last-child):not(.is-fullwidth) {
   margin-right: 1rem;
 
-  @media screen and (max-width: $tablet) {
+  @media screen and (max-width: $widescreen) {
     margin-right: 0;
   }
 }
 
-.buttons .button {
+.buttons .button,
+.form .buttons .button {
   margin-bottom: 0.5rem !important;
+
+  @media screen and (max-width: $widescreen) {
+    font-size: 1rem;
+  }
+}
+
+.buttons,
+.form .buttons {
+  @media screen and (max-width: $widescreen) {
+    flex-direction: column-reverse;
+  }
+}
+
+.buttons .button svg {
+  @media screen and (max-width: $widescreen) {
+    width: 20px;
+  }
 }
 
 button:hover[disabled],

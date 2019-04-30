@@ -60,7 +60,7 @@ export const ScopeAndAbiEventSelect = graphql(abiEventsQuery, { name: 'abiEvents
       const { abiEventsQuery } = this.props
       const { abiEvents, loading, error } = abiEventsQuery
       let abiEventOptions = [{
-        label: 'Add new abi...',
+        label: 'Add new Contract ABI ...',
         value: NEW_ABI_VALUE
       }]
       if (error) {
@@ -90,7 +90,12 @@ export const ScopeAndAbiEventSelect = graphql(abiEventsQuery, { name: 'abiEvents
 
       debug(`Scope: ${scope} abiEventId: ${abiEventId} value: `, value)
 
-      return <NotusSelect {...this.props} value={value} options={[scopeGroup, abiEventGroup]} onChange={this.onChange} />
+      return <NotusSelect
+        {...this.props}
+        value={value}
+        options={[scopeGroup, abiEventGroup]}
+        onChange={this.onChange}
+      />
     }
   }
 )

@@ -1,10 +1,14 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import ReactDOM from 'react-dom'
+import ReactTooltip from 'react-tooltip'
 import { CheckCircle } from 'react-feather'
 import { graphql } from 'react-apollo'
-import { createAbiMutation } from '~/mutations/createAbiMutation'
+import { toast } from 'react-toastify'
 
 import { ABIUpload } from '~/components/ABIUpload'
+import { createAbiMutation } from '~/mutations/createAbiMutation'
+import { showErrorMessage } from '~/utils/showErrorMessage'
 
 export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutation' })(
   class _ContractForm extends PureComponent {
@@ -54,7 +58,7 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
       console.log('err ', message, files)
     }
 
-    onSubmit = (e) => {
+    handleSubmit = (e) => {
       e.preventDefault()
 
       if (this.state.name === '' || this.state.abi === '') {
@@ -70,8 +74,30 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
         },
         refetchQueries: ['abiEventsQuery']
       }).then(({ data }) => {
+        toast.success('Contract added successfully')
         this.props.onCreate(data.createAbi)
+      }).catch(error => {
+        console.warn(error)
+
+        error = {
+          message: `Please format your ABI code correctly (${error.message})`
+        }
+        showErrorMessage(error)
       })
+    }
+
+    invalid = () => {
+      return (this.state.name === '' || this.state.abi === '')
+    }
+
+    showErrorTooltip = () => {
+      if (this.invalid()) {
+        ReactTooltip.show(ReactDOM.findDOMNode(this.refs.errorTooltip))
+      }
+    }
+
+    hideErrorTooltip = () => {
+      ReactTooltip.hide(ReactDOM.findDOMNode(this.refs.errorTooltip))
     }
 
     render () {
@@ -100,7 +126,7 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
             placeholder={`Paste Contract ABI here or upload file above ...`}
           />
 
-          <div className="buttons mt30 has-text-right has-margin-left-auto is-block">
+          <div className='buttons mt30 has-text-right has-margin-left-auto'>
             <button
               onClick={this.props.onCancel}
               className='button is-outlined is-light'
@@ -109,8 +135,8 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
             </button>
             <button
               className='button is-success has-stroke-white'
-              onClick={this.onSubmit}
-              disabled={this.state.name === '' || this.state.abi === ''}
+              onClick={this.handleSubmit}
+              data-tip={this.invalid() ? `Please enter both a name for the new Contract as well as the ABI.` : ''}
             >
               <CheckCircle
                 className='has-stroke-white'

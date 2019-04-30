@@ -217,17 +217,7 @@ export const EditEventButtons =
                             : (<><CheckCircle /> &nbsp;Activate</>)
                           }
                         </button>
-                        <button
-                          className={classnames(
-                            'button',
-                            'is-small',
-                            'is-danger'
-                          )}
-                          onClick={this.handleOpenConfirmDeleteModal}
-                        >
-                          <AlertTriangle /> &nbsp;Delete
-                      </button>
-                    </>
+                      </>
                     )
                   }
 
@@ -312,6 +302,20 @@ export const EditEventButtons =
                         {eventActiveState}
                       </div>
                     )}
+
+
+                    <br />
+                    <button
+                      className={classnames(
+                        'button',
+                        'is-small',
+                        'is-text',
+                        'has-text-danger'
+                      )}
+                      onClick={this.handleOpenConfirmDeleteModal}
+                    >
+                      <AlertTriangle /> &nbsp;Delete
+                      </button>
                   </>
                 )
               }

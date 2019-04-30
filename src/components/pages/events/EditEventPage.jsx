@@ -14,7 +14,7 @@ import { EditEventButtons } from '~/components/events/EditEventButtons'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { EventMatcher } from '~/components/events/EventMatcher'
-import { FrequencyTitle } from '~/components/events/FrequencyTitle'
+import { RunCountTitle } from '~/components/events/RunCountTitle'
 import { EventSource } from '~/components/events/EventSource'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -30,7 +30,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       scope: 0,
       abiEventId: undefined,
       isPublic: false,
-      frequency: -1,
+      runCount: -1,
       matchers: [
         {
           operand: "",
@@ -41,7 +41,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       ]
     },
     editMatcherIndex: null,
-    // showEventForm: false,
+    editingEventSource: false
   }
 
   static propTypes = {
@@ -54,6 +54,10 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   componentDidMount() {
     this.setState({ freshlyMounted: true })
+  }
+
+  handleToggleEventSource = () => {
+    this.setState({ editingEventSource: !this.state.editingEventSource })
   }
 
   handleSubmitTitle = (newEventTitle) => {
@@ -164,7 +168,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         }
       }
       const successCallback = ({ data: { updateEvent } }) => {
-        toast.success('Updated rule matcher positions')
+        toast.success('Updated matcher positions')
       }
       // const errorCallback = ({ data: { updateEvent } }) => {
         // TODO: implement fail state and reverse position of matchers!
@@ -192,7 +196,7 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   doCreate = () => {
     let event = { ...this.state.event }
-    delete event.frequency
+
     this.props.createEventMutation({
       variables: {
         event
@@ -219,19 +223,28 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   handleOnCreateAbi = (abi) => {
-    let event = {...this.state.event}
+    let event = { ...this.state.event }
+
     if (abi.abiEvents.length) {
-      event.abiEventId = abi.abiEvents[0].id
+      event.abiEventId = parseInt(abi.abiEvents[0].id, 10)
     }
-    
+
+    if (!this.isCreateMode()) {
+      const variables = {
+        event: this.state.event
+      }
+      const successCallback = (mutationResult) => {
+        toast.success('Updated event scope')
+      }
+      this.runUpdateEventMutation(variables, successCallback)
+    }
+
+    this.handleToggleEventSource()
+
     this.setState({
       event
     })
   }
-
-  // showEventForm = () => {
-  //   this.setState({ showEventForm: true })
-  // }
 
   runUpdateEventMutation(variables, successCallback, errorCallback) {
     if (!errorCallback) {
@@ -250,27 +263,11 @@ export const EditEventPage = class _EditEventPage extends Component {
     }).then(successCallback).catch(errorCallback)
   }
 
-  // handleHideEventForm = (e) => {
-  //   e.preventDefault()
-
-  //   if (!this.isCreateMode()) {
-  //     const variables = {
-  //       event: this.state.event
-  //     }
-  //     const successCallback = (mutationResult) => {
-  //       toast.success('Updated event scope')
-  //     }
-  //     this.runUpdateEventMutation(variables, successCallback)
-  //   }
-
-  //   this.setState({ showEventForm: false })
-  // }
-
-  handleChangeFrequency = () => {
+  handleChangeRunCount = () => {
     this.setState({
       event: {
         ...this.state.event,
-        frequency: this.state.event.frequency === 0 ? -1 : 0
+        runCount: this.state.event.runCount === 0 ? -1 : 0
       }
     })
   }
@@ -353,7 +350,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         scope,
         abiEventId: parseInt(abiEventId, 10)
       }
-    })
+    }, this.doGenericUpdateEvent)
   }
 
   handleAddMatcher = () => {
@@ -401,7 +398,7 @@ export const EditEventPage = class _EditEventPage extends Component {
             'eventsQuery'
           ],
         }).then((mutationResult) => {
-          toast.success('Successfully removed rule matcher')
+          toast.success('Successfully removed matcher')
         }).catch(error => {
           console.error(error)
           showErrorMessage(error)
@@ -414,7 +411,7 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   doGenericUpdateEvent = () => {
     let event = { ...this.state.event }
-    delete event.frequency
+
     const variables = {
       event
     }
@@ -429,12 +426,7 @@ export const EditEventPage = class _EditEventPage extends Component {
 
     const { eventData } = this.props
 
-    // const editMatcher = this.isEditingMatcher()
-    //   ? this.state.event.matchers[this.state.editMatcherIndex]
-    //   : null
-
-    let recipe = {
-    }
+    let recipe = {}
 
     if (eventData) {
       if (eventData.loading) {
@@ -452,22 +444,19 @@ export const EditEventPage = class _EditEventPage extends Component {
         }
       }
     }
-
-    {/* <EditEventDrawer
-          event={this.state.event}
-          onChangeScopeAndAbiEventId={this.onChangeScopeAndAbiEventId}
-          onCreateAbi={this.handleOnCreateAbi}
-          isOpen={this.state.showEventForm}
-          onClose={this.handleHideEventForm}
-        /> */}
-    const frequencyAndScopeSentences = (
-      <div className='event-box__variable-wrapper'>
+    const runCountAndScopeSentences = (
+      <div className={classnames(
+        'event-box__variable-wrapper',
+        {
+          'matcher-row--is-active': this.state.editingEventSource
+        }
+      )}>
         <button
           className='event-box__variable'
-          onClick={this.handleChangeFrequency}
+          onClick={this.handleChangeRunCount}
         >
-          <FrequencyTitle
-            frequency={this.state.event.frequency}
+          <RunCountTitle
+            runCount={this.state.event.runCount}
           />
         </button>&nbsp;
 
@@ -475,7 +464,9 @@ export const EditEventPage = class _EditEventPage extends Component {
           event={this.state.event}
           onChangeScopeAndAbiEventId={this.onChangeScopeAndAbiEventId}
           onCreateAbi={this.handleOnCreateAbi}
+          handleToggleEventSource={this.handleToggleEventSource}
         />
+        {this.state.event.abiEventId ? `event ` : ``}
         occurs
       </div>
     )
@@ -580,7 +571,7 @@ export const EditEventPage = class _EditEventPage extends Component {
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-xl-10 col-start-xl-2 is-size-4'>
-                    {frequencyAndScopeSentences}
+                    {runCountAndScopeSentences}
                     {matcherSentences}
 
                     <button

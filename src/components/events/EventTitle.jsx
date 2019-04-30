@@ -116,7 +116,10 @@ export const EventTitle = ReactTimeout(class extends Component {
           className='form'
           onKeyUp={this.handleKeyUp}
         >
-          <div ref='errorTooltip' data-tip={`Please enter at least ${TITLE_MIN_LENGTH} characters for the event title.`} />
+          <div
+            ref='errorTooltip'
+            data-tip={`Please enter at least ${TITLE_MIN_LENGTH} characters for the event title.`}
+          />
           
           <input
             type='text'

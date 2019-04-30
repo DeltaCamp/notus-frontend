@@ -1,12 +1,11 @@
 .modal,
 .modal-content {
-  border-radius: 20px;
+  border-radius: 6px;
 }
 
 .modal {
   bottom: 25%;
   display: flex;
-  box-shadow: 0 12px 25px rgba(10, 10, 10, .3);
   color: white;
   height: 60%;
   left: 25%;
@@ -39,10 +38,15 @@
 }
 
 .modal.is-large {
-  height: 80vh;
-  left: 20vw;
+  height: 85vh;
+  left: 25vw;
   top: 5vh;
-  width: 60vw;
+  width: 50vw;
+
+  @media screen and (max-width: $widescreen) {
+    left: 15vw;
+    width: 70vw;
+  }
 
   @media screen and (max-width: $tablet) {
     height: 80vh;
@@ -78,27 +82,24 @@
 }
 
 .modal.is-active .modal-background {
-  pointer-events: all;
-  opacity: 0.5;
-  background-color: black;
-  z-index: 19999;
-  box-shadow: 0 8px 16px rgba(10, 10, 10, .1);
+  background-color: white;
   cursor: pointer;
+  opacity: 0.9;
   pointer-events: auto;
+  z-index: 19999;
 }
 
 .modal-content {
-  background-color: darken($light, 10%);
+  background-color: $dark;
   border: 5px solid white;
-  box-shadow: 0 0 100px 0 rgba(10, 10, 20, 0.6);
+  box-shadow: 0 0 20px 0 rgba(10, 10, 20, 0.2);
   position: relative;
   height: 100%;
-  // max-height: -webkit-fill-available;
   overflow: initial;
   width: 100%;
   z-index: 20001;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: $tablet) {
     margin: 0;
   }
 }
@@ -106,19 +107,16 @@
 .modal-content--inner {
   padding: 3rem 2rem;
 
-  @media screen and (max-width: 768px) {
-    padding: 2rem 0.5rem;
+  @media screen and (max-width: $tablet) {
+    padding: 2rem 1.5rem;
   }
 }
 
-// .modal-content {
-//   @media screen and (min-width: 769px) {
-//     max-height: calc(100vh - 40px);
-//     width: 640px;
-//   }
+.modal .form .textarea {
+  font-size: 1rem;
+}
 
-//   @media screen and (min-width: 1025px) {
-//     max-height: calc(100vh - 20px);
-//     width: 1020px;
-//   }
-// }
+.modal .buttons {
+  align-items: flex-end;
+  justify-content: flex-end;
+}

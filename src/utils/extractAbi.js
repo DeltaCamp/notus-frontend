@@ -2,13 +2,18 @@ export function extractAbi(json) {
   let name = null
   let abi = json
 
-  if (json.schemaVersion && json.contractName) {
-    // Then it's probably a Truffle artifact
+  // Prob a Truffle artifact
+  if (json.contractName) {
     name = json.contractName
-    abi = json.abi
   }
 
+  // Prob a Truffle artifact
+  if (json.abi) {
+    abi = json.abi
+  }
+  
   return {
-    name, abi
+    name,
+    abi
   }
 }

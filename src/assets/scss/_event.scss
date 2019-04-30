@@ -309,7 +309,15 @@
 }
 
 .event-box__variable.has-react-select {
-  width: 250px;
+  width: 270px;
+}
+
+.event-box__variable.has-react-select .react-select {
+  margin-left: -0.9rem;
+}
+
+.event-box__variable.has-react-select .react-select__value {
+  padding-left: 0.25rem;
 }
 
 .event-box__variable.has-text-input {
@@ -369,7 +377,7 @@
 }
 
 .event-box__variable .react-select__value-container {
-  padding: 0;
+  padding: 0 0 0 0.8rem;
   overflow: visible;
 }
 

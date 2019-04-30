@@ -22,6 +22,10 @@ export const EventMatcher =
       onChangeMatcher: PropTypes.func.isRequired
     }
 
+    handleClearEditMatcher = () => {
+      this.props.handleSetEditMatcher(null)
+    }
+
     handleEdit = () => {
       this.props.handleSetEditMatcher(this.props.index)
     }
@@ -50,6 +54,7 @@ export const EventMatcher =
             abiEventInputId={matcher.abiEventInputId}
             event={this.props.event}
             handleEdit={this.handleEdit}
+            handleClearEditMatcher={this.handleClearEditMatcher}
             matcher={matcher}
             onChange={this.props.onChangeMatcher}
             scope={this.props.scope}
@@ -58,6 +63,7 @@ export const EventMatcher =
           <MatcherOperator
             event={this.props.event}
             handleEdit={this.handleEdit}
+            handleClearEditMatcher={this.handleClearEditMatcher}
             matcher={matcher}
             onChange={this.props.onChangeMatcher}
           />

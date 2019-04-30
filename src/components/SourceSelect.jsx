@@ -88,9 +88,13 @@ export const SourceSelect = graphql(sourcesQuery, {
         let selectedOption
         if (value && validOptions) {
           if (value === SOURCES.CONTRACT_EVENT_INPUT) {
-            selectedOption = validOptions.find(option => parseInt(option.abiEventInput.id, 10) === abiEventInputId)
+            selectedOption = validOptions.find(option => 
+              option.abiEventInput && (parseInt(option.abiEventInput.id, 10) === abiEventInputId)
+            )
           } else {
-            selectedOption = validOptions.find(option => option.value === value)
+            selectedOption = validOptions.find(option => 
+              option.value === value
+            )
           }
           if (!selectedOption) {
             selectedOption = validOptions[0]

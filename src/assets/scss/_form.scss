@@ -11,6 +11,10 @@ $addonsFormHeight: 57px;
   box-shadow: none;
 }
 
+.form .input {
+  height: 60px !important;
+}
+
 .field:not(:last-child) {
   margin-bottom: 1rem;
 }
@@ -66,6 +70,25 @@ $hasAddonsformColor: $cyan;
     height: 50px;
     padding: 4px 10px 5px;
   }
+}
+
+.form .input,
+.form .react-select,
+.form .buttons {
+  display: flex;
+  margin: 0 5px;
+}
+
+.form .input:first-child,
+.form .react-select:first-child,
+.form .buttons:first-child {
+  margin-left: 0;
+}
+
+.form .input:last-child,
+.form .react-select:last-child,
+.form .buttons:last-child {
+  margin-right: 0;
 }
 
 .form .textarea {
@@ -386,6 +409,34 @@ input.input.is-large:active {
 }
 
 // REACT SELECT OVERRIDES
+.select,
+.react-select {
+  border-width: 0;
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 270px;
+  max-width: 350px;
+
+  @media screen and (max-width: $tablet - 203px) {
+    min-width: 100%;
+    width: 100%;
+  }
+}
+
+.react-select.is-wide {
+  width: 350px;
+
+  @media screen and (max-width: $tablet) {
+    width: 100%;
+  }
+}
+
+.select select,
+.react-select {
+  height: 60px !important;
+  line-height: 2;
+}
+
 .react-select .react-select__control {
   border-radius: 100px !important;
   border-width: 4px;
@@ -426,6 +477,7 @@ input.input.is-large:active {
   font-size: 1rem;
   margin: 5px;
   padding: 4px 10px;
+  width: 96%;
 }
 
 .react-select__option.react-select__option--is-focused {

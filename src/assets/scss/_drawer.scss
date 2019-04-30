@@ -76,37 +76,6 @@
   }
 }
 
-.select,
-.react-select {
-  border-width: 0;
-  display: inline-flex;
-  flex-direction: column;
-  min-width: 230px;
-  max-width: 350px;
-
-  @media screen and (max-width: $tablet - 203px) {
-    min-width: 100%;
-    width: 100%;
-  }
-}
-
-.react-select.is-wide {
-  width: 350px;
-
-  @media screen and (max-width: $tablet) {
-    width: 100%;
-  }
-}
-
-.form .input {
-  height: 60px !important;
-}
-
-.select select,
-.react-select {
-  height: 60px !important;
-  line-height: 2;
-}
 
 .has-bg .form .button.has-icon,
 .has-bg__dark .form .button.has-icon,
@@ -121,24 +90,7 @@
   margin-right: 4px;
 }
 
-.form .input,
-.form .react-select,
-.form .buttons {
-  display: flex;
-  margin: 0 5px;
-}
 
-.form .input:first-child,
-.form .react-select:first-child,
-.form .buttons:first-child {
-  margin-left: 0;
-}
-
-.form .input:last-child,
-.form .react-select:last-child,
-.form .buttons:last-child {
-  margin-right: 0;
-}
 
 .drawer .form .buttons:not(:last-child),
 .drawer .form .buttons .button {

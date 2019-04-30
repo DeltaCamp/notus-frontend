@@ -1,31 +1,52 @@
 import React from 'react'
-
-import { AbiEventName } from '~/components/AbiEventName'
 import { getNounArticle } from '~/utils/getNounArticle'
+import { graphql } from 'react-apollo'
 
-import { SCOPES, SCOPE_LABELS } from '~/constants'
+import { abiEventQuery } from '~/queries/abiEventQuery'
+import { SCOPE_LABELS } from '~/constants'
 
-export const SourceDescription = function ({ event, handleStartEdit }) {
-  let abiEventId
-  if (event.scope === SCOPES.CONTRACT_EVENT) {
-    abiEventId = event.abiEventId
-    if (event.abiEvent) {
-      abiEventId = event.abiEvent.id
+export const SourceDescription = graphql(abiEventQuery, {
+  name: 'abiEventQuery',
+  skip: (props) => (
+    !props.event.abiEventId
+  ),
+  options: (props) => {
+    return {
+      variables: {
+        id: props.event.abiEventId
+      }
     }
   }
+})(function ({ abiEventQuery, event, handleStartEdit }) {
+  let nounArticle,
+    title
+  
+  // let abiEventId = event.abiEventId
 
-  let title
-  if (abiEventId) {
-    title = <AbiEventName
-      abiEventId={abiEventId}
-    />
+  // if (event.scope === SCOPES.CONTRACT_EVENT) {
+  //   if (event.abiEvent) {
+  //     abiEventId = event.abiEvent.id
+  //   }
+  // }
+
+  if (abiEventQuery && !abiEventQuery.loading) {
+    const { abiEvent, error } = abiEventQuery
+
+    if (error) {
+      console.error(error)
+      title = '...'
+    } else {
+      title = `${abiEvent.abi.name} ${abiEvent.name}`
+    }
   } else {
-    title = getNounArticle(SCOPE_LABELS[event.scope])
+    title = SCOPE_LABELS[event.scope]
   }
+  
+  nounArticle = getNounArticle(title)
 
   return (
     <>
-      {title}
+      {nounArticle}
       <button
         className='event-box__variable has-react-select'
         onClick={handleStartEdit}
@@ -34,4 +55,4 @@ export const SourceDescription = function ({ event, handleStartEdit }) {
       </button>
     </>
   )
-}
+})

@@ -14,6 +14,7 @@ export class MatcherOperator extends Component {
   static propTypes = {
     abiEventInputId: PropTypes.number,
     handleEdit: PropTypes.func.isRequired,
+    handleClearEditMatcher: PropTypes.func.isRequired,
     matcher: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     event: PropTypes.object.isRequired,
@@ -52,6 +53,9 @@ export class MatcherOperator extends Component {
     this.setState({
       isEditing: false
     })
+
+    this.props.handleClearEditMatcher()
+
     document.removeEventListener('mousedown', this.handleClickAnywhere, false)
   }
 

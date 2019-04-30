@@ -42,11 +42,11 @@ export const ABIUpload = class _ABIUpload extends PureComponent {
           <section className={this.props.className || 'abi-upload'}>
             <div {...getRootProps()}>
               <input {...getInputProps()} />
-              <p>
+              <p className='is-size-6'>
                 {
                   isDragActive ? 
-                    <span>Drop file here</span> : 
-                    <span>Drag 'n drop or click to upload ABI or Truffle Artifact</span>
+                    <>Drop file here</> : 
+                    <>Drag &amp; drop a file or click here to upload ABI or Truffle Artifact</>
                 }
               </p>
             </div>

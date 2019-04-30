@@ -17,19 +17,24 @@ export const EventSource = class _EventSource extends Component {
   static propTypes = {
     event: PropTypes.object.isRequired,
     onChangeScopeAndAbiEventId: PropTypes.func.isRequired,
-    onCreateAbi: PropTypes.func.isRequired
+    onCreateAbi: PropTypes.func.isRequired,
+    handleToggleEventSource: PropTypes.func.isRequired
   }
 
   showAddContract = (e) => {
     this.setState({
       showAddContract: true
     })
+
+    document.addEventListener('keyup', this.handleKeyUp, false)
   }
 
   hideAddContract = () => {
     this.setState({
       showAddContract: false
     })
+
+    document.removeEventListener('keyup', this.handleKeyUp, false)
   }
 
   handleOnCreateAbi = (abi) => {
@@ -44,7 +49,7 @@ export const EventSource = class _EventSource extends Component {
       isEditing: true
     })
 
-    // this.props.handleEdit()
+    this.props.handleToggleEventSource()
 
     document.addEventListener('mousedown', this.handleClickAnywhere, false)
   }
@@ -71,7 +76,17 @@ export const EventSource = class _EventSource extends Component {
     this.setState({
       isEditing: false
     })
+
+    this.props.handleToggleEventSource()
+    
     document.removeEventListener('mousedown', this.handleClickAnywhere, false)
+  }
+
+  handleKeyUp = (e) => {
+    console.log(e.keyCode)
+    if (e.keyCode === KEYS.escape) {
+      this.hideAddContract()
+    }
   }
 
   render () {
@@ -81,6 +96,7 @@ export const EventSource = class _EventSource extends Component {
           isOpen={this.state.showAddContract}
           handleClose={this.hideAddContract}
           isLarge={true}
+          onKeyUp={this.handleKeyUp}
         >
           {
             this.state.showAddContract &&
