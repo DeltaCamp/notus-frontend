@@ -7,8 +7,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { signOutMutation } from '~/mutations/signOutMutation'
-// import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
-import NotusLogo from '~/assets/images/notus-logo8.svg'
+import NotusLogo from '~/assets/images/notus-logo.svg'
 import * as routes from '~/../config/routes'
 
 export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
