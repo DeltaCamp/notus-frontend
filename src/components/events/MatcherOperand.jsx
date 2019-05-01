@@ -2,106 +2,71 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import ReactTimeout from 'react-timeout'
+import { graphql } from 'react-apollo'
 
+import { AddressInput } from '~/components/AddressInput'
+import { TextInput } from '~/components/TextInput'
+import { sourceQuery } from '~/queries/sourceQuery'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
-import { KEYS } from '~/constants'
 
-export const MatcherOperand = ReactTimeout(class extends Component {
-  state = {
-    isEditing: false,
-    newOperand: ''
-  }
-
-  static propTypes = {
-    handleEdit: PropTypes.func.isRequired,
-    matcher: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired
-  }
-
-  componentDidUpdate() {
-    this.props.setTimeout(ReactTooltip.rebuild)
-  }
-
-  handleStartEdit = (e) => {
-    e.preventDefault()
-
-    this.setState({
-      isEditing: true,
-      newOperand: this.props.matcher.operand
-    })
-
-    this.props.handleEdit()
-  }
-
-  handleSubmit = () => {
-    if (this.props.matcher.operand === this.state.newOperand) {
-      this.handleCancel()
-      return
+export const MatcherOperand = graphql(sourceQuery, {
+  name: 'sourceQuery',
+  skip: (props) => !props.matcher,
+  options: (props) => ({
+    variables: {
+      source: props.matcher.source
+    }
+  })
+})(
+  ReactTimeout(class extends Component {
+    static propTypes = {
+      handleSetEditMatcher: PropTypes.func.isRequired,
+      matcher: PropTypes.object.isRequired,
+      onChange: PropTypes.func.isRequired
     }
 
-    const clone = deepCloneMatcher(this.props.matcher)
-    clone.operand = this.state.newOperand
-    this.props.onChange(clone)
-
-    this.handleCancel()
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      newOperand: e.target.value
-    })
-  }
-
-  handleKeyUp = (e) => {
-    if (e.keyCode === KEYS.escape) {
-      this.handleCancel()
-    } else if (e.keyCode === KEYS.enter) {
-      this.handleSubmit()
-    }
-  }
-
-  handleCancel = () => {
-    this.setState({
-      isEditing: false,
-      newOperand: ''
-    })
-  }
-
-  render () {
-    const { matcher } = this.props
-
-    if (matcher.operator === 0) {
-      return null
+    componentDidUpdate() {
+      this.props.setTimeout(ReactTooltip.rebuild)
     }
 
-    return (
-      <>
-        {this.state.isEditing
-          ? (
-            <div className='event-box__variable has-text-input'>
-              <input
-                className='input'
-                type='text'
-                value={this.state.newOperand}
-                onChange={this.handleChange}
-                onBlur={this.handleSubmit}
-                onKeyUp={this.handleKeyUp}
-                autoFocus
-                style={{ width: ((this.state.newOperand.length + 1) * 16) }}
-              />
-            </div>
-          )
-          : (
-            <button
-              className='event-box__variable has-text-input event-box__variable--truncated'
-              onClick={this.handleStartEdit}
-              data-tip={matcher.operand.length > 16 ? matcher.operand : ''}
-            >
-              {matcher.operand || 0}
-            </button>
-          )
-        }
-      </>
-    )
-  }
-})
+    handleSubmit = (newValue) => {
+      const clone = deepCloneMatcher(this.props.matcher)
+      clone.operand = newValue
+      this.props.onChange(clone)
+    }
+
+    render () {
+      const { matcher, sourceQuery } = this.props
+      const { source } = sourceQuery
+
+      const error = (sourceQuery || {}).error
+      if (error) {
+        console.error(error)
+      }
+
+      if (matcher.operator === 0) {
+        return null
+      }
+
+      let operandInput = <TextInput
+        matcher={matcher}
+        handleSubmit={this.handleSubmit}
+        handleSetEditMatcher={this.props.handleSetEditMatcher}
+      />
+
+      if (source && source.dataType === 'address') {
+        operandInput = <AddressInput 
+          matcher={matcher}
+          handleSubmit={this.handleSubmit}
+          handleSetEditMatcher={this.props.handleSetEditMatcher}
+        />
+      }
+
+      return (
+        <div className='event-box__variable has-text-input event-box__variable--truncated'>
+          {operandInput}
+        </div>
+      )
+    }
+  })
+)

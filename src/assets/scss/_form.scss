@@ -410,7 +410,7 @@ input.input.is-large:active {
   border-width: 0;
   display: inline-flex;
   flex-direction: column;
-  min-width: 270px;
+  min-width: 225px;
   max-width: 350px;
 
   @media screen and (max-width: $tablet - 203px) {

@@ -15,7 +15,7 @@ export const MatcherOperator = ReactTimeout(class extends Component {
 
   static propTypes = {
     abiEventInputId: PropTypes.number,
-    handleEdit: PropTypes.func.isRequired,
+    handleSetEditMatcher: PropTypes.func.isRequired,
     handleClearEditMatcher: PropTypes.func.isRequired,
     matcher: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
@@ -34,7 +34,7 @@ export const MatcherOperator = ReactTimeout(class extends Component {
       isEditing: true
     })
 
-    this.props.handleEdit()
+    this.props.handleSetEditMatcher()
 
     document.addEventListener('mousedown', this.handleClickAnywhere, false)
   }

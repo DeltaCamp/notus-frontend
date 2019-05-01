@@ -33,7 +33,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       runCount: -1,
       matchers: [
         {
-          operand: '',
+          operand: '0',
           operator: 2,
           order: 1,
           source: 'transaction.value'
@@ -508,7 +508,7 @@ export const EditEventPage = class _EditEventPage extends Component {
                               {...provided.dragHandleProps}
                             >
                               <EventMatcher
-                                key={`event-matcher-${index}`}
+                                key={`event-matcher-${eventMatcher.id || `new-${index}`}`}
                                 isFirst={index === 0}
                                 index={index}
                                 handleSetEditMatcher={this.handleSetEditMatcher}

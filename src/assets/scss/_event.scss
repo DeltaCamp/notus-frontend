@@ -277,23 +277,67 @@
   height: 47px;
   line-height: 1;
   margin: 0.5rem 0.5rem 0;
+  max-width: 225px;
   padding: 0.35rem 0.75rem 0.45rem;
   position: relative;
   text-align: left;
   transition: all 275ms ease-in-out;
 
+  @media screen and (max-width: $fullhd) {
+    max-width: 205px;
+  }
+  
   @media screen and (max-width: $widescreen) {
-    width: 100%;
+    max-width: 160px;
+    // width: 100%;
+  }
+
+  @media screen and (max-width: $desktop) {
+    max-width: 160px;
+  }
+
+  @media screen and (max-width: $tablet) {
+    max-width: 135px;
   }
 
   @media screen and (max-width: $mobile) {
+    display: block;
+    min-width: 100%;
+    max-width: auto;
   }
 }
 
+.event-box__variable--full-width {
+  max-width: none;
+}
+
 .event-box__variable--truncated {
+  // max-width: 225px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  // @media screen and (max-width: $fullhd) {
+  //   max-width: 205px;
+  // }
+
+  // @media screen and (max-width: $widescreen) {
+  //   max-width: 160px;
+  // }
+
+  // @media screen and (max-width: $desktop) {
+  //   max-width: 160px;
+  // }
+
+  // @media screen and (max-width: $tablet) {
+  //   max-width: 135px;
+  // }
+
+  // @media screen and (max-width: $mobile) {
+  //   display: block;
+  //   min-width: 100%;
+  //   max-width: auto;
+  // }
 }
 
 .event-box__variable:first-child {
@@ -327,6 +371,8 @@
 }
 
 .event-box__variable.has-text-input {
+  top: -0.35rem;
+  padding: 0;
   width: auto !important;
 }
 
@@ -338,7 +384,9 @@
   font-weight: 600;
   height: 100%;
   line-height: inherit;
-  padding: 0;
+  max-width: 200px;
+  min-width: 80px;
+  padding: 0.35rem 0.5rem 0.45rem;
   transition: all 50ms ease-in-out;
 }
 

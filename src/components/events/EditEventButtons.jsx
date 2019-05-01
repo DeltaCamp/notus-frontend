@@ -169,11 +169,6 @@ export const EditEventButtons =
                     return null
                   }
 
-                  console.log(currentUserData)
-                  console.log(currentUserData.currentUser)
-                  console.log(currentUserData.currentUser.id)
-                  console.log(event)
-                  console.log(event.user)
                   isEventAuthor = (currentUserData.currentUser && event.user && (currentUserData.currentUser.id === parseInt(event.user.id, 10)))
 
                   if (!isEventAuthor) {

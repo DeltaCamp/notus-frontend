@@ -5,7 +5,7 @@ import { MatcherOperand } from '~/components/events/MatcherOperand'
 import { MatcherOperator } from '~/components/events/MatcherOperator'
 import { MatcherSource } from '~/components/events/MatcherSource'
 
-const DragHandle = () => <span className='drag-handle is-hidden-touch'>
+const DragHandle = () => <span className='drag-handle'>
   <Menu />
 </span>
 
@@ -25,7 +25,7 @@ export const EventMatcher =
       this.props.handleSetEditMatcher(null)
     }
 
-    handleEdit = () => {
+    handleSetEditMatcher = () => {
       this.props.handleSetEditMatcher(this.props.index)
     }
 
@@ -52,7 +52,7 @@ export const EventMatcher =
           <MatcherSource
             abiEventInputId={matcher.abiEventInputId}
             event={this.props.event}
-            handleEdit={this.handleEdit}
+            handleSetEditMatcher={this.handleSetEditMatcher}
             handleClearEditMatcher={this.handleClearEditMatcher}
             matcher={matcher}
             onChange={this.props.onChangeMatcher}
@@ -61,14 +61,14 @@ export const EventMatcher =
 
           <MatcherOperator
             event={this.props.event}
-            handleEdit={this.handleEdit}
+            handleSetEditMatcher={this.handleSetEditMatcher}
             handleClearEditMatcher={this.handleClearEditMatcher}
             matcher={matcher}
             onChange={this.props.onChangeMatcher}
           />
 
           <MatcherOperand
-            handleEdit={this.handleEdit}
+            handleSetEditMatcher={this.handleSetEditMatcher}
             matcher={matcher}
             onChange={this.props.onChangeMatcher}
           />

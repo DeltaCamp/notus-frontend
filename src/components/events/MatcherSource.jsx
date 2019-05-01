@@ -56,7 +56,7 @@ export const MatcherSource = graphql(sourcesQuery, {
 
         static propTypes = {
           abiEventInputId: PropTypes.number,
-          handleEdit: PropTypes.func.isRequired,
+          handleSetEditMatcher: PropTypes.func.isRequired,
           handleClearEditMatcher: PropTypes.func.isRequired,
           matcher: PropTypes.object.isRequired,
           onChange: PropTypes.func.isRequired,
@@ -75,7 +75,7 @@ export const MatcherSource = graphql(sourcesQuery, {
             isEditing: true
           })
 
-          this.props.handleEdit()
+          this.props.handleSetEditMatcher()
 
           document.addEventListener('mousedown', this.handleClickAnywhere, false)
         }

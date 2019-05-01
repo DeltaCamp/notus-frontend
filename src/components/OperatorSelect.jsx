@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
-import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types'
+import { graphql } from 'react-apollo'
 
 import { NotusSelect } from '~/components/forms/NotusSelect'
 import { isValidDataTypeOperator } from '~/utils/isValidDataTypeOperator'
@@ -55,12 +55,18 @@ export const OperatorSelect = graphql(sourceQuery, {
           if (hide) { return false }
           if (!sourceQuery) { return true }
 
+
           const { source } = sourceQuery
+          console.log(source.dataType)
           if (source.source !== SOURCES.CONTRACT_EVENT_INPUT) {
             return isValidDataTypeOperator(source.dataType, option.value)
           } else {
             const { abiEventInput } = abiEventInputQuery || {}
-            return abiEventInput && isValidDataTypeOperator(abiEventInput.type, option.value)
+            console.log(abiEventInput.type)
+            return abiEventInput && isValidDataTypeOperator(
+              abiEventInput.type,
+              option.value
+            )
           }
         })
 

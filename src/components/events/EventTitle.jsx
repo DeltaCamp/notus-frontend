@@ -102,7 +102,7 @@ export const EventTitle = ReactTimeout(class extends Component {
   render () {
     let content = (
       <button
-        className='event-box__variable'
+        className='event-box__variable event-box__variable--full-width'
         onClick={this.handleEditTitle}
       >
         {this.props.event.title || DEFAULT_TITLE}
