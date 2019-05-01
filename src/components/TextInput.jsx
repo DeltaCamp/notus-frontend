@@ -59,12 +59,12 @@ export const TextInput = class _TextInput extends Component {
       type='text'
       className='input'
       ref='inputRef'
+      placeholder='0'
       value={this.state.value}
       onChange={this.handleChange}
       onBlur={this.handleBlur}
       onKeyUp={this.handleKeyUp}
       onClick={this.handleClick}
-      placeholder='0'
       style={{
         width: ((this.state.value.length + 1) * 16)
       }}

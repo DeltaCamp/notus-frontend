@@ -486,3 +486,8 @@ input.input.is-large:active {
   border-radius: 5px;
   color: black !important;
 }
+
+.event-box__variable .input.has-border-danger,
+.has-border-danger {
+  border: 2px solid $danger;
+}

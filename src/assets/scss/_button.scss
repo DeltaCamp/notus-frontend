@@ -109,7 +109,6 @@ button[disabled] {
 }
 
 .button.is-light:hover,
-.button.is-light:focus,
 .button.is-light:active {
   background-color: $dark;
   color: white;
@@ -118,7 +117,6 @@ button[disabled] {
 }
 
 .button.is-light:hover svg,
-.button.is-light:focus svg,
 .button.is-light:active svg {
   stroke: white;
 }
@@ -203,8 +201,7 @@ button[disabled] {
 }
 
 .button.is-small:hover,
-.button.is-small:active,
-.button.is-small:focus {
+.button.is-small:active {
   // box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
   color: white;
 }
@@ -252,8 +249,7 @@ button.button.is-small:active {
 }
 
 .button.has-icon:hover,
-.button.has-icon:active,
-.button.has-icon:focus, {
+.button.has-icon:active {
   border: 3px solid rgba(255, 255, 255, 1);
 }
 
