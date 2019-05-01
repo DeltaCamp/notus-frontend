@@ -290,6 +290,12 @@
   }
 }
 
+.event-box__variable--truncated {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .event-box__variable:first-child {
   margin-left: 0;
 }

@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
+import ReactTooltip from 'react-tooltip'
+import ReactTimeout from 'react-timeout'
 
 import { OperatorSelect } from '~/components/OperatorSelect'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { KEYS, OPERATOR_LABELS } from '~/constants'
 
-export class MatcherOperator extends Component {
+export const MatcherOperator = ReactTimeout(class extends Component {
   state = {
     isEditing: false
   }
@@ -19,6 +21,10 @@ export class MatcherOperator extends Component {
     onChange: PropTypes.func.isRequired,
     event: PropTypes.object.isRequired,
     scope: PropTypes.number
+  }
+
+  componentDidUpdate() {
+    this.props.setTimeout(ReactTooltip.rebuild)
   }
 
   handleStartEdit = (e) => {
@@ -68,6 +74,7 @@ export class MatcherOperator extends Component {
   render () {
     const { matcher } = this.props
     const { abiEventInputId, operator } = matcher
+    const operatorWords = OPERATOR_LABELS[operator]
 
     return (
       <>
@@ -89,14 +96,15 @@ export class MatcherOperator extends Component {
           )
           : (
             <button
-              className='event-box__variable has-react-select'
+              className='event-box__variable has-react-select event-box__variable--truncated'
               onClick={this.handleStartEdit}
+              data-tip={operatorWords.length > 16 ? operatorWords : ''}
             >
-              {OPERATOR_LABELS[operator]}
+              {operatorWords}
             </button>
           )
         }
       </>
     )
   }
-}
+})

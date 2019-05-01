@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
+import ReactTooltip from 'react-tooltip'
+import ReactTimeout from 'react-timeout'
 import { graphql } from 'react-apollo'
 
 import { SourceSelect } from '~/components/SourceSelect'
@@ -47,7 +49,7 @@ export const MatcherSource = graphql(sourcesQuery, {
         }
       })
     })(
-      class _MatcherSource extends Component {
+      ReactTimeout(class _MatcherSource extends Component {
         state = {
           isEditing: false
         }
@@ -60,6 +62,10 @@ export const MatcherSource = graphql(sourcesQuery, {
           onChange: PropTypes.func.isRequired,
           event: PropTypes.object.isRequired,
           scope: PropTypes.number
+        }
+
+        componentDidUpdate() {
+          this.props.setTimeout(ReactTooltip.rebuild)
         }
 
         handleStartEdit = (e) => {
@@ -156,6 +162,7 @@ export const MatcherSource = graphql(sourcesQuery, {
 
           // can't we get this from props?
           const abiEventInputId = matcher.abiEventInputId || (matcher.abiEventInput || {}).id
+          const sourceWords = this.sourceWords()
 
           return (
             <>
@@ -178,17 +185,18 @@ export const MatcherSource = graphql(sourcesQuery, {
                 )
                 : (
                   <button
-                    className='event-box__variable has-react-select'
+                    className='event-box__variable has-react-select event-box__variable--truncated'
                     onClick={this.handleStartEdit}
+                    data-tip={sourceWords.length > 16 ? sourceWords : ''}
                   >
-                    {this.sourceWords()}
+                    {sourceWords}
                   </button>
                 )
               }
             </>
           )
         }
-      }
+      })
     )
   )
 )

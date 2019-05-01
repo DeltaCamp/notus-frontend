@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import ReactTooltip from 'react-tooltip'
+import ReactTimeout from 'react-timeout'
 
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { KEYS } from '~/constants'
 
-export class MatcherOperand extends Component {
+export const MatcherOperand = ReactTimeout(class extends Component {
   state = {
     isEditing: false,
     newOperand: ''
@@ -14,6 +16,10 @@ export class MatcherOperand extends Component {
     handleEdit: PropTypes.func.isRequired,
     matcher: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired
+  }
+
+  componentDidUpdate() {
+    this.props.setTimeout(ReactTooltip.rebuild)
   }
 
   handleStartEdit = (e) => {
@@ -87,8 +93,9 @@ export class MatcherOperand extends Component {
           )
           : (
             <button
-              className='event-box__variable has-text-input'
+              className='event-box__variable has-text-input event-box__variable--truncated'
               onClick={this.handleStartEdit}
+              data-tip={matcher.operand.length > 16 ? matcher.operand : ''}
             >
               {matcher.operand || 0}
             </button>
@@ -97,4 +104,4 @@ export class MatcherOperand extends Component {
       </>
     )
   }
-}
+})
