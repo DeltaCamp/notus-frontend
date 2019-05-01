@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactTooltip from 'react-tooltip'
 import ReactTimeout from 'react-timeout'
+import classnames from 'classnames'
 import { ethers } from 'ethers'
 
 import { KEYS } from '~/constants'
@@ -74,7 +75,12 @@ export const AddressInput = ReactTimeout(class _AddressInput extends Component {
     return <input
       data-tip={!this.valid() ? 'Please enter a valid Ethereum address (42 characters, starts with "0x")' : ''}
       type='text'
-      className={`input ${this.valid() ? '' : 'has-border-danger'}`}
+      className={classnames(
+        'input',
+        {
+          'has-border-danger': this.state.value.length && !this.valid()
+        }
+      )}
       ref='inputRef'
       placeholder='0x0000000000000000000000000000000000000000'
       value={this.state.value}

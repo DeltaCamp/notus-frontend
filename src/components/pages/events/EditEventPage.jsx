@@ -295,7 +295,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       }
     })
 
-    if (!this.isCreateMode()) {
+    if (!this.isCreateMode() && matcher.operand) {
       if (matcher.id) {
         this.props.updateMatcherMutation({
           variables: {
