@@ -53,7 +53,7 @@ export const Footer = class _Footer extends Component {
                       </Link>
 
                       <p className='is-size-7'>
-                        Notus makes it easy to listen for Ethereum smart contract events and triggering webhooks or sending messages in response.
+                        Listen to Ethereum using Notus.  Trigger emails or anything you can imagine.
                       </p>
 
                       <br />
