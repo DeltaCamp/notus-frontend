@@ -106,8 +106,13 @@ body.home .navbar {
 }
 
 .navbar-brand svg:hover path {
-  fill: $purple;
+  fill: $blue;
   transition: all 150ms ease-in;
+  stroke: white;
+}
+
+.navbar-brand svg:hover path:first-child {
+  fill: $purple;
 }
 
 .navbar-brand svg {

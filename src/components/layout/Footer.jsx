@@ -5,7 +5,7 @@ import {
 } from 'react-feather'
 import { withRouter } from 'react-router'
 // import NotusLogo from '~/assets/images/notus--wordmark--black-transparent2.svg'
-import NotusLogo from '~/assets/images/notus7.svg'
+import NotusLogo from '~/assets/images/notus-logo8.svg'
 import * as routes from '~/../config/routes'
 
 export const Footer = class _Footer extends Component {
@@ -48,7 +48,9 @@ export const Footer = class _Footer extends Component {
                         to={routes.HOME}
                         onClick={this.closeMobileNav}
                       >
-                        <NotusLogo />
+                        <NotusLogo
+                          className='brand-svg'
+                        />
                       </Link>
 
                       <p className='is-size-7'>

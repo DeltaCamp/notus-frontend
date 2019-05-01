@@ -16,9 +16,19 @@
   transition: all 700ms ease-in;
 }
 
-.footer-brand svg:hover path {
-  fill: $purple;
+// .footer-brand svg:hover path {
+//   fill: $purple;
+//   transition: all 150ms ease-in;
+// }
+
+.footer-brand .brand-svg:hover path {
+  fill: $cyan;
+  stroke: white;
   transition: all 150ms ease-in;
+}
+
+.footer-brand .brand-svg:hover path:first-child {
+  fill: $orange;
 }
 
 .footer-brand .twitter-svg {
@@ -28,6 +38,7 @@
 .footer-brand .twitter-svg path {
   fill: black;
   stroke: none;
+  transition: all 150ms ease-in;
 }
 
 .footer-brand .twitter-svg:hover path {
