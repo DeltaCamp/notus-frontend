@@ -1,4 +1,4 @@
-# Notus Network - Marketing Site & UI App
+# Notus - Marketing Site & UI App
 
 Mention Jake: <a
                 href='https://twitter.com/jacque006'

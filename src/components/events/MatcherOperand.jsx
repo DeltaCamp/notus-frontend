@@ -56,7 +56,6 @@ export const MatcherOperand = graphql(sourceQuery, {
         if (error) {
           console.error(error)
         }
-        // console.log('abiEventInputQuery', abiEventInputQuery)
 
         if (matcher.operator === 0) {
           return null
@@ -84,9 +83,9 @@ export const MatcherOperand = graphql(sourceQuery, {
           && source.dataType === 'bytes'
         ) {
           operandInput = <TextInput
-            matcher={matcher}
+            value={matcher.operand}
             handleSubmit={this.handleSubmit}
-            handleSetEditMatcher={this.props.handleSetEditMatcher}
+            handleStartEditing={this.props.handleSetEditMatcher}
           />
         } else {
           console.warn('Unknown datatype for source & matcher!', source, matcher)

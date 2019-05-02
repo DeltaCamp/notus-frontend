@@ -24,6 +24,8 @@ import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { showErrorMessage } from '~/utils/showErrorMessage'
 import * as routes from '~/../config/routes'
 
+const debug = require('debug')('notus:EditEventPage')
+
 export const EditEventPage = class _EditEventPage extends Component {
   state = {
     event: {
@@ -254,6 +256,8 @@ export const EditEventPage = class _EditEventPage extends Component {
       }
     }
 
+    debug('runUpdateEventMutation: ', variables)
+
     this.props.updateEventMutation({
       variables,
       refetchQueries: [
@@ -350,7 +354,11 @@ export const EditEventPage = class _EditEventPage extends Component {
         scope,
         abiEventId: parseInt(abiEventId, 10)
       }
-    }, this.doGenericUpdateEvent)
+    }, () => {
+      if (!this.isCreateMode()) {
+        this.doGenericUpdateEvent()
+      }
+    })
   }
 
   handleAddMatcher = () => {
@@ -411,6 +419,8 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   doGenericUpdateEvent = () => {
     let event = { ...this.state.event }
+
+    debug('doGenericUpdateEvent: ', event)
 
     const variables = {
       event

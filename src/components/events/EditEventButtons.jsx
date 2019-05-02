@@ -57,7 +57,6 @@ export const EditEventButtons =
                     }
                   },
                   refetchQueries: [
-                    'eventsQuery',
                     'eventsQuery'
                   ]
                 }).then(({ data: { updateEvent } }) => {
@@ -82,7 +81,6 @@ export const EditEventButtons =
                     }
                   },
                   refetchQueries: [
-                    'eventsQuery',
                     'eventsQuery'
                   ]
                 }).then(({ data: { updateEvent } }) => {
@@ -92,23 +90,6 @@ export const EditEventButtons =
                   toast.error('Error while updating event')
                   console.error(error)
                 })
-              }
-
-              runUpdateEventMutation (variables, successCallback, errorCallback) {
-                if (!errorCallback) {
-                  errorCallback = error => {
-                    console.error(error)
-                  }
-                }
-
-                this.props.updateEventMutation({
-                  variables,
-                  refetchQueries: [
-                    // only refetch the event we just updated (1 record)
-                    'eventsQuery',
-                    'eventsQuery'
-                  ]
-                }).then(successCallback).catch(errorCallback)
               }
 
               handleOpenConfirmDeleteModal = (e) => {

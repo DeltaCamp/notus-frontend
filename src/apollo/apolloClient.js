@@ -51,11 +51,12 @@ export const apolloClient = async () => {
     }
   })
 
-  const errorLink = onError(({ graphQLErrors, networkError }) => {
+  const errorLink = onError((data) => {
+    const { graphQLErrors, networkError } = data
     if (graphQLErrors) {
       graphQLErrors.map(({ message, locations, path }) =>
         console.warn(
-          `[GraphQL error]: Message: `, message, ` Location: `, locations, ` Path: `, path
+          `[GraphQL error]: Message: `, message, ` Location: `, locations, ` Path: `, path, data
         )
       )
     }

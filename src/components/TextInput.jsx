@@ -2,13 +2,25 @@ import React, { Component } from 'react'
 import ReactTooltip from 'react-tooltip'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
+import PropTypes from 'prop-types'
 
 import { KEYS } from '~/constants'
 
 export const TextInput = ReactTimeout(class _TextInput extends Component {
+  static propTypes = {
+    value: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleStartEditing: PropTypes.func,
+    required: PropTypes.bool
+  }
+
+  static defaultProps = {
+    required: true
+  }
+
   state = {
-    value: this.props.matcher.operand,
-    previousValue: this.props.matcher.operand
+    value: this.props.value,
+    previousValue: this.props.value
   }
 
   componentDidUpdate = () => {
@@ -51,7 +63,9 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
   }
 
   handleClick = () => {
-    this.props.handleSetEditMatcher()
+    if (this.props.handleStartEditing) {
+      this.props.handleStartEditing()
+    }
   }
 
   valid = () => {
@@ -59,9 +73,15 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
   }
 
   render () {
+    const props = {}
+
+    if (this.props.required) {
+      props['data-tip'] = !this.valid() ? 'Please enter a value' : this.state.value
+    }
+
     return (
       <input
-        data-tip={!this.valid() ? 'Please enter a value' : this.state.value}
+        {...props}
         type='text'
         className={classnames(
           'input',
