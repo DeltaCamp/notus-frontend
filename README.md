@@ -52,8 +52,8 @@ You can configure the app using environment variables:
 | REACT_APP_ALLOWED_NETWORK_IDS | Network ids that the app recognizes.  We use 1234 as the local network id. | "1234 3 1" |
 | REACT_APP_MAINNET_STARTING_BLOCK | Starting block number for event searches on mainnet.  Required! | 7189521 |
 | REACT_APP_DEFAULT_NETWORK_NAME | Default network when no Ethereum provider is found. See [Ethers.js](https://docs.ethers.io/ethers.js/html/api-providers.html#connecting-to-ethereum) | homestead |
-| REACT_APP_WS_API_URL | WebSocket url to connect to for logs from Notus webhook triggers.  Required! | wss://api.notus.network |
-| REACT_APP_NOTUS_API_URI | Notus API server URI Required! | dev: http://localhost:4000  prod: https://api.notus.network |
+| REACT_APP_WS_API_URL | WebSocket url to connect to for logs from Notus webhook triggers.  Required! | wss://api.notus.events |
+| REACT_APP_NOTUS_API_URI | Notus API server URI Required! | dev: http://localhost:4000  prod: https://api.notus.events |
 
 ## Custom Contract Addresses
 

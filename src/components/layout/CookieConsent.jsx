@@ -52,7 +52,7 @@ export const CookieConsent = ReactTimeout(
           )}
         >
           <div className='cookie-consent--inner'>
-            We use cookies to store your session and for analytics / error reporting. You consent to our cookie usage if you continue to use the <a href='https://notus.network'>notus.network</a> site. Please refer to the <Link to={routes.PRIVACY_PAGE}>privacy policy</Link> for more information.
+            We use cookies to store your session and for analytics / error reporting. You consent to our cookie usage if you continue to use the <a href='https://notus.events'>notus.events</a> site. Please refer to the <Link to={routes.PRIVACY_PAGE}>privacy policy</Link> for more information.
 
             <button
               className='button is-link is-small'

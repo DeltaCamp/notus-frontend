@@ -45,7 +45,7 @@ export const EthereumNotifications = () => {
 
           {/* <CodeBox /> */}
           {/* <p>
-                <a href='https://docs.notus.network'>Read the Developer Documentation</a>
+                <a href='https://docs.notus.events'>Read the Developer Documentation</a>
               </p> */}
           <Link
             to={routes.ABOUT_PAGE}

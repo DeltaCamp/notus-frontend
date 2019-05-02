@@ -33,7 +33,7 @@ export const SupportPage =
 
                     <a
                       className='button is-info'
-                      href='mailto:support@notus.network'
+                      href='mailto:support@notus.events'
                       target='_blank'
                       rel='noopener noreferrer'
                     >Send Us An Email</a>

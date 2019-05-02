@@ -2,7 +2,7 @@
 # or just `source .envrc`
 
 # Notus API Server protocol, host (and optional port) to use
-export REACT_APP_NOTUS_API_URI=http://localhost:4000 # prod: https://api.notus.network
+export REACT_APP_NOTUS_API_URI=http://localhost:4000 # prod: https://api.notus.events
 
 # Space-separated list of one or more required network ids
 # export REACT_APP_ALLOWED_NETWORK_IDS="1234 3 1"
@@ -16,6 +16,6 @@ export REACT_APP_NOTUS_API_URI=http://localhost:4000 # prod: https://api.notus.n
 # export REACT_APP_MAINNET_STARTING_BLOCK=7189520
 
 # Notus WebSocket API to use
-# export REACT_APP_WS_API_URL=wss://api.notus.network
+# export REACT_APP_WS_API_URL=wss://api.notus.events
 
 export REACT_APP_ROLLBAR_ACCESS_TOKEN='youraccesstoken'

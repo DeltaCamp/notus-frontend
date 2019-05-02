@@ -35,7 +35,7 @@ export const PrivacyPage =
                     <hr />
 
                     <p>
-                      This Privacy Policy describes how your personal information is collected, used, and shared when you visit from <a href='https://notus.network'>https://notus.network</a> (the “Site”).
+                      This Privacy Policy describes how your personal information is collected, used, and shared when you visit from <a href='https://notus.events'>https://notus.events</a> (the “Site”).
                     </p>
                     <p>
                       <strong>PERSONAL INFORMATION WE COLLECT</strong>
@@ -124,7 +124,7 @@ export const PrivacyPage =
                     <p>
                       <strong>CONTACT US</strong>
                       <br />
-                      For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at <a href='mailto:support@notus.network'>support@notus.network</a>.
+                      For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at <a href='mailto:support@notus.events'>support@notus.events</a>.
                     </p>
 
                   </div>

@@ -327,7 +327,7 @@ export const TermsPage =
                     </p>
 
                     <p>
-                      Questions about the Terms of Service should be sent to us at <a href='mailto:support@notus.network'>support@notus.network</a>.
+                      Questions about the Terms of Service should be sent to us at <a href='mailto:support@notus.events'>support@notus.events</a>.
                     </p>
 
                   </div>

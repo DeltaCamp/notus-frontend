@@ -50,7 +50,7 @@ export const AppConfirmPage =
                   <h6 className='is-size-6'>
                     Learn how to use the API in depth:
                   </h6>
-                  <a href='https://docs.notus.network'>
+                  <a href='https://docs.notus.events'>
                     Read the Developer Documentation
                   </a>
                 </div>
