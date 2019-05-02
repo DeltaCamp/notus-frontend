@@ -6,10 +6,11 @@ import { graphql } from 'react-apollo'
 
 import { AddressInput } from '~/components/AddressInput'
 import { TextInput } from '~/components/TextInput'
+import { UIntInput } from '~/components/UIntInput'
 import { abiEventInputQuery } from '~/queries/abiEventInputQuery'
 import { sourceQuery } from '~/queries/sourceQuery'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
-// import { SOURCES } from '~/constants'
+import { SOURCES } from '~/constants'
 
 export const MatcherOperand = graphql(sourceQuery, {
   name: 'sourceQuery',
@@ -26,7 +27,6 @@ export const MatcherOperand = graphql(sourceQuery, {
     options: (props) => ({
       variables: {
         id: props.matcher.abiEventInputId
-        // matcher.source === SOURCES.CONTRACT_EVENT_INPUT
       }
     })
   })(
@@ -62,12 +62,7 @@ export const MatcherOperand = graphql(sourceQuery, {
           return null
         }
 
-        let operandInput = <TextInput
-          matcher={matcher}
-          handleSubmit={this.handleSubmit}
-          handleSetEditMatcher={this.props.handleSetEditMatcher}
-        />
-
+        let operandInput
         if (
           (source && source.dataType === 'address')
           || (abiEventInput && abiEventInput.type === 'address')
@@ -77,6 +72,25 @@ export const MatcherOperand = graphql(sourceQuery, {
             handleSubmit={this.handleSubmit}
             handleSetEditMatcher={this.props.handleSetEditMatcher}
           />
+        } else if (source && source.dataType === 'uint256') {
+          operandInput = <UIntInput
+            matcher={matcher}
+            handleSubmit={this.handleSubmit}
+            handleSetEditMatcher={this.props.handleSetEditMatcher}
+          />
+        } else if (
+          source
+          && source.source !== SOURCES.CONTRACT_EVENT_INPUT
+          && source.dataType === 'bytes'
+        ) {
+          operandInput = <TextInput
+            matcher={matcher}
+            handleSubmit={this.handleSubmit}
+            handleSetEditMatcher={this.props.handleSetEditMatcher}
+          />
+        } else {
+          console.warn('Unknown datatype for source & matcher!', source, matcher)
+          return null
         }
 
         return (

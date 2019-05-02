@@ -53,13 +53,6 @@ export const AddressInput = ReactTimeout(class _AddressInput extends Component {
 
   handleClick = () => {
     this.props.handleSetEditMatcher()
-
-    if (this.refs.inputRef.value === '0') {
-      this.refs.inputRef.setSelectionRange(
-        0,
-        this.refs.inputRef.value.length
-      )
-    }
   }
 
   valid = () => {

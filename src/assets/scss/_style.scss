@@ -2,7 +2,7 @@
 .input::placeholder,
 .textarea::placeholder,
 .react-select .react-select__placeholder {
-  color: rgba(200, 220, 230, 0.5);
+  color: rgba(200, 220, 230, 1);
 }
 
 input:-internal-autofill-previewed,
@@ -987,6 +987,7 @@ svg {
 .__react_component_tooltip {
   font-size: 0.825rem;
   font-weight: 500;
+  text-align: center;
   z-index: 60000;
 }
 

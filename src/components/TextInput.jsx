@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactTooltip from 'react-tooltip'
 import ReactTimeout from 'react-timeout'
+import classnames from 'classnames'
 
 import { KEYS } from '~/constants'
 
@@ -51,30 +52,36 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
 
   handleClick = () => {
     this.props.handleSetEditMatcher()
+  }
 
-    if (this.refs.inputRef.value === '0') {
-      this.refs.inputRef.setSelectionRange(
-        0,
-        this.refs.inputRef.value.length
-      )
-    }
+  valid = () => {
+    return this.state.value && this.state.value.length > 0
   }
 
   render () {
-    return <input
-      data-tip={this.state.value.length > 9 ? this.state.value : ''}
-      type='text'
-      className='input'
-      ref='inputRef'
-      placeholder='0'
-      value={this.state.value}
-      onChange={this.handleChange}
-      onBlur={this.handleBlur}
-      onKeyUp={this.handleKeyUp}
-      onClick={this.handleClick}
-      style={{
-        width: ((this.state.value.length + 1) * 16)
-      }}
-    />
+    return (
+      <input
+        data-tip={!this.valid() ? 'Please enter a value' : this.state.value}
+        type='text'
+        className={classnames(
+          'input',
+          'is-truncated',
+          {
+            'has-border-danger': this.state.value.length && !this.valid()
+          }
+        )}
+        ref='inputRef'
+        placeholder='Enter hex data'
+        value={this.state.value}
+        onChange={this.handleChange}
+        onBlur={this.handleBlur}
+        onKeyUp={this.handleKeyUp}
+        onClick={this.handleClick}
+        style={{
+          minWidth: 230,
+          width: ((this.state.value.length + 1) * 16)
+        }}
+      />
+    )
   }
 })

@@ -367,6 +367,13 @@
   transition: all 50ms ease-in-out;
 }
 
+.event-box__variable ::placeholder,
+.event-box__variable .input::placeholder,
+.event-box__variable .textarea::placeholder,
+.event-box__variable .react-select .react-select__placeholder {
+  color: rgba(200, 220, 230, 0.4);
+}
+
 .event-box__variable .input:hover {
 }
 
