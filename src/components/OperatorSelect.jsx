@@ -57,12 +57,10 @@ export const OperatorSelect = graphql(sourceQuery, {
 
 
           const { source } = sourceQuery
-          console.log(source.dataType)
           if (source.source !== SOURCES.CONTRACT_EVENT_INPUT) {
             return isValidDataTypeOperator(source.dataType, option.value)
           } else {
             const { abiEventInput } = abiEventInputQuery || {}
-            console.log(abiEventInput.type)
             return abiEventInput && isValidDataTypeOperator(
               abiEventInput.type,
               option.value

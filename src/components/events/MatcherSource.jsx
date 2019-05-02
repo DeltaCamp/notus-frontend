@@ -185,7 +185,7 @@ export const MatcherSource = graphql(sourcesQuery, {
                 )
                 : (
                   <button
-                    className='event-box__variable has-react-select event-box__variable--truncated'
+                    className='event-box__variable has-react-select is-truncated'
                     onClick={this.handleStartEdit}
                     data-tip={sourceWords.length > 16 ? sourceWords : ''}
                   >

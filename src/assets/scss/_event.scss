@@ -311,33 +311,10 @@
   max-width: none;
 }
 
-.event-box__variable--truncated {
-  // max-width: 225px;
+.is-truncated {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  // @media screen and (max-width: $fullhd) {
-  //   max-width: 205px;
-  // }
-
-  // @media screen and (max-width: $widescreen) {
-  //   max-width: 160px;
-  // }
-
-  // @media screen and (max-width: $desktop) {
-  //   max-width: 160px;
-  // }
-
-  // @media screen and (max-width: $tablet) {
-  //   max-width: 135px;
-  // }
-
-  // @media screen and (max-width: $mobile) {
-  //   display: block;
-  //   min-width: 100%;
-  //   max-width: auto;
-  // }
 }
 
 .event-box__variable:first-child {

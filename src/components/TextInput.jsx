@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
+import ReactTooltip from 'react-tooltip'
+import ReactTimeout from 'react-timeout'
 
 import { KEYS } from '~/constants'
 
-export const TextInput = class _TextInput extends Component {
+export const TextInput = ReactTimeout(class _TextInput extends Component {
   state = {
     value: this.props.matcher.operand,
     previousValue: this.props.matcher.operand
+  }
+
+  componentDidUpdate = () => {
+    this.props.setTimeout(ReactTooltip.rebuild)
   }
 
   handleCancel = () => {
@@ -56,6 +62,7 @@ export const TextInput = class _TextInput extends Component {
 
   render () {
     return <input
+      data-tip={this.state.value.length > 9 ? this.state.value : ''}
       type='text'
       className='input'
       ref='inputRef'
@@ -70,4 +77,4 @@ export const TextInput = class _TextInput extends Component {
       }}
     />
   }
-}
+})
