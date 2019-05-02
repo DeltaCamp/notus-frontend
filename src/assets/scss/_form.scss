@@ -358,7 +358,8 @@ input.input.is-large {
   font-size: 1.5rem;
   height: 100px;
   padding: 1rem;
-  max-width: 800px;
+  max-width: 400px;
+  margin: 0 auto;
 
   @media screen and (max-width: $tablet) {
     font-size: 1.5rem;
