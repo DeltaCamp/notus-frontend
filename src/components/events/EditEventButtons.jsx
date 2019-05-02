@@ -303,18 +303,22 @@ export const EditEventButtons =
                       </div>
                     )}
 
-                    <br />
-                    <button
-                      className={classnames(
-                        'button',
-                        'is-small',
-                        'is-text',
-                        'has-text-danger'
-                      )}
-                      onClick={this.handleOpenConfirmDeleteModal}
-                    >
-                      <AlertTriangle /> &nbsp;Delete
-                    </button>
+                    {!this.props.isCreateMode() && (
+                      <>
+                        <br />
+                        <button
+                          className={classnames(
+                            'button',
+                            'is-small',
+                            'is-text',
+                            'has-text-danger'
+                          )}
+                          onClick={this.handleOpenConfirmDeleteModal}
+                        >
+                          <AlertTriangle /> &nbsp;Delete
+                        </button>
+                      </>
+                    )}
                   </>
                 )
               }
