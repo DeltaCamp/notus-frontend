@@ -96,7 +96,7 @@ export const MatcherOperator = ReactTimeout(class extends Component {
           )
           : (
             <button
-              className='event-box__variable has-react-select event-box__variable--truncated'
+              className='event-box__variable has-react-select is-truncated'
               onClick={this.handleStartEdit}
               data-tip={operatorWords.length > 16 ? operatorWords : ''}
             >

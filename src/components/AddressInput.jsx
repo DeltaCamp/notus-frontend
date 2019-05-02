@@ -73,10 +73,11 @@ export const AddressInput = ReactTimeout(class _AddressInput extends Component {
 
   render() {
     return <input
-      data-tip={!this.valid() ? 'Please enter a valid Ethereum address (42 characters, starts with "0x")' : ''}
+      data-tip={!this.valid() ? 'Please enter a valid Ethereum address (42 characters, starts with "0x")' : this.state.value}
       type='text'
       className={classnames(
         'input',
+        'is-truncated',
         {
           'has-border-danger': this.state.value.length && !this.valid()
         }
