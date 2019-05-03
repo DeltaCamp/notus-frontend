@@ -83,7 +83,7 @@ export const SignUpPage =
           <div className='card-content'>
             <form
               onSubmit={this.handleSignupSubmit}
-              className='form'
+              className='form is-tall'
             >
               <div className='field mt15'>
                 <input

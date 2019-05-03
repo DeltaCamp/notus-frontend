@@ -35,7 +35,7 @@ export class HomeDiscoverEvents extends Component {
 
         <div className='container'>
           <div className='row pb50'>
-            <div className='col-xs-12 col-sm-10 col-start-sm-2 has-text-centered'>
+            <div className='col-xs-12 col-sm-10 col-start-sm-2 col-md-8 col-start-md-3 col-lg-6 col-start-lg-4 has-text-centered'>
               <h4 className='is-size-4 has-text-weight-bold mt75'>
                 Share and Discover
               </h4>

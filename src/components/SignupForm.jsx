@@ -95,10 +95,10 @@ export const SignupForm =
         <div className='accordion accordion-enter-done accordion--signup-form'>
           <form
             onSubmit={this.handleSignupSubmit}
-            className={`form ${this.state.active ? 'is-active' : ''}`}
+            className={`form is-tall ${this.state.active && 'is-active'}`}
           >
             <div className='field has-addons'>
-              <div className='control'>
+              <div className='control is-expanded'>
                 <input
                   ref={this.inputRef}
                   placeholder='Enter your email'

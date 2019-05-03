@@ -118,7 +118,7 @@ export const ConfirmAndSetPasswordPage =
                   <div className='card-content'>
                     <form
                       onSubmit={this.handleConfirmSubmit}
-                      className='form'
+                      className='form is-tall'
                     >
                       <h6 className='is-size-6 has-text-centered has-text-weight-bold'>
                         {this.state.error}
