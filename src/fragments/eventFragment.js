@@ -24,6 +24,8 @@ export const eventFragment = gql`
     matchers {
       ...matcherFragment
     }
+    webhookUrl
+    webhookBody
     createdAt
     updatedAt
     deletedAt

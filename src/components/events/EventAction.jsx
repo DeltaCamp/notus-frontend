@@ -1,11 +1,15 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
+import { WebhookUrlInput } from '~/components/forms/WebhookUrlInput'
+import { WebhookBodyInput } from '~/components/forms/WebhookBodyInput'
+
 export const EventAction =
   class _EventAction extends PureComponent {
     static propTypes = {
-      webhookUrl: PropTypes.string.isRequired,
-      webhookBody: PropTypes.string.isRequired,
+      event: PropTypes.object.isRequired,
+      webhookUrl: PropTypes.string,
+      webhookBody: PropTypes.string,
       onChangeWebhookUrl: PropTypes.func.isRequired,
       onChangeWebhookBody: PropTypes.func.isRequired
     }
@@ -29,12 +33,16 @@ export const EventAction =
       let state = '... then send me an email'
       if (showWebhookForm) {
         state = '...then trigger a webhook'
-
         form =
-          <form>
-              <WebhookUrlInput
-                value={this.props.webhookUrl}
-                onChange={this.props.onChangeWebhookUrl} />
+          <form onSubmit={(e) => e.preventDefault()}>
+            <WebhookUrlInput
+              placeholder='Enter a url'
+              value={this.props.webhookUrl}
+              onChange={this.props.onChangeWebhookUrl} />
+
+            <WebhookBodyInput
+              value={this.props.webhookBody}
+              onChange={this.props.onChangeWebhookBody} />
           </form>
       }
 
