@@ -32,6 +32,7 @@ export const MatcherOperand = graphql(sourceQuery, {
   })(
     ReactTimeout(class extends Component {
       static propTypes = {
+        index: PropTypes.number.isRequired,
         handleSetEditMatcher: PropTypes.func.isRequired,
         matcher: PropTypes.object.isRequired,
         onChange: PropTypes.func.isRequired
@@ -71,6 +72,7 @@ export const MatcherOperand = graphql(sourceQuery, {
           />
         } else if (dataType === 'uint256') {
           operandInput = <UIntInput
+            index={this.props.index}
             matcher={matcher}
             handleSubmit={this.handleSubmit}
             handleSetEditMatcher={this.props.handleSetEditMatcher}

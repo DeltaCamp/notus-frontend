@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
@@ -7,6 +8,13 @@ import { ethers } from 'ethers'
 import { KEYS } from '~/constants'
 
 export const UIntInput = ReactTimeout(class _UIntInput extends Component {
+  static propTypes = {
+    index: PropTypes.number.isRequired,
+    matcher: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleSetEditMatcher: PropTypes.func.isRequired
+  }
+
   getDefaultValue () {
     return ethers.utils.formatEther(this.props.matcher.operand.toString())
   }
@@ -106,11 +114,12 @@ export const UIntInput = ReactTimeout(class _UIntInput extends Component {
   }
 
   render () {
+    const tooltipId = `uint-input-hint-${this.props.index}`
     return (
       <>
         <input
           data-tip
-          data-for='text-input-hint'
+          data-for={tooltipId}
           data-iscapture='true'
           data-scroll-hide='false'
           data-event='click focus'
@@ -138,7 +147,7 @@ export const UIntInput = ReactTimeout(class _UIntInput extends Component {
         />
 
         <ReactTooltip
-          id='text-input-hint'
+          id={tooltipId}
           place='top'
           effect='solid'
           getContent={[this.hintText, 1000]}

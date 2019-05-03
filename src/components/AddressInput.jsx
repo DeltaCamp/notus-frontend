@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
@@ -7,6 +8,12 @@ import { ethers } from 'ethers'
 import { KEYS } from '~/constants'
 
 export const AddressInput = ReactTimeout(class _AddressInput extends Component {
+  static propTypes = {
+    matcher: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleSetEditMatcher: PropTypes.func.isRequired
+  }
+  
   state = {
     value: this.props.matcher.operand,
     previousValue: this.props.matcher.operand
