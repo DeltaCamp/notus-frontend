@@ -35,9 +35,9 @@ export const EventAction =
       if (showWebhookForm) {
         state = '...then trigger a webhook'
         form =
-          <form onSubmit={(e) => e.preventDefault()} className='form'>
+          <form onSubmit={(e) => e.preventDefault()} className='form is-inverted'>
             <WebhookUrlInput
-              placeholder='Enter a url'
+              placeholder='https://www.test.com?var1={{block.number}}'
               value={this.props.webhookUrl}
               onChange={this.props.onChangeWebhookUrl}
               webhookBody={this.props.webhookBody} />

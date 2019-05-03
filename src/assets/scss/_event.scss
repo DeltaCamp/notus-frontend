@@ -384,7 +384,11 @@ $eventFontSize: 1rem;
   color: rgba(255, 255, 255, 0.35);
 }
 
-.event-box__variable .input:hover {
+.is-inverted ::placeholder,
+.is-inverted .input::placeholder,
+.is-inverted .textarea::placeholder,
+.is-inverted .react-select .react-select__placeholder {
+  color: rgba(255, 255, 255, 0.35);
 }
 
 .event-box__variable .react-select {

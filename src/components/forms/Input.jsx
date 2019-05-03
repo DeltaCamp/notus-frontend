@@ -82,6 +82,7 @@ export const Input = class _Input extends Component {
   render () {
     return (
       <input
+        placeholder={this.props.placeholder}
         type='text'
         ref='inputRef'
         className={this.props.className}

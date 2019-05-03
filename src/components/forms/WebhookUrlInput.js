@@ -7,7 +7,8 @@ export class WebhookUrlInput extends PureComponent {
   static propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    webhookBody: PropTypes.string
+    webhookBody: PropTypes.string,
+    placeholder: PropTypes.string
   }
 
   render () {
@@ -19,6 +20,7 @@ export class WebhookUrlInput extends PureComponent {
         </div>
         <div className='control is-expanded'>
           <Input
+            placeholder={this.props.placeholder}
             value={this.props.value || ''}
             handleSubmit={this.props.onChange}
             className='input'

@@ -13,8 +13,11 @@ $addonsFormHeight: 57px;
 }
 
 .form .input {
-  height: $form-input-height !important;
-  max-width: 600px;
+  height: $form-input-height;
+}
+
+.switch[type="checkbox"]+.label::before {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .field:not(:last-child) {
@@ -217,6 +220,12 @@ label.radio,
   transition: color 200ms ease-in-out;
 }
 
+.form.is-tall .input,
+.form.is-tall .button,
+.form.is-tall .react-select {
+  height: $form-input-height-tall;
+}
+
 .has-bg .select select,
 .has-bg .react-select__control,
 .has-bg input.input,
@@ -228,7 +237,6 @@ label.radio,
   background-color: white;
   border-color: white;
   color: black;
-  height: $form-input-height-tall !important;
 }
 
 .has-bg input.input:hover,
@@ -238,10 +246,6 @@ label.radio,
 .has-bg textarea.textarea:focus,
 .has-bg textarea.textarea:active {
   border-color: white;
-}
-
-.has-bg .button {
-  height: $form-input-height-tall !important;
 }
 
 .has-bg .label,
@@ -316,10 +320,12 @@ form.has-addons.is-active textarea.textarea:active {
   transform: scale3d(1, 1, 1);
 }
 
-.has-addons input.input {
+.input.is-white {
   background-color: white;
   border-color: white;
-  height: $form-input-height-tall !important;
+}
+
+.has-addons input.input {
   margin: 0;
 }
 
@@ -359,7 +365,6 @@ input.input.is-dark:active {
 
 input.input.is-large {
   font-size: 1.5rem;
-  height: $form-input-height-tall;
   padding: 1rem;
   max-width: 400px;
 
