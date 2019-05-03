@@ -2,22 +2,16 @@ import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import {
-  AlertTriangle,
-  Cast,
-  CheckCircle,
-  PlusCircle,
-  StopCircle
-} from 'react-feather'
+import { AlertTriangle, PlusCircle } from 'react-feather'
 import { formatRoute } from 'react-router-named-routes'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
-import { toast } from 'react-toastify'
 import { IsAuthed } from '~/components/IsAuthed'
 import { Modal } from '~/components/Modal'
 import { deleteEventMutation } from '~/mutations/deleteEventMutation'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
+import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 
 export const EditEventButtons =
@@ -44,54 +38,6 @@ export const EditEventButtons =
                 router: PropTypes.object.isRequired
               }
 
-              handleActivate = (e) => {
-                e.preventDefault()
-
-                const event = this.props.eventData.event
-
-                this.props.updateEventMutation({
-                  variables: {
-                    event: {
-                      id: event.id,
-                      isActive: !event.isActive
-                    }
-                  },
-                  refetchQueries: [
-                    'eventsQuery'
-                  ]
-                }).then(({ data: { updateEvent } }) => {
-                  toast.dismiss()
-                  toast.success(`Event ${updateEvent.isActive ? 're-activated' : 'deactivated'}`)
-                }).catch(error => {
-                  toast.error('Error while updating event')
-                  console.error(error)
-                })
-              }
-
-              handlePublishClick = (e) => {
-                e.preventDefault()
-
-                const event = this.props.eventData.event
-
-                this.props.updateEventMutation({
-                  variables: {
-                    event: {
-                      id: event.id,
-                      isPublic: !event.isPublic
-                    }
-                  },
-                  refetchQueries: [
-                    'eventsQuery'
-                  ]
-                }).then(({ data: { updateEvent } }) => {
-                  toast.dismiss()
-                  toast.success(`Event ${updateEvent.isPublic ? 'published' : 'made private'}`)
-                }).catch(error => {
-                  toast.error('Error while updating event')
-                  console.error(error)
-                })
-              }
-
               handleOpenConfirmDeleteModal = (e) => {
                 e.preventDefault()
 
@@ -114,12 +60,10 @@ export const EditEventButtons =
                     eventId
                   },
                   refetchQueries: [
-                    'eventsQuery',
                     'eventsQuery'
                   ]
                 }).then(() => {
-                  toast.dismiss()
-                  toast.success('Successfully deleted event')
+                  notusToast.success('Successfully deleted event')
                   this.props.history.push(routes.MY_EVENTS)
                 }).catch(error => {
                   console.error(error)
@@ -130,9 +74,7 @@ export const EditEventButtons =
                 let isEventAuthor,
                   eventAuthorButtons,
                   notEventAuthorButtons,
-                  event,
-                  eventPublishedState,
-                  eventActiveState
+                  event
 
                 const { eventData, currentUserData } = this.props
                 if (eventData) {
@@ -165,66 +107,7 @@ export const EditEventButtons =
                         <PlusCircle /> &nbsp;Create Event From This One
                       </Link>
                     )
-                  } else {
-                    eventAuthorButtons = (
-                      <>
-                        <button
-                          className={classnames(
-                            'button',
-                            'is-small',
-                            'is-link'
-                          )}
-                          onClick={this.handlePublishClick}
-                        >
-
-                          {event.isPublic
-                            ? (<><Cast /> &nbsp;Make Private</>)
-                            : (<><Cast /> &nbsp;Make Public</>)
-                          }
-                        </button>
-                        <button
-                          className={classnames(
-                            'button',
-                            'is-small',
-                            {
-                              'is-info': event.isActive,
-                              'is-success': !event.isActive
-                            }
-                          )}
-                          onClick={this.handleActivate}
-                        >
-                          {event.isActive
-                            ? (<><StopCircle /> &nbsp;Deactivate</>)
-                            : (<><CheckCircle /> &nbsp;Activate</>)
-                          }
-                        </button>
-                      </>
-                    )
                   }
-
-                  eventPublishedState = event.isPublic
-                    ? (
-                      <>
-                        <strong>Published:</strong> This will show up as a useable event for other Notus customers sitewide.
-                        </>
-                    )
-                    : (
-                      <>
-                        <strong>Private:</strong> Only you will be able to see this event.
-                      </>
-                    )
-
-                  eventActiveState = event.isActive
-                    ? (
-                      <>
-                        <strong>Active:</strong> currently triggering actions when transactions/blocks/contract events occurs.
-                      </>
-                    )
-                    : (
-                      <>
-                        <strong>Not Active:</strong> Currently not firing when events occur.
-                      </>
-                    )
                 }
 
                 return (
@@ -277,16 +160,7 @@ export const EditEventButtons =
                     </div>
 
                     {!this.props.isCreateMode() && (
-                      <div className='is-size-7'>
-                        {eventPublishedState}
-                        <br />
-                        {eventActiveState}
-                      </div>
-                    )}
-
-                    {!this.props.isCreateMode() && (
                       <>
-                        <br />
                         <button
                           className={classnames(
                             'button',

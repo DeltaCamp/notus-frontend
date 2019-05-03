@@ -265,13 +265,14 @@
 }
 
 .event-box__variable {
+  align-items: center;
   background: rgba(255, 255, 255, 0.12);
   border: none;
   border: 3px solid transparent;
   border-radius: 6px;
   color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
-  display: inline-block;
+  display: inline-flex;
   font-size: 1.35rem;
   font-weight: 600;
   height: 47px;
@@ -305,6 +306,11 @@
     min-width: 100%;
     max-width: auto;
   }
+}
+
+.event-box__variable svg {
+  margin-right: 7px;
+  margin-top: -2px;
 }
 
 .event-box__variable--full-width {

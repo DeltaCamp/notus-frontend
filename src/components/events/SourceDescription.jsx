@@ -5,7 +5,7 @@ import { getNounArticle } from '~/utils/getNounArticle'
 import { graphql } from 'react-apollo'
 
 import { abiEventQuery } from '~/queries/abiEventQuery'
-import { SCOPE_LABELS } from '~/constants'
+import { SCOPES, SCOPE_LABELS } from '~/constants'
 
 export const SourceDescription = graphql(abiEventQuery, {
   name: 'abiEventQuery',
@@ -43,7 +43,14 @@ export const SourceDescription = graphql(abiEventQuery, {
         handleStartEdit
       } = this.props
 
-      if (abiEventQuery && !abiEventQuery.loading) {
+      title = SCOPE_LABELS[event.scope]
+
+      // When we're on a custom contract ABI scope, use the abiEvent's
+      // abi name and name instead
+      if (
+        event.scope === SCOPES.CONTRACT_EVENT
+        && (abiEventQuery && !abiEventQuery.loading)
+      ) {
         const { abiEvent, error } = abiEventQuery
 
         if (error) {
@@ -52,8 +59,6 @@ export const SourceDescription = graphql(abiEventQuery, {
         } else {
           title = `${abiEvent.abi.name} ${abiEvent.name}`
         }
-      } else {
-        title = SCOPE_LABELS[event.scope]
       }
 
       nounArticle = getNounArticle(title)

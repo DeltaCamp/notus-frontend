@@ -10,12 +10,12 @@ import {
   Mail,
   User
 } from 'react-feather'
-import { toast } from 'react-toastify'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { brandColor } from '~/utils/brandColors'
+import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 
 export const EventCard =
@@ -77,7 +77,7 @@ export const EventCard =
           const { currentUserData } = this.props
 
           if (currentUserData && !currentUserData.currentUser) {
-            toast('You will need to sign up (or sign in) to create events.')
+            notusToast.info('You will need to sign up (or sign in) to create events.')
           }
         }
 
@@ -98,10 +98,9 @@ export const EventCard =
             ]
           }).then((mutationResult) => {
             this.deactivateEditMenu()
-            toast.dismiss()
-            toast.success(`Event ${event.isActive ? 'deactivated' : 're-activated'}`)
+            notusToast.success(`Event ${event.isActive ? 'deactivated' : 're-activated'}`)
           }).catch(error => {
-            toast.error('Error while updating event')
+            notusToast.error('Error while updating event')
             console.error(error)
           })
         }
