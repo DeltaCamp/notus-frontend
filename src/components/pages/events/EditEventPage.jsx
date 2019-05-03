@@ -586,6 +586,11 @@ export const EditEventPage = class _EditEventPage extends Component {
       </DragDropContext>
     )
 
+    if (!this.isCreateMode() && !this.state.event.title) {
+      return null
+      // return <Loading />
+    }
+
     return (
       <div className='is-positioned-absolutely'>
         <Helmet
@@ -598,32 +603,33 @@ export const EditEventPage = class _EditEventPage extends Component {
           <div className={`container-fluid pb20 ${colorClass} color-block`}>
             <div className='container'>
               <div className='row'>
-                <div className='col-xs-12 has-text-centered is-size-4'>
-                  <h6 className='is-size-6 has-text-centered has-text-weight-bold pt30'>
+                <div className='col-xs-12 has-text-centered'>
+                  <h6 className='is-size-6 has-text-centered has-text-weight-bold pt30 pb10'>
                     {recipe && this.isCreateMode() &&
                       <>
                         Creating a new event{recipe.title ? ` based on "${recipe.title}"` : ''}
+                        <br />
                       </>
                     }
-                    <EventTitle
-                      event={this.state.event}
-                      handleSubmitTitle={this.handleSubmitTitle}
-                    />
-
-                    {!this.isCreateMode() &&
-                      <div className="buttons">
-                        <ActiveButton
-                          event={this.state.event}
-                          handleToggleActive={this.handleToggleActive}
-                        />
-                        
-                        <PublishButton
-                          event={this.state.event}
-                          handleTogglePublish={this.handleTogglePublish}
-                        />
-                      </div>
-                    }
                   </h6>
+                  <EventTitle
+                    event={this.state.event}
+                    handleSubmitTitle={this.handleSubmitTitle}
+                  />
+
+                  {!this.isCreateMode() &&
+                    <div className="buttons">
+                      <ActiveButton
+                        event={this.state.event}
+                        handleToggleActive={this.handleToggleActive}
+                      />
+                      
+                      <PublishButton
+                        event={this.state.event}
+                        handleTogglePublish={this.handleTogglePublish}
+                      />
+                    </div>
+                  }
                 </div>
               </div>
             </div>

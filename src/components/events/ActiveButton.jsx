@@ -38,7 +38,7 @@ export const ActiveButton = class _ActiveButton extends Component {
           'event-box__variable',
           'is-size-7',
           {
-            'has-text-grey': !this.props.event.isActive
+            'has-text-lighter': !this.props.event.isActive
           }
         )}
         onClick={this.props.handleToggleActive}

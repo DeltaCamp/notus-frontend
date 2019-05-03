@@ -375,13 +375,6 @@ button.button.is-small:active {
   }
 }
 
-.buttons,
-.form .buttons {
-  @media screen and (max-width: $widescreen) {
-    flex-direction: column-reverse;
-  }
-}
-
 .buttons .button svg {
   @media screen and (max-width: $widescreen) {
     width: 20px;

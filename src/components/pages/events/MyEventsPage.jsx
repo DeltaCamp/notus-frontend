@@ -263,7 +263,9 @@ export const MyEventsPage =
 
                                 <br />
 
-                                <DiscoverEventsListing />
+                                <DiscoverEventsListing
+                                  isDark
+                                />
                               </div>
                             </div>
                           </div>

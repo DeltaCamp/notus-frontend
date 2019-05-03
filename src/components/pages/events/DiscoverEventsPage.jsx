@@ -40,13 +40,13 @@ export const DiscoverEventsPage =
                         Discover Events
                       </h4>
 
-                      <div className='form has-text-centered'>
+                      <div className='form'>
                         <input
                           type='text'
                           placeholder='Search ...'
                           value={this.state.searchValue}
                           onChange={this.handleSearchInputChange}
-                          className='input mt20 is-large has-text-centered'
+                          className='input mt20 has-text-centered has-text-primary has-border-link is-ma-centered'
                         />
                       </div>
                     </div>

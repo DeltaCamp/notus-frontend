@@ -49,7 +49,7 @@ export class HomeDiscoverEvents extends Component {
                   value={this.state.searchValue}
                   onChange={this.handleSearchInputChange}
                   onClick={this.handleInputClick}
-                  className='input mt20 is-dark is-large'
+                  className='input mt20 is-dark is-ma-centered'
                 />
               </div>
             </div>
@@ -58,6 +58,7 @@ export class HomeDiscoverEvents extends Component {
             <DiscoverEventsListing
               searchValue={this.state.searchValue}
               showLoadMore={false}
+              isDark
             />
           </div>
         </div>

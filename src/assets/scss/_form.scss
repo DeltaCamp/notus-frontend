@@ -12,7 +12,8 @@ $addonsFormHeight: 57px;
 }
 
 .form .input {
-  height: 60px !important;
+  height: 47px !important;
+  max-width: 600px;
 }
 
 .field:not(:last-child) {
@@ -57,18 +58,20 @@ $hasAddonsformColor: $cyan;
 .form .select select,
 .form .textarea,
 .react-select__control {
-  border-radius: 100px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
   font-weight: 600;
   height: 100%;
   margin: 0;
   min-height: 25px;
-  padding: 4px 20px 5px;
+  padding: 4px 20px;
   transition: all 200ms ease-in-out;
 
   @media screen and (max-width: $mobile) {
     font-size: 0.875rem;
     height: 50px;
-    padding: 4px 10px 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
   }
 }
 
@@ -129,7 +132,9 @@ textarea.textarea,
 .react-select__control {
   background-color: white;
   box-shadow: none;
-  border-width: 5px;
+  border-width: 3px;
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
 .control:first-child {
@@ -188,7 +193,7 @@ form.has-addons.is-active textarea.textarea:active {
 .form .file-cta,
 .form .file-name,
 .form .button {
-  font-size: inherit;
+  // font-size: inherit;
   line-height: inherit;
 }
 
@@ -363,7 +368,6 @@ input.input.is-large {
   height: 100px;
   padding: 1rem;
   max-width: 400px;
-  margin: 0 auto;
 
   @media screen and (max-width: $tablet) {
     font-size: 1.5rem;
@@ -434,13 +438,13 @@ input.input.is-large:active {
 
 .select select,
 .react-select {
-  height: 60px !important;
+  height: 47px !important;
   line-height: 2;
 }
 
 .react-select .react-select__control {
-  border-radius: 100px !important;
-  border-width: 4px;
+  // border-radius: 100px !important;
+  border-width: 3px;
   cursor: pointer !important;
   padding: 0;
 }

@@ -109,7 +109,7 @@ export const DiscoverEventsListing =
                   {eventCards}
                 </div>
               : (
-                <h2 className='has-text-centered is-size-2 has-text-white'>
+                <h2 className={`has-text-centered is-size-2 ${this.props.isDark && 'has-text-white'}`}>
                   {emptyMessage}
                 </h2>
               )

@@ -268,6 +268,14 @@ a {
   color: rgba(255, 255, 255, 1) !important;
 }
 
+.has-text-lighter {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.has-text-lighter:hover {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
 .tag:not(body) {
   font-family: $code-family;
   font-size: 0.625rem;
@@ -605,7 +613,10 @@ hr {
   padding-right: 10px !important;
 }
 
-
+.is-ma-centered {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 
 .notus-toast {
   background: transparent;
@@ -1010,4 +1021,16 @@ svg {
 
 ul.list {
   list-style: inside;
+}
+
+.has-border-info {
+  border-color: $info !important;
+}
+
+.has-border-primary {
+  border-color: $primary !important;
+}
+
+.has-border-link {
+  border-color: $link !important;
 }

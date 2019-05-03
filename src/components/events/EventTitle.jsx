@@ -11,12 +11,9 @@ const TITLE_MIN_LENGTH = 8
 
 export const EventTitle = ReactTimeout(class extends Component {
   static propTypes = {
+    event: PropTypes.object.isRequired,
     handleSubmitTitle: PropTypes.func.isRequired
   }
-
-  // esc key should revert
-  // mouse clickable checkbox and x to revert ?
-  // select all works but then can't backspace?
 
   constructor (props) {
     super(props)
@@ -29,8 +26,6 @@ export const EventTitle = ReactTimeout(class extends Component {
       isEditing: false,
       newTitle
     }
-
-    this.inputRef = React.createRef()
   }
 
   componentDidUpdate = () => {
@@ -43,9 +38,9 @@ export const EventTitle = ReactTimeout(class extends Component {
     this.setState({
       isEditing: true
     }, () => {
-      this.inputRef.current.setSelectionRange(
+      this.refs.inputRef.setSelectionRange(
         0,
-        this.inputRef.current.value.length
+        this.refs.inputRef.value.length
       )
     })
   }
@@ -74,14 +69,21 @@ export const EventTitle = ReactTimeout(class extends Component {
   handleChange = (e) => {
     e.preventDefault()
 
-    const titleRegEx = /^[a-z0-9- '()]+$/i
-    const isValid = titleRegEx.test(e.target.value)
-
-    this.hideErrorTooltip()
-
-    if (isValid) {
+    if (e.target.value === '') {
       this.setState({
         newTitle: e.target.value
+      })
+    } else {
+      let newTitle
+      const titleRegEx = /^[a-z0-9- '()]+$/i
+      newTitle = titleRegEx.test(e.target.value)
+        ? e.target.value 
+        : this.state.newTitle
+
+      this.hideErrorTooltip()
+
+      this.setState({
+        newTitle
       })
     }
   }
@@ -95,14 +97,14 @@ export const EventTitle = ReactTimeout(class extends Component {
   handleCancel = () => {
     this.setState({
       isEditing: false,
-      newTitle: ''
+      newTitle: this.state.newTitle
     })
   }
 
   render () {
     let content = (
       <button
-        className='event-box__variable event-box__variable--full-width'
+        className='event-box__variable event-box__variable--full-width is-inline-block'
         onClick={this.handleEditTitle}
       >
         {this.props.event.title || DEFAULT_TITLE}
@@ -113,7 +115,7 @@ export const EventTitle = ReactTimeout(class extends Component {
       content = (
         <form
           onSubmit={this.handleSubmit}
-          className='form'
+          className='form is-inline-block'
           onKeyUp={this.handleKeyUp}
         >
           <div
@@ -123,7 +125,7 @@ export const EventTitle = ReactTimeout(class extends Component {
 
           <input
             type='text'
-            ref={this.inputRef}
+            ref='inputRef'
             onBlur={this.handleSubmit}
             onChange={this.handleChange}
             value={this.state.newTitle}
@@ -134,13 +136,7 @@ export const EventTitle = ReactTimeout(class extends Component {
       )
     }
 
-    return (
-      <div
-        className='event-box__variable-wrapper'
-      >
-        {content}
-      </div>
-    )
+    return content
   }
 }
 

@@ -34,7 +34,7 @@ export const PublishButton = class _PublishButton extends Component {
           'event-box__variable',
           'is-size-7',
           {
-            'has-text-grey': !this.props.event.isPublic
+            'has-text-lighter': !this.props.event.isPublic
           }
         )}
         onClick={this.props.handleTogglePublish}
