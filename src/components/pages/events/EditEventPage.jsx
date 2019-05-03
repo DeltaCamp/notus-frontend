@@ -401,7 +401,7 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   handleRemoveMatcher = (matcherIndex) => {
     const matchers = this.state.event.matchers
-    const id = parseInt(matchers[matcherIndex].id, 10)
+    const id = matchers[matcherIndex].id ? parseInt(matchers[matcherIndex].id, 10) : undefined
 
     if (matchers.length > 1) {
       matchers.splice(matcherIndex, 1)
@@ -417,7 +417,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         }
       })
 
-      if (!this.isCreateMode()) {
+      if (!this.isCreateMode() && id) {
         this.props.destroyMatcherMutation({
           variables: {
             id
