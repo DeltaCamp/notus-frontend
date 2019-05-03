@@ -1,6 +1,6 @@
-import { toast } from 'react-toastify'
+import { notusToast } from '~/utils/notusToast'
 
 export function showErrorMessage (error) {
   console.error(error)
-  return toast.error(error.message.replace('GraphQL error: ', ''))
+  return notusToast.error(error.message.replace('GraphQL error: ', ''))
 }

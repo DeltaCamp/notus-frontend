@@ -6,10 +6,11 @@ import arrayMove from 'array-move'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { formatRoute } from 'react-router-named-routes'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { PlusCircle, HelpCircle } from 'react-feather'
-import { toast } from 'react-toastify'
+import { PlusCircle } from 'react-feather'
 import { omit } from 'lodash'
 
+import { ActiveButton } from '~/components/events/ActiveButton'
+import { PublishButton } from '~/components/events/PublishButton'
 import { EditEventButtons } from '~/components/events/EditEventButtons'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
@@ -21,8 +22,8 @@ import { ScrollToTop } from '~/components/ScrollToTop'
 import { brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
+import { notusToast } from '~/utils/notusToast'
 import { showErrorMessage } from '~/utils/showErrorMessage'
-import { SCOPE_LABELS } from '~/constants'
 import * as routes from '~/../config/routes'
 
 const debug = require('debug')('notus:EditEventPage')
@@ -101,7 +102,7 @@ export const EditEventPage = class _EditEventPage extends Component {
             ...updateEvent
           }
         })
-        toast.success('Updated event title')
+        notusToast.success('Updated event title')
       }
       this.runUpdateEventMutation(variables, successCallback)
     }
@@ -205,7 +206,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         'eventsQuery'
       ]
     }).then((mutationResult) => {
-      toast.success('Successfully saved event')
+      notusToast.success('Successfully saved event')
       const eventId = mutationResult.data.createEvent.id
       const newEventLink = formatRoute(routes.EDIT_EVENT, { eventId })
 
@@ -234,7 +235,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         event: this.state.event
       }
       const successCallback = (mutationResult) => {
-        toast.success('Updated event scope')
+        notusToast.success('Updated event scope')
       }
       this.runUpdateEventMutation(variables, successCallback)
     }
@@ -283,6 +284,15 @@ export const EditEventPage = class _EditEventPage extends Component {
     }, this.doGenericUpdateEvent)
   }
 
+  handleTogglePublish = () => {
+    this.setState({
+      event: {
+        ...this.state.event,
+        isPublic: !this.state.event.isPublic
+      }
+    }, this.doGenericUpdateEvent)
+  }
+
   isEditingMatcher = () => {
     return this.state.editMatcherIndex !== null
   }
@@ -317,7 +327,7 @@ export const EditEventPage = class _EditEventPage extends Component {
             'eventsQuery'
           ]
         }).then((mutationResult) => {
-          toast.success('Updated event matchers')
+          notusToast.success('Updated event matchers')
         }).catch(error => {
           showErrorMessage(error)
         })
@@ -333,7 +343,7 @@ export const EditEventPage = class _EditEventPage extends Component {
             'eventsQuery'
           ]
         }).then((mutationResult) => {
-          toast.success('Added new matcher rule')
+          notusToast.success('Added new matcher rule')
         }).catch(error => {
           showErrorMessage(error)
         })
@@ -417,14 +427,14 @@ export const EditEventPage = class _EditEventPage extends Component {
             'eventsQuery'
           ]
         }).then((mutationResult) => {
-          toast.success('Successfully removed matcher')
+          notusToast.success('Successfully removed matcher')
         }).catch(error => {
           console.error(error)
           showErrorMessage(error)
         })
       }
     } else {
-      toast.error('Each event needs at least one matcher.')
+      notusToast.error('Each event needs at least one matcher.')
     }
   }
 
@@ -440,7 +450,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     }
 
     const successCallback = () => {
-      toast.success(successMessage)
+      notusToast.success(successMessage)
     }
 
     this.runUpdateEventMutation(variables, successCallback)
@@ -589,7 +599,7 @@ export const EditEventPage = class _EditEventPage extends Component {
             <div className='container'>
               <div className='row'>
                 <div className='col-xs-12 has-text-centered is-size-4'>
-                  <h6 className='is-size-6 has-text-centered is-uppercase has-text-weight-bold pt30'>
+                  <h6 className='is-size-6 has-text-centered has-text-weight-bold pt30'>
                     {recipe && this.isCreateMode() &&
                       <>
                         Creating a new event{recipe.title ? ` based on "${recipe.title}"` : ''}
@@ -600,33 +610,19 @@ export const EditEventPage = class _EditEventPage extends Component {
                       handleSubmitTitle={this.handleSubmitTitle}
                     />
 
-
-
-                    <button
-                      className='event-box__variable event-box__variable--full-width'
-                      onClick={this.handleToggleActive}
-                    >
-                      {this.state.event.isActive ?
-                        <strong
-                          data-tip={`Currently triggering actions when ${SCOPE_LABELS[this.state.event.scope]}s occurs.`}
-                          className='is-size-7'
-                        >
-                          Active <HelpCircle className='is-xsmall' />
-                        </strong>
-                        : <strong
-                          data-tip='Currently not firing when events occur.'
-                          className='is-size-7'
-                        >
-                          Not Active <HelpCircle className='is-xsmall' />
-                        </strong>
-                      }
-                    </button>
-
-                    
-                    
-                    
-                    
-                    
+                    {!this.isCreateMode() &&
+                      <div className="buttons">
+                        <ActiveButton
+                          event={this.state.event}
+                          handleToggleActive={this.handleToggleActive}
+                        />
+                        
+                        <PublishButton
+                          event={this.state.event}
+                          handleTogglePublish={this.handleTogglePublish}
+                        />
+                      </div>
+                    }
                   </h6>
                 </div>
               </div>

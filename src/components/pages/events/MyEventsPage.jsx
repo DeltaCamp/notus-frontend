@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { toast } from 'react-toastify'
+import {
+  CSSTransition,
+  TransitionGroup
+} from 'react-transition-group'
 import { formatRoute } from 'react-router-named-routes'
 import { PlusCircle } from 'react-feather'
 import { Link } from 'react-router-dom'
@@ -15,11 +18,8 @@ import { deleteEventMutation } from '~/mutations/deleteEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventsQuery } from '~/queries/eventsQuery'
 import { EventCard } from '~/components/events/EventCard'
+import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
-import {
-  CSSTransition,
-  TransitionGroup
-} from 'react-transition-group'
 
 export const MyEventsPage =
   IsAuthed(
@@ -62,12 +62,10 @@ export const MyEventsPage =
                   eventId
                 },
                 refetchQueries: [
-                  'eventsQuery',
                   'eventsQuery'
                 ]
               }).then(() => {
-                toast.dismiss()
-                toast.success('Successfully deleted event')
+                notusToast.success('Successfully deleted event')
                 this.handleCloseConfirmDeleteModal()
               }).catch(error => {
                 console.error(error)

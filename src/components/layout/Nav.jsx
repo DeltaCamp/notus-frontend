@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import { Activity, Power, Search, Send } from 'react-feather'
-import { toast } from 'react-toastify'
 import { withRouter } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'
 import { graphql } from 'react-apollo'
-import { currentUserQuery } from '~/queries/currentUserQuery'
-import { signOutMutation } from '~/mutations/signOutMutation'
+
 import NotusLogo from '~/assets/images/notus-logo.svg'
+import { signOutMutation } from '~/mutations/signOutMutation'
+import { currentUserQuery } from '~/queries/currentUserQuery'
+import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 
 export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
@@ -37,7 +38,8 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
       handleSignOut = (e) => {
         this.props.signOutMutation().then(() => {
           this.closeMobileNav()
-          toast.success('Successfully signed out. Thanks for using Notus!')
+
+          notusToast.info('Successfully signed out. Thanks for using Notus!')
           this.props.history.push(routes.SIGNIN)
         }).catch(error => {
           console.error(error)

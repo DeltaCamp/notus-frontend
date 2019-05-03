@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom'
 import ReactTooltip from 'react-tooltip'
 import { CheckCircle } from 'react-feather'
 import { graphql } from 'react-apollo'
-import { toast } from 'react-toastify'
 
 import { ABIUpload } from '~/components/ABIUpload'
 import { createAbiMutation } from '~/mutations/createAbiMutation'
+import { notusToast } from '~/utils/notusToast'
 import { showErrorMessage } from '~/utils/showErrorMessage'
 
 export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutation' })(
@@ -73,7 +73,7 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
         },
         refetchQueries: ['abiEventsQuery']
       }).then(({ data }) => {
-        toast.success('Contract added successfully')
+        notusToast.success('Contract added successfully')
         this.props.onCreate(data.createAbi)
       }).catch(error => {
         console.warn(error)

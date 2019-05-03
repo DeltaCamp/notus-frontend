@@ -96,21 +96,21 @@ export const DiscoverEventsListing =
         }
 
         if (searchValue) {
-          emptyMessage = <span>No events found named '{searchValue}'.</span>
+          emptyMessage = <>No events found named '{searchValue}'.</>
         } else {
-          emptyMessage = <span>No events found.</span>
+          emptyMessage = <>No events found.</>
         }
 
         return <>
           {(
             eventCards.length > 0
               ? <div className='listing-grid'>
-                {eventCards}
-              </div>
-              : (
-                <div className='has-text-centered'>
-                  <h2 className='has-text-centered is-size-2'>{emptyMessage}</h2>
+                  {eventCards}
                 </div>
+              : (
+                <h2 className='has-text-centered is-size-2 has-text-white'>
+                  {emptyMessage}
+                </h2>
               )
           )}
           {loadMore}
