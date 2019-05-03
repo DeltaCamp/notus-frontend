@@ -22,6 +22,7 @@ import { brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { showErrorMessage } from '~/utils/showErrorMessage'
+import { SCOPE_LABELS } from '~/constants'
 import * as routes from '~/../config/routes'
 
 const debug = require('debug')('notus:EditEventPage')
@@ -116,7 +117,6 @@ export const EditEventPage = class _EditEventPage extends Component {
       this.state.freshlyMounted
     ) {
       const event = this.props.eventData.event
-      console.log('event', event)
       
       let thisEvent
       // only set these if it is a event based off someone's public event
@@ -600,13 +600,15 @@ export const EditEventPage = class _EditEventPage extends Component {
                       handleSubmitTitle={this.handleSubmitTitle}
                     />
 
+
+
                     <button
                       className='event-box__variable event-box__variable--full-width'
                       onClick={this.handleToggleActive}
                     >
                       {this.state.event.isActive ?
                         <strong
-                          data-tip='Currently triggering actions when transactions/blocks/contract events occurs.'
+                          data-tip={`Currently triggering actions when ${SCOPE_LABELS[this.state.event.scope]}s occurs.`}
                           className='is-size-7'
                         >
                           Active <HelpCircle className='is-xsmall' />

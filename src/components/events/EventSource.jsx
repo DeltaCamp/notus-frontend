@@ -83,7 +83,6 @@ export const EventSource = class _EventSource extends Component {
   }
 
   handleKeyUp = (e) => {
-    console.log(e.keyCode)
     if (e.keyCode === KEYS.escape) {
       this.hideAddContract()
     }
