@@ -64,7 +64,9 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   eventEntityToDto(event) {
     event = this.scrubEvent(event)
-    event.matchers = event.matchers.map(matcher => this.matcherEntityToDto(matcher))
+    if (event.matchers) {
+      event.matchers = event.matchers.map(matcher => this.matcherEntityToDto(matcher))
+    }
     return event
   }
 
@@ -167,23 +169,12 @@ export const EditEventPage = class _EditEventPage extends Component {
         ...this.state.event,
         matchers
       }
+    }, () => {
+      this.doGenericUpdateEvent({
+        id: this.state.event.id,
+        matchers
+      }, 'Updated matcher positions')
     })
-
-    if (!this.isCreateMode()) {
-      const variables = {
-        event: {
-          id: this.state.event.id,
-          matchers
-        }
-      }
-      const successCallback = ({ data: { updateEvent } }) => {
-        toast.success('Updated matcher positions')
-      }
-      // const errorCallback = ({ data: { updateEvent } }) => {
-      // TODO: implement fail state and reverse position of matchers!
-      // }
-      this.runUpdateEventMutation(variables, successCallback)
-    }
   }
 
   handleSaveEvent = (e) => {
@@ -372,7 +363,11 @@ export const EditEventPage = class _EditEventPage extends Component {
       }
     }, () => {
       if (!this.isCreateMode()) {
-        this.doGenericUpdateEvent()
+        this.doGenericUpdateEvent({
+          id: this.state.event.id,
+          scope,
+          abiEventId
+        })
       }
     })
   }
@@ -433,10 +428,9 @@ export const EditEventPage = class _EditEventPage extends Component {
     }
   }
 
-  doGenericUpdateEvent = () => {
+  doGenericUpdateEvent = (event = this.state.event, successMessage = 'Updated event') => {
     if (this.isCreateMode()) { return }
 
-    let event = { ...this.state.event }
     event = this.eventEntityToDto(event)
 
     debug('doGenericUpdateEvent: ', event)
@@ -444,9 +438,11 @@ export const EditEventPage = class _EditEventPage extends Component {
     const variables = {
       event
     }
-    const successCallback = ({ data: { updateEvent } }) => {
-      toast.success('Updated event')
+
+    const successCallback = () => {
+      toast.success(successMessage)
     }
+
     this.runUpdateEventMutation(variables, successCallback)
   }
 
