@@ -30,6 +30,8 @@ export const eventFragment = gql`
     createdAt
     updatedAt
     deletedAt
+    sendEmail
+    color
   }
   ${matcherFragment}
 `

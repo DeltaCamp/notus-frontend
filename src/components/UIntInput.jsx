@@ -10,7 +10,7 @@ import { KEYS } from '~/constants'
 export const UIntInput = ReactTimeout(class _UIntInput extends Component {
   static propTypes = {
     index: PropTypes.number.isRequired,
-    matcher: PropTypes.string.isRequired,
+    matcher: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     handleSetEditMatcher: PropTypes.func.isRequired
   }

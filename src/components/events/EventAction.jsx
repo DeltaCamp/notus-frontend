@@ -11,8 +11,11 @@ export const EventAction =
       event: PropTypes.object.isRequired,
       webhookUrl: PropTypes.string,
       webhookBody: PropTypes.string,
+      sendEmail: PropTypes.bool,
+      onChangeSendEmail: PropTypes.func.isRequired,
       onChangeWebhookUrl: PropTypes.func.isRequired,
-      onChangeWebhookBody: PropTypes.func.isRequired
+      onChangeWebhookBody: PropTypes.func.isRequired,
+      onChangeDeleteWebhook: PropTypes.func.isRequired
     }
 
     constructor (props) {
@@ -22,18 +25,23 @@ export const EventAction =
       }
     }
 
-    showWebhookForm = () => {
+    toggleWebhookForm = () => {
+      if (this.state.showWebhookForm) {
+        this.props.onChangeDeleteWebhook(null)
+      }
       this.setState({
-        showWebhookForm: true
+        showWebhookForm: !this.state.showWebhookForm
       })
     }
 
+    onChangeSendEmail = () => {
+      this.props.onChangeSendEmail(!this.props.sendEmail)
+    }
+
     render () {
-      const showWebhookForm = !!this.props.webhookUrl || this.state.showWebhookForm
+      const showWebhookForm = this.state.showWebhookForm
       let form
-      let state = '... then send me an email'
       if (showWebhookForm) {
-        state = '...then trigger a webhook'
         form =
           <form onSubmit={(e) => e.preventDefault()} className='form is-inverted'>
             <WebhookUrlInput
@@ -56,19 +64,15 @@ export const EventAction =
             <div className='row'>
               <div className='col-xs-12 col-xl-10 col-start-xl-2 is-size-4'>
                 <Switch
-                  value={this.state.filterEventBool}
-                  onChange={(e) => {
-                    this.setState({ filterEventBool: !this.state.filterEventBool })
-                  }}
+                  value={this.props.sendEmail}
+                  onChange={this.onChangeSendEmail}
                 >
                   ...then send me an email
                 </Switch>
 
                 <Switch
-                  value={this.state.showWebhookForm}
-                  onChange={(e) => {
-                    this.setState({ showWebhookForm: !this.state.showWebhookForm })
-                  }}
+                  value={showWebhookForm}
+                  onChange={this.toggleWebhookForm}
                 >
                   ...then trigger a webhook
                 </Switch>

@@ -34,6 +34,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       scope: 0,
       abiEventId: undefined,
       isPublic: false,
+      sendEmail: true,
       runCount: -1,
       matchers: [
         {
@@ -484,6 +485,29 @@ export const EditEventPage = class _EditEventPage extends Component {
     })
   }
 
+  onChangeDeleteWebhook = () => {
+    let event = { ...this.state.event }
+    if (event.webhookUrl === null && event.webhookBody === null) { return }
+    event.webhookUrl = null
+    event.webhookBody = null
+    this.setState({
+      event
+    }, () => {
+      this.doGenericUpdateEvent({ id: event.id, webhookUrl: null, webhookBody: null })
+    })
+  }
+
+  onChangeSendEmail = (sendEmail) => {
+    let event = { ...this.state.event }
+    // if (event.sendEmail === sendEmail) { return }
+    event.sendEmail = sendEmail
+    this.setState({
+      event
+    }, () => {
+      this.doGenericUpdateEvent({ id: event.id, sendEmail })
+    })
+  }
+
   render () {
     let colorClass = 'is-dark-colored'
 
@@ -679,10 +703,13 @@ export const EditEventPage = class _EditEventPage extends Component {
             <div className='is-brightness-40 is-full-width-background' />
             <EventAction
               event={this.state.event}
+              sendEmail={this.state.event.sendEmail}
               webhookUrl={this.state.event.webhookUrl}
               webhookBody={this.state.event.webhookBody}
+              onChangeSendEmail={this.onChangeSendEmail}
               onChangeWebhookUrl={this.onChangeWebhookUrl}
               onChangeWebhookBody={this.onChangeWebhookBody}
+              onChangeDeleteWebhook={this.onChangeDeleteWebhook}
               />
           </div>
 
