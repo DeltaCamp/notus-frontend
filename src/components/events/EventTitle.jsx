@@ -126,7 +126,7 @@ export const EventTitle = ReactTimeout(class extends Component {
           <input
             type='text'
             ref='inputRef'
-            onBlur={this.handleSubmit}
+            // onBlur={this.handleSubmit}
             onChange={this.handleChange}
             value={this.state.newTitle}
             className='input'

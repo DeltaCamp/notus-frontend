@@ -31,6 +31,7 @@ export const PublishButton = class _PublishButton extends Component {
         data-tip
         data-for='publish-button-hint'
         className={classnames(
+          'no-mr',
           'event-box__variable',
           'is-size-7',
           {

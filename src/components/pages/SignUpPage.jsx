@@ -61,17 +61,17 @@ export const SignUpPage =
       const thankYou = (
         <div className='accordion accordion--signup-thank-you'>
           <div className='card-content'>
-            <h4 className='is-size-4 has-text-centered mt30'>
+            <h4 className='is-size-4 has-text-weight-bold has-text-centered mt30'>
               Thanks for using Notus!
             </h4>
             <div className='has-text-centered'>
               <Mail className='icon--signup-large' />
             </div>
-            <p>
-              Check your <span className='has-text-light'>'{this.state.email}'</span> inbox for a magic link to access your Notus account!
+            <p className='has-text-weight-semibold has-text-centered has-text-light'>
+              Check your <span className='has-text-white'>'{this.state.email}'</span> inbox for a magic link to access your Notus account!
             </p>
             <br />
-            <p className='is-size-7 has-text-light'>
+            <p className='is-size-7 has-text-lighter has-text-weight-semibold has-text-centered'>
               Can't find the email? Check your spam folder first. We can also re-send the link or reach out to us for support.
             </p>
           </div>

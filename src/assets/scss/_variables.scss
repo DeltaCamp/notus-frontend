@@ -18,6 +18,9 @@ $fullhdMin: $widescreen + 1px;
 $body-line-height: 1.5;
 $body-size: 20px;
 
+$form-input-height: 47px;
+$form-input-height-tall: 60px;
+
 $navbar-height: 4rem;
 $navbar-breakpoint: $tablet;
 $navbar-breakpointMin: $desktopMin;
@@ -33,8 +36,6 @@ $size-7: 0.875rem;
 $section-padding: 2rem 0 0 0;
 $section-padding-medium: 9rem 0;
 $section-padding-large: 18rem 0;
-
-$weight-semibold: 500;
 
 $family-sans-serif: 'futura-pt', 'source-sans-pro', 'Open Sans', 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;

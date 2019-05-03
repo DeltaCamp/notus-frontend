@@ -81,12 +81,12 @@ export const SignupForm =
     render () {
       const thankYou = (
         <div className='accordion accordion--signup-thank-you'>
-          <p className='signup-message'>
+          <p className='signup-message has-text-weight-semibold'>
             <Mail className='icon--signup' />
             Thanks! We've invited: <strong>'{this.state.email}'</strong>
-            <span className='is-size-7 signup-message--footer'>
+            <div className='is-size-7 signup-message--footer has-text-weight-semibold'>
               (Can't find it? Check your spam and 'Updates' folders as well!)
-            </span>
+            </div>
           </p>
         </div>
       )

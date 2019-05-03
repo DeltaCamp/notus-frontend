@@ -8,11 +8,13 @@ $addonsFormHeight: 57px;
 .textarea.is-focused,
 .textarea:active,
 .textarea.is-active {
+  border-color: white;
   box-shadow: none;
 }
 
 .form .input {
-  // height: 47px !important;
+  height: $form-input-height !important;
+  max-width: 600px;
 }
 
 .field:not(:last-child) {
@@ -52,12 +54,18 @@ $addonsFormHeight: 57px;
 
 $hasAddonsformColor: $cyan;
 
-.form .button,
 .form .input,
 .form .select select,
 .form .textarea,
 .react-select__control {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+.form .button,
+.form .input,
+.form .select select,
+.form .textarea,
+.react-select__control {
   border-radius: 8px;
   font-weight: 600;
   height: 100%;
@@ -111,15 +119,6 @@ $hasAddonsformColor: $cyan;
   }
 }
 
-.has-addons button.button {
-  border: 3px solid black;
-  padding: 4px 25px 5px 20px;
-
-  @media screen and (max-width: $mobile) {
-    padding: 4px 10px 5px;
-  }
-}
-
 .select select,
 input.input,
 textarea.textarea,
@@ -159,20 +158,7 @@ form.is-active textarea.textarea,
 form.is-active textarea.textarea:hover,
 form.is-active textarea.textarea:focus,
 form.is-active textarea.textarea:active {
-  // box-shadow: 0 0 60px rgba(255, 255, 255, 0.4);
-  // border-width: 5px;
-  border: 5px solid $cyan;
-}
-
-form.has-addons.is-active input.input:hover,
-form.has-addons.is-active input.input:active,
-form.has-addons.is-active input.input:focus,
-form.has-addons.is-active textarea.textarea:hover,
-form.has-addons.is-active textarea.textarea:focus,
-form.has-addons.is-active textarea.textarea:active {
-  // border: 3px solid $hasAddonsformColor;
-  border-color: $hasAddonsformColor;
-  border-right-color: white;
+  border-color: $yellow;
 }
 
 .form .control,
@@ -183,7 +169,6 @@ form.has-addons.is-active textarea.textarea:active {
 .form .file-cta,
 .form .file-name,
 .form .button {
-  // font-size: inherit;
   line-height: inherit;
 }
 
@@ -240,7 +225,10 @@ label.radio,
 .has-bg__dark .react-select__control,
 .has-bg__dark input.input,
 .has-bg__dark textarea.textarea {
+  background-color: white;
   border-color: white;
+  color: black;
+  height: $form-input-height-tall !important;
 }
 
 .has-bg input.input:hover,
@@ -250,12 +238,35 @@ label.radio,
 .has-bg textarea.textarea:focus,
 .has-bg textarea.textarea:active {
   border-color: white;
-  // box-shadow: 1px 2px 30px rgba(255, 255, 255, 0.55);
+}
+
+.has-bg .button {
+  height: $form-input-height-tall !important;
 }
 
 .has-bg .label,
 .has-bg__dark .label {
   color: white;
+}
+
+.has-addons button.button {
+  border: 3px solid black;
+  padding: 4px 25px 4px 20px;
+
+  @media screen and (max-width: $mobile) {
+    border-top-width: 0;
+    padding: 4px 10px;
+  }
+}
+
+form.has-addons.is-active input.input:hover,
+form.has-addons.is-active input.input:active,
+form.has-addons.is-active input.input:focus,
+form.has-addons.is-active textarea.textarea:hover,
+form.has-addons.is-active textarea.textarea:focus,
+form.has-addons.is-active textarea.textarea:active {
+  border-color: $hasAddonsformColor;
+  border-right-color: white;
 }
 
 .field.has-addons {
@@ -300,17 +311,16 @@ label.radio,
 .field.has-addons .button:hover,
 .field.has-addons .button:focus,
 .field.has-addons .button:active {
-  border-color: $cyan;
-  border-width: 5px;
-}
-
-.field.has-addons .button:hover,
-.field.has-addons .button:focus,
-.field.has-addons .button:active {
   border-color: $yellow;
-  border-width: 5px;
   color: $yellow;
   transform: scale3d(1, 1, 1);
+}
+
+.has-addons input.input {
+  background-color: white;
+  border-color: white;
+  height: $form-input-height-tall !important;
+  margin: 0;
 }
 
 .form.is-warning .field {
@@ -349,13 +359,13 @@ input.input.is-dark:active {
 
 input.input.is-large {
   font-size: 1.5rem;
-  height: 100px;
+  height: $form-input-height-tall;
   padding: 1rem;
   max-width: 400px;
 
   @media screen and (max-width: $tablet) {
     font-size: 1.5rem;
-    height: 80px;
+    // height: 60px;
     padding: 0.25rem;
   }
 
@@ -363,12 +373,6 @@ input.input.is-large {
     font-size: 1.25rem;
     padding: 0.25rem;
   }
-}
-
-input.input.is-large:hover,
-input.input.is-large:focus,
-input.input.is-large:active {
-  // transform: scale3d(1.05, 1.05, 1);
 }
 
 // Accordion
@@ -422,7 +426,7 @@ input.input.is-large:active {
 
 .select select,
 .react-select {
-  height: 47px !important;
+  height: $form-input-height !important;
   line-height: 2;
 }
 

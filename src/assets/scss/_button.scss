@@ -20,7 +20,7 @@ button[disabled] {
 
 .button {
   background-color: black;
-  border-radius: 100px;
+  border-radius: 8px;
   border-width: 5px;
   height: auto;
   font-size: 1.25rem;
@@ -105,20 +105,15 @@ button[disabled] {
 }
 
 .button.is-light {
+  background-color: rgba(255, 255, 255, 0.85);
   transition: all 70ms ease-in-out;
 }
 
 .button.is-light:hover,
 .button.is-light:active {
-  background-color: $dark;
-  color: white;
+  background-color: white;
   border-color: $dark;
   transition: all 70ms ease-in-out;
-}
-
-.button.is-light:hover svg,
-.button.is-light:active svg {
-  stroke: white;
 }
 
 .button.is-success.is-outlined {
@@ -194,27 +189,10 @@ button[disabled] {
 }
 
 .button.is-small {
-  border-radius: 100px;
+  border-radius: 8px;
   height: auto;
   font-size: 1rem;
   padding: 0.5rem 2rem 0.5rem;
-}
-
-.button.is-small:hover,
-.button.is-small:active {
-  // box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
-  color: white;
-}
-
-.button.is-small:active,
-button.button.is-small:active {
-  // box-shadow: 0 0 50px rgba(255, 255, 255, 0.7);
-  color: white;
-  // transform: scale3d(1.07, 1.07, 1.07);
-}
-
-.button:hover:not(.is-text) {
-  // transform: scale3d(1.06, 1.06, 1.0);
 }
 
 .button.is-outlined {
