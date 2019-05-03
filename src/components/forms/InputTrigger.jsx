@@ -69,16 +69,17 @@ class InputTrigger extends Component {
     const element = event.target
 
     const stringMatches = (value.substring(0, selectionStart) + event.key).endsWith(trigger.string)
-    const matches = which === trigger.keyCode || stringMatches
+    const matches =
+      which === trigger.keyCode &&
+      shiftKey === !!trigger.shiftKey &&
+      ctrlKey === !!trigger.ctrlKey &&
+      metaKey === !!trigger.metaKey
 
     const { triggered, triggerStartPosition } = this.state;
 
     if (!triggered) {
       if (
-        matches /* &&
-        shiftKey === !!trigger.shiftKey &&
-        ctrlKey === !!trigger.ctrlKey &&
-        metaKey === !!trigger.metaKey*/
+        matches || stringMatches
       ) {
         this.setState({
           triggered: true,

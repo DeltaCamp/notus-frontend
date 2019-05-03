@@ -6,6 +6,7 @@ import { graphql } from 'react-apollo'
 import { eventsQuery } from '~/queries/eventsQuery'
 import { EventCard } from '~/components/events/EventCard'
 import * as routes from '~/../config/routes'
+import { PAGE_SIZE } from '~/constants'
 
 export const DiscoverEventsListing =
   graphql(eventsQuery, {
@@ -14,7 +15,7 @@ export const DiscoverEventsListing =
       const eventsQuery = {
         isPublic: true,
         skip: 0,
-        take: 2
+        take: PAGE_SIZE
       }
       if (props.searchValue && props.searchValue.trim()) {
         eventsQuery.searchTerms = props.searchValue.trim()

@@ -20,6 +20,7 @@ import { eventsQuery } from '~/queries/eventsQuery'
 import { EventCard } from '~/components/events/EventCard'
 import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
+import { PAGE_SIZE } from '~/constants'
 
 export const MyEventsPage =
   IsAuthed(
@@ -32,7 +33,7 @@ export const MyEventsPage =
             fetchPolicy: 'cache-and-network',
             variables: {
               eventsQuery: {
-                take: 3,
+                take: PAGE_SIZE,
                 skip: 0,
                 userId: props.currentUserData.currentUser.id
               }

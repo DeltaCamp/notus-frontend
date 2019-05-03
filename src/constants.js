@@ -11,6 +11,8 @@ export const INFO = 'info'
 export const WARNING = 'warning'
 export const DANGER = 'danger'
 
+export const PAGE_SIZE = 12
+
 export const KEYS = {
   enter: 13,
   escape: 27,
