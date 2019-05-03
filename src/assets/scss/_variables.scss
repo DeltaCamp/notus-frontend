@@ -22,12 +22,12 @@ $navbar-height: 4rem;
 $navbar-breakpoint: $tablet;
 $navbar-breakpointMin: $desktopMin;
 
-$size-1: 2.5rem;
-$size-2: 2.25rem;
-$size-3: 2rem;
-$size-4: 1.75rem;
-$size-5: 1.5rem;
-$size-6: 1.25rem;
+$size-1: 2.25rem;
+$size-2: 2rem;
+$size-3: 1.75rem;
+$size-4: 1.5rem;
+$size-5: 1.25rem;
+$size-6: 1rem;
 $size-7: 0.875rem;
 
 $section-padding: 2rem 0 0 0;
@@ -55,6 +55,8 @@ $info: $orange;
 $pink: $pink;
 
 $footer-background-color: darken(white, 2%);
+
+$label-color: white;
 
 $button-color: white;
 $button-hover-color: $cyan;

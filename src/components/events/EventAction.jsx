@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import Switch from 'react-bulma-switch'
 
 import { WebhookUrlInput } from '~/components/forms/WebhookUrlInput'
 import { WebhookBodyInput } from '~/components/forms/WebhookBodyInput'
@@ -38,7 +39,10 @@ export const EventAction =
             <WebhookUrlInput
               placeholder='Enter a url'
               value={this.props.webhookUrl}
-              onChange={this.props.onChangeWebhookUrl} />
+              onChange={this.props.onChangeWebhookUrl}
+              webhookBody={this.props.webhookBody} />
+
+            <label>POST Body (optional)</label>
 
             <WebhookBodyInput
               value={this.props.webhookBody}
@@ -48,16 +52,30 @@ export const EventAction =
 
       return (
         <>
-          <div
-            className='event-box__variable-wrapper'
-          >
-            <button
-              className='event-box__variable event-box__action'
-              onClick={this.showWebhookForm}
-            >
-              {state}
-            </button>&nbsp;
-            {form}
+          <div className='container'>
+            <div className='row'>
+              <div className='col-xs-12 col-xl-10 col-start-xl-2 is-size-4'>
+                <Switch
+                  value={this.state.filterEventBool}
+                  onChange={(e) => {
+                    this.setState({ filterEventBool: !this.state.filterEventBool })
+                  }}
+                >
+                  ...then send me an email
+                </Switch>
+
+                <Switch
+                  value={this.state.showWebhookForm}
+                  onChange={(e) => {
+                    this.setState({ showWebhookForm: !this.state.showWebhookForm })
+                  }}
+                >
+                  ...then trigger a webhook
+                </Switch>
+
+                {form}
+              </div>
+            </div>
           </div>
         </>
       )

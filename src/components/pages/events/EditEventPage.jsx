@@ -257,7 +257,7 @@ export const EditEventPage = class _EditEventPage extends Component {
 
     debug('runUpdateEventMutation: ', variables)
 
-    this.props.updateEventMutation({
+    return this.props.updateEventMutation({
       variables,
       refetchQueries: [
         // only refetch the event we just updated (1 record)
@@ -267,21 +267,29 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   handleChangeRunCount = () => {
+    const runCount = this.state.event.runCount === 0 ? -1 : 0
+    const event = {
+      ...this.state.event,
+      runCount
+    }
     this.setState({
-      event: {
-        ...this.state.event,
-        runCount: this.state.event.runCount === 0 ? -1 : 0
-      }
-    }, this.doGenericUpdateEvent)
+      event
+    }, () => {
+      this.doGenericUpdateEvent({id: event.id, runCount })
+    })
   }
 
   handleToggleActive = () => {
+    const isActive = !this.state.event.isActive
+    const event = {
+      ...this.state.event,
+      isActive
+    }
     this.setState({
-      event: {
-        ...this.state.event,
-        isActive: !this.state.event.isActive
-      }
-    }, this.doGenericUpdateEvent)
+      event
+    }, () => {
+      this.doGenericUpdateEvent({id: event.id, isActive })
+    })
   }
 
   handleTogglePublish = () => {
@@ -453,7 +461,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       notusToast.success(successMessage)
     }
 
-    this.runUpdateEventMutation(variables, successCallback)
+    return this.runUpdateEventMutation(variables, successCallback)
   }
 
   onChangeWebhookUrl = (webhookUrl) => {
@@ -461,7 +469,9 @@ export const EditEventPage = class _EditEventPage extends Component {
     event.webhookUrl = webhookUrl
     this.setState({
       event
-    }, this.doGenericUpdateEvent)
+    }, () => {
+      this.doGenericUpdateEvent({ id: event.id, webhookUrl })
+    })
   }
 
   onChangeWebhookBody = (webhookBody) => {
@@ -469,7 +479,9 @@ export const EditEventPage = class _EditEventPage extends Component {
     event.webhookBody = webhookBody
     this.setState({
       event
-    }, this.doGenericUpdateEvent)
+    }, () => {
+      this.doGenericUpdateEvent({ id: event.id, webhookBody })
+    })
   }
 
   render () {
@@ -661,22 +673,13 @@ export const EditEventPage = class _EditEventPage extends Component {
 
           <div className={`event-box event-box__footer color-block ${colorClass}`}>
             <div className='is-brightness-40 is-full-width-background' />
-
-            <div className={`container-fluid`}>
-              <div className='container'>
-                <div className='row'>
-                  <div className='col-xs-12 has-text-centered is-size-4'>
-                    <EventAction
-                      event={this.state.event}
-                      webhookUrl={this.state.event.webhookUrl}
-                      webhookBody={this.state.event.webhookBody}
-                      onChangeWebhookUrl={this.onChangeWebhookUrl}
-                      onChangeWebhookBody={this.onChangeWebhookBody}
-                      />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <EventAction
+              event={this.state.event}
+              webhookUrl={this.state.event.webhookUrl}
+              webhookBody={this.state.event.webhookBody}
+              onChangeWebhookUrl={this.onChangeWebhookUrl}
+              onChangeWebhookBody={this.onChangeWebhookBody}
+              />
           </div>
 
           <div className={`is-white-ter pt30 pb30`}>

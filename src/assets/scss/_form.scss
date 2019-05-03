@@ -12,8 +12,7 @@ $addonsFormHeight: 57px;
 }
 
 .form .input {
-  height: 47px !important;
-  max-width: 600px;
+  // height: 47px !important;
 }
 
 .field:not(:last-child) {
@@ -79,7 +78,7 @@ $hasAddonsformColor: $cyan;
 .form .react-select,
 .form .buttons {
   display: flex;
-  margin: 0 5px;
+  // margin: 0 5px;
 
   @media screen and (max-width: $tablet) {
     margin: 0;
@@ -102,11 +101,6 @@ $hasAddonsformColor: $cyan;
   @media screen and (max-width: $mobile) {
     height: 160px;
   }
-}
-
-.field:not(:last-child) {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
 }
 
 .select:not(.is-multiple):not(.is-loading)::after {
@@ -137,20 +131,16 @@ textarea.textarea,
   color: white;
 }
 
-.control:first-child {
-  flex: 0 0 62%;
-
-  @media screen and (max-width: $mobile) {
-    flex: 0 0 50%;
-  }
-}
-
-.control:last-child {
-  flex: 0 0 38%;
-
-  @media screen and (max-width: $mobile) {
-    flex: 0 0 50%;
-  }
+.method-addon {
+  display: inline-block;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-radius: 8px;
+  margin: 0;
+  min-height: 25px;
+  padding: 4px 20px;
+  border-width: 3px;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 form.is-active button.button,
@@ -198,9 +188,7 @@ form.has-addons.is-active textarea.textarea:active {
 }
 
 .label {
-  color: $grey;
   font-weight: 600;
-  text-transform: uppercase;
 }
 
 label.radio {
@@ -323,10 +311,6 @@ label.radio,
   border-width: 5px;
   color: $yellow;
   transform: scale3d(1, 1, 1);
-}
-
-.has-addons input.input {
-  border-color: white;
 }
 
 .form.is-warning .field {
