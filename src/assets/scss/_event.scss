@@ -321,13 +321,9 @@
   margin-left: 0;
 }
 
-.event-box__variable:hover,
-.event-box__variable:active,
-.event-box__variable:focus,
-.event-box__variable.is-active {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: white;
-  border: 3px solid rgba(255, 255, 255, 0.8);
+.event-box__variable:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.7);
   color: white;
 }
 
