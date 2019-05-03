@@ -211,7 +211,7 @@ export const EditEventButtons =
                     : (
                       <>
                         <strong>Private:</strong> Only you will be able to see this event.
-                        </>
+                      </>
                     )
 
                   eventActiveState = event.isActive

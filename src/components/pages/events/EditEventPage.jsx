@@ -7,7 +7,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { formatRoute } from 'react-router-named-routes'
 import { orderBy } from 'lodash'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { PlusCircle } from 'react-feather'
+import { PlusCircle, HelpCircle } from 'react-feather'
 import { toast } from 'react-toastify'
 import { omit } from 'lodash'
 
@@ -262,7 +262,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         ...this.state.event,
         runCount: this.state.event.runCount === 0 ? -1 : 0
       }
-    })
+    }, this.doGenericUpdateEvent)
   }
 
   isEditingMatcher = () => {
@@ -575,6 +575,25 @@ export const EditEventPage = class _EditEventPage extends Component {
                       event={this.state.event}
                       handleSubmitTitle={this.handleSubmitTitle}
                     />
+
+                    {this.state.event.isActive ? 
+                      <strong
+                        data-tip='Currently triggering actions when transactions/blocks/contract events occurs.'
+                        className='is-size-7'
+                      >
+                        Active <HelpCircle className='is-xsmall' />
+                      </strong> 
+                      : <strong
+                        data-tip='Currently not firing when events occur.'
+                        className='is-size-7'
+                      >
+                        Not Active <HelpCircle className='is-xsmall' />
+                      </strong>
+                    }
+                    
+                    
+                    
+                    
                   </h6>
                 </div>
               </div>
