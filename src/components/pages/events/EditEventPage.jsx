@@ -9,6 +9,7 @@ import { orderBy } from 'lodash'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { PlusCircle } from 'react-feather'
 import { toast } from 'react-toastify'
+import { omit } from 'lodash'
 
 import { EditEventButtons } from '~/components/events/EditEventButtons'
 import { EventAction } from '~/components/events/EventAction'
@@ -62,6 +63,10 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.setState({ editingEventSource: !this.state.editingEventSource })
   }
 
+  scrubEvent(event) {
+    return omit(event, '__typename', 'createdAt', 'updatedAt')
+  }
+
   handleSubmitTitle = (newEventTitle) => {
     if (this.isCreateMode()) {
       this.setState({
@@ -100,40 +105,24 @@ export const EditEventPage = class _EditEventPage extends Component {
       this.state.freshlyMounted
     ) {
       const event = this.props.eventData.event
-      let {
-        id,
-        parentId,
-        isPublic,
-        scope,
-        abiEventId,
-        title
-      } = event
-
-      const matchers = event.matchers.map(
-        matcher => deepCloneMatcher(matcher, this.isCreateMode())
-      )
-
+      
+      let thisEvent
       // only set these if it is a event based off someone's public event
       if (this.isCreateMode()) {
-        parentId = parseInt(event.id, 10)
-        isPublic = false
-        id = undefined
-        title = `Give this new event a title`
-      }
-
-      const newEventObject = {
-        ...this.state.event,
-        id,
-        parentId,
-        isPublic,
-        scope,
-        abiEventId: abiEventId || undefined,
-        title,
-        matchers: orderBy(matchers, 'order')
+        thisEvent = Object.assign({}, omit(event, ['__typename', 'id', 'matchers', 'isPublic', 'createdAt', 'updatedAt']), {
+          parentId: parseInt(event.id, 10),
+          id: undefined,
+          matchers: event.matchers.map(
+            matcher => deepCloneMatcher(matcher, this.isCreateMode())
+          ),
+          isPublic: false
+        })
+      } else {
+        thisEvent = event
       }
 
       this.setState({
-        event: newEventObject,
+        event: thisEvent,
         freshlyMounted: false
       })
     }
@@ -418,6 +407,8 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   doGenericUpdateEvent = () => {
+    if (this.isCreateMode()) { return }
+
     let event = { ...this.state.event }
 
     debug('doGenericUpdateEvent: ', event)
@@ -429,6 +420,22 @@ export const EditEventPage = class _EditEventPage extends Component {
       toast.success('Updated event')
     }
     this.runUpdateEventMutation(variables, successCallback)
+  }
+
+  onChangeWebhookUrl = (webhookUrl) => {
+    let event = { ...this.state.event }
+    event.webhookUrl = webhookUrl
+    this.setState({
+      event
+    }, this.doGenericUpdateEvent)
+  }
+
+  onChangeWebhookBody = (webhookBody) => {
+    let event = { ...this.state.event }
+    event.webhookBody = webhookBody
+    this.setState({
+      event
+    }, this.doGenericUpdateEvent)
   }
 
   render () {
@@ -605,7 +612,13 @@ export const EditEventPage = class _EditEventPage extends Component {
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 has-text-centered is-size-4'>
-                    <EventAction />
+                    <EventAction
+                      event={this.state.event}
+                      webhookUrl={this.state.event.webhookUrl}
+                      webhookBody={this.state.event.webhookBody}
+                      onChangeWebhookUrl={this.onChangeWebhookUrl}
+                      onChangeWebhookBody={this.onChangeWebhookBody}
+                      />
                   </div>
                 </div>
               </div>

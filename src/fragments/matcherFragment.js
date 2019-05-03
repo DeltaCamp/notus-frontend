@@ -6,6 +6,7 @@ export const matcherFragment = gql`
     order
     source
     abiEventInputId
+    eventId
     operator
     operand
     createdAt
