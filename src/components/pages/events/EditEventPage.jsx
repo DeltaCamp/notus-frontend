@@ -612,23 +612,27 @@ export const EditEventPage = class _EditEventPage extends Component {
                       </>
                     }
                   </h6>
+                  
                   <EventTitle
                     event={this.state.event}
                     handleSubmitTitle={this.handleSubmitTitle}
                   />
 
                   {!this.isCreateMode() &&
-                    <div className="buttons">
-                      <ActiveButton
-                        event={this.state.event}
-                        handleToggleActive={this.handleToggleActive}
-                      />
-                      
-                      <PublishButton
-                        event={this.state.event}
-                        handleTogglePublish={this.handleTogglePublish}
-                      />
-                    </div>
+                    <>
+                      <br />
+                      <div className="buttons pt20">
+                        <ActiveButton
+                          event={this.state.event}
+                          handleToggleActive={this.handleToggleActive}
+                        />
+                        
+                        <PublishButton
+                          event={this.state.event}
+                          handleTogglePublish={this.handleTogglePublish}
+                        />
+                      </div>
+                    </>
                   }
                 </div>
               </div>

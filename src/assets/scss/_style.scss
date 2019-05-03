@@ -406,32 +406,12 @@ hr {
   margin-right: 20px;
 }
 
-// .card-xtra-wide-touch {
-//   margin-left: -10%;
-//   width: 120%;
-// }
-
 .has-shadow {
   box-shadow: 0 7px 14px rgba(50, 50, 93, .1), 0 3px 6px rgba(0, 0, 0, .08);
 }
 
 .has-shadow-big {
   box-shadow: 0 17px 50px rgba(50, 50, 93, .1), 0 7px 20px rgba(0, 0, 0, .08);
-}
-
-.logo-signup {
-  height: 60px;
-  margin: 1.5rem auto 2rem auto;
-  width: 200px;
-
-  @media screen and (max-width: $tablet) {
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-}
-
-.logo-signup path {
-  fill: white
 }
 
 .has-no-top-padding {
@@ -616,6 +596,14 @@ hr {
 .is-ma-centered {
   margin-left: auto !important;
   margin-right: auto !important;
+}
+
+.no-ml {
+  margin-left: 0;
+}
+
+.no-mr {
+  margin-right: 0;
 }
 
 .notus-toast {

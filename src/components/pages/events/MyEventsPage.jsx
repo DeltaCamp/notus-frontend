@@ -251,7 +251,7 @@ export const MyEventsPage =
                     <br />
                     <br />
 
-                    <div className='container-fluid has-bg is-blue pt50 pb100'>
+                    <div className='container-fluid color-block is-blue pt50 pb100'>
                       <div className='row'>
                         <div className='col-xs-12'>
                           <div className='container'>

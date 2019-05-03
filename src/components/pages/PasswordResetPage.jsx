@@ -124,7 +124,7 @@ export const PasswordResetPage =
 
           <ScrollToTop />
 
-          <section className='section section--main-content has-no-top-padding'>
+          <section className='section section--main-content has-no-top-padding pb50'>
             <div className='container'>
               <div className='row'>
                 <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>

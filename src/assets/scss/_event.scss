@@ -287,7 +287,7 @@ $eventFontSize: 1rem;
   display: inline-flex;
   font-size: $eventFontSize;
   font-weight: 600;
-  height: 47px;
+  height: $form-input-height;
   line-height: 1;
   margin: 0 0.5rem 0;
   max-width: 225px;
