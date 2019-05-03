@@ -209,11 +209,21 @@ $eventFontSize: 1rem;
   font-size: $eventFontSize;
   margin: 0.25rem 0;
   min-height: 3.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.event-box__variable-wrapper .event-box__variable {
+  margin: 0 0.5rem;
+}
+
+.event-box__variable-wrapper .button {
+  margin: 0;
 }
 
 .event-box__variable-wrapper .form .input {
   font-size: inherit;
-  margin: 0.25rem auto 0 auto;
+  margin: 0 auto;
   max-width: 600px;
 }
 
@@ -252,7 +262,7 @@ $eventFontSize: 1rem;
   border-radius: 10px;
   font-size: $eventFontSize;
 
-  align-items: baseline;
+  align-items: center;
   display: flex;
   justify-content: flex-start;
   padding-right: 1rem;
@@ -280,27 +290,21 @@ $eventFontSize: 1rem;
   height: 47px;
   line-height: 1;
   margin: 0.5rem 0.5rem 0;
-  max-width: 225px;
   padding: 0.35rem 0.75rem 0.45rem;
   position: relative;
   text-align: left;
   transition: all 275ms ease-in-out;
 
   @media screen and (max-width: $fullhd) {
-    max-width: 205px;
   }
   
   @media screen and (max-width: $widescreen) {
-    max-width: 160px;
-    // width: 100%;
   }
 
   @media screen and (max-width: $desktop) {
-    max-width: 160px;
   }
 
   @media screen and (max-width: $tablet) {
-    max-width: 135px;
   }
 
   @media screen and (max-width: $mobile) {
@@ -413,7 +417,7 @@ $eventFontSize: 1rem;
 
 .event-box__variable .select select,
 .event-box__variable .react-select {
-  height: 100% !important;
+  height: auto !important;
   line-height: inherit;
   font-size: inherit;
 }
@@ -442,7 +446,7 @@ $eventFontSize: 1rem;
 .event-box__variable .react-select__dropdown-indicator,
 .react-select__value-container div:last-child,
 .react-select__value-container .react-select__input input {
-  height: 23px !important;
+  height: auto;
 }
 
 .react-select__value-container div:last-child {
