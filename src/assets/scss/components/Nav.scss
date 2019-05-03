@@ -19,6 +19,10 @@ body.home .navbar {
   z-index: 10001;
 }
 
+.navbar.is-top-layer {
+  z-index: 10001;
+}
+
 .navbar {
   background: transparent;
   z-index: 9999;

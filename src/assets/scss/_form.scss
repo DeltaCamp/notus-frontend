@@ -77,6 +77,10 @@ $hasAddonsformColor: $cyan;
 .form .buttons {
   display: flex;
   margin: 0 5px;
+
+  @media screen and (max-width: $tablet) {
+    margin: 0;
+  }
 }
 
 .form .buttons:first-child {
