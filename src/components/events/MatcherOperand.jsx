@@ -63,6 +63,12 @@ export const MatcherOperand = graphql(sourceQuery, {
         }
 
         let operandInput
+        console.log(source)
+        console.log(abiEventInput)
+        console.log((source && source.dataType === 'uint256'));
+        console.log((abiEventInput && abiEventInput.type === 'address'));
+        
+        
         if (
           (source && source.dataType === 'address')
           || (abiEventInput && abiEventInput.type === 'address')
