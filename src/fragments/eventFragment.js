@@ -8,6 +8,7 @@ export const eventFragment = gql`
     isPublic
     isActive
     scope
+    runCount
     user {
       id
       name

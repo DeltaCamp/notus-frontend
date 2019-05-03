@@ -5,7 +5,6 @@ import Helmet from 'react-helmet'
 import arrayMove from 'array-move'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { formatRoute } from 'react-router-named-routes'
-import { orderBy } from 'lodash'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { PlusCircle, HelpCircle } from 'react-feather'
 import { toast } from 'react-toastify'
@@ -63,8 +62,18 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.setState({ editingEventSource: !this.state.editingEventSource })
   }
 
+  eventEntityToDto(event) {
+    event = this.scrubEvent(event)
+    event.matchers = event.matchers.map(matcher => this.matcherEntityToDto(matcher))
+    return event
+  }
+
+  matcherEntityToDto(matcher) {
+    return deepCloneMatcher(matcher)
+  }
+
   scrubEvent(event) {
-    return omit(event, '__typename', 'createdAt', 'updatedAt')
+    return omit(event, '__typename', 'createdAt', 'updatedAt', 'parent', 'user')
   }
 
   handleSubmitTitle = (newEventTitle) => {
@@ -105,11 +114,20 @@ export const EditEventPage = class _EditEventPage extends Component {
       this.state.freshlyMounted
     ) {
       const event = this.props.eventData.event
+      console.log('event', event)
       
       let thisEvent
       // only set these if it is a event based off someone's public event
       if (this.isCreateMode()) {
-        thisEvent = Object.assign({}, omit(event, ['__typename', 'id', 'matchers', 'isPublic', 'createdAt', 'updatedAt']), {
+        const filteredEvent = omit(event, [
+          '__typename',
+          'id',
+          'matchers',
+          'isPublic',
+          'createdAt',
+          'updatedAt'
+        ])
+        thisEvent = Object.assign({}, filteredEvent, {
           parentId: parseInt(event.id, 10),
           id: undefined,
           matchers: event.matchers.map(
@@ -265,6 +283,15 @@ export const EditEventPage = class _EditEventPage extends Component {
     }, this.doGenericUpdateEvent)
   }
 
+  handleToggleActive = () => {
+    this.setState({
+      event: {
+        ...this.state.event,
+        isActive: !this.state.event.isActive
+      }
+    }, this.doGenericUpdateEvent)
+  }
+
   isEditingMatcher = () => {
     return this.state.editMatcherIndex !== null
   }
@@ -410,6 +437,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     if (this.isCreateMode()) { return }
 
     let event = { ...this.state.event }
+    event = this.eventEntityToDto(event)
 
     debug('doGenericUpdateEvent: ', event)
 
@@ -576,20 +604,27 @@ export const EditEventPage = class _EditEventPage extends Component {
                       handleSubmitTitle={this.handleSubmitTitle}
                     />
 
-                    {this.state.event.isActive ? 
-                      <strong
-                        data-tip='Currently triggering actions when transactions/blocks/contract events occurs.'
-                        className='is-size-7'
-                      >
-                        Active <HelpCircle className='is-xsmall' />
-                      </strong> 
-                      : <strong
-                        data-tip='Currently not firing when events occur.'
-                        className='is-size-7'
-                      >
-                        Not Active <HelpCircle className='is-xsmall' />
-                      </strong>
-                    }
+                    <button
+                      className='event-box__variable event-box__variable--full-width'
+                      onClick={this.handleToggleActive}
+                    >
+                      {this.state.event.isActive ?
+                        <strong
+                          data-tip='Currently triggering actions when transactions/blocks/contract events occurs.'
+                          className='is-size-7'
+                        >
+                          Active <HelpCircle className='is-xsmall' />
+                        </strong>
+                        : <strong
+                          data-tip='Currently not firing when events occur.'
+                          className='is-size-7'
+                        >
+                          Not Active <HelpCircle className='is-xsmall' />
+                        </strong>
+                      }
+                    </button>
+
+                    
                     
                     
                     
