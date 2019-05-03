@@ -857,6 +857,10 @@ hr {
   position: fixed;
   right: 0;
   z-index: 300000;
+
+  @media screen and (max-width: $mobile) {
+    padding: 1rem 0;
+  }
 }
 
 .cookie-consent-enter {
@@ -871,6 +875,11 @@ hr {
   @media screen and (max-width: $widescreen) {
     font-size: 1rem;
     margin: 0 2rem;
+  }
+
+  @media screen and (max-width: $mobile) {
+    font-size: 0.825rem;
+    margin: 0 1rem;
   }
 }
 

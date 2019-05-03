@@ -9,8 +9,8 @@ import { TextInput } from '~/components/TextInput'
 import { UIntInput } from '~/components/UIntInput'
 import { abiEventInputQuery } from '~/queries/abiEventInputQuery'
 import { sourceQuery } from '~/queries/sourceQuery'
+import { calculateSourceDataType } from '~/utils/calculateSourceDataType'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
-import { SOURCES } from '~/constants'
 
 export const MatcherOperand = graphql(sourceQuery, {
   name: 'sourceQuery',
@@ -57,39 +57,30 @@ export const MatcherOperand = graphql(sourceQuery, {
           console.error(error)
         }
 
-        if (matcher.operator === 0) {
+        if (!source || matcher.operator === 0) {
           return null
         }
 
         let operandInput
-        if (
-          (source && source.dataType === 'address')
-          || (abiEventInput && abiEventInput.type === 'address')
-        ) {
+        const dataType = calculateSourceDataType(source, abiEventInput)
+        if (dataType === 'address') {
           operandInput = <AddressInput 
             matcher={matcher}
             handleSubmit={this.handleSubmit}
             handleSetEditMatcher={this.props.handleSetEditMatcher}
           />
-        } else if (source && source.dataType === 'uint256') {
+        } else if (dataType === 'uint256') {
           operandInput = <UIntInput
             matcher={matcher}
             handleSubmit={this.handleSubmit}
             handleSetEditMatcher={this.props.handleSetEditMatcher}
           />
-        } else if (
-          source
-          && source.source !== SOURCES.CONTRACT_EVENT_INPUT
-          && source.dataType === 'bytes'
-        ) {
+        } else {
           operandInput = <TextInput
             value={matcher.operand}
             handleSubmit={this.handleSubmit}
             handleStartEditing={this.props.handleSetEditMatcher}
           />
-        } else {
-          console.warn('Unknown datatype for source & matcher!', source, matcher)
-          return null
         }
 
         return (
