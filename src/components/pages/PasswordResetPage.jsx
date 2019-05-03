@@ -80,7 +80,7 @@ export const PasswordResetPage =
           <div className='card-content'>
             <form
               onSubmit={this.handlePasswordReset}
-              className='form'
+              className='form is-tall'
             >
               <h6 className='is-size-6 has-text-centered has-text-weight-bold'>
                 {this.state.error}
