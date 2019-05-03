@@ -509,7 +509,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           <RunCountTitle
             runCount={this.state.event.runCount}
           />
-        </button>&nbsp;
+        </button>
 
         <EventSource
           event={this.state.event}
