@@ -20,7 +20,7 @@ button[disabled] {
 
 .button {
   background-color: black;
-  border-radius: 100px;
+  border-radius: 8px;
   border-width: 5px;
   height: auto;
   font-size: 1.25rem;
@@ -194,7 +194,7 @@ button[disabled] {
 }
 
 .button.is-small {
-  border-radius: 100px;
+  border-radius: 8px;
   height: auto;
   font-size: 1rem;
   padding: 0.5rem 2rem 0.5rem;
