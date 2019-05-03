@@ -208,7 +208,6 @@ $eventFontSize: 1rem;
 .event-box__variable-wrapper {
   font-size: $eventFontSize;
   margin: 0.25rem 0;
-  padding-top: 0.5rem;
   min-height: 3.25rem;
   display: flex;
   align-items: center;
@@ -290,7 +289,7 @@ $eventFontSize: 1rem;
   font-weight: 600;
   height: 47px;
   line-height: 1;
-  margin: 0.5rem 0.5rem 0;
+  margin: 0 0.5rem 0;
   max-width: 225px;
   padding: 0.35rem 0.75rem 0.45rem;
   position: relative;
