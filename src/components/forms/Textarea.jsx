@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 import { KEYS } from '~/constants'
 
-export const Input = class _Input extends Component {
+export const Textarea = class _Textarea extends Component {
   static propTypes = {
     value: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
     handleStartEditing: PropTypes.func
   }
 
@@ -32,14 +32,14 @@ export const Input = class _Input extends Component {
     })
   }
 
-  handleChange = (e) => {
+  onChange = (e) => {
     this.setState({
       value: e.target.value
     })
   }
 
   submit = () => {
-    this.props.handleSubmit(this.state.value)
+    this.props.onChange(this.state.value)
   }
 
   handleBlur = (e) => {
@@ -62,8 +62,21 @@ export const Input = class _Input extends Component {
   handleKeyUp = (e) => {
     if (e.keyCode === KEYS.escape) {
       this.onCancel()
-    } else if (e.keyCode === KEYS.enter) {
-      this.refs.inputRef.blur()
+    }
+  }
+
+  handleKeyDown = (e) => {
+    if (e.keyCode === KEYS.tab) {
+      e.preventDefault();
+      let start = this.refs.textAreaRef.selectionStart;
+      let end = this.refs.textAreaRef.selectionEnd;
+      const value = this.state.value.substring(0, start) + "\t" + this.state.value.substring(end)
+      this.setState({
+        value
+      }, () => {
+        this.refs.textAreaRef.selectionStart = start + 1;
+        this.refs.textAreaRef.selectionEnd = start + 1;
+      })
     }
   }
 
@@ -81,14 +94,15 @@ export const Input = class _Input extends Component {
 
   render () {
     return (
-      <input
-        type='text'
-        ref='inputRef'
+      <textarea
+        ref='textAreaRef'
+        placeholder={this.props.placeholder}
         className={this.props.className}
         value={this.state.value}
-        onChange={this.handleChange}
+        onChange={this.onChange}
         onBlur={this.handleBlur}
         onKeyUp={this.handleKeyUp}
+        onKeyDown={this.handleKeyDown}
         onFocus={this.handleFocus}
       />
     )

@@ -13,7 +13,8 @@ export const DANGER = 'danger'
 
 export const KEYS = {
   enter: 13,
-  escape: 27
+  escape: 27,
+  tab: 9
 }
 
 export const SOURCES = {

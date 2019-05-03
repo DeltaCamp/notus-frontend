@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import { TextInput } from '~/components/TextInput'
+import { Input } from '~/components/forms/Input'
 
 export class WebhookUrlInput extends PureComponent {
   static propTypes = {
@@ -10,6 +10,16 @@ export class WebhookUrlInput extends PureComponent {
   }
 
   render () {
-    return <TextInput value={this.props.value || ''} handleSubmit={this.props.onChange} />
+    return (
+      <div className='field'>
+        <div className='control'>
+          <Input
+            value={this.props.value || ''}
+            handleSubmit={this.props.onChange}
+            className='input'
+            />
+        </div>
+      </div>
+    )
   }
 }

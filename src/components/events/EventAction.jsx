@@ -34,7 +34,7 @@ export const EventAction =
       if (showWebhookForm) {
         state = '...then trigger a webhook'
         form =
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form onSubmit={(e) => e.preventDefault()} className='form'>
             <WebhookUrlInput
               placeholder='Enter a url'
               value={this.props.webhookUrl}

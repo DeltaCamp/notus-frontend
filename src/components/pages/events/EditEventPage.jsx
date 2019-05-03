@@ -116,7 +116,6 @@ export const EditEventPage = class _EditEventPage extends Component {
       this.state.freshlyMounted
     ) {
       const event = this.props.eventData.event
-      console.log('event', event)
       
       let thisEvent
       // only set these if it is a event based off someone's public event
