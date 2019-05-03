@@ -25,6 +25,7 @@ import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { notusToast } from '~/utils/notusToast'
 import { showErrorMessage } from '~/utils/showErrorMessage'
 import * as routes from '~/../config/routes'
+import { SCOPES } from '~/constants'
 
 const debug = require('debug')('notus:EditEventPage')
 
@@ -226,23 +227,12 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   handleOnCreateAbi = (abi) => {
     let event = { ...this.state.event }
-
     if (abi.abiEvents.length) {
+      event.scope = SCOPES.CONTRACT_EVENT
       event.abiEventId = parseInt(abi.abiEvents[0].id, 10)
     }
-
-    if (!this.isCreateMode()) {
-      const variables = {
-        event: this.state.event
-      }
-      const successCallback = (mutationResult) => {
-        notusToast.success('Updated event scope')
-      }
-      this.runUpdateEventMutation(variables, successCallback)
-    }
-
+    this.doGenericUpdateEvent(event, 'Updated event scope')
     this.handleToggleEventSource()
-
     this.setState({
       event
     })
