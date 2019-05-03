@@ -264,32 +264,11 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-$borderWidth: 3px;
-
-@keyframes animatedGradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
 .event-box__variable {
   background: rgba(255, 255, 255, 0.12);
-  
   border: none;
-  // border-radius: $borderWidth;
-  // border: 3px solid transparent;
-  
-  // border: 3px solid;
-  // border-image-slice: 1;
-  // border-image: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8);
-  // border-radius: 6px;
-
+  border: 3px solid transparent;
+  border-radius: 6px;
   color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
   display: inline-block;
@@ -303,7 +282,6 @@ $borderWidth: 3px;
   position: relative;
   text-align: left;
   transition: all 275ms ease-in-out;
-  // background: #1D1F20;
 
   @media screen and (max-width: $fullhd) {
     max-width: 205px;
@@ -329,46 +307,12 @@ $borderWidth: 3px;
   }
 }
 
-// .event-box__variable:before {
-//   content: '';
-//   position: absolute;
-//   top: calc(-1 * #{$borderWidth});
-//   left: calc(-1 * #{$borderWidth});
-//   height: calc(100% + #{$borderWidth} * 2);
-//   width: calc(100% + #{$borderWidth} * 2);
-//   background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8);
-//   border-radius: calc(2 * #{$borderWidth});
-//   z-index: -1;
-//   animation: animatedGradient 3s ease alternate infinite;
-//   background-size: 300% 300%;
-// }
-
-// .event-box__variable:before {
-//   content: '';
-//   position: absolute;
-//   top: calc(-1 * #{$borderWidth});
-//   left: calc(-1 * #{$borderWidth});
-//   height: calc(100% + #{$borderWidth} * 2);
-//   width: calc(100% + #{$borderWidth} * 2);
-//   border-radius: calc(2 * #{$borderWidth});
-//   z-index: -1;
-//   animation: animatedGradient 3s ease alternate infinite;
-//   background-size: 300% 300%;
-
-//   border: 3px solid;
-//   border-image-slice: 1;
-//   border-image: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8);
-//   border-radius: 6px;
-//   // overflow: visible;
-// }
-
-
 .event-box__variable--full-width {
   max-width: none;
 }
 
 .is-truncated {
-  overflow: hidden; // this fucks up the animated borders
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
