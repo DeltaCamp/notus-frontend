@@ -266,7 +266,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.setState({
       event
     }, () => {
-      this.doGenericUpdateEvent({id: event.id, runCount })
+      this.doGenericUpdateEvent({id: event.id, runCount }, `Event will run ${RunCountTitle(runCount).toLowerCase()}`)
     })
   }
 
@@ -279,17 +279,21 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.setState({
       event
     }, () => {
-      this.doGenericUpdateEvent({id: event.id, isActive })
+      this.doGenericUpdateEvent({id: event.id, isActive }, `Event ${isActive ? 'is active' : 'no longer active'}`)
     })
   }
 
   handleTogglePublish = () => {
+    const isPublic = !this.state.event.isPublic
+    const event = {
+      ...this.state.event,
+      isPublic
+    }
     this.setState({
-      event: {
-        ...this.state.event,
-        isPublic: !this.state.event.isPublic
-      }
-    }, this.doGenericUpdateEvent)
+      event
+    }, () => {
+      this.doGenericUpdateEvent(event, `Event is ${isPublic ? 'public' : 'no longer public'}`)
+    })
   }
 
   isEditingMatcher = () => {
@@ -483,7 +487,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.setState({
       event
     }, () => {
-      this.doGenericUpdateEvent({ id: event.id, webhookUrl: null, webhookBody: null })
+      this.doGenericUpdateEvent({ id: event.id, webhookUrl: null, webhookBody: null }, 'Webhook has been deleted')
     })
   }
 
@@ -494,7 +498,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.setState({
       event
     }, () => {
-      this.doGenericUpdateEvent({ id: event.id, sendEmail })
+      this.doGenericUpdateEvent({ id: event.id, sendEmail }, sendEmail ? 'Emails are on' : 'Emails are off')
     })
   }
 
