@@ -29,11 +29,11 @@ export const EventAction =
     }
 
     render () {
-      const showWebhookForm = !!this.props.webhookUrl || this.state.showWebhookForm
       let form
-      let state = '... then send me an email'
+      
+      const showWebhookForm = !!this.props.webhookUrl || this.state.showWebhookForm
+
       if (showWebhookForm) {
-        state = '...then trigger a webhook'
         form =
           <form onSubmit={(e) => e.preventDefault()} className='form is-inverted'>
             <WebhookUrlInput

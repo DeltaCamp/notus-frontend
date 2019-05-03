@@ -58,17 +58,17 @@ export const PasswordResetPage =
       const thankYou = (
         <div className='accordion accordion--signup-thank-you'>
           <div className='card-content'>
-            <h4 className='is-size-4 has-text-centered mt30'>
+            <h4 className='is-size-4 has-text-weight-bold has-text-centered mt30'>
               Thanks for using Notus!
             </h4>
             <div className='has-text-centered'>
               <Mail className='icon--signup-large' />
             </div>
-            <p>
-              If an account exists with the email <span className='has-text-light'>'{this.state.email}'</span> check it's inbox for a reset password link.
+            <p className='has-text-weight-semibold has-text-centered has-text-light'>
+              If an account exists with the email <span className='has-text-white'>'{this.state.email}'</span> check it's inbox for a reset password link.
             </p>
             <br />
-            <p className='is-size-7 has-text-light'>
+            <p className='is-size-7 has-text-lighter has-text-weight-semibold has-text-centered'>
               Can't find the email? Check your spam folder first. Or reach out to us for support.
             </p>
           </div>
