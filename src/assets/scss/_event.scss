@@ -1,7 +1,8 @@
 // EVENT CARD
 
-$eventFontSize: 1rem;
-$eventBoxTransitionTime: all 275ms ease-in-out;
+$event-box-transition: all 275ms ease-in-out;
+$event-font-size: 1rem;
+$event-font-size-sm: 0.9rem;
 
 .button.event-card {
   border-radius: 15px;
@@ -198,7 +199,7 @@ $eventBoxTransitionTime: all 275ms ease-in-out;
 
 .event-box__text {
   display: inline-block;
-  transition: $eventBoxTransitionTime;
+  transition: $event-box-transition;
 
   @media screen and (max-width: $tablet) {
     margin-left: 0;
@@ -207,15 +208,15 @@ $eventBoxTransitionTime: all 275ms ease-in-out;
 }
 
 .event-box__variable-wrapper {
-  font-size: $eventFontSize;
+  font-size: $event-font-size;
   margin: 0.25rem 0;
   min-height: 3.25rem;
   display: flex;
   align-items: center;
-}
 
-.event-box__variable-wrapper .event-box__variable {
-  margin: 0 0.5rem;
+  @media screen and (max-width: $tablet) {
+    font-size: $event-font-size-sm;
+  }
 }
 
 .event-box__variable-wrapper .button {
@@ -223,7 +224,6 @@ $eventBoxTransitionTime: all 275ms ease-in-out;
 }
 
 .event-box__variable-wrapper .form .input {
-  // font-size: inherit;
   margin: 0 auto;
   max-width: 600px;
 }
@@ -242,12 +242,7 @@ $eventBoxTransitionTime: all 275ms ease-in-out;
 .event-box__variable-wrapper .has-icon,
 .event-box__variable-wrapper .drag-handle {
   pointer-events: none;
-  // transition: all 200ms ease-in-out;
   will-change: opacity;
-}
-
-.event-box__variable-wrapper:hover .has-icon.remove {
-  // transition-duration: 1000ms;
 }
 
 .event-box__variable-wrapper:hover .has-icon,
@@ -255,19 +250,25 @@ $eventBoxTransitionTime: all 275ms ease-in-out;
 .event-box__variable-wrapper:hover .drag-handle {
   opacity: 1;
   pointer-events: initial;
-  // transition-duration: 600ms;
 }
 
 .event-box__variable-wrapper__matcher {
+  align-items: center;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
-  font-size: $eventFontSize;
-  margin-bottom: 0.5rem;
-
-  align-items: center;
   display: flex;
+  font-size: $event-font-size;
   justify-content: flex-start;
-  padding-right: 1rem;
+  margin-bottom: 0.5rem;
+  padding-right: 0.5rem;
+
+  @media screen and (max-width: $desktop) {
+    display: block;
+  }
+
+  @media screen and (max-width: $tablet) {
+    font-size: $event-font-size-sm;
+  }
 }
 
 .event-box__variable-wrapper__matcher > * {
@@ -289,33 +290,24 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   color: $event-box__variable--color;
   cursor: pointer;
   display: inline-flex;
-  font-size: $eventFontSize;
+  font-size: $event-font-size;
   font-weight: 600;
   height: $form-input-height;
   line-height: 1;
-  margin: 0 0.5rem 0;
+  margin: 0 0.5rem;
   max-width: 225px;
   padding: 0.35rem 0.75rem 0.45rem;
   position: relative;
   text-align: left;
-  transition: $eventBoxTransitionTime;
-
-  @media screen and (max-width: $fullhd) {
-  }
-  
-  @media screen and (max-width: $widescreen) {
-  }
+  transition: $event-box-transition;
 
   @media screen and (max-width: $desktop) {
+    display: block;
+    min-width: 100%;
   }
 
   @media screen and (max-width: $tablet) {
-  }
-
-  @media screen and (max-width: $mobile) {
-    display: block;
-    min-width: 100%;
-    max-width: auto;
+    font-size: $event-font-size-sm;
   }
 }
 
@@ -361,7 +353,6 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 }
 
 .event-box__variable.has-text-input {
-  // top: -0.35rem;
   padding: 0;
   width: auto !important;
 }
@@ -536,20 +527,6 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 
 .event-history__date {
   display: inline-flex;
-}
-
-// HOMEPAGE EVENT CARD / DISCOVERY
-// .home .listing-grid {
-//   grid-column-gap: 0;
-//   grid-row-gap: 0;
-// }
-
-.home .event-card {
-//   border-radius: 0;
-  // border-width: 0 !important;
-  // border-color: transparent;
-//   margin: 0;
-//   width: 100%;
 }
 
 .matcher-row--is-active {

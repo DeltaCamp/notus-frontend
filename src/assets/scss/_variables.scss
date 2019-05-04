@@ -1,18 +1,18 @@
-$gridGap: 64px;
-$mobileContainerWidth: 85%;
+$grid-gap: 64px;
+$mobile-container-width: 85%;
 
-$mobile: 480px + (2 * $gridGap);
-$tablet: 700px + (2 * $gridGap);
-$desktop: 820px + (2 * $gridGap);
-$widescreen: 1150px + (2 * $gridGap);
-$fullhd: 1400px + (2 * $gridGap);
+$mobile: 480px + (2 * $grid-gap);
+$tablet: 700px + (2 * $grid-gap);
+$desktop: 820px + (2 * $grid-gap);
+$widescreen: 1150px + (2 * $grid-gap);
+$fullhd: 1400px + (2 * $grid-gap);
 
 // These are good to use with min-width
-$mobileMin: 0px;     
-$tabletMin: $mobile + 1px;
-$desktopMin: $tablet + 1px;
-$widescreenMin: $desktop + 1px;
-$fullhdMin: $widescreen + 1px;
+// $mobileMin: 0px;
+$tablet-min: $mobile + 1px;
+$desktop-min: $tablet + 1px;
+$widescreen-min: $desktop + 1px;
+$fullhd-min: $widescreen + 1px;
 
 // Static variables
 $body-line-height: 1.5;
@@ -23,7 +23,7 @@ $form-input-height-tall: 60px;
 
 $navbar-height: 4rem;
 $navbar-breakpoint: $tablet;
-$navbar-breakpointMin: $desktopMin;
+$navbar-breakpointMin: $desktop-min;
 
 $size-1: 2.25rem;
 $size-2: 2rem;

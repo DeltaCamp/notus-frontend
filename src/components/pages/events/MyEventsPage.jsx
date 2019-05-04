@@ -182,7 +182,7 @@ export const MyEventsPage =
                   <>
                     <div className='mt20 has-text-right'>
                       <Link
-                        className='button is-small mt20 is-outlined is-link'
+                        className='button is-small mt20 is-link'
                         to={routes.NEW_EVENT}
                       >
                         <PlusCircle /> &nbsp;Create a Custom Event
@@ -251,7 +251,7 @@ export const MyEventsPage =
                     <br />
                     <br />
 
-                    <div className='container-fluid color-block is-blue pt50 pb100'>
+                    <div className='container-fluid color-block is-dark pt50 pb100'>
                       <div className='row'>
                         <div className='col-xs-12'>
                           <div className='container'>

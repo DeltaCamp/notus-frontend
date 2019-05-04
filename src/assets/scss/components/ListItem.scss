@@ -78,7 +78,7 @@
 .package-list-item--loader_tablet {
   display: none;
 
-  @media screen and (min-width: $tabletMin) and (max-width: $desktop) {
+  @media screen and (min-width: $tablet-min) and (max-width: $desktop) {
     display: block;
   }
 }
