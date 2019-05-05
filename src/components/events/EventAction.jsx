@@ -67,14 +67,14 @@ export const EventAction =
                   value={this.props.sendEmail}
                   onChange={this.onChangeSendEmail}
                 >
-                  ...then send me an email
+                  send me an email
                 </Switch>
 
                 <Switch
                   value={showWebhookForm}
                   onChange={this.toggleWebhookForm}
                 >
-                  ...then trigger a webhook
+                  trigger a webhook
                 </Switch>
 
                 {form}

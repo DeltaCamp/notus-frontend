@@ -68,6 +68,7 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   eventEntityToDto(event) {
     event = this.scrubEvent(event)
+    event.abiEventId = parseInt(event.abiEventId, 10)
     if (event.matchers) {
       event.matchers = event.matchers.map(matcher => this.matcherEntityToDto(matcher))
     }
@@ -680,12 +681,12 @@ export const EditEventPage = class _EditEventPage extends Component {
                     {matcherSentences}
 
                     <button
-                      className='button has-icon  mt10 pl10 pr10 is-light is-small'
+                      className='button has-icon plus-button mt10 pl10 pr10 is-light is-small'
                       onClick={this.handleAddMatcher}
                     >
                       <PlusCircle
-                        className='icon__button has-stroke-info'
-                      /> &nbsp; Add Matcher
+                        className='icon__button has-stroke-white'
+                      />
                     </button>
                   </div>
                 </div>

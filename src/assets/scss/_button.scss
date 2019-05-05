@@ -215,6 +215,13 @@ button[disabled] {
   color: white;
 }
 
+.button.has-icon.plus-button {
+  width: 100%;
+  background-color: rgba(255,255,255,0.1);
+  color: #ffffffad;
+  font-weight: bolder;
+}
+
 .has-bg .button.has-icon,
 .has-bg__dark .button.has-icon,
 .button.has-icon {

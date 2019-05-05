@@ -277,13 +277,15 @@ $eventFontSize: 1rem;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+$event-box__variable--color: rgba(255, 255, 255, 0.95);
+
 .event-box__variable {
   align-items: center;
   background: rgba(255, 255, 255, 0.12);
   border: none;
   border: 3px solid transparent;
   border-radius: 6px;
-  color: rgba(255, 255, 255, 0.95);
+  color: $event-box__variable--color;
   cursor: pointer;
   display: inline-flex;
   font-size: $eventFontSize;
