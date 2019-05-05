@@ -1,6 +1,7 @@
 // EVENT CARD
 
 $eventFontSize: 1rem;
+$eventBoxTransitionTime: all 275ms ease-in-out;
 
 .button.event-card {
   border-radius: 15px;
@@ -197,7 +198,7 @@ $eventFontSize: 1rem;
 
 .event-box__text {
   display: inline-block;
-  transition: all 275ms ease-in-out;
+  transition: $eventBoxTransitionTime;
 
   @media screen and (max-width: $tablet) {
     margin-left: 0;
@@ -297,7 +298,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   padding: 0.35rem 0.75rem 0.45rem;
   position: relative;
   text-align: left;
-  transition: all 275ms ease-in-out;
+  transition: $eventBoxTransitionTime;
 
   @media screen and (max-width: $fullhd) {
   }
