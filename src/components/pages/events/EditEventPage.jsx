@@ -702,6 +702,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           <div className={`event-box event-box__footer color-block ${colorClass}`}>
             <div className='is-brightness-40 is-full-width-background' />
             <EventAction
+              {...this.props}
               event={this.state.event}
               sendEmail={this.state.event.sendEmail}
               webhookUrl={this.state.event.webhookUrl}

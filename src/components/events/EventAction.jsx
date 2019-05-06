@@ -15,7 +15,8 @@ export const EventAction =
       onChangeSendEmail: PropTypes.func.isRequired,
       onChangeWebhookUrl: PropTypes.func.isRequired,
       onChangeWebhookBody: PropTypes.func.isRequired,
-      onChangeDeleteWebhook: PropTypes.func.isRequired
+      onChangeDeleteWebhook: PropTypes.func.isRequired,
+      currentUserData: PropTypes.object.isRequired
     }
 
     constructor (props) {
@@ -39,6 +40,7 @@ export const EventAction =
     }
 
     render () {
+      const usersEmail = this.props.currentUserData.currentUser.email
       const showWebhookForm = this.state.showWebhookForm
       let form
       if (showWebhookForm) {
@@ -66,8 +68,9 @@ export const EventAction =
                 <Switch
                   value={this.props.sendEmail}
                   onChange={this.onChangeSendEmail}
+                  color='link'
                 >
-                  send me an email
+                  send me an email <span className='has-text-lighter'> - {usersEmail}</span>
                 </Switch>
 
                 <Switch
