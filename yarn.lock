@@ -9384,10 +9384,10 @@ react-bulma-switch@^0.0.3:
     bulma-switch "1.0.1"
     classnames "2.2.5"
 
-react-content-loader@^3.4.2:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-3.4.2.tgz#187fbec2aa389635e4613faa046713f196173f40"
-  integrity sha512-UsL3uyPUBZbaPXr52E+MMIOjs7qr6QpcCiF9Xt7we0ACEMAFYp6rWNxVwJbk4/1Peqe9Deajs0PRW5ymvyF5SA==
+react-content-loader@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/react-content-loader/-/react-content-loader-4.2.1.tgz#0d355134ed7d0987966abd0f784bc59e76976e91"
+  integrity sha512-XA5irUvZpQAEavfUBo7kc4tdvAbWwVKJolz/+2Pkj/XU7pn78AweAUtn+AxEajN0Srg/mraJ8XMKlUsXOFiknw==
 
 react-copy-to-clipboard@^5.0.1:
   version "5.0.1"

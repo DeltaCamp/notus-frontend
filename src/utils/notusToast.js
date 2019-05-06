@@ -21,8 +21,6 @@ export const notusToast = {
   },
   info: (message, options = DEFAULT_OPTIONS) => {
     toast.dismiss()
-    console.warn('info');
-    
     toast.info(message, options)
   },
   warn: (message, options = DEFAULT_OPTIONS) => {

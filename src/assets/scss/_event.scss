@@ -111,7 +111,7 @@ $event-font-size-sm: 0.9rem;
 
 .button.event-card.event-card--small {
   border-radius: 10px;
-  border: 4px solid white;
+  border: 4px solid rgba(255, 255, 255, 0.42);
   margin: 0;
 }
 
@@ -124,7 +124,7 @@ $event-font-size-sm: 0.9rem;
 .button.is-danger.event-card:hover,
 .button.is-danger.event-card:active,
 .button.is-danger.event-card:focus {
-  border-color: saturate($red, 100%);
+  border-color: lighten(saturate($red, 100%), 10%);
 }
 
 .button.is-dark.event-card:active,
@@ -135,7 +135,7 @@ $event-font-size-sm: 0.9rem;
 .button.is-info.event-card:hover,
 .button.is-info.event-card:focus,
 .button.is-info.event-card:active {
-  border-color: lighten($info, 10%);
+  border-color: lighten(saturate($info, 10%), 10%);
 }
 
 .button.is-link.event-card:hover,
@@ -147,7 +147,7 @@ $event-font-size-sm: 0.9rem;
 .button.is-purple.event-card:hover,
 .button.is-purple.event-card:focus,
 .button.is-purple.event-card:active {
-  border-color: lighten($purple, 20%);
+  border-color: lighten(saturate($purple, 10%), 20%);
 }
 
 .button.event-card.event-card--small .event-card__header {

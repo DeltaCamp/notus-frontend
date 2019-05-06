@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { IsAuthed } from '~/components/IsAuthed'
 import { Modal } from '~/components/Modal'
+import { EventsPageLoader } from '~/components/loading/EventsPageLoader'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -122,12 +123,16 @@ export const MyEventsPage =
             }
 
             render () {
-              let loadMore
+              let loadMore,
+                content
               const { eventsData } = this.props
 
-              // const { loading } = eventsData || {}
-              const { error, events } = eventsData || {}
+              const { loading, error, events } = eventsData || {}
               const { skip, take, totalCount } = events || {}
+
+              if (loading) {
+                content = <EventsPageLoader />
+              }
 
               let eventEvents = events ? events.events : []
 
@@ -165,35 +170,39 @@ export const MyEventsPage =
                   >Load More</button>
               }
 
-              const eventsOrBlankState = eventEvents.length === 0
-                ? (
-                  <>
-                    <h2 className='is-size-2 mt75 has-text-weight-bold'>
-                      You haven't created any events.
+              if (!content) {
+                content = (
+                  eventEvents.length === 0
+                    ? (
+                      <>
+                        <h2 className='is-size-2 mt75 has-text-weight-bold'>
+                          You haven't created any events.
                     </h2>
-                    <Link
-                      className='button mt20 is-purple'
-                      to={routes.NEW_EVENT}
-                    >
-                      Create an Event
+                        <Link
+                          className='button mt20 is-purple'
+                          to={routes.NEW_EVENT}
+                        >
+                          Create an Event
                     </Link>
-                  </>
-                ) : (
-                  <>
-                    <div className='mt20 has-text-right'>
-                      <Link
-                        className='button is-small mt20 is-link has-fat-icons'
-                        to={routes.NEW_EVENT}
-                      >
-                        <Plus /> &nbsp;Create a Custom Event
+                      </>
+                    ) : (
+                      <>
+                        <div className='mt20 has-text-right'>
+                          <Link
+                            className='button is-small mt20 is-link has-fat-icons'
+                            to={routes.NEW_EVENT}
+                          >
+                            <Plus /> &nbsp;Create a Custom Event
                       </Link>
-                    </div>
+                        </div>
 
-                    {eventCards}
+                        {eventCards}
 
-                    {loadMore}
-                  </>
+                        {loadMore}
+                      </>
+                    )
                 )
+              } 
 
               return (
                 <div className='is-positioned-absolutely'>
@@ -241,7 +250,7 @@ export const MyEventsPage =
                       </div>
                       <div className='row'>
                         <div className='col-xs-12 has-text-centered'>
-                          {eventsOrBlankState}
+                          {content}
                         </div>
                       </div>
                     </div>

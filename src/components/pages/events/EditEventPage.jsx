@@ -511,8 +511,6 @@ export const EditEventPage = class _EditEventPage extends Component {
     let recipe = {}
 
     if (eventData) {
-      console.log('hello', eventData);
-      
       const error = eventData && eventData.error
       const loading = eventData && eventData.loading
       recipe = eventData && eventData.event
