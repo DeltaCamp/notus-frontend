@@ -64,7 +64,7 @@ export const EventAction =
         <>
           <div className='container'>
             <div className='row'>
-              <div className='col-xs-12 col-xl-10 col-start-xl-2 is-size-4'>
+              <div className='col-xs-12'>
                 <Switch
                   value={this.props.sendEmail}
                   onChange={this.onChangeSendEmail}

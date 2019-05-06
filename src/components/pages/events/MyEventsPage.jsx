@@ -6,7 +6,7 @@ import {
   TransitionGroup
 } from 'react-transition-group'
 import { formatRoute } from 'react-router-named-routes'
-import { PlusCircle } from 'react-feather'
+import { Plus } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { IsAuthed } from '~/components/IsAuthed'
@@ -182,10 +182,10 @@ export const MyEventsPage =
                   <>
                     <div className='mt20 has-text-right'>
                       <Link
-                        className='button is-small mt20 is-link'
+                        className='button is-small mt20 is-link has-fat-icons'
                         to={routes.NEW_EVENT}
                       >
-                        <PlusCircle /> &nbsp;Create a Custom Event
+                        <Plus /> &nbsp;Create a Custom Event
                       </Link>
                     </div>
 

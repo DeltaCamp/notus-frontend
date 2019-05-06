@@ -687,7 +687,7 @@ export const EditEventPage = class _EditEventPage extends Component {
             <div className={`container-fluid`}>
               <div className='container'>
                 <div className='row'>
-                  <div className='col-xs-12 col-xl-10 col-start-xl-2 is-size-4'>
+                  <div className='col-xs-12'>
                     {runCountAndScopeSentences}
                     {matcherSentences}
 
