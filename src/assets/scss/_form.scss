@@ -134,15 +134,29 @@ textarea.textarea,
 }
 
 .method-addon {
+  background-color: rgba(255, 255, 255, 0.2);
   display: inline-block;
+  border-radius: 8px;
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
-  border-radius: 8px;
   margin: 0;
-  min-height: 25px;
-  padding: 4px 20px;
+  padding: 5px 20px;
   border-width: 3px;
   border-color: rgba(255, 255, 255, 0.2);
+}
+
+.input:hover,
+.input.is-hovered,
+.textarea:hover,
+.textarea.is-hovered {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.input:focus,
+.input.is-focused,
+.textarea:focus,
+.textarea.is-focused {
+  border-color: rgba(255, 255, 255, 1);
 }
 
 form.is-active button.button,

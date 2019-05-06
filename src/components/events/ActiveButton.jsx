@@ -49,7 +49,6 @@ export const ActiveButton = class _ActiveButton extends Component {
         }
       </button>
       <ReactTooltip
-        type='light'
         id='active-button-hint'
         place='top'
         effect='solid'

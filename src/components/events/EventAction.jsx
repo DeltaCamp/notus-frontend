@@ -76,6 +76,7 @@ export const EventAction =
                 <Switch
                   value={showWebhookForm}
                   onChange={this.toggleWebhookForm}
+                  color='link'
                 >
                   trigger a webhook
                 </Switch>

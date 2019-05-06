@@ -21,6 +21,9 @@ module.exports = function (api) {
       '@babel/plugin-proposal-class-properties'
     ],
     [
+      '@babel/plugin-proposal-optional-chaining'
+    ],
+    [
       'babel-plugin-root-import',
       {
         'rootPathSuffix': 'src',

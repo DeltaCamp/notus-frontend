@@ -12,6 +12,7 @@
     "start": "node --max-old-space-size=4096 scripts/start.js"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "jsdom": "^13.0.0",

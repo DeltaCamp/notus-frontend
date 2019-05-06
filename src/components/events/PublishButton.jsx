@@ -46,7 +46,6 @@ export const PublishButton = class _PublishButton extends Component {
         }
       </button>
       <ReactTooltip
-        type='light'
         id='publish-button-hint'
         place='top'
         effect='solid'

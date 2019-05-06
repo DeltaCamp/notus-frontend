@@ -46,7 +46,7 @@ export const App = withRouter(hot(module)(
     render () {
       return (
         <BodyClass {...this.props}>
-          <ReactTooltip place='top' type='light' effect='solid' />
+          <ReactTooltip place='top' type='dark' effect='solid' />
 
           <ToastContainer
             className='notus-toast'

@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import arrayMove from 'array-move'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { formatRoute } from 'react-router-named-routes'
+import { Redirect } from 'react-router-dom'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { Plus } from 'react-feather'
 import { omit } from 'lodash'
@@ -504,28 +505,36 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   render () {
-    let colorClass = 'is-dark-colored'
-
     const { eventData } = this.props
 
+    let colorClass = 'is-dark-colored'
     let recipe = {}
 
     if (eventData) {
-      if (eventData.loading) {
+      console.log('hello', eventData);
+      
+      const error = eventData && eventData.error
+      const loading = eventData && eventData.loading
+      recipe = eventData && eventData.event
+      
+      if (loading) {
         return null
-      } else {
-        if (eventData.error) {
-          console.warn(eventData.error)
-          return null
-        } else {
-          recipe = eventData.event
-
-          if (recipe) {
-            colorClass = brandColor(recipe.id)
-          }
+      } else if (error) {
+        let errorMsg = `There was an issue loading this page: ${error.message}`
+        const gqlError = eventData?.error?.graphQLErrors?.[0].message?.error
+        if (gqlError === 'Unauthorized') {
+          errorMsg = 'You are not allowed to view this private event'
         }
+        notusToast.error(errorMsg)
+        
+        return <Redirect to={routes.MY_EVENTS} />
+      } else if (!recipe) {
+        return null
       }
+
+      colorClass = brandColor(recipe.id)
     }
+
     const runCountAndScopeSentences = (
       <div className={classnames(
         'event-box__variable-wrapper',
