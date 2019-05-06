@@ -217,7 +217,7 @@ a {
 }
 
 .has-text-right--desktop {
-  @media screen and (min-width: $desktopMin) {
+  @media screen and (min-width: $desktop-min) {
     text-align: right;
   }
 }

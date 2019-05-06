@@ -673,7 +673,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           <div className={`event-box event-box__header color-block ${colorClass} is-top-layer`}>
             <div className='is-brightness-70 is-full-width-background' />
 
-            <div className={`container-fluid pt20 pb20`}>
+            <div className={`container-fluid`}>
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-xl-10 col-start-xl-2 is-size-4'>
