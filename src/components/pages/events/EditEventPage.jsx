@@ -520,7 +520,9 @@ export const EditEventPage = class _EditEventPage extends Component {
       } else if (error) {
         let errorMsg = `There was an issue loading this page: ${error.message}`
         const gqlError = eventData?.error?.graphQLErrors?.[0].message?.error
-        if (gqlError === 'Unauthorized') {
+        if (gqlError === 'Not Found') {
+          errorMsg = 'This event has been deleted'
+        } else if (gqlError === 'Unauthorized') {
           errorMsg = 'You are not allowed to view this private event'
         }
         notusToast.error(errorMsg)
