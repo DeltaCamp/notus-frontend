@@ -1,3 +1,8 @@
 .has-stroke-white {
   stroke: white;
 }
+
+.has-fat-icons svg {
+  stroke-width: 3px;
+  stroke-linecap: butt;
+}

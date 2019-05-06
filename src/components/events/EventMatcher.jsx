@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { XCircle, Menu } from 'react-feather'
+import { X, Menu } from 'react-feather'
 import { MatcherOperand } from '~/components/events/MatcherOperand'
 import { MatcherOperator } from '~/components/events/MatcherOperator'
 import { MatcherSource } from '~/components/events/MatcherSource'
@@ -76,10 +76,10 @@ export const EventMatcher =
 
           <div className='buttons buttons-right'>
             <button
-              className='button has-icon plus-button is-light'
+              className='button has-icon plus-button is-light has-fat-icons'
               onClick={this.handleRemove}
             >
-              <XCircle
+              <X
                 className='icon__button has-stroke-white'
               />
             </button>

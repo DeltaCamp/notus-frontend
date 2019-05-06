@@ -6,7 +6,7 @@ import arrayMove from 'array-move'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { formatRoute } from 'react-router-named-routes'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { PlusCircle } from 'react-feather'
+import { Plus } from 'react-feather'
 import { omit } from 'lodash'
 
 import { ActiveButton } from '~/components/events/ActiveButton'
@@ -680,14 +680,19 @@ export const EditEventPage = class _EditEventPage extends Component {
                     {runCountAndScopeSentences}
                     {matcherSentences}
 
-                    <button
-                      className='button has-icon plus-button mt10 pl10 pr10 is-light is-small'
-                      onClick={this.handleAddMatcher}
-                    >
-                      <PlusCircle
-                        className='icon__button has-stroke-white'
-                      />
-                    </button>
+                    <div className='row'>
+                      <div className='col-xs-12 col-sm-3'>
+                        <button
+                        className='button has-icon plus-button mt10 pl10 pr10 is-light is-small has-fat-icons'
+                        onClick={this.handleAddMatcher}
+                        >
+                        <Plus
+                          className='icon__button has-stroke-white'
+                        />
+                        </button>  
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
               </div>

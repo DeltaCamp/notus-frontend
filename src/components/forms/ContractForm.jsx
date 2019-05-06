@@ -133,7 +133,7 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
               Cancel
             </button>
             <button
-              className='button is-success has-stroke-white'
+              className='button is-success has-stroke-white has-fat-icons'
               onClick={this.handleSubmit}
               data-tip={this.invalid() ? `Please enter both a name for the new Contract as well as the ABI.` : ''}
             >
