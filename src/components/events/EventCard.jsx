@@ -14,7 +14,6 @@ import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
-import { brandColor } from '~/utils/brandColors'
 import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 
@@ -118,64 +117,11 @@ export const EventCard =
         }
 
         render () {
-          // let editDropdown
-          // const { editable } = this.props
-
           const { currentUserData, event } = this.props
 
           const isLoggedIn = currentUserData && currentUserData.currentUser
 
           const linkTo = isLoggedIn ? this.props.linkTo : routes.SIGNUP
-
-          // if (editable) {
-          //   editDropdown = (
-          //     <div
-          //       className={classnames(
-          //         'dropdown',
-          //         'is-right',
-          //         'is-up',
-          //         { 'is-active': this.state.editDropdownActive }
-          //       )
-          //     }>
-          //       <div className='dropdown-trigger'>
-          //         <div
-          //           className='button has-icon has-icon__transparent'
-          //           onClick={this.handleMenuClick}
-          //         >
-          //           <Settings />
-          //         </div>
-          //       </div>
-          //       <div className='dropdown-menu' id='dropdown-menu6' role='menu'>
-          //         <div className='dropdown-content'>
-          //           <div
-          //             className='dropdown-item'
-          //             onClick={this.handleEdit}
-          //           >
-          //             <Edit /> &nbsp;Edit
-          //           </div>
-          //           <div
-          //             className='dropdown-item'
-          //             onClick={this.handleActivate}
-          //           >
-          //             {event.isActive
-          //               ? (<><StopCircle /> &nbsp;Deactivate</>)
-          //               : (<><CheckCircle /> &nbsp;Activate</>)
-          //             }
-          //           </div>
-          //           <div
-          //             className='dropdown-item'
-          //             onClick={(e) => {
-          //               e.preventDefault()
-          //               this.props.handleOpenConfirmDeleteModal(event.id)
-          //             }}
-          //           >
-          //             <AlertTriangle /> &nbsp;Delete
-          //           </div>
-          //         </div>
-          //       </div>
-          //     </div>
-          //   )
-          // }
 
           return (
             <Link
@@ -186,11 +132,13 @@ export const EventCard =
               className={classnames(
                 'button',
                 'event-card',
-                brandColor(event.id),
                 {
                   'event-card--small': this.props.isSmall
                 }
               )}
+              style={{
+                backgroundColor: event.color
+              }}
             >
               <div className='event-card__header'>
                 <p className='event-card__title is-size-5'>

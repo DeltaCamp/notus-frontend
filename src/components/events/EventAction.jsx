@@ -40,7 +40,7 @@ export const EventAction =
     }
 
     render () {
-      const usersEmail = this.props.currentUserData.currentUser.email
+      const usersEmail = this.props.currentUserData?.currentUser?.email
       const showWebhookForm = this.state.showWebhookForm
       let form
       if (showWebhookForm) {

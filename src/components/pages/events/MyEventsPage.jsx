@@ -130,15 +130,16 @@ export const MyEventsPage =
               const { loading, error, events } = eventsData || {}
               const { skip, take, totalCount } = events || {}
 
+              let eventEvents = events ? events.events : []
+
               if (loading) {
                 content = <EventsPageLoader />
               }
-
-              let eventEvents = events ? events.events : []
-
               if (error) {
                 console.error(error)
-                return 'There was an error while fetching your events'
+                content = <h5 className='is-size-5 has-text-danger'>
+                  There was an error while fetching your events
+                </h5>
               }
 
               let eventCards = <>

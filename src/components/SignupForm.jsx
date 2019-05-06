@@ -103,7 +103,6 @@ export const SignupForm =
                   ref={this.inputRef}
                   placeholder='Enter your email'
                   type='email'
-                  id='email'
                   className='input is-white'
                   onFocus={this.activate}
                   onBlur={this.deactivate}

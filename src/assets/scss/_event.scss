@@ -7,6 +7,7 @@ $event-font-size-sm: 0.9rem;
 .button.event-card {
   border-radius: 15px;
   border: 4px solid transparent;
+  background-color: $dark;
   display: inline-block;
   font-weight: 600;
   height: 300px;
@@ -118,7 +119,8 @@ $event-font-size-sm: 0.9rem;
 .button.event-card:hover,
 .button.event-card:focus,
 .button.event-card:active {
-  border: 4px solid lighten($dark, 2%);
+  border: 4px solid rgba(255, 255, 255, 0.25);
+  color: white;
 }
 
 .button.is-danger.event-card:hover,

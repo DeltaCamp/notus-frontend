@@ -8,7 +8,7 @@ import { formatRoute } from 'react-router-named-routes'
 import { Redirect } from 'react-router-dom'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { Plus } from 'react-feather'
-import { omit } from 'lodash'
+import { sample, omit } from 'lodash'
 
 import { ActiveButton } from '~/components/events/ActiveButton'
 import { PublishButton } from '~/components/events/PublishButton'
@@ -20,7 +20,6 @@ import { RunCountTitle } from '~/components/events/RunCountTitle'
 import { EventSource } from '~/components/events/EventSource'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
-import { brandColor } from '~/utils/brandColors'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { notusToast } from '~/utils/notusToast'
@@ -30,9 +29,24 @@ import { SCOPES } from '~/constants'
 
 const debug = require('debug')('notus:EditEventPage')
 
+const randomColor = () => {
+  return sample([
+    '#201334', // dark purple
+    '#0b603a', // forest green
+    '#06368b', // dark blue
+    '#dd5500', // orange
+    '#0676cb', // light blue
+    '#6e0ad3', // purple
+    '#cd0720', // red
+    '#181818', // black
+    '#2f2d29', // grey
+  ])
+}
+
 export const EditEventPage = class _EditEventPage extends Component {
   state = {
     event: {
+      color: randomColor(),
       scope: 0,
       abiEventId: undefined,
       isPublic: false,
@@ -507,7 +521,6 @@ export const EditEventPage = class _EditEventPage extends Component {
   render () {
     const { eventData } = this.props
 
-    let colorClass = 'is-dark-colored'
     let recipe = {}
 
     if (eventData) {
@@ -531,8 +544,6 @@ export const EditEventPage = class _EditEventPage extends Component {
       } else if (!recipe) {
         return null
       }
-
-      colorClass = brandColor(recipe.id)
     }
 
     const runCountAndScopeSentences = (
@@ -644,7 +655,12 @@ export const EditEventPage = class _EditEventPage extends Component {
         <ScrollToTop />
 
         <section className='section section--main-content'>
-          <div className={`container-fluid pb20 ${colorClass} color-block`}>
+          <div
+            className={`container-fluid pb20 color-block`}
+            style={{
+              backgroundColor: this.state.event.color
+            }}
+          >
             <div className='container'>
               <div className='row'>
                 <div className='col-xs-12 pt20'>
@@ -694,7 +710,12 @@ export const EditEventPage = class _EditEventPage extends Component {
             </div>
           </div>
 
-          <div className={`event-box event-box__header color-block ${colorClass} is-top-layer`}>
+          <div
+            className={`event-box event-box__header color-block is-top-layer`}
+            style={{
+              backgroundColor: this.state.event.color
+            }}
+          >
             <div className='is-brightness-70 is-full-width-background' />
 
             <div className={`container-fluid`}>
@@ -723,7 +744,12 @@ export const EditEventPage = class _EditEventPage extends Component {
             </div>
           </div>
 
-          <div className={`event-box event-box__footer color-block ${colorClass}`}>
+          <div
+            className={`event-box event-box__footer color-block`}
+            style={{
+              backgroundColor: this.state.event.color
+            }}
+          >
             <div className='is-brightness-40 is-full-width-background' />
             <EventAction
               {...this.props}
