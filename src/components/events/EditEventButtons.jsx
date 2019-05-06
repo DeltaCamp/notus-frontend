@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { AlertTriangle, PlusCircle } from 'react-feather'
+import { AlertTriangle, Plus } from 'react-feather'
 import { formatRoute } from 'react-router-named-routes'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
@@ -102,9 +102,9 @@ export const EditEventButtons =
                     notEventAuthorButtons = (
                       <Link
                         to={createEventFromParentRoute}
-                        className='button is-small is-success'
+                        className='button is-small is-success has-fat-icons'
                       >
-                        <PlusCircle /> &nbsp;Create Event From This One
+                        <Plus /> &nbsp;Create Event From This One
                       </Link>
                     )
                   }
@@ -144,10 +144,10 @@ export const EditEventButtons =
                         ? (
                           <button
                             onClick={this.props.handleSaveEvent}
-                            className='button is-success'
+                            className='button is-success has-fat-icons'
                             disabled={this.props.isSubmitting}
                           >
-                            <PlusCircle />&nbsp;Create Event
+                            <Plus />&nbsp;Create Event
                           </button>
                         )
                         : (

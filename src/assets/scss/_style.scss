@@ -1023,3 +1023,21 @@ ul.list {
 .has-border-link {
   border-color: $link !important;
 }
+
+.align-items-flex-start {
+  align-items: flex-start !important;
+} 
+
+.align-items-flex-end {
+  align-items: flex-end !important;
+} 
+
+.justify-content-flex-start {
+  justify-content: flex-start !important;
+  margin-right: auto !important;
+} 
+
+.justify-content-flex-end {
+  justify-content: flex-end !important;
+  margin-left: auto !important;
+} 

@@ -6,7 +6,7 @@ import ReactTimeout from 'react-timeout'
 
 import { KEYS } from '~/constants'
 
-const DEFAULT_TITLE = 'New Event - Give this event a title'
+const DEFAULT_TITLE = 'Click to title this event'
 const TITLE_MIN_LENGTH = 8
 
 export const EventTitle = ReactTimeout(class extends Component {
@@ -104,7 +104,7 @@ export const EventTitle = ReactTimeout(class extends Component {
   render () {
     let content = (
       <button
-        className='event-box__variable event-box__variable--full-width is-inline-block'
+        className='event-box__variable event-box__variable--full-width is-inline-block event-box__variable event-box__variable--full-width is-inline-block is-size-4 is-truncated'
         onClick={this.handleEditTitle}
       >
         {this.props.event.title || DEFAULT_TITLE}
@@ -129,7 +129,7 @@ export const EventTitle = ReactTimeout(class extends Component {
             onBlur={this.handleSubmit}
             onChange={this.handleChange}
             value={this.state.newTitle}
-            className='input'
+            className='input is-size-4'
             autoFocus
           />
         </form>

@@ -634,37 +634,48 @@ export const EditEventPage = class _EditEventPage extends Component {
           <div className={`container-fluid pb20 ${colorClass} color-block`}>
             <div className='container'>
               <div className='row'>
-                <div className='col-xs-12 has-text-centered'>
-                  <h6 className='is-size-6 has-text-centered has-text-weight-bold pt30 pb10'>
-                    {recipe && this.isCreateMode() &&
-                      <>
-                        Creating a new event{recipe.title ? ` based on "${recipe.title}"` : ''}
-                        <br />
-                      </>
-                    }
-                  </h6>
-                  
-                  <EventTitle
-                    event={this.state.event}
-                    handleSubmitTitle={this.handleSubmitTitle}
-                  />
+                <div className='col-xs-12 pt20'>
 
-                  {!this.isCreateMode() &&
-                    <>
-                      <br />
-                      <div className="buttons pt20">
-                        <ActiveButton
-                          event={this.state.event}
-                          handleToggleActive={this.handleToggleActive}
-                        />
-                        
-                        <PublishButton
-                          event={this.state.event}
-                          handleTogglePublish={this.handleTogglePublish}
-                        />
+                  {recipe && this.isCreateMode() &&
+                    <div className='row'>
+                      <div className='col-xs-12'>
+                        <h6 className='is-size-6 has-text-weight-semibold has-text-lighter pb10'>
+                          Creating a new event{recipe.title ? ` based on "${recipe.title}"` : ''}
+                        </h6>
                       </div>
-                    </>
+                    </div>
                   }
+
+                  <div className='row'>
+                    <div className='col-xs-12 col-sm-8 is-flex'>
+                      
+                      <EventTitle
+                        event={this.state.event}
+                        handleSubmitTitle={this.handleSubmitTitle}
+                      />
+                    </div>
+
+                    <div className='col-xs-12 col-sm-4 is-flex'>
+                      <div className='justify-content-flex-end'>
+                        {!this.isCreateMode() &&
+                          <>
+                            <div className="buttons">
+                              <ActiveButton
+                                event={this.state.event}
+                                handleToggleActive={this.handleToggleActive}
+                              />
+
+                              <PublishButton
+                                event={this.state.event}
+                                handleTogglePublish={this.handleTogglePublish}
+                              />
+                            </div>
+                          </>
+                        }
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
