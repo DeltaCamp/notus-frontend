@@ -36,13 +36,17 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
               mobileNavActive: true,
               navIsInFront: true
             })
+
+            if (this.navFrontFalseTimeout) {
+              this.props.clearTimeout(this.navFrontFalseTimeout)
+            }
           }
         }
 
         closeMobileNav = (e) => {
           this.setState({ mobileNavActive: false })
 
-          this.props.setTimeout(() => {
+          this.navFrontFalseTimeout = this.props.setTimeout(() => {
             this.setState({ navIsInFront: false })
           }, 1000)
         }
