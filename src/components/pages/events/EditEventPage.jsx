@@ -631,10 +631,14 @@ export const EditEventPage = class _EditEventPage extends Component {
       // return <Loading />
     }
 
+    const pageTitle = (!this.isCreateMode() && this.state.event.title)
+      ? `Editing '${this.state.event.title}'`
+      : `Creating a New Event`
+
     return (
       <div className='is-positioned-absolutely'>
         <Helmet
-          title='Create New Event'
+          title={pageTitle}
         />
 
         <ScrollToTop />
