@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import { Modal } from '~/components/Modal'
 import { SourceDescription } from '~/components/events/SourceDescription'
-import { ContractForm } from '~/components/forms/ContractForm'
 import { ScopeAndAbiEventSelect } from '~/components/forms/ScopeAndAbiEventSelect'
 import { KEYS } from '~/constants'
 
@@ -17,7 +15,6 @@ export const EventSource = class _EventSource extends Component {
   static propTypes = {
     event: PropTypes.object.isRequired,
     onChangeScopeAndAbiEventId: PropTypes.func.isRequired,
-    onCreateAbi: PropTypes.func.isRequired,
     handleToggleEventSource: PropTypes.func.isRequired
   }
 
@@ -35,11 +32,6 @@ export const EventSource = class _EventSource extends Component {
     })
 
     document.removeEventListener('keyup', this.handleKeyUp, false)
-  }
-
-  handleOnCreateAbi = (abi) => {
-    this.hideAddContract()
-    this.props.onCreateAbi(abi)
   }
 
   handleStartEdit = (e) => {
@@ -91,21 +83,6 @@ export const EventSource = class _EventSource extends Component {
   render () {
     return (
       <>
-        <Modal
-          isOpen={this.state.showAddContract}
-          handleClose={this.hideAddContract}
-          isLarge
-          onKeyUp={this.handleKeyUp}
-        >
-          {
-            this.state.showAddContract &&
-            <ContractForm
-              onCancel={this.hideAddContract}
-              onCreate={this.handleOnCreateAbi}
-            />
-          }
-        </Modal>
-
         {this.state.isEditing
           ? (
             <>a
@@ -126,12 +103,10 @@ export const EventSource = class _EventSource extends Component {
             </>
           )
           : (
-            <>
-              <SourceDescription
-                handleStartEdit={this.handleStartEdit}
-                event={this.props.event}
-              />
-            </>
+            <SourceDescription
+              handleStartEdit={this.handleStartEdit}
+              event={this.props.event}
+            />
           )
         }
       </>

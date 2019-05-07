@@ -5,6 +5,7 @@ export const currentUserQuery = gql`
     currentUser @client {
       id
       email
+      isAdmin
     }
   }
 `

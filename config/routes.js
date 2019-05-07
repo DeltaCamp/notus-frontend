@@ -1,3 +1,5 @@
+export const ADMIN = '/admin'
+
 export const HOME = '/'
 export const ABOUT_PAGE = '/about'
 export const TERMS_PAGE = '/terms'

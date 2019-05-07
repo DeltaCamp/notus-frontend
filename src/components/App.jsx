@@ -6,8 +6,10 @@ import { Slide, ToastContainer } from 'react-toastify'
 import { hot } from 'react-hot-loader'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
+
 import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
+import { AdminContractsPage } from '~/components/pages/admin/AdminContractsPage'
 import { HomePage } from '~/components/pages/HomePage'
 import { AboutPage } from '~/components/pages/AboutPage'
 import { PrivacyPage } from '~/components/pages/PrivacyPage'
@@ -70,6 +72,8 @@ export const App = withRouter(hot(module)(
               appear
             >
               <Switch location={this.props.location}>
+                <Route exact path={routes.ADMIN} component={AdminContractsPage} />
+
                 <Route exact path={routes.HOME} component={HomePage} />
                 <Route exact path={routes.ABOUT_PAGE} component={AboutPage} />
                 <Route exact path={routes.PRIVACY_PAGE} component={PrivacyPage} />

@@ -25,7 +25,7 @@ import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { notusToast } from '~/utils/notusToast'
 import { showErrorMessage } from '~/utils/showErrorMessage'
 import * as routes from '~/../config/routes'
-import { SCOPES } from '~/constants'
+// import { SCOPES } from '~/constants'
 
 const debug = require('debug')('notus:EditEventPage')
 
@@ -238,19 +238,6 @@ export const EditEventPage = class _EditEventPage extends Component {
   handleSetEditMatcher = (editMatcherIndex) => {
     this.setState({
       editMatcherIndex
-    })
-  }
-
-  handleOnCreateAbi = (abi) => {
-    let event = { ...this.state.event }
-    if (abi.abiEvents.length) {
-      event.scope = SCOPES.CONTRACT_EVENT
-      event.abiEventId = parseInt(abi.abiEvents[0].id, 10)
-    }
-    this.doGenericUpdateEvent(event, 'Updated event scope')
-    this.handleToggleEventSource()
-    this.setState({
-      event
     })
   }
 
@@ -565,7 +552,6 @@ export const EditEventPage = class _EditEventPage extends Component {
         <EventSource
           event={this.state.event}
           onChangeScopeAndAbiEventId={this.onChangeScopeAndAbiEventId}
-          onCreateAbi={this.handleOnCreateAbi}
           handleToggleEventSource={this.handleToggleEventSource}
         />
         {this.state.event.abiEventId ? `event ` : ``}

@@ -73,7 +73,7 @@ $hasAddonsformColor: $cyan;
   font-weight: 600;
   height: 100%;
   margin: 0;
-  min-height: 25px;
+  min-height: 45px;
   padding: 4px 20px;
   transition: all 200ms ease-in-out;
 
@@ -105,7 +105,7 @@ $hasAddonsformColor: $cyan;
 }
 
 .form .textarea {
-  border-radius: 5px;
+  border-radius: 8px;
   height: 260px;
   padding-top: 20px;
 
@@ -427,7 +427,7 @@ input.input.is-large {
   border-width: 0;
   display: inline-flex;
   flex-direction: column;
-  min-width: 225px;
+  min-width: 255px;
   max-width: 350px;
 
   @media screen and (max-width: $tablet - 203px) {
@@ -494,14 +494,15 @@ input.input.is-large {
 }
 
 .react-select__option.react-select__option--is-focused {
-  background-color: lighten($cyan, 22%);
+  background-color: lighten($blue, 20%);
   border-radius: 5px;
+  color: white !important;
 }
 
 .react-select__option.react-select__option--is-selected {
-  background-color: darken($cyan, 15%);
+  background-color: lighten($blue, 2%);
   border-radius: 5px;
-  color: black !important;
+  color: white !important;
 }
 
 .event-box__variable .input.has-border-danger,
