@@ -17,8 +17,8 @@ export const NewAdminContractForm =
   graphql(createContractMutation, { name: 'createContractMutation' })(
     graphql(createAbiMutation, { name: 'createAbiMutation' })(
       class _NewAdminContractForm extends PureComponent {
-        
-        DEFAULT_STATE = {
+      
+        state = {
           contract: {
             address: '',
             name: '',
@@ -29,11 +29,9 @@ export const NewAdminContractForm =
           hasCustomizedName: false
         }
 
-        state = { ...this.DEFAULT_STATE }
-
         static propTypes = {
-          onCreate: PropTypes.func.isRequired,
-          onClose: PropTypes.func.isRequired
+          onClose: PropTypes.func.isRequired,
+          redirectToAdminContractPage: PropTypes.func.isRequired,
         }
 
         handleNameChange = (e) => {
@@ -98,16 +96,15 @@ export const NewAdminContractForm =
           const variables = {
             contract: this.state.contract
           }
-          console.warn(variables);
-          
 
           this.props.createContractMutation({
             variables,
             refetchQueries: ['contractsQuery']
           }).then(({ data }) => {
             notusToast.success('Contract added successfully')
-
-            this.props.onClose()
+            this.props.redirectToAdminContractPage(
+              parseInt(data.createContract.id, 10)
+            )
           }).catch(error => {
             console.warn(error)
 
@@ -151,9 +148,6 @@ export const NewAdminContractForm =
         }
 
         handleCancel = () => {
-          this.setState({
-
-          })
           this.props.onClose()
         }
 

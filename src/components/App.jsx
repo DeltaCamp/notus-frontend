@@ -9,7 +9,9 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
+import { AdminPage } from '~/components/pages/admin/AdminPage'
 import { AdminContractsPage } from '~/components/pages/admin/AdminContractsPage'
+import { AdminContractPage } from '~/components/pages/admin/AdminContractPage'
 import { HomePage } from '~/components/pages/HomePage'
 import { AboutPage } from '~/components/pages/AboutPage'
 import { PrivacyPage } from '~/components/pages/PrivacyPage'
@@ -23,11 +25,11 @@ import { SignUpPage } from '~/components/pages/SignUpPage'
 import { ConfirmAndSetPasswordPage } from '~/components/pages/ConfirmAndSetPasswordPage'
 import { AppConfirmPage } from '~/components/pages/AppConfirmPage'
 import { AppUserConfirmPage } from '~/components/pages/AppUserConfirmPage'
-import { Nav } from '~/components/layout/Nav'
-import { CookieConsent } from '~/components/layout/CookieConsent'
 import { FourOhFour } from '~/components/pages/FourOhFour'
+import { DiscoverEventsPage } from '~/components/pages/events/DiscoverEventsPage'
+import { CookieConsent } from '~/components/layout/CookieConsent'
+import { Nav } from '~/components/layout/Nav'
 import * as routes from '~/../config/routes'
-import { DiscoverEventsPage } from './pages/events/DiscoverEventsPage'
 
 WebFont.load({
   typekit: {
@@ -72,7 +74,9 @@ export const App = withRouter(hot(module)(
               appear
             >
               <Switch location={this.props.location}>
-                <Route exact path={routes.ADMIN} component={AdminContractsPage} />
+                <Route exact path={routes.ADMIN_CONTRACTS_PAGE} component={AdminContractsPage} />
+                <Route exact path={routes.ADMIN_CONTRACT_PAGE} component={AdminContractPage} />
+                <Route exact path={routes.ADMIN} component={AdminPage} />
 
                 <Route exact path={routes.HOME} component={HomePage} />
                 <Route exact path={routes.ABOUT_PAGE} component={AboutPage} />

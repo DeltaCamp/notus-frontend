@@ -57,22 +57,25 @@ export const ScopeAndAbiEventSelect = graphql(abiEventsQuery, { name: 'abiEvents
         options: scopeOptions
       }
 
+      let abiEventOptions = []
       const { abiEventsQuery } = this.props
       const { abiEvents, loading, error } = abiEventsQuery
-      let abiEventOptions = [{
-        label: 'Add new Contract ABI ...',
-        value: NEW_ABI_VALUE
-      }]
+
+      // let abiEventOptions = [{
+      //   label: 'Add new Contract ABI ...',
+      //   value: NEW_ABI_VALUE
+      // }]
+
       if (error) {
         console.error(error)
       } else if (!loading) {
-        abiEventOptions = abiEventOptions.concat(abiEvents.map(abiEvent => {
+        abiEventOptions = abiEvents.map(abiEvent => {
           return {
             label: `${abiEvent.abi.name} ${abiEvent.name}`,
             value: `abi-event-${abiEvent.id}`,
             abiEvent
           }
-        }))
+        })
       }
       const abiEventGroup = {
         label: 'Contract Event',

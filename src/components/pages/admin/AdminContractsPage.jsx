@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
+import { Link } from 'react-router-dom'
 import { Plus } from 'react-feather'
 import { graphql } from 'react-apollo'
+import { formatRoute } from 'react-router-named-routes'
+
 import { IsAdmin } from '~/components/IsAdmin'
 import { Modal } from '~/components/Modal'
 import { ScrollToTop } from '~/components/ScrollToTop'
@@ -11,6 +14,7 @@ import { contractsQuery } from '~/queries/contractsQuery'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { KEYS } from '~/constants'
 import { ADMIN_TABLE_PAGE_SIZE } from '~/constants'
+import * as routes from '~/../config/routes'
 
 export const AdminContractsPage =
   IsAdmin(
@@ -20,10 +24,9 @@ export const AdminContractsPage =
       options: (props) => ({
         fetchPolicy: 'cache-and-network',
         variables: {
-          eventsQuery: {
+          contractsQuery: {
             take: ADMIN_TABLE_PAGE_SIZE,
-            skip: 0,
-            userId: props.currentUserData.currentUser.id
+            skip: 0
           }
         }
       })
@@ -85,6 +88,15 @@ export const AdminContractsPage =
             }
           }
 
+          redirectToAdminContractPage = (contractId) => {
+            const newAdminContractRoute = formatRoute(
+              routes.ADMIN_CONTRACT_PAGE, {
+                contractId
+              }
+            )
+            this.props.history.push(newAdminContractRoute)
+          }
+
           render () {
             let loadMore,
               content,
@@ -121,17 +133,23 @@ export const AdminContractsPage =
               content = (
                 contractContracts.length === 0
                   ? (
-                    <h2 className='is-size-2 mt75 has-text-weight-bold'>
-                      No contracts exist.
-                    </h2>
+                    contractRows = <tr className='is-size-6 has-text-weight-bold'>
+                      <td>
+                        No contracts exist.
+                      </td>
+                    </tr>
                   ) : (
                     contractRows = contractContracts.map(contract => (
                       <tr key={`contract-id-${contract.id}`}>
                         <td>
-                          <strong>{contract.id}</strong>
+                          <Link to={formatRoute(routes.ADMIN_CONTRACT_PAGE, { contractId: contract.id })}>
+                            {contract.id}
+                          </Link>
                         </td>
                         <td>
-                          <strong>{contract.name}</strong>
+                          <Link to={formatRoute(routes.ADMIN_CONTRACT_PAGE, { contractId: contract.id })}>
+                            <strong>{contract.name}</strong>
+                          </Link>
                         </td>
                         <td>
                           <a
@@ -148,7 +166,6 @@ export const AdminContractsPage =
               )
             } 
 
-            console.log(this.props.contractsData)
             return (
               <div className='is-positioned-absolutely'>
                 <Helmet
@@ -167,7 +184,7 @@ export const AdminContractsPage =
                     this.state.showingAddContractModal &&
                     <NewAdminContractForm
                       onClose={this.handleHideAddContractModal}
-                      onCreate={() => {}}
+                      redirectToAdminContractPage={this.redirectToAdminContractPage}
                     />
                   }
                 </Modal>
@@ -178,7 +195,7 @@ export const AdminContractsPage =
                     <div className='row'>
                       <div className='col-xs-12'>
                         <h4 className='is-size-4 has-text-weight-bold mt75 has-text-centered'>
-                          Editing Contracts
+                          <Link to={routes.ADMIN}>Admin</Link> &raquo; Contracts
                         </h4>
                       </div>
                     </div>
@@ -218,7 +235,6 @@ export const AdminContractsPage =
                         </table>
 
                         {loadMore}
-
                       </div>
                     </div>
                   </div>
