@@ -42,59 +42,61 @@ export const AdminContractPage =
           contract = contractData.contract || {}
           abiEvents = contract.abi?.abiEvents || []
 
+          let abiEventRows = []
+          if (abiEvents.length === 0) {
+            abiEventRows = 
+              <tr className='is-size-6 has-text-weight-bold'>
+                <td>
+                  No Events exist for this ABI.
+                </td>
+              </tr>
+          } else {
+            abiEventRows = abiEvents.map(abiEvent => (
+              <tr key={`abi-event-row-${abiEvent.id}`}>
+                <td>
+                  {abiEvent.id}
+                </td>
+                <td>
+                  {abiEvent.name}
+                </td>
+                <td>
+                  {abiEvent.isPublic} public!
+                </td>
+                <td>
+                  {
+                    abiEvent.abiEventInputs.length === 0 
+                      ? (
+                        <span className='is-size-6 has-text-weight-bold'>
+                          No Inputs exist for this ABI Event.
+                        </span>
+                      )
+                      : (
+                        abiEvent.abiEventInputs.map(abiEventInput => (
+                          <span
+                            key={`abi-event-input-row-${abiEventInput.id}`}
+                            className='is-block'
+                          >
+                            <p className='heading'>
+                              #{abiEventInput.id}: <strong>{abiEventInput.name}</strong> is <strong>{abiEventInput.type}</strong>
+                            </p>
 
-          let abiEventRows = abiEvents.map(abiEvent => (
-            <tr key={`abi-event-row-${abiEvent.id}`}>
-              <td>
-                {abiEvent.id}
-              </td>
-              <td>
-                {abiEvent.name}
-              </td>
-              <td>
-                {abiEvent.isPublic} public!
-              </td>
-              <td>
-                {
-                  abiEvent.abiEventInputs.map(abiEventInput => (
-                    <span
-                      key={`abi-event-input-row-${abiEventInput.id}`}
-                      className='is-block color-block is-dark'
-                    >
-                      <nav className='level'>
-                        <div className='level-item has-text-centered'>
-                          <div>
-                            <p className='heading'>{abiEventInput.id}</p>
-                          </div>
-                        </div>
-                        <div className='level-item has-text-centered'>
-                          <div>
-                            <p className='heading'>{abiEventInput.name}</p>
-                          </div>
-                        </div>
-                        <div className='level-item has-text-centered'>
-                          <div>
-                            <p className='heading'>{abiEventInput.type}</p>
-                          </div>
-                        </div>
-                      </nav>
-                      {abiEventInput.type === 'uint256' && (
-                        <div
-                          className='event-box__variable has-react-select'
-                        >
-                          <MetaDataTypeSelect
-                            abiEventInput={abiEventInput}
-                          />
-                        </div>
-                      )}
-                    </span>
-                  ))
-                }
-              </td>
-            </tr>
-          ))
-
-
+                            {abiEventInput.type === 'uint256' && (
+                              <div
+                                className='event-box__variable has-react-select'
+                              >
+                                <MetaDataTypeSelect
+                                  abiEventInput={abiEventInput}
+                                />
+                              </div>
+                            )}
+                          </span>
+                        ))
+                      )
+                  }
+                </td>
+              </tr>
+            ))
+          }
 
           return (
             <div className='is-positioned-absolutely'>
