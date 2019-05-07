@@ -130,7 +130,7 @@ export const EditEventButtons =
                             No
                           </button>
                           <button
-                            className='button is-small is-success'
+                            className='button is-small is-danger'
                             onClick={this.handleDelete}
                           >
                             Yes
