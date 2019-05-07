@@ -135,7 +135,7 @@ export const MyEventsPage =
                   eventEvents.length === 0
                     ? (
                       <>
-                        <h2 className='is-size-2 mt75 has-text-weight-bold'>
+                        <h2 className='is-size-4 mt75 has-text-weight-bold'>
                           You haven't created any events.
                     </h2>
                         <Link
