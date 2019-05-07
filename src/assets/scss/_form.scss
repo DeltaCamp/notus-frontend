@@ -507,5 +507,9 @@ input.input.is-large {
 
 .event-box__variable .input.has-border-danger,
 .has-border-danger {
-  border: 2px solid $danger;
+  border: 2px solid $danger !important;
+}
+
+.has-border-success {
+  border: 3px solid $success !important;
 }

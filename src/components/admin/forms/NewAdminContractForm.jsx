@@ -2,9 +2,11 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import ReactTooltip from 'react-tooltip'
+import { ethers } from 'ethers'
 import { CheckCircle } from 'react-feather'
 import { graphql } from 'react-apollo'
 
+import { AddressInput } from '~/components/AddressInput'
 import { ABIUpload } from '~/components/ABIUpload'
 import { createAbiMutation } from '~/mutations/createAbiMutation'
 import { createContractMutation } from '~/mutations/createContractMutation'
@@ -15,7 +17,8 @@ export const NewAdminContractForm =
   graphql(createContractMutation, { name: 'createContractMutation' })(
     graphql(createAbiMutation, { name: 'createAbiMutation' })(
       class _NewAdminContractForm extends PureComponent {
-        state = {
+        
+        DEFAULT_STATE = {
           contract: {
             address: '',
             name: '',
@@ -26,23 +29,40 @@ export const NewAdminContractForm =
           hasCustomizedName: false
         }
 
+        state = { ...this.DEFAULT_STATE }
+
         static propTypes = {
           onCreate: PropTypes.func.isRequired,
-          onCancel: PropTypes.func.isRequired
+          onClose: PropTypes.func.isRequired
         }
 
-        onChangeName = (e) => {
+        handleNameChange = (e) => {
           this.setState({
             contract: {
+              ...this.state.contract,
               name: e.target.value
             },
             hasCustomizedName: true
           })
         }
 
-        onChangeAddress = (e) => {
+        handleAddressChange = (e) => {
           this.setState({
-            address: e.target.value
+            contract: {
+              ...this.state.contract,
+              address: e.target.value
+            }
+          })
+        }
+
+        handleAbiChange = (e) => {
+          this.setState({
+            contract: {
+              ...this.state.contract,
+              abi: {
+                abi: e.target.value
+              }
+            }
           })
         }
 
@@ -53,6 +73,7 @@ export const NewAdminContractForm =
 
           this.setState({
             contract: {
+              ...this.state.contract,
               name: newName,
               abi: {
                 name: newName,
@@ -74,34 +95,49 @@ export const NewAdminContractForm =
             return
           }
 
+          const variables = {
+            contract: this.state.contract
+          }
+          console.warn(variables);
+          
+
           this.props.createContractMutation({
-            variables: {
-              contract: this.state.contract
-            },
+            variables,
             refetchQueries: ['contractsQuery']
           }).then(({ data }) => {
             notusToast.success('Contract added successfully')
-            // this.props.onCreate(data.createAbi)
+
+            this.props.onClose()
           }).catch(error => {
             console.warn(error)
 
             error = {
               message: `Please format your ABI code correctly (${error.message})`
             }
+
             showErrorMessage(error)
           })
         }
 
+        addressIsValid = () => {
+          try {
+            ethers.utils.getAddress(this.state.contract.address)
+            return true
+          } catch {
+            return false
+          }
+        }
+
         invalid = () => {
           return (
-            this.state.contract.address === ''
+            !this.addressIsValid()
             || this.state.contract.name === ''
             || this.state.contract.abi === ''
           )
         }
 
         invalidMessage = () => {
-          return 'Please enter both a name for the new Contract as well as the ABI.'
+          return 'Please enter a contract address, name and ABI (as JSON) for the new Contract.'
         }
 
         showErrorTooltip = () => {
@@ -114,22 +150,30 @@ export const NewAdminContractForm =
           ReactTooltip.hide(ReactDOM.findDOMNode(this.refs.errorTooltip))
         }
 
+        handleCancel = () => {
+          this.setState({
+
+          })
+          this.props.onClose()
+        }
+
         render () {
           return (
             <div className='form'>
               <div className='field'>
-                <ABIUpload onAbi={this.handleAbi} onError={this.handleAbiError} />
+                <ABIUpload
+                  onAbi={this.handleAbi}
+                  onError={this.handleAbiError}
+                />
               </div>
 
               <hr />
 
               <div className='field'>
-                <input
-                  className='input'
-                  type='text'
-                  value={this.state.contract.address}
-                  onChange={this.onChangeAddress}
+                <AddressInput
+                  onChange={this.handleAddressChange}
                   placeholder={`Contract Address (Mainnet)`}
+                  value={this.state.contract.address}
                 />
               </div>
 
@@ -138,7 +182,7 @@ export const NewAdminContractForm =
                   className='input'
                   type='text'
                   value={this.state.contract.name}
-                  onChange={this.onChangeName}
+                  onChange={this.handleNameChange}
                   placeholder={`Contract Name`}
                 />
               </div>
@@ -147,14 +191,14 @@ export const NewAdminContractForm =
                 <textarea
                   className='textarea'
                   value={this.state.contract.abi.abi}
-                  onChange={(e) => this.setState({ abi: e.target.value })}
+                  onChange={this.handleAbiChange}
                   placeholder={`Paste Contract ABI here or upload file above ...`}
                 />
               </div>
 
               <div className='buttons mt30 has-text-right has-margin-left-auto'>
                 <button
-                  onClick={this.props.onCancel}
+                  onClick={this.handleCancel}
                   className='button is-outlined is-light'
                 >
                   Cancel

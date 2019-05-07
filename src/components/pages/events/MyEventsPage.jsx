@@ -168,7 +168,9 @@ export const MyEventsPage =
                   <button
                     className='button is-small is-info mt30'
                     onClick={this.fetchMore}
-                  >Load More</button>
+                  >
+                    Load More
+                  </button>
               }
 
               if (!content) {
