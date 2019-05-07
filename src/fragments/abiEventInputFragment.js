@@ -5,5 +5,6 @@ export const abiEventInputFragment = gql`
     id
     name
     type
+    metaType
   }
 `

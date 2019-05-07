@@ -3,87 +3,69 @@ import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 
 import { NotusSelect } from '~/components/forms/NotusSelect'
-import { SOURCES, OPERATORS, OPERATOR_LABELS } from '~/constants'
-import { sourceQuery } from '~/queries/sourceQuery'
-import { abiEventInputQuery } from '~/queries/abiEventInputQuery'
+import { metaDataTypesQuery } from '~/queries/metaDataTypesQuery'
 
-export const MetaDataTypeSelect = graphql(sourceQuery, {
-  name: 'sourceQuery',
-  skip: (props) => !props.source,
-  options: (props) => ({
-    variables: {
-      source: props.source
-    }
-  })
-})(
-  graphql(abiEventInputQuery, {
-    name: 'abiEventInputQuery',
-    skip: (props) => !props.abiEventInputId,
-    options: (props) => ({
-      variables: {
-        id: parseInt(props.abiEventInputId, 10)
-      }
-    })
-  })(
+export const MetaDataTypeSelect =
+  graphql(metaDataTypesQuery, { name: 'metaDataTypesData' })(
     class _MetaDataTypeSelect extends PureComponent {
       static propTypes = {
-        value: PropTypes.number,
-        source: PropTypes.string,
-        abiEventInputId: PropTypes.number,
-        onChange: PropTypes.func.isRequired
+        abiEventInputId: PropTypes.number.isRequired,
+        value: PropTypes.string,
+        handleMetaDataTypeChange: PropTypes.func.isRequired,
+      }
+
+      onChange = (newValue) => {
+        const abiEventInputClone = {
+          id: this.props.abiEventInputId,
+          metaType: newValue?.value || null
+        }
+
+        this.props.handleMetaDataTypeChange(abiEventInputClone)
       }
 
       render() {
-        var props = this.props
-        const { value, showNoop, sourceQuery, abiEventInputQuery } = this.props
+        let props = this.props
 
-        const error = (abiEventInputQuery || {}).error || sourceQuery.error
+        const {
+          metaDataTypesData,
+          value,
+        } = this.props
+
+        const error = metaDataTypesData.error
 
         if (error) {
           console.error(error)
         }
+        let options = metaDataTypesData.metaDataTypes || []
 
-        let options = Object.keys(OPERATORS).map(key => {
-          const value = OPERATORS[key]
-          return {
-            value,
-            label: OPERATOR_LABELS[value]
+        options = options.map(metaDataType => (
+          {
+            value: metaDataType.metaDataType,
+            label: metaDataType.title
           }
-        }).filter(option => {
-          const hide = option.value === OPERATORS.NOOP && !showNoop
-          if (hide) { return false }
-          if (!sourceQuery) { return true }
-
-
-          const { source } = sourceQuery
-          // if (source.source !== SOURCES.CONTRACT_EVENT_INPUT) {
-          //   return isValidDataTypeMetaDataType(source.dataType, option.value)
-          // } else {
-          //   const { abiEventInput } = abiEventInputQuery || {}
-          //   return abiEventInput && isValidDataTypeMetaDataType(
-          //     abiEventInput.type,
-          //     option.value
-          //   )
-          // }
-        })
+        ))
 
         let selectedOption
-        if (value !== undefined) {
+        if (value !== null && value !== undefined) {
           selectedOption = options.find(option => option.value === value)
+
           if (!selectedOption) {
             selectedOption = options[0]
           }
+
           props = { ...this.props, value: selectedOption }
         }
 
-        const isDisabled = options.length === 1
+        const isDisabled = options.length <= 1
 
         return <NotusSelect
           {...props}
           options={options}
           isDisabled={isDisabled}
+          isSearchable={false}
+          isClearable
+          onChange={this.onChange}
         />
       }
     }
   )
-)
