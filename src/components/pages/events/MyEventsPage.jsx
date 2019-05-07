@@ -183,18 +183,19 @@ export const MyEventsPage =
                           className='button mt20 is-purple'
                           to={routes.NEW_EVENT}
                         >
-                          Create an Event
+                          Create Event
                     </Link>
                       </>
                     ) : (
                       <>
-                        <div className='mt20 has-text-right'>
+                        <div className='mt20'>
                           <Link
-                            className='button is-small mt20 is-link has-fat-icons'
+                            className='button is-small mt20 is-link is-outlined has-blur-to-focus has-fat-icons'
                             to={routes.NEW_EVENT}
                           >
-                            <Plus /> &nbsp;Create a Custom Event
-                      </Link>
+                            <div className='inner-blur-to-focus'></div>
+                            <Plus /> &nbsp;Create Event
+                          </Link>
                         </div>
 
                         {eventCards}
@@ -244,7 +245,7 @@ export const MyEventsPage =
                     <div className='container'>
                       <div className='row'>
                         <div className='col-xs-12'>
-                          <h4 className='is-size-4 has-text-weight-bold mt75 has-text-centered'>
+                          <h4 className='is-size-2 has-text-weight-bold mt75 has-text-centered'>
                             My Events
                           </h4>
                         </div>
