@@ -127,7 +127,9 @@ export const MyEventsPage =
                   <button
                     className='button is-small is-info mt30'
                     onClick={this.fetchMore}
-                  >Load More</button>
+                  >
+                    Load More
+                  </button>
               }
 
               if (!content) {
@@ -137,13 +139,13 @@ export const MyEventsPage =
                       <>
                         <h2 className='is-size-4 mt75 has-text-weight-bold'>
                           You haven't created any events.
-                    </h2>
+                        </h2>
                         <Link
                           className='button mt20 is-purple'
                           to={routes.NEW_EVENT}
                         >
                           Create Event
-                    </Link>
+                        </Link>
                       </>
                     ) : (
                       <>
@@ -152,7 +154,6 @@ export const MyEventsPage =
                             className='button is-small mt20 is-link is-outlined has-blur-to-focus has-fat-icons'
                             to={routes.NEW_EVENT}
                           >
-                            <div className='inner-blur-to-focus'></div>
                             <Plus /> &nbsp;Create Event
                           </Link>
                         </div>

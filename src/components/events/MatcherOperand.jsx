@@ -4,7 +4,7 @@ import ReactTooltip from 'react-tooltip'
 import ReactTimeout from 'react-timeout'
 import { graphql } from 'react-apollo'
 
-import { AddressInput } from '~/components/AddressInput'
+import { MatcherAddressInput } from '~/components/MatcherAddressInput'
 import { TextInput } from '~/components/TextInput'
 import { UIntInput } from '~/components/UIntInput'
 import { abiEventInputQuery } from '~/queries/abiEventInputQuery'
@@ -65,7 +65,7 @@ export const MatcherOperand = graphql(sourceQuery, {
         let operandInput
         const dataType = calculateSourceDataType(source, abiEventInput)
         if (dataType === 'address') {
-          operandInput = <AddressInput 
+          operandInput = <MatcherAddressInput 
             matcher={matcher}
             handleSubmit={this.handleSubmit}
             handleSetEditMatcher={this.props.handleSetEditMatcher}

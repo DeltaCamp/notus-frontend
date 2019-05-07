@@ -12,6 +12,7 @@ export const WARNING = 'warning'
 export const DANGER = 'danger'
 
 export const PAGE_SIZE = 12
+export const ADMIN_TABLE_PAGE_SIZE = 3
 
 export const KEYS = {
   enter: 13,
