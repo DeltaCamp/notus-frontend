@@ -9,7 +9,7 @@ import { KEYS } from '~/constants'
 
 export const MatcherAddressInput = ReactTimeout(class _MatcherAddressInput extends Component {
   static propTypes = {
-    matcher: PropTypes.string.isRequired,
+    matcher: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     handleSetEditMatcher: PropTypes.func.isRequired
   }

@@ -3,9 +3,12 @@ import { OPERATORS } from '~/constants'
 export function isValidDataTypeOperator (dataType, operator) {
   if (dataType.indexOf('int') !== -1) {
     // int / uint support all operations
-    return true
+    return operator !== OPERATORS.CONTAINS
   }
 
-  // Otherwise only equals is supported
-  return operator === OPERATORS.EQ || operator === OPERATORS.NOOP
+  if (dataType === 'address') {
+    return operator === OPERATORS.EQ || operator === OPERATORS.NOOP  
+  }
+
+  return operator === OPERATORS.CONTAINS || operator === OPERATORS.EQ || operator === OPERATORS.NOOP
 }
