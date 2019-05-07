@@ -226,7 +226,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     }).then((mutationResult) => {
       notusToast.success('Successfully saved event')
       const eventId = mutationResult.data.createEvent.id
-      const newEventLink = formatRoute(routes.EDIT_EVENT, { eventId })
+      const newEventLink = formatRoute(routes.MY_EVENTS)
 
       this.props.history.push(newEventLink)
     }).catch(error => {
