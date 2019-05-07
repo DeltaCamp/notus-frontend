@@ -10,7 +10,6 @@ import { Plus } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { IsAuthed } from '~/components/IsAuthed'
-import { Modal } from '~/components/Modal'
 import { EventsPageLoader } from '~/components/loading/EventsPageLoader'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
 import { FooterContainer } from '~/components/layout/Footer'
@@ -19,7 +18,6 @@ import { deleteEventMutation } from '~/mutations/deleteEventMutation'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventsQuery } from '~/queries/eventsQuery'
 import { EventCard } from '~/components/events/EventCard'
-import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 import { PAGE_SIZE } from '~/constants'
 
@@ -52,44 +50,6 @@ export const MyEventsPage =
 
             static contextTypes = {
               router: PropTypes.object.isRequired
-            }
-
-            handleDelete = (e) => {
-              e.preventDefault()
-
-              const eventId = parseInt(this.state.eventId, 10)
-
-              this.props.deleteEventMutation({
-                variables: {
-                  eventId
-                },
-                refetchQueries: [
-                  'eventsQuery'
-                ]
-              }).then(() => {
-                notusToast.success('Successfully deleted event')
-                this.handleCloseConfirmDeleteModal()
-              }).catch(error => {
-                console.error(error)
-              })
-            }
-
-            handleOpenConfirmDeleteModal = (eventId) => {
-              this.setState({
-                eventId,
-                isConfirmingDelete: true
-              })
-            }
-
-            handleCloseConfirmDeleteModal = (e) => {
-              if (e) {
-                e.preventDefault()
-              }
-
-              this.setState({
-                eventId: null,
-                isConfirmingDelete: false
-              })
             }
 
             fetchMore = () => {
@@ -156,7 +116,6 @@ export const MyEventsPage =
                         editable
                         isSmall
                         linkTo={formatRoute(routes.EDIT_EVENT, { eventId: event.id })}
-                        handleOpenConfirmDeleteModal={this.handleOpenConfirmDeleteModal}
                       />
                     </CSSTransition>
                   ))}
@@ -213,33 +172,6 @@ export const MyEventsPage =
                   />
 
                   <ScrollToTop />
-
-                  <Modal
-                    isOpen={this.state.isConfirmingDelete}
-                    handleClose={this.handleCloseConfirmDeleteModal}
-                    isSmall
-                  >
-                    <div className='has-text-centered'>
-                      <h5 className='is-size-5 has-text-weight-normal'>
-                        Are you sure you want to delete this event?
-                      </h5>
-                      <br />
-                      <div className='buttons'>
-                        <button
-                          className='button is-small is-light'
-                          onClick={this.handleCloseConfirmDeleteModal}
-                        >
-                          No
-                        </button>
-                        <button
-                          className='button is-small is-danger'
-                          onClick={this.handleDelete}
-                        >
-                          Yes
-                        </button>
-                      </div>
-                    </div>
-                  </Modal>
 
                   <section className='section section--main-content'>
                     <div className='container'>
