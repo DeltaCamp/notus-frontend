@@ -38,7 +38,6 @@ export const AbiEventSelect = graphql(abiEventsQuery, {
 
     render () {
       const { abiId, abiEventId, abiEventsData } = this.props
-      console.log('abiId', abiId)
 
       if (!abiId) { return null }
 
@@ -47,11 +46,7 @@ export const AbiEventSelect = graphql(abiEventsQuery, {
 
       const { loading, error } = abiEventsData
 
-      console.log(abiEventsData)
-      console.log(abiEventsData.abiEvents)
-
       abiEvents = abiEventsData?.abiEvents?.abiEvents
-      console.warn('abiEvents is', abiEvents)
 
       if (error) {
         console.error(error)

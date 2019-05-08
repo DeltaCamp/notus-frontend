@@ -7,23 +7,27 @@ import { contractsQuery } from '~/queries/contractsQuery'
 import { SCOPES, SCOPE_LABELS } from '~/constants'
 
 const debug = require('debug')('notus:ScopeAndContractSelect')
-// const NEW_ABI_VALUE = '__ADD_NEW_ABI'
 
-export const ScopeAndContractSelect = graphql(contractsQuery, { name: 'contractsData' })(
+export const ScopeAndContractSelect = graphql(contractsQuery, {
+  name: 'contractsData',
+  options: (props) => ({
+    fetchPolicy: 'cache-and-network',
+    variables: {
+      contractsQuery: {
+        hasAbiEvents: true
+      }
+    }
+  })
+})(
   class _ScopeAndContractSelect extends PureComponent {
     static propTypes = {
       scope: PropTypes.number.isRequired,
-      // abiEventId: PropTypes.number,
       onChangeScopeAndContractId: PropTypes.func.isRequired,
-      // onAddAbiEvent: PropTypes.func.isRequired,
       menuIsOpen: PropTypes.bool.isRequired,
       handleStopEditing: PropTypes.func.isRequired
     }
 
     onChange = (option) => {
-      // if (option.value === NEW_ABI_VALUE) {
-      //   this.props.onAddAbiEvent()
-      
       if (option.contract) {
         this.props.onChangeScopeAndContractId({
           scope: SCOPES.CONTRACT_EVENT,
@@ -92,17 +96,12 @@ export const ScopeAndContractSelect = graphql(contractsQuery, { name: 'contracts
         value = scopeOptions.find(option => option.value === scope)
       }
 
-      const notSeeingContractGroup = {
-        label: 'Not seeing the contract you want? Let us know!',
-        options: []
-      }
-
       debug(`Scope: ${scope} contractId: ${contractId} value: `, value)
 
       return <NotusSelect
         {...this.props}
         value={value}
-        options={[scopeGroup, contractsGroup, notSeeingContractGroup]}
+        options={[scopeGroup, contractsGroup]}
         onChange={this.onChange}
       />
     }

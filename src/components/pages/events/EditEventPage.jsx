@@ -33,7 +33,7 @@ const debug = require('debug')('notus:EditEventPage')
 
 const randomColor = () => {
   return sample([
-    '#201334', // dark purple
+    '#2a083f', // dark purple
     '#0b603a', // forest green
     '#06368b', // dark blue
     '#dd5500', // orange
@@ -373,23 +373,34 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   onChangeScopeAndContractId = ({ scope, contract }) => {
+    let abiEvent
+    let abiEventId = null
+    if (contract && contract.abi && contract.abi.abiEvents) {
+      abiEvent = contract.abi.abiEvents[0]
+      abiEventId = parseInt(abiEvent.id, 10)
+    }
+
     const matchers = this.state.event.matchers.map(matcher => {
       let clone = { ...matcher }
 
-      if (!isValidScopeSource(scope, matcher.source)) {
-        clone.source = 'block.number'
-        // clear out operand stuff
+      const isNowInvalid = (
+           !isValidMatcherForAbiEvent(abiEvent, matcher)
+        || !isValidScopeSource(scope, matcher.source)
+      )
+
+      if (isNowInvalid) {
+        clone.source = 'transaction.value'
+        // will need to be smart about the operand and change it to
+        // a default value of the matcher's new type (ie 0.01 for uint256, etc)
+        // clone.operand = ''
       }
+      console.log('clone!', clone)
 
       return clone
     })
 
-    console.warn('WANTING TO UPDATE MATCHERS! deepClone?', matchers)
+    // console.warn('WANTING TO UPDATE MATCHERS! deepClone?', matchers)
 
-    let abiEventId = null
-    if (contract && contract.abi && contract.abi.abiEvents) {
-      abiEventId = parseInt(contract.abi.abiEvents[0].id, 10)
-    }
 
     let contractId
     if (contract) {
@@ -424,9 +435,11 @@ export const EditEventPage = class _EditEventPage extends Component {
 
       if (!isValidMatcherForAbiEvent(abiEvent, matcher)) {
         clone.source = 'transaction.value'
-        console.log(matcher)
-        console.log(abiEvent)
-        clone.operand = ''
+        console.log('clone!', clone)
+
+        // will need to be smart about the operand and change it to
+        // a default value of the matcher's new type (ie 0.01 for uint256, etc)
+        // clone.operand = ''
       }
 
       return clone
@@ -581,10 +594,10 @@ export const EditEventPage = class _EditEventPage extends Component {
       } else if (error) {
         let errorMsg = `There was an issue loading this page: ${error.message}`
 
-        const hello = eventData?.error?.graphQLErrors?.[0]
-        console.log('hello', hello) // trying to track down a bug that happens here intermittently ...
-
-        const gqlError = eventData?.error?.graphQLErrors?.[0].message?.error
+        let gqlError
+        if (eventData?.error?.graphQLErrors?.[0]) {
+          gqlError = eventData?.error?.graphQLErrors?.[0].message?.error
+        }
 
         if (gqlError === 'Not Found') {
           errorMsg = 'This event has been deleted'
