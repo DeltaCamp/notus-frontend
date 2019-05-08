@@ -29,13 +29,6 @@ export const SourceDescription = graphql(abiEventQuery, {
     render() {
       let title,
         nounArticle
-      // let abiEventId = event.abiEventId
-
-      // if (event.scope === SCOPES.CONTRACT_EVENT) {
-      //   if (event.abiEvent) {
-      //     abiEventId = event.abiEvent.id
-      //   }
-      // }
 
       const {
         abiEventQuery,
@@ -45,8 +38,6 @@ export const SourceDescription = graphql(abiEventQuery, {
 
       title = SCOPE_LABELS[event.scope]
 
-      // When we're on a custom contract ABI scope, use the abiEvent's
-      // abi name and name instead
       if (
         event.scope === SCOPES.CONTRACT_EVENT
         && (abiEventQuery && !abiEventQuery.loading)
@@ -57,7 +48,7 @@ export const SourceDescription = graphql(abiEventQuery, {
           console.error(error)
           title = '...'
         } else {
-          title = `${abiEvent.abi.name} ${abiEvent.name}`
+          title = abiEvent.abi.name
         }
       }
 
