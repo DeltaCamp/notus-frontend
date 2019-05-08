@@ -365,10 +365,13 @@ export const EditEventPage = class _EditEventPage extends Component {
 
       if (!isValidScopeSource(scope, matcher.source)) {
         clone.source = 'block.number'
+        // clear out operand stuff
       }
 
       return clone
     })
+
+    console.warn('WANTING TO UPDATE MATCHERS! deepClone?', matchers)
 
     this.setState({
       event: {
@@ -381,8 +384,37 @@ export const EditEventPage = class _EditEventPage extends Component {
       if (!this.isCreateMode()) {
         this.doGenericUpdateEvent({
           id: this.state.event.id,
+          matchers,
           scope,
           abiEventId
+        })
+      }
+    })
+  }
+
+  onChangeAbiEventId = ({ abiEvent }) => {
+    const matchers = this.state.event.matchers.map(matcher => {
+      let clone = { ...matcher }
+
+      if (!isValidMatcherForAbiEvent(abiEvent, matcher.source)) {
+        clone.source = 'transaction.value'
+        // clear out operand stuff
+      }
+
+      return clone
+    })
+
+    this.setState({
+      event: {
+        ...this.state.event,
+        matchers,
+        abiEventId: parseInt(abiEvent.id, 10)
+      }
+    }, () => {
+      if (!this.isCreateMode()) {
+        this.doGenericUpdateEvent({
+          id: this.state.event.id,
+          abiEventId: parseInt(abiEvent.id, 10)
         })
       }
     })
@@ -555,6 +587,11 @@ export const EditEventPage = class _EditEventPage extends Component {
           handleToggleEventSource={this.handleToggleEventSource}
         />
         {this.state.event.abiEventId ? `event ` : ``}
+        <ContractABIEvent
+          event={this.state.event}
+          onChangeAbiEventId={this.onChangeAbiEventId}
+          handleToggleEventSource={this.handleToggleEventSource}
+        />
         occurs
       </div>
     )
