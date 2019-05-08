@@ -22,6 +22,7 @@ import { EditEventPageWrapper } from '~/components/pages/events/EditEventPageWra
 import { PasswordResetPage } from '~/components/pages/PasswordResetPage'
 import { SignInPage } from '~/components/pages/SignInPage'
 import { SignUpPage } from '~/components/pages/SignUpPage'
+import { DisableEmailPage } from '~/components/pages/DisableEmailPage'
 import { ConfirmAndSetPasswordPage } from '~/components/pages/ConfirmAndSetPasswordPage'
 import { AppConfirmPage } from '~/components/pages/AppConfirmPage'
 import { AppUserConfirmPage } from '~/components/pages/AppUserConfirmPage'
@@ -96,6 +97,8 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.SIGNIN} component={SignInPage} />
                 <Route exact path={routes.PASSWORD_RESET} component={PasswordResetPage} />
                 <Route exact path={routes.APP_CONFIRM} component={AppConfirmPage} />
+
+                <Route exact path={routes.DISABLE_EMAIL} component={DisableEmailPage} />
 
                 <Route component={FourOhFour} />
               </Switch>

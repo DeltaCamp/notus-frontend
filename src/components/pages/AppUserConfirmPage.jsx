@@ -100,10 +100,10 @@ export const AppUserConfirmPage = graphql(appUserConfirmPageMutation, { name: 'c
             <div className='container'>
               <div className='row'>
                 <div className='col-xs-12'>
-                  <p className='content'>
+                  <p className='mt50'>
                     <button
                       onClick={this.context.router.history.goBack}
-                      className='button is-monospaced is-text has-text-weight-bold back-button has-underline-border'
+                      className='button is-small is-outlined is-dark'
                     >
                       {'<'} Back
                     </button>

@@ -21,13 +21,15 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
         <section className='section section--main-content'>
           <div className='container'>
             <div className='row'>
-              <div className='col-xs-12 mt50'>
-                <button
-                  onClick={this.context.router.history.goBack}
-                  className='button is-xsmall is-outlined is-dark'
-                >
-                  {'<'} Back
-                </button>
+              <div className='col-xs-12'>
+                <p className='mt50'>
+                  <button
+                    onClick={this.context.router.history.goBack}
+                    className='button is-small is-outlined is-dark'
+                  >
+                    {'<'} Back
+                  </button>
+                </p>
 
                 <br />
                 <br />
