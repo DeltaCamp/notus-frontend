@@ -88,17 +88,12 @@ export const MatcherSource = graphql(sourcesQuery, {
           if (option.value === SOURCES.CONTRACT_EVENT_INPUT) {
             const { abiEventInput } = option
             sourceDataType = abiEventInput.type
-            console.log('abiEventInput', abiEventInput)
             clone.abiEventInputId = parseInt(abiEventInput.id, 10)
           } else {
             const { sources } = this.props.sourcesQuery
             const source = sources.find(s => s.source === option.value)
-            console.log('source', source)
             sourceDataType = source.dataType
           }
-
-          console.log('sourceDataType', sourceDataType)
-          console.log('clone', clone)
 
           if (!isValidDataTypeOperator(sourceDataType, clone.operator)) {
             clone.operator = OPERATORS.EQ
@@ -131,7 +126,7 @@ export const MatcherSource = graphql(sourcesQuery, {
           } else if (error) {
             console.error(error)
             content = error.toString()
-          } else if (source.source !== SOURCES.CONTRACT_EVENT_INPUT) {
+          } else if (source && source.source !== SOURCES.CONTRACT_EVENT_INPUT) {
             content = source.title
           } else if (abiEventInput) {
             content = `${abiEventInput.abiEvent.name} ${abiEventInput.name}`
