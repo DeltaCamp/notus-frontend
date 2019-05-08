@@ -16,16 +16,18 @@ import { EditEventButtons } from '~/components/events/EditEventButtons'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { EventMatcher } from '~/components/events/EventMatcher'
+import { ContractAbiEvent } from '~/components/events/ContractAbiEvent'
 import { RunCountTitle } from '~/components/events/RunCountTitle'
 import { EventSource } from '~/components/events/EventSource'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
+import { isValidMatcherForAbiEvent } from '~/utils/isValidMatcherForAbiEvent'
 import { notusToast } from '~/utils/notusToast'
 import { showErrorMessage } from '~/utils/showErrorMessage'
 import * as routes from '~/../config/routes'
-// import { SCOPES } from '~/constants'
+import { SCOPES } from '~/constants'
 
 const debug = require('debug')('notus:EditEventPage')
 
@@ -359,7 +361,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.handleSetEditMatcher(null)
   }
 
-  onChangeScopeAndAbiEventId = ({ scope, abiEventId }) => {
+  onChangeScopeAndContractId = ({ scope, contract }) => {
     const matchers = this.state.event.matchers.map(matcher => {
       let clone = { ...matcher }
 
@@ -373,12 +375,24 @@ export const EditEventPage = class _EditEventPage extends Component {
 
     console.warn('WANTING TO UPDATE MATCHERS! deepClone?', matchers)
 
+    let abiEventId = null
+    if (contract && contract.abi && contract.abi.abiEvents) {
+      abiEventId = parseInt(contract.abi.abiEvents[0].id, 10)
+    }
+
+    let contractId
+    if (contract) {
+      contractId = parseInt(contract.id, 10)
+    }
+
     this.setState({
       event: {
         ...this.state.event,
         matchers,
         scope,
-        abiEventId: parseInt(abiEventId, 10)
+        contract,
+        contractId,
+        abiEventId
       }
     }, () => {
       if (!this.isCreateMode()) {
@@ -386,6 +400,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           id: this.state.event.id,
           matchers,
           scope,
+          contractId,
           abiEventId
         })
       }
@@ -396,9 +411,11 @@ export const EditEventPage = class _EditEventPage extends Component {
     const matchers = this.state.event.matchers.map(matcher => {
       let clone = { ...matcher }
 
-      if (!isValidMatcherForAbiEvent(abiEvent, matcher.source)) {
+      if (!isValidMatcherForAbiEvent(abiEvent, matcher)) {
         clone.source = 'transaction.value'
-        // clear out operand stuff
+        console.log(matcher)
+        console.log(abiEvent)
+        clone.operand = ''
       }
 
       return clone
@@ -408,13 +425,14 @@ export const EditEventPage = class _EditEventPage extends Component {
       event: {
         ...this.state.event,
         matchers,
-        abiEventId: parseInt(abiEvent.id, 10)
+        abiEventId: parseInt(abiEvent.id, 10),
       }
     }, () => {
       if (!this.isCreateMode()) {
         this.doGenericUpdateEvent({
           id: this.state.event.id,
-          abiEventId: parseInt(abiEvent.id, 10)
+          matchers,
+          abiEventId: parseInt(abiEvent.id, 10),
         })
       }
     })
@@ -583,15 +601,16 @@ export const EditEventPage = class _EditEventPage extends Component {
 
         <EventSource
           event={this.state.event}
-          onChangeScopeAndAbiEventId={this.onChangeScopeAndAbiEventId}
+          onChangeScopeAndContractId={this.onChangeScopeAndContractId}
           handleToggleEventSource={this.handleToggleEventSource}
         />
-        {this.state.event.abiEventId ? `event ` : ``}
-        <ContractABIEvent
+
+        <ContractAbiEvent
           event={this.state.event}
           onChangeAbiEventId={this.onChangeAbiEventId}
           handleToggleEventSource={this.handleToggleEventSource}
         />
+        {this.state.event.scope === SCOPES.CONTRACT_EVENT ? `event ` : ``}
         occurs
       </div>
     )
