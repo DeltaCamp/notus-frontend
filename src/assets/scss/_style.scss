@@ -65,18 +65,6 @@ select:-internal-autofill-selected {
 
 // ================= END .has-blur-to-focus
 
-.button.is-link.is-outlined {
-  background-color: transparent;
-  border-color: #141414;
-  color: #141414;
-  transition: border-color 0.3s;
-}
-.button.is-link.is-outlined:hover {
-  background-color: transparent;
-  border-color: lighten(#141414, 30%);
-  color: lighten(#141414, 5%);
-}
-
 h1,
 h2,
 h3,

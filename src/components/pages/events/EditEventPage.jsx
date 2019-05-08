@@ -662,15 +662,14 @@ export const EditEventPage = class _EditEventPage extends Component {
                   }
 
                   <div className='row'>
-                    <div className='col-xs-12 col-sm-8 is-flex'>
-                      
+                    <div className='col-xs-12 col-sm-6 col-xl-8 is-flex'>
                       <EventTitle
                         event={this.state.event}
                         handleSubmitTitle={this.handleSubmitTitle}
                       />
                     </div>
 
-                    <div className='col-xs-12 col-sm-4 is-flex'>
+                    <div className='col-xs-12 col-sm-6 col-xl-4 is-flex'>
                       <div className='justify-content-flex-end'>
                         {!this.isCreateMode() &&
                           <>
