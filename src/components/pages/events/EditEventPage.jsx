@@ -86,6 +86,7 @@ export const EditEventPage = class _EditEventPage extends Component {
   eventEntityToDto(event) {
     event = this.scrubEvent(event)
     event.abiEventId = parseInt(event.abiEventId, 10)
+    
     if (event.matchers) {
       event.matchers = event.matchers.map(matcher => this.matcherEntityToDto(matcher))
     }
@@ -97,7 +98,15 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   scrubEvent(event) {
-    return omit(event, '__typename', 'createdAt', 'updatedAt', 'parent', 'user')
+    return omit(
+      event,
+      '__typename',
+      'createdAt',
+      'updatedAt',
+      'contract',
+      'parent',
+      'user'
+    )
   }
 
   handleSubmitTitle = (newEventTitle) => {
@@ -217,6 +226,8 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   doCreate = () => {
     let event = { ...this.state.event }
+
+    event = this.eventEntityToDto(event)
 
     this.props.createEventMutation({
       variables: {
@@ -569,7 +580,12 @@ export const EditEventPage = class _EditEventPage extends Component {
         return null
       } else if (error) {
         let errorMsg = `There was an issue loading this page: ${error.message}`
+
+        const hello = eventData?.error?.graphQLErrors?.[0]
+        console.log('hello', hello) // trying to track down a bug that happens here intermittently ...
+
         const gqlError = eventData?.error?.graphQLErrors?.[0].message?.error
+
         if (gqlError === 'Not Found') {
           errorMsg = 'This event has been deleted'
         } else if (gqlError === 'Unauthorized') {
