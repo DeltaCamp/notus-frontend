@@ -30,9 +30,12 @@ export const MatcherAddressInput = ReactTimeout(class _MatcherAddressInput exten
   }
 
   handleChange = (e) => {
-    this.setState({
-      value: e.target.value
-    })
+    const regexp = /((?:0x[0-9a-fA-F]{0,40})|(?:0x?)?)/.exec(e.target.value)
+    if (regexp) {
+      this.setState({
+        value: regexp[1]
+      })
+    }
   }
 
   setNewPreviousValue = () => {

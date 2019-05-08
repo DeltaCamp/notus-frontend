@@ -7,16 +7,16 @@ import { ethers } from 'ethers'
 
 import { KEYS } from '~/constants'
 
-export const UIntInput = ReactTimeout(class _UIntInput extends Component {
+export const WeiInput = ReactTimeout(class _WeiInput extends Component {
   static propTypes = {
     index: PropTypes.number.isRequired,
-    matcher: PropTypes.object.isRequired,
+    value: PropTypes.any.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    handleSetEditMatcher: PropTypes.func.isRequired
+    handleStartEditing: PropTypes.func.isRequired
   }
 
   getDefaultValue () {
-    return ethers.utils.formatEther(this.props.matcher.operand.toString())
+    return ethers.utils.formatEther(this.props.value.toString())
   }
 
   state = {
@@ -87,7 +87,7 @@ export const UIntInput = ReactTimeout(class _UIntInput extends Component {
   }
 
   handleClick = () => {
-    this.props.handleSetEditMatcher()
+    this.props.handleStartEditing()
   }
   
   hintText = () => {
@@ -102,15 +102,18 @@ export const UIntInput = ReactTimeout(class _UIntInput extends Component {
 
     // when focused/click
     let wei = '?'
+    let gwei = '?'
 
     try {
       const weiBn = ethers.utils.parseEther(this.state.value)
       wei = ethers.utils.commify(weiBn)
+
+      gwei = ethers.utils.commify(ethers.utils.formatUnits(weiBn, 'gwei'))
     } catch (error) {
       console.warn(error)
     }
 
-    return `${this.state.value} ether<br /><br />(${wei} wei)`
+    return `${this.state.value} ether<br /><br />(${gwei} gwei)<br /><br />(${wei} wei)`
   }
 
   render () {

@@ -6,6 +6,7 @@ export const sourceQuery = gql`
       source
       title
       dataType
+      metaDataType
     }
   }
 `

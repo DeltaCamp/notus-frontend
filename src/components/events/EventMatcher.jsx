@@ -12,7 +12,6 @@ const DragHandle = () => <span className='drag-handle'>
 export const EventMatcher =
   class _EventMatcher extends PureComponent {
     static propTypes = {
-      editMatcher: PropTypes.object,
       isFirst: PropTypes.bool.isRequired,
       index: PropTypes.number.isRequired,
       handleSetEditMatcher: PropTypes.func.isRequired,

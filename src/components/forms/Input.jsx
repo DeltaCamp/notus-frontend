@@ -5,9 +5,14 @@ import { KEYS } from '~/constants'
 
 export const Input = class _Input extends Component {
   static propTypes = {
+    type: PropTypes.string,
     value: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     handleStartEditing: PropTypes.func
+  }
+
+  static defaultProps = {
+    type: 'text'
   }
 
   state = {
@@ -83,9 +88,9 @@ export const Input = class _Input extends Component {
     return (
       <input
         placeholder={this.props.placeholder}
-        type='text'
+        type={this.props.type}
         ref='inputRef'
-        className={this.props.className}
+        className={this.props.className || 'input'}
         value={this.state.value}
         onChange={this.handleChange}
         onBlur={this.handleBlur}

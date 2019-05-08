@@ -30,6 +30,42 @@ export const SCOPES = {
   CONTRACT_EVENT: 2
 }
 
+export const META_DATA_TYPES = {
+  WEI: 'wei',
+  TIMESTAMP: 'timestamp',
+  FIXED_POINT_1: "fixedPoint1",
+  FIXED_POINT_2: "fixedPoint2",
+  FIXED_POINT_3: "fixedPoint3",
+  FIXED_POINT_4: "fixedPoint4",
+  FIXED_POINT_5: "fixedPoint5",
+  FIXED_POINT_6: "fixedPoint6",
+  FIXED_POINT_7: "fixedPoint7",
+  FIXED_POINT_8: "fixedPoint8",
+  FIXED_POINT_9: "fixedPoint9",
+  FIXED_POINT_10: "fixedPoint10",
+  FIXED_POINT_11: "fixedPoint11",
+  FIXED_POINT_12: "fixedPoint12",
+  FIXED_POINT_13: "fixedPoint13",
+  FIXED_POINT_14: "fixedPoint14",
+  FIXED_POINT_15: "fixedPoint15",
+  FIXED_POINT_16: "fixedPoint16",
+  FIXED_POINT_17: "fixedPoint17",
+  FIXED_POINT_18: "fixedPoint18",
+  FIXED_POINT_19: "fixedPoint19",
+  FIXED_POINT_20: "fixedPoint20",
+  FIXED_POINT_21: "fixedPoint21",
+  FIXED_POINT_22: "fixedPoint22",
+  FIXED_POINT_23: "fixedPoint23",
+  FIXED_POINT_24: "fixedPoint24",
+  FIXED_POINT_25: "fixedPoint25",
+  FIXED_POINT_26: "fixedPoint26",
+  FIXED_POINT_27: "fixedPoint27",
+  FIXED_POINT_28: "fixedPoint28",
+  FIXED_POINT_29: "fixedPoint29",
+  FIXED_POINT_30: "fixedPoint30",
+  FIXED_POINT_31: "fixedPoint31"
+}
+
 export const SCOPE_LABELS = {
   [SCOPES.TRANSACTION]: 'Transaction',
   [SCOPES.BLOCK]: 'Block',

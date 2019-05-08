@@ -6,11 +6,14 @@ import { graphql } from 'react-apollo'
 
 import { MatcherAddressInput } from '~/components/MatcherAddressInput'
 import { TextInput } from '~/components/TextInput'
-import { UIntInput } from '~/components/UIntInput'
+import { WeiInput } from '~/components/WeiInput'
 import { abiEventInputQuery } from '~/queries/abiEventInputQuery'
 import { sourceQuery } from '~/queries/sourceQuery'
 import { calculateSourceDataType } from '~/utils/calculateSourceDataType'
+import { calculateSourceMetaDataType } from '~/utils/calculateSourceMetaDataType'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
+import { META_DATA_TYPES } from '~/constants'
+import { Input } from '../forms/Input';
 
 export const MatcherOperand = graphql(sourceQuery, {
   name: 'sourceQuery',
@@ -64,18 +67,32 @@ export const MatcherOperand = graphql(sourceQuery, {
 
         let operandInput
         const dataType = calculateSourceDataType(source, abiEventInput)
-        if (dataType === 'address') {
+        const metaDataType = calculateSourceMetaDataType(source, abiEventInput)
+
+        console.log(source, dataType, metaDataType)
+
+        if (
+          metaDataType === META_DATA_TYPES.WEI ||
+          metaDataType === META_DATA_TYPES.FIXED_POINT_18
+        ) {
+          operandInput = <WeiInput
+            index={this.props.index}
+            value={matcher.operand}
+            handleSubmit={this.handleSubmit}
+            handleStartEditing={this.props.handleSetEditMatcher}
+          />
+        } else if (dataType === 'address') {
           operandInput = <MatcherAddressInput 
             matcher={matcher}
             handleSubmit={this.handleSubmit}
             handleSetEditMatcher={this.props.handleSetEditMatcher}
           />
-        } else if (dataType === 'uint256') {
-          operandInput = <UIntInput
-            index={this.props.index}
-            matcher={matcher}
+        } else if (dataType.startsWith('uint') || dataType.startsWith('int')) {
+          operandInput = <Input
+            type='number'
+            value={matcher.operand}
             handleSubmit={this.handleSubmit}
-            handleSetEditMatcher={this.props.handleSetEditMatcher}
+            handleStartEditing={this.props.handleSetEditMatcher}
           />
         } else {
           operandInput = <TextInput
