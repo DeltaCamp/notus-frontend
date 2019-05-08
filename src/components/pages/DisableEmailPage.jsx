@@ -83,7 +83,7 @@ export const DisableEmailPage = graphql(disableEventEmailMutation, { name: 'disa
       }
 
       render () {
-        const { currentUserData, event } = this.props
+        const { currentUserData } = this.props
         const isLoggedIn = currentUserData && currentUserData.currentUser
 
         let message
