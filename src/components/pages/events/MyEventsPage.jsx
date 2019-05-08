@@ -178,7 +178,7 @@ export const MyEventsPage =
                     <div className='container'>
                       <div className='row'>
                         <div className='col-xs-12'>
-                          <h4 className='is-size-2 has-text-weight-bold mt75 has-text-centered'>
+                          <h4 className='is-size-4 has-text-weight-bold mt75 has-text-centered'>
                             My Events
                           </h4>
                         </div>
