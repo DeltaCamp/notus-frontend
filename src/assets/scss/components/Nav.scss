@@ -129,10 +129,13 @@ body.home .navbar {
   transition: border 300ms ease-in-out;
 }
 
+.home .navbar-menu .navbar-item {
+  padding: 3px 10px 5px;
+}
+
 .home .navbar-menu .navbar-item.bold {
   border-radius: 6px;
   color: #24f0e2;
-  padding: 3px 10px 5px;
 
   @media screen and (max-width: $navbar-breakpoint) {
     color: rgba(0, 0, 0, 0.5);
