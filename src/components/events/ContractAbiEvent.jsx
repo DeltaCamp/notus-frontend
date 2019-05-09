@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import { SourceDescription } from '~/components/events/SourceDescription'
-import { ScopeAndContractSelect } from '~/components/forms/ScopeAndContractSelect'
-import { KEYS } from '~/constants'
+import { AbiEventName } from '~/components/events/AbiEventName'
+import { AbiEventSelect } from '~/components/forms/AbiEventSelect'
+import { KEYS, SCOPES } from '~/constants'
 
-export const EventSource = class _EventSource extends Component {
+export const ContractAbiEvent = class _ContractAbiEvent extends Component {
   state = {
     isEditing: false,
     showAddContract: false
@@ -14,7 +14,7 @@ export const EventSource = class _EventSource extends Component {
 
   static propTypes = {
     event: PropTypes.object.isRequired,
-    onChangeScopeAndContractId: PropTypes.func.isRequired,
+    onChangeAbiEventId: PropTypes.func.isRequired,
     handleToggleEventSource: PropTypes.func.isRequired
   }
 
@@ -46,9 +46,9 @@ export const EventSource = class _EventSource extends Component {
     document.addEventListener('mousedown', this.handleClickAnywhere, false)
   }
 
-  handleChangeSource = (option) => {
-    this.handleStopEditing()
-  }
+  // handleChangeSource = (option) => {
+  //   this.handleStopEditing()
+  // }
 
   handleKeyUp = (e) => {
     if (e.keyCode === KEYS.escape) {
@@ -81,31 +81,36 @@ export const EventSource = class _EventSource extends Component {
   }
 
   render () {
+    if (this.props.event.scope !== SCOPES.CONTRACT_EVENT) {
+      return null
+    }
+
+    let abiId = this.props.event.contract?.abi?.id
+    if (abiId) {
+      abiId = parseInt(abiId, 10)
+    }
+
     return (
       <>
         {this.state.isEditing
           ? (
-            <>a
-              <div
-                ref={node => { this.node = node }}
-                className='event-box__variable has-react-select'
-                onKeyUp={this.handleKeyUp}
-              >
-                <ScopeAndContractSelect
-                  scope={this.props.event.scope}
-                  abiEventId={this.props.event.abiEventId}
-                  onChangeScopeAndContractId={this.props.onChangeScopeAndContractId}
-                  onAddAbiEvent={this.showAddContract}
-                  menuIsOpen={this.state.isEditing}
-                  handleStopEditing={this.handleStopEditing}
-                />
-              </div>
-            </>
+            <div
+              ref={node => { this.node = node }}
+              className='event-box__variable has-react-select'
+              onKeyUp={this.handleKeyUp}
+            >
+              <AbiEventSelect
+                abiId={abiId}
+                onChangeAbiEventId={this.props.onChangeAbiEventId}
+                menuIsOpen={this.state.isEditing}
+                handleStopEditing={this.handleStopEditing}
+              />
+            </div>
           )
           : (
-            <SourceDescription
+            <AbiEventName
               handleStartEdit={this.handleStartEdit}
-              event={this.props.event}
+              abiEventId={this.props.event.abiEventId}
             />
           )
         }

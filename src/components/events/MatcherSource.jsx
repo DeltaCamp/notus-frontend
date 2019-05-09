@@ -98,8 +98,9 @@ export const MatcherSource = graphql(sourcesQuery, {
           if (!isValidDataTypeOperator(sourceDataType, clone.operator)) {
             clone.operator = OPERATORS.EQ
           }
-
-          clone.operand = ''
+          
+          clone.operand = clone.operand || ''
+          console.warn('MATCHER SOURCE CLONE ', clone)
 
           this.props.onChange(clone)
 
@@ -126,7 +127,7 @@ export const MatcherSource = graphql(sourcesQuery, {
           } else if (error) {
             console.error(error)
             content = error.toString()
-          } else if (source.source !== SOURCES.CONTRACT_EVENT_INPUT) {
+          } else if (source && source.source !== SOURCES.CONTRACT_EVENT_INPUT) {
             content = source.title
           } else if (abiEventInput) {
             content = `${abiEventInput.abiEvent.name} ${abiEventInput.name}`

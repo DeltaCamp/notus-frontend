@@ -20,6 +20,7 @@ export const NewAdminContractForm =
           address: '',
           name: '',
           abi: {
+            name: '',
             abi: ''
           }
         },
@@ -35,7 +36,11 @@ export const NewAdminContractForm =
         this.setState({
           contract: {
             ...this.state.contract,
-            name: e.target.value
+            name: e.target.value,
+            abi: {
+              ...this.state.contract.abi,
+              name: e.target.value
+            }
           },
           hasCustomizedName: true
         })

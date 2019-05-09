@@ -16,22 +16,24 @@ import { EditEventButtons } from '~/components/events/EditEventButtons'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
 import { EventMatcher } from '~/components/events/EventMatcher'
+import { ContractAbiEvent } from '~/components/events/ContractAbiEvent'
 import { RunCountTitle } from '~/components/events/RunCountTitle'
 import { EventSource } from '~/components/events/EventSource'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
+import { isValidMatcherForAbiEvent } from '~/utils/isValidMatcherForAbiEvent'
 import { notusToast } from '~/utils/notusToast'
 import { showErrorMessage } from '~/utils/showErrorMessage'
 import * as routes from '~/../config/routes'
-// import { SCOPES } from '~/constants'
+import { SCOPES } from '~/constants'
 
 const debug = require('debug')('notus:EditEventPage')
 
 const randomColor = () => {
   return sample([
-    '#201334', // dark purple
+    '#2a083f', // dark purple
     '#0b603a', // forest green
     '#06368b', // dark blue
     '#dd5500', // orange
@@ -84,6 +86,7 @@ export const EditEventPage = class _EditEventPage extends Component {
   eventEntityToDto(event) {
     event = this.scrubEvent(event)
     event.abiEventId = parseInt(event.abiEventId, 10)
+    
     if (event.matchers) {
       event.matchers = event.matchers.map(matcher => this.matcherEntityToDto(matcher))
     }
@@ -95,7 +98,15 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   scrubEvent(event) {
-    return omit(event, '__typename', 'createdAt', 'updatedAt', 'parent', 'user')
+    return omit(
+      event,
+      '__typename',
+      'createdAt',
+      'updatedAt',
+      'contract',
+      'parent',
+      'user'
+    )
   }
 
   handleSubmitTitle = (newEventTitle) => {
@@ -215,6 +226,8 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   doCreate = () => {
     let event = { ...this.state.event }
+
+    event = this.eventEntityToDto(event)
 
     this.props.createEventMutation({
       variables: {
@@ -359,12 +372,74 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.handleSetEditMatcher(null)
   }
 
-  onChangeScopeAndAbiEventId = ({ scope, abiEventId }) => {
+  onChangeScopeAndContractId = ({ scope, contract }) => {
+    let abiEvent
+    let abiEventId = null
+    if (contract && contract.abi && contract.abi.abiEvents) {
+      abiEvent = contract.abi.abiEvents[0]
+      abiEventId = parseInt(abiEvent.id, 10)
+    }
+
     const matchers = this.state.event.matchers.map(matcher => {
       let clone = { ...matcher }
 
-      if (!isValidScopeSource(scope, matcher.source)) {
-        clone.source = 'block.number'
+      const isNowInvalid = (
+           !isValidMatcherForAbiEvent(abiEvent, matcher)
+        || !isValidScopeSource(scope, matcher.source)
+      )
+
+      if (isNowInvalid) {
+        clone.source = 'transaction.value'
+        // will need to be smart about the operand and change it to
+        // a default value of the matcher's new type (ie 0.01 for uint256, etc)
+        // clone.operand = ''
+      }
+      console.log('clone!', clone)
+
+      return clone
+    })
+
+    // console.warn('WANTING TO UPDATE MATCHERS! deepClone?', matchers)
+
+
+    let contractId
+    if (contract) {
+      contractId = parseInt(contract.id, 10)
+    }
+
+    this.setState({
+      event: {
+        ...this.state.event,
+        matchers,
+        scope,
+        contract,
+        contractId,
+        abiEventId
+      }
+    }, () => {
+      if (!this.isCreateMode()) {
+        this.doGenericUpdateEvent({
+          id: this.state.event.id,
+          matchers,
+          scope,
+          contractId,
+          abiEventId
+        })
+      }
+    })
+  }
+
+  onChangeAbiEventId = ({ abiEvent }) => {
+    const matchers = this.state.event.matchers.map(matcher => {
+      let clone = { ...matcher }
+
+      if (!isValidMatcherForAbiEvent(abiEvent, matcher)) {
+        clone.source = 'transaction.value'
+        console.log('clone!', clone)
+
+        // will need to be smart about the operand and change it to
+        // a default value of the matcher's new type (ie 0.01 for uint256, etc)
+        // clone.operand = ''
       }
 
       return clone
@@ -374,15 +449,14 @@ export const EditEventPage = class _EditEventPage extends Component {
       event: {
         ...this.state.event,
         matchers,
-        scope,
-        abiEventId: parseInt(abiEventId, 10)
+        abiEventId: parseInt(abiEvent.id, 10),
       }
     }, () => {
       if (!this.isCreateMode()) {
         this.doGenericUpdateEvent({
           id: this.state.event.id,
-          scope,
-          abiEventId
+          matchers,
+          abiEventId: parseInt(abiEvent.id, 10),
         })
       }
     })
@@ -519,7 +593,12 @@ export const EditEventPage = class _EditEventPage extends Component {
         return null
       } else if (error) {
         let errorMsg = `There was an issue loading this page: ${error.message}`
-        const gqlError = eventData?.error?.graphQLErrors?.[0].message?.error
+
+        let gqlError
+        if (eventData?.error?.graphQLErrors?.[0]) {
+          gqlError = eventData?.error?.graphQLErrors?.[0].message?.error
+        }
+
         if (gqlError === 'Not Found') {
           errorMsg = 'This event has been deleted'
         } else if (gqlError === 'Unauthorized') {
@@ -551,10 +630,16 @@ export const EditEventPage = class _EditEventPage extends Component {
 
         <EventSource
           event={this.state.event}
-          onChangeScopeAndAbiEventId={this.onChangeScopeAndAbiEventId}
+          onChangeScopeAndContractId={this.onChangeScopeAndContractId}
           handleToggleEventSource={this.handleToggleEventSource}
         />
-        {this.state.event.abiEventId ? `event ` : ``}
+
+        <ContractAbiEvent
+          event={this.state.event}
+          onChangeAbiEventId={this.onChangeAbiEventId}
+          handleToggleEventSource={this.handleToggleEventSource}
+        />
+        {this.state.event.scope === SCOPES.CONTRACT_EVENT ? `event ` : ``}
         occurs
       </div>
     )

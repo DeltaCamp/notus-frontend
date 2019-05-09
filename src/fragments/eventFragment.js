@@ -1,4 +1,6 @@
 import gql from 'graphql-tag'
+
+import { contractFragment } from '~/fragments/contractFragment'
 import { matcherFragment } from '~/fragments/matcherFragment'
 
 export const eventFragment = gql`
@@ -12,6 +14,9 @@ export const eventFragment = gql`
     user {
       id
       name
+    }
+    contract {
+      ...contractFragment
     }
     abiEventId
     parent {
@@ -33,5 +38,6 @@ export const eventFragment = gql`
     sendEmail
     color
   }
+  ${contractFragment}
   ${matcherFragment}
 `

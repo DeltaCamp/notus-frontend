@@ -189,9 +189,7 @@ button[disabled] {
 }
 
 .button.is-small {
-  // height: auto;
-  // font-size: 1rem;
-  // padding: 0.5rem 2rem 0.5rem;
+  border-radius: 8px;
 }
 
 .button.is-outlined {

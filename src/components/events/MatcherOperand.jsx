@@ -4,6 +4,7 @@ import ReactTooltip from 'react-tooltip'
 import ReactTimeout from 'react-timeout'
 import { graphql } from 'react-apollo'
 
+import { Input } from '~/components/forms/Input'
 import { MatcherAddressInput } from '~/components/MatcherAddressInput'
 import { TextInput } from '~/components/TextInput'
 import { WeiInput } from '~/components/WeiInput'
@@ -13,7 +14,6 @@ import { calculateSourceDataType } from '~/utils/calculateSourceDataType'
 import { calculateSourceMetaDataType } from '~/utils/calculateSourceMetaDataType'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { META_DATA_TYPES } from '~/constants'
-import { Input } from '../forms/Input';
 
 export const MatcherOperand = graphql(sourceQuery, {
   name: 'sourceQuery',
@@ -70,8 +70,9 @@ export const MatcherOperand = graphql(sourceQuery, {
         const metaDataType = calculateSourceMetaDataType(source, abiEventInput)
 
         if (
-          metaDataType === META_DATA_TYPES.WEI ||
-          metaDataType === META_DATA_TYPES.FIXED_POINT_18
+          metaDataType
+          && (metaDataType === META_DATA_TYPES.WEI ||
+              metaDataType === META_DATA_TYPES.FIXED_POINT_18)
         ) {
           operandInput = <WeiInput
             index={this.props.index}
@@ -79,14 +80,18 @@ export const MatcherOperand = graphql(sourceQuery, {
             handleSubmit={this.handleSubmit}
             handleStartEditing={this.props.handleSetEditMatcher}
           />
-        } else if (dataType === 'address') {
+        } else if (dataType && dataType === 'address') {
           operandInput = <MatcherAddressInput 
             matcher={matcher}
             handleSubmit={this.handleSubmit}
             handleSetEditMatcher={this.props.handleSetEditMatcher}
           />
-        } else if (dataType.startsWith('uint') || dataType.startsWith('int')) {
+        } else if (
+          dataType
+          && (dataType.startsWith('uint') || dataType.startsWith('int'))
+        ) {
           operandInput = <Input
+            placeholder='Enter a number'
             type='number'
             value={matcher.operand}
             handleSubmit={this.handleSubmit}

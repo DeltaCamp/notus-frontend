@@ -6,7 +6,7 @@ export const abiEventFragment = gql`
   fragment abiEventFragment on AbiEventEntity {
     id
     name
-    topic
+    isPublic
     abi {
       id
       name

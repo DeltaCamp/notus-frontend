@@ -1,18 +1,17 @@
 import gql from 'graphql-tag'
 
+import { abiEventFragment } from '~/fragments/abiEventFragment'
+
 export const abiEventsQuery = gql`
-  query abiEventsQuery {
-    abiEvents {
-      id
-      name
-      abi {
-        id
-        name
-      }
-      abiEventInputs {
-        id
-        name
+  query abiEventsQuery($abiEventsQuery: AbiEventsQuery) {
+    abiEvents(abiEventsQuery: $abiEventsQuery) {
+      totalCount
+      skip
+      take
+      abiEvents {
+        ...abiEventFragment
       }
     }
   }
+  ${abiEventFragment}
 `
