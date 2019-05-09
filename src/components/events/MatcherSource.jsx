@@ -99,8 +99,7 @@ export const MatcherSource = graphql(sourcesQuery, {
             clone.operator = OPERATORS.EQ
           }
           
-          clone.operand = clone.operand || ''
-          console.warn('MATCHER SOURCE CLONE ', clone)
+          clone.operand = ''
 
           this.props.onChange(clone)
 

@@ -26,8 +26,8 @@ import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { isValidMatcherForAbiEvent } from '~/utils/isValidMatcherForAbiEvent'
 import { notusToast } from '~/utils/notusToast'
 import { showErrorMessage } from '~/utils/showErrorMessage'
-import * as routes from '~/../config/routes'
 import { SCOPES } from '~/constants'
+import * as routes from '~/../config/routes'
 
 const debug = require('debug')('notus:EditEventPage')
 
@@ -335,7 +335,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       }
     })
 
-    if (!this.isCreateMode() && matcher.operand) {
+    if (!this.isCreateMode()) {
       if (matcher.id) {
         this.props.updateMatcherMutation({
           variables: {
@@ -389,18 +389,16 @@ export const EditEventPage = class _EditEventPage extends Component {
       )
 
       if (isNowInvalid) {
-        clone.source = 'transaction.value'
-        // will need to be smart about the operand and change it to
-        // a default value of the matcher's new type (ie 0.01 for uint256, etc)
-        // clone.operand = ''
+        clone.operand = ''
+
+        const source = scope === SCOPES.BLOCK
+          ? 'block.number'
+          : 'transaction.value'
+        clone.source = source
       }
-      console.log('clone!', clone)
 
       return clone
     })
-
-    // console.warn('WANTING TO UPDATE MATCHERS! deepClone?', matchers)
-
 
     let contractId
     if (contract) {
@@ -434,12 +432,12 @@ export const EditEventPage = class _EditEventPage extends Component {
       let clone = { ...matcher }
 
       if (!isValidMatcherForAbiEvent(abiEvent, matcher)) {
-        clone.source = 'transaction.value'
-        console.log('clone!', clone)
+        clone.operand = ''
 
-        // will need to be smart about the operand and change it to
-        // a default value of the matcher's new type (ie 0.01 for uint256, etc)
-        // clone.operand = ''
+        const source = this.state.event.scope === SCOPES.BLOCK
+          ? 'block.number'
+          : 'transaction.value'
+        clone.source = source
       }
 
       return clone
@@ -463,11 +461,15 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   handleAddMatcher = () => {
+    const source = this.state.event.scope === SCOPES.BLOCK
+      ? 'block.number'
+      : 'transaction.value'
+
     const newMatcher = {
       operand: '',
       operator: 2,
       order: 1,
-      source: 'transaction.value',
+      source,
       eventId: parseInt(this.state.event.id, 10) || undefined
     }
 
