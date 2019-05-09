@@ -69,8 +69,6 @@ export const MatcherOperand = graphql(sourceQuery, {
         const dataType = calculateSourceDataType(source, abiEventInput)
         const metaDataType = calculateSourceMetaDataType(source, abiEventInput)
 
-        console.log(source, dataType, metaDataType)
-
         if (
           metaDataType === META_DATA_TYPES.WEI ||
           metaDataType === META_DATA_TYPES.FIXED_POINT_18

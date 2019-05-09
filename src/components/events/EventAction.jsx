@@ -41,7 +41,7 @@ export const EventAction =
 
     render () {
       const usersEmail = this.props.currentUserData?.currentUser?.email
-      const showWebhookForm = this.state.showWebhookForm
+      const showWebhookForm = this.state.showWebhookForm || this.props.webhookUrl !== undefined
       let form
       if (showWebhookForm) {
         form =
@@ -80,6 +80,12 @@ export const EventAction =
                 >
                   trigger a webhook
                 </Switch>
+
+                <p className='has-text-light'>
+                  <small>
+                    You can insert variables into webhooks using double curlies.  For example: {"{{transaction.value}}"}
+                  </small>
+                </p>
 
                 {form}
               </div>

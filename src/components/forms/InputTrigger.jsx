@@ -67,7 +67,6 @@ class InputTrigger extends Component {
     const { selectionStart, value } = event.target;
 
     const element = event.target
-
     const stringMatches = (value.substring(0, selectionStart) + event.key).endsWith(trigger.string)
     const matches =
       which === trigger.keyCode &&

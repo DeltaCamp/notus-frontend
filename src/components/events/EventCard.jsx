@@ -123,6 +123,8 @@ export const EventCard =
 
           const linkTo = isLoggedIn ? this.props.linkTo : routes.SIGNUP
 
+          const sendEmail = event ? event.sendEmail : false
+
           return (
             <Link
               key={`event-${event.id}`}
@@ -160,13 +162,15 @@ export const EventCard =
                 <div className='event-card__icons has-text-right'>
                   {/* {editable ? editDropdown : ''} */}
                   {event.isActive
-                    ? (<><CheckCircle /> &nbsp;On</>)
-                    : (<><StopCircle /> &nbsp;Off</>)
+                    ? (<><CheckCircle /> &nbsp;Active</>)
+                    : (<><StopCircle /> &nbsp;Inactive</>)
                   }
                 </div>
-                <div className='event-card__icons has-text-right'>
-                  Sends &nbsp;<Mail />
-                </div>
+                {sendEmail &&
+                  <div className='event-card__icons has-text-right'>
+                    Sends &nbsp;<Mail />
+                  </div>
+                }
               </div>
             </Link>
           )

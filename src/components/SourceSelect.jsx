@@ -40,7 +40,7 @@ export const SourceSelect = graphql(sourcesQuery, {
   })(
     class _SourceSelect extends Component {
       static propTypes = {
-        value: PropTypes.string.isRequired,
+        value: PropTypes.string,
         onChange: PropTypes.func.isRequired,
         scope: PropTypes.number,
         abiEventInputId: PropTypes.number,
