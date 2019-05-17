@@ -45,6 +45,13 @@ export const EventAction =
       let form
       if (showWebhookForm) {
         form =
+        <>
+          <p className='has-text-light'>
+            <small>
+              You can insert variables into webhooks using double curlies.  For example: {"{{transaction.value}}"}
+            </small>
+          </p>
+
           <form onSubmit={(e) => e.preventDefault()} className='form is-inverted'>
             <WebhookUrlInput
               placeholder='https://www.test.com?var1={{block.number}}'
@@ -58,6 +65,7 @@ export const EventAction =
               value={this.props.webhookBody || ''}
               onChange={this.props.onChangeWebhookBody} />
           </form>
+        </>
       }
 
       return (
@@ -80,12 +88,6 @@ export const EventAction =
                 >
                   trigger a webhook
                 </Switch>
-
-                <p className='has-text-light'>
-                  <small>
-                    You can insert variables into webhooks using double curlies.  For example: {"{{transaction.value}}"}
-                  </small>
-                </p>
 
                 {form}
               </div>
