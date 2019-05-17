@@ -426,10 +426,16 @@ input.input.is-large {
   border-width: 0;
   display: inline-flex;
   flex-direction: column;
-  min-width: 255px;
-  max-width: 350px;
+  min-width: 190px;
+  // max-width: 250px;
 
-  @media screen and (max-width: $tablet - 203px) {
+  // @media screen and (max-width: $tablet - 203px) {
+  //   min-width: 100%;
+  //   width: 100%;
+  // }
+
+  @media screen and (max-width: $widescreen) {
+    max-width: 100%;
     min-width: 100%;
     width: 100%;
   }
@@ -469,6 +475,11 @@ input.input.is-large {
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 30000;
+  width: 120%;
+
+  @media screen and (max-width: $widescreen) {
+    width: 100%;
+  }
 }
 
 .react-select__menu-list {

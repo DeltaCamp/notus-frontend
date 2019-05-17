@@ -159,7 +159,6 @@ export const WebhookInput =
       }
     
       render () {
-    
         const selectStyle = {
           position: 'absolute',
           top: this.state.trigger ? this.state.trigger.cursor.top : 0,

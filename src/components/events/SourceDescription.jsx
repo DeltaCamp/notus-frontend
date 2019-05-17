@@ -56,7 +56,9 @@ export const SourceDescription = graphql(abiEventQuery, {
 
       return (
         <>
-          {nounArticle}
+          <span>
+            {nounArticle}
+          </span>
           <button
             className='event-box__variable has-react-select is-truncated'
             onClick={handleStartEdit}

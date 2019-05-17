@@ -144,9 +144,6 @@ export const WeiInput = ReactTimeout(class _WeiInput extends Component {
           onBlur={this.handleBlur}
           onKeyUp={this.handleKeyUp}
           onClick={this.handleClick}
-          style={{
-            width: ((this.state.value.length + 1) * 16)
-          }}
         />
 
         <ReactTooltip

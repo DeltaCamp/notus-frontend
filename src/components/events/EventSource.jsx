@@ -85,7 +85,11 @@ export const EventSource = class _EventSource extends Component {
       <>
         {this.state.isEditing
           ? (
-            <>a
+            <>
+              <span>
+                a
+              </span>
+            
               <div
                 ref={node => { this.node = node }}
                 className='event-box__variable has-react-select'
