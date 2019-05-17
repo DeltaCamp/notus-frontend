@@ -92,9 +92,6 @@ export const MatcherAddressInput = ReactTimeout(class _MatcherAddressInput exten
       onBlur={this.handleBlur}
       onKeyUp={this.handleKeyUp}
       onClick={this.handleClick}
-      style={{
-        width: 200
-      }}
     />
   }
 })

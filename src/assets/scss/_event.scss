@@ -242,7 +242,7 @@ $event-font-size-sm: 17.5px;
 }
 
 .event-box__variable-wrapper .drag-handle {
-  margin: 1rem 0.75rem 0.75rem 0.4rem;
+  margin: 1.25rem 0.75rem 0.75rem 0.4rem;
   opacity: 0.4;
 }
 
@@ -282,14 +282,11 @@ $event-font-size-sm: 17.5px;
 
 .event-box__variable-wrapper__matcher .buttons {
   position: absolute;
-  right: 0.25rem;
+  right: 0.5rem;
   top: 0.5rem;
 
-  @media screen and (max-width: $widescreen) {
-    // position: absolute;
-    // right: 0.5rem;
-    // top: 0.5rem;
-    // top: 0;
+  @media screen and (max-width: $desktop) {
+    right: 0.25rem;
   }
 }
 
@@ -339,8 +336,13 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   text-align: left;
   transition: $event-box-transition;
 
+  @media screen and (max-width: $widescreen) {
+    max-width: 185px;
+  }
+
   @media screen and (max-width: $desktop) {
     display: block;
+    max-width: 100%;
     min-width: 100%;
   }
 
@@ -392,18 +394,21 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 }
 
 .event-box__variable .react-select .react-select__menu {
+  left: -20px;
+
   @media screen and (max-width: $widescreen) {
-    margin-left: -8%;
-    width: 116%;
+    width: 128%;
+  }
+
+  @media screen and (max-width: $desktop) {
+    width: 105%;
   }
 
   @media screen and (max-width: $tablet) {
-    margin-left: -3.5%;
     width: 107%;
   }
 
-  @media screen and (max-width: $mobile) {
-    margin-left: -8%;
+  @media screen and (max-width: $mobile - 100px) {
     width: 116%;
   }
 }
@@ -412,17 +417,27 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   display: inline-flex;
 }
 
-.event-box__variable.has-react-select .react-select {
-  // margin-left: -0.82rem;
-}
-
 .event-box__variable.has-react-select .react-select__value {
   padding-left: 0.25rem;
 }
 
 .event-box__variable.has-text-input {
+  min-width: 300px;
+  max-width: 500px;
   padding: 0;
   width: auto !important;
+
+  @media screen and (max-width: $fullhd) {
+    max-width: 190px;
+  }
+
+  @media screen and (max-width: $widescreen) {
+    min-width: auto;
+  }
+
+  @media screen and (max-width: $desktop) {
+    min-width: 100%;
+  }
 }
 
 .event-box__variable .input {
@@ -433,7 +448,6 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   font-weight: 600;
   height: 100%;
   line-height: inherit;
-  max-width: 200px;
   min-width: 80px;
   padding: 0.35rem 0.5rem 0.45rem;
   transition: all 50ms ease-in-out;
@@ -626,7 +640,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 
   @media screen and (max-width: $desktop) {
     display: block;
-    margin: 0 0 0.5rem;
+    // margin: 0 0 0.25rem;
     width: 100%;
   }
 }
@@ -634,7 +648,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 .event-box__flex-mobile-group > * {
   @media screen and (max-width: $desktop) {
     display: block;
-    margin: 0 0.25rem 0.5rem 0.25rem;
+    margin: 0.125rem 0.25rem 0.25rem 0.25rem;
   }
 }
 
@@ -654,7 +668,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   width: 150px;
 
   @media screen and (max-width: $widescreen) {
-    width: 190px;
+    width: 150px;
   }
 
   @media screen and (max-width: $desktop) {

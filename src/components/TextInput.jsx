@@ -97,10 +97,6 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
         onBlur={this.handleBlur}
         onKeyUp={this.handleKeyUp}
         onClick={this.handleClick}
-        style={{
-          minWidth: 230,
-          width: ((this.state.value.length + 1) * 16)
-        }}
       />
     )
   }
