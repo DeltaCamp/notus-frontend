@@ -2,7 +2,7 @@
 
 $event-box-transition: all 275ms ease-in-out;
 $event-font-size: 1rem;
-$event-font-size-sm: 0.9rem;
+$event-font-size-sm: 17.5px;
 
 .button.event-card {
   border-radius: 15px;
@@ -213,11 +213,15 @@ $event-font-size-sm: 0.9rem;
   font-size: $event-font-size;
   margin: 0.25rem 0;
   min-height: 3.25rem;
-  display: flex;
-  align-items: center;
 
   @media screen and (max-width: $tablet) {
     font-size: $event-font-size-sm;
+  }
+  
+  @media screen and (max-width: $tablet) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -238,6 +242,7 @@ $event-font-size-sm: 0.9rem;
 }
 
 .event-box__variable-wrapper .drag-handle {
+  margin: 1rem 0.75rem 0.75rem 0.4rem;
   opacity: 0.4;
 }
 
@@ -262,7 +267,9 @@ $event-font-size-sm: 0.9rem;
   font-size: $event-font-size;
   justify-content: flex-start;
   margin-bottom: 0.5rem;
-  padding-right: 0.5rem;
+  // padding-right: 0.5rem;
+  padding: 0.5rem;
+  position: relative;
 
   @media screen and (max-width: $desktop) {
     display: block;
@@ -273,8 +280,37 @@ $event-font-size-sm: 0.9rem;
   }
 }
 
+.event-box__variable-wrapper__matcher .buttons {
+  position: absolute;
+  right: 0.25rem;
+  top: 0.5rem;
+
+  @media screen and (max-width: $widescreen) {
+    // position: absolute;
+    // right: 0.5rem;
+    // top: 0.5rem;
+    // top: 0;
+  }
+}
+
 .event-box__variable-wrapper__matcher > * {
   display: inline-flex;
+}
+
+.event-box__variable-wrapper__matcher .event-box__variable {
+  margin: 0 0.25rem;
+
+  @media screen and (max-width: $desktop) {
+    margin: 0.5rem 0 0;
+  }
+}
+
+.event-box__variable-wrapper__matcher .event-box__variable:first-child {
+  margin-top: 0;
+}
+
+.event-box__variable-wrapper__matcher .event-box__variable:last-child {
+  margin-bottom: 0;
 }
 
 .event-box__variable-wrapper__matcher:hover {
@@ -296,8 +332,8 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   font-weight: 600;
   height: $form-input-height;
   line-height: 1;
-  margin: 0 0.5rem;
-  max-width: 255px;
+  margin: 0;
+  max-width: 225px;
   padding: 0.35rem 0.75rem 0.45rem;
   position: relative;
   text-align: left;
@@ -313,10 +349,10 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   }
 }
 
-.event-box__variable svg {
-  margin-right: 7px;
-  margin-top: -2px;
-}
+// .event-box__variable svg {
+//   margin-right: 7px;
+//   margin-top: -2px;
+// }
 
 .event-box__variable--full-width {
   max-width: 100%;
@@ -329,7 +365,12 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 }
 
 .event-box__variable:first-child {
-  margin-left: 0;
+  margin-right: 0.5rem;
+  
+  @media screen and (max-width: $desktop) {
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .event-box__variable:hover {
@@ -343,11 +384,36 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 }
 
 .event-box__variable.has-react-select {
-  width: 270px;
+  width: 100%;
+
+  @media screen and (min-width: $widescreen) {
+    width: 270px;
+  }
+}
+
+.event-box__variable .react-select .react-select__menu {
+  @media screen and (max-width: $widescreen) {
+    margin-left: -8%;
+    width: 116%;
+  }
+
+  @media screen and (max-width: $tablet) {
+    margin-left: -3.5%;
+    width: 107%;
+  }
+
+  @media screen and (max-width: $mobile) {
+    margin-left: -8%;
+    width: 116%;
+  }
+}
+
+.event-box__variable.has-react-select {
+  display: inline-flex;
 }
 
 .event-box__variable.has-react-select .react-select {
-  margin-left: -0.9rem;
+  // margin-left: -0.82rem;
 }
 
 .event-box__variable.has-react-select .react-select__value {
@@ -371,6 +437,11 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   min-width: 80px;
   padding: 0.35rem 0.5rem 0.45rem;
   transition: all 50ms ease-in-out;
+  
+  @media screen and (max-width: $widescreen) {
+    min-width: 100% !important;
+    width: 100% !important;
+  }
 }
 
 .event-box__variable ::placeholder,
@@ -405,6 +476,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 
 .event-box__variable .react-select__single-value {
   color: white;
+  margin: 0;
 }
 
 .event-box__variable .react-select__input {
@@ -415,6 +487,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   font-weight: 600;
   line-height: inherit;
   font-size: inherit;
+  // padding-left: 2px;
 }
 
 .event-box__variable .select select,
@@ -425,7 +498,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 }
 
 .event-box__variable .react-select__value-container {
-  padding: 0 0 0 0.8rem;
+  // padding: 0 0 0 0.8rem;
   overflow: visible;
 }
 
@@ -451,8 +524,20 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   height: auto;
 }
 
+.event-box__variable .react-select__dropdown-indicator {
+  padding-right: 0;
+  position: relative;
+  right: -6px;
+}
+
+.event-box__variable .react-select__value-container {
+  padding: 0;
+}
+
 .react-select__value-container div:last-child {
   line-height: 0.1;
+  padding: 0;
+  margin: 0;
 }
 
 .event-box__action {
@@ -534,4 +619,45 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 .matcher-row--is-active {
   position: relative;
   z-index: 30001;
+}
+
+.event-box__flex-mobile-group {
+  // margin: 0 0.5rem;
+
+  @media screen and (max-width: $desktop) {
+    display: block;
+    margin: 0 0 0.5rem;
+    width: 100%;
+  }
+}
+
+.event-box__flex-mobile-group > * {
+  @media screen and (max-width: $desktop) {
+    display: block;
+    margin: 0 0.25rem 0.5rem 0.25rem;
+  }
+}
+
+.event-box__flex-mobile-group .event-box__variable {
+  margin: 0 0.5rem;
+
+  @media screen and (max-width: $desktop) {
+    margin: 0;
+  }
+}
+
+.event-box__variable-wrapper__matcher .event-box__flex-mobile-group {
+  align-items: center;
+  display: flex;
+  height: 42px;
+  margin: 0;
+  width: 150px;
+
+  @media screen and (max-width: $widescreen) {
+    width: 190px;
+  }
+
+  @media screen and (max-width: $desktop) {
+    width: 100%;
+  }
 }

@@ -630,19 +630,24 @@ export const EditEventPage = class _EditEventPage extends Component {
           />
         </button>
 
-        <EventSource
-          event={this.state.event}
-          onChangeScopeAndContractId={this.onChangeScopeAndContractId}
-          handleToggleEventSource={this.handleToggleEventSource}
-        />
+        <span className='event-box__flex-mobile-group'>
+          <EventSource
+            event={this.state.event}
+            onChangeScopeAndContractId={this.onChangeScopeAndContractId}
+            handleToggleEventSource={this.handleToggleEventSource}
+          />
 
-        <ContractAbiEvent
-          event={this.state.event}
-          onChangeAbiEventId={this.onChangeAbiEventId}
-          handleToggleEventSource={this.handleToggleEventSource}
-        />
-        {this.state.event.scope === SCOPES.CONTRACT_EVENT ? `event ` : ``}
-        occurs
+          <ContractAbiEvent
+            event={this.state.event}
+            onChangeAbiEventId={this.onChangeAbiEventId}
+            handleToggleEventSource={this.handleToggleEventSource}
+          />
+
+          <span>
+            {this.state.event.scope === SCOPES.CONTRACT_EVENT ? `event ` : ``}
+            occurs
+          </span>
+        </span>
       </div>
     )
 

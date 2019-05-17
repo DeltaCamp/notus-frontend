@@ -44,9 +44,22 @@ export const EventMatcher =
 
       return (
         <div className='event-box__variable-wrapper event-box__variable-wrapper__matcher'>
-          <DragHandle />
+          <span className='event-box__flex-mobile-group'>
+            <DragHandle />
 
-          {andWord} the
+            {andWord} the
+
+            <div className='buttons buttons-right'>
+              <button
+                className='button has-icon plus-button is-light has-fat-icons'
+                onClick={this.handleRemove}
+              >
+                <X
+                  className='icon__button has-stroke-white'
+                />
+              </button>
+            </div>
+          </span>
 
           <MatcherSource
             abiEventInputId={matcher.abiEventInputId}
@@ -72,17 +85,6 @@ export const EventMatcher =
             matcher={matcher}
             onChange={this.props.onChangeMatcher}
           />
-
-          <div className='buttons buttons-right'>
-            <button
-              className='button has-icon plus-button is-light has-fat-icons'
-              onClick={this.handleRemove}
-            >
-              <X
-                className='icon__button has-stroke-white'
-              />
-            </button>
-          </div>
         </div>
       )
     }

@@ -725,6 +725,10 @@ hr {
   max-width: 480px;
 }
 
+.hero-body .signup-message {
+  margin-left: 0;
+}
+
 .color-block.is-primary .signup-message {
   background-color: rgba(255, 255, 255, 0.5);
   color: $black;

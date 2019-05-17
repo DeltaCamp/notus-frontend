@@ -429,7 +429,13 @@ input.input.is-large {
   min-width: 255px;
   max-width: 350px;
 
-  @media screen and (max-width: $tablet - 203px) {
+  // @media screen and (max-width: $tablet - 203px) {
+  //   min-width: 100%;
+  //   width: 100%;
+  // }
+
+  @media screen and (max-width: $widescreen) {
+    max-width: 100%;
     min-width: 100%;
     width: 100%;
   }
