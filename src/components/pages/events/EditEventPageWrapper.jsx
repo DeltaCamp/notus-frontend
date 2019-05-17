@@ -10,6 +10,9 @@ import { deleteEventMutation } from '~/mutations/deleteEventMutation'
 import { createMatcherMutation } from '~/mutations/createMatcherMutation'
 import { updateMatcherMutation } from '~/mutations/updateMatcherMutation'
 import { destroyMatcherMutation } from '~/mutations/destroyMatcherMutation'
+import { createWebhookHeaderMutation } from '~/mutations/createWebhookHeaderMutation'
+import { updateWebhookHeaderMutation } from '~/mutations/updateWebhookHeaderMutation'
+import { destroyWebhookHeaderMutation } from '~/mutations/destroyWebhookHeaderMutation'
 import { eventQuery } from '~/queries/eventQuery'
 
 export const EditEventPageWrapper =
@@ -28,11 +31,16 @@ export const EditEventPageWrapper =
             graphql(createMatcherMutation, { name: 'createMatcherMutation' })(
               graphql(updateMatcherMutation, { name: 'updateMatcherMutation' })(
                 graphql(destroyMatcherMutation, { name: 'destroyMatcherMutation' })(
-                  ReactTimeout(class _EditEventPageWrapper extends Component {
-                    render () {
-                      return <EditEventPage {...this.props} />
-                    }
-                  }
+                  graphql(createWebhookHeaderMutation, { name: 'createWebhookHeaderMutation' })(
+                    graphql(updateWebhookHeaderMutation, { name: 'updateWebhookHeaderMutation' })(
+                      graphql(destroyWebhookHeaderMutation, { name: 'destroyWebhookHeaderMutation' })(
+                        ReactTimeout(class _EditEventPageWrapper extends Component {
+                          render () {
+                            return <EditEventPage {...this.props} />
+                          }
+                        })
+                      )
+                    )
                   )
                 )
               )

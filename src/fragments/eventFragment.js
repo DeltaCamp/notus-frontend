@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { contractFragment } from '~/fragments/contractFragment'
 import { matcherFragment } from '~/fragments/matcherFragment'
+import { webhookHeaderFragment } from '~/fragments/webhookHeaderFragment'
 
 export const eventFragment = gql`
   fragment eventFragment on EventEntity {
@@ -32,6 +33,9 @@ export const eventFragment = gql`
     }
     webhookUrl
     webhookBody
+    webhookHeaders {
+      ...webhookHeaderFragment
+    }
     createdAt
     updatedAt
     deletedAt
@@ -40,4 +44,5 @@ export const eventFragment = gql`
   }
   ${contractFragment}
   ${matcherFragment}
+  ${webhookHeaderFragment}
 `

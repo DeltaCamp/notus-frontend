@@ -460,6 +460,99 @@ export const EditEventPage = class _EditEventPage extends Component {
     })
   }
 
+  onChangeWebhookHeader = (webhookHeader) => {
+    const webhookHeaders = this.state.event.webhookHeaders.slice()
+
+    this.setState({
+      event: {
+        ...this.state.event,
+        webhookHeaders
+      }
+    })
+
+    if (!this.isCreateMode()) {
+      if (webhookHeader.id) {
+        this.props.updateWebhookHeaderMutation({
+          variables: {
+            webhookHeader
+          },
+          refetchQueries: [
+            // only refetch the event or webhookHeader we just updated (1 record)
+            'eventsQuery'
+          ]
+        }).then((mutationResult) => {
+          notusToast.success('Updated webhook header')
+        }).catch(error => {
+          showErrorMessage(error)
+        })
+      } else {
+        // order is wrong!
+
+        this.props.createWebhookHeaderMutation({
+          variables: {
+            webhookHeader
+          },
+          refetchQueries: [
+            // only refetch the event or webhookHeader we just created (1 record)
+            'eventsQuery'
+          ]
+        }).then((mutationResult) => {
+          notusToast.success('Added new webhook header')
+        }).catch(error => {
+          showErrorMessage(error)
+        })
+      }
+    }
+
+    this.handleSetEditMatcher(null)
+  }
+
+  onAddWebhookHeader = () => {
+    const newWebhookHeader = {
+      key: '',
+      value: '',
+      eventId: parseInt(this.state.event.id, 10) || undefined
+    }
+
+    this.setState({
+      event: {
+        ...this.state.event,
+        webhookHeaders: (this.state.event.webhookHeaders || []).concat(newWebhookHeader)
+      }
+    })
+  }
+
+  onDeleteWebhookHeader = (webhookHeader) => {
+    const webhookHeaders = this.state.event.webhookHeaders
+    const id = webhookHeader.id
+
+    webhookHeaders.splice(webhookHeaders.indexOf(webhookHeader), 1)
+
+    this.setState({
+      event: {
+        ...this.state.event,
+        webhookHeaders
+      }
+    })
+
+    if (!this.isCreateMode() && id) {
+      this.props.destroyWebhookHeaderMutation({
+        variables: {
+          id
+        },
+        refetchQueries: [
+          // only refetch the event we just updated (1 record)
+          'eventsQuery'
+        ]
+      }).then((mutationResult) => {
+        notusToast.success('Successfully removed webhook header')
+      }).catch(error => {
+        console.error(error)
+        showErrorMessage(error)
+      })
+    }
+  }
+
   handleAddMatcher = () => {
     const source = this.state.event.scope === SCOPES.BLOCK
       ? 'block.number'
@@ -833,6 +926,9 @@ export const EditEventPage = class _EditEventPage extends Component {
               onChangeWebhookUrl={this.onChangeWebhookUrl}
               onChangeWebhookBody={this.onChangeWebhookBody}
               onChangeDeleteWebhook={this.onChangeDeleteWebhook}
+              onChangeWebhookHeader={this.onChangeWebhookHeader}
+              onAddWebhookHeader={this.onAddWebhookHeader}
+              onDeleteWebhookHeader={this.onDeleteWebhookHeader}
               />
           </div>
 

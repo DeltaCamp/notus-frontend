@@ -4,6 +4,7 @@ import Switch from 'react-bulma-switch'
 
 import { WebhookUrlInput } from '~/components/forms/WebhookUrlInput'
 import { WebhookBodyInput } from '~/components/forms/WebhookBodyInput'
+import { WebhookHeaderForm } from '~/components/forms/WebhookHeaderForm'
 
 export const EventAction =
   class _EventAction extends PureComponent {
@@ -16,6 +17,9 @@ export const EventAction =
       onChangeWebhookUrl: PropTypes.func.isRequired,
       onChangeWebhookBody: PropTypes.func.isRequired,
       onChangeDeleteWebhook: PropTypes.func.isRequired,
+      onChangeWebhookHeader: PropTypes.func.isRequired,
+      onAddWebhookHeader: PropTypes.func.isRequired,
+      onDeleteWebhookHeader: PropTypes.func.isRequired,
       currentUserData: PropTypes.object.isRequired
     }
 
@@ -64,6 +68,21 @@ export const EventAction =
             <WebhookBodyInput
               value={this.props.webhookBody || ''}
               onChange={this.props.onChangeWebhookBody} />
+
+            {(this.props.event.webhookHeaders || []).map((webhookHeader, index) => {
+              return <WebhookHeaderForm
+                key={webhookHeader.id ? webhookHeader.id : `new-header-${index}`}
+                webhookHeader={webhookHeader}
+                onChange={this.props.onChangeWebhookHeader}
+                onRemove={this.props.onDeleteWebhookHeader} />
+            })}
+            <p>
+              <button
+                className='button has-icon plus-button mt10 pl10 pr10 is-light is-small'
+                onClick={this.props.onAddWebhookHeader}>
+                Add Header
+              </button>
+            </p>
           </form>
         </>
       }
