@@ -28,7 +28,7 @@ export const EventAction =
 
     toggleWebhookForm = () => {
       if (this.state.showWebhookForm) {
-        this.props.onChangeDeleteWebhook(null)
+        this.props.onChangeDeleteWebhook()
       }
       this.setState({
         showWebhookForm: !this.state.showWebhookForm
@@ -41,7 +41,7 @@ export const EventAction =
 
     render () {
       const usersEmail = this.props.currentUserData?.currentUser?.email
-      const showWebhookForm = this.state.showWebhookForm || this.props.webhookUrl !== undefined
+      const showWebhookForm = this.state.showWebhookForm || this.props.webhookUrl
       let form
       if (showWebhookForm) {
         form =
