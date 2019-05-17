@@ -41,21 +41,21 @@ export const EventAction =
 
     render () {
       const usersEmail = this.props.currentUserData?.currentUser?.email
-      const showWebhookForm = this.state.showWebhookForm || this.props.webhookUrl
+      const showWebhookForm = this.state.showWebhookForm || !!this.props.webhookUrl
       let form
       if (showWebhookForm) {
         form =
           <form onSubmit={(e) => e.preventDefault()} className='form is-inverted'>
             <WebhookUrlInput
               placeholder='https://www.test.com?var1={{block.number}}'
-              value={this.props.webhookUrl}
+              value={this.props.webhookUrl || ''}
               onChange={this.props.onChangeWebhookUrl}
               webhookBody={this.props.webhookBody} />
 
             <label>POST Body (optional)</label>
 
             <WebhookBodyInput
-              value={this.props.webhookBody}
+              value={this.props.webhookBody || ''}
               onChange={this.props.onChangeWebhookBody} />
           </form>
       }

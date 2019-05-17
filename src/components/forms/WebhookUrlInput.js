@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import { Input } from '~/components/forms/Input'
+import { WebhookInput } from '~/components/forms/WebhookInput'
 
 export class WebhookUrlInput extends PureComponent {
   static propTypes = {
@@ -19,10 +19,11 @@ export class WebhookUrlInput extends PureComponent {
           <span className='method-addon is-addon'>{method}</span>
         </div>
         <div className='control is-expanded'>
-          <Input
+          <WebhookInput
+            isTextarea={false}
             placeholder={this.props.placeholder}
             value={this.props.value || ''}
-            handleSubmit={this.props.onChange}
+            onChange={this.props.onChange}
             className='input'
             />
         </div>
