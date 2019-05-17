@@ -1096,3 +1096,17 @@ ul.list {
   justify-content: flex-end !important;
   margin-left: auto !important;
 } 
+
+.publish-button {
+  @media screen and (max-width: $desktop) { 
+    margin-top: 0.5rem;
+  }
+}
+
+.flex-button {
+  display: flex;
+}
+
+.flex-button svg:first-child {
+  margin-right: 10px;
+}

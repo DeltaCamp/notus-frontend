@@ -84,6 +84,7 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
         {...props}
         type='text'
         className={classnames(
+          this.props.classNames ? this.props.classNames : '',
           'input',
           'is-truncated',
           {
@@ -91,7 +92,7 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
           }
         )}
         ref='inputRef'
-        placeholder='Enter hex data'
+        placeholder={this.props.placeholder || 'Enter hex data'}
         value={this.state.value}
         onChange={this.handleChange}
         onBlur={this.handleBlur}

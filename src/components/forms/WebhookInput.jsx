@@ -173,6 +173,7 @@ export const WebhookInput =
         let input
         if (this.props.isTextarea) {
           input = <textarea
+            id='webhook-body-textarea'
             className={this.props.className}
             onClick={this.handleClick}
             onKeyDown={this.handleKeyDown}
@@ -184,6 +185,7 @@ export const WebhookInput =
           />
         } else {
           input = <input
+            id='webhook-url-input'
             className={this.props.className}
             onClick={this.handleClick}
             onKeyDown={this.handleKeyDown}
@@ -207,16 +209,16 @@ export const WebhookInput =
                       onChange={this.onChangeSource}
                       onKeyDown={this.onKeyUpSource}
                       clearable={false}
-                      escapeClearsValue={true} />
+                      escapeClearsValue={true}
+                    />
                   </div>
                 }
                 <InputTrigger
                   trigger={{ string: '{{' }}
                   onStart={this.onTriggerSourceSelect}
-                  ref={this.inputTriggerRef}>
-                  
+                  ref={this.inputTriggerRef}
+                >
                   {input}
-                  
                 </InputTrigger>
               </div>
             </div>

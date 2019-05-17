@@ -901,9 +901,9 @@ export const EditEventPage = class _EditEventPage extends Component {
                         className='button has-icon plus-button mt10 pl10 pr10 is-light is-small has-fat-icons'
                         onClick={this.handleAddMatcher}
                         >
-                        <Plus
-                          className='icon__button has-stroke-white'
-                        />
+                          <Plus
+                            className='icon__button has-stroke-white'
+                          />
                         </button>  
                       </div>
                     </div>

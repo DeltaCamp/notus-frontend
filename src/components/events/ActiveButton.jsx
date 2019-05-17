@@ -36,6 +36,7 @@ export const ActiveButton = class _ActiveButton extends Component {
         data-for='active-button-hint'
         className={classnames(
           'event-box__variable',
+          'flex-button',
           'is-size-7',
           {
             'has-text-lighter': !this.props.event.isActive

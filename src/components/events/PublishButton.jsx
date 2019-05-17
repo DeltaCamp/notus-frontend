@@ -33,6 +33,8 @@ export const PublishButton = class _PublishButton extends Component {
         className={classnames(
           'no-mr',
           'event-box__variable',
+          'flex-button',
+          'publish-button',
           'is-size-7',
           {
             'has-text-lighter': !this.props.event.isPublic

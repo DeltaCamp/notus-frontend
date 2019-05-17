@@ -40,28 +40,43 @@ export const WebhookHeaderForm = class _WebhookHeaderForm extends PureComponent 
   }
 
   render () {
-    return <div className='event-box__variable-wrapper event-box__variable-wrapper__matcher'>
+    return (
+      <div className='event-box__variable-wrapper event-box__variable-wrapper__matcher'>
+        <span class='event-box__flex-mobile-group'>
+          <span className='has-text-lighter'>
+            Header Info:
+          </span>
+          <div className='buttons buttons-right'>
+            <button
+              className='button has-icon plus-button is-light has-fat-icons'
+              onClick={this.onRemove}
+            >
+              <X
+                className='icon__button has-stroke-white'
+              />
+            </button>
+          </div>
+        </span>
+
         <div className='event-box__variable has-text-input is-truncated'>
           <TextInput
+            placeholder='Enter header name'
             value={this.props.webhookHeader.key}
             handleSubmit={this.onChangeWebhookKey}
+            classNames='no-background-color'
           />
         </div>
         <div className='event-box__variable has-text-input is-truncated'>
           <TextInput
+            placeholder='Enter header value'
             value={this.props.webhookHeader.value}
             handleSubmit={this.onChangeWebhookValue}
+            classNames='no-background-color'
           />
         </div>
-      <button
-        className='button has-icon plus-button is-light has-fat-icons'
-        onClick={this.onRemove}
-      >
-        <X
-          className='icon__button has-stroke-white'
-        />
-      </button>
-    </div>
+        
+      </div>
+    )
   }
 
 }

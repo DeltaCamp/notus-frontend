@@ -16,7 +16,10 @@ export class WebhookUrlInput extends PureComponent {
     return (
       <div className='field has-addons'>
         <div className='control'>
-          <span className='method-addon is-addon'>{method}</span>
+          <label
+            for='webhook-url-input'
+            className='label method-addon is-addon'
+          >{method}</label>
         </div>
         <div className='control is-expanded'>
           <WebhookInput
@@ -25,7 +28,7 @@ export class WebhookUrlInput extends PureComponent {
             value={this.props.value || ''}
             onChange={this.props.onChange}
             className='input'
-            />
+          />
         </div>
       </div>
     )

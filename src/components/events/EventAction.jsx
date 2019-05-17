@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Switch from 'react-bulma-switch'
+import { Plus } from 'react-feather'
 
 import { WebhookUrlInput } from '~/components/forms/WebhookUrlInput'
 import { WebhookBodyInput } from '~/components/forms/WebhookBodyInput'
@@ -57,32 +58,53 @@ export const EventAction =
           </p>
 
           <form onSubmit={(e) => e.preventDefault()} className='form is-inverted'>
+            <label
+              className='label'
+              for='webhook-url-input'
+            >
+              Webhook GET or POST URL
+            </label>
             <WebhookUrlInput
               placeholder='https://www.test.com?var1={{block.number}}'
               value={this.props.webhookUrl || ''}
               onChange={this.props.onChangeWebhookUrl}
-              webhookBody={this.props.webhookBody} />
+              webhookBody={this.props.webhookBody}
+            />
 
-            <label>POST Body (optional)</label>
+            <label
+              className='label'
+              for='webhook-body-textarea'
+            >
+              POST Body (optional)
+            </label>
 
             <WebhookBodyInput
               value={this.props.webhookBody || ''}
-              onChange={this.props.onChangeWebhookBody} />
+              onChange={this.props.onChangeWebhookBody}
+            />
+
+            <h6
+              className='is-size-6'
+            >
+              HTTP Headers (Optional)
+            </h6>
 
             {(this.props.event.webhookHeaders || []).map((webhookHeader, index) => {
               return <WebhookHeaderForm
                 key={webhookHeader.id ? webhookHeader.id : `new-header-${index}`}
                 webhookHeader={webhookHeader}
                 onChange={this.props.onChangeWebhookHeader}
-                onRemove={this.props.onDeleteWebhookHeader} />
+                onRemove={this.props.onDeleteWebhookHeader}
+              />
             })}
-            <p>
-              <button
-                className='button has-icon plus-button mt10 pl10 pr10 is-light is-small'
-                onClick={this.props.onAddWebhookHeader}>
-                Add Header
-              </button>
-            </p>
+            
+            <button
+              className='button has-icon plus-button mt10 pl10 pr10 is-light is-small'
+              onClick={this.props.onAddWebhookHeader}>
+              <Plus
+                className='icon__button has-stroke-white'
+              />
+            </button>
           </form>
         </>
       }

@@ -128,7 +128,8 @@ textarea.textarea,
   background-color: white;
   box-shadow: none;
   border-width: 3px;
-  border-color: rgba(255, 255, 255, 0.2);
+  // border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.0);
   color: white;
 }
 
@@ -139,7 +140,7 @@ textarea.textarea,
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   margin: 0;
-  padding: 5px 20px;
+  padding: 5px 20px 5px 19px;
   border-width: 3px;
   border-color: rgba(255, 255, 255, 0.2);
 }
@@ -148,14 +149,14 @@ textarea.textarea,
 .input.is-hovered,
 .textarea:hover,
 .textarea.is-hovered {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 1);
 }
 
 .input:focus,
 .input.is-focused,
 .textarea:focus,
 .textarea.is-focused {
-  border-color: rgba(255, 255, 255, 1);
+  // border-color: rgba(255, 255, 255, 1);
 }
 
 form.is-active button.button,
@@ -522,4 +523,13 @@ input.input.is-large {
 
 .has-border-success {
   border: 3px solid $success !important;
+}
+
+.field.has-addons .control:not(:last-child) {
+  cursor: pointer;
+  margin-right: 0;
+}
+
+.no-background-color {
+  background-color: transparent !important;
 }
