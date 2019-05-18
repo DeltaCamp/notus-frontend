@@ -96,22 +96,23 @@ export const ConfirmAndSetPasswordPage =
           createPasswordFormRow =
             <div className='row'>
               <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>
-                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
-                  Set Your Password
+                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt30'>
+                  Set A Password
                 </h1>
                 <br />
                 <br />
                 <p>
                   Unable to set password and confirm account without a one time key. (already signed up?).
                 </p>
+                {/* add forgot password link here */}
               </div>
             </div>
         } else {
           createPasswordFormRow =
             <div className='row'>
               <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>
-                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
-                  Set Your Password
+                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt30'>
+                  Set A Password
                 </h1>
 
                 <section className='card has-bg has-shadow has-shadow-big mt30'>
