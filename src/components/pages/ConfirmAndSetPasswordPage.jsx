@@ -1,120 +1,153 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { confirmUserMutation } from '~/mutations/confirmUserMutation'
+import { oneTimeKeyValidQuery } from '~/queries/oneTimeKeyValidQuery'
 import * as routes from '~/../config/routes'
 
 const queryString = require('query-string')
+const debug = require('debug')('notus:users:confirm')
 
 export const ConfirmAndSetPasswordPage =
   graphql(confirmUserMutation, { name: 'confirmUser' })(
-    class _ConfirmAndSetPasswordPage extends PureComponent {
-      static propTypes = {
-        match: PropTypes.object.isRequired
-      }
-
-      static contextTypes = {
-        router: PropTypes.object.isRequired
-      }
-
-      constructor (props) {
-        super(props)
-        this.state = {
-          confirming: false,
-          password: '',
-          passwordConfirmation: ''
-        }
-      }
-
-      getOneTimeKey (props) {
+    graphql(oneTimeKeyValidQuery, {
+      name: 'oneTimeKeyValidData',
+      skip: (props) => {
         const { oneTimeKey } = queryString.parse(props.location.search)
-        return oneTimeKey
-      }
-
-      handleConfirmSubmit = (e) => {
-        e.preventDefault()
-
-        let error
-
-        let oneTimeKey = this.getOneTimeKey(this.props)
-        if (!oneTimeKey) {
-          error = 'Missing one time key'
+        return !oneTimeKey
+      },
+      options: (props) => ({
+        variables: {
+          oneTimeKey: queryString.parse(props.location.search).oneTimeKey
+        }
+      })
+    })(
+      class _ConfirmAndSetPasswordPage extends PureComponent {
+        static propTypes = {
+          match: PropTypes.object.isRequired
         }
 
-        if (!this.state.password) {
-          error = 'You must enter a password'
+        static contextTypes = {
+          router: PropTypes.object.isRequired
         }
 
-        if (this.state.password !== this.state.passwordConfirmation) {
-          error = 'The passwords do not match'
-        }
-
-        if (this.state.password.length < 8 || this.state.passwordConfirmation.length < 8) {
-          error = 'Passwords must be at least 8 characters in length'
-        }
-
-        if (error) {
-          this.setState({
-            error
-          })
-          return
-        } else {
-          this.setState({
-            confirming: true,
-            error: null
-          })
-        }
-
-        this.props.confirmUser({
-          variables: {
-            oneTimeKey,
-            password: this.state.password
-          }
-        }).then((response) => {
-          this.props.history.push(routes.MY_EVENTS)
-        }).catch(error => {
-          this.setState({
+        constructor (props) {
+          super(props)
+          this.state = {
             confirming: false,
-            error: error.message
-          })
-        })
-      }
-
-      render () {
-        let message, createPasswordFormRow
-
-        if (this.state.confirming) {
-          message = 'Confirming your account ...'
+            password: '',
+            passwordConfirmation: ''
+          }
         }
 
-        const oneTimeKey = this.getOneTimeKey(this.props)
+        getOneTimeKey (props) {
+          const { oneTimeKey } = queryString.parse(props.location.search)
+          return oneTimeKey
+        }
 
-        if (!oneTimeKey) {
-          createPasswordFormRow =
-            <div className='row'>
-              <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>
-                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt30'>
-                  Set A Password
-                </h1>
+        handleConfirmSubmit = (e) => {
+          e.preventDefault()
+
+          let error
+
+          let oneTimeKey = this.getOneTimeKey(this.props)
+          if (!oneTimeKey) {
+            error = 'Missing one time key'
+          }
+
+          if (!this.state.password) {
+            error = 'You must enter a password'
+          }
+
+          if (this.state.password !== this.state.passwordConfirmation) {
+            error = 'The passwords do not match'
+          }
+
+          if (this.state.password.length < 8 || this.state.passwordConfirmation.length < 8) {
+            error = 'Passwords must be at least 8 characters in length'
+          }
+
+          if (error) {
+            this.setState({
+              error
+            })
+            return
+          } else {
+            this.setState({
+              confirming: true,
+              error: null
+            })
+          }
+
+          this.props.confirmUser({
+            variables: {
+              oneTimeKey,
+              password: this.state.password
+            }
+          }).then((response) => {
+            this.props.history.push(routes.MY_EVENTS)
+          }).catch(error => {
+            this.setState({
+              confirming: false,
+              error: error.message
+            })
+          })
+        }
+
+        render () {
+          let message, createPasswordFormRow, keyIsValid, expiresAt
+          const { oneTimeKeyValidData } = this.props
+
+          if (this.state.confirming) {
+            message = 'Confirming your account ...'
+          }
+
+          if (oneTimeKeyValidData && !oneTimeKeyValidData.loading) {
+            const { oneTimeKeyValid } = oneTimeKeyValidData
+            keyIsValid = oneTimeKeyValid && oneTimeKeyValid.valid
+            expiresAt = oneTimeKeyValid && oneTimeKeyValid.expiresAt
+            
+            debug(new Date().getTime() + ' should be before the expiry: ')
+            debug(expiresAt)
+          }
+
+          const oneTimeKey = this.getOneTimeKey(this.props)
+
+          if (!oneTimeKey) {
+            createPasswordFormRow =
+              <>
                 <br />
                 <br />
                 <p>
-                  Unable to set password and confirm account without a one time key. (already signed up?).
+                  Unable to set password and confirm account without a one time key.
                 </p>
-                {/* add forgot password link here */}
-              </div>
-            </div>
-        } else {
-          createPasswordFormRow =
-            <div className='row'>
-              <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>
-                <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt30'>
-                  Set A Password
-                </h1>
-
+                <p>
+                  If you are already signed up you can try to&nbsp;<Link to={routes.PASSWORD_RESET}>
+                  reset your password
+                  </Link>.
+                </p>
+              </>
+          } else if (keyIsValid === false) {
+            createPasswordFormRow =
+              <>
+                <br />
+                <br />
+                <p>
+                  The one time key you are attempting to use has expired.
+                </p>
+                <p>
+                  Please use the&nbsp;<Link to={routes.PASSWORD_RESET}>
+                    reset password
+                  </Link> page to get a new key delivered to your email.
+                </p>
+              </>
+          } else {
+            createPasswordFormRow = (
+              <>
                 <section className='card has-bg has-shadow has-shadow-big mt30'>
                   <div className='card-content'>
                     <form
@@ -171,28 +204,37 @@ export const ConfirmAndSetPasswordPage =
                     {message}
                   </p>
                 </div>
+              </>
+            )
+          }
 
-              </div>
+          return (
+            <div className='is-positioned-absolutely'>
+              <Helmet
+                title='Confirm Your Account'
+              />
+
+              <ScrollToTop />
+
+              <section className='section section--main-content'>
+                <div className='container'>
+
+                  <div className='row'>
+                    <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>
+                      <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt30'>
+                        Set A Password
+                      </h1>
+
+                      {createPasswordFormRow}
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <FooterContainer />
             </div>
+          )
         }
-
-        return (
-          <div className='is-positioned-absolutely'>
-            <Helmet
-              title='Confirm Your Account'
-            />
-
-            <ScrollToTop />
-
-            <section className='section section--main-content'>
-              <div className='container'>
-                {createPasswordFormRow}
-              </div>
-            </section>
-
-            <FooterContainer />
-          </div>
-        )
       }
-    }
+    )
   )

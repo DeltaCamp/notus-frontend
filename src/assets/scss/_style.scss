@@ -685,8 +685,8 @@ hr {
   background: $red;
 }
 
-.notus-toast .Toastify__toast--warn {
-  background: $yellow;
+.notus-toast .Toastify__toast--warning {
+  background: darken($yellow, 6%);
 }
 
 .notus-toast .Toastify__toast--info {

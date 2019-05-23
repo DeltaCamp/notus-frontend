@@ -4,9 +4,11 @@ import Helmet from 'react-helmet'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
+import { ButtonLoader } from '~/components/ButtonLoader'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
+import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 
 const queryString = require('query-string')
@@ -16,6 +18,8 @@ const signInPageMutation = gql`
     signIn(email: $email, password: $password) @client
   }
 `
+
+const debug = require('debug')('notus:SignInPage')
 
 export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })(
   graphql(signInPageMutation, { name: 'signIn' })(
@@ -50,24 +54,22 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         let error
 
         if (!this.state.email) {
-          error = 'Please enter your email address'
+          notusToast.warn('Please enter your email address')
         }
 
         if (!this.state.password) {
-          error = 'Please enter your password'
+          notusToast.warn('Please enter your password')
         }
 
         if (error) {
           this.setState({
-            error,
-            message: ''
+            error
           })
           return
         } else {
           this.setState({
             signingIn: true,
-            error: null,
-            message: ''
+            error: null
           })
         }
 
@@ -81,12 +83,12 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
             this.props.history.push(routes.MY_EVENTS)
           }
         }).catch(error => {
-          console.log(error)
+          debug(error)
           this.setState({
-            signingIn: false,
-            error: this.translateErrorMessage(error.message),
-            message: error.message
+            signingIn: false
           })
+
+          notusToast.warn(this.translateErrorMessage(error.message))
         })
       }
 
@@ -101,11 +103,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
       }
 
       render () {
-        let message, signInForm
-
-        if (this.state.signingIn) {
-          message = 'Signing in ...'
-        }
+        let signInForm
 
         signInForm =
           <div className='row'>
@@ -157,8 +155,15 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
                       <button
                         type='submit'
                         className='button is-small is-dark'
+                        disabled={this.state.signingIn}
                       >
-                        Sign In
+                        
+                        {this.state.signingIn ? (
+                          <>
+                            Signing in ... &nbsp;
+                            <ButtonLoader />
+                          </>
+                        ) : 'Sign In'}
                       </button>
                     </div>
                   </form>
@@ -172,10 +177,6 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
               <hr />
 
               <div className='card-footer has-text-centered pb100'>
-                <p className='has-text-weight-bold'>
-                  {message}
-                </p>
-
                 Need a new account or a new password?
                 <br />
                 <Link to={routes.SIGNUP}>

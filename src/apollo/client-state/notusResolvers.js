@@ -34,10 +34,10 @@ export const notusResolvers = {
     signIn: async function (object, args, { cache }, info) {
       const { email, password } = args
       if (!email) {
-        throw new Error('email must be provided')
+        throw new Error('Email must be provided')
       }
       if (!password) {
-        throw new Error('password must be provided')
+        throw new Error('Password must be provided')
       }
 
       const response = await axiosInstance.get(`${process.env.REACT_APP_NOTUS_API_URI}/sign-in`, {

@@ -128,7 +128,7 @@ export const PasswordResetPage =
             <div className='container'>
               <div className='row'>
                 <div className='column col-xtra-wide-touch col-xs-12 col-lg-8 col-start-lg-3 col-xl-6 col-start-xl-4'>
-                  <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt75'>
+                  <h1 className='is-size-1 has-text-centered is-uppercase has-text-weight-extrabold mt30'>
                     Reset Your Password
                   </h1>
 

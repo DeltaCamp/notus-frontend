@@ -211,3 +211,18 @@
   pointer-events: none;
   will-change: bottom, height;
 }
+
+.spinning {
+  animation: spinningAnim 1500ms infinite forwards ease-in-out;
+}
+
+@keyframes spinningAnim {
+  0% {
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, 0);
+  }
+  100% {
+    transform-origin: center;
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
