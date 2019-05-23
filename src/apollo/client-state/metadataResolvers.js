@@ -4,7 +4,7 @@ export const metadataResolvers = {
   Query: {
     metadata: async function (object, args, options, info) {
       const { uri } = args
-      if (!uri) { throw new Error('You must pass a URI') }
+      if (!uri) { throw new Error('You must enter a URI') }
 
       return fetch(uri, {
         method: 'GET'

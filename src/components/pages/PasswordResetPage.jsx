@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
+import { ButtonLoader } from '~/components/ButtonLoader'
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { FooterContainer } from '~/components/layout/Footer'
 import { Mail } from 'react-feather'
 import { axiosInstance } from '~/../config/axiosInstance'
 import { ScrollToTop } from '~/components/ScrollToTop'
+import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
+
+// const debug = require('debug')('notus:SignUpPage')
 
 export const PasswordResetPage =
   class _PasswordResetPage extends Component {
     state = {
       email: '',
-      error: '',
       success: false
     }
 
@@ -31,8 +34,9 @@ export const PasswordResetPage =
             isResetting: false
           })
         }).catch(error => {
+          notusToast.info(error.message)
+
           this.setState({
-            error: error.message,
             isResetting: false
           })
         })
@@ -43,7 +47,6 @@ export const PasswordResetPage =
       e.preventDefault()
 
       this.setState({
-        error: '',
         isResetting: true
       }, this.doReset)
     }
@@ -82,10 +85,6 @@ export const PasswordResetPage =
               onSubmit={this.handlePasswordReset}
               className='form is-tall'
             >
-              <h6 className='is-size-6 has-text-centered has-text-weight-bold'>
-                {this.state.error}
-              </h6>
-
               <div className='field mt15'>
                 <input
                   placeholder='Account email address'
@@ -107,8 +106,14 @@ export const PasswordResetPage =
                 <button
                   type='submit'
                   className='button is-small is-dark'
+                  disabled={this.state.resetting || this.state.email === ''}
                 >
-                  Reset
+                  {this.state.resetting ? (
+                    <>
+                      Resetting ... &nbsp;
+                            <ButtonLoader />
+                    </>
+                  ) : 'Reset Password'}
                 </button>
               </div>
             </form>

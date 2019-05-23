@@ -7,7 +7,7 @@ export const notusResolvers = {
   Query: {
     appUser: async function (object, args, options, info) {
       const { appUserId } = args
-      if (!appUserId) { throw new Error('You must pass the appUserId') }
+      if (!appUserId) { throw new Error('You must enter the appUserId') }
       return axiosInstance
         .get(`${process.env.REACT_APP_NOTUS_API_URI}/app-users/${appUserId}`)
         .then(json => {
@@ -57,7 +57,7 @@ export const notusResolvers = {
         throw new Error('oneTimeKey is not defined')
       }
       if (!password) {
-        throw new Error('You must pass a password')
+        throw new Error('You must enter a password')
       }
 
       const confirmResponse = await axiosInstance

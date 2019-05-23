@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
+import { ButtonLoader } from '~/components/ButtonLoader'
 import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { FooterContainer } from '~/components/layout/Footer'
 import { Mail } from 'react-feather'
 import { axiosInstance } from '~/../config/axiosInstance'
 import { ScrollToTop } from '~/components/ScrollToTop'
+import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
+
+const debug = require('debug')('notus:SignUpPage')
 
 export const SignUpPage =
   class _SignUpPage extends Component {
     state = {
       email: '',
-      success: false
+      success: false,
+      signingUp: false
     }
 
     doSignup = async () => {
@@ -36,13 +41,14 @@ export const SignUpPage =
         ).then(() => {
           this.setState({
             success: true,
-            isSigningUp: false
+            signingUp: false
           })
         }).catch(error => {
-          console.error(error)
+          debug(error)
+          notusToast.info(error.message)
+
           this.setState({
-            error: true,
-            isSigningUp: false
+            signingUp: false
           })
         })
       }
@@ -52,8 +58,7 @@ export const SignUpPage =
       e.preventDefault()
 
       this.setState({
-        error: false,
-        isSigningUp: true
+        signingUp: true
       }, this.doSignup)
     }
 
@@ -106,8 +111,14 @@ export const SignUpPage =
                 <button
                   type='submit'
                   className='button is-small is-dark'
+                  disabled={this.state.signingUp || this.state.email === ''}
                 >
-                  Sign Up
+                  {this.state.signingUp ? (
+                    <>
+                      Signing up ... &nbsp;
+                            <ButtonLoader />
+                    </>
+                  ) : 'Sign Up'}
                 </button>
               </div>
             </form>
