@@ -71,7 +71,6 @@ $hasAddonsformColor: $cyan;
 .react-select__control {
   border-radius: 8px;
   font-weight: 600;
-  height: 100%;
   margin: 0;
   padding: 4px 20px;
   transition: all 200ms ease-in-out;
@@ -175,7 +174,7 @@ form.is-active textarea.textarea,
 form.is-active textarea.textarea:hover,
 form.is-active textarea.textarea:focus,
 form.is-active textarea.textarea:active {
-  border-color: $yellow;
+  border-color: $cyan;
 }
 
 .form .control,
@@ -329,8 +328,7 @@ form.has-addons.is-active textarea.textarea:active {
 .field.has-addons .button:hover,
 .field.has-addons .button:focus,
 .field.has-addons .button:active {
-  border-color: $yellow;
-  color: $yellow;
+  color: $cyan;
   transform: scale3d(1, 1, 1);
 }
 
@@ -532,4 +530,11 @@ input.input.is-large {
 
 .no-background-color {
   background-color: transparent !important;
+}
+
+.input.is-white:focus,
+.input.is-white:active,
+.textarea.is-white:focus,
+.textarea.is-white:active {
+  box-shadow: none;
 }

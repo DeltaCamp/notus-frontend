@@ -9,21 +9,27 @@ import { KEYS } from '~/constants'
 const DEFAULT_TITLE = 'Click to title this event'
 const TITLE_MIN_LENGTH = 8
 
+// const debug = require('debug')('notus:components:EventTitle')
+
 export const EventTitle = ReactTimeout(class extends Component {
   static propTypes = {
     event: PropTypes.object.isRequired,
-    handleSubmitTitle: PropTypes.func.isRequired
+    handleSubmitTitle: PropTypes.func.isRequired,
+    onlyShowInput: PropTypes.bool,
+    handleSaveEvent: PropTypes.func
   }
 
   constructor (props) {
     super(props)
 
-    const newTitle = this.props.event.title && this.props.event.title.length
-      ? this.props.event.title
+    const newTitle = props.event.title && props.event.title.length
+      ? props.event.title
       : ''
 
+    const isEditing = props.onlyShowInput || false
+
     this.state = {
-      isEditing: false,
+      isEditing,
       newTitle
     }
   }
@@ -54,14 +60,23 @@ export const EventTitle = ReactTimeout(class extends Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
 
     if (this.state.newTitle.length <= TITLE_MIN_LENGTH) {
       this.showErrorTooltip()
       return false
     }
 
-    this.props.handleSubmitTitle(this.state.newTitle)
+    this.props.handleSubmitTitle(
+      this.state.newTitle,
+      () => {
+        if (this.props.handleSaveEvent) {
+          this.props.handleSaveEvent()
+        }
+      }
+    )
 
     this.handleCancel()
   }
@@ -91,6 +106,8 @@ export const EventTitle = ReactTimeout(class extends Component {
   handleKeyUp = (e) => {
     if (e.keyCode === KEYS.escape) {
       this.handleCancel()
+    } else if (e.keyCode === KEYS.enter && this.props.createEvent) {
+      this.handleSubmit()
     }
   }
 
@@ -118,9 +135,17 @@ export const EventTitle = ReactTimeout(class extends Component {
           className='form is-inline-block'
           onKeyUp={this.handleKeyUp}
         >
+          <ReactTooltip
+            id='event-title-tooltip'
+            place='top'
+            type='dark'
+            effect='solid'
+          />
+
           <div
             ref='errorTooltip'
             data-tip={`Please enter at least ${TITLE_MIN_LENGTH} characters for the event title.`}
+            data-for='event-title-tooltip'
           />
 
           <input
@@ -138,6 +163,4 @@ export const EventTitle = ReactTimeout(class extends Component {
 
     return content
   }
-}
-
-)
+})
