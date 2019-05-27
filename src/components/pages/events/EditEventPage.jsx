@@ -12,6 +12,7 @@ import { sample, omit } from 'lodash'
 
 import { ActiveButton } from '~/components/events/ActiveButton'
 import { PublishButton } from '~/components/events/PublishButton'
+import { CreateEventModal } from '~/components/events/CreateEventModal'
 import { EditEventButtons } from '~/components/events/EditEventButtons'
 import { EventAction } from '~/components/events/EventAction'
 import { EventTitle } from '~/components/events/EventTitle'
@@ -33,14 +34,13 @@ const debug = require('debug')('notus:EditEventPage')
 
 const randomColor = () => {
   return sample([
-    '#2a083f', // dark purple
+    '#3a084f', // dark purple
     '#0b603a', // forest green
     '#06368b', // dark blue
     '#dd5500', // orange
     '#0676cb', // light blue
     '#6e0ad3', // purple
-    '#cd0720', // red
-    '#181818', // black
+    '#b8051b', // red
     '#2f2d29', // grey
   ])
 }
@@ -65,7 +65,8 @@ export const EditEventPage = class _EditEventPage extends Component {
       ]
     },
     editMatcherIndex: null,
-    editingEventSource: false
+    editingEventSource: false,
+    createEventModalOpen: false
   }
 
   static propTypes = {
@@ -110,12 +111,16 @@ export const EditEventPage = class _EditEventPage extends Component {
     )
   }
 
-  handleSubmitTitle = (newEventTitle) => {
+  handleSubmitTitle = (newEventTitle, callback) => {
     if (this.isCreateMode()) {
       this.setState({
         event: {
           ...this.state.event,
           title: newEventTitle
+        }
+      }, () => {
+        if (callback) {
+          callback()
         }
       })
     } else {
@@ -209,7 +214,9 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   handleSaveEvent = (e) => {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
 
     const { matchers } = this.state.event
 
@@ -238,6 +245,7 @@ export const EditEventPage = class _EditEventPage extends Component {
         'eventsQuery'
       ]
     }).then((mutationResult) => {
+      this.handleCloseCreateEventModal()
       notusToast.success('Successfully saved event')
       // const eventId = mutationResult.data.createEvent.id
       const newEventLink = formatRoute(routes.MY_EVENTS)
@@ -674,6 +682,20 @@ export const EditEventPage = class _EditEventPage extends Component {
     })
   }
 
+  handleOpenCreateEventModal = (e) => {
+    e.preventDefault()
+
+    this.setState({ createEventModalOpen: true })
+  }
+
+  handleCloseCreateEventModal = (e) => {
+    if (e) {
+      e.preventDefault()
+    }
+
+    this.setState({ createEventModalOpen: false })
+  }
+
   render () {
     const { eventData } = this.props
 
@@ -839,41 +861,40 @@ export const EditEventPage = class _EditEventPage extends Component {
                   {recipe && this.isCreateMode() &&
                     <div className='row'>
                       <div className='col-xs-12'>
-                        <h6 className='is-size-6 has-text-weight-semibold has-text-lighter pb10'>
+                        <h6 className='is-size-6 has-text-weight-semibold has-text-lighter'>
                           Creating a new event{recipe.title ? ` based on "${recipe.title}"` : ''}
                         </h6>
                       </div>
                     </div>
                   }
 
-                  <div className='row'>
-                    <div className='col-xs-12 col-sm-6 col-xl-8 is-flex'>
-                      <EventTitle
-                        event={this.state.event}
-                        handleSubmitTitle={this.handleSubmitTitle}
-                      />
-                    </div>
 
-                    <div className='col-xs-12 col-sm-6 col-xl-4 is-flex'>
-                      <div className='justify-content-flex-end'>
-                        {!this.isCreateMode() &&
-                          <>
-                            <div className="buttons">
-                              <ActiveButton
-                                event={this.state.event}
-                                handleToggleActive={this.handleToggleActive}
-                              />
+                  {!this.isCreateMode() &&
+                    <div className='row'>
+                      <div className='col-xs-12 col-sm-6 col-xl-8 is-flex'>
+                        <EventTitle
+                          event={this.state.event}
+                          handleSubmitTitle={this.handleSubmitTitle}
+                        />
+                      </div>
 
-                              <PublishButton
-                                event={this.state.event}
-                                handleTogglePublish={this.handleTogglePublish}
-                              />
-                            </div>
-                          </>
-                        }
+                      <div className='col-xs-12 col-sm-6 col-xl-4 is-flex'>
+                        <div className='justify-content-flex-end'>
+                              <div className="buttons">
+                                <ActiveButton
+                                  event={this.state.event}
+                                  handleToggleActive={this.handleToggleActive}
+                                />
+
+                                <PublishButton
+                                  event={this.state.event}
+                                  handleTogglePublish={this.handleTogglePublish}
+                                />
+                              </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  }
 
                 </div>
               </div>
@@ -886,7 +907,7 @@ export const EditEventPage = class _EditEventPage extends Component {
               backgroundColor: this.state.event.color
             }}
           >
-            <div className='is-brightness-70 is-full-width-background' />
+            <div className='is-brightness-60 is-full-width-background' />
 
             <div className={`container-fluid`}>
               <div className='container'>
@@ -938,6 +959,16 @@ export const EditEventPage = class _EditEventPage extends Component {
               />
           </div>
 
+          {this.isCreateMode() && this.state.createEventModalOpen &&
+            <CreateEventModal
+              event={this.state.event}
+              createEventModalOpen={this.state.createEventModalOpen}
+              handleSubmitTitle={this.handleSubmitTitle}
+              handleSaveEvent={this.handleSaveEvent}
+              handleCloseCreateEventModal={this.handleCloseCreateEventModal}
+            />
+          }
+
           <div className={`is-white-ter pt30 pb30`}>
             <div className={`container-fluid`}>
               <div className='container'>
@@ -948,7 +979,7 @@ export const EditEventPage = class _EditEventPage extends Component {
                       eventData={eventData}
                       isCreateMode={this.isCreateMode}
                       isSubmitting={this.state.isSubmitting}
-                      handleSaveEvent={this.handleSaveEvent}
+                      handleOpenCreateEventModal={this.handleOpenCreateEventModal}
                     />
                   </div>
                 </div>

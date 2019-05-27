@@ -14,7 +14,7 @@
   pointer-events: none;
   position: fixed;
   transition: opacity 300ms ease-in-out;
-  top: 15%;
+  top: 5%;
   width: 50%;
   z-index: 19998;
 
@@ -38,7 +38,7 @@
 }
 
 .modal.is-large {
-  height: 85vh;
+  height: 70%;
   left: 25vw;
   top: 5vh;
   width: 50vw;
@@ -64,9 +64,16 @@
 }
 
 .modal.is-active {
-  opacity: 1;
   transition: opacity 300ms ease-in-out;
   pointer-events: initial;
+}
+
+.modal.is-active-enter {
+  opacity: 1;
+}
+
+.modal.is-active-enter .modal-background {
+  opacity: 0.9;
 }
 
 .modal-background {
@@ -76,15 +83,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: opacity .2s;
+  transition: opacity 300ms;
   opacity: 0;
-  background: black;
 }
 
 .modal.is-active .modal-background {
   background-color: white;
   cursor: pointer;
-  opacity: 0.9;
   pointer-events: auto;
   z-index: 19999;
 }
@@ -92,7 +97,7 @@
 .modal-content {
   background-color: $dark;
   border: 5px solid white;
-  box-shadow: 0 0 20px 0 rgba(10, 10, 20, 0.2);
+  box-shadow: 0 5px 60px 0 rgba(10, 10, 20, 0.4);
   position: relative;
   height: 100%;
   overflow: initial;

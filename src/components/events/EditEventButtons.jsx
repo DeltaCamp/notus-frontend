@@ -143,7 +143,7 @@ export const EditEventButtons =
                       {this.props.isCreateMode()
                         ? (
                           <button
-                            onClick={this.props.handleSaveEvent}
+                            onClick={this.props.handleOpenCreateEventModal}
                             className='button is-success has-fat-icons'
                             disabled={this.props.isSubmitting}
                           >
