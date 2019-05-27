@@ -1,16 +1,18 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { ButtonLoader } from '~/components/ButtonLoader'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { confirmUserMutation } from '~/mutations/confirmUserMutation'
 import { oneTimeKeyValidQuery } from '~/queries/oneTimeKeyValidQuery'
+import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 
 const queryString = require('query-string')
-const debug = require('debug')('notus:users:confirm')
+const debug = require('debug')('notus:users:ConfirmAndSetPasswordPage')
 
 export const ConfirmAndSetPasswordPage =
   graphql(confirmUserMutation, { name: 'confirmUser' })(
@@ -38,7 +40,7 @@ export const ConfirmAndSetPasswordPage =
         constructor (props) {
           super(props)
           this.state = {
-            confirming: false,
+            isConfirming: false,
             password: '',
             passwordConfirmation: ''
           }
@@ -56,19 +58,19 @@ export const ConfirmAndSetPasswordPage =
 
           let oneTimeKey = this.getOneTimeKey(this.props)
           if (!oneTimeKey) {
-            error = 'Missing one time key'
+            notusToast.info('Missing one time key')
           }
 
           if (!this.state.password) {
-            error = 'You must enter a password'
+            notusToast.info('You must enter a password')
           }
 
           if (this.state.password !== this.state.passwordConfirmation) {
-            error = 'The passwords do not match'
+            notusToast.info('The passwords do not match')
           }
 
           if (this.state.password.length < 8 || this.state.passwordConfirmation.length < 8) {
-            error = 'Passwords must be at least 8 characters in length'
+            notusToast.info('Passwords must be at least 8 characters in length')
           }
 
           if (error) {
@@ -78,8 +80,7 @@ export const ConfirmAndSetPasswordPage =
             return
           } else {
             this.setState({
-              confirming: true,
-              error: null
+              isConfirming: true
             })
           }
 
@@ -91,9 +92,10 @@ export const ConfirmAndSetPasswordPage =
           }).then((response) => {
             this.props.history.push(routes.MY_EVENTS)
           }).catch(error => {
+            notusToast.info(error.message)
+
             this.setState({
-              confirming: false,
-              error: error.message
+              isConfirming: false
             })
           })
         }
@@ -101,10 +103,6 @@ export const ConfirmAndSetPasswordPage =
         render () {
           let message, createPasswordFormRow, keyIsValid, expiresAt
           const { oneTimeKeyValidData } = this.props
-
-          if (this.state.confirming) {
-            message = 'Confirming your account ...'
-          }
 
           if (oneTimeKeyValidData && !oneTimeKeyValidData.loading) {
             const { oneTimeKeyValid } = oneTimeKeyValidData
@@ -154,10 +152,6 @@ export const ConfirmAndSetPasswordPage =
                       onSubmit={this.handleConfirmSubmit}
                       className='form is-tall'
                     >
-                      <h6 className='is-size-6 has-text-centered has-text-weight-bold'>
-                        {this.state.error}
-                      </h6>
-
                       <div className='field mt15'>
                         <input
                           autoFocus
@@ -166,7 +160,6 @@ export const ConfirmAndSetPasswordPage =
                           className='input'
                           onChange={(e) => {
                             this.setState({
-                              error: '',
                               password: e.target.value
                             })
                           }}
@@ -180,7 +173,6 @@ export const ConfirmAndSetPasswordPage =
                           className='input'
                           onChange={(e) => {
                             this.setState({
-                              error: '',
                               passwordConfirmation: e.target.value
                             })
                           }}
@@ -191,8 +183,18 @@ export const ConfirmAndSetPasswordPage =
                         <button
                           type='submit'
                           className='button is-small is-dark'
+                          disabled={
+                            this.state.isConfirming ||
+                            this.state.password === '' ||
+                            this.state.passwordConfirmation === ''
+                          }
                         >
-                          Save
+                          {this.state.isConfirming ? (
+                            <>
+                              Saving Password ... &nbsp;
+                            <ButtonLoader />
+                            </>
+                          ) : 'Save Password'}
                         </button>
                       </div>
                     </form>

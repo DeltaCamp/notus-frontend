@@ -12,14 +12,13 @@ import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 
 const queryString = require('query-string')
+const debug = require('debug')('notus:SignInPage')
 
 const signInPageMutation = gql`
   mutation signIn($email: String!, $password: String!) {
     signIn(email: $email, password: $password) @client
   }
 `
-
-const debug = require('debug')('notus:SignInPage')
 
 export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })(
   graphql(signInPageMutation, { name: 'signIn' })(
@@ -54,11 +53,11 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
         let error
 
         if (!this.state.email) {
-          notusToast.warn('Please enter your email address')
+          notusToast.info('Please enter your email address')
         }
 
         if (!this.state.password) {
-          notusToast.warn('Please enter your password')
+          notusToast.info('Please enter your password')
         }
 
         if (error) {
@@ -88,7 +87,7 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
             signingIn: false
           })
 
-          notusToast.warn(this.translateErrorMessage(error.message))
+          notusToast.info(this.translateErrorMessage(error.message))
         })
       }
 
@@ -155,9 +154,12 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
                       <button
                         type='submit'
                         className='button is-small is-dark'
-                        disabled={this.state.signingIn}
+                        disabled={
+                          this.state.signingIn ||
+                          this.state.email === '' ||
+                          this.state.password === ''
+                        }
                       >
-                        
                         {this.state.signingIn ? (
                           <>
                             Signing in ... &nbsp;
