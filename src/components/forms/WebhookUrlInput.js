@@ -17,7 +17,7 @@ export class WebhookUrlInput extends PureComponent {
       <div className='field has-addons'>
         <div className='control'>
           <label
-            for='webhook-url-input'
+            htmlFor='webhook-url-input'
             className='label method-addon is-addon'
           >{method}</label>
         </div>

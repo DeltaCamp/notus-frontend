@@ -460,48 +460,43 @@ export const EditEventPage = class _EditEventPage extends Component {
     })
   }
 
-  onChangeWebhookHeader = (webhookHeader) => {
-    const webhookHeaders = this.state.event.webhookHeaders.slice()
-
-    this.setState({
-      event: {
-        ...this.state.event,
-        webhookHeaders
-      }
-    })
+  onChangeWebhookHeader = (webhookHeader, index) => {
+    debug('onChangeWebhookHeader: ', webhookHeader)
 
     if (!this.isCreateMode()) {
-      if (webhookHeader.id) {
-        this.props.updateWebhookHeaderMutation({
-          variables: {
-            webhookHeader
-          },
-          refetchQueries: [
-            // only refetch the event or webhookHeader we just updated (1 record)
-            'eventsQuery'
-          ]
-        }).then((mutationResult) => {
+      this.props.createWebhookHeaderMutation({
+        variables: {
+          webhookHeader
+        },
+        refetchQueries: [
+          // only refetch the event or webhookHeader we just created (1 record)
+          'eventsQuery'
+        ]
+      }).then((mutationResult) => {
+        debug('onChangeWebhookHeader result: ', mutationResult)
+  
+        const webhookHeaderResult = mutationResult.data.createWebhookHeader
+  
+        const webhookHeaders = this.state.event.webhookHeaders.slice()
+  
+        if (webhookHeader.id) {
           notusToast.success('Updated webhook header')
-        }).catch(error => {
-          showErrorMessage(error)
-        })
-      } else {
-        // order is wrong!
-
-        this.props.createWebhookHeaderMutation({
-          variables: {
-            webhookHeader
-          },
-          refetchQueries: [
-            // only refetch the event or webhookHeader we just created (1 record)
-            'eventsQuery'
-          ]
-        }).then((mutationResult) => {
+        } else {          
           notusToast.success('Added new webhook header')
-        }).catch(error => {
-          showErrorMessage(error)
+        }
+
+        webhookHeaders[index] = webhookHeaderResult
+
+        this.setState({
+          event: {
+            ...this.state.event,
+            webhookHeaders
+          }
         })
-      }
+
+      }).catch(error => {
+        showErrorMessage(error)
+      })
     }
 
     this.handleSetEditMatcher(null)
@@ -514,19 +509,25 @@ export const EditEventPage = class _EditEventPage extends Component {
       eventId: parseInt(this.state.event.id, 10) || undefined
     }
 
+    const webhookHeaders = (this.state.event.webhookHeaders || []).concat([newWebhookHeader])
+
+    debug('onAddWebhookHeader: ', webhookHeaders)
+
     this.setState({
       event: {
         ...this.state.event,
-        webhookHeaders: (this.state.event.webhookHeaders || []).concat(newWebhookHeader)
+        webhookHeaders
       }
     })
   }
 
-  onDeleteWebhookHeader = (webhookHeader) => {
+  onDeleteWebhookHeader = (webhookHeader, index) => {
     const webhookHeaders = this.state.event.webhookHeaders
     const id = webhookHeader.id
 
-    webhookHeaders.splice(webhookHeaders.indexOf(webhookHeader), 1)
+    debug('onDeleteWebhookHeader: ', webhookHeaders, webhookHeader, index)
+
+    webhookHeaders.splice(index, 1)
 
     this.setState({
       event: {

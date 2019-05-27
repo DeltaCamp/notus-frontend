@@ -12,6 +12,8 @@ import './index.scss'
 
 import 'animate.css/animate.min.css'
 
+window.debug = require('debug')
+
 window.addEventListener('load', async () => {
   try {
     const client = await apolloClient()

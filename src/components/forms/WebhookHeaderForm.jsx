@@ -42,7 +42,7 @@ export const WebhookHeaderForm = class _WebhookHeaderForm extends PureComponent 
   render () {
     return (
       <div className='event-box__variable-wrapper event-box__variable-wrapper__matcher'>
-        <span class='event-box__flex-mobile-group'>
+        <span className='event-box__flex-mobile-group'>
           <span className='has-text-lighter'>
             Header Info:
           </span>

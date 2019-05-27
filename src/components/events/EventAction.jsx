@@ -60,7 +60,7 @@ export const EventAction =
           <form onSubmit={(e) => e.preventDefault()} className='form is-inverted'>
             <label
               className='label'
-              for='webhook-url-input'
+              htmlFor='webhook-url-input'
             >
               Webhook GET or POST URL
             </label>
@@ -73,7 +73,7 @@ export const EventAction =
 
             <label
               className='label'
-              for='webhook-body-textarea'
+              htmlFor='webhook-body-textarea'
             >
               POST Body (optional)
             </label>
@@ -93,8 +93,8 @@ export const EventAction =
               return <WebhookHeaderForm
                 key={webhookHeader.id ? webhookHeader.id : `new-header-${index}`}
                 webhookHeader={webhookHeader}
-                onChange={this.props.onChangeWebhookHeader}
-                onRemove={this.props.onDeleteWebhookHeader}
+                onChange={(webhookHeader) => this.props.onChangeWebhookHeader(webhookHeader, index) }
+                onRemove={(webhookHeader) => this.props.onDeleteWebhookHeader(webhookHeader, index) }
               />
             })}
             
