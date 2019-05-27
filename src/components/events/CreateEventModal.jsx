@@ -35,9 +35,9 @@ export const CreateEventModal = class _CreateEventModal extends Component {
     return (
       <>
         <Modal
+        isLarge
           isOpen={this.props.createEventModalOpen}
           handleClose={this.props.handleCloseCreateEventModal}
-          isSmall
         >
           <div
             onKeyUp={this.handleKeyUp}
@@ -49,6 +49,7 @@ export const CreateEventModal = class _CreateEventModal extends Component {
             </h5>
 
             <br />
+            <br />
 
             <EventTitle
               event={this.props.event}
@@ -58,7 +59,13 @@ export const CreateEventModal = class _CreateEventModal extends Component {
             />
 
             <br />
+            <hr />
             <br />
+
+            <p>
+              <strong>NOTE:</strong> This event will start reacting to Mainnet immediately!
+            </p>
+
             <div className='buttons has-text-centered'>
               <button
                 onClick={this.handleSaveEvent}
