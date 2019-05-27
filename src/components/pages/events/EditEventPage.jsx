@@ -53,6 +53,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       abiEventId: undefined,
       isPublic: false,
       sendEmail: true,
+      callWebhook: false,
       runCount: -1,
       matchers: [
         {
@@ -652,15 +653,13 @@ export const EditEventPage = class _EditEventPage extends Component {
     })
   }
 
-  onChangeDeleteWebhook = () => {
+  onChangeCallWebhook = (callWebhook) => {
     let event = { ...this.state.event }
-    if (event.webhookUrl === null && event.webhookBody === null) { return }
-    event.webhookUrl = null
-    event.webhookBody = null
+    event.callWebhook = callWebhook
     this.setState({
       event
     }, () => {
-      this.doGenericUpdateEvent({ id: event.id, webhookUrl: null, webhookBody: null }, 'Webhook has been deleted')
+      this.doGenericUpdateEvent({ id: event.id, callWebhook }, `Webhook is now ${callWebhook ? 'active' : 'inactive'}`)
     })
   }
 
@@ -926,12 +925,13 @@ export const EditEventPage = class _EditEventPage extends Component {
               {...this.props}
               event={this.state.event}
               sendEmail={this.state.event.sendEmail}
+              callWebhook={this.state.event.callWebhook}
               webhookUrl={this.state.event.webhookUrl}
               webhookBody={this.state.event.webhookBody}
               onChangeSendEmail={this.onChangeSendEmail}
               onChangeWebhookUrl={this.onChangeWebhookUrl}
               onChangeWebhookBody={this.onChangeWebhookBody}
-              onChangeDeleteWebhook={this.onChangeDeleteWebhook}
+              onChangeCallWebhook={this.onChangeCallWebhook}
               onChangeWebhookHeader={this.onChangeWebhookHeader}
               onAddWebhookHeader={this.onAddWebhookHeader}
               onDeleteWebhookHeader={this.onDeleteWebhookHeader}

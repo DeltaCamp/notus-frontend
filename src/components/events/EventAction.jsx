@@ -14,30 +14,19 @@ export const EventAction =
       webhookUrl: PropTypes.string,
       webhookBody: PropTypes.string,
       sendEmail: PropTypes.bool,
+      callWebhook: PropTypes.bool,
       onChangeSendEmail: PropTypes.func.isRequired,
       onChangeWebhookUrl: PropTypes.func.isRequired,
       onChangeWebhookBody: PropTypes.func.isRequired,
-      onChangeDeleteWebhook: PropTypes.func.isRequired,
+      onChangeCallWebhook: PropTypes.func.isRequired,
       onChangeWebhookHeader: PropTypes.func.isRequired,
       onAddWebhookHeader: PropTypes.func.isRequired,
       onDeleteWebhookHeader: PropTypes.func.isRequired,
       currentUserData: PropTypes.object.isRequired
     }
 
-    constructor (props) {
-      super(props)
-      this.state = {
-        showWebhookForm: false
-      }
-    }
-
     toggleWebhookForm = () => {
-      if (this.state.showWebhookForm) {
-        this.props.onChangeDeleteWebhook()
-      }
-      this.setState({
-        showWebhookForm: !this.state.showWebhookForm
-      })
+      this.props.onChangeCallWebhook(!this.props.callWebhook)
     }
 
     onChangeSendEmail = () => {
@@ -46,9 +35,8 @@ export const EventAction =
 
     render () {
       const usersEmail = this.props.currentUserData?.currentUser?.email
-      const showWebhookForm = this.state.showWebhookForm || !!this.props.webhookUrl
       let form
-      if (showWebhookForm) {
+      if (this.props.callWebhook) {
         form =
         <>
           <p className='has-text-light'>
@@ -123,7 +111,7 @@ export const EventAction =
                 </Switch>
 
                 <Switch
-                  value={showWebhookForm}
+                  value={this.props.callWebhook}
                   onChange={this.toggleWebhookForm}
                   color='link'
                 >
