@@ -6,6 +6,7 @@ export const currentUserQuery = gql`
       id
       email
       isAdmin
+      etherscan_api_key
     }
   }
 `
