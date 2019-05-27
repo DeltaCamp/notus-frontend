@@ -9,7 +9,7 @@ import { KEYS } from '~/constants'
 const DEFAULT_TITLE = 'Click to title this event'
 const TITLE_MIN_LENGTH = 8
 
-const debug = require('debug')('notus:components:EventTitle')
+// const debug = require('debug')('notus:components:EventTitle')
 
 export const EventTitle = ReactTimeout(class extends Component {
   static propTypes = {
