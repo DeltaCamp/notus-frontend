@@ -661,7 +661,7 @@ hr {
   text-align: center;
   bottom: 0;
   width: 100%;
-  z-index: 20000;
+  z-index: 80000;
 }
 
 .notus-toast .Toastify__toast {
@@ -670,7 +670,7 @@ hr {
   font-weight: 600;
   margin-bottom: 0;
   min-height: 70px;
-  padding: 0;
+  padding: 0 2.5rem;
 }
 
 .notus-toast .Toastify__toast--default {
@@ -708,12 +708,17 @@ hr {
   color: white;
   flex: 1 0 0;
   font-size: 26px;
-  margin-left: -6%;
+  opacity: 0.5;
+  margin-left: 0;
 
   @media screen and (max-width: $tablet) {
     font-size: 22px;
-    margin-left: -16%;
+    margin-left: 10px;
   }
+}
+
+.notus-toast:hover .Toastify__close-button {
+  opacity: 1;
 }
 
 .signup-message {
@@ -915,7 +920,7 @@ hr {
   padding: 2rem 0;
   position: fixed;
   right: 0;
-  z-index: 300000;
+  z-index: 70000;
 
   @media screen and (max-width: $mobile) {
     padding: 1rem 0;

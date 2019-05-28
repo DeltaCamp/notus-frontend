@@ -1,7 +1,8 @@
 import { axiosInstance } from '~/../config/axiosInstance'
-import { storage } from '~/apollo/storage'
-import { AppUserFragment } from '~/fragments/AppUserFragment'
 import { signIn } from '~/apollo/signIn'
+import { AppUserFragment } from '~/fragments/AppUserFragment'
+import { notusLocalStorage } from '~/utils/notusLocalStorage'
+import { JWT_TOKEN_COOKIE_NAME } from '~/constants'
 
 export const notusResolvers = {
   Query: {
@@ -26,9 +27,7 @@ export const notusResolvers = {
         }
       })
 
-      if (storage()) {
-        window.localStorage.removeItem('jwtToken')
-      }
+      notusLocalStorage.write(JWT_TOKEN_COOKIE_NAME, null)
     },
 
     signIn: async function (object, args, { cache }, info) {

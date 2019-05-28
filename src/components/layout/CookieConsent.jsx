@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
 import classnames from 'classnames'
 import { Link } from 'react-router-dom'
-import { storage } from '~/apollo/storage'
-import * as routes from '~/../config/routes'
 
-const CONSENT_COOKIE_NAME = 'consentCookie'
+import { notusLocalStorage } from '~/utils/notusLocalStorage'
+import { CONSENT_COOKIE_NAME } from '~/constants'
+import * as routes from '~/../config/routes'
 
 export const CookieConsent = ReactTimeout(
   class _CookieConsent extends Component {
@@ -14,11 +14,7 @@ export const CookieConsent = ReactTimeout(
     }
 
     componentDidMount () {
-      let cookieConsent
-
-      if (storage()) {
-        cookieConsent = window.localStorage.getItem(CONSENT_COOKIE_NAME)
-      }
+      const cookieConsent = notusLocalStorage.read(CONSENT_COOKIE_NAME)
 
       if (cookieConsent) {
         this.setState({ hidden: true })
@@ -30,7 +26,8 @@ export const CookieConsent = ReactTimeout(
     handleAccept = (e) => {
       e.preventDefault()
 
-      window.localStorage.setItem(CONSENT_COOKIE_NAME, true)
+      notusLocalStorage.write(CONSENT_COOKIE_NAME, true)
+
       this.setState({ hidden: true })
     }
 
