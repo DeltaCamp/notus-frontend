@@ -664,6 +664,17 @@ hr {
   z-index: 80000;
 }
 
+.notus-toast .Toastify__toast a,
+.notus-toast .Toastify__toast a:visited,
+.notus-toast .Toastify__toast a:focus {
+  color: white;
+  text-decoration: underline;
+}
+
+.notus-toast .Toastify__toast a:hover {
+  color: #ececec;
+}
+
 .notus-toast .Toastify__toast {
   color: white;
   font-family: inherit;

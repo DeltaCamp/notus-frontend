@@ -51,6 +51,8 @@ withApollo(
           let form = <span></span>
 
           if (currentUser) {
+            debug(currentUser)
+            
             name = currentUser.name || ''
             etherscan_api_key = currentUser.etherscan_api_key || ''
 

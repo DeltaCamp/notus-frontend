@@ -45,7 +45,7 @@ export const ABIUpload = class _ABIUpload extends PureComponent {
                 {
                   isDragActive
                     ? <>Drop file here</>
-                    : <>Drag &amp; drop a file or click here to upload ABI or Truffle Artifact</>
+                    : <>Drop a file or click here to upload an ABI or Truffle Artifact</>
                 }
               </p>
             </div>
