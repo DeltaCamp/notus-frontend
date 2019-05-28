@@ -1,12 +1,11 @@
-import { storage } from '~/apollo/storage'
 import { axiosGetUserFromApi } from '~/utils/axiosGetUserFromApi'
+import { notusLocalStorage } from '~/utils/notusLocalStorage'
+import { JWT_TOKEN_COOKIE_NAME } from '~/constants'
 
 const debug = require('debug')('notus:apollo:signIn')
 
 export async function signIn (apolloCache, jwtToken) {
-  if (storage()) {
-    window.localStorage.setItem('jwtToken', jwtToken)
-  }
+  notusLocalStorage.write(JWT_TOKEN_COOKIE_NAME, jwtToken)
 
   if (jwtToken) {
     try {
@@ -19,9 +18,8 @@ export async function signIn (apolloCache, jwtToken) {
         }
       })
     } catch (error) {
-      if (storage()) {
-        window.localStorage.removeItem('jwtToken')
-      }
+      notusLocalStorage.write(JWT_TOKEN_COOKIE_NAME, null)
+
       jwtToken = undefined
     }
   }
