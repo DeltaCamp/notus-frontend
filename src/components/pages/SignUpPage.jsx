@@ -22,23 +22,29 @@ export const SignUpPage =
 
     doSignup = async () => {
       const { email } = this.state
+      debug('doSignUp')
 
       if (email) {
-        // check if email and appName exists in DB, if yes:
-        // - name already registered, check email used to sign up
-        // - also could re-send email w/ API key if app name matches email provided
-
-        // if no:
-        // - create a new app in the db and hook it up to this email address
-        // - on the API server, send an email to the newly signed up user
-        // console.log(process.env.REACT_APP_NOTUS_API_URI)
-
         await axiosInstance.post(
           `${process.env.REACT_APP_NOTUS_API_URI}/users`,
           {
             email: this.state.email
           }
-        ).then(() => {
+        ).then((response) => {
+          debug('response', response)
+
+          // confirmed: true
+          // createdAt: "2019-05-17T19:56:00.651Z"
+          // email: "chuck@delta.camp"
+          // etherscan_api_key: null
+          // id: 1
+          // isAdmin: true
+          // name: "Chuck Bergeron"
+          // one_time_key_expires_at: "2019-05-28T22:49:43.326Z"
+          // one_time_key_hash: "9c16e848c8e4d42bc41885d621da26c7c627853b8d01bcdc9dedb879c84229e6"
+          // password_hash: "3c8dde16bdd3393084188d810314df748ea69510396cc3d99e16c7688cd452d4"
+          // updatedAt: "2019-05-28T20:02:36.207Z"
+
           this.setState({
             success: true,
             signingUp: false
