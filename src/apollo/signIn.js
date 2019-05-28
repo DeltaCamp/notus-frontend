@@ -19,8 +19,6 @@ export async function signIn (apolloCache, jwtToken) {
       })
     } catch (error) {
       notusLocalStorage.write(JWT_TOKEN_COOKIE_NAME, null)
-
-      jwtToken = undefined
     }
   }
 }

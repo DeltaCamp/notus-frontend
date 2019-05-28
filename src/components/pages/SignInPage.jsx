@@ -1,27 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
+
 import { ButtonLoader } from '~/components/ButtonLoader'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { currentUserQuery } from '~/queries/currentUserQuery'
+import { signInMutation } from '~/mutations/signInMutation'
 import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 
 const queryString = require('query-string')
 const debug = require('debug')('notus:SignInPage')
 
-const signInPageMutation = gql`
-  mutation signIn($email: String!, $password: String!) {
-    signIn(email: $email, password: $password) @client
-  }
-`
-
 export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })(
-  graphql(signInPageMutation, { name: 'signIn' })(
+  graphql(signInMutation, { name: 'signIn' })(
     class _SignInPage extends Component {
       state = {}
 
@@ -50,8 +45,6 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
       handleConfirmSubmit = (e) => {
         e.preventDefault()
 
-        let error
-
         if (!this.state.email) {
           notusToast.info('Please enter your email address')
         }
@@ -60,17 +53,9 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
           notusToast.info('Please enter your password')
         }
 
-        if (error) {
-          this.setState({
-            error
-          })
-          return
-        } else {
-          this.setState({
-            signingIn: true,
-            error: null
-          })
-        }
+        this.setState({
+          signingIn: true
+        })
 
         this.props.signIn({
           variables: {
