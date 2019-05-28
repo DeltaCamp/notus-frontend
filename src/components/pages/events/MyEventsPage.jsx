@@ -34,7 +34,7 @@ export const MyEventsPage =
               eventsQuery: {
                 take: PAGE_SIZE,
                 skip: 0,
-                userId: props.currentUserData.currentUser.id
+                userId: parseInt(props.currentUserData.currentUser.id, 10)
               }
             }
           })
@@ -63,7 +63,7 @@ export const MyEventsPage =
                     eventsQuery: {
                       take,
                       skip: (skip + take),
-                      userId: currentUser.id
+                      userId: parseInt(currentUser.id, 10)
                     }
                   },
                   updateQuery: (prev, { fetchMoreResult }) => {

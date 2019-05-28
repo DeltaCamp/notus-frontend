@@ -11,7 +11,8 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
     value: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     handleStartEditing: PropTypes.func,
-    required: PropTypes.bool
+    required: PropTypes.bool,
+    placeholder: PropTypes.string
   }
 
   static defaultProps = {

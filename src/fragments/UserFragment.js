@@ -1,10 +1,10 @@
 import gql from 'graphql-tag'
 
-export const UserFragment = gql`
-  fragment userFragment on User {
+export const userFragment = gql`
+  fragment userFragment on UserEntity {
     id
-    email
     isAdmin
-    access_key_expires_at
+    name
+    etherscan_api_key
   }
 `
