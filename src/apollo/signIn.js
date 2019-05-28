@@ -11,12 +11,6 @@ export async function signIn (apolloCache, jwtToken) {
     try {
       let currentUser = await axiosGetUserFromApi(jwtToken)
       debug('found current user: ', currentUser, ' for jwtToken: ', jwtToken)
-      apolloCache.writeData({
-        data: {
-          currentUser,
-          jwtToken
-        }
-      })
     } catch (error) {
       notusLocalStorage.write(JWT_TOKEN_COOKIE_NAME, null)
     }

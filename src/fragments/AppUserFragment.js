@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { UserFragment } from './UserFragment'
+import { userFragment } from './userFragment'
 
 export const AppUserFragment = gql`
   fragment appUserFragment on AppUser {
@@ -16,5 +16,5 @@ export const AppUserFragment = gql`
     created_at
     updated_at
   }
-  ${UserFragment}
+  ${userFragment}
 `

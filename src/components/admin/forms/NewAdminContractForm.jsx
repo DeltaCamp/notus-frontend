@@ -5,6 +5,7 @@ import ReactTooltip from 'react-tooltip'
 import { ethers } from 'ethers'
 import { CheckCircle } from 'react-feather'
 import { withApollo, graphql } from 'react-apollo'
+import { Link } from 'react-router-dom'
 
 import { AddressInput } from '~/components/AddressInput'
 import { ABIUpload } from '~/components/ABIUpload'
@@ -13,6 +14,7 @@ import { notusToast } from '~/utils/notusToast'
 import { showErrorMessage } from '~/utils/showErrorMessage'
 import { etherscanAbiQuery } from '~/queries/etherscanAbiQuery'
 import { currentUserQuery } from '~/queries/currentUserQuery'
+import * as routes from '~/../config/routes'
 
 export const NewAdminContractForm = 
 withApollo(
@@ -33,7 +35,7 @@ withApollo(
 
         static propTypes = {
           onClose: PropTypes.func.isRequired,
-          redirectToAdminContractPage: PropTypes.func.isRequired,
+          redirectToContractPage: PropTypes.func.isRequired,
         }
 
         handleNameChange = (e) => {
@@ -108,7 +110,7 @@ withApollo(
             refetchQueries: ['contractsQuery']
           }).then(({ data }) => {
             notusToast.success('Contract added successfully')
-            this.props.redirectToAdminContractPage(
+            this.props.redirectToContractPage(
               parseInt(data.createContract.id, 10)
             )
           }).catch(error => {
@@ -158,22 +160,23 @@ withApollo(
         }
 
         onPullAbiFromEtherscan = async () => {
-          if (!this.state.contract.address) {
-            notusToast.error('You must enter an address')
+          if (!this.props.currentUserQuery.currentUser.etherscan_api_key) {
+            notusToast.error(
+              <span>
+                You need an Etherscan API key.  Update your <Link to={routes.ACCOUNT_SETTINGS}>Settings</Link>
+              </span>
+            )
             return
           }
-          if (!this.props.currentUserQuery.currentUser.etherscan_api_key) {
-            notusToast.error('You need an Etherscan API key')
+
+          if (!this.state.contract.address) {
+            notusToast.error('You must enter an address')
             return
           }
 
           const response = await this.props.client.query({ query: etherscanAbiQuery, variables: { address: this.state.contract.address }})
           
-          console.log(response)
-
           const { abiString } = response.data.etherscanAbi
-
-          console.log(abiString)
 
           if (abiString) {
             this.setState({
@@ -191,29 +194,16 @@ withApollo(
         render () {
           return (
             <div className='form'>
-              <div className='field'>
-                <ABIUpload
-                  onAbi={this.handleAbi}
-                  onError={this.handleAbiError}
-                />
-              </div>
-
-              <hr />
-
+              <h4 className='is-size-4 has-text-weight-bold has-text-centered pb30'>
+                Add Contract
+              </h4>
+              
               <div className='field'>
                 <AddressInput
                   onChange={this.handleAddressChange}
                   placeholder={`Contract Address (Mainnet)`}
                   value={this.state.contract.address}
                 />
-              </div>
-
-              <div className='field'>
-                <button
-                  className='button'
-                  onClick={this.onPullAbiFromEtherscan}>
-                  Pull ABI from Etherscan
-                </button>
               </div>
 
               <div className='field'>
@@ -225,6 +215,27 @@ withApollo(
                   placeholder={`Contract Name`}
                 />
               </div>
+
+              <hr />
+
+              <div className='field'>
+                <button
+                  className='button is-full-width'
+                  onClick={this.onPullAbiFromEtherscan}>
+                  Pull ABI from Etherscan
+                </button>
+              </div>
+
+              <div className='has-text-centered pb20'>&mdash; or &mdash;</div>
+
+              <div className='field'>
+                <ABIUpload
+                  onAbi={this.handleAbi}
+                  onError={this.handleAbiError}
+                />
+              </div>
+
+              <div className='has-text-centered pb20'>&mdash; or &mdash;</div>
 
               <div className='field'>
                 <textarea

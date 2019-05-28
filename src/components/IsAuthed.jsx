@@ -9,9 +9,9 @@ export const IsAuthed =
     return graphql(currentUserQuery, { name: 'currentUserData' })(
       class extends Component {
         render () {
-          const { currentUser } = this.props.currentUserData
+          const { currentUser, loading } = this.props.currentUserData
           const isSigningOut = (this.props.history.location.pathname === '/signin')
-          if (!currentUser && !isSigningOut) {
+          if (!loading && !currentUser && !isSigningOut) {
             return <Redirect to={routes.SIGNIN} />
           } else {
             return <WrappedComponent {...this.props} />

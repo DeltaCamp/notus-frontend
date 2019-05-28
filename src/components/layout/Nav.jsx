@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import ReactTimeout from 'react-timeout'
-import { Activity, Power, Search, Send } from 'react-feather'
+import { Activity, Power, Search, Send, Settings } from 'react-feather'
 import { withRouter } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'
 import { graphql } from 'react-apollo'
@@ -98,16 +98,15 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 >
                   <Send />&nbsp;Go To App
                 </NavLink>
-                {/* <NavLink
+                <NavLink
                   exact
                   className='navbar-item hide-on-home'
                   to={routes.ACCOUNT_SETTINGS}
                   onClick={this.closeMobileNav}
                   activeClassName="is-active"
                 >
-                  <Star />&nbsp;Your Account
+                  <Settings />&nbsp;Settings
                 </NavLink>
-                */}
                 <button
                   className='navbar-item button hide-on-home'
                   onClick={this.handleSignOut}
@@ -127,6 +126,15 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   activeClassName='is-active'
                 >
                   <Activity />&nbsp;My Events
+                </NavLink>
+                <NavLink
+                  exact
+                  to={routes.CONTRACTS_PAGE}
+                  className='navbar-item'
+                  onClick={this.closeMobileNav}
+                  activeClassName='is-active'
+                >
+                  <Activity />&nbsp;My Contracts
                 </NavLink>
                 <NavLink
                   exact

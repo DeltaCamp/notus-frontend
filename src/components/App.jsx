@@ -10,13 +10,14 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
 import { AdminPage } from '~/components/pages/admin/AdminPage'
-import { AdminContractsPage } from '~/components/pages/admin/AdminContractsPage'
-import { AdminContractPage } from '~/components/pages/admin/AdminContractPage'
+import { ContractsPage } from '~/components/pages/ContractsPage'
+import { ContractPage } from '~/components/pages/ContractPage'
 import { HomePage } from '~/components/pages/HomePage'
 import { AboutPage } from '~/components/pages/AboutPage'
 import { PrivacyPage } from '~/components/pages/PrivacyPage'
 import { TermsPage } from '~/components/pages/TermsPage'
 import { SupportPage } from '~/components/pages/SupportPage'
+import { SettingsPage } from '~/components/pages/SettingsPage'
 import { MyEventsPage } from '~/components/pages/events/MyEventsPage'
 import { EditEventPageWrapper } from '~/components/pages/events/EditEventPageWrapper'
 import { PasswordResetPage } from '~/components/pages/PasswordResetPage'
@@ -79,8 +80,8 @@ export const App = withRouter(hot(module)(
               appear
             >
               <Switch location={this.props.location}>
-                <Route exact path={routes.ADMIN_CONTRACTS_PAGE} component={AdminContractsPage} />
-                <Route exact path={routes.ADMIN_CONTRACT_PAGE} component={AdminContractPage} />
+                <Route exact path={routes.CONTRACTS_PAGE} component={ContractsPage} />
+                <Route exact path={routes.CONTRACT_PAGE} component={ContractPage} />
                 <Route exact path={routes.ADMIN} component={AdminPage} />
 
                 <Route exact path={routes.HOME} component={HomePage} />
@@ -94,6 +95,7 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.NEW_EVENT_FROM_PARENT} component={EditEventPageWrapper} />
                 <Route exact path={routes.MY_EVENTS} component={MyEventsPage} />
                 <Route exact path={routes.DISCOVER_EVENTS} component={DiscoverEventsPage} />
+                <Route exact path={routes.ACCOUNT_SETTINGS} component={SettingsPage} />
 
                 <Route exact path={routes.CONFIRM_AND_SET_PASSWORD_PAGE} component={ConfirmAndSetPasswordPage} />
                 <Route exact path={routes.CONFIRM} component={AppUserConfirmPage} />

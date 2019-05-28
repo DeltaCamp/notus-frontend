@@ -1,6 +1,6 @@
 export const ADMIN = '/admin'
-export const ADMIN_CONTRACTS_PAGE = '/admin/contracts'
-export const ADMIN_CONTRACT_PAGE = '/admin/contracts/:contractId'
+export const CONTRACTS_PAGE = '/contracts'
+export const CONTRACT_PAGE = '/contracts/:contractId'
 
 export const HOME = '/'
 export const ABOUT_PAGE = '/about'
@@ -15,7 +15,7 @@ export const SIGNUP = '/signup'
 export const PASSWORD_RESET = '/password-reset'
 export const APP_CONFIRM = '/app-confirm/:appName/:apiKey'
 
-export const ACCOUNT_SETTINGS = '/account'
+export const ACCOUNT_SETTINGS = '/settings'
 export const DISCOVER_EVENTS = '/events/discover'
 export const NEW_EVENT = '/events/new'
 export const NEW_EVENT_FROM_PARENT = '/events/new/:eventId'

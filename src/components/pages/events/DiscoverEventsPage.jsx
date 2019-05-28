@@ -39,15 +39,20 @@ export const DiscoverEventsPage =
                       <h4 className='is-size-4 has-text-weight-bold mt75'>
                         Discover Events
                       </h4>
-
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col-xs-12 col-sm-4 col-start-sm-5 has-text-centered mt20'>
                       <div className='form'>
-                        <input
-                          type='text'
-                          placeholder='Search ...'
-                          value={this.state.searchValue}
-                          onChange={this.handleSearchInputChange}
-                          className='input mt20 has-text-centered has-text-primary has-border-link is-ma-centered'
-                        />
+                        <div className='field mt20 has-text-centered'>
+                          <input
+                            type='text'
+                            placeholder='Search ...'
+                            value={this.state.searchValue}
+                            onChange={this.handleSearchInputChange}
+                            className='input has-text-primary has-border-link is-ma-centered has-text-centered'
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
