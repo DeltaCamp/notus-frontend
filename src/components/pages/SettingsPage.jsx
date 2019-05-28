@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
-import { Link } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
-import { Mail } from 'react-feather'
 import { graphql, withApollo } from 'react-apollo'
 
-import { ButtonLoader } from '~/components/ButtonLoader'
 import { FooterContainer } from '~/components/layout/Footer'
-import { axiosInstance } from '~/../config/axiosInstance'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { notusToast } from '~/utils/notusToast'
-import * as routes from '~/../config/routes'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import { TextInput } from '~/components/TextInput'
 import { updateUserMutation } from '~/mutations/updateUserMutation'
@@ -27,21 +22,11 @@ withApollo(
           return this.props.updateUserMutation({
             variables: {
               user: userDto
-            },
-            update: (cache, mutationResult) => {
-              // const user = mutationResult.data.updateUser
-              // user.id = parseInt(user.id, 10)
-              // cache.writeData({
-              //   data: {
-              //     currentUser: user
-              //   }
-              // })
             }
           })
         }
 
         onSubmitName = async (name) => {
-          console.log('changed name: ', name)
           this.updateUser({
             name
           }).then(() => {
@@ -50,7 +35,6 @@ withApollo(
         }
 
         onSubmitEtherscanApiKey = async (apiKey) => {
-          console.log('changed EtherscanApiKey: ', apiKey)
           this.updateUser({
             etherscan_api_key: apiKey
           }).then(() => {
@@ -63,37 +47,39 @@ withApollo(
           let name = ''
           let etherscan_api_key = ''
           const { currentUser } = this.props.currentUserQuery
+
+          let form = <span></span>
+
           if (currentUser) {
             name = currentUser.name || ''
             etherscan_api_key = currentUser.etherscan_api_key || ''
+
+            form =
+              <div className='card-content'>
+                <form
+                  onSubmit={this.handlePasswordReset}
+                  className='form is-tall'
+                >
+
+                  <div className='field mt15'>
+                    <label htmlFor='newsletter' className='label'>Name</label>
+                    <TextInput
+                      value={name}
+                      handleSubmit={this.onSubmitName}
+                      placeholder='Name' />
+                  </div>
+
+                  <div className='field mt15'>
+                    <label htmlFor='newsletter' className='label'>Etherscan API Key</label>
+                    <TextInput
+                      value={etherscan_api_key}
+                      handleSubmit={this.onSubmitEtherscanApiKey}
+                      placeholder='Etherscan API Key' />
+                  </div>
+
+                </form>
+              </div>
           }
-
-          const form = (
-            <div className='card-content'>
-              <form
-                onSubmit={this.handlePasswordReset}
-                className='form is-tall'
-              >
-
-                <div className='field mt15'>
-                  <label htmlFor='newsletter' className='label'>Name</label>
-                  <TextInput
-                    value={name}
-                    handleSubmit={this.onSubmitName}
-                    placeholder='Name' />
-                </div>
-
-                <div className='field mt15'>
-                  <label htmlFor='newsletter' className='label'>Etherscan API Key</label>
-                  <TextInput
-                    value={etherscan_api_key}
-                    handleSubmit={this.onSubmitEtherscanApiKey}
-                    placeholder='Etherscan API Key' />
-                </div>
-
-              </form>
-            </div>
-          )
 
           return (
             <div className='is-positioned-absolutely'>
@@ -115,7 +101,7 @@ withApollo(
                         <CSSTransition
                           timeout={600}
                           classNames='accordion'
-                          in={true}
+                          in={!!currentUser}
                         >
                           {state => form}
                         </CSSTransition>
