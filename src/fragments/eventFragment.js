@@ -36,6 +36,7 @@ export const eventFragment = gql`
     webhookHeaders {
       ...webhookHeaderFragment
     }
+    networkId
     createdAt
     updatedAt
     deletedAt

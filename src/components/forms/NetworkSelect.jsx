@@ -13,15 +13,11 @@ export const NetworkSelect = graphql(networksQuery, {
   class _NetworkSelect extends PureComponent {
     static propTypes = {
       networkId: PropTypes.number,
-      onChangeNetworkId: PropTypes.func.isRequired,
-      menuIsOpen: PropTypes.bool.isRequired,
-      handleStopEditing: PropTypes.func.isRequired
+      onChangeNetworkId: PropTypes.func.isRequired
     }
 
     onChange = (option) => {
-      this.props.onChangeNetworkId(option.value)
-
-      this.props.handleStopEditing()
+      this.props.onChangeNetworkId(option.value, option.label)
     }
 
     render () {

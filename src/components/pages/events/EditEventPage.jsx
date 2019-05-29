@@ -698,6 +698,18 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.setState({ createEventModalOpen: false })
   }
 
+  handleChangeNetworkId = (networkId, networkName) => {
+    networkId = parseInt(networkId, 10)
+    let event = { ...this.state.event }
+    if (event.networkId === networkId) { return }
+    event.networkId = networkId
+    this.setState({
+      event
+    }, () => {
+      this.doGenericUpdateEvent({ id: event.id, networkId }, `Network is now ${networkName}`)
+    })
+  }
+
   render () {
     const { eventData } = this.props
 
@@ -770,10 +782,10 @@ export const EditEventPage = class _EditEventPage extends Component {
 
     const networkSentence = 
       <div className='event-box__variable-wrapper'>
-        On
+        On &nbsp;
 
-        <span className='event-box__flex-mobile-group'>
-          <NetworkSelect />
+        <span className='event-box__variable has-react-select'>
+          <NetworkSelect networkId={this.state.event.networkId} onChangeNetworkId={this.handleChangeNetworkId} />
         </span>
       </div>
 

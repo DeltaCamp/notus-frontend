@@ -4,6 +4,7 @@ import { Plus } from 'react-feather'
 import { Modal } from '~/components/Modal'
 import { EventTitle } from '~/components/events/EventTitle'
 import { KEYS } from '~/constants'
+import { NetworkName } from '~/components/NetworkName'
 
 // const debug = require('debug')('notus:components:CreateEventModal')
 
@@ -63,7 +64,7 @@ export const CreateEventModal = class _CreateEventModal extends Component {
             <br />
 
             <p>
-              <strong>NOTE:</strong> This event will start reacting to Mainnet immediately!
+              <strong>NOTE:</strong> This event will start reacting to <NetworkName networkId={this.props.event.networkId} /> immediately!
             </p>
 
             <div className='buttons has-text-centered'>
