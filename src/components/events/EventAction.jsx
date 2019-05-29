@@ -22,7 +22,7 @@ export const EventAction =
       onChangeWebhookHeader: PropTypes.func.isRequired,
       onAddWebhookHeader: PropTypes.func.isRequired,
       onDeleteWebhookHeader: PropTypes.func.isRequired,
-      currentUserData: PropTypes.object.isRequired
+      currentUserData: PropTypes.object
     }
 
     toggleWebhookForm = () => {

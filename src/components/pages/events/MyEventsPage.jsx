@@ -10,12 +10,12 @@ import { Plus } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 import { IsAuthed } from '~/components/IsAuthed'
+import { withCurrentUser } from '~/components/withCurrentUser'
 import { EventsPageLoader } from '~/components/loading/EventsPageLoader'
 import { DiscoverEventsListing } from '~/components/events/DiscoverEventsListing'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { deleteEventMutation } from '~/mutations/deleteEventMutation'
-import { currentUserQuery } from '~/queries/currentUserQuery'
 import { eventsQuery } from '~/queries/eventsQuery'
 import { EventCard } from '~/components/events/EventCard'
 import * as routes from '~/../config/routes'
@@ -23,18 +23,18 @@ import { PAGE_SIZE } from '~/constants'
 
 export const MyEventsPage =
   IsAuthed(
-    graphql(currentUserQuery, { name: 'currentUserData' })(
+    withCurrentUser(
       graphql(deleteEventMutation, { name: 'deleteEventMutation' })(
         graphql(eventsQuery, {
           name: 'eventsData',
-          skip: (props) => !props.currentUserData.currentUser,
+          skip: (props) => props.currentUserData && !props.currentUserData.currentUser,
           options: (props) => ({
             fetchPolicy: 'cache-and-network',
             variables: {
               eventsQuery: {
                 take: PAGE_SIZE,
                 skip: 0,
-                userId: parseInt(props.currentUserData.currentUser.id, 10)
+                userId: parseInt(props.currentUserData?.currentUser?.id, 10)
               }
             }
           })
@@ -54,7 +54,7 @@ export const MyEventsPage =
 
             fetchMore = () => {
               const { eventsData, currentUserData } = this.props
-              const { currentUser } = currentUserData
+              const { currentUser } = currentUserData || {}
               const { fetchMore, events } = eventsData || {}
               const { skip, take } = events || {}
               if (fetchMore) {
@@ -85,14 +85,15 @@ export const MyEventsPage =
             render () {
               let loadMore,
                 content
-              const { eventsData } = this.props
+              const { currentUserData, eventsData } = this.props
+              const currentUserLoading = currentUserData?.loading
 
               const { loading, error, events } = eventsData || {}
               const { skip, take, totalCount } = events || {}
 
               let eventEvents = events ? events.events : []
 
-              if (loading) {
+              if (currentUserLoading || loading) {
                 content = <EventsPageLoader />
               }
               if (error) {

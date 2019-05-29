@@ -12,13 +12,14 @@ import {
 } from 'react-feather'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
-import { currentUserQuery } from '~/queries/currentUserQuery'
+
+import { withCurrentUser } from '~/components/withCurrentUser'
 import { updateEventMutation } from '~/mutations/updateEventMutation'
 import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 
 export const EventCard =
-  graphql(currentUserQuery, { name: 'currentUserData' })(
+  withCurrentUser(
     graphql(updateEventMutation, {
       name: 'updateEventMutation'
     })(
@@ -73,7 +74,7 @@ export const EventCard =
         handleEventCardClick = (e) => {
           // e.preventDefault()
 
-          const { currentUserData } = this.props
+          const { currentUserData } = this.props || {}
 
           if (currentUserData && !currentUserData.currentUser) {
             notusToast.info('You will need to sign up (or sign in) to create events.')
@@ -105,8 +106,8 @@ export const EventCard =
         }
 
         author = () => {
-          const { currentUserData, event } = this.props
-          const { currentUser } = currentUserData
+          const { currentUserData, event } = this.props || {}
+          const { currentUser } = currentUserData || {}
           const { user } = event
 
           if (currentUser && (currentUser.id === parseInt(user.id, 10))) {

@@ -38,7 +38,8 @@ export const SignUpPage =
         this.props.signUp({
           variables: {
             email: this.state.email
-          }
+          },
+          refetchQueries: ['currentUserQuery']
         }).then((mutationResult) => {
           debug('mutationResult', mutationResult)
           const { signUp } = mutationResult.data

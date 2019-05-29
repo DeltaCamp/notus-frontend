@@ -4,10 +4,10 @@ import Helmet from 'react-helmet'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
 
+import { withCurrentUser } from '~/components/withCurrentUser'
 import { ButtonLoader } from '~/components/ButtonLoader'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
-import { currentUserQuery } from '~/queries/currentUserQuery'
 import { signInMutation } from '~/mutations/signInMutation'
 import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
@@ -15,7 +15,7 @@ import * as routes from '~/../config/routes'
 const queryString = require('query-string')
 const debug = require('debug')('notus:SignInPage')
 
-export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })(
+export const SignInPage = withCurrentUser(
   graphql(signInMutation, { name: 'signIn' })(
     class _SignInPage extends Component {
       state = {}
@@ -61,8 +61,11 @@ export const SignInPage = graphql(currentUserQuery, { name: 'currentUserData' })
           variables: {
             email: this.state.email,
             password: this.state.password
-          }
+          },
+          refetchQueries: ['currentUserQuery'],
+          awaitRefetchQueries: true,
         }).then((mutationResult) => {
+          debug('in mutation result', mutationResult)
           if (mutationResult) {
             this.props.history.push(routes.MY_EVENTS)
           }

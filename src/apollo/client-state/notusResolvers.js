@@ -1,5 +1,5 @@
 import { signIn } from '~/apollo/signIn'
-import { AppUserFragment } from '~/fragments/AppUserFragment'
+import { appUserFragment } from '~/fragments/appUserFragment'
 import { notusLocalStorage } from '~/utils/notusLocalStorage'
 import { JWT_TOKEN_COOKIE_NAME } from '~/constants'
 import { axiosInstance } from '~/../config/axiosInstance'
@@ -15,7 +15,7 @@ export const notusResolvers = {
         .get(`${process.env.REACT_APP_NOTUS_API_URI}/app-users/${appUserId}`)
         .then(json => {
           const id = `AppUser:${json.id}`
-          return options.writeFragment({ id, fragment: AppUserFragment, data: json })
+          return options.writeFragment({ id, fragment: appUserFragment, data: json })
         })
     }
   },
@@ -80,8 +80,10 @@ export const notusResolvers = {
         }
       })
 
+      
       const { data } = response
       const jwtToken = data
+      debug('jwtToken', jwtToken)
       await signIn(cache, jwtToken)
     },
 
@@ -110,7 +112,6 @@ export const notusResolvers = {
     },
 
     confirmAppUser: async function (object, args, { cache }, info) {
-      console.log('starting confirmAppUser: ')
       const { requestKey } = args
       if (!requestKey) {
         throw new Error('requestKey is not defined')

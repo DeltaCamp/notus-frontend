@@ -4,7 +4,7 @@ import { JWT_TOKEN_COOKIE_NAME } from '~/constants'
 
 const debug = require('debug')('notus:apollo:signIn')
 
-export async function signIn (apolloCache, jwtToken) {
+export async function signIn (cache, jwtToken) {
   notusLocalStorage.write(JWT_TOKEN_COOKIE_NAME, jwtToken)
 
   if (jwtToken) {
