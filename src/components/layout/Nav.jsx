@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import ReactTimeout from 'react-timeout'
-import { Activity, Power, Search, Send, Settings } from 'react-feather'
+import { Activity, FileText, Power, Search, Send, Settings } from 'react-feather'
 import { withRouter } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'
 import { graphql } from 'react-apollo'
 
-import NotusLogo from '~/assets/images/notus-logo.svg'
+import { withCurrentUser } from '~/components/withCurrentUser'
 import { signOutMutation } from '~/mutations/signOutMutation'
-import { currentUserQuery } from '~/queries/currentUserQuery'
 import { notusToast } from '~/utils/notusToast'
+import NotusLogo from '~/assets/images/notus-logo.svg'
 import * as routes from '~/../config/routes'
 
+// const debug = require('debug')('notus:components:Nav')
+
 export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
-  graphql(currentUserQuery)(
+  withCurrentUser(
     withRouter(
       ReactTimeout(class _Nav extends Component {
         constructor (props) {
@@ -63,9 +65,14 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
         }
 
         render () {
+          const { currentUserData } = this.props || {}
+          const { currentUser } = currentUserData || {}
+          
           let signUp, myEvents, signOut
 
-          if (!this.props.data.currentUser) {
+          // debug(currentUserData, currentUser)
+
+          if (!currentUserData || !currentUser) {
             signUp = <>
               <NavLink
                 exact
@@ -96,7 +103,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   onClick={this.closeMobileNav}
                   activeClassName='is-active'
                 >
-                  <Send />&nbsp;Go To App
+                  <Send className='navbar-item--icon' /> Go To App
                 </NavLink>
                 <NavLink
                   exact
@@ -105,13 +112,13 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   onClick={this.closeMobileNav}
                   activeClassName="is-active"
                 >
-                  <Settings />&nbsp;Settings
+                  <Settings className='navbar-item--icon' /> Settings
                 </NavLink>
                 <button
                   className='navbar-item button hide-on-home'
                   onClick={this.handleSignOut}
                 >
-                  <Power />&nbsp;Sign Out
+                  <Power className='navbar-item--icon' /> Sign Out
                 </button>
               </>
             )
@@ -125,7 +132,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   onClick={this.closeMobileNav}
                   activeClassName='is-active'
                 >
-                  <Activity />&nbsp;My Events
+                  <Activity className='navbar-item--icon' /> Events
                 </NavLink>
                 <NavLink
                   exact
@@ -134,7 +141,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   onClick={this.closeMobileNav}
                   activeClassName='is-active'
                 >
-                  <Activity />&nbsp;My Contracts
+                  <FileText className='navbar-item--icon' /> Contracts
                 </NavLink>
                 <NavLink
                   exact
@@ -143,7 +150,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   onClick={this.closeMobileNav}
                   activeClassName='is-active'
                 >
-                  <Search />&nbsp;Discover Events
+                  <Search className='navbar-item--icon' /> Discover
                 </NavLink>
               </>
           }

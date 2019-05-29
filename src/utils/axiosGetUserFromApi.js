@@ -1,10 +1,11 @@
 import { axiosInstance } from '~/../config/axiosInstance'
 
-const debug = require('debug')('notus:axios')
+const debug = require('debug')('notus:axiosGetUserFromApi')
 
 export const axiosGetUserFromApi = (jwtToken) => {
   debug('jwtToken: ', jwtToken)
-  axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`
+  axiosInstance.defaults.headers.common.Authorization = `Bearer ${jwtToken}`
+  debug('axiosInstance.defaults.headers.common', axiosInstance.defaults.headers.common)
 
   return axiosInstance
     .get(`${process.env.REACT_APP_NOTUS_API_URI}/users`)

@@ -11,11 +11,13 @@ import { signIn } from '~/apollo/signIn'
 import { notusLocalStorage } from '~/utils/notusLocalStorage'
 import { JWT_TOKEN_COOKIE_NAME } from '~/constants'
 
-// const debug = require('debug')('notus:apolloClient')
+const debug = require('debug')('notus:apolloClient')
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = notusLocalStorage.read(JWT_TOKEN_COOKIE_NAME)
+
+  debug('setting authLink')
 
   // return the headers to the context so httpLink can read them
   return {

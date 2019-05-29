@@ -2,10 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter } from 'react-router-dom'
-import * as serviceWorker from './serviceWorker'
+
 import { apolloClient } from '~/apollo/apolloClient'
 import { App } from '~/components/App'
 import { AppErrorBoundary } from '~/components/AppErrorBoundary'
+import * as serviceWorker from './serviceWorker'
 
 import 'react-toastify/dist/ReactToastify.css'
 import './index.scss'

@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
 import { Redirect } from 'react-router-dom'
-import { currentUserQuery } from '~/queries/currentUserQuery'
+
+import { withCurrentUser } from '~/components/withCurrentUser'
 import * as routes from '~/../config/routes'
+
+// const debug = require('debug')('notus:components:IsAuthed')
 
 export const IsAuthed =
   (WrappedComponent) => {
-    return graphql(currentUserQuery, { name: 'currentUserData' })(
+    return withCurrentUser(
       class extends Component {
         render () {
-          const { currentUser, loading } = this.props.currentUserData
+          const { currentUserData } = this.props || {}
+          const { currentUser, loading } = currentUserData || {}
           const isSigningOut = (this.props.history.location.pathname === '/signin')
+
+          // debug(currentUserData)
+
           if (!loading && !currentUser && !isSigningOut) {
             return <Redirect to={routes.SIGNIN} />
           } else {
