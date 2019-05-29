@@ -8,7 +8,7 @@ export const withCurrentUser =
   (WrappedComponent) => {
     return graphql(currentUserQuery, {
       name: 'currentUserData',
-      options: { fetchPolicy: 'cache-and-network' },
+      options: { fetchPolicy: 'network-only' },
     })(
       class _withCurrentUser extends PureComponent {
         render () {
