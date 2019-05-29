@@ -23,6 +23,7 @@ import { EventSource } from '~/components/events/EventSource'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
+import { NetworkSelect } from '~/components/forms/NetworkSelect'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { isValidMatcherForAbiEvent } from '~/utils/isValidMatcherForAbiEvent'
 import { notusToast } from '~/utils/notusToast'
@@ -55,6 +56,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       sendEmail: true,
       callWebhook: false,
       runCount: -1,
+      networkId: 1,
       matchers: [
         {
           operand: '10000000000000000000',
@@ -766,6 +768,15 @@ export const EditEventPage = class _EditEventPage extends Component {
       </div>
     )
 
+    const networkSentence = 
+      <div className='event-box__variable-wrapper'>
+        On
+
+        <span className='event-box__flex-mobile-group'>
+          <NetworkSelect />
+        </span>
+      </div>
+
     const matcherSentences = (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <Droppable droppableId='droppable'>
@@ -913,6 +924,7 @@ export const EditEventPage = class _EditEventPage extends Component {
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12'>
+                    {networkSentence}
                     {runCountAndScopeSentences}
                     {matcherSentences}
 
