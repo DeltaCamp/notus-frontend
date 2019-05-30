@@ -542,3 +542,29 @@ input.input.is-large {
 .textarea.is-white:active {
   box-shadow: none;
 }
+
+form.is-inverse .label,
+form.is-inverse .input,
+form.is-inverse .textarea {
+  color: black;
+}
+
+form.is-inverse .input,
+form.is-inverse .textarea {
+  background-color: #eaeaea;
+}
+
+form.is-inverse .input:hover,
+form.is-inverse .textarea:hover,
+form.is-inverse .input:focus,
+form.is-inverse .textarea:focus {
+  background-color: #f4f4f4;
+  border-color: #f4f4f4;
+}
+
+form.is-inverse .input[disabled],
+form.is-inverse .textarea[disabled] {
+  background-color: #c5c5c5;
+  border: none;
+  color: #888;
+}
