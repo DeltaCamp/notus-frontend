@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
+import ReactTimeout from 'react-timeout'
 import { CSSTransition } from 'react-transition-group'
 import { graphql, withApollo } from 'react-apollo'
 
@@ -16,7 +17,10 @@ export const SettingsPage =
 withApollo(
   graphql(updateUserMutation, { name: 'updateUserMutation' })(
     graphql(currentUserQuery, { name: 'currentUserQuery' })(
-      class _SettingsPage extends Component {
+      ReactTimeout(class _SettingsPage extends Component {
+        state = {
+          canSend: true
+        }
 
         updateUser = async (userDto) => {
           return this.props.updateUserMutation({
@@ -26,7 +30,7 @@ withApollo(
           })
         }
 
-        onSubmitName = async (name) => {
+        handleSubmitName = async (name) => {
           this.updateUser({
             name
           }).then(() => {
@@ -34,7 +38,7 @@ withApollo(
           })
         }
 
-        onSubmitEtherscanApiKey = async (apiKey) => {
+        handleSubmitEtherscanApiKey = async (apiKey) => {
           this.updateUser({
             etherscan_api_key: apiKey
           }).then(() => {
@@ -42,10 +46,31 @@ withApollo(
           })
         }
 
-        render () {
+        handleReSendConfirmation = (e) => {
+          e.preventDefault()
 
-          let name = ''
-          let etherscan_api_key = ''
+          if (!this.state.canSend) {
+            return
+          }
+
+          this.setState({ canSend: false })
+
+          // only show this if they need to be confirmed
+          // run API call
+
+          notusToast.info('Sent new confirmation link to your email')
+
+          // prevent them from clicking over and over
+          this.props.setTimeout(() => {
+            this.setState({ canSend: true })
+          }, 5000)
+        }
+
+        render () {
+          let name,
+            email,
+            etherscan_api_key
+
           const { currentUser } = this.props.currentUserQuery
 
           let form = <span></span>
@@ -53,30 +78,68 @@ withApollo(
           if (currentUser) {
             debug(currentUser)
             
+            email = currentUser.email || ''
             name = currentUser.name || ''
             etherscan_api_key = currentUser.etherscan_api_key || ''
 
             form =
               <div className='card-content'>
                 <form
-                  onSubmit={this.handlePasswordReset}
-                  className='form is-tall'
+                  className='form is-tall is-inverse'
                 >
-
-                  <div className='field mt15'>
-                    <label htmlFor='newsletter' className='label'>Name</label>
+                  <div className='field'>
+                    <label
+                      htmlFor='email-input'
+                      className='label'
+                    >
+                      Email
+                    </label>
                     <TextInput
+                      id='email-input'
+                      value={email}
+                      // handleSubmit={this.handleSubmitEmail}
+                      placeholder='Email'
+                      disabled
+                    />
+                    <span className='hint'>
+                      <button
+                        className='button is-text is-xsmall'
+                        onClick={this.handleReSendConfirmation}
+                        disabled={!this.state.canSend}
+                      >
+                        Re-send Confirmation Email
+                      </button>
+                    </span>
+                  </div>
+
+                  <div className='field'>
+                    <label
+                      htmlFor='name-input'
+                      className='label'
+                    >
+                      Name
+                    </label>
+                    <TextInput
+                      id='name-input'
                       value={name}
-                      handleSubmit={this.onSubmitName}
-                      placeholder='Name' />
+                      handleSubmit={this.handleSubmitName}
+                      placeholder='Name'
+                    />
                   </div>
 
                   <div className='field mt15'>
-                    <label htmlFor='newsletter' className='label'>Etherscan API Key</label>
+                    <label
+                      htmlFor='etherscanApiKey-input'
+                      className='label'
+                    >
+                      Etherscan API Key
+                    </label>
                     <TextInput
+                      id='etherscanApiKey-input'
                       value={etherscan_api_key}
-                      handleSubmit={this.onSubmitEtherscanApiKey}
-                      placeholder='Etherscan API Key' />
+                      handleSubmit={this.handleSubmitEtherscanApiKey}
+                      placeholder='Etherscan API Key (Optional)'
+                    />
                   </div>
 
                 </form>
@@ -99,7 +162,7 @@ withApollo(
                         Settings
                       </h1>
 
-                      <section className='card has-bg has-shadow has-shadow-big mt30'>
+                      <section className='card mt30'>
                         <CSSTransition
                           timeout={600}
                           classNames='accordion'
@@ -118,7 +181,7 @@ withApollo(
             </div>
           )
         }
-      }
+      })
     )
   )
 )

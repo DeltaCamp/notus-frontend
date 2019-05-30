@@ -16,7 +16,7 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
   }
 
   static defaultProps = {
-    required: true
+    required: false
   }
 
   state = {
@@ -74,7 +74,9 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
   }
 
   render () {
-    const props = {}
+    const props = {
+      ...this.props
+    }
 
     if (this.props.required) {
       props['data-tip'] = !this.valid() ? 'Please enter a value' : this.state.value

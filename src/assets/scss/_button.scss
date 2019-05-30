@@ -63,6 +63,26 @@ button[disabled] {
   background-color: initial;
 }
 
+form.is-tall .button.is-text.is-xsmall,
+.button.is-text.is-xsmall {
+  color: $blue;
+  height: auto;
+  min-width: auto;
+  padding: 0;
+}
+
+form.is-tall .button.is-text.is-xsmall[disabled],
+.button.is-text.is-xsmall[disabled],
+form.is-tall .button.is-text.is-xsmall[disabled]:hover,
+.button.is-text.is-xsmall[disabled]:hover {
+  color: #ccc;
+}
+
+form.is-tall .button.is-text.is-xsmall:hover,
+.button.is-text.is-xsmall:hover {
+  color: $link-hover-color;
+}
+
 .button.is-info,
 .button.is-info:hover,
 .button.is-info:active {
