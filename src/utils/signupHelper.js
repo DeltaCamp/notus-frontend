@@ -5,6 +5,15 @@ import * as routes from '~/../config/routes'
 
 const debug = require('debug')('notus:signupHelper')
 
+const trackSignup = () => {
+  if (process.env.REACT_APP_GA_TRACKING_ID) {
+    ReactGA.event({
+      category: 'User',
+      action: 'Created an Account'
+    })
+  }
+}
+
 export const signupHelper = (component) => {
   component.props.signUp({
     variables: {
@@ -24,10 +33,7 @@ export const signupHelper = (component) => {
         })
       }, 500)
     } else if (signUp.signedIn) {
-      ReactGA.event({
-        category: 'User',
-        action: 'Created an Account'
-      })
+      trackSignup()
 
       notusToast.info('Account created successfully, welcome to Notus!')
       component.props.history.push(routes.MY_EVENTS)
