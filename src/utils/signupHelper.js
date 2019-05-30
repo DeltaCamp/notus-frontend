@@ -1,3 +1,5 @@
+import ReactGA from 'react-ga'
+
 import { notusToast } from '~/utils/notusToast'
 import * as routes from '~/../config/routes'
 
@@ -22,6 +24,11 @@ export const signupHelper = (component) => {
         })
       }, 500)
     } else if (signUp.signedIn) {
+      ReactGA.event({
+        category: 'User',
+        action: 'Created an Account'
+      })
+
       notusToast.info('Account created successfully, welcome to Notus!')
       component.props.history.push(routes.MY_EVENTS)
     } else {

@@ -31,6 +31,7 @@ import { FourOhFour } from '~/components/pages/FourOhFour'
 import { DiscoverEventsPage } from '~/components/pages/events/DiscoverEventsPage'
 import { CookieConsent } from '~/components/layout/CookieConsent'
 import { Nav } from '~/components/layout/Nav'
+import { withTracker } from '~/components/withTracker'
 import * as routes from '~/../config/routes'
 
 WebFont.load({
@@ -80,33 +81,33 @@ export const App = withRouter(hot(module)(
               appear
             >
               <Switch location={this.props.location}>
-                <Route exact path={routes.CONTRACTS_PAGE} component={ContractsPage} />
-                <Route exact path={routes.CONTRACT_PAGE} component={ContractPage} />
-                <Route exact path={routes.ADMIN} component={AdminPage} />
+                <Route exact path={routes.CONTRACTS_PAGE} component={withTracker(ContractsPage)} />
+                <Route exact path={routes.CONTRACT_PAGE} component={withTracker(ContractPage)} />
+                <Route exact path={routes.ADMIN} component={withTracker(AdminPage)} />
 
-                <Route exact path={routes.HOME} component={HomePage} />
-                <Route exact path={routes.ABOUT_PAGE} component={AboutPage} />
-                <Route exact path={routes.PRIVACY_PAGE} component={PrivacyPage} />
-                <Route exact path={routes.TERMS_PAGE} component={TermsPage} />
-                <Route exact path={routes.SUPPORT_PAGE} component={SupportPage} />
+                <Route exact path={routes.HOME} component={withTracker(HomePage)} />
+                <Route exact path={routes.ABOUT_PAGE} component={withTracker(AboutPage)} />
+                <Route exact path={routes.PRIVACY_PAGE} component={withTracker(PrivacyPage)} />
+                <Route exact path={routes.TERMS_PAGE} component={withTracker(TermsPage)} />
+                <Route exact path={routes.SUPPORT_PAGE} component={withTracker(SupportPage)} />
 
-                <Route exact path={routes.EDIT_EVENT} component={EditEventPageWrapper} />
-                <Route exact path={routes.NEW_EVENT} component={EditEventPageWrapper} />
-                <Route exact path={routes.NEW_EVENT_FROM_PARENT} component={EditEventPageWrapper} />
-                <Route exact path={routes.MY_EVENTS} component={MyEventsPage} />
-                <Route exact path={routes.DISCOVER_EVENTS} component={DiscoverEventsPage} />
-                <Route exact path={routes.ACCOUNT_SETTINGS} component={SettingsPage} />
+                <Route exact path={routes.EDIT_EVENT} component={withTracker(EditEventPageWrapper)} />
+                <Route exact path={routes.NEW_EVENT} component={withTracker(EditEventPageWrapper)} />
+                <Route exact path={routes.NEW_EVENT_FROM_PARENT} component={withTracker(EditEventPageWrapper)} />
+                <Route exact path={routes.MY_EVENTS} component={withTracker(MyEventsPage)} />
+                <Route exact path={routes.DISCOVER_EVENTS} component={withTracker(DiscoverEventsPage)} />
+                <Route exact path={routes.ACCOUNT_SETTINGS} component={withTracker(SettingsPage)} />
 
-                <Route exact path={routes.CONFIRM_AND_SET_PASSWORD_PAGE} component={ConfirmAndSetPasswordPage} />
-                <Route exact path={routes.CONFIRM} component={AppUserConfirmPage} />
-                <Route exact path={routes.SIGNUP} component={SignUpPage} />
-                <Route exact path={routes.SIGNIN} component={SignInPage} />
-                <Route exact path={routes.PASSWORD_RESET} component={PasswordResetPage} />
-                <Route exact path={routes.APP_CONFIRM} component={AppConfirmPage} />
+                <Route exact path={routes.CONFIRM_AND_SET_PASSWORD_PAGE} component={withTracker(ConfirmAndSetPasswordPage)} />
+                <Route exact path={routes.CONFIRM} component={withTracker(AppUserConfirmPage)} />
+                <Route exact path={routes.SIGNUP} component={withTracker(SignUpPage)} />
+                <Route exact path={routes.SIGNIN} component={withTracker(SignInPage)} />
+                <Route exact path={routes.PASSWORD_RESET} component={withTracker(PasswordResetPage)} />
+                <Route exact path={routes.APP_CONFIRM} component={withTracker(AppConfirmPage)} />
 
-                <Route exact path={routes.DISABLE_EMAIL} component={DisableEmailPage} />
+                <Route exact path={routes.DISABLE_EMAIL} component={withTracker(DisableEmailPage)} />
 
-                <Route component={FourOhFour} />
+                <Route component={withTracker(FourOhFour)} />
               </Switch>
             </CSSTransition>
           </TransitionGroup>
