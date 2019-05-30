@@ -29,7 +29,7 @@ export const LeverageTheCommunity = () => {
               className='button is-small is-light'
               to={routes.SIGNUP}
             >
-              Let's Get Started
+              Let's get started
             </Link>
           </div>
         </div>

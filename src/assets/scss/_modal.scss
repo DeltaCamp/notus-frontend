@@ -10,7 +10,9 @@
   height: 60%;
   left: 25%;
   right: 25%;
+  max-height: 90%;
   opacity: 0;
+  overflow: auto;
   pointer-events: none;
   position: fixed;
   transition: opacity 300ms ease-in-out;
@@ -30,15 +32,21 @@
 }
 
 .modal.is-small {
-  height: 40vh;
+  // height: auto;
+  left: 30%;
+  right: 30%;
+  width: 40%;
 
-  @media screen and (max-width: $tablet) {
-    height: 50vh;
+  @media screen and (max-width: $widescreen) {
+    height: 50%;
+    left: 5%;
+    right: 5%;
+    width: 90%;
   }
 }
 
 .modal.is-large {
-  height: auto;
+  // height: auto;
   bottom: auto;
   left: 25vw;
   top: 5vh;
@@ -50,7 +58,7 @@
   }
 
   @media screen and (max-width: $tablet) {
-    height: 80vh;
+    // height: 80vh;
     left: 3vw;
     right: 3vw;
     top: 2vh;
@@ -98,10 +106,12 @@
 .modal-content {
   background-color: $dark;
   border: 5px solid white;
-  box-shadow: 0 5px 60px 0 rgba(10, 10, 20, 0.4);
+  box-shadow: 0 5px 30px 0 rgba(10, 10, 20, 0.4);
+  margin: 40px;
   position: relative;
-  height: 100%;
-  overflow: initial;
+  max-height: 90%;
+  // height: 90%;
+  overflow: hidden;
   overflow-y: auto;
   width: 100%;
   z-index: 20001;
@@ -112,6 +122,7 @@
 }
 
 .modal-content--inner {
+  max-height: 90%;
   padding: 3rem 2rem;
 
   @media screen and (max-width: $tablet) {

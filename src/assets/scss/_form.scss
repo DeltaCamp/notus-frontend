@@ -83,6 +83,10 @@ $hasAddonsformColor: $cyan;
   }
 }
 
+.form .button {
+  padding-top: 5px;
+}
+
 .form .input,
 .form .react-select,
 .form .buttons {
@@ -104,7 +108,7 @@ $hasAddonsformColor: $cyan;
 
 .form .textarea {
   border-radius: 8px;
-  height: 260px;
+  height: 160px;
   padding-top: 20px;
 
   @media screen and (max-width: $mobile) {

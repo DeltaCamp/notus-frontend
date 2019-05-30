@@ -699,14 +699,23 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   handleChangeNetworkId = (networkId, networkName) => {
-    networkId = parseInt(networkId, 10)
     let event = { ...this.state.event }
-    if (event.networkId === networkId) { return }
+
+    networkId = parseInt(networkId, 10)
+
+    if (event.networkId === networkId) {
+      return
+    }
+
     event.networkId = networkId
+
     this.setState({
       event
     }, () => {
-      this.doGenericUpdateEvent({ id: event.id, networkId }, `Network is now ${networkName}`)
+      this.doGenericUpdateEvent({
+        id: event.id,
+        networkId
+      }, `Network is now ${networkName}`)
     })
   }
 
@@ -785,7 +794,10 @@ export const EditEventPage = class _EditEventPage extends Component {
         On &nbsp;
 
         <span className='event-box__variable has-react-select'>
-          <NetworkSelect networkId={this.state.event.networkId} onChangeNetworkId={this.handleChangeNetworkId} />
+          <NetworkSelect
+            networkId={this.state.event.networkId}
+            onChangeNetworkId={this.handleChangeNetworkId}
+          />
         </span>
       </div>
 
@@ -985,6 +997,7 @@ export const EditEventPage = class _EditEventPage extends Component {
 
           {this.isCreateMode() && this.state.createEventModalOpen &&
             <CreateEventModal
+              {...this.props}
               event={this.state.event}
               createEventModalOpen={this.state.createEventModalOpen}
               handleSubmitTitle={this.handleSubmitTitle}

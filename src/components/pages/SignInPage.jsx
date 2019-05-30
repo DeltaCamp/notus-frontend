@@ -153,7 +153,7 @@ export const SignInPage = withCurrentUser(
                             Signing in ... &nbsp;
                             <ButtonLoader />
                           </>
-                        ) : 'Sign In'}
+                        ) : 'Sign in'}
                       </button>
                     </div>
                   </form>

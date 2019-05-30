@@ -46,7 +46,7 @@ export const ActiveButton = class _ActiveButton extends Component {
       >
         {this.props.event.isActive
           ? <><CheckCircle /> Active</>
-          : <><StopCircle /> Not Active</>
+          : <><StopCircle /> Not active</>
         }
       </button>
       <ReactTooltip

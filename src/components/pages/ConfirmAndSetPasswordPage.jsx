@@ -191,10 +191,10 @@ export const ConfirmAndSetPasswordPage =
                         >
                           {this.state.isConfirming ? (
                             <>
-                              Saving Password ... &nbsp;
+                              Saving password ... &nbsp;
                             <ButtonLoader />
                             </>
-                          ) : 'Save Password'}
+                          ) : 'Save password'}
                         </button>
                       </div>
                     </form>

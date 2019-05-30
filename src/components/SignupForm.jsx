@@ -1,159 +1,165 @@
 import React, { Component } from 'react'
+import ReactTimeout from 'react-timeout'
+import { graphql } from 'react-apollo'
 import { Mail } from 'react-feather'
 import { CSSTransition } from 'react-transition-group'
-import { axiosInstance } from '~/../config/axiosInstance'
+import { withRouter } from 'react-router'
+
+import { signUpMutation } from '~/mutations/signUpMutation'
 import { getSystemInfo } from '~/utils/getSystemInfo'
+import { signupHelper } from '~/utils/signupHelper'
+
+const debug = require('debug')('notus:components:SignupForm')
 
 export const SignupForm =
-  class _SignupForm extends Component {
-    state = {
-      email: '',
-      success: false
-    }
-
-    constructor (props) {
-      super(props)
-
-      this.inputRef = React.createRef()
-    }
-
-    componentDidMount () {
-      const { mobileOS } = getSystemInfo()
-      const touch = (mobileOS === 'iOS' || mobileOS === 'Android')
-
-      if (!touch && this.props.autoFocus) {
-        this.inputRef.current.focus()
-      }
-    }
-
-    doSignup = async () => {
-      const { email } = this.state
-
-      if (email) {
-        // check if email and appName exists in DB, if yes:
-        // - name already registered, check email used to sign up
-        // - also could re-send email w/ API key if app name matches email provided
-
-        // if no:
-        // - create a new app in the db and hook it up to this email address
-        // - on the API server, send an email to the newly signed up user
-        // console.log(process.env.REACT_APP_NOTUS_API_URI)
-
-        await axiosInstance.post(
-          `${process.env.REACT_APP_NOTUS_API_URI}/users`,
-          {
-            email: this.state.email
+  graphql(signUpMutation, { name: 'signUp' })(
+    withRouter(
+      ReactTimeout(
+        class _SignupForm extends Component {
+          state = {
+            email: '',
+            success: false
           }
-        ).then(() => {
-          this.props.setSuccess()
 
-          this.setState({
-            success: true,
-            isSigningUp: false
-          })
-        }).catch(error => {
-          console.error(error)
-          this.setState({
-            error: true,
-            isSigningUp: false
-          })
-        })
-      }
-    }
+          constructor (props) {
+            super(props)
 
-    handleSignupSubmit = (e) => {
-      e.preventDefault()
+            this.inputRef = React.createRef()
+          }
 
-      this.setState({
-        error: false,
-        isSigningUp: true
-      }, this.doSignup)
-    }
+          componentDidMount () {
+            const { mobileOS } = getSystemInfo()
+            const touch = (mobileOS === 'iOS' || mobileOS === 'Android')
 
-    activate = (active) => {
-      this.setState({ active: true })
-    }
+            if (!touch && this.props.autoFocus) {
+              this.inputRef.current.focus()
+            }
+          }
 
-    deactivate = (active) => {
-      this.setState({ active: false })
-    }
+          doSignup = async () => {
+            debug('doSignUp')
 
-    render () {
-      const thankYou = (
-        <div className='accordion accordion--signup-thank-you'>
-          <div className='signup-message has-text-weight-semibold'>
-            <Mail className='icon--signup' />
-            Thanks! We've invited: <strong>'{this.state.email}'</strong>
-            <div className='is-size-7 signup-message--footer has-text-weight-semibold'>
-              (Can't find it? Check your spam and 'Updates' folders as well!)
-            </div>
-          </div>
-        </div>
-      )
+            signupHelper(this)
+          }
 
-      const form = (
-        <div className='accordion accordion-enter-done accordion--signup-form'>
-          <form
-            onSubmit={this.handleSignupSubmit}
-            className={`form is-tall ${this.state.active && 'is-active'}`}
-          >
-            <div className='field has-addons'>
-              <div className='control is-expanded'>
-                <input
-                  ref={this.inputRef}
-                  placeholder='Enter your email'
-                  type='email'
-                  className='input is-white'
-                  onFocus={this.activate}
-                  onBlur={this.deactivate}
-                  onMouseOver={this.activate}
-                  onMouseOut={this.deactivate}
-                  onChange={(e) => { this.setState({ email: e.target.value }) }}
-                  value={this.state.email}
-                />
+          handleSignupSubmit = (e) => {
+            e.preventDefault()
+
+            this.setState({
+              signingUp: true
+            }, this.doSignup)
+          }
+
+          // doSignup = async () => {
+          //   const { email } = this.state
+
+          //   this.props.setSuccess()
+
+          //   this.setState({
+          //     success: true,
+          //     signingUp: false
+          //   })
+
+          //   this.setState({
+          //     signingUp: false
+          //   })
+          // }
+
+          handleSignupSubmit = (e) => {
+            e.preventDefault()
+
+            this.setState({
+              signingUp: true
+            }, this.doSignup)
+          }
+
+          activate = (active) => {
+            this.setState({ active: true })
+          }
+
+          deactivate = (active) => {
+            this.setState({ active: false })
+          }
+
+          render () {
+            const thankYou = (
+              <div className='accordion accordion--signup-thank-you'>
+                <div className='signup-message has-text-weight-semibold'>
+                  <Mail className='icon--signup' />
+                  Thanks! We've invited: <strong>'{this.state.email}'</strong>
+                  <div className='is-size-7 signup-message--footer has-text-weight-semibold'>
+                    (Can't find it? Check your spam and 'Updates' folders as well!)
+                  </div>
+                </div>
               </div>
-              <div className='control'>
-                <button
-                  type='submit'
-                  className='button'
-                  onFocus={this.activate}
-                  onBlur={this.deactivate}
-                  onMouseOver={this.activate}
-                  onMouseOut={this.deactivate}
+            )
+
+            const form = (
+              <div className='accordion accordion-enter-done accordion--signup-form'>
+                <form
+                  onSubmit={this.handleSignupSubmit}
+                  className={`form is-tall ${this.state.active && 'is-active'}`}
                 >
-                  Get Started
-                </button>
+                  <div className='field has-addons'>
+                    <div className='control is-expanded'>
+                      <input
+                        ref={this.inputRef}
+                        placeholder='Enter your email'
+                        type='email'
+                        className='input is-white'
+                        onFocus={this.activate}
+                        onBlur={this.deactivate}
+                        onMouseOver={this.activate}
+                        onMouseOut={this.deactivate}
+                        onChange={(e) => { this.setState({ email: e.target.value }) }}
+                        value={this.state.email}
+                      />
+                    </div>
+                    <div className='control'>
+                      <button
+                        type='submit'
+                        className='button'
+                        onFocus={this.activate}
+                        onBlur={this.deactivate}
+                        onMouseOver={this.activate}
+                        onMouseOut={this.deactivate}
+                      >
+                        Get started
+                      </button>
+                    </div>
+                  </div>
+                  {/* <div className='control checkbox'>
+                                          <label htmlFor='newsletter'>
+                                            <input id='newsletter' className='checkbox-input' type='checkbox' />Stay
+                                            up-to-date with our newsletter
+                                        </label>
+                                        </div> */}
+
+                </form>
               </div>
-            </div>
-            {/* <div className='control checkbox'>
-                                    <label htmlFor='newsletter'>
-                                      <input id='newsletter' className='checkbox-input' type='checkbox' />Stay
-                                      up-to-date with our newsletter
-                                  </label>
-                                  </div> */}
+            )
 
-          </form>
-        </div>
+            return (
+              <div>
+                <CSSTransition
+                  timeout={600}
+                  classNames='accordion'
+                  in={!this.state.success}
+                >
+                  {state => form}
+                </CSSTransition>
+
+                <CSSTransition
+                  timeout={600}
+                  classNames='accordion'
+                  in={this.state.success}
+                >
+                  {state => thankYou}
+                </CSSTransition>
+              </div>
+            )
+          }
+        }
       )
-
-      return (
-        <div>
-          <CSSTransition
-            timeout={600}
-            classNames='accordion'
-            in={!this.state.success}
-          >
-            {state => form}
-          </CSSTransition>
-
-          <CSSTransition
-            timeout={600}
-            classNames='accordion'
-            in={this.state.success}
-          >
-            {state => thankYou}
-          </CSSTransition>
-        </div>
-      )
-    }
-  }
+    )
+  )

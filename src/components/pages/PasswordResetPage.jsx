@@ -113,7 +113,7 @@ export const PasswordResetPage =
                       Resetting ... &nbsp;
                             <ButtonLoader />
                     </>
-                  ) : 'Reset Password'}
+                  ) : 'Reset password'}
                 </button>
               </div>
             </form>

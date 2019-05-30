@@ -216,8 +216,6 @@ withApollo(
                 />
               </div>
 
-              <hr />
-
               <div className='field'>
                 <button
                   className='button is-full-width'
@@ -247,20 +245,20 @@ withApollo(
               </div>
 
               <div className='buttons mt30 has-text-right has-margin-left-auto'>
-                <button
-                  onClick={this.handleCancel}
-                  className='button is-outlined is-light'
-                >
-                  Cancel
-                </button>
-                
                 <ReactTooltip
                   id='new-admin-contract-form-hint'
                   place='top'
                   effect='solid'
                 />
 
-                <div
+                <button
+                  onClick={this.handleCancel}
+                  className='button is-outlined is-light '
+                >
+                  Cancel
+                </button>
+
+                <span
                   data-for='new-admin-contract-form-hint'
                   data-tip={this.invalid() ? this.invalidMessage() : ''}
                 >
@@ -271,9 +269,9 @@ withApollo(
                   >
                     <CheckCircle
                       className='has-stroke-white'
-                    />&nbsp;Save
+                    />&nbsp;Save contract
                   </button>
-                </div>
+                </span>
               </div>
             </div>
           )

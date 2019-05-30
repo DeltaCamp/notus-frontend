@@ -34,7 +34,12 @@ export const EventAction =
     }
 
     render () {
-      const usersEmail = this.props.currentUserData?.currentUser?.email
+      const { currentUserData } = this.props
+      const email = currentUserData?.currentUser?.email || ''
+      const emailOrMessage = currentUserData?.currentUser?.confirmedAt ?
+        email :
+        `Check your '${email}' inbox to confirm email address first`
+
       let form
       if (this.props.callWebhook) {
         form =
@@ -107,7 +112,7 @@ export const EventAction =
                   onChange={this.onChangeSendEmail}
                   color='link'
                 >
-                  send me an email <span className='has-text-lighter'> - {usersEmail}</span>
+                  send me an email <span className='has-text-lighter'> - {emailOrMessage}</span>
                 </Switch>
 
                 <Switch

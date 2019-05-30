@@ -102,9 +102,9 @@ export const EditEventButtons =
                     notEventAuthorButtons = (
                       <Link
                         to={createEventFromParentRoute}
-                        className='button is-small is-success has-fat-icons'
+                        className='button is-small is-link is-outlined has-fat-icons'
                       >
-                        <Plus /> &nbsp;Create Event From This One
+                        <Plus /> &nbsp;Create event from this one
                       </Link>
                     )
                   }
@@ -116,6 +116,7 @@ export const EditEventButtons =
                       isOpen={this.state.isConfirmingDelete}
                       handleClose={this.handleCloseConfirmDeleteModal}
                       isSmall
+                      height={460}
                     >
                       <div className='has-text-centered'>
                         <h5 className='is-size-5 has-text-weight-normal'>
@@ -127,13 +128,13 @@ export const EditEventButtons =
                             className='button is-small is-outlined is-light'
                             onClick={this.handleCloseConfirmDeleteModal}
                           >
-                            No
+                            Cancel
                           </button>
                           <button
                             className='button is-small is-danger'
                             onClick={this.handleDelete}
                           >
-                            Yes
+                            Delete event
                           </button>
                         </div>
                       </div>
@@ -147,7 +148,7 @@ export const EditEventButtons =
                             className='button is-success has-fat-icons'
                             disabled={this.props.isSubmitting}
                           >
-                            <Plus />&nbsp;Create Event
+                            <Plus />&nbsp;Create event
                           </button>
                         )
                         : (
@@ -161,6 +162,7 @@ export const EditEventButtons =
 
                     {!this.props.isCreateMode() && (
                       <>
+                        <br />
                         <button
                           className={classnames(
                             'button',
@@ -170,7 +172,7 @@ export const EditEventButtons =
                           )}
                           onClick={this.handleOpenConfirmDeleteModal}
                         >
-                          <AlertTriangle /> &nbsp;Delete
+                          <AlertTriangle /> &nbsp;Delete event
                         </button>
                       </>
                     )}

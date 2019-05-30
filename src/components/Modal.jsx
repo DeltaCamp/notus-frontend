@@ -12,7 +12,8 @@ export const Modal = ReactTimeout(class _Modal extends Component {
     children: PropTypes.object.isRequired,
     isSmall: PropTypes.bool,
     isLarge: PropTypes.bool,
-    className: PropTypes.string
+    className: PropTypes.string,
+    height: PropTypes.number
   }
 
   componentDidMount () {
@@ -47,6 +48,7 @@ export const Modal = ReactTimeout(class _Modal extends Component {
             'is-active-enter': isOpen && isReady
           }
         )}
+        style={{ height: this.props.height || 'auto' }}
       >
         <div className='modal-background' onClick={handleClose} />
         <div className='modal-content'>

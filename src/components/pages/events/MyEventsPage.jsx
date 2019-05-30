@@ -129,7 +129,7 @@ export const MyEventsPage =
                     className='button is-small is-info mt30'
                     onClick={this.fetchMore}
                   >
-                    Load More
+                    Load more
                   </button>
               }
 
@@ -142,10 +142,10 @@ export const MyEventsPage =
                           You haven't created any events.
                         </h2>
                         <Link
-                          className='button mt20 is-purple'
+                          className='button mt20 is-link'
                           to={routes.NEW_EVENT}
                         >
-                          Create Event
+                          Create your first event
                         </Link>
                       </>
                     ) : (
@@ -155,7 +155,7 @@ export const MyEventsPage =
                             className='button is-small mt20 is-link is-outlined has-fat-icons'
                             to={routes.NEW_EVENT}
                           >
-                            <Plus /> &nbsp;Create Event
+                            <Plus /> &nbsp;Create event
                           </Link>
                         </div>
 

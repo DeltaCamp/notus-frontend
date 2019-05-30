@@ -10,10 +10,10 @@ import { FooterContainer } from '~/components/layout/Footer'
 import { ButtonLoader } from '~/components/ButtonLoader'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { signUpMutation } from '~/mutations/signUpMutation'
-import { notusToast } from '~/utils/notusToast'
+import { signupHelper } from '~/utils/signupHelper'
 import * as routes from '~/../config/routes'
 
-const debug = require('debug')('notus:SignUpPage')
+const debug = require('debug')('notus:components:SignUpPage')
 
 export const SignUpPage =
   graphql(signUpMutation, { name: 'signUp' })(
@@ -27,51 +27,7 @@ export const SignUpPage =
       doSignup = async () => {
         debug('doSignUp')
         
-        if (!this.state.email) {
-          notusToast.info('Please enter your email address')
-        }
-
-        this.setState({
-          signingUp: true
-        })
-
-        this.props.signUp({
-          variables: {
-            email: this.state.email
-          },
-          refetchQueries: ['currentUserQuery']
-        }).then((mutationResult) => {
-          debug('mutationResult', mutationResult)
-          const { signUp } = mutationResult.data
-
-          if (signUp.previouslySignedUp) {
-            // notusToast.error('Already signed up? Check your email for the account confirmation link.')
-
-            this.props.setTimeout(() => {
-              this.setState({
-                success: true,
-                signingUp: false
-              })
-            }, 500)
-          } else if (signUp.signedIn) {
-            notusToast.info('Account created successfully, welcome to Notus!')
-            this.props.history.push(routes.MY_EVENTS)
-          } else {
-            // shouldn't end up here
-            debug('unhandled mutationResult', mutationResult)
-          }
-        }).catch(error => {
-          debug(error)
-
-          this.props.setTimeout(() => {
-            this.setState({
-              success: false,
-              signingUp: false
-            })
-          }, 1000)
-
-          notusToast.info(error.message)
-        })
+        signupHelper(this)
       }
 
       handleSignupSubmit = (e) => {
@@ -138,7 +94,7 @@ export const SignUpPage =
                         Signing up ... &nbsp;
                               <ButtonLoader />
                       </>
-                    ) : 'Sign Up'}
+                    ) : 'Sign up'}
                   </button>
                 </div>
               </form>

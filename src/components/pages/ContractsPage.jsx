@@ -123,7 +123,7 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
               className='button is-small is-link is-outlined mt30'
               onClick={this.fetchMore}
             >
-              Load More
+              Load more
             </button>
         }
 
@@ -199,7 +199,7 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
                     className='button is-small is-info is-outlined has-fat-icons mt20'
                     onClick={this.handleShowAddContractModal}
                   >
-                    <Plus /> &nbsp;Create Contract
+                    <Plus /> &nbsp;Create contract
                   </button>
                 </div>
 

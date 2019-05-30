@@ -139,7 +139,7 @@ export const ContractForm = graphql(createAbiMutation, { name: 'createAbiMutatio
             >
               <CheckCircle
                 className='has-stroke-white'
-              />&nbsp;Save
+              />&nbsp;Save contract
             </button>
           </div>
         </div>

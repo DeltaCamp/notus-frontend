@@ -33,10 +33,26 @@ export const CreateEventModal = class _CreateEventModal extends Component {
   }
 
   render () {
+    const { currentUserData } = this.props
+
+    // const networkName = <NetworkName networkId={this.props.event.networkId} />
+    // console.log(networkName)
+    // console.log(networkName.toString())
+    // debug(<NetworkName networkId={this.props.event.networkId} />)
+
+    const networkName = <NetworkName networkId={this.props.event.networkId} />
+    // console.log(networkName)
+    // console.log('wtf!')
+    // console.log(networkName)
+
+    const email = currentUserData?.currentUser?.email || ''
+    
+
     return (
       <>
         <Modal
-        isLarge
+          isSmall
+          height={660}
           isOpen={this.props.createEventModalOpen}
           handleClose={this.props.handleCloseCreateEventModal}
         >
@@ -64,7 +80,15 @@ export const CreateEventModal = class _CreateEventModal extends Component {
             <br />
 
             <p>
-              <strong>NOTE:</strong> This event will start reacting to <NetworkName networkId={this.props.event.networkId} /> immediately!
+              <strong>NOTE:</strong>&nbsp;
+              {currentUserData?.currentUser?.confirmedAt ?
+                <>
+                  This event will start reacting to the <strong>'{networkName}'</strong> network immediately!
+                </> :
+                <>
+                  You will need to <strong>confirm your '{email}' email address</strong> prior to this event reacting to {networkName}.
+                </>
+              }
             </p>
 
             <div className='buttons has-text-centered'>
@@ -73,7 +97,7 @@ export const CreateEventModal = class _CreateEventModal extends Component {
                 className='button is-success has-fat-icons'
                 disabled={this.props.isSubmitting}
               >
-                <Plus />&nbsp;Create
+                <Plus />&nbsp;Create event
               </button>
             </div>
           </div>

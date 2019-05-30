@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
 
@@ -11,7 +11,12 @@ export const NetworkName = graphql(networkQuery, { name: 'networkQuery' })(
     }
 
     render () {
-      const { loading, network } = this.props.networkQuery
+      const {
+        // loading,
+        network
+      } = this.props.networkQuery
+      
+
       if (network) {
         return network.name
       } else {

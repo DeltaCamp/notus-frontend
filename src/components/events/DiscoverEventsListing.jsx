@@ -92,7 +92,7 @@ export const DiscoverEventsListing =
             <button
               className='button is-small is-light mt30'
               onClick={this.fetchMore}
-            >Load More</button>
+            >Load more</button>
           </p>
         }
 

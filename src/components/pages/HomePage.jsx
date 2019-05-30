@@ -28,10 +28,7 @@ export class HomePage extends Component {
           <HomeBetaNotice />
         </section>
 
-        <HomeSignupFooterCTA
-          setSuccess={this.setSuccess}
-          success={this.state.success}
-        />
+        <HomeSignupFooterCTA />
 
         <FooterContainer />
       </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
-import { graphql } from 'react-apollo'
+import { graphql, withApollo } from 'react-apollo'
 
 import { EditEventPage } from '~/components/pages/events/EditEventPage'
 import { IsAuthed } from '~/components/IsAuthed'
@@ -25,20 +25,22 @@ export const EditEventPageWrapper =
         variables: { id: parseInt(props.match.params.eventId, 10) }
       })
     })(
-      graphql(createEventMutation, { name: 'createEventMutation' })(
-        graphql(updateEventMutation, { name: 'updateEventMutation' })(
-          graphql(deleteEventMutation, { name: 'deleteEventMutation' })(
-            graphql(createMatcherMutation, { name: 'createMatcherMutation' })(
-              graphql(updateMatcherMutation, { name: 'updateMatcherMutation' })(
-                graphql(destroyMatcherMutation, { name: 'destroyMatcherMutation' })(
-                  graphql(createWebhookHeaderMutation, { name: 'createWebhookHeaderMutation' })(
-                    graphql(updateWebhookHeaderMutation, { name: 'updateWebhookHeaderMutation' })(
-                      graphql(destroyWebhookHeaderMutation, { name: 'destroyWebhookHeaderMutation' })(
-                        ReactTimeout(class _EditEventPageWrapper extends Component {
-                          render () {
-                            return <EditEventPage {...this.props} />
-                          }
-                        })
+      withApollo(
+        graphql(createEventMutation, { name: 'createEventMutation' })(
+          graphql(updateEventMutation, { name: 'updateEventMutation' })(
+            graphql(deleteEventMutation, { name: 'deleteEventMutation' })(
+              graphql(createMatcherMutation, { name: 'createMatcherMutation' })(
+                graphql(updateMatcherMutation, { name: 'updateMatcherMutation' })(
+                  graphql(destroyMatcherMutation, { name: 'destroyMatcherMutation' })(
+                    graphql(createWebhookHeaderMutation, { name: 'createWebhookHeaderMutation' })(
+                      graphql(updateWebhookHeaderMutation, { name: 'updateWebhookHeaderMutation' })(
+                        graphql(destroyWebhookHeaderMutation, { name: 'destroyWebhookHeaderMutation' })(
+                          ReactTimeout(class _EditEventPageWrapper extends Component {
+                            render () {
+                              return <EditEventPage {...this.props} />
+                            }
+                          })
+                        )
                       )
                     )
                   )

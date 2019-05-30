@@ -81,7 +81,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 onClick={this.closeMobileNav}
                 activeClassName='is-active'
               >
-              Sign In
+              Sign in
               </NavLink>
               <NavLink
                 exact
@@ -90,7 +90,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 onClick={this.closeMobileNav}
                 activeClassName='is-active'
               >
-                Sign Up
+                Sign up
               </NavLink>
             </>
           } else {
@@ -103,7 +103,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   onClick={this.closeMobileNav}
                   activeClassName='is-active'
                 >
-                  <Send className='navbar-item--icon' /> Go To App
+                  <Send className='navbar-item--icon' /> Go to App
                 </NavLink>
                 <NavLink
                   exact
@@ -118,7 +118,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   className='navbar-item button hide-on-home'
                   onClick={this.handleSignOut}
                 >
-                  <Power className='navbar-item--icon' /> Sign Out
+                  <Power className='navbar-item--icon' /> Sign out
                 </button>
               </>
             )
