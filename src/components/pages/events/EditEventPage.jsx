@@ -795,7 +795,7 @@ export const EditEventPage = class _EditEventPage extends Component {
 
         <span className='event-box__variable has-react-select'>
           <NetworkSelect
-            networkId={this.state.event.networkId}
+            networkId={parseInt(this.state.event.networkId, 10)}
             onChangeNetworkId={this.handleChangeNetworkId}
           />
         </span>

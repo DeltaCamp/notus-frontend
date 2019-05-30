@@ -10,6 +10,7 @@ export const contractFragment = gql`
     abi {
       ...abiFragment
     }
+    networkId
     createdAt
     updatedAt
     deletedAt

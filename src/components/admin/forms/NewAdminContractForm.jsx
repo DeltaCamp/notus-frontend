@@ -15,6 +15,7 @@ import { showErrorMessage } from '~/utils/showErrorMessage'
 import { etherscanAbiQuery } from '~/queries/etherscanAbiQuery'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
+import { NetworkSelect } from '~/components/forms/NetworkSelect'
 
 export const NewAdminContractForm = 
 withApollo(
@@ -25,6 +26,7 @@ withApollo(
           contract: {
             address: '',
             name: '',
+            networkId: 1,
             abi: {
               name: '',
               abi: ''
@@ -68,6 +70,15 @@ withApollo(
               abi: {
                 abi: e.target.value
               }
+            }
+          })
+        }
+
+        handleNetworkIdChange = (networkId, networkName) => {
+          this.setState({
+            contract: {
+              ...this.state.contract,
+              networkId: parseInt(networkId, 10)
             }
           })
         }
@@ -174,7 +185,17 @@ withApollo(
             return
           }
 
-          const response = await this.props.client.query({ query: etherscanAbiQuery, variables: { address: this.state.contract.address }})
+          const variables = {
+            address: this.state.contract.address,
+            networkId: this.state.contract.networkId
+          }
+
+          console.log(variables)
+
+          const response = await this.props.client.query({
+            query: etherscanAbiQuery,
+            variables
+          })
           
           const { abiString } = response.data.etherscanAbi
 
@@ -201,9 +222,18 @@ withApollo(
               <div className='field'>
                 <AddressInput
                   onChange={this.handleAddressChange}
-                  placeholder={`Contract Address (Mainnet)`}
+                  placeholder={`Contract Address`}
                   value={this.state.contract.address}
                 />
+              </div>
+
+              <div className='field'>
+                <span className='event-box__variable has-react-select is-full-width'>
+                  <NetworkSelect
+                    onChangeNetworkId={this.handleNetworkIdChange}
+                    networkId={parseInt(this.state.contract.networkId, 10)}
+                  />
+                </span>
               </div>
 
               <div className='field'>
