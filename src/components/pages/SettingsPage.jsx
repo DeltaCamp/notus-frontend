@@ -94,7 +94,6 @@ export const SettingsPage =
                   debug(currentUser)
                   
                   confirmedAt = currentUser.confirmedAt || ''
-                  console.log(confirmedAt)
                   email = currentUser.email || ''
                   name = currentUser.name || ''
                   etherscan_api_key = currentUser.etherscan_api_key || ''
