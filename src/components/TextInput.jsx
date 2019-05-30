@@ -12,7 +12,8 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
     handleSubmit: PropTypes.func.isRequired,
     handleStartEditing: PropTypes.func,
     required: PropTypes.bool,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    disabled: PropTypes.bool
   }
 
   static defaultProps = {
@@ -74,9 +75,7 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
   }
 
   render () {
-    const props = {
-      ...this.props
-    }
+    const props = {}
 
     if (this.props.required) {
       props['data-tip'] = !this.valid() ? 'Please enter a value' : this.state.value
@@ -101,6 +100,7 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
         onBlur={this.handleBlur}
         onKeyUp={this.handleKeyUp}
         onClick={this.handleClick}
+        disabled={this.props.disabled}
       />
     )
   }

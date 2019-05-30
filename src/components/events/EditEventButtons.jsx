@@ -6,6 +6,7 @@ import { AlertTriangle, Plus } from 'react-feather'
 import { formatRoute } from 'react-router-named-routes'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
+
 import { IsAuthed } from '~/components/IsAuthed'
 import { Modal } from '~/components/Modal'
 import { deleteEventMutation } from '~/mutations/deleteEventMutation'
