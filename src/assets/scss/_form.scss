@@ -237,9 +237,14 @@ label.radio,
   transition: color 200ms ease-in-out;
 }
 
+// .form.is-tall .input,
+// .form.is-tall .button,
+// .form.is-tall .react-select {
+//   height: $form-input-height-tall;
+// }
+
 .form.is-tall .input,
-.form.is-tall .button,
-.form.is-tall .react-select {
+.form.is-tall .button {
   height: $form-input-height-tall;
 }
 
@@ -452,8 +457,13 @@ input.input.is-large {
   }
 }
 
-.select select,
-.react-select {
+// .select select,
+// .react-select {
+//   height: $form-input-height !important;
+//   line-height: 2;
+// }
+
+.select select {
   height: $form-input-height !important;
   line-height: 2;
 }
@@ -475,10 +485,10 @@ input.input.is-large {
   margin-bottom: 0;
   line-height: 1.3;
   font-size: inherit;
-  overflow-y: auto;
-  overflow-x: hidden;
+  // overflow-y: auto;
+  // overflow-x: hidden;
   z-index: 30000;
-  width: 120%;
+  // width: 120%;
 
   @media screen and (max-width: $widescreen) {
     width: 100%;

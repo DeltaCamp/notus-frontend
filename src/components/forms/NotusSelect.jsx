@@ -37,11 +37,11 @@ const Blanket = props => (
   />
 );
 const Dropdown = ({ children, isOpen, target, onClose }) => (
-  <div style={{ position: 'relative' }}>
+  <span style={{ display: 'inline-block', position: 'relative' }}>
     {target}
     {isOpen ? <Menu>{children}</Menu> : null}
     {isOpen ? <Blanket onClick={onClose} /> : null}
-  </div>
+  </span>
 );
 const Svg = p => (
   <svg
@@ -75,20 +75,20 @@ const ChevronDown = () => (
 );
 
 export const NotusSelect = class _NotusSelect extends Component {
-  state = { isOpen: false, value: undefined };
+  state = { isOpen: false };
 
   toggleOpen = () => {
     this.setState(state => ({ isOpen: !state.isOpen }));
   };
 
   onSelectChange = value => {
-    this.toggleOpen();
-    this.setState({ value });
+    this.toggleOpen()
+    this.props.onChange(value)
+  //   this.setState({ value });
   };
 
   render () {
-    const { isOpen, value } = this.state;
-
+    const { isOpen } = this.state;
 
     return (
       <Dropdown
@@ -105,13 +105,13 @@ export const NotusSelect = class _NotusSelect extends Component {
               }
             )}
           >
-            {value ? value.label : 'Select'} <ChevronDown />
+            {this.props.value ? this.props.value.label : '...'} <ChevronDown />
           </button>
         }
       >
         <Select
           {...this.props}
-          autoFocus
+          // autoFocus
           backspaceRemovesValue={false}
           components={{ DropdownIndicator, IndicatorSeparator: null }}
           controlShouldRenderValue={false}
@@ -126,11 +126,11 @@ export const NotusSelect = class _NotusSelect extends Component {
           // onClose={this.toggleOpen}
           // menuPlacement='auto'
           className={`react-select ${this.props.className || ''}`}
-          // classNamePrefix='react-select'
+          classNamePrefix='react-select'
           // isSearchable={this.state.focused}
         />
       </Dropdown>
     )
   }
     
-  }
+}

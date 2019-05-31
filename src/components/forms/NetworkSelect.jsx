@@ -45,6 +45,7 @@ export const NetworkSelect = graphql(networksQuery, {
       })
 
       debug(`networkId: ${networkId} value: `, value)
+      console.log(value)
 
       return <NotusSelect
         {...this.props}
