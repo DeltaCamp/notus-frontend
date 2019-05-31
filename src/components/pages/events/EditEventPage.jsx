@@ -786,12 +786,12 @@ export const EditEventPage = class _EditEventPage extends Component {
       <div className='event-box__variable-wrapper'>
         On &nbsp;
 
-        <span className='event-box__variable has-react-select'>
+        {/* <span className='event-box__variable has-react-select'> */}
           <NetworkSelect
             networkId={parseInt(this.state.event.networkId, 10)}
             onChangeNetworkId={this.handleChangeNetworkId}
           />
-        </span>
+        {/* </span> */}
       </div>
 
     const matcherSentences = (
