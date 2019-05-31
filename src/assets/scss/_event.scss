@@ -351,10 +351,13 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   }
 }
 
-// .event-box__variable svg {
-//   margin-right: 7px;
-//   margin-top: -2px;
-// }
+.event-box__variable.event-box__variable-disabled,
+.event-box__variable.event-box__variable-disabled:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: white !important;
+  opacity: 0.3;
+}
 
 .event-box__variable--full-width {
   max-width: 100%;

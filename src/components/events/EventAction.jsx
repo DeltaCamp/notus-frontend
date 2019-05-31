@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Switch from 'react-bulma-switch'
 import { Plus } from 'react-feather'
 
+import { PublishButton } from '~/components/events/PublishButton'
 import { WebhookUrlInput } from '~/components/forms/WebhookUrlInput'
 import { WebhookBodyInput } from '~/components/forms/WebhookBodyInput'
 import { WebhookHeaderForm } from '~/components/forms/WebhookHeaderForm'
@@ -107,6 +108,11 @@ export const EventAction =
           <div className='container'>
             <div className='row'>
               <div className='col-xs-12'>
+                <PublishButton
+                  event={this.props.event}
+                  handleTogglePublish={this.props.handleTogglePublish}
+                />
+                
                 <Switch
                   value={this.props.sendEmail}
                   onChange={this.onChangeSendEmail}

@@ -10,8 +10,6 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import { Plus } from 'react-feather'
 import { sample, omit } from 'lodash'
 
-import { ActiveButton } from '~/components/events/ActiveButton'
-import { PublishButton } from '~/components/events/PublishButton'
 import { CreateEventModal } from '~/components/events/CreateEventModal'
 import { EditEventButtons } from '~/components/events/EditEventButtons'
 import { EventAction } from '~/components/events/EventAction'
@@ -297,20 +295,15 @@ export const EditEventPage = class _EditEventPage extends Component {
     })
   }
 
-  handleToggleActive = () => {
-    const isActive = !this.state.event.isActive
-    const event = {
-      ...this.state.event,
-      isActive
-    }
-    this.setState({
-      event
-    }, () => {
-      this.doGenericUpdateEvent({id: event.id, isActive }, `Event ${isActive ? 'is active' : 'no longer active'}`)
-    })
-  }
-
   handleTogglePublish = () => {
+    console.log('toggle publish')
+    const { currentUser } = this.props
+    if (currentUser && !currentUser.confirmedAt) {
+      notusToast.info(`You will need to confirm your ${currentUser.email} email address before you can publish the event`)
+      this.props.history.push(routes.ACCOUNT_SETTINGS)
+      return
+    }
+
     const isPublic = !this.state.event.isPublic
     const event = {
       ...this.state.event,
@@ -319,7 +312,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.setState({
       event
     }, () => {
-      this.doGenericUpdateEvent(event, `Event is ${isPublic ? 'public' : 'no longer public'}`)
+      this.doGenericUpdateEvent(event, `Event is now ${isPublic ? 'visible to everyone' : 'now only visible to you'}`)
     })
   }
 
@@ -912,22 +905,6 @@ export const EditEventPage = class _EditEventPage extends Component {
                           handleSubmitTitle={this.handleSubmitTitle}
                         />
                       </div>
-
-                      <div className='col-xs-12 col-sm-6 col-xl-4 is-flex'>
-                        <div className='justify-content-flex-end'>
-                              <div className="buttons">
-                                <ActiveButton
-                                  event={this.state.event}
-                                  handleToggleActive={this.handleToggleActive}
-                                />
-
-                                <PublishButton
-                                  event={this.state.event}
-                                  handleTogglePublish={this.handleTogglePublish}
-                                />
-                              </div>
-                        </div>
-                      </div>
                     </div>
                   }
 
@@ -982,6 +959,7 @@ export const EditEventPage = class _EditEventPage extends Component {
               {...this.props}
               event={this.state.event}
               sendEmail={this.state.event.sendEmail}
+              handleTogglePublish={this.handleTogglePublish}
               callWebhook={this.state.event.callWebhook}
               webhookUrl={this.state.event.webhookUrl}
               webhookBody={this.state.event.webhookBody}

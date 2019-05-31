@@ -43,7 +43,7 @@ button[disabled] {
 
 .button.is-xsmall {
   border-radius: 100px;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   height: auto;
   padding: 0.2rem 1rem 0.3rem;
 }
@@ -68,7 +68,7 @@ form.is-tall .button.is-text.is-xsmall,
   color: $blue;
   height: auto;
   min-width: auto;
-  padding: 0;
+  padding: 3px 0;
 }
 
 form.is-tall .button.is-text.is-xsmall[disabled],
