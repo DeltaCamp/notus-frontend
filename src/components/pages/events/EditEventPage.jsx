@@ -87,7 +87,9 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   eventEntityToDto(event) {
     event = this.scrubEvent(event)
-    event.abiEventId = parseInt(event.abiEventId, 10)
+    if (event.abiEventId !== undefined) {
+      event.abiEventId = parseInt(event.abiEventId, 10)
+    }
     
     if (event.matchers) {
       event.matchers = event.matchers.map(matcher => this.matcherEntityToDto(matcher))
@@ -104,6 +106,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       event,
       '__typename',
       'createdAt',
+      'contract',
       'updatedAt',
       'contract',
       'parent',
@@ -112,35 +115,12 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   handleSubmitTitle = (newEventTitle, callback) => {
-    if (this.isCreateMode()) {
-      this.setState({
-        event: {
-          ...this.state.event,
-          title: newEventTitle
-        }
-      }, () => {
-        if (callback) {
-          callback()
-        }
-      })
-    } else {
-      const variables = {
-        event: {
-          id: this.state.event.id,
-          title: newEventTitle
-        }
-      }
-      const successCallback = ({ data: { updateEvent } }) => {
-        this.setState({
-          event: {
-            ...this.state.event,
-            ...updateEvent
-          }
-        })
-        notusToast.success('Updated event title')
-      }
-      this.runUpdateEventMutation(variables, successCallback)
-    }
+    this.doGenericUpdateEvent({
+      id: this.state.event.id,
+      title: newEventTitle
+    }, 'Updated event title').then(() => {
+      if (callback) { callback() }
+    })
   }
 
   isCreateMode = () => {
@@ -200,17 +180,10 @@ export const EditEventPage = class _EditEventPage extends Component {
       matcher.order = index
     })
 
-    this.setState({
-      event: {
-        ...this.state.event,
-        matchers
-      }
-    }, () => {
-      this.doGenericUpdateEvent({
-        id: this.state.event.id,
-        matchers
-      }, 'Updated matcher positions')
-    })
+    this.doGenericUpdateEvent({
+      id: this.state.event.id,
+      matchers
+    }, 'Updated matcher positions')
   }
 
   handleSaveEvent = (e) => {
@@ -263,36 +236,13 @@ export const EditEventPage = class _EditEventPage extends Component {
     })
   }
 
-  runUpdateEventMutation (variables, successCallback, errorCallback) {
-    if (!errorCallback) {
-      errorCallback = error => {
-        console.error(error)
-        showErrorMessage(error)
-      }
-    }
-
-    debug('runUpdateEventMutation: ', variables)
-
-    return this.props.updateEventMutation({
-      variables,
-      refetchQueries: [
-        // only refetch the event we just updated (1 record)
-        'eventsQuery'
-      ]
-    }).then(successCallback).catch(errorCallback)
-  }
-
   handleChangeRunCount = () => {
     const runCount = this.state.event.runCount === 0 ? -1 : 0
     const event = {
       ...this.state.event,
       runCount
     }
-    this.setState({
-      event
-    }, () => {
-      this.doGenericUpdateEvent({id: event.id, runCount }, `Event will run ${RunCountTitle(runCount).toLowerCase()}`)
-    })
+    this.doGenericUpdateEvent({id: event.id, runCount }, `Event will run ${RunCountTitle(runCount).toLowerCase()}`)
   }
 
   handleTogglePublish = () => {
@@ -309,11 +259,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       ...this.state.event,
       isPublic
     }
-    this.setState({
-      event
-    }, () => {
-      this.doGenericUpdateEvent(event, `Event is now ${isPublic ? 'visible to everyone' : 'now only visible to you'}`)
-    })
+    this.doGenericUpdateEvent(event, `Event is now ${isPublic ? 'visible to everyone' : 'now only visible to you'}`)
   }
 
   isEditingMatcher = () => {
@@ -409,25 +355,13 @@ export const EditEventPage = class _EditEventPage extends Component {
       contractId = parseInt(contract.id, 10)
     }
 
-    this.setState({
-      event: {
-        ...this.state.event,
-        matchers,
-        scope,
-        contract,
-        contractId,
-        abiEventId
-      }
-    }, () => {
-      if (!this.isCreateMode()) {
-        this.doGenericUpdateEvent({
-          id: this.state.event.id,
-          matchers,
-          scope,
-          contractId,
-          abiEventId
-        })
-      }
+    this.doGenericUpdateEvent({
+      id: this.state.event.id,
+      matchers,
+      scope,
+      contract,
+      contractId,
+      abiEventId
     })
   }
 
@@ -447,20 +381,10 @@ export const EditEventPage = class _EditEventPage extends Component {
       return clone
     })
 
-    this.setState({
-      event: {
-        ...this.state.event,
-        matchers,
-        abiEventId: parseInt(abiEvent.id, 10),
-      }
-    }, () => {
-      if (!this.isCreateMode()) {
-        this.doGenericUpdateEvent({
-          id: this.state.event.id,
-          matchers,
-          abiEventId: parseInt(abiEvent.id, 10),
-        })
-      }
+    this.doGenericUpdateEvent({
+      id: this.state.event.id,
+      matchers,
+      abiEventId: parseInt(abiEvent.id, 10),
     })
   }
 
@@ -618,63 +542,66 @@ export const EditEventPage = class _EditEventPage extends Component {
     }
   }
 
-  doGenericUpdateEvent = (event = this.state.event, successMessage = 'Updated event') => {
-    if (this.isCreateMode()) { return }
+  doGenericUpdateEvent = (event, successMessage = 'Updated event') => {
+    const oldEvent = {...this.state.event}
 
-    event = this.eventEntityToDto(event)
-
-    debug('doGenericUpdateEvent: ', event)
-
-    const variables = {
-      event
+    const newEvent = {
+      ...oldEvent,
+      ...event
     }
 
-    const successCallback = () => {
-      notusToast.success(successMessage)
-    }
+    const eventDto = this.eventEntityToDto(event)
 
-    return this.runUpdateEventMutation(variables, successCallback)
+    debug('doGenericUpdateEvent: ', eventDto)
+
+    this.setState({
+      event: newEvent
+    })
+
+    if (!this.isCreateMode()) {
+      return this.props.updateEventMutation({
+        variables: {
+          event: eventDto
+        },
+        refetchQueries: [
+          // only refetch the event we just updated (1 record)
+          'eventsQuery'
+        ]
+      }).then(() => {
+        notusToast.success(successMessage)
+      }).catch(error => {
+        console.error(error)
+        showErrorMessage(error)
+        this.setState({
+          event: oldEvent
+        })
+      })
+    }
   }
 
   onChangeWebhookUrl = (webhookUrl) => {
     let event = { ...this.state.event }
     event.webhookUrl = webhookUrl
-    this.setState({
-      event
-    }, () => {
-      this.doGenericUpdateEvent({ id: event.id, webhookUrl })
-    })
+    this.doGenericUpdateEvent({ id: event.id, webhookUrl })
   }
 
   onChangeWebhookBody = (webhookBody) => {
     let event = { ...this.state.event }
     event.webhookBody = webhookBody
-    this.setState({
-      event
-    }, () => {
-      this.doGenericUpdateEvent({ id: event.id, webhookBody })
-    })
+    this.doGenericUpdateEvent({ id: event.id, webhookBody })
   }
 
   onChangeCallWebhook = (callWebhook) => {
     let event = { ...this.state.event }
     event.callWebhook = callWebhook
-    this.setState({
-      event
-    }, () => {
-      this.doGenericUpdateEvent({ id: event.id, callWebhook }, `Webhook is now ${callWebhook ? 'active' : 'inactive'}`)
-    })
+    this.doGenericUpdateEvent({ id: event.id, callWebhook }, `Webhook is now ${callWebhook ? 'active' : 'inactive'}`)
   }
 
   onChangeSendEmail = (sendEmail) => {
     let event = { ...this.state.event }
-    // if (event.sendEmail === sendEmail) { return }
+    if (event.sendEmail === sendEmail) { return }
     event.sendEmail = sendEmail
-    this.setState({
-      event
-    }, () => {
-      this.doGenericUpdateEvent({ id: event.id, sendEmail }, sendEmail ? 'Emails are on' : 'Emails are off')
-    })
+    this.doGenericUpdateEvent({ id: event.id, sendEmail }, sendEmail ? 'Emails are on' : 'Emails are off')
   }
 
   handleOpenCreateEventModal = (e) => {
@@ -693,23 +620,12 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   handleChangeNetworkId = (networkId, networkName) => {
     let event = { ...this.state.event }
-
     networkId = parseInt(networkId, 10)
-
     if (event.networkId === networkId) {
       return
     }
-
     event.networkId = networkId
-
-    this.setState({
-      event
-    }, () => {
-      this.doGenericUpdateEvent({
-        id: event.id,
-        networkId
-      }, `Network is now ${networkName}`)
-    })
+    this.doGenericUpdateEvent({ id: event.id, networkId }, `Network is now ${networkName}`)
   }
 
   render () {

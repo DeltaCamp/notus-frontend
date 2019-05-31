@@ -63,9 +63,9 @@ export const WeiInput = ReactTimeout(class _WeiInput extends Component {
     e.preventDefault()
 
     const valueAsWei = this.validate(this.state.value)
-    const prevValueAsWei = ethers.utils.parseEther(this.state.previousValue || '0')
+    const prevValueAsWei = ethers.utils.parseEther(this.state.previousValue)
 
-    if (!valueAsWei.eq(prevValueAsWei)) {
+    if (this.state.value && (!this.props.value || !valueAsWei.eq(prevValueAsWei))) {
       this.setNewPreviousValue()
       this.props.handleSubmit(valueAsWei.toString())
     } else {
