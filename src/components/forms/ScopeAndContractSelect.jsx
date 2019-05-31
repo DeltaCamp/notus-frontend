@@ -6,7 +6,7 @@ import { NotusSelect } from '~/components/forms/NotusSelect'
 import { contractsQuery } from '~/queries/contractsQuery'
 import { SCOPES, SCOPE_LABELS } from '~/constants'
 
-const debug = require('debug')('notus:ScopeAndContractSelect')
+const debug = require('debug')('notus:components:ScopeAndContractSelect')
 
 export const ScopeAndContractSelect = graphql(contractsQuery, {
   name: 'contractsData',

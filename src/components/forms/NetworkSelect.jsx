@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { NotusSelect } from '~/components/forms/NotusSelect'
 import { networksQuery } from '~/queries/networksQuery'
 
-const debug = require('debug')('notus:NetworkSelect')
+const debug = require('debug')('notus:components:NetworkSelect')
 
 export const NetworkSelect = graphql(networksQuery, {
   name: 'networksQuery'
@@ -45,7 +45,6 @@ export const NetworkSelect = graphql(networksQuery, {
       })
 
       debug(`networkId: ${networkId} value: `, value)
-      console.log(value)
 
       return <NotusSelect
         {...this.props}

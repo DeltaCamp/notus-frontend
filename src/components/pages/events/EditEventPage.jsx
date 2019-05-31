@@ -29,7 +29,7 @@ import { showErrorMessage } from '~/utils/showErrorMessage'
 import { SCOPES } from '~/constants'
 import * as routes from '~/../config/routes'
 
-const debug = require('debug')('notus:EditEventPage')
+const debug = require('debug')('notus:components:EditEventPage')
 
 const randomColor = () => {
   return sample([

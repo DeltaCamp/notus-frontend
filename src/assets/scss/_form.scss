@@ -431,7 +431,7 @@ input.input.is-large {
   color: rgba(160, 180, 200, 0.5);
 }
 
-.react-select:hover .react-select__placeholder {
+.react-select .react-select__placeholder:hover {
   color: rgba(160, 180, 200, 1);
 }
 
@@ -487,6 +487,7 @@ input.input.is-large {
   color: black;
   cursor: pointer;
   font-size: 1rem;
+  font-weight: 600;
   margin: 5px;
   padding: 4px 10px;
   width: 96%;

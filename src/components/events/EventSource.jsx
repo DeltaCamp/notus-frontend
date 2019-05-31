@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import { SourceDescription } from '~/components/events/SourceDescription'
 import { ScopeAndContractSelect } from '~/components/forms/ScopeAndContractSelect'
 import { KEYS } from '~/constants'
 
@@ -83,36 +82,18 @@ export const EventSource = class _EventSource extends Component {
   render () {
     return (
       <>
-        {this.state.isEditing
-          ? (
-            <>
-              <span>
-                a
-              </span>
-            
-              <div
-                ref={node => { this.node = node }}
-                className='event-box__variable has-react-select'
-                onKeyUp={this.handleKeyUp}
-              >
-                <ScopeAndContractSelect
-                  scope={this.props.event.scope}
-                  abiEventId={this.props.event.abiEventId}
-                  onChangeScopeAndContractId={this.props.onChangeScopeAndContractId}
-                  onAddAbiEvent={this.showAddContract}
-                  menuIsOpen={this.state.isEditing}
-                  handleStopEditing={this.handleStopEditing}
-                />
-              </div>
-            </>
-          )
-          : (
-            <SourceDescription
-              handleStartEdit={this.handleStartEdit}
-              event={this.props.event}
-            />
-          )
-        }
+        <span>
+          a
+        </span>
+    
+        <ScopeAndContractSelect
+          scope={this.props.event.scope}
+          abiEventId={this.props.event.abiEventId}
+          onChangeScopeAndContractId={this.props.onChangeScopeAndContractId}
+          onAddAbiEvent={this.showAddContract}
+          menuIsOpen={this.state.isEditing}
+          handleStopEditing={this.handleStopEditing}
+        />
       </>
     )
   }

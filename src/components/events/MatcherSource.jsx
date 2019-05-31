@@ -14,6 +14,8 @@ import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidDataTypeOperator } from '~/utils/isValidDataTypeOperator'
 import { KEYS, SOURCES, OPERATORS } from '~/constants'
 
+const debug = require('debug')('notus:components:MatcherSource')
+
 const abiEventInputQuery = gql`
   query abiEventInputQuery($id: Float!) {
     abiEventInput(id: $id) {
@@ -166,6 +168,17 @@ export const MatcherSource = graphql(sourcesQuery, {
           const abiEventInputId = matcher.abiEventInputId || (matcher.abiEventInput || {}).id
           const sourceWords = this.sourceWords()
 
+          debug('MatcherSource matcher: ', matcher)
+
+          return <SourceSelect
+            abiEventId={abiEventId}
+            abiEventInputId={abiEventInputId}
+            value={matcher.source}
+            onChange={this.handleChangeSource}
+            scope={scope}
+            menuIsOpen={this.state.isEditing}
+          />
+
           return (
             <>
               {this.state.isEditing
@@ -175,14 +188,7 @@ export const MatcherSource = graphql(sourcesQuery, {
                     className='event-box__variable has-react-select'
                     onKeyUp={this.handleKeyUp}
                   >
-                    <SourceSelect
-                      abiEventId={abiEventId}
-                      abiEventInputId={abiEventInputId}
-                      value={matcher.source}
-                      onChange={this.handleChangeSource}
-                      scope={scope}
-                      menuIsOpen={this.state.isEditing}
-                    />
+                    
                   </div>
                 )
                 : (

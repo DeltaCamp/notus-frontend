@@ -90,31 +90,11 @@ export const ContractAbiEvent = class _ContractAbiEvent extends Component {
       abiId = parseInt(abiId, 10)
     }
 
-    return (
-      <>
-        {this.state.isEditing
-          ? (
-            <div
-              ref={node => { this.node = node }}
-              className='event-box__variable has-react-select'
-              onKeyUp={this.handleKeyUp}
-            >
-              <AbiEventSelect
-                abiId={abiId}
-                onChangeAbiEventId={this.props.onChangeAbiEventId}
-                menuIsOpen={this.state.isEditing}
-                handleStopEditing={this.handleStopEditing}
-              />
-            </div>
-          )
-          : (
-            <AbiEventName
-              handleStartEdit={this.handleStartEdit}
-              abiEventId={this.props.event.abiEventId}
-            />
-          )
-        }
-      </>
-    )
+    return <AbiEventSelect
+      abiId={abiId}
+      onChangeAbiEventId={this.props.onChangeAbiEventId}
+      menuIsOpen={this.state.isEditing}
+      handleStopEditing={this.handleStopEditing}
+    />
   }
 }
