@@ -83,15 +83,10 @@ $hasAddonsformColor: $cyan;
   }
 }
 
-// .form .button {
-//   padding-top: 5px;
-// }
-
 .form .input,
 .form .react-select,
 .form .buttons {
   display: flex;
-  // margin: 0 5px;
 
   @media screen and (max-width: $tablet) {
     margin: 0;
@@ -130,8 +125,7 @@ textarea.textarea,
 .react-select__control {
   background-color: white;
   box-shadow: none;
-  border-width: 3px;
-  // border-color: rgba(255, 255, 255, 0.2);
+  border-width: 2px;
   border-color: rgba(255, 255, 255, 0.0);
   color: white;
 }
@@ -153,13 +147,6 @@ textarea.textarea,
 .textarea:hover,
 .textarea.is-hovered {
   border-color: rgba(255, 255, 255, 1);
-}
-
-.input:focus,
-.input.is-focused,
-.textarea:focus,
-.textarea.is-focused {
-  // border-color: rgba(255, 255, 255, 1);
 }
 
 form.is-active button.button,
@@ -236,12 +223,6 @@ label.radio,
   width: 80%;
   transition: color 200ms ease-in-out;
 }
-
-// .form.is-tall .input,
-// .form.is-tall .button,
-// .form.is-tall .react-select {
-//   height: $form-input-height-tall;
-// }
 
 .form.is-tall .input,
 .form.is-tall .button {
@@ -392,7 +373,6 @@ input.input.is-large {
 
   @media screen and (max-width: $tablet) {
     font-size: 1.5rem;
-    // height: 60px;
     padding: 0.25rem;
   }
 
@@ -435,18 +415,24 @@ input.input.is-large {
   display: inline-flex;
   flex-direction: column;
   min-width: 190px;
-  // max-width: 250px;
-
-  // @media screen and (max-width: $tablet - 203px) {
-  //   min-width: 100%;
-  //   width: 100%;
-  // }
 
   @media screen and (max-width: $widescreen) {
     max-width: 100%;
     min-width: 100%;
     width: 100%;
   }
+}
+
+.react-select .react-select__placeholder {
+  cursor: text;
+}
+
+.react-select .react-select__placeholder {
+  color: rgba(160, 180, 200, 0.5);
+}
+
+.react-select:hover .react-select__placeholder {
+  color: rgba(160, 180, 200, 1);
 }
 
 .react-select.is-wide {
@@ -457,20 +443,13 @@ input.input.is-large {
   }
 }
 
-// .select select,
-// .react-select {
-//   height: $form-input-height !important;
-//   line-height: 2;
-// }
-
 .select select {
   height: $form-input-height !important;
   line-height: 2;
 }
 
 .react-select .react-select__control {
-  // border-radius: 100px !important;
-  border-width: 3px;
+  border-width: 0;
   cursor: pointer !important;
   padding: 0;
 }
@@ -485,10 +464,7 @@ input.input.is-large {
   margin-bottom: 0;
   line-height: 1.3;
   font-size: inherit;
-  // overflow-y: auto;
-  // overflow-x: hidden;
   z-index: 30000;
-  // width: 120%;
 
   @media screen and (max-width: $widescreen) {
     width: 100%;

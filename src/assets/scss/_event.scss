@@ -331,7 +331,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   line-height: 1;
   margin: 0;
   max-width: 225px;
-  padding: 4px 20px;
+  padding: 4px 10px;
   position: relative;
   text-align: left;
   transition: $event-box-transition;
@@ -385,14 +385,16 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 }
 
 .event-box__variable.is-active {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.5);
+  outline: none;
 }
 
 .event-box__variable.has-react-select {
   width: 100%;
 
   @media screen and (min-width: $widescreen) {
-    width: 270px;
+    // width: 270px;
   }
 }
 
@@ -463,8 +465,11 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 
 .event-box__variable ::placeholder,
 .event-box__variable .input::placeholder,
-.event-box__variable .textarea::placeholder,
-.event-box__variable .react-select .react-select__placeholder {
+.event-box__variable .textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.react-select .react-select__placeholder {
   color: rgba(255, 255, 255, 0.35);
 }
 
@@ -475,40 +480,11 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   color: rgba(255, 255, 255, 0.35);
 }
 
-.event-box__variable .react-select {
-  line-height: inherit;
-  font-size: inherit;
-}
-
-.event-box__variable .react-select__control {
-  min-height: 23px !important;
-}
-
-.event-box__variable .react-select,
-.event-box__variable .react-select__control {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-.event-box__variable .react-select__single-value {
-  color: white;
-  margin: 0;
-}
-
-.event-box__variable .react-select__input {
-  color: white;
-}
-
-.event-box__variable .react-select__input input {
+.react-select__input input {
   font-weight: 600;
-  line-height: inherit;
-  font-size: inherit;
-  // padding-left: 2px;
 }
 
-.event-box__variable .select select,
-.event-box__variable .react-select {
+.event-box__variable .select select {
   height: auto !important;
   line-height: inherit;
   font-size: inherit;
