@@ -12,7 +12,8 @@ export const WeiInput = ReactTimeout(class _WeiInput extends Component {
     index: PropTypes.number.isRequired,
     value: PropTypes.any.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    handleStartEditing: PropTypes.func.isRequired
+    handleStartEditing: PropTypes.func.isRequired,
+    handleCancelEditing: PropTypes.func
   }
 
   getDefaultValue () {
@@ -31,6 +32,10 @@ export const WeiInput = ReactTimeout(class _WeiInput extends Component {
   handleCancel = () => {
     this.setState({
       value: this.state.previousValue
+    }, () => {
+      if (this.props.handleCancelEditing) {
+        this.props.handleCancelEditing()
+      }
     })
   }
 
@@ -58,13 +63,13 @@ export const WeiInput = ReactTimeout(class _WeiInput extends Component {
     e.preventDefault()
 
     const valueAsWei = this.validate(this.state.value)
+    const prevValueAsWei = ethers.utils.parseEther(this.state.previousValue || '0')
 
-    if (
-      valueAsWei !== ''
-      && (valueAsWei !== this.state.previousValue)
-    ) {
+    if (!valueAsWei.eq(prevValueAsWei)) {
       this.setNewPreviousValue()
       this.props.handleSubmit(valueAsWei.toString())
+    } else {
+      this.handleCancel()
     }
   }
 
@@ -74,7 +79,7 @@ export const WeiInput = ReactTimeout(class _WeiInput extends Component {
       return ethers.utils.parseEther(value)
     } catch (error) {
       console.warn(error)
-      return ''
+      return ethers.utils.bigNumberify('0')
     }
   }
 

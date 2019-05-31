@@ -37,6 +37,7 @@ export const MatcherOperand = graphql(sourceQuery, {
       static propTypes = {
         index: PropTypes.number.isRequired,
         handleSetEditMatcher: PropTypes.func.isRequired,
+        handleClearEditMatcher: PropTypes.func.isRequired,
         matcher: PropTypes.object.isRequired,
         onChange: PropTypes.func.isRequired
       }
@@ -79,12 +80,14 @@ export const MatcherOperand = graphql(sourceQuery, {
             value={matcher.operand}
             handleSubmit={this.handleSubmit}
             handleStartEditing={this.props.handleSetEditMatcher}
+            handleCancelEditing={this.props.handleClearEditMatcher}
           />
         } else if (dataType && dataType === 'address') {
           operandInput = <MatcherAddressInput 
             matcher={matcher}
             handleSubmit={this.handleSubmit}
             handleSetEditMatcher={this.props.handleSetEditMatcher}
+            handleCancelEditMatcher={this.props.handleClearEditMatcher}
           />
         } else if (
           dataType
@@ -96,12 +99,14 @@ export const MatcherOperand = graphql(sourceQuery, {
             value={matcher.operand}
             handleSubmit={this.handleSubmit}
             handleStartEditing={this.props.handleSetEditMatcher}
+            handleCancelEditing={this.props.handleClearEditMatcher}
           />
         } else {
           operandInput = <TextInput
             value={matcher.operand}
             handleSubmit={this.handleSubmit}
             handleStartEditing={this.props.handleSetEditMatcher}
+            handleCancelEditing={this.props.handleClearEditMatcher}
           />
         }
 
