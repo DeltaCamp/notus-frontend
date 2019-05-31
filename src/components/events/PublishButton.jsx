@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import Switch from 'react-bulma-switch'
-import {
-  Cast,
-  CloudOff
-} from 'react-feather'
 
 import { withCurrentUser } from '~/components/withCurrentUser'
 
