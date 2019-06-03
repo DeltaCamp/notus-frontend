@@ -19,7 +19,7 @@ const Menu = props => {
         backgroundColor: 'white',
         borderRadius: 4,
         boxShadow: `0 0 0 1px ${shadow}, 0 4px 11px ${shadow}`,
-        marginTop: 1,
+        marginTop: 5,
         position: 'absolute',
         zIndex: 2,
       }}

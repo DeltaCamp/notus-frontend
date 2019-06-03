@@ -770,7 +770,6 @@ export const EditEventPage = class _EditEventPage extends Component {
                             <div
                               ref={provided.innerRef}
                               {...provided.draggableProps}
-                              {...provided.dragHandleProps}
                             >
                               <EventMatcher
                                 key={`event-matcher-${eventMatcher.id || `new-${index}`}`}
@@ -781,6 +780,7 @@ export const EditEventPage = class _EditEventPage extends Component {
                                 matcher={eventMatcher}
                                 event={this.state.event}
                                 onChangeMatcher={this.onChangeMatcher}
+                                dragHandleProps={provided.dragHandleProps}
                               />
                             </div>
                           </div>

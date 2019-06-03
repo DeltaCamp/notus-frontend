@@ -5,9 +5,11 @@ import { MatcherOperand } from '~/components/events/MatcherOperand'
 import { MatcherOperator } from '~/components/events/MatcherOperator'
 import { MatcherSource } from '~/components/events/MatcherSource'
 
-const DragHandle = () => <span className='drag-handle'>
-  <Menu />
-</span>
+const DragHandle = ({ dragHandleProps }) => (
+  <span className='drag-handle' {...dragHandleProps}>
+    <Menu />
+  </span>
+)
 
 export const EventMatcher =
   class _EventMatcher extends PureComponent {
@@ -17,7 +19,8 @@ export const EventMatcher =
       handleSetEditMatcher: PropTypes.func.isRequired,
       handleRemoveMatcher: PropTypes.func.isRequired,
       matcher: PropTypes.object.isRequired,
-      onChangeMatcher: PropTypes.func.isRequired
+      onChangeMatcher: PropTypes.func.isRequired,
+      dragHandleProps: PropTypes.object
     }
 
     handleClearEditMatcher = () => {
@@ -48,7 +51,7 @@ export const EventMatcher =
           event-box__variable-wrapper__matcher
         '>
           <span className='event-box__flex-mobile-group'>
-            <DragHandle />
+            <DragHandle dragHandleProps={this.props.dragHandleProps} />
 
             {andWord} the
 

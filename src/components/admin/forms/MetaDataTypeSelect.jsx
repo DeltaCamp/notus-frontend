@@ -56,12 +56,9 @@ export const MetaDataTypeSelect =
           props = { ...this.props, value: selectedOption }
         }
 
-        const isDisabled = options.length <= 1
-
         return <NotusSelect
           {...props}
           options={options}
-          isDisabled={isDisabled}
           isSearchable={false}
           isClearable
           onChange={this.onChange}

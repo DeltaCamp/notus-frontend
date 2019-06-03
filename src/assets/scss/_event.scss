@@ -293,12 +293,6 @@ $event-font-size-sm: 17.5px;
   display: inline-flex;
 }
 
-.event-box__variable-wrapper__matcher .event-box__variable {
-  @media screen and (max-width: $widescreen) {
-    margin: 0 0 0.5rem 0;
-  }
-}
-
 .event-box__variable-wrapper__matcher .event-box__variable:first-child {
   margin-top: 0;
 }

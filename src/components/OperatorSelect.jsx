@@ -82,12 +82,9 @@ export const OperatorSelect = graphql(sourceQuery, {
           props = { ...this.props, value: selectedOption }
         }
 
-        const isDisabled = options.length === 1
-
         return <NotusSelect
           {...props}
           options={options}
-          isDisabled={isDisabled}
           className='no-ml'
           handleOpenReactSelect={this.props.handleOpenReactSelect}
           handleCloseReactSelect={this.props.handleCloseReactSelect}
