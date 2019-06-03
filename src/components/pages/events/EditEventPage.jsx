@@ -56,12 +56,14 @@ export const EditEventPage = class _EditEventPage extends Component {
       runCount: -1,
       networkId: 1,
       matchers: [
+        /*
         {
           operand: '10000000000000000000',
           operator: 3,
           order: 1,
           source: 'transaction.value'
         }
+        */
       ]
     },
     editMatcherIndex: null,
