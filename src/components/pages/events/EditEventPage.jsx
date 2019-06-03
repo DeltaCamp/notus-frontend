@@ -526,38 +526,30 @@ export const EditEventPage = class _EditEventPage extends Component {
     const matchers = this.state.event.matchers
     const id = matchers[matcherIndex].id ? parseInt(matchers[matcherIndex].id, 10) : undefined
 
-    if (matchers.length > 1) {
-      matchers.splice(matcherIndex, 1)
+    matchers.splice(matcherIndex, 1)
 
-      // matchers.forEach((matcher, index) => {
-      //   matcher.order = index
-      // })
-
-      this.setState({
-        event: {
-          ...this.state.event,
-          matchers
-        }
-      })
-
-      if (!this.isCreateMode() && id) {
-        this.props.destroyMatcherMutation({
-          variables: {
-            id
-          },
-          refetchQueries: [
-            // only refetch the event we just updated (1 record)
-            'eventsQuery'
-          ]
-        }).then((mutationResult) => {
-          notusToast.success('Successfully removed matcher')
-        }).catch(error => {
-          console.error(error)
-          showErrorMessage(error)
-        })
+    this.setState({
+      event: {
+        ...this.state.event,
+        matchers
       }
-    } else {
-      notusToast.error('Each event needs at least one matcher.')
+    })
+
+    if (!this.isCreateMode() && id) {
+      this.props.destroyMatcherMutation({
+        variables: {
+          id
+        },
+        refetchQueries: [
+          // only refetch the event we just updated (1 record)
+          'eventsQuery'
+        ]
+      }).then((mutationResult) => {
+        notusToast.success('Successfully removed matcher')
+      }).catch(error => {
+        console.error(error)
+        showErrorMessage(error)
+      })
     }
   }
 
