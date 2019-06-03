@@ -105,7 +105,7 @@ export const EditEventButtons =
                         to={createEventFromParentRoute}
                         className='button is-small is-link is-outlined has-fat-icons'
                       >
-                        <Plus /> &nbsp;Create event from this one
+                        <Plus /> &nbsp;Duplicate this event
                       </Link>
                     )
                   }

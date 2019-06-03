@@ -241,7 +241,7 @@ form.is-tall .button.is-text.is-xsmall:hover,
   height: 47px;
   width: 47px;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $widescreen) {
     height: 42px;
     width: 42px;
   }

@@ -83,15 +83,10 @@ $hasAddonsformColor: $cyan;
   }
 }
 
-// .form .button {
-//   padding-top: 5px;
-// }
-
 .form .input,
 .form .react-select,
 .form .buttons {
   display: flex;
-  // margin: 0 5px;
 
   @media screen and (max-width: $tablet) {
     margin: 0;
@@ -131,19 +126,19 @@ textarea.textarea,
   background-color: white;
   box-shadow: none;
   border-width: 3px;
-  // border-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.0);
   color: white;
 }
 
 .method-addon {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
   display: inline-block;
   border-radius: 8px;
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+  height: 100%;
   margin: 0;
-  padding: 5px 20px 5px 19px;
+  padding: 8px 20px 5px 19px;
   border-width: 3px;
   border-color: rgba(255, 255, 255, 0.2);
 }
@@ -153,13 +148,6 @@ textarea.textarea,
 .textarea:hover,
 .textarea.is-hovered {
   border-color: rgba(255, 255, 255, 1);
-}
-
-.input:focus,
-.input.is-focused,
-.textarea:focus,
-.textarea.is-focused {
-  // border-color: rgba(255, 255, 255, 1);
 }
 
 form.is-active button.button,
@@ -238,8 +226,7 @@ label.radio,
 }
 
 .form.is-tall .input,
-.form.is-tall .button,
-.form.is-tall .react-select {
+.form.is-tall .button {
   height: $form-input-height-tall;
 }
 
@@ -387,7 +374,6 @@ input.input.is-large {
 
   @media screen and (max-width: $tablet) {
     font-size: 1.5rem;
-    // height: 60px;
     padding: 0.25rem;
   }
 
@@ -430,18 +416,79 @@ input.input.is-large {
   display: inline-flex;
   flex-direction: column;
   min-width: 190px;
-  // max-width: 250px;
-
-  // @media screen and (max-width: $tablet - 203px) {
-  //   min-width: 100%;
-  //   width: 100%;
-  // }
 
   @media screen and (max-width: $widescreen) {
     max-width: 100%;
     min-width: 100%;
     width: 100%;
   }
+}
+
+.react-select__dropdown.react-select__half-width {
+  margin-right: 0.5rem;
+
+  @media screen and (max-width: $fullhd) {
+    margin-right: 0;
+    margin-left: 0.5rem;
+    width: 25%;
+  }
+
+  @media screen and (max-width: $widescreen) {
+    margin-left: 0;
+    width: 37%;
+  }
+
+  @media screen and (max-width: $tablet) {
+    width: 40%;
+  }
+
+  @media screen and (max-width: $mobile) {
+    width: 70%;
+  }
+}
+
+.react-select__dropdown {
+  display: inline-block;
+  margin: 0 0.5rem;
+  position: relative;
+
+  @media screen and (max-width: $fullhd) {
+    display: inline;
+    margin: 0 0 0.5rem 0;
+    width: 100%;
+  }
+
+  @media screen and (max-width: $widescreen) {
+    display: block;
+  }
+}
+
+.react-select__dropdown.network-select {
+  @media screen and (max-width: $fullhd) {
+    margin-left: 0.5rem;
+  }
+
+  @media screen and (max-width: $widescreen) {
+    margin-left: 0;
+  }
+
+}
+
+.react-select__chevron {
+  margin-right: -16px;
+
+  @media screen and (max-width: $widescreen) {
+    margin-right: -10px;
+  }
+}
+
+.react-select .react-select__placeholder {
+  color: rgba(160, 180, 200, 0.7);
+  cursor: text;
+}
+
+.react-select .react-select__placeholder:hover {
+  color: rgba(160, 180, 200, 1);
 }
 
 .react-select.is-wide {
@@ -452,15 +499,13 @@ input.input.is-large {
   }
 }
 
-.select select,
-.react-select {
+.select select {
   height: $form-input-height !important;
   line-height: 2;
 }
 
 .react-select .react-select__control {
-  // border-radius: 100px !important;
-  border-width: 3px;
+  border-width: 0;
   cursor: pointer !important;
   padding: 0;
 }
@@ -475,12 +520,9 @@ input.input.is-large {
   margin-bottom: 0;
   line-height: 1.3;
   font-size: inherit;
-  overflow-y: auto;
-  overflow-x: hidden;
   z-index: 30000;
-  width: 120%;
 
-  @media screen and (max-width: $widescreen) {
+  @media screen and (max-width: $fullhd) {
     width: 100%;
   }
 }
@@ -501,6 +543,7 @@ input.input.is-large {
   color: black;
   cursor: pointer;
   font-size: 1rem;
+  font-weight: 600;
   margin: 5px;
   padding: 4px 10px;
   width: 96%;

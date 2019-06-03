@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
-import { graphql } from 'react-apollo'
 import PropTypes from 'prop-types'
+import { graphql } from 'react-apollo'
 
 import { NotusSelect } from '~/components/forms/NotusSelect'
 import { networksQuery } from '~/queries/networksQuery'
 
-const debug = require('debug')('notus:NetworkSelect')
+const debug = require('debug')('notus:components:NetworkSelect')
 
 export const NetworkSelect = graphql(networksQuery, {
   name: 'networksQuery'
@@ -18,6 +18,14 @@ export const NetworkSelect = graphql(networksQuery, {
 
     onChange = (option) => {
       this.props.onChangeNetworkId(option.value, option.label)
+    }
+
+    handleOpenReactSelect = () => {
+      this.props.handleToggleEditingNetwork(true)
+    }
+
+    handleCloseReactSelect = () => {
+      this.props.handleToggleEditingNetwork(false)
     }
 
     render () {
@@ -51,6 +59,9 @@ export const NetworkSelect = graphql(networksQuery, {
         value={value}
         options={options}
         onChange={this.onChange}
+        className='network-select'
+        handleOpenReactSelect={this.handleOpenReactSelect}
+        handleCloseReactSelect={this.handleCloseReactSelect}
       />
     }
   }

@@ -6,7 +6,7 @@ import { NotusSelect } from '~/components/forms/NotusSelect'
 import { contractsQuery } from '~/queries/contractsQuery'
 import { SCOPES, SCOPE_LABELS } from '~/constants'
 
-const debug = require('debug')('notus:ScopeAndContractSelect')
+const debug = require('debug')('notus:components:ScopeAndContractSelect')
 
 export const ScopeAndContractSelect = graphql(contractsQuery, {
   name: 'contractsData',
@@ -25,8 +25,9 @@ export const ScopeAndContractSelect = graphql(contractsQuery, {
     static propTypes = {
       scope: PropTypes.number.isRequired,
       onChangeScopeAndContractId: PropTypes.func.isRequired,
-      menuIsOpen: PropTypes.bool.isRequired,
-      handleStopEditing: PropTypes.func.isRequired
+      handleStartEditing: PropTypes.func.isRequired,
+      handleStopEditing: PropTypes.func.isRequired,
+      contractId: PropTypes.number
     }
 
     onChange = (option) => {
@@ -39,11 +40,9 @@ export const ScopeAndContractSelect = graphql(contractsQuery, {
         this.props.onChangeScopeAndContractId({
           scope: option.value,
           contractId: null,
-          abiEventId: null // do this here?
+          abiEventId: null
         })
       }
-
-      this.props.handleStopEditing()
     }
 
     render () {
@@ -104,7 +103,10 @@ export const ScopeAndContractSelect = graphql(contractsQuery, {
         {...this.props}
         value={value}
         options={[scopeGroup, contractsGroup]}
+        className='react-select__half-width'
         onChange={this.onChange}
+        handleOpenReactSelect={this.props.handleStartEditing}
+        handleCloseReactSelect={this.props.handleStopEditing}
       />
     }
   }

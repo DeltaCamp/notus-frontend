@@ -8,6 +8,8 @@ import { sourcesQuery } from '~/queries/sourcesQuery'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { SOURCES } from '../constants'
 
+const debug = require('debug')('notus:components:SourceSelect')
+
 export const SourceSelect = graphql(sourcesQuery, {
   name: 'sourcesQuery',
   props: ({ sourcesQuery }) => {
@@ -44,7 +46,9 @@ export const SourceSelect = graphql(sourcesQuery, {
         onChange: PropTypes.func.isRequired,
         scope: PropTypes.number,
         abiEventInputId: PropTypes.number,
-        abiEventId: PropTypes.number
+        abiEventId: PropTypes.number,
+        handleOpenReactSelect: PropTypes.func.isRequired,
+        handleCloseReactSelect: PropTypes.func.isRequired,
       }
 
       onChange = (option) => {
@@ -69,6 +73,8 @@ export const SourceSelect = graphql(sourcesQuery, {
           options
         } = props
         const { abiEvent } = abiEventQuery || {}
+
+        debug('SourceSelect value: ', value)
 
         let validOptions = (options || []).filter(option => {
           return isValidScopeSource(scope, option.value)
@@ -106,6 +112,8 @@ export const SourceSelect = graphql(sourcesQuery, {
           {...props}
           options={validOptions}
           onChange={this.onChange}
+          handleOpenReactSelect={this.props.handleOpenReactSelect}
+          handleCloseReactSelect={this.props.handleCloseReactSelect}
         />
       }
     }

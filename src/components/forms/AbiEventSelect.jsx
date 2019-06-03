@@ -24,16 +24,14 @@ export const AbiEventSelect = graphql(abiEventsQuery, {
     static propTypes = {
       abiId: PropTypes.number,
       onChangeAbiEventId: PropTypes.func.isRequired,
-      menuIsOpen: PropTypes.bool.isRequired,
-      handleStopEditing: PropTypes.func.isRequired
+      handleOpenReactSelect: PropTypes.func.isRequired,
+      handleCloseReactSelect: PropTypes.func.isRequired
     }
 
     onChange = (option) => {
       this.props.onChangeAbiEventId({
         abiEvent: option.abiEvent
       })
-
-      this.props.handleStopEditing()
     }
 
     render () {
@@ -74,7 +72,10 @@ export const AbiEventSelect = graphql(abiEventsQuery, {
         {...this.props}
         value={value}
         options={options}
+        className='react-select__half-width'
         onChange={this.onChange}
+        handleOpenReactSelect={this.props.handleOpenReactSelect}
+        handleCloseReactSelect={this.props.handleCloseReactSelect}
       />
     }
   }

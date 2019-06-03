@@ -181,7 +181,7 @@ $event-font-size-sm: 17.5px;
     padding: 1rem;
   }
 
-  @media screen and (max-width: $widescreen) {
+  @media screen and (max-width: $fullhd) {
     padding: 1.5rem 0;
   }
 
@@ -211,17 +211,15 @@ $event-font-size-sm: 17.5px;
 
 .event-box__variable-wrapper {
   font-size: $event-font-size;
-  margin: 0.25rem 0;
-  min-height: 3.25rem;
+  margin: 0.5rem 0;
+  // min-height: 3.25rem;
 
-  @media screen and (max-width: $tablet) {
-    font-size: $event-font-size-sm;
-  }
-  
-  @media screen and (max-width: $tablet) {
+  @media screen and (max-width: $widescreen) {
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    font-size: $event-font-size-sm;
+    margin: 0;
   }
 }
 
@@ -242,7 +240,7 @@ $event-font-size-sm: 17.5px;
 }
 
 .event-box__variable-wrapper .drag-handle {
-  margin: 1.25rem 0.75rem 0.75rem 0.4rem;
+  margin: 1rem 0.75rem 0.75rem 0.4rem;
   opacity: 0.4;
 }
 
@@ -267,12 +265,12 @@ $event-font-size-sm: 17.5px;
   font-size: $event-font-size;
   justify-content: flex-start;
   margin-bottom: 0.5rem;
-  // padding-right: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.35rem;
   position: relative;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $fullhd) {
     display: block;
+    margin-top: 0.75rem;
   }
 
   @media screen and (max-width: $tablet) {
@@ -285,8 +283,9 @@ $event-font-size-sm: 17.5px;
   right: 0.5rem;
   top: 0.5rem;
 
-  @media screen and (max-width: $desktop) {
-    right: 0.25rem;
+  @media screen and (max-width: $widescreen) {
+    right: 0;
+    top: 0.25rem;
   }
 }
 
@@ -295,10 +294,8 @@ $event-font-size-sm: 17.5px;
 }
 
 .event-box__variable-wrapper__matcher .event-box__variable {
-  margin: 0 0.25rem;
-
-  @media screen and (max-width: $desktop) {
-    margin: 0.5rem 0 0;
+  @media screen and (max-width: $widescreen) {
+    margin: 0 0 0.5rem 0;
   }
 }
 
@@ -328,19 +325,19 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   font-size: $event-font-size;
   font-weight: 600;
   height: $form-input-height;
-  line-height: 1;
+  line-height: 0.92;
   margin: 0;
-  max-width: 225px;
-  padding: 4px 20px;
+  max-width: 285px;
+  padding: 4px 10px;
   position: relative;
   text-align: left;
   transition: $event-box-transition;
 
-  @media screen and (max-width: $widescreen) {
-    max-width: 185px;
+  @media screen and (max-width: $fullhd) {
+    // max-width: 185px;
   }
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $widescreen) {
     display: block;
     max-width: 100%;
     min-width: 100%;
@@ -369,10 +366,10 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   white-space: nowrap;
 }
 
-.event-box__variable:first-child {
+.event-box__variable {
   margin-right: 0.5rem;
   
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $widescreen) {
     margin-left: 0;
     margin-right: 0;
   }
@@ -385,39 +382,22 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 }
 
 .event-box__variable.is-active {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.5);
+  outline: none;
 }
 
-.event-box__variable.has-react-select {
-  width: 100%;
-
-  @media screen and (min-width: $widescreen) {
-    width: 270px;
-  }
-}
-
-.event-box__variable .react-select .react-select__menu {
-  left: -20px;
-
-  @media screen and (max-width: $widescreen) {
-    width: 128%;
-  }
-
-  @media screen and (max-width: $desktop) {
-    width: 105%;
-  }
-
-  @media screen and (max-width: $tablet) {
-    width: 107%;
-  }
-
-  @media screen and (max-width: $mobile - 100px) {
-    width: 116%;
-  }
+.event-box__variable:focus {
+  outline: none !important;
 }
 
 .event-box__variable.has-react-select {
   display: inline-flex;
+  width: 100%;
+
+  @media screen and (min-width: $fullhd) {
+    max-width: 330px;
+  }
 }
 
 .event-box__variable.has-react-select .react-select__value {
@@ -430,19 +410,39 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   padding: 0;
   width: auto !important;
 
-  @media screen and (max-width: $fullhd) {
-    max-width: 190px;
-  }
+  // @media screen and (max-width: $fullhd) {
+  //   max-width: 190px;
+  // }
 
-  @media screen and (max-width: $widescreen) {
+  @media screen and (max-width: $fullhd) {
     min-width: auto;
   }
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $widescreen) {
     min-width: 100%;
   }
 }
 
+.event-box__variable.event-box__variable__half-width {
+  @media screen and (max-width: $widescreen) {
+    display: inline-block;
+    margin-left: 0;
+    min-width: 25%;
+    width: 25%;
+  }
+
+  @media screen and (max-width: $tablet) {
+    min-width: 25%;
+    width: 25%;
+  }
+
+  @media screen and (max-width: $mobile) {
+    min-width: 45%;
+    width: 45%;
+  }
+}
+
+.form .event-box__variable .input,
 .event-box__variable .input {
   background-color: transparent;
   border: none;
@@ -455,7 +455,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   padding: 0.35rem 0.5rem 0.45rem;
   transition: all 50ms ease-in-out;
   
-  @media screen and (max-width: $widescreen) {
+  @media screen and (max-width: $fullhd) {
     min-width: 100% !important;
     width: 100% !important;
   }
@@ -463,52 +463,21 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 
 .event-box__variable ::placeholder,
 .event-box__variable .input::placeholder,
-.event-box__variable .textarea::placeholder,
-.event-box__variable .react-select .react-select__placeholder {
+.event-box__variable .textarea::placeholder {
   color: rgba(255, 255, 255, 0.35);
 }
 
 .is-inverted ::placeholder,
 .is-inverted .input::placeholder,
-.is-inverted .textarea::placeholder,
-.is-inverted .react-select .react-select__placeholder {
-  color: rgba(255, 255, 255, 0.35);
+.is-inverted .textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
 }
 
-.event-box__variable .react-select {
-  line-height: inherit;
-  font-size: inherit;
-}
-
-.event-box__variable .react-select__control {
-  min-height: 23px !important;
-}
-
-.event-box__variable .react-select,
-.event-box__variable .react-select__control {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-.event-box__variable .react-select__single-value {
-  color: white;
-  margin: 0;
-}
-
-.event-box__variable .react-select__input {
-  color: white;
-}
-
-.event-box__variable .react-select__input input {
+.react-select__input input {
   font-weight: 600;
-  line-height: inherit;
-  font-size: inherit;
-  // padding-left: 2px;
 }
 
-.event-box__variable .select select,
-.event-box__variable .react-select {
+.event-box__variable .select select {
   height: auto !important;
   line-height: inherit;
   font-size: inherit;
@@ -563,7 +532,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   max-width: 600px;  
   text-align: right;
 
-  @media screen and (max-width: $widescreen) {
+  @media screen and (max-width: $fullhd) {
     margin-left: auto;
     max-width: 100%;
   }
@@ -633,48 +602,35 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   display: inline-flex;
 }
 
-.matcher-row--is-active {
+.react-select--is-active {
   position: relative;
   z-index: 30001;
 }
 
 .event-box__flex-mobile-group {
-  // margin: 0 0.5rem;
-
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $widescreen) {
     display: block;
-    // margin: 0 0 0.25rem;
     width: 100%;
   }
 }
 
 .event-box__flex-mobile-group > * {
-  @media screen and (max-width: $desktop) {
-    display: block;
-    margin: 0.125rem 0.25rem 0.25rem 0.25rem;
-  }
-}
-
-.event-box__flex-mobile-group .event-box__variable {
-  margin: 0 0.5rem;
-
-  @media screen and (max-width: $desktop) {
-    margin: 0;
+  @media screen and (max-width: $widescreen) {
+    margin: 0.125rem 0.5rem 0.5rem 0rem;
   }
 }
 
 .event-box__variable-wrapper__matcher .event-box__flex-mobile-group {
   align-items: center;
   display: flex;
-  height: 42px;
-  margin: 0;
-  width: 150px;
+  height: 52px;
+  margin: 0 0.5rem;
 
-  @media screen and (max-width: $widescreen) {
+  @media screen and (max-width: $fullhd) {
     width: 150px;
   }
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $widescreen) {
     width: 100%;
   }
 }

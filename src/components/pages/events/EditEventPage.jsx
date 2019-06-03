@@ -29,7 +29,7 @@ import { showErrorMessage } from '~/utils/showErrorMessage'
 import { SCOPES } from '~/constants'
 import * as routes from '~/../config/routes'
 
-const debug = require('debug')('notus:EditEventPage')
+const debug = require('debug')('notus:components:EditEventPage')
 
 const randomColor = () => {
   return sample([
@@ -39,7 +39,7 @@ const randomColor = () => {
     '#dd5500', // orange
     '#0676cb', // light blue
     '#6e0ad3', // purple
-    '#b8051b', // red
+    // '#b8051b', // red
     '#2f2d29', // grey
   ])
 }
@@ -66,6 +66,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     },
     editMatcherIndex: null,
     editingEventSource: false,
+    editingNetwork: false,
     createEventModalOpen: false
   }
 
@@ -81,8 +82,17 @@ export const EditEventPage = class _EditEventPage extends Component {
     this.setState({ freshlyMounted: true })
   }
 
-  handleToggleEventSource = () => {
-    this.setState({ editingEventSource: !this.state.editingEventSource })
+  handleToggleEditingEventSource = (newValue) => {
+    debug('handleToggleEditingEventSource', newValue)
+
+
+    this.setState({ editingEventSource: newValue })
+  }
+
+  handleToggleEditingNetwork = (newValue) => {
+    debug('handleToggleEditingNetwork', newValue)
+
+    this.setState({ editingNetwork: newValue })
   }
 
   eventEntityToDto(event) {
@@ -231,6 +241,8 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   handleSetEditMatcher = (editMatcherIndex) => {
+    debug('handleSetEditMatcher', editMatcherIndex)
+
     this.setState({
       editMatcherIndex
     })
@@ -273,6 +285,10 @@ export const EditEventPage = class _EditEventPage extends Component {
 
     return startsWithVowel ? `an ${title}` : `a ${title}`
   }
+
+  // handleChangeMatcher = (updatedMatcher) => {
+  //   this.onChangeMatcher(updatedMatcher)
+  // }
 
   onChangeMatcher = (matcher) => {
     const matchers = this.state.event.matchers.slice()
@@ -665,29 +681,31 @@ export const EditEventPage = class _EditEventPage extends Component {
       <div className={classnames(
         'event-box__variable-wrapper',
         {
-          'matcher-row--is-active': this.state.editingEventSource
+          'react-select--is-active': this.state.editingEventSource
         }
       )}>
-        <button
-          className='event-box__variable'
-          onClick={this.handleChangeRunCount}
-        >
-          <RunCountTitle
-            runCount={this.state.event.runCount}
-          />
-        </button>
+        
 
         <span className='event-box__flex-mobile-group'>
+          <button
+            className='event-box__variable event-box__variable__half-width'
+            onClick={this.handleChangeRunCount}
+          >
+            <RunCountTitle
+              runCount={this.state.event.runCount}
+            />
+          </button>
+          
           <EventSource
             event={this.state.event}
             onChangeScopeAndContractId={this.onChangeScopeAndContractId}
-            handleToggleEventSource={this.handleToggleEventSource}
+            handleToggleEditingEventSource={this.handleToggleEditingEventSource}
           />
 
           <ContractAbiEvent
             event={this.state.event}
             onChangeAbiEventId={this.onChangeAbiEventId}
-            handleToggleEventSource={this.handleToggleEventSource}
+            handleToggleEditingEventSource={this.handleToggleEditingEventSource}
           />
 
           <span>
@@ -699,16 +717,24 @@ export const EditEventPage = class _EditEventPage extends Component {
     )
 
     const networkSentence = 
-      <div className='event-box__variable-wrapper'>
-        On &nbsp;
-
-        <span className='event-box__variable has-react-select'>
-          <NetworkSelect
-            networkId={parseInt(this.state.event.networkId, 10)}
-            onChangeNetworkId={this.handleChangeNetworkId}
-          />
+      <span
+        className={classnames(
+          'event-box__flex-mobile-group',
+          {
+            'react-select--is-active': this.state.editingNetwork
+          }
+        )}
+      >
+        <span>
+          On 
         </span>
-      </div>
+
+        <NetworkSelect
+          networkId={parseInt(this.state.event.networkId, 10)}
+          onChangeNetworkId={this.handleChangeNetworkId}
+          handleToggleEditingNetwork={this.handleToggleEditingNetwork}
+        />
+      </span>
 
     const matcherSentences = (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -723,7 +749,7 @@ export const EditEventPage = class _EditEventPage extends Component {
                   key={`event-matcher-${index}`}
                   className={classnames(
                     {
-                      'matcher-row--is-active': index === this.state.editMatcherIndex
+                      'react-select--is-active': index === this.state.editMatcherIndex
                     }
                   )}
                 >
@@ -754,11 +780,8 @@ export const EditEventPage = class _EditEventPage extends Component {
                                 handleRemoveMatcher={this.handleRemoveMatcher}
                                 matcher={eventMatcher}
                                 event={this.state.event}
-                                onChangeMatcher={
-                                  (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
-                                }
+                                onChangeMatcher={this.onChangeMatcher}
                               />
-                              {/* editMatcher={editMatcher} */}
                             </div>
                           </div>
                         </CSSTransition>
@@ -776,7 +799,6 @@ export const EditEventPage = class _EditEventPage extends Component {
 
     if (!this.isCreateMode() && !this.state.event.title) {
       return null
-      // return <Loading />
     }
 
     const pageTitle = (!this.isCreateMode() && this.state.event.title)

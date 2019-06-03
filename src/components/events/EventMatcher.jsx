@@ -43,7 +43,10 @@ export const EventMatcher =
       const andWord = isFirst ? 'where' : '... and'
 
       return (
-        <div className='event-box__variable-wrapper event-box__variable-wrapper__matcher'>
+        <div className='
+          event-box__variable-wrapper
+          event-box__variable-wrapper__matcher
+        '>
           <span className='event-box__flex-mobile-group'>
             <DragHandle />
 
@@ -77,6 +80,7 @@ export const EventMatcher =
             handleClearEditMatcher={this.handleClearEditMatcher}
             matcher={matcher}
             onChange={this.props.onChangeMatcher}
+            className='no-ml'
           />
 
           <MatcherOperand

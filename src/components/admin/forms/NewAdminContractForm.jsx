@@ -228,12 +228,10 @@ withApollo(
               </div>
 
               <div className='field'>
-                <span className='event-box__variable has-react-select is-full-width'>
-                  <NetworkSelect
-                    onChangeNetworkId={this.handleNetworkIdChange}
-                    networkId={parseInt(this.state.contract.networkId, 10)}
-                  />
-                </span>
+                <NetworkSelect
+                  onChangeNetworkId={this.handleNetworkIdChange}
+                  networkId={parseInt(this.state.contract.networkId, 10)}
+                />
               </div>
 
               <div className='field'>

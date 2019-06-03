@@ -14,6 +14,8 @@ import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidDataTypeOperator } from '~/utils/isValidDataTypeOperator'
 import { KEYS, SOURCES, OPERATORS } from '~/constants'
 
+const debug = require('debug')('notus:components:MatcherSource')
+
 const abiEventInputQuery = gql`
   query abiEventInputQuery($id: Float!) {
     abiEventInput(id: $id) {
@@ -50,10 +52,6 @@ export const MatcherSource = graphql(sourcesQuery, {
       })
     })(
       ReactTimeout(class _MatcherSource extends Component {
-        state = {
-          isEditing: false
-        }
-
         static propTypes = {
           abiEventInputId: PropTypes.number,
           handleSetEditMatcher: PropTypes.func.isRequired,
@@ -68,16 +66,12 @@ export const MatcherSource = graphql(sourcesQuery, {
           this.props.setTimeout(ReactTooltip.rebuild)
         }
 
-        handleStartEdit = (e) => {
-          e.preventDefault()
-
-          this.setState({
-            isEditing: true
-          })
-
+        handleStartEditing = () => {
           this.props.handleSetEditMatcher()
+        }
 
-          document.addEventListener('mousedown', this.handleClickAnywhere, false)
+        handleStopEditing = () => {
+          this.props.handleClearEditMatcher()
         }
 
         handleChangeSource = (option) => {
@@ -102,57 +96,6 @@ export const MatcherSource = graphql(sourcesQuery, {
           clone.operand = ''
 
           this.props.onChange(clone)
-
-          this.handleStopEditing()
-        }
-
-        handleKeyUp = (e) => {
-          if (e.keyCode === KEYS.escape) {
-            this.handleStopEditing()
-          }
-        }
-
-        sourceWords = () => {
-          let content
-
-          const { sourceQuery, abiEventInputQuery } = this.props
-          const { abiEventInput, abiError } = abiEventInputQuery || {}
-          const { source, loading, sourceError } = sourceQuery
-
-          const error = abiError || sourceError
-
-          if (loading) {
-            content = '...'
-          } else if (error) {
-            console.error(error)
-            content = error.toString()
-          } else if (source && source.source !== SOURCES.CONTRACT_EVENT_INPUT) {
-            content = source.title
-          } else if (abiEventInput) {
-            content = `${abiEventInput.abiEvent.name} ${abiEventInput.name}`
-          } else {
-            content = '...'
-          }
-
-          return content
-        }
-
-        handleClickAnywhere = (e) => {
-          const domNode = ReactDOM.findDOMNode(this.node)
-
-          if (domNode && !domNode.contains(e.target)) {
-            this.handleStopEditing()
-          }
-        }
-
-        handleStopEditing = () => {
-          this.setState({
-            isEditing: false
-          })
-
-          this.props.handleClearEditMatcher()
-
-          document.removeEventListener('mousedown', this.handleClickAnywhere, false)
         }
 
         render () {
@@ -164,40 +107,20 @@ export const MatcherSource = graphql(sourcesQuery, {
 
           // can't we get this from props?
           const abiEventInputId = matcher.abiEventInputId || (matcher.abiEventInput || {}).id
-          const sourceWords = this.sourceWords()
 
-          return (
-            <>
-              {this.state.isEditing
-                ? (
-                  <div
-                    ref={node => { this.node = node }}
-                    className='event-box__variable has-react-select'
-                    onKeyUp={this.handleKeyUp}
-                  >
-                    <SourceSelect
-                      abiEventId={abiEventId}
-                      abiEventInputId={abiEventInputId}
-                      value={matcher.source}
-                      onChange={this.handleChangeSource}
-                      scope={scope}
-                      menuIsOpen={this.state.isEditing}
-                    />
-                  </div>
-                )
-                : (
-                  <button
-                    className='event-box__variable has-react-select is-truncated'
-                    onClick={this.handleStartEdit}
-                    data-tip={sourceWords.length > 16 ? sourceWords : ''}
-                  >
-                    {sourceWords}
-                  </button>
-                )
-              }
-            </>
-          )
+          debug('MatcherSource matcher: ', matcher)
+
+          return <SourceSelect
+            scope={scope}
+            abiEventId={abiEventId}
+            abiEventInputId={abiEventInputId}
+            value={matcher.source}
+            onChange={this.handleChangeSource}
+            handleOpenReactSelect={this.handleStartEditing}
+            handleCloseReactSelect={this.handleStopEditing}
+          />
         }
+        
       })
     )
   )
