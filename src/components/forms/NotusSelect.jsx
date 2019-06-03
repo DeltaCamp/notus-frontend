@@ -91,7 +91,14 @@ export const NotusSelect = class _NotusSelect extends Component {
     handleOpenReactSelect: PropTypes.func,
     handleCloseReactSelect: PropTypes.func,
     className: PropTypes.string,
-    value: PropTypes.object
+    value: PropTypes.object,
+    isOpen: PropTypes.bool
+  }
+
+  componentDidMount () {
+    if (this.props.isOpen) {
+      this.setState({ isOpen: true })
+    }
   }
 
   runCallbacks = () => {
@@ -107,6 +114,12 @@ export const NotusSelect = class _NotusSelect extends Component {
       }
 
       document.removeEventListener("keydown", this.handleKeyDown);
+    }
+  }
+
+  componentDidUpdate (oldProps) {
+    if (!oldProps.isOpen && this.props.isOpen && !this.state.isOpen) {
+      this.setState({ isOpen: true })
     }
   }
 

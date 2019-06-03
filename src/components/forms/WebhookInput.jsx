@@ -157,6 +157,18 @@ export const WebhookInput =
           draftValue: this.props.value
         })
       }
+
+      onBlurSourceSelect = () => {
+      }
+
+      handleOpenReactSelect = () => {
+      }
+      
+      handleCloseReactSelect = () => {
+        this.setState({
+          showSelect: false
+        })
+      }            
     
       render () {
         const selectStyle = {
@@ -204,12 +216,16 @@ export const WebhookInput =
                 {this.state.showSelect &&
                   <div style={selectStyle}>
                     <SourceSelect
+                      autoFocus
+                      onBlur={this.onBlurSourceSelect}
                       className='testing'
-                      menuIsOpen={true}
+                      isOpen={true}
                       onChange={this.onChangeSource}
                       onKeyDown={this.onKeyUpSource}
                       clearable={false}
                       escapeClearsValue={true}
+                      handleOpenReactSelect={this.handleOpenReactSelect}
+                      handleCloseReactSelect={this.handleCloseReactSelect}
                     />
                   </div>
                 }
