@@ -92,7 +92,9 @@ export const EditContractPage =
                       <div className='container'>
                         <div className='row'>
                           <div className='col-xs-12 pt20'>
-                            <ContractForm />
+                            <ContractForm
+                              redirectToContractPage={this.redirectToContractPage}
+                            />
                           </div>
                         </div>
                       </div>
