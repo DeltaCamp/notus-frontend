@@ -81,30 +81,6 @@ export const EventCard =
           }
         }
 
-        handleActivate = (e) => {
-          e.preventDefault()
-
-          const event = this.props.event
-
-          this.props.updateEventMutation({
-            variables: {
-              event: {
-                id: event.id,
-                isActive: !event.isActive
-              }
-            },
-            refetchQueries: [
-              'eventsQuery'
-            ]
-          }).then((mutationResult) => {
-            this.deactivateEditMenu()
-            notusToast.success(`Event ${event.isActive ? 'deactivated' : 're-activated'}`)
-          }).catch(error => {
-            notusToast.error('Error while updating event')
-            console.error(error)
-          })
-        }
-
         author = () => {
           const { currentUserData, event } = this.props || {}
           const { currentUser } = currentUserData || {}
@@ -162,7 +138,7 @@ export const EventCard =
                 </div>
                 <div className='event-card__icons has-text-right'>
                   {/* {editable ? editDropdown : ''} */}
-                  {event.isActive
+                  {(event.sendEmail || event.callWebhook)
                     ? (<><CheckCircle /> &nbsp;Active</>)
                     : (<><StopCircle /> &nbsp;Inactive</>)
                   }

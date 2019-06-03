@@ -10,11 +10,13 @@ const debug = require('debug')('notus:components:ScopeAndContractSelect')
 
 export const ScopeAndContractSelect = graphql(contractsQuery, {
   name: 'contractsData',
+  skip: (props) => !props.networkId,
   options: (props) => ({
     fetchPolicy: 'cache-and-network',
     variables: {
       contractsQuery: {
-        hasAbiEvents: true
+        hasAbiEvents: true,
+        networkId: props.networkId
       }
     }
   })

@@ -71,6 +71,7 @@ export const EventMatcher =
             <MatcherOperand
               index={this.props.index}
               handleSetEditMatcher={this.handleSetEditMatcher}
+              handleClearEditMatcher={this.handleClearEditMatcher}
               matcher={matcher}
               onChange={this.props.onChangeMatcher}
             />
@@ -86,8 +87,6 @@ export const EventMatcher =
               </button>
             </div>
           </span>
-
-          
         </div>
       )
     }

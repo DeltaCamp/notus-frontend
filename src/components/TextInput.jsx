@@ -11,6 +11,7 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
     value: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     handleStartEditing: PropTypes.func,
+    handleCancelEditing: PropTypes.func,
     required: PropTypes.bool,
     placeholder: PropTypes.string,
     disabled: PropTypes.bool
@@ -32,6 +33,10 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
   handleCancel = () => {
     this.setState({
       value: this.state.previousValue
+    }, () => {
+      if (this.props.handleCancelEditing) {
+        this.props.handleCancelEditing()
+      }
     })
   }
 
@@ -53,6 +58,8 @@ export const TextInput = ReactTimeout(class _TextInput extends Component {
     if (this.state.value !== this.state.previousValue) {
       this.setNewPreviousValue()
       this.props.handleSubmit(this.state.value)
+    } else {
+      this.handleCancel()
     }
   }
 

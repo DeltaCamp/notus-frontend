@@ -8,7 +8,8 @@ export const Input = class _Input extends Component {
     type: PropTypes.string,
     value: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    handleStartEditing: PropTypes.func
+    handleStartEditing: PropTypes.func,
+    handleCancelEditing: PropTypes.func
   }
 
   static defaultProps = {
@@ -34,6 +35,10 @@ export const Input = class _Input extends Component {
     this.setState({
       value: this.state.previousValue,
       editing: false
+    }, () => {
+      if (this.props.handleCancelEditing) {
+        this.props.handleCancelEditing()
+      }
     })
   }
 
@@ -59,6 +64,8 @@ export const Input = class _Input extends Component {
     if (this.state.value !== this.state.previousValue) {
       newState.previousValue = this.state.value
       callback = this.submit
+    } else {
+      callback = this.onCancel
     }
 
     this.setState(newState, callback)

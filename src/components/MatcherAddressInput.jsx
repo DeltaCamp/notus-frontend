@@ -11,7 +11,8 @@ export const MatcherAddressInput = ReactTimeout(class _MatcherAddressInput exten
   static propTypes = {
     matcher: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    handleSetEditMatcher: PropTypes.func.isRequired
+    handleSetEditMatcher: PropTypes.func.isRequired,
+    handleCancelEditMatcher: PropTypes.func
   }
   
   state = {
@@ -26,6 +27,10 @@ export const MatcherAddressInput = ReactTimeout(class _MatcherAddressInput exten
   handleCancel = () => {
     this.setState({
       value: this.state.previousValue
+    }, () => {
+      if (this.props.handleCancelEditMatcher) {
+        this.props.handleCancelEditMatcher()
+      }
     })
   }
 
@@ -50,6 +55,8 @@ export const MatcherAddressInput = ReactTimeout(class _MatcherAddressInput exten
     if (this.state.value !== this.state.previousValue && this.valid()) {
       this.setNewPreviousValue()
       this.props.handleSubmit(this.state.value)
+    } else {
+      this.handleCancel()
     }
   }
 

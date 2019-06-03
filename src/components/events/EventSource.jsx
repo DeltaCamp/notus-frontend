@@ -87,9 +87,10 @@ export const EventSource = class _EventSource extends Component {
         </span>
     
         <ScopeAndContractSelect
-          contractId={this.props.event.contractId}
           scope={this.props.event.scope}
+          contractId={this.props.event.contractId}
           abiEventId={this.props.event.abiEventId}
+          networkId={this.props.event.networkId}
           onChangeScopeAndContractId={this.props.onChangeScopeAndContractId}
           onAddAbiEvent={this.showAddContract}
           menuIsOpen={this.state.isEditing}
