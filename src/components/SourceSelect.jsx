@@ -44,10 +44,11 @@ export const SourceSelect = graphql(sourcesQuery, {
       static propTypes = {
         value: PropTypes.string,
         onChange: PropTypes.func.isRequired,
-        handleOpenReactSelect: PropTypes.func.isRequired,
         scope: PropTypes.number,
         abiEventInputId: PropTypes.number,
-        abiEventId: PropTypes.number
+        abiEventId: PropTypes.number,
+        handleOpenReactSelect: PropTypes.func.isRequired,
+        handleCloseReactSelect: PropTypes.func.isRequired,
       }
 
       onChange = (option) => {
@@ -109,9 +110,10 @@ export const SourceSelect = graphql(sourcesQuery, {
 
         return <NotusSelect
           {...props}
-          handleOpenReactSelect={this.props.handleOpenReactSelect}
           options={validOptions}
           onChange={this.onChange}
+          handleOpenReactSelect={this.props.handleOpenReactSelect}
+          handleCloseReactSelect={this.props.handleCloseReactSelect}
         />
       }
     }

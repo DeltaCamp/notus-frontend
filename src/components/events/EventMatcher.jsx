@@ -43,38 +43,14 @@ export const EventMatcher =
       const andWord = isFirst ? 'where' : '... and'
 
       return (
-        <div className='event-box__variable-wrapper event-box__variable-wrapper__matcher'>
+        <div className='
+          event-box__variable-wrapper
+          event-box__variable-wrapper__matcher
+        '>
           <span className='event-box__flex-mobile-group'>
             <DragHandle />
 
             {andWord} the
-
-            <MatcherSource
-              abiEventInputId={matcher.abiEventInputId}
-              event={this.props.event}
-              handleSetEditMatcher={this.handleSetEditMatcher}
-              handleClearEditMatcher={this.handleClearEditMatcher}
-              matcher={matcher}
-              onChange={this.props.onChangeMatcher}
-              scope={this.props.scope}
-            />
-
-            <MatcherOperator
-              event={this.props.event}
-              handleSetEditMatcher={this.handleSetEditMatcher}
-              handleClearEditMatcher={this.handleClearEditMatcher}
-              matcher={matcher}
-              onChange={this.props.onChangeMatcher}
-              className='no-ml'
-            />
-
-            <MatcherOperand
-              index={this.props.index}
-              handleSetEditMatcher={this.handleSetEditMatcher}
-              handleClearEditMatcher={this.handleClearEditMatcher}
-              matcher={matcher}
-              onChange={this.props.onChangeMatcher}
-            />
 
             <div className='buttons buttons-right'>
               <button
@@ -87,6 +63,33 @@ export const EventMatcher =
               </button>
             </div>
           </span>
+
+          <MatcherSource
+            abiEventInputId={matcher.abiEventInputId}
+            event={this.props.event}
+            handleSetEditMatcher={this.handleSetEditMatcher}
+            handleClearEditMatcher={this.handleClearEditMatcher}
+            matcher={matcher}
+            onChange={this.props.onChangeMatcher}
+            scope={this.props.scope}
+          />
+
+          <MatcherOperator
+            event={this.props.event}
+            handleSetEditMatcher={this.handleSetEditMatcher}
+            handleClearEditMatcher={this.handleClearEditMatcher}
+            matcher={matcher}
+            onChange={this.props.onChangeMatcher}
+            className='no-ml'
+          />
+
+          <MatcherOperand
+            index={this.props.index}
+            handleSetEditMatcher={this.handleSetEditMatcher}
+            handleClearEditMatcher={this.handleClearEditMatcher}
+            matcher={matcher}
+            onChange={this.props.onChangeMatcher}
+          />
         </div>
       )
     }

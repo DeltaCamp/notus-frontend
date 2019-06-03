@@ -36,10 +36,10 @@ export const MatcherOperand = graphql(sourceQuery, {
     ReactTimeout(class extends Component {
       static propTypes = {
         index: PropTypes.number.isRequired,
+        matcher: PropTypes.object.isRequired,
+        onChange: PropTypes.func.isRequired,
         handleSetEditMatcher: PropTypes.func.isRequired,
         handleClearEditMatcher: PropTypes.func.isRequired,
-        matcher: PropTypes.object.isRequired,
-        onChange: PropTypes.func.isRequired
       }
 
       componentDidUpdate() {

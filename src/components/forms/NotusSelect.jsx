@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
+import PropTypes from 'prop-types'
 import Select from 'react-select'
 
 import { KEYS } from '~/constants'
@@ -85,20 +86,34 @@ const ChevronDown = () => (
 export const NotusSelect = class _NotusSelect extends Component {
   state = { isOpen: false }
 
-  toggleOpen = () => {
-    if (this.props.handleOpenReactSelect) {
-      this.props.handleOpenReactSelect()
-    }
+  static propTypes = {
+    onChange: PropTypes.func.isRequired,
+    handleOpenReactSelect: PropTypes.func,
+    handleCloseReactSelect: PropTypes.func,
+    className: PropTypes.string,
+    value: PropTypes.object
+  }
 
+  runCallbacks = () => {
+    if (this.state.isOpen) {
+      if (this.props.handleOpenReactSelect) {
+        this.props.handleOpenReactSelect()
+      }
+
+      document.addEventListener("keydown", this.handleKeyDown);
+    } else {
+      if (this.props.handleCloseReactSelect) {
+        this.props.handleCloseReactSelect()
+      }
+
+      document.removeEventListener("keydown", this.handleKeyDown);
+    }
+  }
+
+  toggleOpen = () => {
     this.setState({
       isOpen: !this.state.isOpen
-    }, () => {
-      if (this.state.isOpen) {
-        document.addEventListener("keydown", this.handleKeyDown);
-      } else {
-        document.removeEventListener("keydown", this.handleKeyDown);
-      }
-    })
+    }, this.runCallbacks)
   }
 
   onSelectChange = value => {
@@ -138,7 +153,6 @@ export const NotusSelect = class _NotusSelect extends Component {
       >
         <Select
           {...this.props}
-          // autoFocus
           backspaceRemovesValue={false}
           components={{ DropdownIndicator, IndicatorSeparator: null }}
           controlShouldRenderValue={false}
@@ -150,11 +164,8 @@ export const NotusSelect = class _NotusSelect extends Component {
           styles={selectStyles}
           tabSelectsValue={false}
           onKeyUp={this.handleKeyUp}
-          // onClose={this.toggleOpen}
-          // menuPlacement='auto'
-          className={`react-select`}
+          className='react-select'
           classNamePrefix='react-select'
-          // isSearchable={this.state.focused}
         />
       </Dropdown>
     )

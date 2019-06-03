@@ -131,13 +131,14 @@ textarea.textarea,
 }
 
 .method-addon {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
   display: inline-block;
   border-radius: 8px;
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+  height: 100%;
   margin: 0;
-  padding: 5px 20px 5px 19px;
+  padding: 8px 20px 5px 19px;
   border-width: 3px;
   border-color: rgba(255, 255, 255, 0.2);
 }
@@ -423,26 +424,67 @@ input.input.is-large {
   }
 }
 
+.react-select__dropdown.react-select__half-width {
+  margin-right: 0.5rem;
+
+  @media screen and (max-width: $fullhd) {
+    margin-right: 0;
+    margin-left: 0.5rem;
+    width: 25%;
+  }
+
+  @media screen and (max-width: $widescreen) {
+    margin-left: 0;
+    width: 37%;
+  }
+
+  @media screen and (max-width: $tablet) {
+    width: 40%;
+  }
+
+  @media screen and (max-width: $mobile) {
+    width: 70%;
+  }
+}
+
 .react-select__dropdown {
   display: inline-block;
   margin: 0 0.5rem;
   position: relative;
+
+  @media screen and (max-width: $fullhd) {
+    display: inline;
+    margin: 0 0 0.5rem 0;
+    width: 100%;
+  }
+
+  @media screen and (max-width: $widescreen) {
+    display: block;
+  }
+}
+
+.react-select__dropdown.network-select {
+  @media screen and (max-width: $fullhd) {
+    margin-left: 0.5rem;
+  }
+
+  @media screen and (max-width: $widescreen) {
+    margin-left: 0;
+  }
+
 }
 
 .react-select__chevron {
   margin-right: -16px;
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $widescreen) {
     margin-right: -10px;
   }
 }
 
 .react-select .react-select__placeholder {
+  color: rgba(160, 180, 200, 0.7);
   cursor: text;
-}
-
-.react-select .react-select__placeholder {
-  color: rgba(160, 180, 200, 0.5);
 }
 
 .react-select .react-select__placeholder:hover {
@@ -480,7 +522,7 @@ input.input.is-large {
   font-size: inherit;
   z-index: 30000;
 
-  @media screen and (max-width: $widescreen) {
+  @media screen and (max-width: $fullhd) {
     width: 100%;
   }
 }

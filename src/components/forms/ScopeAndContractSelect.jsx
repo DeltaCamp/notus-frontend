@@ -25,7 +25,7 @@ export const ScopeAndContractSelect = graphql(contractsQuery, {
     static propTypes = {
       scope: PropTypes.number.isRequired,
       onChangeScopeAndContractId: PropTypes.func.isRequired,
-      menuIsOpen: PropTypes.bool.isRequired,
+      handleStartEditing: PropTypes.func.isRequired,
       handleStopEditing: PropTypes.func.isRequired,
       contractId: PropTypes.number
     }
@@ -43,8 +43,6 @@ export const ScopeAndContractSelect = graphql(contractsQuery, {
           abiEventId: null
         })
       }
-
-      this.props.handleStopEditing()
     }
 
     render () {
@@ -105,7 +103,10 @@ export const ScopeAndContractSelect = graphql(contractsQuery, {
         {...this.props}
         value={value}
         options={[scopeGroup, contractsGroup]}
+        className='react-select__half-width'
         onChange={this.onChange}
+        handleOpenReactSelect={this.props.handleStartEditing}
+        handleCloseReactSelect={this.props.handleStopEditing}
       />
     }
   }
