@@ -80,13 +80,11 @@ export const EventCard =
           }
         }
 
-        author = () => {
-          const { currentUserData, event } = this.props || {}
-          const { currentUser } = currentUserData || {}
+        authorName = () => {
+          const { event } = this.props || {}
           const { user } = event
 
-          if (currentUser && (currentUser.id === user.id)) {
-            console.log('you')
+          if (this.isAuthor()) {
             return 'you'
           } else if (user.name.length > 0) {
             return user.name
@@ -95,12 +93,22 @@ export const EventCard =
           }
         }
 
+        isAuthor = () => {
+          const { currentUserData, event } = this.props || {}
+          const { currentUser } = currentUserData || {}
+          const { user } = event
+
+          return (currentUser && (currentUser.id === user.id))
+        }
+
         render () {
           const { currentUserData, event } = this.props
 
           const isLoggedIn = currentUserData && currentUserData.currentUser
 
           const linkTo = isLoggedIn ? this.props.linkTo : routes.SIGNUP
+
+          const isAuthor = this.isAuthor()
 
           // const sendEmail = event ? event.sendEmail : false
 
@@ -122,55 +130,43 @@ export const EventCard =
               }}
             >
               <div className='event-card__header'>
-                <p className='event-card__title is-size-5'>
+                <p className='event-card__title is-size-3 has-font-weight-extrabold'>
                   {event.title}
                 </p>
 
-                
-
-                <div className='is-size-8'>
-                  <span className='has-text-lighter'>Runs:</span> {event.runCount === 0 ? 'Off' : 
-                    event.runCount === -1 ? 'Every time' : 'Next time'
-                  }
-                </div>
-                <div className='is-size-8'>
-                  <span className='has-text-lighter'>Sends an email: </span>{event.sendEmail ? <Check className='is-xsmall' /> : <span className='has-text-lighter'><X className='is-xsmall' /></span>}
-                </div>
-                <div className='is-size-8'>
-                  <span className='has-text-lighter'>Triggers a webhook: </span>{event.callWebhook ? <Check className='is-xsmall' /> : <span className='has-text-lighter'><X className='is-xsmall' /></span>}
-                </div>
+                {isAuthor && <>
+                  <div className='is-size-8'>
+                    <span className='has-text-lighter'>Runs:</span> {event.runCount === 0 ? 'Off' :
+                      event.runCount === -1 ? 'Every time' : 'Next time'
+                    }
+                  </div>
+                  <div className='is-size-8'>
+                    <span className='has-text-lighter'>Sends an email: </span>{event.sendEmail ? <Check className='is-xsmall' /> : <span className='has-text-lighter'><X className='is-xsmall' /></span>}
+                  </div>
+                  <div className='is-size-8'>
+                    <span className='has-text-lighter'>Triggers a webhook: </span>{event.callWebhook ? <Check className='is-xsmall' /> : <span className='has-text-lighter'><X className='is-xsmall' /></span>}
+                  </div>
+                </>}
               </div>
 
               <div className='event-card__footer event-card__author is-size-7'>
 
                 <div className='event-card__icons'>
                   {
-                    this.author().length > 0 && <>
-                      <User />&nbsp;By {this.author()}
+                    this.authorName().length > 0 && <>
+                      <User />&nbsp;By {this.authorName()}
                     </>
                   }
                 </div>
 
                 <div className='event-card__icons has-text-right'>
-                  {event.isPublic
-                    ? (<><Cast /> &nbsp;Public</>)
-                    : (<><Lock /> &nbsp;Private</>)
+                  {isAuthor && (
+                    event.isPublic
+                      ? (<><Cast /> &nbsp;Public</>)
+                      : (<><Lock /> &nbsp;Private</>)
+                    )
                   }
                 </div>
-
-                {/* <div className='event-card__icons has-text-right'> */}
-                  {/* {editable ? editDropdown : ''} */}
-                  {/* {this.author() && (
-                    (event.runCount !== 0 && (event.sendEmail || event.callWebhook))
-                      ? (<><CheckCircle /> &nbsp;Active</>)
-                      : (<><StopCircle /> &nbsp;Inactive</>)
-                  )} */}
-                {/* </div> */}
-                {/* {sendEmail &&
-                  <div className='event-card__icons has-text-right'>
-                    Sends &nbsp;<Mail />
-                  </div>
-                } */}
               </div>
             </Link>
           )
