@@ -5,9 +5,7 @@ import { Plus } from 'react-feather'
 import { graphql } from 'react-apollo'
 import { formatRoute } from 'react-router-named-routes'
 
-import { Modal } from '~/components/Modal'
 import { ScrollToTop } from '~/components/ScrollToTop'
-import { NewAdminContractForm } from '~/components/admin/forms/NewAdminContractForm'
 import { EventsPageLoader } from '~/components/loading/EventsPageLoader'
 import { contractsQuery } from '~/queries/contractsQuery'
 import { currentUserQuery } from '~/queries/currentUserQuery'
@@ -88,7 +86,7 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
 
       redirectToContractPage = (contractId) => {
         const newAdminContractRoute = formatRoute(
-          routes.CONTRACT_PAGE, {
+          routes.CONTRACT, {
             contractId
           }
         )
@@ -132,20 +130,29 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
             contractContracts.length === 0
               ? (
                 contractRows = <tr className='is-size-6 has-text-weight-bold'>
-                  <td>
+                  <td className='has-text-centered' colspan='3'>
+                    <br />
                     No contracts exist.
+                    <br />
+                    <Link
+                     to={routes.NEW_CONTRACT}
+                    >
+                      Upload ABI and Create your first contract.
+                    </Link>
+                    <br />
+                    <br />
                   </td>
                 </tr>
               ) : (
                 contractRows = contractContracts.map(contract => (
                   <tr key={`contract-id-${contract.id}`}>
                     <td>
-                      <Link to={formatRoute(routes.CONTRACT_PAGE, { contractId: contract.id })}>
+                      <Link to={formatRoute(routes.CONTRACT, { contractId: contract.id })}>
                         {contract.id}
                       </Link>
                     </td>
                     <td>
-                      <Link to={formatRoute(routes.CONTRACT_PAGE, { contractId: contract.id })}>
+                      <Link to={formatRoute(routes.CONTRACT, { contractId: contract.id })}>
                         <strong>{contract.name}</strong>
                       </Link>
                     </td>
@@ -171,18 +178,6 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
             />
 
             <ScrollToTop />
-            <Modal
-              isOpen={this.state.showingAddContractModal}
-              handleClose={this.handleHideAddContractModal}
-              onKeyUp={this.handleKeyUp}
-              isLarge
-            >
-              <NewAdminContractForm
-                onClose={this.handleHideAddContractModal}
-                redirectToContractPage={this.redirectToContractPage}
-              />
-            </Modal>
-
 
             <section className='section section--main-content'>
               <div className='container'>
@@ -195,12 +190,12 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
                 </div>
 
                 <div className='mt20 has-text-centered'>
-                  <button
+                  <Link
                     className='button is-small is-info is-outlined has-fat-icons mt20'
-                    onClick={this.handleShowAddContractModal}
+                    to={routes.NEW_CONTRACT}
                   >
                     <Plus /> &nbsp;Create contract
-                  </button>
+                  </Link>
                 </div>
 
                 <br />

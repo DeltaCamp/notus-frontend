@@ -1,6 +1,9 @@
 export const ADMIN = '/admin'
-export const CONTRACTS_PAGE = '/contracts'
-export const CONTRACT_PAGE = '/contracts/:contractId'
+
+export const NEW_CONTRACT = '/contracts/new'
+export const EDIT_CONTRACT = '/contracts/edit/:contractId'
+export const CONTRACTS = '/contracts'
+export const CONTRACT = '/contracts/:contractId'
 
 export const HOME = '/'
 export const ABOUT_PAGE = '/about'

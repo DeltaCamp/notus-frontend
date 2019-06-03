@@ -463,17 +463,6 @@ input.input.is-large {
   }
 }
 
-.react-select__dropdown.network-select {
-  @media screen and (max-width: $fullhd) {
-    margin-left: 0.5rem;
-  }
-
-  @media screen and (max-width: $widescreen) {
-    margin-left: 0;
-  }
-
-}
-
 .react-select__chevron {
   margin-right: -16px;
 

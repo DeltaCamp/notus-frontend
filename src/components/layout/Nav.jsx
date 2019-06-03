@@ -136,7 +136,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 </NavLink>
                 <NavLink
                   exact
-                  to={routes.CONTRACTS_PAGE}
+                  to={routes.CONTRACTS}
                   className='navbar-item'
                   onClick={this.closeMobileNav}
                   activeClassName='is-active'

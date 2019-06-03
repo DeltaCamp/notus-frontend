@@ -195,6 +195,20 @@ form.is-tall .button.is-text.is-xsmall:hover,
   background-color: lighten($purple, 10%);
 }
 
+.button.is-purple.is-outlined {
+  background-color: transparent;
+  border-color: $purple;
+  color: white;
+}
+
+.button.is-purple.is-outlined:hover,
+.button.is-purple.is-outlined:focus,
+.button.is-purple.is-outlined:active {
+  background-color: transparent;
+  border-color: white;
+  color: white;
+}
+
 .is-copy-button {
   color: lighten($text, 30%);
   cursor: pointer;

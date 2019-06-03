@@ -10,6 +10,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
 import { AdminPage } from '~/components/pages/admin/AdminPage'
+import { EditContractPage } from '~/components/pages/EditContractPage'
 import { ContractsPage } from '~/components/pages/ContractsPage'
 import { ContractPage } from '~/components/pages/ContractPage'
 import { HomePage } from '~/components/pages/HomePage'
@@ -81,9 +82,12 @@ export const App = withRouter(hot(module)(
               appear
             >
               <Switch location={this.props.location}>
-                <Route exact path={routes.CONTRACTS_PAGE} component={withTracker(ContractsPage)} />
-                <Route exact path={routes.CONTRACT_PAGE} component={withTracker(ContractPage)} />
                 <Route exact path={routes.ADMIN} component={withTracker(AdminPage)} />
+
+                <Route exact path={routes.EDIT_CONTRACT} component={withTracker(EditContractPage)} />
+                <Route exact path={routes.NEW_CONTRACT} component={withTracker(EditContractPage)} />
+                <Route exact path={routes.CONTRACTS} component={withTracker(ContractsPage)} />
+                <Route exact path={routes.CONTRACT} component={withTracker(ContractPage)} />
 
                 <Route exact path={routes.HOME} component={withTracker(HomePage)} />
                 <Route exact path={routes.ABOUT_PAGE} component={withTracker(AboutPage)} />
