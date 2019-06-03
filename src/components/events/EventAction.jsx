@@ -2,11 +2,13 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import Switch from 'react-bulma-switch'
 import { Plus } from 'react-feather'
+import { Link } from 'react-router-dom'
 
 import { PublishButton } from '~/components/events/PublishButton'
 import { WebhookUrlInput } from '~/components/forms/WebhookUrlInput'
 import { WebhookBodyInput } from '~/components/forms/WebhookBodyInput'
 import { WebhookHeaderForm } from '~/components/forms/WebhookHeaderForm'
+import * as routes from '~/../config/routes'
 
 export const EventAction =
   class _EventAction extends PureComponent {
@@ -45,6 +47,20 @@ export const EventAction =
       if (this.props.callWebhook) {
         form =
         <>
+          {(
+            currentUserData.currentUser &&
+            !currentUserData.currentUser.confirmedAt
+            ) && <>
+              <p className='color-block is-purple has-text-centered'>
+                <br />
+                Webhooks will not fire until you have confirmed your '{email}' email address first:
+                <br /><Link className='has-underline has-text-lighter' to={routes.ACCOUNT_SETTINGS}>Confirm on Settings</Link>
+                <br />
+                <br />
+              </p>
+            </>
+          }
+
           <p className='has-text-light'>
             <small>
               You can insert variables into webhooks using double curlies.  For example: {"{{transaction.value}}"}

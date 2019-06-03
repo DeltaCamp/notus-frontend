@@ -125,10 +125,13 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   handleSubmitTitle = (newEventTitle, callback) => {
-    this.doGenericUpdateEvent({
-      id: this.state.event.id,
-      title: newEventTitle
-    }, 'Updated event title').then(() => {
+    this.doGenericUpdateEvent(
+      {
+        id: this.state.event.id,
+        title: newEventTitle
+      },
+      'Updated event title'
+    ).then(() => {
       if (callback) { callback() }
     })
   }
@@ -592,6 +595,8 @@ export const EditEventPage = class _EditEventPage extends Component {
           event: oldEvent
         })
       })
+    } else {
+      return Promise.resolve()
     }
   }
 
