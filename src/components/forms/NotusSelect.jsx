@@ -140,6 +140,10 @@ export const NotusSelect = class _NotusSelect extends Component {
     }
   }
 
+  onClick = (e) => {
+    e.stopPropagation()
+  }
+
   render () {
     const { isOpen } = this.state
 
@@ -173,6 +177,7 @@ export const NotusSelect = class _NotusSelect extends Component {
           isClearable={false}
           menuIsOpen
           onChange={this.onSelectChange}
+          onClick={this.onClick}
           placeholder="Search..."
           styles={selectStyles}
           tabSelectsValue={false}
