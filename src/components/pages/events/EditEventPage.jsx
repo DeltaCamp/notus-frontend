@@ -244,8 +244,6 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   handleSetEditMatcher = (editMatcherIndex) => {
-    debug('handleSetEditMatcher', editMatcherIndex)
-
     this.setState({
       editMatcherIndex
     })
@@ -261,7 +259,6 @@ export const EditEventPage = class _EditEventPage extends Component {
   }
 
   handleTogglePublish = () => {
-    console.log('toggle publish')
     const { currentUser } = this.props
     if (currentUser && !currentUser.confirmedAt) {
       notusToast.info(`You will need to confirm your ${currentUser.email} email address before you can publish the event`)
@@ -295,7 +292,9 @@ export const EditEventPage = class _EditEventPage extends Component {
 
   onChangeMatcher = (matcher) => {
     const matchers = this.state.event.matchers.slice()
-    matchers[this.state.editMatcherIndex] = matcher
+    const index = this.state.editMatcherIndex
+
+    matchers[index] = matcher
 
     this.setState({
       event: {
@@ -304,41 +303,51 @@ export const EditEventPage = class _EditEventPage extends Component {
       }
     })
 
-    if (!this.isCreateMode()) {
-      if (matcher.id) {
-        this.props.updateMatcherMutation({
-          variables: {
-            matcher: matchers[this.state.editMatcherIndex]
-          },
-          refetchQueries: [
-            // only refetch the event or matcher we just updated (1 record)
-            'eventsQuery'
-          ]
-        }).then((mutationResult) => {
-          notusToast.success('Updated event matchers')
-        }).catch(error => {
-          showErrorMessage(error)
-        })
-      } else {
-        // order is wrong!
+    if (matcher.id) {
+      this.props.updateMatcherMutation({
+        variables: {
+          matcher: matchers[index]
+        },
+        refetchQueries: [
+          // only refetch the event or matcher we just updated (1 record)
+          'eventsQuery'
+        ]
+      }).then((mutationResult) => {
+        notusToast.success('Updated event matchers')
+      }).catch(error => {
+        showErrorMessage(error)
+      })
+    } else {
+      // order is wrong!
 
-        this.props.createMatcherMutation({
-          variables: {
-            matcher
-          },
-          refetchQueries: [
-            // only refetch the event or matcher we just created (1 record)
-            'eventsQuery'
-          ]
-        }).then((mutationResult) => {
-          notusToast.success('Added new matcher rule')
-        }).catch(error => {
-          showErrorMessage(error)
+      this.props.createMatcherMutation({
+        variables: {
+          matcher
+        },
+        refetchQueries: [
+          // only refetch the event or matcher we just created (1 record)
+          'eventsQuery'
+        ]
+      }).then((mutationResult) => {
+        notusToast.success('Added new matcher rule')
+
+        const { data: { createMatcher }} = mutationResult
+        const matchers = this.state.event.matchers.slice()
+        matchers[index] = createMatcher
+
+        this.setState({
+          event: {
+            ...this.state.event,
+            matchers
+          }
         })
-      }
+
+      }).catch(error => {
+        showErrorMessage(error)
+      }).finally(() => {
+        this.handleSetEditMatcher(null)
+      })
     }
-
-    this.handleSetEditMatcher(null)
   }
 
   onChangeScopeAndContractId = ({ scope, contract }) => {
@@ -445,8 +454,6 @@ export const EditEventPage = class _EditEventPage extends Component {
         showErrorMessage(error)
       })
     }
-
-    this.handleSetEditMatcher(null)
   }
 
   onAddWebhookHeader = () => {
@@ -535,7 +542,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       }
     })
 
-    if (!this.isCreateMode() && id) {
+    if (id) {
       this.props.destroyMatcherMutation({
         variables: {
           id

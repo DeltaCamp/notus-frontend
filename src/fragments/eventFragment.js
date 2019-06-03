@@ -18,6 +18,7 @@ export const eventFragment = gql`
     contract {
       ...contractFragment
     }
+    contractId
     abiEventId
     parent {
       id
