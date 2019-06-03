@@ -23,7 +23,7 @@ $event-font-size-sm: 17.5px;
 }
 
 .event-card__title {
-  height: 68%;
+  height: 56%;
   overflow: hidden;
   width: 100%;
 }
@@ -35,7 +35,11 @@ $event-font-size-sm: 17.5px;
 
 .event-card__footer {
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.2);
+  // background-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(220deg, 
+  rgba(20, 20, 10, 0.1) 0%, 
+  rgba(20, 20, 100, 0.1) 30%, 
+  rgba(220, 200, 240, 0.05) 100%);
   display: flex;
   height: 54px;
   margin-top: 0rem;
@@ -50,6 +54,14 @@ $event-font-size-sm: 17.5px;
 
 .button.event-card .event-card__icons svg {
   width: 20px;
+}
+
+.button.event-card .event-card__icons.is-xsmall svg {
+  width: 10px;
+}
+
+.button.event-card .has-text-lighter svg {
+  stroke: rgba(255, 255, 255, 0.25);
 }
 
 .button.event-card .event-card__icons:first-child {

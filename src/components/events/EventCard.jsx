@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 import { formatRoute } from 'react-router-named-routes'
 import {
-  StopCircle,
   Cast,
-  CheckCircle,
+  Check,
   Lock,
-  Mail,
-  User
+  User,
+  X
 } from 'react-feather'
 import { graphql } from 'react-apollo'
 import { Link } from 'react-router-dom'
@@ -86,10 +85,13 @@ export const EventCard =
           const { currentUser } = currentUserData || {}
           const { user } = event
 
-          if (currentUser && (currentUser.id === parseInt(user.id, 10))) {
+          if (currentUser && (currentUser.id === user.id)) {
+            console.log('you')
             return 'you'
+          } else if (user.name.length > 0) {
+            return user.name
           } else {
-            return (user.name || user.email)
+            return ''
           }
         }
 
@@ -100,7 +102,7 @@ export const EventCard =
 
           const linkTo = isLoggedIn ? this.props.linkTo : routes.SIGNUP
 
-          const sendEmail = event ? event.sendEmail : false
+          // const sendEmail = event ? event.sendEmail : false
 
           return (
             <Link
@@ -124,30 +126,51 @@ export const EventCard =
                   {event.title}
                 </p>
 
-                <div className='event-card__icons is-size-7'>
+                
+
+                <div className='is-size-8'>
+                  <span className='has-text-lighter'>Runs:</span> {event.runCount === 0 ? 'Off' : 
+                    event.runCount === -1 ? 'Every time' : 'Next time'
+                  }
+                </div>
+                <div className='is-size-8'>
+                  <span className='has-text-lighter'>Sends an email: </span>{event.sendEmail ? <Check className='is-xsmall' /> : <span className='has-text-lighter'><X className='is-xsmall' /></span>}
+                </div>
+                <div className='is-size-8'>
+                  <span className='has-text-lighter'>Triggers a webhook: </span>{event.callWebhook ? <Check className='is-xsmall' /> : <span className='has-text-lighter'><X className='is-xsmall' /></span>}
+                </div>
+              </div>
+
+              <div className='event-card__footer event-card__author is-size-7'>
+
+                <div className='event-card__icons'>
+                  {
+                    this.author().length > 0 && <>
+                      <User />&nbsp;By {this.author()}
+                    </>
+                  }
+                </div>
+
+                <div className='event-card__icons has-text-right'>
                   {event.isPublic
                     ? (<><Cast /> &nbsp;Public</>)
                     : (<><Lock /> &nbsp;Private</>)
                   }
                 </div>
-              </div>
 
-              <div className='event-card__footer event-card__author is-size-7'>
-                <div className='event-card__icons'>
-                  <User /> &nbsp;by {this.author()}
-                </div>
-                <div className='event-card__icons has-text-right'>
+                {/* <div className='event-card__icons has-text-right'> */}
                   {/* {editable ? editDropdown : ''} */}
-                  {(event.sendEmail || event.callWebhook)
-                    ? (<><CheckCircle /> &nbsp;Active</>)
-                    : (<><StopCircle /> &nbsp;Inactive</>)
-                  }
-                </div>
-                {sendEmail &&
+                  {/* {this.author() && (
+                    (event.runCount !== 0 && (event.sendEmail || event.callWebhook))
+                      ? (<><CheckCircle /> &nbsp;Active</>)
+                      : (<><StopCircle /> &nbsp;Inactive</>)
+                  )} */}
+                {/* </div> */}
+                {/* {sendEmail &&
                   <div className='event-card__icons has-text-right'>
                     Sends &nbsp;<Mail />
                   </div>
-                }
+                } */}
               </div>
             </Link>
           )
