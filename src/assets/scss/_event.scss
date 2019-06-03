@@ -6,12 +6,14 @@ $event-font-size-sm: 17.5px;
 
 .button.event-card {
   border-radius: 15px;
-  border: 4px solid transparent;
+  // border: 4px solid transparent;
+  border: none;
   background-color: $dark;
   display: inline-block;
-  font-weight: 600;
-  height: 300px;
+  font-weight: 700;
+  height: 330px;
   line-height: 1.3;
+  overflow: hidden;
   padding: 0;
   text-align: left;
   text-transform: none;
@@ -23,22 +25,28 @@ $event-font-size-sm: 17.5px;
 }
 
 .event-card__title {
-  height: 68%;
+  font-weight: 700;
+  line-height: 1;
+  height: 166px;
+  margin-bottom: 0;
   overflow: hidden;
   width: 100%;
 }
 
 .event-card__header {
-  height: 220px;
+  height: 268px;
   padding: 1.5rem;
 }
 
 .event-card__footer {
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(220deg, 
+  rgba(20, 20, 10, 0.1) 0%, 
+  rgba(20, 20, 100, 0.1) 30%, 
+  rgba(220, 200, 240, 0.05) 100%);
   display: flex;
-  height: 54px;
   margin-top: 0rem;
+  min-height: 64px;
   padding: 0.75rem 1.5rem;
 }
 
@@ -50,6 +58,14 @@ $event-font-size-sm: 17.5px;
 
 .button.event-card .event-card__icons svg {
   width: 20px;
+}
+
+.button.event-card .event-card__icons.is-xsmall svg {
+  width: 10px;
+}
+
+.button.event-card .has-text-lighter svg {
+  stroke: rgba(255, 255, 255, 0.25);
 }
 
 .button.event-card .event-card__icons:first-child {
@@ -112,14 +128,16 @@ $event-font-size-sm: 17.5px;
 
 .button.event-card.event-card--small {
   border-radius: 10px;
-  border: 4px solid rgba(255, 255, 255, 0.42);
+  // border: 4px solid rgba(255, 255, 255, 0.42);
+  border: none;
   margin: 0;
 }
 
 .button.event-card:hover,
 .button.event-card:focus,
 .button.event-card:active {
-  border: 4px solid rgba(255, 255, 255, 0.25);
+  // border: 4px solid rgba(255, 255, 255, 0.25);
+  border: none;
   color: white;
 }
 
@@ -158,7 +176,9 @@ $event-font-size-sm: 17.5px;
 }
 
 .button.event-card.event-card--small .event-card__footer {
-  height: 44px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 62px;
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
 }
@@ -171,7 +191,7 @@ $event-font-size-sm: 17.5px;
 // EVENT BOX
 
 .event-box {
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.5;
   padding: 1.5rem 0;
   position: relative;
@@ -317,7 +337,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
   display: inline-flex;
   font-size: $event-font-size;
-  font-weight: 600;
+  font-weight: 700;
   height: $form-input-height;
   line-height: 0.92;
   margin: 0;
@@ -442,7 +462,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   border: none;
   color: white;
   font-size: inherit;
-  font-weight: 600;
+  font-weight: 700;
   height: 100%;
   line-height: inherit;
   min-width: 80px;
@@ -468,7 +488,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 }
 
 .react-select__input input {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .event-box__variable .select select {
