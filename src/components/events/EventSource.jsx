@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// import ReactDOM from 'react-dom'
 
 import { ScopeAndContractSelect } from '~/components/forms/ScopeAndContractSelect'
-import { KEYS } from '~/constants'
 
-const debug = require('debug')('notus:components:EventSource')
+// const debug = require('debug')('notus:components:EventSource')
 
 export const EventSource = class _EventSource extends Component {
   state = {

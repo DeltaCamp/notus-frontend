@@ -37,7 +37,10 @@ export const MatcherOperator = ReactTimeout(class extends Component {
 
   render () {
     const { matcher } = this.props
-    const { abiEventInputId, operator } = matcher
+    const {
+      abiEventInputId,
+      // operator
+    } = matcher
     // const operatorWords = OPERATOR_LABELS[operator]
 
     if (!matcher) {

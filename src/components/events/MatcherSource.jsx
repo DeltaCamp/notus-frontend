@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
 import ReactTooltip from 'react-tooltip'
 import ReactTimeout from 'react-timeout'
 import { graphql } from 'react-apollo'
@@ -12,7 +11,7 @@ import { sourceQuery } from '~/queries/sourceQuery'
 import { sourcesQuery } from '~/queries/sourcesQuery'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { isValidDataTypeOperator } from '~/utils/isValidDataTypeOperator'
-import { KEYS, SOURCES, OPERATORS } from '~/constants'
+import { SOURCES, OPERATORS } from '~/constants'
 
 const debug = require('debug')('notus:components:MatcherSource')
 
