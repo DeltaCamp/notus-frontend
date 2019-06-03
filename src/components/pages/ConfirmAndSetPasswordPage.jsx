@@ -58,22 +58,23 @@ export const ConfirmAndSetPasswordPage =
 
           let oneTimeKey = this.getOneTimeKey(this.props)
           if (!oneTimeKey) {
-            notusToast.info('Missing one time key')
+            error = 'Missing one time key'
           }
 
           if (!this.state.password) {
-            notusToast.info('You must enter a password')
+            error = 'You must enter a password'
           }
 
           if (this.state.password !== this.state.passwordConfirmation) {
-            notusToast.info('The passwords do not match')
+            error = 'The passwords do not match'
           }
 
           if (this.state.password.length < 8 || this.state.passwordConfirmation.length < 8) {
-            notusToast.info('Passwords must be at least 8 characters in length')
+            error = 'Passwords must be at least 8 characters in length'
           }
 
           if (error) {
+            notusToast.error(error)
             this.setState({
               error
             })
