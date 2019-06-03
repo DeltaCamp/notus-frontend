@@ -295,11 +295,11 @@ $event-font-size-sm: 17.5px;
 }
 
 .event-box__variable-wrapper__matcher .event-box__variable {
-  margin: 0 0.25rem;
+  // margin: 0 0.5rem;
 
-  @media screen and (max-width: $desktop) {
-    margin: 0.5rem 0 0;
-  }
+  // @media screen and (max-width: $desktop) {
+  //   margin: 0.5rem 0 0;
+  // }
 }
 
 .event-box__variable-wrapper__matcher .event-box__variable:first-child {
@@ -369,7 +369,7 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   white-space: nowrap;
 }
 
-.event-box__variable:first-child {
+.event-box__variable {
   margin-right: 0.5rem;
   
   @media screen and (max-width: $desktop) {
@@ -388,6 +388,10 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   background: rgba(255, 255, 255, 0.35);
   border-color: rgba(255, 255, 255, 0.5);
   outline: none;
+}
+
+.event-box__variable:focus {
+  outline: none !important;
 }
 
 .event-box__variable.has-react-select {
@@ -626,25 +630,25 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
 
 .event-box__flex-mobile-group > * {
   @media screen and (max-width: $desktop) {
-    display: block;
+    // display: block;
     margin: 0.125rem 0.25rem 0.25rem 0.25rem;
   }
 }
 
-.event-box__flex-mobile-group .event-box__variable {
-  margin: 0 0.5rem;
+// .event-box__flex-mobile-group .event-box__variable {
+//   margin: 0 0.5rem;
 
-  @media screen and (max-width: $desktop) {
-    margin: 0;
-  }
-}
+//   @media screen and (max-width: $desktop) {
+//     margin: 0;
+//   }
+// }
 
 .event-box__variable-wrapper__matcher .event-box__flex-mobile-group {
   align-items: center;
   display: flex;
   height: 42px;
   margin: 0;
-  width: 150px;
+  // width: 150px;
 
   @media screen and (max-width: $widescreen) {
     width: 150px;

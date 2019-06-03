@@ -6,6 +6,8 @@ import { AbiEventName } from '~/components/events/AbiEventName'
 import { AbiEventSelect } from '~/components/forms/AbiEventSelect'
 import { KEYS, SCOPES } from '~/constants'
 
+const debug = require('debug')('notus:AbiEventSelect')
+
 export const ContractAbiEvent = class _ContractAbiEvent extends Component {
   state = {
     isEditing: false,
@@ -90,8 +92,16 @@ export const ContractAbiEvent = class _ContractAbiEvent extends Component {
       abiId = parseInt(abiId, 10)
     }
 
+    let abiEventId = this.props.event.abiEventId
+    if (abiEventId) {
+      abiEventId = parseInt(abiEventId, 10)
+    }
+
+    debug(`abiId: ${abiId}, abiEventId: ${abiEventId}`)
+
     return <AbiEventSelect
       abiId={abiId}
+      abiEventId={abiEventId}
       onChangeAbiEventId={this.props.onChangeAbiEventId}
       menuIsOpen={this.state.isEditing}
       handleStopEditing={this.handleStopEditing}

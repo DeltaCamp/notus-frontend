@@ -39,7 +39,7 @@ const randomColor = () => {
     '#dd5500', // orange
     '#0676cb', // light blue
     '#6e0ad3', // purple
-    '#b8051b', // red
+    // '#b8051b', // red
     '#2f2d29', // grey
   ])
 }
@@ -328,16 +328,24 @@ export const EditEventPage = class _EditEventPage extends Component {
     return startsWithVowel ? `an ${title}` : `a ${title}`
   }
 
+  // handleChangeMatcher = (updatedMatcher) => {
+  //   this.onChangeMatcher(updatedMatcher)
+  // }
+
   onChangeMatcher = (matcher) => {
     const matchers = this.state.event.matchers.slice()
     matchers[this.state.editMatcherIndex] = matcher
 
+    debug('this.state.editMatcherIndex', this.state.editMatcherIndex)
+
+    debug('matchers[this.state.editMatcherIndex]', matchers[this.state.editMatcherIndex])
     this.setState({
       event: {
         ...this.state.event,
         matchers
       }
     })
+    debug('matchers', matchers)
 
     if (!this.isCreateMode()) {
       if (matcher.id) {
@@ -783,14 +791,16 @@ export const EditEventPage = class _EditEventPage extends Component {
     )
 
     const networkSentence = 
-      <div className='event-box__variable-wrapper'>
-        On &nbsp;
+      <span className='event-box__flex-mobile-group'>
+        <span>
+          On 
+        </span>
 
         <NetworkSelect
           networkId={parseInt(this.state.event.networkId, 10)}
           onChangeNetworkId={this.handleChangeNetworkId}
         />
-      </div>
+      </span>
 
     const matcherSentences = (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -836,9 +846,7 @@ export const EditEventPage = class _EditEventPage extends Component {
                                 handleRemoveMatcher={this.handleRemoveMatcher}
                                 matcher={eventMatcher}
                                 event={this.state.event}
-                                onChangeMatcher={
-                                  (updatedMatcher) => this.onChangeMatcher(updatedMatcher)
-                                }
+                                onChangeMatcher={this.onChangeMatcher}
                               />
                               {/* editMatcher={editMatcher} */}
                             </div>

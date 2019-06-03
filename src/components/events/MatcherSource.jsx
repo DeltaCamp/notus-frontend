@@ -71,7 +71,9 @@ export const MatcherSource = graphql(sourcesQuery, {
         }
 
         handleStartEdit = (e) => {
-          e.preventDefault()
+          if (e) {
+            e.preventDefault()
+          }
 
           this.setState({
             isEditing: true
@@ -177,6 +179,7 @@ export const MatcherSource = graphql(sourcesQuery, {
             onChange={this.handleChangeSource}
             scope={scope}
             menuIsOpen={this.state.isEditing}
+            handleOpenReactSelect={this.handleStartEdit}
           />
 
           return (

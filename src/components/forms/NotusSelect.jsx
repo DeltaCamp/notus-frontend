@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import Select from 'react-select'
 
+import { KEYS } from '~/constants'
+
 const selectStyles = {
   control: provided => ({ ...provided, minWidth: 240, margin: 8 }),
   menu: () => ({ boxShadow: 'inset 0 1px 0 rgba(0, 0, 0, 0.1)' }),
-};
+}
 
 const Menu = props => {
-  const shadow = 'hsla(218, 50%, 10%, 0.1)';
+  const shadow = 'hsla(218, 50%, 10%, 0.1)'
+
   return (
     <div
       style={{
@@ -21,8 +24,9 @@ const Menu = props => {
       }}
       {...props}
     />
-  );
-};
+  )
+}
+
 const Blanket = props => (
   <div
     style={{
@@ -35,24 +39,27 @@ const Blanket = props => (
     }}
     {...props}
   />
-);
-const Dropdown = ({ children, isOpen, target, onClose }) => (
-  <span style={{ display: 'inline-block', position: 'relative' }}>
+)
+
+const Dropdown = ({ handleKeyUp, children, isOpen, target, onClose, className }) => (
+  <span className={`react-select__dropdown ${className || ''}`}>
     {target}
     {isOpen ? <Menu>{children}</Menu> : null}
     {isOpen ? <Blanket onClick={onClose} /> : null}
   </span>
-);
-const Svg = p => (
+)
+
+const Svg = props => (
   <svg
     width="24"
     height="24"
     viewBox="0 0 24 24"
     focusable="false"
     role="presentation"
-    {...p}
+    {...props}
   />
-);
+)
+
 const DropdownIndicator = () => (
   <div style={{ color: '#aaa', height: 24, width: 32 }}>
     <Svg>
@@ -63,48 +70,68 @@ const DropdownIndicator = () => (
       />
     </Svg>
   </div>
-);
+)
+
 const ChevronDown = () => (
-  <Svg style={{ marginRight: -16 }}>
+  <Svg className='react-select__chevron'>
     <path
       d="M8.292 10.293a1.009 1.009 0 0 0 0 1.419l2.939 2.965c.218.215.5.322.779.322s.556-.107.769-.322l2.93-2.955a1.01 1.01 0 0 0 0-1.419.987.987 0 0 0-1.406 0l-2.298 2.317-2.307-2.327a.99.99 0 0 0-1.406 0z"
       fill="currentColor"
       fillRule="evenodd"
     />
   </Svg>
-);
+)
 
 export const NotusSelect = class _NotusSelect extends Component {
-  state = { isOpen: false };
+  state = { isOpen: false }
 
   toggleOpen = () => {
-    this.setState(state => ({ isOpen: !state.isOpen }));
-  };
+    if (this.props.handleOpenReactSelect) {
+      this.props.handleOpenReactSelect()
+    }
+
+    this.setState({
+      isOpen: !this.state.isOpen
+    }, () => {
+      if (this.state.isOpen) {
+        document.addEventListener("keydown", this.handleKeyDown);
+      } else {
+        document.removeEventListener("keydown", this.handleKeyDown);
+      }
+    })
+  }
 
   onSelectChange = value => {
     this.toggleOpen()
     this.props.onChange(value)
-  //   this.setState({ value });
-  };
+  }
+
+  handleKeyDown = (e) => {
+    if (e.keyCode === KEYS.escape) {
+      this.toggleOpen()
+    }
+  }
 
   render () {
-    const { isOpen } = this.state;
+    const { isOpen } = this.state
 
     return (
       <Dropdown
+        handleKeyUp={this.handleKeyUp}
         isOpen={isOpen}
         onClose={this.toggleOpen}
+        className={this.props.className || ''}
         target={
           <button
-            onClick={this.toggleOpen}
-            className={classnames(
-              'event-box__variable',
-              'has-react-select',
-              {
-                'is-active': isOpen
+          onClick={this.toggleOpen}
+          className={classnames(
+            'event-box__variable',
+            'has-react-select',
+            {
+              'is-active': isOpen
               }
-            )}
-          >
+              )}
+              >
             {this.props.value ? this.props.value.label : '...'} <ChevronDown />
           </button>
         }
@@ -122,10 +149,10 @@ export const NotusSelect = class _NotusSelect extends Component {
           placeholder="Search..."
           styles={selectStyles}
           tabSelectsValue={false}
-
+          onKeyUp={this.handleKeyUp}
           // onClose={this.toggleOpen}
           // menuPlacement='auto'
-          className={`react-select ${this.props.className || ''}`}
+          className={`react-select`}
           classNamePrefix='react-select'
           // isSearchable={this.state.focused}
         />

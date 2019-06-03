@@ -24,7 +24,8 @@ export const ScopeAndContractSelect = graphql(contractsQuery, {
       scope: PropTypes.number.isRequired,
       onChangeScopeAndContractId: PropTypes.func.isRequired,
       menuIsOpen: PropTypes.bool.isRequired,
-      handleStopEditing: PropTypes.func.isRequired
+      handleStopEditing: PropTypes.func.isRequired,
+      contractId: PropTypes.number
     }
 
     onChange = (option) => {
@@ -37,7 +38,7 @@ export const ScopeAndContractSelect = graphql(contractsQuery, {
         this.props.onChangeScopeAndContractId({
           scope: option.value,
           contractId: null,
-          abiEventId: null // do this here?
+          abiEventId: null
         })
       }
 

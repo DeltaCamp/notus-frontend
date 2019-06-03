@@ -28,7 +28,9 @@ export const MatcherOperator = ReactTimeout(class extends Component {
   }
 
   handleStartEdit = (e) => {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
 
     this.setState({
       isEditing: true
@@ -75,6 +77,19 @@ export const MatcherOperator = ReactTimeout(class extends Component {
     const { matcher } = this.props
     const { abiEventInputId, operator } = matcher
     const operatorWords = OPERATOR_LABELS[operator]
+
+    if (!matcher) {
+      return null
+    }
+
+    return <OperatorSelect
+      source={matcher.source}
+      abiEventInputId={abiEventInputId}
+      value={matcher.operator}
+      onChange={this.onChangeOperator}
+      menuIsOpen={this.state.isEditing}
+      handleOpenReactSelect={this.handleStartEdit}
+    />
 
     return (
       <>

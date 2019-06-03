@@ -49,6 +49,32 @@ export const EventMatcher =
 
             {andWord} the
 
+            <MatcherSource
+              abiEventInputId={matcher.abiEventInputId}
+              event={this.props.event}
+              handleSetEditMatcher={this.handleSetEditMatcher}
+              handleClearEditMatcher={this.handleClearEditMatcher}
+              matcher={matcher}
+              onChange={this.props.onChangeMatcher}
+              scope={this.props.scope}
+            />
+
+            <MatcherOperator
+              event={this.props.event}
+              handleSetEditMatcher={this.handleSetEditMatcher}
+              handleClearEditMatcher={this.handleClearEditMatcher}
+              matcher={matcher}
+              onChange={this.props.onChangeMatcher}
+              className='no-ml'
+            />
+
+            <MatcherOperand
+              index={this.props.index}
+              handleSetEditMatcher={this.handleSetEditMatcher}
+              matcher={matcher}
+              onChange={this.props.onChangeMatcher}
+            />
+
             <div className='buttons buttons-right'>
               <button
                 className='button has-icon plus-button is-light has-fat-icons'
@@ -61,30 +87,7 @@ export const EventMatcher =
             </div>
           </span>
 
-          <MatcherSource
-            abiEventInputId={matcher.abiEventInputId}
-            event={this.props.event}
-            handleSetEditMatcher={this.handleSetEditMatcher}
-            handleClearEditMatcher={this.handleClearEditMatcher}
-            matcher={matcher}
-            onChange={this.props.onChangeMatcher}
-            scope={this.props.scope}
-          />
-
-          <MatcherOperator
-            event={this.props.event}
-            handleSetEditMatcher={this.handleSetEditMatcher}
-            handleClearEditMatcher={this.handleClearEditMatcher}
-            matcher={matcher}
-            onChange={this.props.onChangeMatcher}
-          />
-
-          <MatcherOperand
-            index={this.props.index}
-            handleSetEditMatcher={this.handleSetEditMatcher}
-            matcher={matcher}
-            onChange={this.props.onChangeMatcher}
-          />
+          
         </div>
       )
     }

@@ -125,7 +125,7 @@ textarea.textarea,
 .react-select__control {
   background-color: white;
   box-shadow: none;
-  border-width: 2px;
+  border-width: 3px;
   border-color: rgba(255, 255, 255, 0.0);
   color: white;
 }
@@ -420,6 +420,20 @@ input.input.is-large {
     max-width: 100%;
     min-width: 100%;
     width: 100%;
+  }
+}
+
+.react-select__dropdown {
+  display: inline-block;
+  margin: 0 0.5rem;
+  position: relative;
+}
+
+.react-select__chevron {
+  margin-right: -16px;
+
+  @media screen and (max-width: $desktop) {
+    margin-right: -10px;
   }
 }
 

@@ -8,6 +8,8 @@ import { SOURCES, OPERATORS, OPERATOR_LABELS } from '~/constants'
 import { sourceQuery } from '~/queries/sourceQuery'
 import { abiEventInputQuery } from '~/queries/abiEventInputQuery'
 
+const debug = require('debug')('notus:components:OperatorSelect')
+
 export const OperatorSelect = graphql(sourceQuery, {
   name: 'sourceQuery',
   skip: (props) => !props.source,
@@ -31,6 +33,7 @@ export const OperatorSelect = graphql(sourceQuery, {
         value: PropTypes.number,
         source: PropTypes.string,
         abiEventInputId: PropTypes.number,
+        handleOpenReactSelect: PropTypes.func.isRequired,
         onChange: PropTypes.func.isRequired
       }
 
@@ -55,9 +58,10 @@ export const OperatorSelect = graphql(sourceQuery, {
           if (hide) { return false }
           if (!sourceQuery) { return true }
 
-
           const { source } = sourceQuery
-          if (source.source !== SOURCES.CONTRACT_EVENT_INPUT) {
+          // debug('sourceQuery: ', sourceQuery)
+
+          if (source && (source.source !== SOURCES.CONTRACT_EVENT_INPUT)) {
             return isValidDataTypeOperator(source.dataType, option.value)
           } else {
             const { abiEventInput } = abiEventInputQuery || {}
@@ -82,7 +86,9 @@ export const OperatorSelect = graphql(sourceQuery, {
         return <NotusSelect
           {...props}
           options={options}
+          handleOpenReactSelect={this.props.handleOpenReactSelect}
           isDisabled={isDisabled}
+          className='no-ml'
         />
       }
     }
