@@ -731,7 +731,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           }
         )}
       >
-        <span>
+        <span className='mr5'>
           On 
         </span>
 
