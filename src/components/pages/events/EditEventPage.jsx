@@ -686,9 +686,9 @@ export const EditEventPage = class _EditEventPage extends Component {
     const runCountAndScopeSentences = (
       <div className={classnames(
         'event-box__variable-wrapper',
-        {
-          'react-select--is-active': this.state.editingEventSource
-        }
+        // {
+        //   'react-select--is-active': this.state.editingEventSource
+        // }
       )}>
         
 
@@ -726,9 +726,9 @@ export const EditEventPage = class _EditEventPage extends Component {
       <span
         className={classnames(
           'event-box__flex-mobile-group',
-          {
-            'react-select--is-active': this.state.editingNetwork
-          }
+          // {
+          //   'react-select--is-active': this.state.editingNetwork
+          // }
         )}
       >
         <span className='mr5'>
@@ -754,9 +754,9 @@ export const EditEventPage = class _EditEventPage extends Component {
                 <div
                   key={`event-matcher-${index}`}
                   className={classnames(
-                    {
-                      'react-select--is-active': index === this.state.editMatcherIndex
-                    }
+                    // {
+                    //   'react-select--is-active': index === this.state.editMatcherIndex
+                    // }
                   )}
                 >
                   <Draggable

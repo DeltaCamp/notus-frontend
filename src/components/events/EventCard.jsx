@@ -71,12 +71,10 @@ export const EventCard =
         }
 
         handleEventCardClick = (e) => {
-          // e.preventDefault()
-
           const { currentUserData } = this.props || {}
 
           if (currentUserData && !currentUserData.currentUser) {
-            notusToast.info('You will need to sign up (or sign in) to create events.')
+            notusToast.info('You will need to sign up or sign in to create events.')
           }
         }
 

@@ -109,7 +109,7 @@ export const EventAction =
             })}
             
             <button
-              className='button has-icon plus-button mt10 pl10 pr10 is-light is-small'
+              className='button  has-fat-icons has-icon plus-button mt10 pl10 pr10 is-light is-small'
               onClick={this.props.onAddWebhookHeader}>
               <Plus
                 className='icon__button has-stroke-white'

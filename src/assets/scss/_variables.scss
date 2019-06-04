@@ -1,11 +1,11 @@
 $grid-gap: 64px;
 $mobile-container-width: 85%;
 
-$mobile: 480px + (2 * $grid-gap);
-$tablet: 700px + (2 * $grid-gap);
-$desktop: 820px + (2 * $grid-gap);
+$mobile: 700px + (2 * $grid-gap);
+$tablet: 700px + (2 * $grid-gap); // SAME AS MOBILE
+$desktop: 860px + (2 * $grid-gap);
 $widescreen: 1150px + (2 * $grid-gap);
-$fullhd: 1400px + (2 * $grid-gap);
+$fullhd: 1150px + (2 * $grid-gap); // SAME AS WIDESCREEN
 
 // These are good to use with min-width
 // $mobileMin: 0px;
