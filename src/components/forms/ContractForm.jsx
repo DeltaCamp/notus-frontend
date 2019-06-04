@@ -9,13 +9,13 @@ import { Link } from 'react-router-dom'
 
 import { AddressInput } from '~/components/AddressInput'
 import { ABIUpload } from '~/components/ABIUpload'
+import { NetworkSelect } from '~/components/forms/NetworkSelect'
 import { createContractMutation } from '~/mutations/createContractMutation'
 import { notusToast } from '~/utils/notusToast'
 import { showErrorMessage } from '~/utils/showErrorMessage'
 import { etherscanAbiQuery } from '~/queries/etherscanAbiQuery'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
-import { NetworkSelect } from '~/components/forms/NetworkSelect'
 
 export const ContractForm = 
 withApollo(
@@ -28,6 +28,7 @@ withApollo(
             name: '',
             networkId: 1,
             abi: {
+              id: null,
               name: '',
               abi: ''
             }
@@ -38,6 +39,15 @@ withApollo(
         static propTypes = {
           onClose: PropTypes.func.isRequired,
           redirectToContractPage: PropTypes.func.isRequired,
+        }
+
+        handleToggleEditingNetwork = (newValue) => {
+          // debug('handleToggleEditingNetwork', newValue)
+          this.setState({ editingNetwork: newValue })
+        }
+
+        handleToggleAbiSelect = (newValue) => {
+          this.setState({ editingAbi: newValue })
         }
 
         handleNameChange = (e) => {
@@ -216,9 +226,11 @@ withApollo(
           return (
             <div className='form'>
               <div className='field'>
+                Network: 
                 <NetworkSelect
-                  onChangeNetworkId={this.handleNetworkIdChange}
                   networkId={parseInt(this.state.contract.networkId, 10)}
+                  onChangeNetworkId={this.handleNetworkIdChange}
+                  handleToggleEditingNetwork={this.handleToggleEditingNetwork}
                 />
               </div>
               
@@ -241,13 +253,22 @@ withApollo(
               </div>
 
               <div className='field'>
+                ABI:
+                <AbiSelect
+                  abiId={parseInt(this.state.contract.abi.id, 10)}
+                  handleChangeAbi={this.handleChangeAbi}
+                  handleToggleAbiSelect={this.handleToggleAbiSelect}
+                />
+              </div>
+
+              {/* <div className='field'>
                 <button
                   className='button is-link is-outlined'
                   onClick={this.onPullAbiFromEtherscan}
                 >
                   Pull ABI from Etherscan
                 </button>
-              </div>
+              </div> */}
 
               <div className='has-text-centered pb20'>&mdash; or &mdash;</div>
 
@@ -265,7 +286,7 @@ withApollo(
                   className='textarea'
                   value={this.state.contract.abi.abi}
                   onChange={this.handleAbiChange}
-                  placeholder={`Paste Contract ABI here or upload file above ...`}
+                  placeholder={`Paste Contract ABI (JSON) here ...`}
                 />
               </div>
 

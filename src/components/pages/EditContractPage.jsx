@@ -9,7 +9,6 @@ import { ContractForm } from '~/components/forms/ContractForm'
 import { EventsPageLoader } from '~/components/loading/EventsPageLoader'
 import { contractQuery } from '~/queries/contractQuery'
 import { currentUserQuery } from '~/queries/currentUserQuery'
-import { KEYS } from '~/constants'
 import * as routes from '~/../config/routes'
 
 export const EditContractPage =
@@ -54,6 +53,12 @@ export const EditContractPage =
               `Editing Contract ${contract.name}` :
               `Creating a new Contract`
 
+            if (!content) {
+              content = <ContractForm
+                redirectToContractPage={this.redirectToContractPage}
+              />
+            }
+
             return (
               <div className='is-positioned-absolutely'>
                 <Helmet
@@ -91,10 +96,8 @@ export const EditContractPage =
 
                       <div className='container'>
                         <div className='row'>
-                          <div className='col-xs-12 pt20'>
-                            <ContractForm
-                              redirectToContractPage={this.redirectToContractPage}
-                            />
+                          <div className='col-xs-12 col-sm-6 pt20'>
+                            {content}
                           </div>
                         </div>
                       </div>
