@@ -96,7 +96,6 @@ export const AbiSelect =
           {...this.props}
           value={value}
           options={[createGroup, abisGroup]}
-          className='react-select__half-width'
           onChange={this.handleChange}
         />
       }

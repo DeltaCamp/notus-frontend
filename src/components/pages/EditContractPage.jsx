@@ -7,6 +7,7 @@ import { IsAuthed } from '~/components/IsAuthed'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { ContractForm } from '~/components/forms/ContractForm'
 import { EventsPageLoader } from '~/components/loading/EventsPageLoader'
+import { abiQuery } from '~/queries/abiQuery'
 import { contractQuery } from '~/queries/contractQuery'
 import { currentUserQuery } from '~/queries/currentUserQuery'
 import * as routes from '~/../config/routes'
@@ -73,7 +74,7 @@ export const EditContractPage =
                   >
                     <div className='container'>
                       <div className='row'>
-                        <div className='col-xs-12 pt20 pb20'>
+                        <div className='col-xs-12 pt20'>
                           
                           <div className='row'>
                             <div className='col-xs-12'>
@@ -88,22 +89,9 @@ export const EditContractPage =
                         </div>
                       </div>
                     </div>
-
-                    <div
-                      className={`event-box color-block is-top-layer is-dark-colored`}
-                    >
-                      <div className='is-brightness-60 is-full-width-background' />
-
-                      <div className='container'>
-                        <div className='row'>
-                          <div className='col-xs-12 col-sm-6 pt20'>
-                            {content}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
                   </div>
+
+                  {content}
                 </section>
               </div>
             )
