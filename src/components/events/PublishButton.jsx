@@ -40,7 +40,7 @@ export const PublishButton = withCurrentUser(
           value={this.props.event.isPublic}
           onChange={this.props.handleTogglePublish}
           disabled={!confirmed}
-          color='link'
+          color='light'
         >
           shared with the Notus community 
           {/* {this.props.event.isPublic

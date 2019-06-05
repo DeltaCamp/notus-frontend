@@ -39,7 +39,6 @@ const randomColor = () => {
     '#dd5500', // orange
     '#0676cb', // light blue
     '#6e0ad3', // purple
-    // '#b8051b', // red
     '#2f2d29', // grey
   ])
 }
@@ -899,6 +898,7 @@ export const EditEventPage = class _EditEventPage extends Component {
             }}
           >
             <div className='is-brightness-40 is-full-width-background' />
+
             <EventAction
               {...this.props}
               event={this.state.event}

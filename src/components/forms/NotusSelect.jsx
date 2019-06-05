@@ -152,7 +152,6 @@ export const NotusSelect = class _NotusSelect extends Component {
 
   render () {
     const { isOpen } = this.state
-    console.log(this.state.autoFocus)
 
     return (
       <Dropdown
