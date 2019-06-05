@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Plus } from 'react-feather'
+import { Save } from 'react-feather'
 import { Modal } from '~/components/Modal'
 import { EventTitle } from '~/components/events/EventTitle'
 import { KEYS } from '~/constants'
@@ -56,17 +56,13 @@ export const CreateEventModal = class _CreateEventModal extends Component {
           isOpen={this.props.createEventModalOpen}
           handleClose={this.props.handleCloseCreateEventModal}
         >
-          <div
+          <form
             onKeyUp={this.handleKeyUp}
-            className='has-text-centered'
+            className='form is-tall is-inverse has-text-centered'
           >
-          
-            <h5 className='is-size-5 has-text-weight-normal'>
+            <h5 className='is-size-5 has-text-weight-normal pb20'>
               Please give this event a title:
             </h5>
-
-            <br />
-            <br />
 
             <EventTitle
               event={this.props.event}
@@ -75,12 +71,9 @@ export const CreateEventModal = class _CreateEventModal extends Component {
               onlyShowInput
             />
 
-            <br />
-            <hr />
-            <br />
-
-            <p>
-              <strong>NOTE:</strong>&nbsp;
+            <p className='pt20'>
+              <strong>NOTE:</strong>
+              <br />
               {currentUserData?.currentUser?.confirmedAt ?
                 <>
                   This event will start reacting to the <strong>'{networkName}'</strong> network immediately!
@@ -97,10 +90,10 @@ export const CreateEventModal = class _CreateEventModal extends Component {
                 className='button is-success has-fat-icons'
                 disabled={this.props.isSubmitting}
               >
-                <Plus />&nbsp;Create event
+                <Save />&nbsp;Save event
               </button>
             </div>
-          </div>
+          </form>
         </Modal>
       </>
     )
