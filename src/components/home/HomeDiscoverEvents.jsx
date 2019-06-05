@@ -34,14 +34,19 @@ export class HomeDiscoverEvents extends Component {
         />
 
         <div className='container'>
-          <div className='row pb50'>
-            <div className='col-xs-12 col-sm-10 col-start-sm-2 col-md-8 col-start-md-3 col-lg-6 col-start-lg-4 has-text-centered'>
+          <div className='row'>
+            <div className='col-xs-12 col-sm-10 col-start-sm-2 col-md-8 col-start-md-3 col-lg-8 col-start-lg-3 has-text-centered'>
               <h4 className='is-size-4 has-text-weight-bold mt75'>
                 Share and Discover
               </h4>
               <h5 className='is-size-6'>
                 Share your events with the Notus community and discover the events that others have created.
               </h5>
+            </div>
+          </div>
+
+          <div className='row pb50'>
+            <div className='col-xs-12 col-sm-8 col-start-sm-3 col-md-6 col-start-md-4 col-lg-6 col-start-lg-4'>
               <div className='form'>
                 <input
                   type='text'

@@ -1,0 +1,17 @@
+.table thead td,
+.table thead th {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.table thead:hover td,
+.table thead:hover th {
+  color: rgba(0, 0, 0, 1);
+}
+
+.table thead,
+.table thead td,
+.table thead th,
+.table tbody tr,
+.table tbody td, {
+  transition: all 150ms ease-in-out;
+}

@@ -59,7 +59,6 @@ export const NetworkSelect = graphql(networksQuery, {
         value={value}
         options={options}
         onChange={this.onChange}
-        className='network-select'
         handleOpenReactSelect={this.handleOpenReactSelect}
         handleCloseReactSelect={this.handleCloseReactSelect}
       />

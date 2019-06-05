@@ -30,12 +30,12 @@ button[disabled] {
   transition: all 350ms cubic-bezier(0.15, 0.89, 0, 1);
   min-width: 240px;
 
-  @media screen and (max-width: $mobile) {
+  @media screen and (max-width: $desktop) {
     font-size: 1rem;
-    width: 100%;
+    // width: 100%;
   }
 
-  @media screen and (max-width: $desktop) {
+  @media screen and (max-width: $mobile) {
     font-size: 1rem;
     width: 100%;
   }
@@ -195,6 +195,20 @@ form.is-tall .button.is-text.is-xsmall:hover,
   background-color: lighten($purple, 10%);
 }
 
+.button.is-purple.is-outlined {
+  background-color: transparent;
+  border-color: $purple;
+  color: white;
+}
+
+.button.is-purple.is-outlined:hover,
+.button.is-purple.is-outlined:focus,
+.button.is-purple.is-outlined:active {
+  background-color: transparent;
+  border-color: white;
+  color: white;
+}
+
 .is-copy-button {
   color: lighten($text, 30%);
   cursor: pointer;
@@ -209,7 +223,7 @@ form.is-tall .button.is-text.is-xsmall:hover,
 
 .button.is-small {
   border-radius: 8px;
-  min-width: 100px;
+  min-width: 125px;
 }
 
 .button.is-outlined {
@@ -234,12 +248,14 @@ form.is-tall .button.is-text.is-xsmall:hover,
 
 .button.has-icon.plus-button {
   transition: all 275ms ease-in-out;
-  // width: 100%;
   background-color: rgba(255,255,255,0.1);
   color: #ffffffad;
   font-weight: bolder;
-  height: 47px;
-  width: 47px;
+  height: 37px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 37px;
+  min-width: 37px;
 
   @media screen and (max-width: $widescreen) {
     height: 42px;
@@ -362,6 +378,10 @@ form.is-tall .button.is-text.is-xsmall:hover,
 
 .buttons {
   display: inline-flex;
+
+  @media screen and (max-width: $tablet) {
+    width: 100%;
+  }
 }
 
 .buttons:last-child {
@@ -411,4 +431,8 @@ button:active[disabled],
 
 .loading-indicator.loading-indicator--button {
   width: 18px;
+}
+
+.button.is-light:focus:not(:active), .button.is-light.is-focused:not(:active) {
+  box-shadow: none;
 }

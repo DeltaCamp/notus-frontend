@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Select from 'react-select'
 
 import { KEYS } from '~/constants'
+import { getSystemInfo } from '~/utils/getSystemInfo'
 
 const selectStyles = {
   control: provided => ({ ...provided, minWidth: 240, margin: 8 }),
@@ -94,8 +95,13 @@ export const NotusSelect = class _NotusSelect extends Component {
     value: PropTypes.object,
     isOpen: PropTypes.bool
   }
-
+    
   componentDidMount () {
+    const { mobileOS } = getSystemInfo()
+    const touch = (mobileOS === 'iOS' || mobileOS === 'Android')
+
+    this.setState({ autoFocus: !touch })
+
     if (this.props.isOpen) {
       this.setState({ isOpen: true })
     }
@@ -170,6 +176,7 @@ export const NotusSelect = class _NotusSelect extends Component {
       >
         <Select
           {...this.props}
+          autoFocus={this.state.autoFocus}
           backspaceRemovesValue={false}
           components={{ DropdownIndicator, IndicatorSeparator: null }}
           controlShouldRenderValue={false}
@@ -188,5 +195,4 @@ export const NotusSelect = class _NotusSelect extends Component {
       </Dropdown>
     )
   }
-    
 }

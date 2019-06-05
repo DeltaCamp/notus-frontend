@@ -42,18 +42,18 @@ export const DiscoverEventsPage =
                     </div>
                   </div>
                   <div className='row'>
-                    <div className='col-xs-12 col-sm-4 col-start-sm-5 has-text-centered mt20'>
-                      <div className='form'>
-                        <div className='field mt20 has-text-centered'>
+                    <div className='col-xs-12 col-sm-8 col-start-sm-3 col-md-6 col-start-md-4 col-lg-6 col-start-lg-4'>
+                      <form className='form is-inverse'>
+                        <div className='field mt20'>
                           <input
                             type='text'
                             placeholder='Search ...'
                             value={this.state.searchValue}
                             onChange={this.handleSearchInputChange}
-                            className='input has-text-primary has-border-link is-ma-centered has-text-centered'
+                            className='input is-ma-centered has-text-centered'
                           />
                         </div>
-                      </div>
+                      </form>
                     </div>
                   </div>
                   <div className='row'>

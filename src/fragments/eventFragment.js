@@ -31,6 +31,7 @@ export const eventFragment = gql`
     matchers {
       ...matcherFragment
     }
+    callWebhook
     webhookUrl
     webhookBody
     webhookHeaders {
