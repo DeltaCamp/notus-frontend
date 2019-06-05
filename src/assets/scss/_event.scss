@@ -2,7 +2,7 @@
 
 $event-box-transition: all 275ms ease-in-out;
 $event-font-size: 1rem;
-$event-font-size-sm: 17.5px;
+$event-font-size-sm: 18px;
 
 .button.event-card {
   border-radius: 15px;
@@ -28,7 +28,7 @@ $event-font-size-sm: 17.5px;
 .event-card__title {
   font-weight: 700;
   line-height: 1;
-  height: 166px;
+  height: 156px;
   margin-bottom: 0;
   overflow: hidden;
   width: 100%;
@@ -36,7 +36,7 @@ $event-font-size-sm: 17.5px;
 
 .event-card__header {
   height: 268px;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 0;
 }
 
 .event-card__footer {
@@ -187,8 +187,8 @@ $event-font-size-sm: 17.5px;
 }
 
 .button.event-card.event-card--small .event-card__header {
-  padding-bottom: 1rem;
-  padding-top: 1rem;
+  // padding-bottom: 1rem;
+  // padding-top: 1rem;
 }
 
 .button.event-card.event-card--small .event-card__footer {
@@ -259,6 +259,12 @@ $event-font-size-sm: 17.5px;
   }
 }
 
+.event-box__variable-wrapper .event-box__variable {
+  @media screen and (max-width: $widescreen) {
+    margin-bottom: 10px;
+  }
+}
+
 .event-box__variable-wrapper .button {
   margin: 0;
 }
@@ -295,18 +301,19 @@ $event-font-size-sm: 17.5px;
 
 .event-box__variable-wrapper__matcher {
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.035);
   border-radius: 10px;
   display: flex;
   font-size: $event-font-size;
   justify-content: flex-start;
   margin-bottom: 0.5rem;
-  padding: 0.35rem;
+  padding: 2px;
   position: relative;
 
   @media screen and (max-width: $fullhd) {
     display: block;
     margin-top: 0.75rem;
+    padding: 7px;
   }
 
   @media screen and (max-width: $tablet) {
@@ -316,12 +323,14 @@ $event-font-size-sm: 17.5px;
 
 .event-box__variable-wrapper__matcher .buttons {
   position: absolute;
-  right: 0.5rem;
-  top: 0.5rem;
+  right: 10px;
+  top: 10px;
 
   @media screen and (max-width: $widescreen) {
-    right: 0;
-    top: 0.25rem;
+    margin-right: 0;
+    margin-top: 0;
+    right: 7px;
+    top: 7px;
   }
 }
 
@@ -362,10 +371,6 @@ $event-box__variable--color: rgba(255, 255, 255, 0.95);
   position: relative;
   text-align: left;
   transition: $event-box-transition;
-
-  @media screen and (max-width: $fullhd) {
-    // max-width: 185px;
-  }
 
   @media screen and (max-width: $widescreen) {
     display: block;

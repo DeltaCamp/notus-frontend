@@ -1,7 +1,7 @@
 // Grid array (used for generating the grid)
 $grid_arr: (
   (xs, 0px), 
-  (sm, $mobile), 
+  (sm, $tablet), // used to be $mobile
   (md, $tablet), 
   (lg, $desktop), 
   (xl, $widescreen)

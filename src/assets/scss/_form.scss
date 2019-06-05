@@ -141,6 +141,11 @@ textarea.textarea,
   padding: 8px 20px 5px 19px;
   border-width: 3px;
   border-color: rgba(255, 255, 255, 0.2);
+
+  @media screen and (max-width: $tablet) {
+    border-radius: 8px;
+    margin-bottom: 2px;
+  }
 }
 
 .input:hover,
@@ -282,7 +287,6 @@ form.has-addons.is-active textarea.textarea:active {
     flex-direction: column;
   }
 }
-
 .field.has-addons .control:first-child:not(:only-child) .button,
 .field.has-addons .control:first-child:not(:only-child) .input,
 .field.has-addons .control:first-child:not(:only-child) .select select {
@@ -304,6 +308,13 @@ form.has-addons.is-active textarea.textarea:active {
     border-top-right-radius: 0 !important;
   }
 }
+
+.field.has-addons .control:last-child:not(:only-child) .input {
+  @media screen and (max-width: $mobile) {
+    border-radius: 8px !important;
+  }
+}
+
 
 .field.has-addons .button {
   background: black;
@@ -426,10 +437,11 @@ input.input.is-large {
 }
 
 .react-select__dropdown.react-select__half-width {
+  display: inline-block;
   margin-right: 0.5rem;
 
   @media screen and (max-width: $fullhd) {
-    margin-right: 0;
+    // margin-right: 0;
     margin-left: 0.5rem;
     width: 25%;
   }
@@ -444,7 +456,7 @@ input.input.is-large {
   }
 
   @media screen and (max-width: $mobile) {
-    width: 70%;
+    width: 100%;
   }
 }
 
@@ -454,7 +466,6 @@ input.input.is-large {
   position: relative;
 
   @media screen and (max-width: $fullhd) {
-    display: inline;
     margin: 0 0 0.5rem 0;
     width: 100%;
   }
@@ -530,6 +541,7 @@ input.input.is-large {
 }
 
 .react-select .react-select__option {
+  border: 3px solid white;
   color: black;
   cursor: pointer;
   font-size: 1rem;
@@ -539,16 +551,19 @@ input.input.is-large {
   width: 96%;
 }
 
-.react-select__option.react-select__option--is-focused {
-  background-color: lighten($blue, 20%);
-  border-radius: 5px;
-  color: white !important;
+.react-select__option.react-select__option--is-focused:not(.react-select__option--is-selected) {
+  background-color: white !important;
+  border-radius: 8px;
+  border: 3px dotted lighten($blue, 30%);
 }
 
 .react-select__option.react-select__option--is-selected {
-  background-color: lighten($blue, 2%);
-  border-radius: 5px;
+  border-radius: 8px;
   color: white !important;
+}
+
+.react-select__option.react-select__option--is-selected.react-select__option--is-focused {
+  border-color: white;
 }
 
 .event-box__variable .input.has-border-danger,
@@ -600,4 +615,10 @@ form.is-inverse .textarea[disabled] {
   background-color: #c5c5c5;
   border: none;
   color: #888;
+}
+
+.switch[type="checkbox"] + label {
+  display: block;
+  max-width: 100%;
+  padding-top: 0;
 }
