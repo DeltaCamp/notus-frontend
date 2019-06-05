@@ -28,7 +28,7 @@
   }
 }
 
-.code.code--example {
+.code {
   background-color: $black-bis;
   border-radius: 10px;
   color: white !important;
@@ -40,18 +40,19 @@
   width: 100%;
 }
 
-.code.code--example pre {
+.code pre {
   background-color: $black-bis;
   color: white !important;
   font-size: 0.75rem;
   padding: 0.5rem;
+  white-space: initial;
 }
 
-.code.code--example svg {
+.code svg {
   fill: $grey-light;
 }
 
-.code.code--example svg:hover {
+.code svg:hover {
   fill: white;
 }
 

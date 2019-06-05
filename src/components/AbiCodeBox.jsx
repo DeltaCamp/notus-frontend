@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo'
 
 import { abiQuery } from '~/queries/abiQuery'
 
-const debug = require('debug')('notus:components:AbiCodeBox')
+// const debug = require('debug')('notus:components:AbiCodeBox')
 
 export const AbiCodeBox = 
   graphql(abiQuery, {
@@ -26,11 +26,8 @@ export const AbiCodeBox =
         const { abiBody, abiData } = this.props
         const abi = abiData?.abi
 
-        console.log(abiBody)
-        console.log(abiData)
-
         return (
-          <code className='code code--example'>
+          <code className='code'>
             <pre>
               {abiBody || abi?.abi || 'Choose ABI Method Above'}
             </pre>

@@ -43,6 +43,7 @@ export const ContractForm =
                 }
               },
               hasCustomizedName: false,
+              hasCustomizedAbiName: false,
               abiCreateMethod: '',
               isHiding: false,
               networkName: 'mainnet'
@@ -58,13 +59,17 @@ export const ContractForm =
             }
 
             handleNameChange = (e) => {
+              const newAbiName = this.state.hasCustomizedAbiName ?
+                this.state.contract.abi.name :
+                e.target.value
+                
               this.setState({
                 contract: {
                   ...this.state.contract,
                   name: e.target.value,
                   abi: {
                     ...this.state.contract.abi,
-                    name: e.target.value
+                    name: newAbiName
                   }
                 },
                 hasCustomizedName: true
@@ -95,12 +100,16 @@ export const ContractForm =
                 ? this.state.contract.name
                 : name
 
+              const newAbiName = this.state.hasCustomizedAbiName ?
+                this.state.contract.abi.name :
+                newName
+
               this.setState({
                 contract: {
                   ...this.state.contract,
                   name: newName,
                   abi: {
-                    name: newName,
+                    name: newAbiName,
                     abi: JSON.stringify(abi, null, 2)
                   }
                 }
@@ -205,6 +214,7 @@ export const ContractForm =
                   contract: {
                     ...this.state.contract,
                     abi: {
+                      ...this.state.contract.abi,
                       abi: abiString
                     }
                   }
@@ -221,7 +231,7 @@ export const ContractForm =
                   contract: {
                     ...this.state.contract,
                     abi: {
-                      ...this.state.abi,
+                      ...this.state.contract.abi,
                       id: value
                     }
                   }
@@ -233,7 +243,7 @@ export const ContractForm =
                   contract: {
                     ...this.state.contract,
                     abi: {
-                      ...this.state.abi,
+                      ...this.state.contract.abi,
                       id: null
                     }
                   }
@@ -251,6 +261,7 @@ export const ContractForm =
                 contract: {
                   ...this.state.contract,
                   abi: {
+                    ...this.state.contract.abi,
                     abi: e.target.value
                   }
                 }
@@ -266,6 +277,19 @@ export const ContractForm =
                 }
               }).then(() => {
                 notusToast.success('Updated Your Etherscan API Key')
+              })
+            }
+
+            handleChangeAbiName = (e) => {
+              this.setState({
+                contract: {
+                  ...this.state.contract,
+                  abi: {
+                    ...this.state.contract.abi,
+                    name: e.target.value
+                  }
+                },
+                hasCustomizedAbiName: true
               })
             }
 
@@ -344,6 +368,44 @@ export const ContractForm =
                               />
                             </div>
 
+
+                            <div className={classnames(
+                              'accordion-max-height',
+                              {
+                                'accordion-max-height-enter-done': (
+                                  !this.state.isHiding &&
+                                  this.state.abiCreateMethod === 'upload'
+                                )
+                              }
+                            )}>
+                              <div className='field pb20'>
+                                <ABIUpload
+                                  onAbi={this.handleAbiUpload}
+                                  onError={this.handleAbiError}
+                                />
+                              </div>
+                            </div>
+
+                            {!this.state.contract.abi.id &&
+                              <div className='field'>
+                                <label
+                                  htmlFor='abi-name-input'
+                                  className='label'
+                                >
+                                  ABI Name:
+                                </label>
+                                <input
+                                  className='input'
+                                  type='text'
+                                  id='abi-name-input'
+                                  value={this.state.contract.abi.name}
+                                  onChange={this.handleChangeAbiName}
+                                  placeholder='ABI Name'
+                                />
+                              </div>
+                            }
+                            
+
                             <div className={classnames(
                               'accordion-max-height',
                               {
@@ -363,22 +425,6 @@ export const ContractForm =
                               </div>
                             </div>
 
-                            <div className={classnames(
-                              'accordion-max-height',
-                              {
-                                'accordion-max-height-enter-done': (
-                                  !this.state.isHiding &&
-                                  this.state.abiCreateMethod === 'upload'
-                                )
-                              }
-                            )}>
-                              <div className='field'>
-                                <ABIUpload
-                                  onAbi={this.handleAbiUpload}
-                                  onError={this.handleAbiError}
-                                />
-                              </div>
-                            </div>
 
 
                             <div className={classnames(
@@ -448,7 +494,7 @@ export const ContractForm =
                                   this.state.networkName
                                 ) ? 
                                   <>
-                                    ABI&nbsp;
+                                    Click 'Pull' to download the ABI&nbsp;
                                     {this.state.contract.address &&
                                       <>
                                         for '{this.state.contract.address}'&nbsp;
