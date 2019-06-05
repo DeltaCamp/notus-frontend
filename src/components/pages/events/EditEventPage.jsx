@@ -319,7 +319,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       }).catch(error => {
         showErrorMessage(error)
       })
-    } else {
+    } else if (!this.isCreateMode()) {
       // order is wrong!
 
       this.props.createMatcherMutation({
