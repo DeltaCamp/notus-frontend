@@ -1,7 +1,7 @@
 ::placeholder,
 .input::placeholder,
 .textarea::placeholder {
-  color: rgba(160, 180, 200, 1);
+  color: rgba(200, 140, 230, 0.7);
 }
 
 input:-internal-autofill-previewed,
@@ -703,7 +703,7 @@ hr {
 }
 
 .color-block.is-dark-colored {
-  background-color: darken($blue, 27%);
+  background-color: #52057f;
 }
 
 .color-block.is-dark {
