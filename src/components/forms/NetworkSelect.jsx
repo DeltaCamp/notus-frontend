@@ -20,14 +20,6 @@ export const NetworkSelect = graphql(networksQuery, {
       this.props.onChangeNetworkId(option.value, option.label)
     }
 
-    handleOpenReactSelect = () => {
-      this.props.handleToggleEditingNetwork(true)
-    }
-
-    handleCloseReactSelect = () => {
-      this.props.handleToggleEditingNetwork(false)
-    }
-
     render () {
       const { networkId, networksQuery } = this.props
 
@@ -59,8 +51,6 @@ export const NetworkSelect = graphql(networksQuery, {
         value={value}
         options={options}
         onChange={this.onChange}
-        handleOpenReactSelect={this.handleOpenReactSelect}
-        handleCloseReactSelect={this.handleCloseReactSelect}
       />
     }
   }

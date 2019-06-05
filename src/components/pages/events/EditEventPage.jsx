@@ -737,7 +737,6 @@ export const EditEventPage = class _EditEventPage extends Component {
         <NetworkSelect
           networkId={parseInt(this.state.event.networkId, 10)}
           onChangeNetworkId={this.handleChangeNetworkId}
-          handleToggleEditingNetwork={this.handleToggleEditingNetwork}
         />
       </span>
 
