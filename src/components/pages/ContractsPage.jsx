@@ -130,7 +130,7 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
             contractContracts.length === 0
               ? (
                 contractRows = <tr className='is-size-6 has-text-weight-bold'>
-                  <td className='has-text-centered' colspan='3'>
+                  <td className='has-text-centered' colSpan='3'>
                     <br />
                     No contracts exist.
                     <br />
