@@ -57,7 +57,7 @@ export const SourceDescription = graphql(abiEventQuery, {
           console.error(error)
           title = '...'
         } else {
-          title = `${abiEvent.abi.name} ${abiEvent.name}`
+          title = `${abiEvent.abi.name} ${abiEvent.title}`
         }
       }
 

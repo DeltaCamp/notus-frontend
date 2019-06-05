@@ -10,8 +10,8 @@ export const abiFragment = gql`
     isPublic
     abiEvents {
       id
-      name
-      # isPublic
+      title
+      isPublic
       abiEventInputs {
         ...abiEventInputFragment
       }

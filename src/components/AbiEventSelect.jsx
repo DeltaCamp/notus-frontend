@@ -16,7 +16,7 @@ export const AbiEventSelect = graphql(abiEventsQuery, { name: 'abiEventsQuery' }
     } else if (!loading) {
       options = abiEvents.map(abiEvent => {
         return {
-          label: `${abiEvent.abi.name} ${abiEvent.name}`,
+          label: `${abiEvent.abi.name} ${abiEvent.title}`,
           value: abiEvent.id,
           abiEvent
         }

@@ -52,7 +52,7 @@ export const AbiEventSelect = graphql(abiEventsQuery, {
       } else if (!loading) {
         options = abiEvents.map(abiEvent => {
           return {
-            label: abiEvent.name,
+            label: abiEvent.title,
             value: `abi-event-${abiEvent.id}`,
             abiEvent
           }

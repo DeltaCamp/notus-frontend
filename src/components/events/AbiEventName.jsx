@@ -44,7 +44,7 @@
 //           console.error(error)
 //           return null
 //         } else {
-//           title = abiEvent.name
+//           title = abiEvent.title
 //         }
 //       }
 

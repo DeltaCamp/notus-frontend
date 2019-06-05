@@ -75,10 +75,10 @@
 //         })
 
 //         if (abiEvent) {
-//           const { name, abiEventInputs } = abiEvent
+//           const { title, abiEventInputs } = abiEvent
 //           validOptions = abiEventInputs.map(abiEventInput => {
 //             return {
-//               label: `${name} ${abiEventInput.name}`,
+//               label: `${title} ${abiEventInput.title}`,
 //               value: abiEventInput.id,
 //               abiEventInput
 //             }

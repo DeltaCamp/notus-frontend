@@ -81,7 +81,7 @@ export const ContractPage =
                   {abiEvent.id}
                 </td>
                 <td>
-                  {abiEvent.name}
+                  {abiEvent.title}
                 </td>
                 <td>
                   {abiEvent.isPublic} public!
@@ -101,7 +101,7 @@ export const ContractPage =
                             className='is-block'
                             style={{height: 50}}
                           >
-                            #{abiEventInput.id}: <strong>{abiEventInput.name}</strong> is <strong>{abiEventInput.type}</strong>
+                            #{abiEventInput.id}: <strong>{abiEventInput.title}</strong> is <strong>{abiEventInput.type}</strong>
 
                             {abiEventInput.type === 'uint256' && (
                               <>
