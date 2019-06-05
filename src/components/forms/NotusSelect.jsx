@@ -170,7 +170,7 @@ export const NotusSelect = class _NotusSelect extends Component {
               }
               )}
               >
-            {this.props.value ? this.props.value.label : '...'} <ChevronDown />
+            {this.props.value ? this.props.value.label : 'Select ...'} <ChevronDown />
           </button>
         }
       >

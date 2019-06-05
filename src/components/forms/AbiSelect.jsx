@@ -16,32 +16,33 @@ export const AbiSelect =
   })(
     class _AbiSelect extends PureComponent {
       static propTypes = {
-        abiId: PropTypes.number,
+        abiId: PropTypes.string,
+        abiCreateMethod: PropTypes.string,
         handleChangeAbi: PropTypes.func.isRequired,
-        handleToggleAbiSelect: PropTypes.func.isRequired
       }
 
       handleChange = (option) => {
         debug('run handleChange option: ', option)
-        this.props.handleChangeAbi({
-          abiId: option.value
-        })
-      }
 
-      handleOpenReactSelect = () => {
-        this.props.handleToggleAbiSelect(true)
-      }
-
-      handleCloseReactSelect = () => {
-        this.props.handleToggleAbiSelect(false)
+        if (option.abi) {
+          this.props.handleChangeAbi({
+            abiId: option.value,
+            value: option.value
+          })  
+        } else {
+          this.props.handleChangeAbi({
+            abiId: null,
+            value: option.value
+          })
+        }
       }
 
       render () {
-        let options = []
+        let value
+        let existingOptions = []
         let abis = []
 
-        const { abiId } = this.props
-        let value = this.props.value || null
+        const { abiId, abiCreateMethod } = this.props
 
         const createOptions = [
           {
@@ -70,25 +71,26 @@ export const AbiSelect =
         if (error) {
           console.error(error)
         } else if (!loading) {
-          options = abis.map(abi => {
+          existingOptions = abis.map(abi => {
             return {
               label: abi.name,
               value: abi.id,
-              // value: `abi-${abi.id}`,
               abi
             }
           })
         }
         const abisGroup = {
           label: 'Choose Existing ABI',
-          options: options
+          options: existingOptions
         }
 
         if (abiId) {
-          value = createOptions.find(option => option.value === abiId)
+          value = existingOptions.find(option => option.value === abiId)
+        } else if (abiCreateMethod) {
+          value = createOptions.find(option => option.value === abiCreateMethod)
         }
 
-        debug(`abiId: ${abiId} value: `, value)
+        debug(`abiId: ${abiId}, abiCreateMethod: ${abiCreateMethod}, value: ${value}`)
 
         return <NotusSelect
           {...this.props}
@@ -96,8 +98,6 @@ export const AbiSelect =
           options={[createGroup, abisGroup]}
           className='react-select__half-width'
           onChange={this.handleChange}
-          handleOpenReactSelect={this.handleOpenReactSelect}
-          handleCloseReactSelect={this.handleCloseReactSelect}
         />
       }
     }

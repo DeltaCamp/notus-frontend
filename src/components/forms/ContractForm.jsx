@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import ReactTooltip from 'react-tooltip'
@@ -36,7 +37,8 @@ export const ContractForm =
                 abi: ''
               }
             },
-            hasCustomizedName: false
+            hasCustomizedName: false,
+            abiCreateMethod: '',
           }
 
           static propTypes = {
@@ -46,10 +48,6 @@ export const ContractForm =
           handleToggleEditingNetwork = (newValue) => {
             // debug('handleToggleEditingNetwork', newValue)
             this.setState({ editingNetwork: newValue })
-          }
-
-          handleToggleAbiSelect = (newValue) => {
-            this.setState({ editingAbi: newValue })
           }
 
           handleNameChange = (e) => {
@@ -75,17 +73,6 @@ export const ContractForm =
             })
           }
 
-          handleAbiChange = (e) => {
-            this.setState({
-              contract: {
-                ...this.state.contract,
-                abi: {
-                  abi: e.target.value
-                }
-              }
-            })
-          }
-
           handleNetworkIdChange = (networkId, networkName) => {
             this.setState({
               contract: {
@@ -95,7 +82,7 @@ export const ContractForm =
             })
           }
 
-          handleAbi = ({ name, abi }) => {
+          handleAbiUpload = ({ name, abi }) => {
             const newName = this.state.hasCustomizedName
               ? this.state.contract.name
               : name
@@ -217,23 +204,51 @@ export const ContractForm =
                 }
               })
             }
-      
           }
 
-          handleChangeAbi = (value) => {
-            debug('handleChangeAbi value', value)
+          handleChangeAbi = ({ abiId, value }) => {
+            // debug(`handleChangeAbi value: ${value}, abiId: ${abiId}`)
+
+            if (abiId) {
+              this.setState({
+                abiCreateMethod: null,
+                contract: {
+                  ...this.state.contract,
+                  abi: {
+                    ...this.state.abi,
+                    id: value
+                  }
+                }
+              })
+            } else {
+              this.setState({
+                abiCreateMethod: value,
+                contract: {
+                  ...this.state.contract,
+                  abi: {
+                    ...this.state.abi,
+                    id: null
+                  }
+                }
+              })
+            }
+          }
+
+          handleChangeAbiBody = (e) => {
             this.setState({
               contract: {
                 ...this.state.contract,
                 abi: {
-                  ...this.state.abi,
-                  id: value.abiId
+                  abi: e.target.value
                 }
               }
             })
           }
 
           render () {
+            const { abiCreateMethod } = this.state
+            debug(`handleChangeAbi abiCreateMethod: ${abiCreateMethod}`)
+
             return (
               <div className='form'>
                 <div className='field'>
@@ -263,43 +278,79 @@ export const ContractForm =
                   />
                 </div>
 
+                <hr />
+
                 <div className='field'>
                   ABI:
                   <AbiSelect
-                    abiId={parseInt(this.state.contract.abi.id, 10)}
+                    abiId={this.state.contract.abi.id}
+                    abiCreateMethod={abiCreateMethod}
                     handleChangeAbi={this.handleChangeAbi}
-                    handleToggleAbiSelect={this.handleToggleAbiSelect}
                   />
                 </div>
 
-                {/* <div className='field'>
-                  <button
-                    className='button is-link is-outlined'
-                    onClick={this.onPullAbiFromEtherscan}
-                  >
-                    Pull ABI from Etherscan
-                  </button>
-                </div> */}
-
-                <div className='has-text-centered pb20'>&mdash; or &mdash;</div>
-
-                <div className='field'>
-                  <ABIUpload
-                    onAbi={this.handleAbi}
-                    onError={this.handleAbiError}
-                  />
+                <div className={classnames(
+                  'accordion-max-height',
+                  {
+                    'accordion-max-height-enter-done': this.state.abiCreateMethod === 'paste'
+                  }
+                )}>
+                  <div className='field'>
+                    <textarea
+                      className='textarea'
+                      value={this.state.contract.abi.abi}
+                      onChange={this.handleChangeAbiBody}
+                      placeholder={`Paste Contract ABI (JSON) here ...`}
+                    />
+                  </div>
                 </div>
 
-                <div className='has-text-centered pb20'>&mdash; or &mdash;</div>
-
-                <div className='field'>
-                  <textarea
-                    className='textarea'
-                    value={this.state.contract.abi.abi}
-                    onChange={this.handleAbiChange}
-                    placeholder={`Paste Contract ABI (JSON) here ...`}
-                  />
+                <div className={classnames(
+                  'accordion-max-height',
+                  {
+                    'accordion-max-height-enter-done': this.state.abiCreateMethod === 'upload'
+                  }
+                )}>
+                  <div className='field'>
+                    <ABIUpload
+                      onAbi={this.handleAbiUpload}
+                      onError={this.handleAbiError}
+                    />
+                  </div>
                 </div>
+
+                <div className={classnames(
+                  'accordion-max-height',
+                  {
+                    'accordion-max-height-enter-done': this.state.abiCreateMethod === 'pull'
+                  }
+                )}>
+                  <div className='field'>
+                    <button
+                      className='button is-link is-outlined'
+                      onClick={this.onPullAbiFromEtherscan}
+                    >
+                      Pull ABI from Etherscan
+                    </button>
+                  </div>
+                </div>
+
+
+
+                <div className={classnames(
+                  'accordion-max-height',
+                  {
+                    'accordion-max-height-enter-done': (
+                      this.state.abiCreateMethod === 'pull' ||
+                      this.state.abiCreateMethod === 'upload'
+                    )
+                  }
+                )}>
+                  <code className='code code--example'>
+                  </code>
+                </div>
+
+
 
                 <div className='buttons mt30 has-text-right has-margin-left-auto'>
                   <ReactTooltip
