@@ -36,7 +36,6 @@ withApollo(
         }
 
         static propTypes = {
-          onClose: PropTypes.func.isRequired,
           redirectToContractPage: PropTypes.func.isRequired,
         }
 
@@ -167,7 +166,6 @@ withApollo(
         }
 
         handleCancel = () => {
-          this.props.onClose()
         }
 
         onPullAbiFromEtherscan = async () => {
