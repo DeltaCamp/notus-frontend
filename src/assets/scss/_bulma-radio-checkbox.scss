@@ -6,12 +6,11 @@
 }
 
 .switch[type="checkbox"]:hover + label::before {
-  border-color: rgba(220, 200, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.43);
 }
 
 .switch[type="checkbox"]:checked + label::before {
-  
-  border-color: rgba(40, 70, 180, 0.1);
+  border-color: rgba(255, 255, 255, 0.04);
 }
 
 .switch[type="checkbox"].is-light:checked + label::before {
