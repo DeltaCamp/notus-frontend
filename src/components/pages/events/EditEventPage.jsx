@@ -518,7 +518,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     const newMatcher = {
       operand: '',
       operator: 2,
-      order: 1,
+      order: this.state.event.matchers.length,
       source,
       eventId: parseInt(this.state.event.id, 10) || undefined
     }
