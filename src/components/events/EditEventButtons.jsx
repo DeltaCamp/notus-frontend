@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactTimeout from 'react-timeout'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { AlertTriangle, Plus } from 'react-feather'
+import { AlertTriangle, Plus, Save } from 'react-feather'
 import { formatRoute } from 'react-router-named-routes'
 import { Link } from 'react-router-dom'
 import { graphql } from 'react-apollo'
@@ -149,7 +149,7 @@ export const EditEventButtons =
                             className='button is-success has-fat-icons'
                             disabled={this.props.isSubmitting}
                           >
-                            <Plus />&nbsp;Create event
+                            <Save />&nbsp;Save event
                           </button>
                         )
                         : (

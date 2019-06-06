@@ -73,7 +73,7 @@ export const EditContractPage =
                   >
                     <div className='container'>
                       <div className='row'>
-                        <div className='col-xs-12 pt20 pb20'>
+                        <div className='col-xs-12 pt20'>
                           
                           <div className='row'>
                             <div className='col-xs-12'>
@@ -88,22 +88,9 @@ export const EditContractPage =
                         </div>
                       </div>
                     </div>
-
-                    <div
-                      className={`event-box color-block is-top-layer is-dark-colored`}
-                    >
-                      <div className='is-brightness-60 is-full-width-background' />
-
-                      <div className='container'>
-                        <div className='row'>
-                          <div className='col-xs-12 pt20'>
-                            {content}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
                   </div>
+
+                  {content}
                 </section>
               </div>
             )

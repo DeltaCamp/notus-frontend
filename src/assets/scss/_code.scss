@@ -28,20 +28,31 @@
   }
 }
 
-.code.code--example {
+.code {
   background-color: $black-bis;
   border-radius: 10px;
   color: white !important;
-  padding: 1.5rem;
+  height: 150px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 0.5rem;
   position: relative;
   width: 100%;
 }
 
-.code.code--example svg {
+.code pre {
+  background-color: $black-bis;
+  color: white !important;
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  white-space: initial;
+}
+
+.code svg {
   fill: $grey-light;
 }
 
-.code.code--example svg:hover {
+.code svg:hover {
   fill: white;
 }
 
