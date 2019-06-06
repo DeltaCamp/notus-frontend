@@ -308,7 +308,7 @@ export const ContractForm =
               return (
                 <>
                   <div
-                    className={`event-box color-block is-top-layer is-dark-colored`}
+                    className={`event-box color-block is-dark-colored`}
                   >
                     <div className='is-brightness-60 is-full-width-background' />
 
@@ -350,7 +350,7 @@ export const ContractForm =
                   </div>
 
                   <div
-                    className={`event-box color-block is-top-layer is-dark-colored has-min-height`}
+                    className={`event-box color-block is-dark-colored has-min-height`}
                   >
                     <div className='is-brightness-40 is-full-width-background' />
 

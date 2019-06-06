@@ -856,7 +856,7 @@ export const EditEventPage = class _EditEventPage extends Component {
           </div>
 
           <div
-            className={`event-box event-box__header color-block is-top-layer`}
+            className={`event-box event-box__header color-block`}
             style={{
               backgroundColor: this.state.event.color
             }}
