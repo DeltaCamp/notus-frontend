@@ -140,15 +140,7 @@ export const ContractForm =
                 this.props.redirectToContractPage(
                   parseInt(data.createContract.id, 10)
                 )
-              }).catch(error => {
-                console.warn(error)
-
-                error = {
-                  message: `Please format your ABI code correctly (${error.message})`
-                }
-
-                showErrorMessage(error)
-              })
+              }).catch(showErrorMessage)
             }
 
             addressIsValid = () => {
