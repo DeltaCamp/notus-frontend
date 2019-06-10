@@ -47,10 +47,10 @@ export const EventMatcher =
 
       return (
         <div className='
-          event-box__variable-wrapper
-          event-box__variable-wrapper__matcher
+          form-box__variable-wrapper
+          form-box__variable-wrapper__matcher
         '>
-          <span className='event-box__flex-mobile-group'>
+          <span className='form-box__flex-mobile-group'>
             <DragHandle dragHandleProps={this.props.dragHandleProps} />
 
             {andWord} the

@@ -203,7 +203,7 @@ export const MyEventsPage =
                             <div className='row'>
                               <div className='col-xs-12 has-text-centered mt50'>
                                 <h4 className='is-size-4 has-text-white has-text-weight-bold'>
-                                  Or create a new event based off an existing one:
+                                  Or create a new Event based off an existing one:
                                 </h4>
 
                                 <br />

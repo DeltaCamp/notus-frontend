@@ -121,7 +121,7 @@ export const EventTitle = ReactTimeout(class extends Component {
   render () {
     let content = (
       <button
-        className='event-box__variable event-box__variable--full-width is-inline-block event-box__variable event-box__variable--full-width is-inline-block is-size-4 is-truncated'
+        className='form-box__variable form-box__variable--full-width is-inline-block form-box__variable form-box__variable--full-width is-inline-block is-size-4 is-truncated'
         onClick={this.handleEditTitle}
       >
         {this.props.event.title || DEFAULT_TITLE}

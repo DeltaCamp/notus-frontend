@@ -163,7 +163,7 @@ export const NotusSelect = class _NotusSelect extends Component {
           <button
           onClick={this.toggleOpen}
           className={classnames(
-            'event-box__variable',
+            'form-box__variable',
             'has-react-select',
             {
               'is-active': isOpen

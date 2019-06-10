@@ -139,10 +139,10 @@ export const EventCard =
                     }
                   </div>
                   <div className='is-size-8'>
-                    <span className='has-text-lighter'>Sends an email: </span>{event.sendEmail ? <Check className='is-xsmall' /> : <span className='has-text-lighter'><X className='is-xsmall' /></span>}
+                    <span className='has-text-lighter'>Sends an email: </span>{event.sendEmail ? <Check className='is-xxsmall' /> : <span className='has-text-lighter'><X className='is-xxsmall' /></span>}
                   </div>
                   <div className='is-size-8'>
-                    <span className='has-text-lighter'>Triggers a webhook: </span>{event.callWebhook ? <Check className='is-xsmall' /> : <span className='has-text-lighter'><X className='is-xsmall' /></span>}
+                    <span className='has-text-lighter'>Triggers a webhook: </span>{event.callWebhook ? <Check className='is-xxsmall' /> : <span className='has-text-lighter'><X className='is-xxsmall' /></span>}
                   </div>
                 </>}
               </div>

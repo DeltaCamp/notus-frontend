@@ -7,9 +7,29 @@
   stroke-linecap: butt;
 }
 
-svg.is-xsmall {
+svg.is-xxsmall {
   height: 12px;
   position: relative;
   top: 1px;
   width: 12px;
+}
+
+svg.is-xsmall {
+  height: 18px;
+  width: 18px;
+}
+
+svg.is-small {
+  height: 32px;
+  width: 32px;
+}
+
+svg.is-medium {
+  height: 48px;
+  width: 48px;
+}
+
+svg.is-large {
+  height: 64px;
+  width: 64px;
 }

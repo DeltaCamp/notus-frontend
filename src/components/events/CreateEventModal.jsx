@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Save } from 'react-feather'
+
 import { Modal } from '~/components/Modal'
 import { EventTitle } from '~/components/events/EventTitle'
-import { KEYS } from '~/constants'
 import { NetworkName } from '~/components/NetworkName'
+import { KEYS } from '~/constants'
 
 // const debug = require('debug')('notus:components:CreateEventModal')
 
@@ -35,18 +36,9 @@ export const CreateEventModal = class _CreateEventModal extends Component {
   render () {
     const { currentUserData } = this.props
 
-    // const networkName = <NetworkName networkId={this.props.event.networkId} />
-    // console.log(networkName)
-    // console.log(networkName.toString())
-    // debug(<NetworkName networkId={this.props.event.networkId} />)
-
     const networkName = <NetworkName networkId={this.props.event.networkId} />
-    // console.log(networkName)
-    // console.log('wtf!')
-    // console.log(networkName)
 
     const email = currentUserData?.currentUser?.email || ''
-    
 
     return (
       <>

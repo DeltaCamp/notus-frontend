@@ -111,7 +111,7 @@ export const MatcherOperand = graphql(sourceQuery, {
         }
 
         return (
-          <div className='event-box__variable has-text-input is-truncated'>
+          <div className='form-box__variable has-text-input is-truncated'>
             {operandInput}
           </div>
         )

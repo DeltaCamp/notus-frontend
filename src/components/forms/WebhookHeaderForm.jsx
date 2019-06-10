@@ -41,8 +41,8 @@ export const WebhookHeaderForm = class _WebhookHeaderForm extends PureComponent 
 
   render () {
     return (
-      <div className='event-box__variable-wrapper event-box__variable-wrapper__matcher'>
-        <span className='event-box__flex-mobile-group'>
+      <div className='form-box__variable-wrapper form-box__variable-wrapper__matcher'>
+        <span className='form-box__flex-mobile-group'>
           <span className='has-text-lighter'>
             Header Info:
           </span>
@@ -58,7 +58,7 @@ export const WebhookHeaderForm = class _WebhookHeaderForm extends PureComponent 
           </div>
         </span>
 
-        <div className='event-box__variable has-text-input is-truncated'>
+        <div className='form-box__variable has-text-input is-truncated'>
           <TextInput
             placeholder='Enter header name'
             value={this.props.webhookHeader.key}
@@ -66,7 +66,7 @@ export const WebhookHeaderForm = class _WebhookHeaderForm extends PureComponent 
             classNames='no-background-color'
           />
         </div>
-        <div className='event-box__variable has-text-input is-truncated'>
+        <div className='form-box__variable has-text-input is-truncated'>
           <TextInput
             placeholder='Enter header value'
             value={this.props.webhookHeader.value}

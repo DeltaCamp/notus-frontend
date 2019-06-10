@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
-import { Plus } from 'react-feather'
+import { CheckCircle, Plus } from 'react-feather'
 import { graphql } from 'react-apollo'
 import { formatRoute } from 'react-router-named-routes'
 
+import { NetworkName } from '~/components/NetworkName'
 import { ScrollToTop } from '~/components/ScrollToTop'
+import { FooterContainer } from '~/components/layout/Footer'
 import { EventsPageLoader } from '~/components/loading/EventsPageLoader'
 import { contractsQuery } from '~/queries/contractsQuery'
 import { currentUserQuery } from '~/queries/currentUserQuery'
@@ -93,6 +95,10 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
         this.props.history.push(newAdminContractRoute)
       }
 
+      abiInputsCount = () => {
+        return 
+      }
+
       render () {
         let loadMore,
           content,
@@ -148,22 +154,29 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
                   <tr key={`contract-id-${contract.id}`}>
                     <td>
                       <Link to={formatRoute(routes.CONTRACT, { contractId: contract.id })}>
-                        {contract.id}
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to={formatRoute(routes.CONTRACT, { contractId: contract.id })}>
                         <strong>{contract.name}</strong>
                       </Link>
                     </td>
-                    <td>
-                      <a
-                        href={`https://etherscan.io/address/${contract.address}`}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                      >
+                    <td className='has-text-centered'>
+                      <Link to={formatRoute(routes.CONTRACT, { contractId: contract.id })}>
+                        <strong>{contract.isPublic ? <CheckCircle className='is-xsmall' /> : null}</strong>
+                      </Link>
+                    </td>
+                    <td className='has-text-centered'>
+                      <Link to={formatRoute(routes.CONTRACT, { contractId: contract.id })}>
+                        <strong><NetworkName
+                          networkId={contract.networkId}
+                        /></strong>
+                      </Link>
+                    </td>
+                    <td className='has-text-centered'>
+                      <Link to={formatRoute(routes.CONTRACT, { contractId: contract.id })}>
                         <small className='is-size-7'>{contract.address}</small>
-                      </a>
+                      </Link>
+                    </td>
+                    <td className='has-text-right'>
+                      <strong>{contract.abi ?.abiEvents ?.abiEventInputs ?.length}</strong>
+                      <strong>{contract.abi?.abiEvents?.abiEventInputs?.length}</strong>
                     </td>
                   </tr>
                 ))
@@ -180,7 +193,7 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
             <ScrollToTop />
 
             <section className='section section--main-content'>
-              <div className='container'>
+              <div className='container pb100'>
                 <div className='row'>
                   <div className='col-xs-12'>
                     <h4 className='is-size-4 has-text-weight-bold mt75 has-text-centered'>
@@ -208,13 +221,19 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
                       <thead>
                         <tr>
                           <th>
-                            ID
-                          </th>
-                          <th>
                             Name
                           </th>
-                          <th>
-                            Address (Mainnet)
+                          <th className='has-text-centered'>
+                            Public?
+                          </th>
+                          <th className='has-text-centered'>
+                            Network
+                          </th>
+                          <th className='has-text-centered'>
+                            Address
+                          </th>
+                          <th className='has-text-right'>
+                            ABI Inputs
                           </th>
                         </tr>
                       </thead>
@@ -229,6 +248,7 @@ graphql(currentUserQuery, { name: 'currentUserQuery' })(
               </div>
             </section>
 
+            <FooterContainer />
           </div>
         )
       }

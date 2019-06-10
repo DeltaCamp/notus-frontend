@@ -438,3 +438,9 @@
 .has-min-height {
   min-height: 350px;
 }
+
+.is-left-aligned-mobile {
+  @media screen and (max-width: $tablet) {
+    text-align: left !important;
+  }
+}

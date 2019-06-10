@@ -7,6 +7,7 @@ export const contractFragment = gql`
     id
     name
     address
+    isPublic
     abi {
       ...abiFragment
     }

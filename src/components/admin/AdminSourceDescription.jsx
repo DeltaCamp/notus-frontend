@@ -67,7 +67,7 @@ export const SourceDescription = graphql(abiEventQuery, {
         <>
           {nounArticle}
           <button
-            className='event-box__variable has-react-select is-truncated'
+            className='form-box__variable has-react-select is-truncated'
             onClick={handleStartEdit}
             data-tip={title.length > 16 ? title : ''}
           >

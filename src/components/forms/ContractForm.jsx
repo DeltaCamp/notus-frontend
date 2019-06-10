@@ -13,6 +13,8 @@ import { AddressInput } from '~/components/AddressInput'
 import { AbiCodeBox } from '~/components/AbiCodeBox'
 import { AbiSelect } from '~/components/forms/AbiSelect'
 import { ABIUpload } from '~/components/ABIUpload'
+import { FormFooter } from '~/components/forms/FormFooter'
+import { ColorBlock } from '~/components/forms/ColorBlock'
 import { NetworkSelect } from '~/components/forms/NetworkSelect'
 import { TextInput } from '~/components/TextInput'
 import { createContractMutation } from '~/mutations/createContractMutation'
@@ -24,6 +26,17 @@ import { updateUserMutation } from '~/mutations/updateUserMutation'
 import * as routes from '~/../config/routes'
 
 const debug = require('debug')('notus:components:ContractForm')
+
+const AccordionMaxHeight = ({ visible, children }) => {
+  return <div className={classnames(
+    'accordion-max-height',
+    {
+      'accordion-max-height-enter-done': visible
+    }
+  )}>
+    {children}
+  </div>
+}
 
 export const ContractForm = 
   withApollo(
@@ -285,6 +298,25 @@ export const ContractForm =
               })
             }
 
+            statusBarText = () => {
+              let contractAddress
+
+              let text = 'Please enter the contract address first.'
+
+              if (this.state.contract.address) {
+                contractAddress = `for '${this.state.contract.address}'`
+              }
+
+              if (
+                this.state.contract.address &&
+                this.state.networkName
+              ) {
+                text = `Click 'Pull' to attempt to download the ABI ${contractAddress} on '${this.state.networkName}' from Etherscan`
+              }
+
+              return text
+            }
+
             render () {
               let etherscan_api_key = ''
               const { currentUser } = this.props.currentUserQuery
@@ -299,252 +331,185 @@ export const ContractForm =
 
               return (
                 <>
-                  <div
-                    className={`event-box color-block is-dark-colored`}
+                  <ColorBlock
+                    brightnessPercent={60}
+                    isDark
+                    hasMinHeight={false}
+                    columnSizing={`col-xs-12 col-sm-9 col-lg-8`}
                   >
-                    <div className='is-brightness-60 is-full-width-background' />
+                    <div className='form'>
+                      <div className='field'>
+                        Network: 
+                        <NetworkSelect
+                          networkId={parseInt(this.state.contract.networkId, 10)}
+                          onChangeNetworkId={this.handleNetworkIdChange}
+                          handleToggleEditingNetwork={this.handleToggleEditingNetwork}
+                        />
+                      </div>
+                      
+                      <div className='field'>
+                        <AddressInput
+                          onChange={this.handleAddressChange}
+                          placeholder={`Contract Address`}
+                          value={this.state.contract.address}
+                        />
+                      </div>
 
-                    <div className='container'>
-                      <div className='row'>
-                        <div className='col-xs-12 col-sm-9 col-lg-8'>
-
-                          <div className='form'>
-                            <div className='field'>
-                              Network: 
-                              <NetworkSelect
-                                networkId={parseInt(this.state.contract.networkId, 10)}
-                                onChangeNetworkId={this.handleNetworkIdChange}
-                                handleToggleEditingNetwork={this.handleToggleEditingNetwork}
-                              />
-                            </div>
-                            
-                            <div className='field'>
-                              <AddressInput
-                                onChange={this.handleAddressChange}
-                                placeholder={`Contract Address`}
-                                value={this.state.contract.address}
-                              />
-                            </div>
-
-                            <div className='field'>
-                              <input
-                                className='input'
-                                type='text'
-                                value={this.state.contract.name}
-                                onChange={this.handleNameChange}
-                                placeholder={`Contract Name`}
-                              />
-                            </div>
-                          </div>
-                        </div>
+                      <div className='field'>
+                        <input
+                          className='input'
+                          type='text'
+                          value={this.state.contract.name}
+                          onChange={this.handleNameChange}
+                          placeholder={`Contract Name`}
+                        />
                       </div>
                     </div>
-                  </div>
+                  </ColorBlock>
 
-                  <div
-                    className={`event-box color-block is-dark-colored has-min-height`}
+                  <ColorBlock
+                    brightnessPercent={40}
+                    columnSizing={`col-xs-12 col-sm-9 col-lg-8`}
+                    isDark
+                    hasMinHeight
                   >
-                    <div className='is-brightness-40 is-full-width-background' />
-
-                    <div className='container'>
-                      <div className='row'>
-                        <div className='col-xs-12 col-sm-9 col-lg-8'>
-
-                          <div className='form'>
-
-                            <div className='field'>
-                              ABI: <AbiSelect
-                                abiId={this.state.contract.abi.id}
-                                abiCreateMethod={abiCreateMethod}
-                                handleChangeAbi={this.handleChangeAbi}
-                              />
-                            </div>
-
-
-                            <div className={classnames(
-                              'accordion-max-height',
-                              {
-                                'accordion-max-height-enter-done': (
-                                  !this.state.isHiding &&
-                                  this.state.abiCreateMethod === 'upload'
-                                )
-                              }
-                            )}>
-                              <div className='field pb20'>
-                                <ABIUpload
-                                  onAbi={this.handleAbiUpload}
-                                  onError={this.handleAbiError}
-                                />
-                              </div>
-                            </div>
-
-                            {!this.state.contract.abi.id &&
-                              <div className='field'>
-                                <label
-                                  htmlFor='abi-name-input'
-                                  className='label'
-                                >
-                                  ABI Name:
-                                </label>
-                                <input
-                                  className='input'
-                                  type='text'
-                                  id='abi-name-input'
-                                  value={this.state.contract.abi.name}
-                                  onChange={this.handleChangeAbiName}
-                                  placeholder='ABI Name'
-                                />
-                              </div>
-                            }
-                            
-
-                            <div className={classnames(
-                              'accordion-max-height',
-                              {
-                                'accordion-max-height-enter-done': (
-                                  !this.state.isHiding &&
-                                  this.state.abiCreateMethod === 'paste'
-                                )
-                              }
-                            )}>
-                              <div className='field'>
-                                <textarea
-                                  className='textarea'
-                                  value={this.state.contract.abi.abi}
-                                  onChange={this.handleChangeAbiBody}
-                                  placeholder={`Paste Contract ABI (JSON) here ...`}
-                                />
-                              </div>
-                            </div>
-
-
-
-                            <div className={classnames(
-                              'accordion-max-height',
-                              {
-                                'accordion-max-height-enter-done': (
-                                  !this.state.isHiding &&
-                                  this.state.abiCreateMethod === 'pull'
-                                )
-                              }
-                            )}>
-                              <>
-                                <div className='field'>
-                                  <label
-                                    htmlFor='etherscanApiKey-input'
-                                    className='label'
-                                  >
-                                    Etherscan API Key
-                                  </label>
-                                  <TextInput
-                                    id='etherscanApiKey-input'
-                                    value={etherscan_api_key}
-                                    handleSubmit={this.handleSubmitEtherscanApiKey}
-                                    placeholder='Enter Your Etherscan API Key'
-                                    className='event-box__variable__half-width'
-                                  />
-                                </div>
-                                <div className='field'>
-                                  <button
-                                    className='button is-info'
-                                    onClick={this.onPullAbiFromEtherscan}
-                                    disabled={!etherscan_api_key || !this.state.contract.address}
-                                  >
-                                    Pull
-                                  </button>
-                                </div>
-                              </>
-                            </div>
-
-                            <div className={classnames(
-                              'accordion-max-height',
-                              {
-                                'accordion-max-height-enter-done': (
-                                  !this.state.isHiding && 
-                                    this.state.abiCreateMethod !== 'paste'
-                                )
-                              }
-                            )}>
-                              <AbiCodeBox
-                                abiBody={this.state.contract.abi.abi}
-                                abiId={this.state.contract.abi.id}
-                              />
-                            </div>
-
-                            <div className={classnames(
-                              'accordion-max-height',
-                              {
-                                'accordion-max-height-enter-done': (
-                                  !this.state.isHiding &&
-                                  this.state.abiCreateMethod === 'pull'
-                                )
-                              }
-                            )}>
-                              <p className='hint'>
-                                {(
-                                  this.state.contract.address &&
-                                  this.state.networkName
-                                ) ? 
-                                  <>
-                                    Click 'Pull' to download the ABI&nbsp;
-                                    {this.state.contract.address &&
-                                      <>
-                                        for '{this.state.contract.address}'&nbsp;
-                                      </>
-                                    }
-                                    {this.state.networkName &&
-                                      <>
-                                        on '{this.state.networkName}'&nbsp;
-                                      </>
-                                    }
-                                    from Etherscan
-                                  </> :
-                                  <>
-                                    Please enter the contract address first.
-                                  </>
-                                }
-                              </p>
-                            </div>
-
-                          </div>
-                        </div>
-
-                        
-
+                    <div className='form'>
+                      <div className='field'>
+                        ABI: <AbiSelect
+                          abiId={this.state.contract.abi.id}
+                          abiCreateMethod={abiCreateMethod}
+                          handleChangeAbi={this.handleChangeAbi}
+                        />
                       </div>
-                    </div>
-                  </div>
 
-                  <div className={`is-white-ter pt30 pb30`}>
-                    <div className={`container-fluid`}>
-                      <div className='container'>
-                        <div className='row'>
-                          <div className='col-xs-12 has-text-centered is-size-4'>
-                            <ReactTooltip
-                              id='new-admin-contract-form-hint'
-                              place='top'
-                              effect='solid'
-                            />
-
-                            <span
-                              data-for='new-admin-contract-form-hint'
-                              data-tip={this.invalid() ? this.invalidMessage() : ''}
-                            >
-                              <button
-                                className='button is-success has-stroke-white has-fat-icons'
-                                onClick={this.handleSubmit}
-                                disabled={this.invalid()}
-                              >
-                                <Save
-                                  className='has-stroke-white'
-                                />&nbsp;Save contract
-                              </button>
-                            </span>
-                          </div>
+                      <AccordionMaxHeight
+                        visible={
+                          !this.state.isHiding &&
+                            this.state.abiCreateMethod === 'upload'
+                        }
+                      >
+                        <div className='field pb20'>
+                          <ABIUpload
+                            onAbi={this.handleAbiUpload}
+                            onError={this.handleAbiError}
+                          />
                         </div>
-                      </div>
+                      </AccordionMaxHeight>
+
+                      {!this.state.contract.abi.id &&
+                        <div className='field'>
+                          <label
+                            htmlFor='abi-name-input'
+                            className='label'
+                          >
+                            ABI Name:
+                          </label>
+                          <input
+                            className='input'
+                            type='text'
+                            id='abi-name-input'
+                            value={this.state.contract.abi.name}
+                            onChange={this.handleChangeAbiName}
+                            placeholder='ABI Name'
+                          />
+                        </div>
+                      }
+
+                      <AccordionMaxHeight
+                        visible={
+                          !this.state.isHiding &&
+                          this.state.abiCreateMethod === 'paste'
+                        }
+                      >
+                        <div className='field'>
+                          <textarea
+                            className='textarea'
+                            value={this.state.contract.abi.abi}
+                            onChange={this.handleChangeAbiBody}
+                            placeholder={`Paste Contract ABI (JSON) here ...`}
+                          />
+                        </div>
+                      </AccordionMaxHeight>
+
+                      <AccordionMaxHeight
+                        visible={
+                          !this.state.isHiding &&
+                          this.state.abiCreateMethod === 'pull'
+                        }
+                      >
+                        <div className='field'>
+                          <label
+                            htmlFor='etherscanApiKey-input'
+                            className='label'
+                          >
+                            Etherscan API Key
+                          </label>
+                          <TextInput
+                            id='etherscanApiKey-input'
+                            value={etherscan_api_key}
+                            handleSubmit={this.handleSubmitEtherscanApiKey}
+                            placeholder='Enter Your Etherscan API Key'
+                            className='form-box__variable__half-width'
+                          />
+                        </div>
+                        <div className='field'>
+                          <button
+                            className='button is-info'
+                            onClick={this.onPullAbiFromEtherscan}
+                            disabled={!etherscan_api_key || !this.state.contract.address}
+                          >
+                            Pull
+                          </button>
+                        </div>
+                      </AccordionMaxHeight>
+
+                      <AccordionMaxHeight
+                        visible={
+                          !this.state.isHiding &&
+                          this.state.abiCreateMethod !== 'paste'
+                        }
+                      >
+                        <AbiCodeBox
+                          abiBody={this.state.contract.abi.abi}
+                          abiId={this.state.contract.abi.id}
+                        />
+                      </AccordionMaxHeight>
+
+                      <AccordionMaxHeight
+                        visible={
+                          !this.state.isHiding &&
+                          this.state.abiCreateMethod === 'pull'
+                        }
+                      >
+                        <p className='hint'>
+                          {this.statusBarText()}
+                        </p>
+                      </AccordionMaxHeight>
                     </div>
-                  </div>
+                  </ColorBlock>
+
+                  <FormFooter>
+                    <ReactTooltip
+                      id='new-admin-contract-form-hint'
+                      place='top'
+                      effect='solid'
+                    />
+
+                    <span
+                      data-for='new-admin-contract-form-hint'
+                      data-tip={this.invalid() ? this.invalidMessage() : ''}
+                    >
+                      <button
+                        className='button is-success has-stroke-white has-fat-icons'
+                        onClick={this.handleSubmit}
+                        disabled={this.invalid()}
+                      >
+                        <Save
+                          className='has-stroke-white'
+                        />&nbsp;Save contract
+                      </button>
+                    </span>
+                  </FormFooter>
                 </>
               )
             }

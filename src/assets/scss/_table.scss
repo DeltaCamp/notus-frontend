@@ -1,4 +1,3 @@
-.table thead td,
 .table thead th {
   color: rgba(0, 0, 0, 0.4);
 }
@@ -9,9 +8,44 @@
 }
 
 .table thead,
-.table thead td,
 .table thead th,
 .table tbody tr,
 .table tbody td, {
-  transition: all 150ms ease-in-out;
+  transition: all 80ms ease-in-out;
+}
+
+.table.is-transparent,
+.table.is-transparent th,
+.table.is-transparent tr,
+.table.is-transparent td {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.table.is-transparent thead tr {
+  background-color: rgba(255, 255, 255, 0.005);
+  border-radius: 20px;
+}
+
+.table.is-transparent thead:hover th {
+  color: white;
+}
+
+.table.is-transparent tbody tr:nth-child(2) td {
+  background-color: rgba(255, 255, 255, 0.002);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.table.is-transparent tbody tr:hover td {
+  background-color: rgba(255, 255, 255, 0.07);
+  color: white;
+}
+
+.table.is-transparent th {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.table.is-transparent th,
+.table.is-transparent td {
+  border-color: transparent;
 }

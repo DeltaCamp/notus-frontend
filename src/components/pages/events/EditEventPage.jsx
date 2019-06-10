@@ -21,6 +21,9 @@ import { EventSource } from '~/components/events/EventSource'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
+import { ColorBlock } from '~/components/forms/ColorBlock'
+import { FormBanner } from '~/components/forms/FormBanner'
+import { FormFooter } from '~/components/forms/FormFooter'
 import { NetworkSelect } from '~/components/forms/NetworkSelect'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { isValidMatcherForAbiEvent } from '~/utils/isValidMatcherForAbiEvent'
@@ -272,7 +275,7 @@ export const EditEventPage = class _EditEventPage extends Component {
       ...this.state.event,
       isPublic
     }
-    this.doGenericUpdateEvent(event, `Event is now ${isPublic ? 'visible to everyone' : 'now only visible to you'}`)
+    this.doGenericUpdateEvent(event, `Event is ${isPublic ? 'visible to everyone' : 'only visible to you'}`)
   }
 
   isEditingMatcher = () => {
@@ -615,7 +618,7 @@ export const EditEventPage = class _EditEventPage extends Component {
   onChangeCallWebhook = (callWebhook) => {
     let event = { ...this.state.event }
     event.callWebhook = callWebhook
-    this.doGenericUpdateEvent({ id: event.id, callWebhook }, `Webhook is now ${callWebhook ? 'active' : 'inactive'}`)
+    this.doGenericUpdateEvent({ id: event.id, callWebhook }, `Webhook now ${callWebhook ? 'active' : 'inactive'}`)
   }
 
   onChangeSendEmail = (sendEmail) => {
@@ -684,16 +687,16 @@ export const EditEventPage = class _EditEventPage extends Component {
 
     const runCountAndScopeSentences = (
       <div className={classnames(
-        'event-box__variable-wrapper',
+        'form-box__variable-wrapper',
         // {
         //   'react-select--is-active': this.state.editingEventSource
         // }
       )}>
         
 
-        <span className='event-box__flex-mobile-group'>
+        <span className='form-box__flex-mobile-group'>
           <button
-            className='event-box__variable event-box__variable__half-width'
+            className='form-box__variable form-box__variable__half-width'
             onClick={this.handleChangeRunCount}
           >
             <RunCountTitle
@@ -724,7 +727,7 @@ export const EditEventPage = class _EditEventPage extends Component {
     const networkSentence = 
       <span
         className={classnames(
-          'event-box__flex-mobile-group',
+          'form-box__flex-mobile-group',
           // {
           //   'react-select--is-active': this.state.editingNetwork
           // }
@@ -818,86 +821,61 @@ export const EditEventPage = class _EditEventPage extends Component {
         <ScrollToTop />
 
         <section className='section section--main-content'>
-          <div
-            className={`container-fluid pb20 color-block`}
-            style={{
-              backgroundColor: this.state.event.color
-            }}
+          <FormBanner
+            backgroundColor={this.state.event.color}
+            entity={this.state.event}
+            entityClassName='Event' 
           >
-            <div className='container'>
+            {recipe && this.isCreateMode() &&
               <div className='row'>
-                <div className='col-xs-12 pt20'>
-
-                  {recipe && this.isCreateMode() &&
-                    <div className='row'>
-                      <div className='col-xs-12'>
-                        <h6 className='is-size-6 has-text-weight-semibold has-text-lighter'>
-                          Creating a new event{recipe.title ? ` based on "${recipe.title}"` : ''}
-                        </h6>
-                      </div>
-                    </div>
-                  }
-
-
-                  {!this.isCreateMode() &&
-                    <div className='row'>
-                      <div className='col-xs-12 col-sm-6 col-xl-8 is-flex'>
-                        <EventTitle
-                          event={this.state.event}
-                          handleSubmitTitle={this.handleSubmitTitle}
-                        />
-                      </div>
-                    </div>
-                  }
-
+                <div className='col-xs-12'>
+                  <h6 className='is-size-6 has-text-weight-semibold has-text-lighter'>
+                    Creating a new Event{recipe.title ? ` based on "${recipe.title}"` : ''}
+                  </h6>
                 </div>
               </div>
-            </div>
-          </div>
+            }
 
-          <div
-            className={`event-box event-box__header color-block`}
-            style={{
-              backgroundColor: this.state.event.color
-            }}
-          >
-            <div className='is-brightness-60 is-full-width-background' />
-
-            <div className={`container-fluid`}>
-              <div className='container'>
-                <div className='row'>
-                  <div className='col-xs-12'>
-                    {networkSentence}
-                    {runCountAndScopeSentences}
-                    {matcherSentences}
-
-                    <div className='row'>
-                      <div className='col-xs-12 col-sm-3'>
-                        <button
-                        className='button has-icon plus-button mt10 pl10 pr10 is-light is-small has-fat-icons'
-                        onClick={this.handleAddMatcher}
-                        >
-                          <Plus
-                            className='icon__button has-stroke-white'
-                          />
-                        </button>  
-                      </div>
-                    </div>
-                    
-                  </div>
+            {!this.isCreateMode() &&
+              <div className='row'>
+                <div className='col-xs-12 col-sm-6 col-xl-8 is-flex'>
+                  <EventTitle
+                    event={this.state.event}
+                    handleSubmitTitle={this.handleSubmitTitle}
+                  />
                 </div>
               </div>
-            </div>
-          </div>
+            }
+          </FormBanner>
 
-          <div
-            className={`event-box event-box__footer color-block`}
-            style={{
-              backgroundColor: this.state.event.color
-            }}
+          <ColorBlock
+            backgroundColor={this.state.event.color}
+            brightnessPercent={60}
+            columnSizing={`col-xs-12`}
           >
-            <div className='is-brightness-40 is-full-width-background' />
+            {networkSentence}
+            {runCountAndScopeSentences}
+            {matcherSentences}
 
+            <div className='row'>
+              <div className='col-xs-12 col-sm-3'>
+                <button
+                  className='button has-icon plus-button mt10 pl10 pr10 is-light is-small has-fat-icons'
+                  onClick={this.handleAddMatcher}
+                >
+                  <Plus
+                    className='icon__button has-stroke-white'
+                  />
+                </button>
+              </div>
+            </div>
+          </ColorBlock>
+
+          <ColorBlock
+            backgroundColor={this.state.event.color}
+            brightnessPercent={40}
+            columnSizing={`col-xs-12`}
+          >
             <EventAction
               {...this.props}
               event={this.state.event}
@@ -913,8 +891,8 @@ export const EditEventPage = class _EditEventPage extends Component {
               onChangeWebhookHeader={this.onChangeWebhookHeader}
               onAddWebhookHeader={this.onAddWebhookHeader}
               onDeleteWebhookHeader={this.onDeleteWebhookHeader}
-              />
-          </div>
+            />
+          </ColorBlock>
 
           {this.isCreateMode() && this.state.createEventModalOpen &&
             <CreateEventModal
@@ -927,23 +905,15 @@ export const EditEventPage = class _EditEventPage extends Component {
             />
           }
 
-          <div className={`is-white-ter pt30 pb30`}>
-            <div className={`container-fluid`}>
-              <div className='container'>
-                <div className='row'>
-                  <div className='col-xs-12 has-text-centered is-size-4'>
-                    <EditEventButtons
-                      {...this.props}
-                      eventData={eventData}
-                      isCreateMode={this.isCreateMode}
-                      isSubmitting={this.state.isSubmitting}
-                      handleOpenCreateEventModal={this.handleOpenCreateEventModal}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <FormFooter>
+            <EditEventButtons
+              {...this.props}
+              eventData={eventData}
+              isCreateMode={this.isCreateMode}
+              isSubmitting={this.state.isSubmitting}
+              handleOpenCreateEventModal={this.handleOpenCreateEventModal}
+            />
+          </FormFooter>
 
           {/* <EventHistory /> */}
         </section>
