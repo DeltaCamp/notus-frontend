@@ -12,7 +12,6 @@ export const NetworkSelect = graphql(networksQuery, {
 })(
   class _NetworkSelect extends PureComponent {
     static propTypes = {
-      handleToggleEditingNetwork: PropTypes.func.isRequired,
       networkId: PropTypes.number,
       onChangeNetworkId: PropTypes.func.isRequired
     }
