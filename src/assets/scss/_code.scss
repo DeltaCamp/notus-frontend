@@ -1,12 +1,23 @@
+// Use <Scrollbars> / <ColoredScrollbars> components with this!
+// see AbiCodeBox.js
+
+.code-wrapper {
+  background-color: $black-bis;
+  border-radius: 10px;
+}
+
 .code {
-  border-radius: 30px;
+  background-color: transparent;
+  color: white !important;
   display: inline-block;
   font-size: 1rem;
   margin-top: 0.5rem;
   padding: 1rem;
   position: relative;
-  // overflow: scroll;
   overflow: hidden;
+  padding: 0.5rem;
+  position: relative;
+  width: 100%;
 
   @media screen and (max-width: $tablet) {
     max-width: 100%;
@@ -28,20 +39,8 @@
   }
 }
 
-.code {
-  background-color: $black-bis;
-  border-radius: 10px;
-  color: white !important;
-  height: 150px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding: 0.5rem;
-  position: relative;
-  width: 100%;
-}
-
 .code pre {
-  background-color: $black-bis;
+  background-color: transparent;
   color: white !important;
   font-size: 0.75rem;
   padding: 0.5rem;

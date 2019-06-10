@@ -1,10 +1,36 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'react-apollo'
+import { Scrollbars } from 'react-custom-scrollbars'
 
 import { abiQuery } from '~/queries/abiQuery'
 
 // const debug = require('debug')('notus:components:AbiCodeBox')
+
+class ColoredScrollbars extends PureComponent {
+
+  renderThumb = ({ style, ...props }) => {
+    const thumbStyle = {
+      borderRadius: 20,
+      backgroundColor: `white`
+    };
+    return (
+      <div
+        style={{ ...style, ...thumbStyle }}
+        {...props}
+      />
+    );
+  }
+
+  render() {
+    return (
+      <Scrollbars
+        renderThumbHorizontal={this.renderThumb}
+        renderThumbVertical={this.renderThumb}
+        {...this.props} />
+    );
+  }
+}
 
 export const AbiCodeBox = 
   graphql(abiQuery, {
@@ -27,11 +53,15 @@ export const AbiCodeBox =
         const abi = abiData?.abi
 
         return (
-          <code className='code'>
-            <pre>
-              {abiBody || abi?.abi || 'Choose ABI Method Above'}
-            </pre>
-          </code>
+          <div className='code-wrapper'>
+            <ColoredScrollbars autoHeight autoHide>
+              <code className='code'>
+                <pre>
+                  {abiBody || abi?.abi || 'Choose ABI Method Above'}
+                </pre>
+              </code>
+            </ColoredScrollbars>
+          </div>
         )
       }
 
