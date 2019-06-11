@@ -18,7 +18,12 @@ export const PublishButton = withCurrentUser(
 
     hintText = () => {
       const { currentUser } = this.props
-      if (currentUser && !currentUser.confirmedAt) {
+
+      if (!this.isAuthor()) {
+        return `You are not the owner of this contract.`
+      }
+
+      if (!this.userConfirmed()) {
         return `You will need to confirm your ${currentUser.email} email address prior to sharing contracts.`
       }
 
@@ -29,24 +34,34 @@ export const PublishButton = withCurrentUser(
       return text
     }
 
+    isAuthor = () => {
+      const { currentUser, contract } = this.props
+      
+      return currentUser && 
+        (parseInt(currentUser.id, 10) === parseInt(contract.ownerId, 10))
+    }
+
+    userConfirmed = () => {
+      const { currentUser } = this.props
+      return currentUser
+        && currentUser.confirmedAt
+    }
+
     handleTogglePublish = (e) => {
       this.props.handleTogglePublish(this.props.contract)
     }
 
     render() {
-      const { currentUser } = this.props
-      const confirmed = currentUser && currentUser.confirmedAt
-
       return <>
         <Switch
           data-tip
           data-for='publish-button-hint'
           value={this.props.contract.isPublic}
           onChange={this.handleTogglePublish}
-          disabled={!confirmed}
+          disabled={!this.userConfirmed() || !this.isAuthor()}
           color='light'
         >
-          shared with the Notus community 
+          shared with the Notus community
         </Switch>
         <ReactTooltip
           id='publish-button-hint'

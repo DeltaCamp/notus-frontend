@@ -1,3 +1,8 @@
+.table thead th,
+.table tbody td {
+  vertical-align: middle;
+}
+
 .table thead th {
   color: rgba(0, 0, 0, 0.4);
 }
@@ -15,15 +20,14 @@
 }
 
 .table.is-transparent,
-.table.is-transparent th,
-.table.is-transparent tr,
-.table.is-transparent td {
-  background-color: rgba(255, 255, 255, 0.03);
+.table.is-transparent tr/*,
+.table.is-transparent td*/ {
+  background-color: rgba(255, 255, 255, 0.01);
   color: rgba(255, 255, 255, 0.7);
 }
 
 .table.is-transparent thead tr {
-  background-color: rgba(255, 255, 255, 0.005);
+  background-color: rgba(255, 255, 255, 0);
   border-radius: 20px;
 }
 
@@ -31,9 +35,19 @@
   color: white;
 }
 
-.table.is-transparent tbody tr:nth-child(2) td {
+.table.is-transparent tr:nth-child(2n) td {
   background-color: rgba(255, 255, 255, 0.002);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.table.is-transparent tr.is-dark td {
+  background-color: rgba(255, 255, 255, 0.002);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.table.is-transparent tr.is-light td {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .table.is-transparent tbody tr:hover td {
@@ -48,4 +62,8 @@
 .table.is-transparent th,
 .table.is-transparent td {
   border-color: transparent;
+}
+
+.table.is-transparent tbody tr td .table {
+  background-color: rgba(0, 0, 0, 0.1);
 }

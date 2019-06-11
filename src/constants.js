@@ -13,6 +13,7 @@ export const DANGER = 'danger'
 
 export const PAGE_SIZE = 12
 export const ADMIN_TABLE_PAGE_SIZE = 50
+export const CONTRACTS_PAGE_SIZE = 50
 
 export const CONSENT_COOKIE_NAME = 'consentCookie'
 export const JWT_TOKEN_COOKIE_NAME = 'jwtToken'

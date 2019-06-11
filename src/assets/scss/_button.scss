@@ -436,3 +436,24 @@ button:active[disabled],
 .button.is-light:focus:not(:active), .button.is-light.is-focused:not(:active) {
   box-shadow: none;
 }
+
+.is-transparent,
+.is-transparent:focus {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.is-transparent:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: transparent;
+  color: white;
+}
+
+.is-transparent:active {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.is-xsmall.is-transparent {
+  min-width: auto;
+}

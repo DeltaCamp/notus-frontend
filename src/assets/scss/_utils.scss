@@ -439,8 +439,24 @@
   min-height: 350px;
 }
 
+.has-ma-auto {
+  margin: auto;
+}
+
 .is-left-aligned-mobile {
   @media screen and (max-width: $tablet) {
     text-align: left !important;
   }
+}
+
+.is-cursor-pointer {
+  cursor: pointer;
+}
+
+.is-flex {
+  display: flex;
+}
+
+.is-content-justified-center {
+  justify-content: center;
 }

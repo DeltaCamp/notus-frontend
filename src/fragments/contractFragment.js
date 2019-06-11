@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
 import { abiFragment } from '~/fragments/abiFragment'
+import { userFragment } from '~/fragments/userFragment'
 
 export const contractFragment = gql`
   fragment contractFragment on ContractEntity {
@@ -8,6 +9,10 @@ export const contractFragment = gql`
     name
     address
     isPublic
+    owner {
+      ...userFragment
+    }
+    ownerId
     abi {
       ...abiFragment
     }
@@ -17,4 +22,5 @@ export const contractFragment = gql`
     deletedAt
   }
   ${abiFragment}
+  ${userFragment}
 `

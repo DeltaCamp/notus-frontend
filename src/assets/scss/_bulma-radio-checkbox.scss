@@ -14,7 +14,7 @@
 }
 
 .switch[type="checkbox"].is-light:checked + label::before {
-  background: rgba(255, 255, 255, 0.4) !important;
+  background: rgba(255, 255, 255, 0.6) !important;
 }
 
 .switch[type="checkbox"]:checked:hover + label::before {
@@ -22,7 +22,7 @@
 }
 
 .switch[type="checkbox"] + .label::before {
-  background: rgba(255, 255, 255, 0.16) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
 }
 
 .switch[type="checkbox"] + label::after {

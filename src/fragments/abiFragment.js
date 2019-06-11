@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { abiEventInputFragment } from '~/fragments/abiEventInputFragment'
+import { abiEventFragment } from '~/fragments/abiEventFragment'
 
 export const abiFragment = gql`
   fragment abiFragment on AbiEntity {
@@ -9,13 +9,8 @@ export const abiFragment = gql`
     abi
     isPublic
     abiEvents {
-      id
-      title
-      isPublic
-      abiEventInputs {
-        ...abiEventInputFragment
-      }
+      ...abiEventFragment
     }
   }
-  ${abiEventInputFragment}
+  ${abiEventFragment}
 `
