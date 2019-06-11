@@ -437,23 +437,23 @@ button:active[disabled],
   box-shadow: none;
 }
 
-.is-transparent,
-.is-transparent:focus {
+.button.is-transparent,
+.button.is-transparent:focus {
   background-color: rgba(255, 255, 255, 0.05);
   border-color: transparent;
   color: rgba(255, 255, 255, 0.5);
 }
 
-.is-transparent:hover {
+.button.is-transparent:hover {
   background-color: rgba(255, 255, 255, 0.3);
   border-color: transparent;
   color: white;
 }
 
-.is-transparent:active {
+.button.is-transparent:active {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-.is-xsmall.is-transparent {
+.button.is-xsmall.is-transparent {
   min-width: auto;
 }
