@@ -10,6 +10,7 @@ export const ABOUT_PAGE = '/about'
 export const TERMS_PAGE = '/terms'
 export const PRIVACY_PAGE = '/privacy'
 export const SUPPORT_PAGE = '/support'
+export const STATUS = '/status'
 
 export const CONFIRM_AND_SET_PASSWORD_PAGE = '/users/confirm'
 export const CONFIRM = '/app-users/confirm'

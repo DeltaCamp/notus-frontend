@@ -11,6 +11,7 @@ import { BodyClass } from '~/components/BodyClass'
 import { MetaTags } from '~/components/MetaTags'
 import { AdminPage } from '~/components/pages/admin/AdminPage'
 import { EditContractPage } from '~/components/pages/EditContractPage'
+import { StatusPage } from '~/components/pages/StatusPage'
 import { ContractsPage } from '~/components/pages/ContractsPage'
 import { ContractPage } from '~/components/pages/ContractPage'
 import { HomePage } from '~/components/pages/HomePage'
@@ -83,6 +84,7 @@ export const App = withRouter(hot(module)(
             >
               <Switch location={this.props.location}>
                 <Route exact path={routes.ADMIN} component={withTracker(AdminPage)} />
+                <Route exact path={routes.STATUS} component={withTracker(StatusPage)} />
 
                 <Route exact path={routes.EDIT_CONTRACT} component={withTracker(EditContractPage)} />
                 <Route exact path={routes.NEW_CONTRACT} component={withTracker(EditContractPage)} />
