@@ -117,15 +117,6 @@ export const DisableEmailPage = graphql(disableEventEmailMutation, { name: 'disa
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12'>
-                    <p className='mt50'>
-                      <button
-                        onClick={this.context.router.history.goBack}
-                        className='button is-small is-outlined is-dark'
-                      >
-                        {'<'} Back
-                      </button>
-                    </p>
-
                     <div className='has-text-centered'>
                       <h2 className='is-size-4 mt75 has-text-weight-bold '>
                         {message}
