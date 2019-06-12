@@ -23,8 +23,8 @@ export const PublishButton = withCurrentUser(
         return `You are not the owner of this contract.`
       }
 
-      if (!this.userConfirmed()) {
-        return `You will need to confirm your ${currentUser.email} email address prior to sharing contracts.`
+      if (!this.userPaid()) {
+        return `Only paid accounts can have private contracts.`
       }
 
       const text = this.props.contract.isPublic
@@ -36,15 +36,20 @@ export const PublishButton = withCurrentUser(
 
     isAuthor = () => {
       const { currentUser, contract } = this.props
-      
-      return currentUser && 
+
+      if (!currentUser || !contract) {
+        return false
+      }
+
+      return currentUser && contract &&
         (parseInt(currentUser.id, 10) === parseInt(contract.ownerId, 10))
     }
 
-    userConfirmed = () => {
+    userPaid = () => {
       const { currentUser } = this.props
+
       return currentUser
-        && currentUser.confirmedAt
+        && currentUser.isPaid
     }
 
     handleTogglePublish = (e) => {
@@ -58,10 +63,10 @@ export const PublishButton = withCurrentUser(
           data-for='publish-button-hint'
           value={this.props.contract.isPublic}
           onChange={this.handleTogglePublish}
-          disabled={!this.userConfirmed() || !this.isAuthor()}
+          disabled={!this.userPaid() || !this.isAuthor()}
           color='light'
         >
-          shared with the Notus community
+          is public
         </Switch>
         <ReactTooltip
           id='publish-button-hint'

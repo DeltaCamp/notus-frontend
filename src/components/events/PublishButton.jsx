@@ -42,7 +42,7 @@ export const PublishButton = withCurrentUser(
           disabled={!confirmed}
           color='light'
         >
-          shared with the Notus community 
+          is public
           {/* {this.props.event.isPublic
             ? <><Cast />Published</>
             : <><CloudOff />Private</>

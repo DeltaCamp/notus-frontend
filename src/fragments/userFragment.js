@@ -6,6 +6,7 @@ export const userFragment = gql`
     isAdmin
     name
     email
+    isPaid
     confirmedAt
     etherscan_api_key
   }
