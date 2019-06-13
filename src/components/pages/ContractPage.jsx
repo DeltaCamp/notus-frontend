@@ -150,11 +150,6 @@ export const ContractPage =
                 notusToast.success('ABI Event Title updated successfully.')
               }).catch(error => {
                 console.warn(error)
-
-                error = {
-                  message: `Error updating ABI Event title (${error.message})`
-                }
-
                 showErrorMessage(error)
               })
             }
@@ -174,11 +169,6 @@ export const ContractPage =
                 notusToast.success('ABI Event Title updated successfully.')
               }).catch(error => {
                 console.warn(error)
-
-                error = {
-                  message: `Error updating ABI Event Input title (${error.message})`
-                }
-
                 showErrorMessage(error)
               })
             }
