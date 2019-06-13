@@ -283,6 +283,7 @@ const AbiEventInputRow = class _AbiEventInputRow extends PureComponent {
       <div className='grid-table__body__column'>
         {input.type === 'uint256' && (
           <MetaDataTypeSelect
+            disabled={!isAuthor()}
             abiEventInputId={parseInt(input.id, 10)}
             value={input.metaType}
             handleMetaDataTypeChange={handleMetaDataTypeChange}

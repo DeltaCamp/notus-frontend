@@ -93,7 +93,8 @@ export const NotusSelect = class _NotusSelect extends Component {
     handleCloseReactSelect: PropTypes.func,
     className: PropTypes.string,
     value: PropTypes.object,
-    isOpen: PropTypes.bool
+    isOpen: PropTypes.bool,
+    disabled: PropTypes.bool
   }
     
   componentDidMount () {
@@ -130,6 +131,10 @@ export const NotusSelect = class _NotusSelect extends Component {
   }
 
   toggleOpen = () => {
+    if (this.props.disabled) {
+      return false
+    }
+
     this.setState({
       isOpen: !this.state.isOpen
     }, this.runCallbacks)
@@ -161,15 +166,17 @@ export const NotusSelect = class _NotusSelect extends Component {
         className={this.props.className || ''}
         target={
           <button
-          onClick={this.toggleOpen}
-          className={classnames(
-            'form-box__variable',
-            'has-react-select',
-            {
-              'is-active': isOpen
+            // disabled={this.props.disabled}
+            onClick={this.toggleOpen}
+            className={classnames(
+              'form-box__variable',
+              'has-react-select',
+              {
+                'disabled': this.props.disabled,
+                'is-active': isOpen
               }
-              )}
-              >
+            )}
+          >
             {this.props.value ? this.props.value.label : 'Select ...'} <ChevronDown />
           </button>
         }

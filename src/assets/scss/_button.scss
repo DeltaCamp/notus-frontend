@@ -8,6 +8,7 @@
   color: white;
 }
 
+.button.disabled,
 .button[disabled],
 button[disabled] {
   cursor: not-allowed;
@@ -414,6 +415,9 @@ form.is-tall .button.is-text.is-xsmall:hover,
 button:hover[disabled],
 button:focus[disabled],
 button:active[disabled],
+.button.disabled:hover,
+.button.disabled:focus,
+.button.disabled:active,
 .button:hover[disabled],
 .button:focus[disabled],
 .button:active[disabled] {
@@ -439,7 +443,7 @@ button:active[disabled],
 
 .button.is-transparent,
 .button.is-transparent:focus {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.18);
   border-color: transparent;
   color: rgba(255, 255, 255, 0.5);
 }
@@ -456,4 +460,8 @@ button:active[disabled],
 
 .button.is-xsmall.is-transparent {
   min-width: auto;
+}
+
+.button.disabled {
+  opacity: 0.5;
 }

@@ -372,12 +372,14 @@ $form-box__variable--color: rgba(255, 255, 255, 0.95);
   }
 }
 
+.form-box__variable.form-box__variable.disabled,
 .form-box__variable.form-box__variable-disabled,
 .form-box__variable.form-box__variable-disabled:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.3);
   border-color: rgba(255, 255, 255, 0.4);
   color: white !important;
-  opacity: 0.3;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .form-box__variable--full-width {
