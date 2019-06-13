@@ -114,7 +114,6 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
           let signUp, myEvents, signOut
 
           const scrolledDown = this.state.scrollTop > 50
-          // const hideFixedNav = this.isNotHomeRoute() && !scrolledDown
           const showFixedNav = this.isHomeRoute() && scrolledDown
 
           if (!currentUserData || !currentUser) {
