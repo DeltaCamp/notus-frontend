@@ -33,28 +33,22 @@ export const PublishButton = withCurrentUser(
       const { currentUser } = this.props
       const confirmed = currentUser && currentUser.confirmedAt
 
-      return <>
+      return <span data-tip data-for='publish-event-button-hint'>
         <Switch
-          data-tip
-          data-for='publish-button-hint'
           value={this.props.event.isPublic}
           onChange={this.props.handleTogglePublish}
           disabled={!confirmed}
           color='light'
         >
           is public
-          {/* {this.props.event.isPublic
-            ? <><Cast />Published</>
-            : <><CloudOff />Private</>
-          } */}
         </Switch>
         <ReactTooltip
-          id='publish-button-hint'
+          id='publish-event-button-hint'
           place='top'
           effect='solid'
           getContent={[this.hintText, 1000]}
         />
-      </>
+      </span>
     }
   }
 )

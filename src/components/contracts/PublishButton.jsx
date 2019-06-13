@@ -58,7 +58,7 @@ export const PublishButton = withCurrentUser(
     render() {
       let helpText
 
-      return <span data-tip='wtf' data-for='publish-button-hint'>
+      return <span data-tip data-for='publish-button-hint'>
         <Switch
           value={this.props.contract.isPublic}
           onChange={this.handleTogglePublish}

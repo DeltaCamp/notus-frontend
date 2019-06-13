@@ -32,3 +32,13 @@
 .switch[type="checkbox"]:checked + label::after {
   left: 34px;
 }
+
+.switch[type="checkbox"][disabled] + label::before,
+.switch[type="checkbox"][disabled] + label::after {
+  opacity: 1;
+}
+
+.switch[type="checkbox"][disabled]:hover + label::before,
+.switch[type="checkbox"][disabled]:checked:hover + label::before {
+  border-color: rgba(255, 255, 255, 0) !important;
+}
