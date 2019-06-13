@@ -13,7 +13,7 @@ import { AdminPage } from '~/components/pages/admin/AdminPage'
 import { EditContractPage } from '~/components/pages/EditContractPage'
 import { StatusPage } from '~/components/pages/StatusPage'
 import { ContractsPage } from '~/components/pages/ContractsPage'
-import { ContractPage } from '~/components/pages/ContractPage'
+import { ContractPageWrapper } from '~/components/pages/ContractPageWrapper'
 import { HomePage } from '~/components/pages/HomePage'
 import { AboutPage } from '~/components/pages/AboutPage'
 import { PrivacyPage } from '~/components/pages/PrivacyPage'
@@ -89,7 +89,7 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.EDIT_CONTRACT} component={withTracker(EditContractPage)} />
                 <Route exact path={routes.NEW_CONTRACT} component={withTracker(EditContractPage)} />
                 <Route exact path={routes.CONTRACTS} component={withTracker(ContractsPage)} />
-                <Route exact path={routes.CONTRACT} component={withTracker(ContractPage)} />
+                <Route exact path={routes.CONTRACT} component={withTracker(ContractPageWrapper)} />
 
                 <Route exact path={routes.HOME} component={withTracker(HomePage)} />
                 <Route exact path={routes.ABOUT_PAGE} component={withTracker(AboutPage)} />

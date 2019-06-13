@@ -18,8 +18,6 @@ export const PublishButton = withCurrentUser(
     }
 
     hintText = () => {
-      const { currentUser } = this.props
-
       if (!this.isAuthor()) {
         return `You are not the owner of this contract.`
       }

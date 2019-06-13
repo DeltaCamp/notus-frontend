@@ -49,7 +49,7 @@ export const AbiEventVisibleButton = withCurrentUser(
           onChange={this.handleToggleAbiEvent}
           disabled={!this.isAuthor()}
           color='light'
-          className='is-content-justified-center is-flex'
+          className='is-content-justified-center mobile--is-content-justified-left is-flex'
           style={{ position: 'relative' }}
         >
         </Switch>
