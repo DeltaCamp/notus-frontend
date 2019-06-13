@@ -48,7 +48,7 @@ export const CreateEventModal = class _CreateEventModal extends Component {
           isOpen={this.props.createEventModalOpen}
           handleClose={this.props.handleCloseCreateEventModal}
         >
-          <form
+          <div
             onKeyUp={this.handleKeyUp}
             className='form is-tall is-inverse has-text-centered'
           >
@@ -63,7 +63,7 @@ export const CreateEventModal = class _CreateEventModal extends Component {
               onlyShowInput
             />
 
-            <p className='pt20'>
+            <p className='pt20 is-size-7'>
               <strong>NOTE:</strong>
               <br />
               {currentUserData?.currentUser?.confirmedAt ?
@@ -85,7 +85,7 @@ export const CreateEventModal = class _CreateEventModal extends Component {
                 <Save />&nbsp;Save event
               </button>
             </div>
-          </form>
+          </div>
         </Modal>
       </>
     )

@@ -542,19 +542,12 @@ input.input.is-large {
 
 .react-select .react-select__option {
   border: 3px solid white;
-  color: black;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
   margin: 5px;
   padding: 4px 10px;
   width: 96%;
-}
-
-.react-select__option.react-select__option--is-focused:not(.react-select__option--is-selected) {
-  background-color: white !important;
-  border-radius: 8px;
-  border: 3px dotted lighten($blue, 30%);
 }
 
 .react-select__option.react-select__option--is-selected {
@@ -591,17 +584,26 @@ input.input.is-large {
   box-shadow: none;
 }
 
+.form.is-inverse .label,
+.form.is-inverse .input,
+.form.is-inverse .textarea,
 form.is-inverse .label,
 form.is-inverse .input,
 form.is-inverse .textarea {
   color: black;
 }
 
+.form.is-inverse .input,
+.form.is-inverse .textarea,
 form.is-inverse .input,
 form.is-inverse .textarea {
   background-color: #eaeaea;
 }
 
+.form.is-inverse .input:hover,
+.form.is-inverse .textarea:hover,
+.form.is-inverse .input:focus,
+.form.is-inverse .textarea:focus,
 form.is-inverse .input:hover,
 form.is-inverse .textarea:hover,
 form.is-inverse .input:focus,
@@ -610,6 +612,8 @@ form.is-inverse .textarea:focus {
   border-color: #f4f4f4;
 }
 
+.form.is-inverse .input[disabled],
+.form.is-inverse .textarea[disabled],
 form.is-inverse .input[disabled],
 form.is-inverse .textarea[disabled] {
   background-color: #c5c5c5;

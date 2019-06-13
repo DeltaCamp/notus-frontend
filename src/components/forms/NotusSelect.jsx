@@ -7,6 +7,21 @@ import { KEYS } from '~/constants'
 import { getSystemInfo } from '~/utils/getSystemInfo'
 
 const selectStyles = {
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    return {
+      ...styles,
+      backgroundColor: !isDisabled && (isSelected ? '#2684FF' : 'white'),
+      border: '3px dotted lighten($blue, 30%)',
+      borderRadius: 8,
+      color: 'black',
+
+      ':hover': {
+        ...styles[':hover'],
+        backgroundColor: !isDisabled && (isSelected ? '#2684FF' : '#26d4dF'),
+        color: 'white',
+      },
+    }
+  },
   control: provided => ({ ...provided, minWidth: 240, margin: 8 }),
   menu: () => ({ boxShadow: 'inset 0 1px 0 rgba(0, 0, 0, 0.1)' }),
 }
@@ -158,6 +173,15 @@ export const NotusSelect = class _NotusSelect extends Component {
   render () {
     const { isOpen } = this.state
 
+    let styles = selectStyles
+
+    if (this.props.styles) {
+      styles = {
+        ...selectStyles,
+        ...this.props.styles
+      }
+    }
+
     return (
       <Dropdown
         handleKeyUp={this.handleKeyUp}
@@ -193,7 +217,7 @@ export const NotusSelect = class _NotusSelect extends Component {
           onChange={this.onSelectChange}
           onClick={this.onClick}
           placeholder="Search..."
-          styles={selectStyles}
+          styles={styles}
           tabSelectsValue={false}
           onKeyUp={this.handleKeyUp}
           className='react-select'

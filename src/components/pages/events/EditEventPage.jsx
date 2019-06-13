@@ -24,10 +24,12 @@ import { deepCloneMatcher } from '~/utils/deepCloneMatcher'
 import { ColorBlock } from '~/components/forms/ColorBlock'
 import { FormBanner } from '~/components/forms/FormBanner'
 import { FormFooter } from '~/components/forms/FormFooter'
+import { ColorSelect } from '~/components/forms/ColorSelect'
 import { NetworkSelect } from '~/components/forms/NetworkSelect'
 import { isValidScopeSource } from '~/utils/isValidScopeSource'
 import { isValidMatcherForAbiEvent } from '~/utils/isValidMatcherForAbiEvent'
 import { notusToast } from '~/utils/notusToast'
+import { eventColors } from '~/utils/eventColors'
 import { showErrorMessage } from '~/utils/showErrorMessage'
 import { SCOPES } from '~/constants'
 import * as routes from '~/../config/routes'
@@ -35,15 +37,7 @@ import * as routes from '~/../config/routes'
 const debug = require('debug')('notus:components:EditEventPage')
 
 const randomColor = () => {
-  return sample([
-    '#3a084f', // dark purple
-    '#0b603a', // forest green
-    '#06368b', // dark blue
-    '#dd5500', // orange
-    '#0676cb', // light blue
-    '#6e0ad3', // purple
-    '#2f2d29', // grey
-  ])
+  return sample(eventColors)
 }
 
 export const EditEventPage = class _EditEventPage extends Component {
@@ -352,6 +346,13 @@ export const EditEventPage = class _EditEventPage extends Component {
         this.handleSetEditMatcher(null)
       })
     }
+  }
+
+  handleColorChange = ({ value }) => {
+    this.doGenericUpdateEvent({
+      id: this.state.event.id || null,
+      color: value
+    }, `Color has been updated.`)
   }
 
   onChangeScopeAndContractId = ({ scope, contract }) => {
@@ -847,6 +848,20 @@ export const EditEventPage = class _EditEventPage extends Component {
               </div>
             }
           </FormBanner>
+
+          <ColorBlock
+            backgroundColor={this.state.event.color}
+            brightnessPercent={80}
+            columnSizing={`col-xs-12`}
+          >
+            Change Color: 
+            <ColorSelect
+              value={this.state.event.color}
+              handleColorChange={this.handleColorChange}
+            >
+              
+            </ColorSelect>
+          </ColorBlock>
 
           <ColorBlock
             backgroundColor={this.state.event.color}

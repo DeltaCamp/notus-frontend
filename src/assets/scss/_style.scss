@@ -1,7 +1,7 @@
 ::placeholder,
 .input::placeholder,
 .textarea::placeholder {
-  color: rgba(190, 170, 210, 0.7);
+  color: rgba(200, 190, 210, 0.7);
 }
 
 input:-internal-autofill-previewed,
@@ -653,6 +653,10 @@ hr {
   position: absolute;
   top: 0;
   width: 100%;
+}
+
+.is-brightness-80 {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .is-brightness-60 {

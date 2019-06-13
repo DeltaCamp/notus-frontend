@@ -466,9 +466,12 @@ export const ContractPage = class _ContractPage extends Component {
     let contract,
       abiEvents
 
-    const { contractData, currentUserData } = this.props
+    const {
+      contractData,
+      // currentUserData
+    } = this.props
     const { loading, error } = contractData || {}
-    const { currentUser } = currentUserData || { email: '' }
+    // const { currentUser } = currentUserData || { email: '' }
 
     if (error) {
       console.error(error)
