@@ -126,7 +126,6 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
             myEvents =
               <>
                 <NavLink
-                  exact
                   to={routes.MY_EVENTS}
                   className='navbar-item'
                   onClick={this.closeMobileNav}
@@ -135,7 +134,6 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   <Activity className='navbar-item--icon' /> Events
                 </NavLink>
                 <NavLink
-                  exact
                   to={routes.CONTRACTS}
                   className='navbar-item'
                   onClick={this.closeMobileNav}

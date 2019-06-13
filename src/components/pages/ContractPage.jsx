@@ -26,6 +26,7 @@ const AbiEventRows = class _AbiEventRows extends PureComponent {
   static propTypes = {
     abiEvents: PropTypes.array.isRequired,
     contract: PropTypes.object.isRequired,
+    isAuthor: PropTypes.func.isRequired,
     abiEventInputsVisibleState: PropTypes.array.isRequired,
     handleToggleAbiEventVisible: PropTypes.func.isRequired,
     handleSubmitAbiEventTitle: PropTypes.func.isRequired,
@@ -38,6 +39,7 @@ const AbiEventRows = class _AbiEventRows extends PureComponent {
     const { 
       abiEvents,
       contract,
+      isAuthor,
       abiEventInputsVisibleState,
       handleToggleAbiEventVisible,
       handleSubmitAbiEventTitle,
@@ -48,9 +50,8 @@ const AbiEventRows = class _AbiEventRows extends PureComponent {
 
     if (abiEvents.length === 0) {
       return (
-        <div className='grid-table__body__column is-light has-text-centered is-size-6 has-text-weight-bold'>
-          {/* colSpan='4' */}
-          No Events exist for this ABI.
+        <div className='grid-table__body__column grid-table__body__column--full-width has-text-centered is-size-6 has-text-weight-bold'>
+          No events exist for this ABI.
         </div>
       )
     } else {
@@ -59,6 +60,7 @@ const AbiEventRows = class _AbiEventRows extends PureComponent {
           key={`abi-event-row-${abiEvent.id}`}
           abiEvent={abiEvent}
           contract={contract}
+          isAuthor={isAuthor}
           handleToggleAbiEventVisible={handleToggleAbiEventVisible}
           handleSubmitAbiEventTitle={handleSubmitAbiEventTitle}
           handleSubmitAbiEventInputTitle={handleSubmitAbiEventInputTitle}
@@ -77,6 +79,7 @@ const AbiEventRow = class _AbiEventRow extends PureComponent {
   static propTypes = {
     abiEvent: PropTypes.object.isRequired,
     contract: PropTypes.object.isRequired,
+    isAuthor: PropTypes.func.isRequired,
     handleToggleAbiEventVisible: PropTypes.func.isRequired,
     handleSubmitAbiEventTitle: PropTypes.func.isRequired,
     handleSubmitAbiEventInputTitle: PropTypes.func.isRequired,
@@ -89,6 +92,7 @@ const AbiEventRow = class _AbiEventRow extends PureComponent {
     const {
       abiEvent,
       contract,
+      isAuthor,
       handleSubmitAbiEventTitle,
       handleToggleAbiEventVisible,
       handleSubmitAbiEventInputTitle,
@@ -112,6 +116,7 @@ const AbiEventRow = class _AbiEventRow extends PureComponent {
                 handleSubmit={(newTitle) => {
                   handleSubmitAbiEventTitle(abiEvent.id, newTitle)
                 }}
+                disabled={!isAuthor()}
               />
             </div>
           </div>
@@ -140,6 +145,7 @@ const AbiEventRow = class _AbiEventRow extends PureComponent {
         </div>
 
         <AbiEventInputRows
+          isAuthor={isAuthor}
           abiEvent={abiEvent}
           abiEventInputsVisibleState={abiEventInputsVisibleState}
           handleSubmitAbiEventInputTitle={handleSubmitAbiEventInputTitle}
@@ -155,6 +161,7 @@ const AbiEventInputRows = class _AbiEventInputRows extends PureComponent {
   static propTypes = {
     abiEvent: PropTypes.object.isRequired,
     abiEventInputsVisibleState: PropTypes.array.isRequired,
+    isAuthor: PropTypes.func.isRequired,
     handleSubmitAbiEventInputTitle: PropTypes.func.isRequired,
     handleMetaDataTypeChange: PropTypes.func.isRequired,
   }
@@ -163,6 +170,7 @@ const AbiEventInputRows = class _AbiEventInputRows extends PureComponent {
     const {
       abiEvent,
       abiEventInputsVisibleState,
+      isAuthor,
       handleSubmitAbiEventInputTitle,
       handleMetaDataTypeChange
     } = this.props
@@ -170,14 +178,13 @@ const AbiEventInputRows = class _AbiEventInputRows extends PureComponent {
     let inputs = abiEvent.abiEventInputs
     inputs = sortBy(inputs, input => input.id)
 
+    const className = abiEventInputsVisibleState.includes(abiEvent.id) ? '' : 'is-hidden'
+
     if (inputs.length === 0) {
       return (
-        <div className='grid-table__row'>
-          <div className='grid-table__body__column'>
-            {/* colSpan='5' */}
-            <span className='is-size-6 has-text-weight-bold'>
-              No Inputs exist for this ABI Event.
-            </span>
+        <div className={`grid-table__row ${className}`}>
+          <div className='grid-table__body__column grid-table__body__column--full-width has-text-centered is-size-6 has-text-weight-bold'>
+            No inputs exist for this ABI event.
           </div>
         </div>
       )
@@ -186,12 +193,11 @@ const AbiEventInputRows = class _AbiEventInputRows extends PureComponent {
         <AbiEventInputRow
           key={`abi-event-input-row-${input.id}`}
           input={input}
+          isAuthor={isAuthor}
           handleSubmitAbiEventInputTitle={handleSubmitAbiEventInputTitle}
           handleMetaDataTypeChange={handleMetaDataTypeChange}
         />
       ))
-
-      const className = abiEventInputsVisibleState.includes(abiEvent.id) ? '' : 'is-hidden'
 
       return (
         <>
@@ -199,39 +205,36 @@ const AbiEventInputRows = class _AbiEventInputRows extends PureComponent {
             className={`grid-table__row ${className}`}
           >
             <div className='grid-table__body__column grid-table__body__column--full-width is-dark'>
-              {/* colSpan='5' */}
-              {/* <div className='grid-table is-transparent is-fullwidth'> */}
-                <div className='grid-table__row'>
-                  <div className='grid-table__head__column'>
-                    <span className='has-text-weight-normal has-text-lighter'>
-                      Name <Help
-                        id={`abi-event-input-name-${abiEvent.id}`}
-                        text='The name this ABI Event was given when imported.'
-                      />
-                    </span>
-                  </div>
-                  <div className='grid-table__head__column grid-table__column-2'>
-                    <span className='has-text-weight-normal has-text-lighter'>
-                      Title <Help
-                        id={`abi-event-input-title-${abiEvent.id}`}
-                        text={`The text you and others will see for this ABI Event on Notus.<br />Click to rename this.`}
-                      />
-                    </span>
-                  </div>
-                  <div className='grid-table__head__column'>
-                    <span className='has-text-weight-normal has-text-lighter'>
-                      Type
-                    </span>
-                  </div>
-                  <div className='grid-table__head__column'>
-                    <span className='has-text-weight-normal has-text-lighter'>
-                      MetaData Type
-                    </span>
-                  </div>
+              <div className='grid-table__row'>
+                <div className='grid-table__head__column'>
+                  <span className='has-text-weight-normal has-text-lighter'>
+                    Name <Help
+                      id={`abi-event-input-name-${abiEvent.id}`}
+                      text='The name this ABI Event was given when imported.'
+                    />
+                  </span>
                 </div>
+                <div className='grid-table__head__column grid-table__column-2'>
+                  <span className='has-text-weight-normal has-text-lighter'>
+                    Title <Help
+                      id={`abi-event-input-title-${abiEvent.id}`}
+                      text={`The text you and others will see for this ABI Event on Notus.<br />Click a box below to rename.`}
+                    />
+                  </span>
+                </div>
+                <div className='grid-table__head__column'>
+                  <span className='has-text-weight-normal has-text-lighter'>
+                    Type
+                  </span>
+                </div>
+                <div className='grid-table__head__column'>
+                  <span className='has-text-weight-normal has-text-lighter'>
+                    MetaData Type
+                  </span>
+                </div>
+              </div>
 
-                {inputRows}
-              {/* </div> */}
+              {inputRows}
             </div>
           </div>
         </>
@@ -245,6 +248,7 @@ const AbiEventInputRow = class _AbiEventInputRow extends PureComponent {
 
   static propTypes = {
     input: PropTypes.object.isRequired,
+    isAuthor: PropTypes.func.isRequired,
     handleSubmitAbiEventInputTitle: PropTypes.func.isRequired,
     handleMetaDataTypeChange: PropTypes.func.isRequired,
   }
@@ -252,6 +256,7 @@ const AbiEventInputRow = class _AbiEventInputRow extends PureComponent {
   render () {
     const {
       input,
+      isAuthor,
       handleSubmitAbiEventInputTitle,
       handleMetaDataTypeChange
     } = this.props
@@ -268,6 +273,7 @@ const AbiEventInputRow = class _AbiEventInputRow extends PureComponent {
             handleSubmit={(newTitle) => {
               handleSubmitAbiEventInputTitle(input.id, newTitle)
             }}
+            disabled={!isAuthor()}
           />
         </div>
       </div>
@@ -435,12 +441,33 @@ export const ContractPage = class _ContractPage extends Component {
     })
   }
 
+  isAuthor = () => {
+    const { currentUserData, contractData } = this.props
+    const { currentUser } = currentUserData || {}
+    const { contract } = contractData || {}
+    
+    if (!currentUserData || !contract) {
+      return false
+    }
+
+    return currentUser && contract &&
+      (parseInt(currentUser.id, 10) === parseInt(contract.ownerId, 10))
+  }
+
+  userConfirmed = () => {
+    const { currentUserData } = this.props
+    const { currentUser } = currentUserData || {}
+
+    return currentUser && currentUser.confirmedAt
+  }
+
   render () {
     let contract,
       abiEvents
 
-    const { contractData } = this.props
+    const { contractData, currentUserData } = this.props
     const { loading, error } = contractData || {}
+    const { currentUser } = currentUserData || { email: '' }
 
     if (error) {
       console.error(error)
@@ -468,6 +495,19 @@ export const ContractPage = class _ContractPage extends Component {
         <ScrollToTop />
 
         <section className='section section--main-content pb100'>
+          {!this.isAuthor() &&
+            <div className='color-block is-purple has-text-centered pt10 pb10 pr20 pl20'>
+              Cannot edit this contract as you are not the owner.
+            </div>
+          }
+
+          {/* {(this.isAuthor() &&
+            !this.userConfirmed()) && 
+              <div className='color-block is-purple has-text-centered pt10 pb10 pr20 pl20'>
+                Certain features will be unavailable until you have confirmed your "{currentUser.email}" email address.
+              </div>
+          } */}
+
           <FormBanner 
             backgroundColor='#4a8594'
           >
@@ -490,10 +530,11 @@ export const ContractPage = class _ContractPage extends Component {
             </div>
           </FormBanner>
 
+
           <ColorBlock
             backgroundColor='#4a8594'
             brightnessPercent={60}
-            columnSizing='col-xs-12 col-sm-9 col-lg-8'
+            columnSizing='col-xs-12 col-sm-8 col-lg-4'
           >
             <PublishButton
               contract={contract}
@@ -539,6 +580,7 @@ export const ContractPage = class _ContractPage extends Component {
                 key={new Date()}
                 abiEvents={abiEvents}
                 contract={contract}
+                isAuthor={this.isAuthor}
                 handleToggleAbiEventVisible={this.handleToggleAbiEventVisible}
                 handleSubmitAbiEventTitle={this.handleSubmitAbiEventTitle}
                 handleSubmitAbiEventInputTitle={this.handleSubmitAbiEventInputTitle}

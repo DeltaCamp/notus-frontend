@@ -622,3 +622,16 @@ form.is-inverse .textarea[disabled] {
   max-width: 100%;
   padding-top: 0;
 }
+
+.disabled .input,
+.disabled .label {
+  border: none;
+  opacity: 0.5;
+}
+
+.is-transparent .form .field .input[disabled],
+.is-transparent .form .field .textarea[disabled] {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: rgba(255, 255, 255, 0.3);
+}

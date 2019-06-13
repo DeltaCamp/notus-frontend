@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import Switch from 'react-bulma-switch'
 
-import { Help } from '~/components/Help'
 import { withCurrentUser } from '~/components/withCurrentUser'
 
 export const PublishButton = withCurrentUser(
@@ -19,11 +19,11 @@ export const PublishButton = withCurrentUser(
 
     hintText = () => {
       if (!this.isAuthor()) {
-        return `You are not the owner of this contract.`
+        return `Cannot edit as you are not the owner of this contract.`
       }
 
       if (!this.userPaid()) {
-        return `Only paid accounts can have private contracts.`
+        return `Private contracts will be available at a future date.`
       }
 
       const text = this.props.contract.isPublic
@@ -52,32 +52,26 @@ export const PublishButton = withCurrentUser(
     }
 
     handleTogglePublish = (e) => {
-      this.props.handleTogglePublish(this.props.contract)
+      // this.props.handleTogglePublish(this.props.contract)
     }
 
     render() {
       let helpText
 
-      if (!this.userPaid() && this.isAuthor()) {
-        helpText = <>
-          &nbsp;
-          <Help
-            id='abi-event-title'
-            text={`Only paid users can have private contracts`}
-          />
-        </>
-      }
-
-      return <>
+      return <span data-tip='wtf' data-for='publish-button-hint'>
         <Switch
-          data-tip
-          data-for='publish-button-hint'
           value={this.props.contract.isPublic}
           onChange={this.handleTogglePublish}
-          disabled={!this.userPaid() || !this.isAuthor()}
           color='light'
+          className={
+            classnames(
+              {
+                disabled: !this.userPaid() || !this.isAuthor()
+              }
+            )
+          }
         >
-          is public {helpText}
+          Contract is public
         </Switch>
         
         <ReactTooltip
@@ -86,7 +80,7 @@ export const PublishButton = withCurrentUser(
           effect='solid'
           getContent={[this.hintText, 1000]}
         />
-      </>
+      </span>
     }
   }
 )
