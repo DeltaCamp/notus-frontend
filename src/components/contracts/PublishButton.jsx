@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import Switch from 'react-bulma-switch'
 
+import { Help } from '~/components/Help'
 import { withCurrentUser } from '~/components/withCurrentUser'
 
 export const PublishButton = withCurrentUser(
@@ -57,6 +58,18 @@ export const PublishButton = withCurrentUser(
     }
 
     render() {
+      let helpText
+
+      if (!this.userPaid() && this.isAuthor()) {
+        helpText = <>
+          &nbsp;
+          <Help
+            id='abi-event-title'
+            text={`Only paid users can have private contracts`}
+          />
+        </>
+      }
+
       return <>
         <Switch
           data-tip
@@ -66,8 +79,9 @@ export const PublishButton = withCurrentUser(
           disabled={!this.userPaid() || !this.isAuthor()}
           color='light'
         >
-          is public
+          is public {helpText}
         </Switch>
+        
         <ReactTooltip
           id='publish-button-hint'
           place='top'
