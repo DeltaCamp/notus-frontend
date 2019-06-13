@@ -10,6 +10,7 @@ import { withCurrentUser } from '~/components/withCurrentUser'
 import { signOutMutation } from '~/mutations/signOutMutation'
 import { notusToast } from '~/utils/notusToast'
 import NotusLogo from '~/assets/images/notus-logo.svg'
+import NotusLogoWhiteOnBlack2 from '~/assets/images/notus-logo--white-on-black2.svg'
 import * as routes from '~/../config/routes'
 
 // const debug = require('debug')('notus:components:Nav')
@@ -21,13 +22,32 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
         constructor (props) {
           super(props)
           this.state = {
-            signedOut: false
+            signedOut: false,
+            scrollTop: 0
           }
         }
 
         state = {
           mobileNavActive: false,
           navIsInFront: false
+        }
+
+        componentDidMount() {
+          window.addEventListener('scroll', this.listenToScroll)
+        }
+
+        componentWillUnmount() {
+          window.removeEventListener('scroll', this.listenToScroll)
+        }
+
+        listenToScroll = () => {
+          const scrollTop = window.pageYOffset !== undefined ?
+            window.pageYOffset :
+            (document.documentElement || document.body.parentNode || document.body).scrollTop
+
+          this.setState({
+            scrollTop
+          })
         }
 
         handleToggleMobileNav = (e) => {
@@ -50,7 +70,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
 
           this.navFrontFalseTimeout = this.props.setTimeout(() => {
             this.setState({ navIsInFront: false })
-          }, 1000)
+          }, 400)
         }
 
         handleSignOut = (e) => {
@@ -65,15 +85,26 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
         }
 
         homeOrMyEventsRoute = () => {
-          const { pathname } = this.props.location
           const { currentUserData } = this.props || {}
           const { currentUser } = currentUserData || {}
 
-          if (!routes.MARKETING_ROUTES.includes(pathname) && currentUser) {
+          if (!this.isMarketingRoute() && currentUser) {
             return routes.MY_EVENTS
           } else {
             return routes.HOME
           }
+        }
+
+        isMarketingRoute = () => {
+          const { pathname } = this.props.location
+
+          return routes.MARKETING_ROUTES.includes(pathname)
+        }
+
+        isHomeRoute = () => {
+          const { pathname } = this.props.location
+
+          return pathname === routes.HOME
         }
 
         render () {
@@ -82,7 +113,9 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
           
           let signUp, myEvents, signOut
 
-          // debug(currentUserData, currentUser)
+          const scrolledDown = this.state.scrollTop > 50
+          // const hideFixedNav = this.isNotHomeRoute() && !scrolledDown
+          const showFixedNav = this.isHomeRoute() && scrolledDown
 
           if (!currentUserData || !currentUser) {
             signUp = <>
@@ -165,6 +198,90 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
               </>
           }
 
+          const innerNav = (
+            <div className='container'>
+              <div className='row navbar-menu-container'>
+                <div className='navbar-brand col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-2'>
+                  <Link
+                    to={this.homeOrMyEventsRoute()}
+                    className='navbar-item'
+                    onClick={this.closeMobileNav}
+                  >
+                    {!showFixedNav
+                      || this.state.navIsInFront ?
+                      <NotusLogo /> :
+                      <NotusLogoWhiteOnBlack2 />
+                    }
+                  </Link>
+                </div>
+
+                <div className='col-xs-6 is-hidden-tablet has-text-right'>
+                  <button
+                    className={classnames(
+                      'burger',
+                      'burger-slip',
+                      { 'open': this.state.mobileNavActive }
+                    )}
+                    data-target='navbar-menu'
+                    onClick={this.handleToggleMobileNav}
+                  >
+                    <div className='burger-lines' />
+                  </button>
+                </div>
+
+                <div id='navbar-menu' className={classnames(
+                  'navbar-menu',
+                  'col-xs-12',
+                  'col-sm-8',
+                  'col-md-9',
+                  'col-lg-9',
+                  'col-xl-10',
+                  { 'is-active': this.state.mobileNavActive }
+                )}>
+                  <div className='navbar-start'>
+                    {myEvents}
+                  </div>
+                  <div className='navbar-end'>
+                    {signUp}
+                    {signOut}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          )
+
+          const mainNav = (
+            <nav className={classnames(
+              'navbar',
+              'is-transparent',
+              {
+                'is-active': this.state.mobileNavActive,
+                'is-top-layer': this.state.navIsInFront
+              }
+            )}>
+              {innerNav}
+            </nav>
+          )
+
+          const mainNavFixed = (
+            <nav
+              style={{ backgroundPosition: `center ${this.state.scrollTop * 0.2}%` }}
+              className={classnames(
+                'navbar',
+                'is-transparent',
+                'is-fixed-top',
+                {
+                  'is-active': this.state.mobileNavActive,
+                  'is-top-layer': this.state.navIsInFront,
+                  'is-hidden': !showFixedNav
+                }
+              )}
+            >
+              {innerNav}
+            </nav>
+          )
+
           return (
             <>
               <div
@@ -178,61 +295,8 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 onClick={this.closeMobileNav}
               />
 
-              <nav className={classnames(
-                'navbar',
-                'is-transparent',
-                {
-                  'is-active': this.state.mobileNavActive,
-                  'is-top-layer': this.state.navIsInFront
-                }
-              )}>
-                <div className='container'>
-                  <div className='row navbar-menu-container'>
-                    <div className='navbar-brand col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-2'>
-                      <Link
-                        to={this.homeOrMyEventsRoute()}
-                        className='navbar-item'
-                        onClick={this.closeMobileNav}
-                      >
-                        <NotusLogo />
-                      </Link>
-                    </div>
-
-                    <div className='col-xs-6 is-hidden-tablet has-text-right'>
-                      <button
-                        className={classnames(
-                          'burger',
-                          'burger-slip',
-                          { 'open': this.state.mobileNavActive }
-                        )}
-                        data-target='navbar-menu'
-                        onClick={this.handleToggleMobileNav}
-                      >
-                        <div className='burger-lines' />
-                      </button>
-                    </div>
-
-                    <div id='navbar-menu' className={classnames(
-                      'navbar-menu',
-                      'col-xs-12',
-                      'col-sm-8',
-                      'col-md-9',
-                      'col-lg-9',
-                      'col-xl-10',
-                      { 'is-active': this.state.mobileNavActive }
-                    )}>
-                      <div className='navbar-start'>
-                        {myEvents}
-                      </div>
-                      <div className='navbar-end'>
-                        {signUp}
-                        {signOut}
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </nav>
+              {mainNav}
+              {mainNavFixed}
             </>
           )
         }

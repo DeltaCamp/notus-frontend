@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
+import { Link } from 'react-router-dom'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
+import * as routes from '~/../config/routes'
 
 export const AboutPage =
   class _AboutPage extends Component {
@@ -18,15 +20,9 @@ export const AboutPage =
             <div className='container'>
               <div className='row'>
                 <div className='col-xs-12 col-xl-10'>
-                  {/* <h1 className="is-size-xlarge has-text-weight-bold">
-                    About Notus
-                  </h1> */}
                   <h1 className='is-size-xlarge has-text-weight-bold'>
-                    Our mission is to connect people to the future of finance.
+                    Our mission is to enable you to stay connected with the future of finance.
                   </h1>
-                  {/* <h2 className="is-size-2 has-text-weight-bold">
-                    Our mission is to connect people to distributed ledgers.
-                  </h2> */}
 
                   <div className='buttons mt30'>
                     <a
@@ -34,10 +30,15 @@ export const AboutPage =
                       href='#roadmap'
                     >View Roadmap</a>
 
-                    <a
+                    <Link
+                      exact
+                      to={routes.SIGNUP}
                       className='button is-info'
-                      href='#signup'
-                    >Join Beta</a>
+                      onClick={this.closeMobileNav}
+                      activeClassName='is-active'
+                    >
+                      Join Open Beta
+                    </Link>
                   </div>
                 </div>
               </div>

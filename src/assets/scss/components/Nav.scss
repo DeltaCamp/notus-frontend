@@ -3,6 +3,53 @@ body:not(.home) .navbar {
   box-shadow: 0 1px 3px rgba(100, 130, 180, 0.1);
 }
 
+body.home .navbar.is-fixed-top,
+body:not(.home) .navbar.is-fixed-top {
+  // background-color: #121419 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
+    0 4px 20px rgba(0, 0, 0, 0.1);
+  background-image: 
+    linear-gradient(220deg, black 0%, #121418 30%, #121418 80%, black 100%),
+    url('/funky-lines.png');
+  background-blend-mode: hard-light;
+  background-size: 100% 100%, 400px 400px;
+}
+
+.navbar.is-fixed-top .navbar-menu,
+.navbar.is-fixed-top-touch .navbar-menu {
+  overflow: hidden;
+  
+  @media screen and (max-width: 827px) {
+    max-height: 100vh;
+  }
+}
+
+.navbar.is-fixed-top.is-hidden {
+  display: block !important;
+  opacity: 0;
+  pointer-events: none;
+  top: -50px;
+}
+
+.navbar.is-fixed-top {
+  opacity: 1;
+  pointer-events: initial;
+  transition: all 180ms cubic-bezier(0.48, 0.63, 0.53, 0.95);
+  top: 0;
+
+  // @media screen and (min-width: 828px) {
+  //   height: 2rem;
+  //   min-height: 2rem;
+  // }
+}
+
+.navbar.is-fixed-top > .container {
+  // @media screen and (min-width: 828px) {
+  //   height: 2rem;
+  //   min-height: 2rem;
+  // }
+}
+
 body.home .hide-on-home {
   display: none;
 }
@@ -181,7 +228,7 @@ a.navbar-item,
   @media screen and (max-width: $navbar-breakpoint) {
     box-sizing: content-box;
     display: block;
-    height: 1px;
+    height: 0;
     left: 0;
     overflow: hidden;
     position: fixed;

@@ -51,7 +51,7 @@ export const EthereumNotifications = () => {
             to={routes.ABOUT_PAGE}
             className='button is-dark is-small'
           >
-            Learn More about Notus
+            Learn more about Notus
           </Link>
         </div>
       </div>

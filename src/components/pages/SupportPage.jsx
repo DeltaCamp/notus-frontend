@@ -19,10 +19,11 @@ export const SupportPage =
               <div className='row'>
                 <div className='col-xs-12 col-xl-10'>
                   <h1 className='is-size-xlarge has-text-weight-bold'>
-                    Support
+                    Need a helping hand?
                   </h1>
-                  <h4 className='is-size-4 has-text-weight-bold'>
-                    Need help with a technical issue or assistance using the Notus service?
+                  
+                  <h4 className='is-size-4 has-text-weight-bold pr200 pt20 pb10 mobile--padding-reset'>
+                    Whether it's a technical issue or assistance using the Notus service, we've got your back:
                   </h4>
 
                   <div className='buttons mt30'>
