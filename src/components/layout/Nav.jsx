@@ -64,6 +64,18 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
           })
         }
 
+        homeOrMyEventsRoute = () => {
+          const { pathname } = this.props.location
+          const { currentUserData } = this.props || {}
+          const { currentUser } = currentUserData || {}
+
+          if (!routes.MARKETING_ROUTES.includes(pathname) && currentUser) {
+            return routes.MY_EVENTS
+          } else {
+            return routes.HOME
+          }
+        }
+
         render () {
           const { currentUserData } = this.props || {}
           const { currentUser } = currentUserData || {}
@@ -178,7 +190,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   <div className='row navbar-menu-container'>
                     <div className='navbar-brand col-xs-6 col-sm-6 col-md-3 col-lg-3 col-xl-2'>
                       <Link
-                        to={routes.HOME}
+                        to={this.homeOrMyEventsRoute()}
                         className='navbar-item'
                         onClick={this.closeMobileNav}
                       >

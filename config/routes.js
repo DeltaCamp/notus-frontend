@@ -27,3 +27,19 @@ export const EDIT_EVENT = '/events/:eventId/edit'
 export const MY_EVENTS = '/events'
 
 export const DISABLE_EMAIL = '/disable-email'
+
+// Useful for controlling behaviour when in the App vs. on the landing pages/marketing site
+export const MARKETING_ROUTES = [
+  HOME,
+  ABOUT_PAGE,
+  TERMS_PAGE,
+  PRIVACY_PAGE,
+  SUPPORT_PAGE,
+  STATUS,
+  SIGNIN,
+  SIGNUP,
+  PASSWORD_RESET,
+  APP_CONFIRM,
+  CONFIRM,
+  CONFIRM_AND_SET_PASSWORD_PAGE
+]
