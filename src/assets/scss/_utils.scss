@@ -460,3 +460,13 @@
 .is-content-justified-center {
   justify-content: center;
 }
+
+.mobile--is-content-justified-left {
+  justify-content: initial !important;
+}
+
+.mobile--has-text-left {
+  @media screen and (max-width: $tablet) {
+    text-align: left !important;
+  }
+}

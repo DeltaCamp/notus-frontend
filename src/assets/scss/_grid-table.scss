@@ -1,0 +1,76 @@
+$grid-table-padding: 20px;
+
+.grid-table {
+  display: grid;
+  grid-row-gap: $grid-table-padding;
+}
+
+.grid-table__row {
+  display: grid;
+  grid-column: 1 / -1; // span all columns
+  grid-template-columns: minmax(200px, 1fr) 1fr 1fr 1fr minmax(200px, 1fr);
+  grid-column-gap: $grid-table-padding;
+  align-items: center;
+
+  @media screen and (max-width: $desktop) {
+    grid-template-columns: minmax(100%, 1fr);
+    grid-row-gap: $grid-table-padding / 1.5;
+  }
+}
+
+.grid-table__head__column {
+  background-color: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  padding: ($grid-table-padding / 2) $grid-table-padding;
+}
+
+.grid-table__body__column {
+  padding: 0 ($grid-table-padding / 2);
+}
+
+.grid-table__body__column .grid-table__body__column {
+  padding: $grid-table-padding 0;
+
+  @media screen and (max-width: $desktop) {
+    padding: ($grid-table-padding / 2) 0;
+  }
+}
+
+.grid-table__column-1 {
+  grid-column-start: span 1;
+
+  @media screen and (max-width: $desktop) {
+    grid-column-start: auto;
+  }
+}
+
+.grid-table__column-2 {
+  grid-column-start: span 2;
+
+  @media screen and (max-width: $desktop) {
+    grid-column-start: auto;
+  }
+}
+
+.grid-table__column-3 {
+  grid-column-start: span 3;
+
+  @media screen and (max-width: $desktop) {
+    grid-column-start: auto;
+  }
+}
+
+.grid-table__body__column--full-width {
+  border-radius: $grid-table-padding;
+  grid-column: 1 / -1; // span all columns
+  padding: $grid-table-padding;
+}
+
+.grid-table__body__column.is-light {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.grid-table__body__column.is-dark {
+  background-color: rgba(0, 0, 0, 0.1);
+}

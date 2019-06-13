@@ -48,13 +48,10 @@ const AbiEventRows = class _AbiEventRows extends PureComponent {
 
     if (abiEvents.length === 0) {
       return (
-        <tr
-          className='is-size-6 has-text-weight-bold'
-        >
-          <td colSpan='4' className='has-text-centered'>
-            No Events exist for this ABI.
-          </td>
-        </tr>
+        <div className='grid-table__body__column is-light has-text-centered is-size-6 has-text-weight-bold'>
+          {/* colSpan='4' */}
+          No Events exist for this ABI.
+        </div>
       )
     } else {
       return abiEvents.map(abiEvent => 
@@ -102,34 +99,33 @@ const AbiEventRow = class _AbiEventRow extends PureComponent {
 
     return (
       <>
-        <tr>
-          <td>
+        <div className='grid-table__row'>
+          <div className='grid-table__body__column'>
             {abiEvent.name}
-          </td>
-          <td colSpan='2'>
-            <div className='form'>
-              <div className='field'>
-                <TextInput
-                  id={`abi-event-${abiEvent.id}-title`}
-                  value={abiEvent.title}
-                  handleSubmit={(newTitle) => {
-                    handleSubmitAbiEventTitle(abiEvent.id, newTitle)
-                  }}
-                />
-              </div>
+          </div>
+          <div className='grid-table__body__column grid-table__column-2 form'>
+            {/* colSpan='2' */}
+            <div className='field'>
+              <TextInput
+                id={`abi-event-${abiEvent.id}-title`}
+                value={abiEvent.title}
+                handleSubmit={(newTitle) => {
+                  handleSubmitAbiEventTitle(abiEvent.id, newTitle)
+                }}
+              />
             </div>
-          </td>
-          <td
-            className='has-text-centered'
+          </div>
+          <div
+            className='grid-table__body__column has-text-centered mobile--has-text-left'
           >
             <AbiEventVisibleButton
               abiEvent={abiEvent}
               contract={contract}
               handleToggleAbiEventVisible={handleToggleAbiEventVisible}
             />
-          </td>
-          <td
-            className='has-text-right'
+          </div>
+          <div
+            className='grid-table__body__column has-text-right'
           >
             <button
               className='button is-xsmall is-transparent'
@@ -140,8 +136,8 @@ const AbiEventRow = class _AbiEventRow extends PureComponent {
             >
               {abiEventInputsVisibleState.includes(abiEvent.id) ? 'Hide' : 'Show'} inputs
             </button>
-          </td>
-        </tr>
+          </div>
+        </div>
 
         <AbiEventInputRows
           abiEvent={abiEvent}
@@ -176,13 +172,14 @@ const AbiEventInputRows = class _AbiEventInputRows extends PureComponent {
 
     if (inputs.length === 0) {
       return (
-        <tr>
-          <td colSpan='5'>
+        <div className='grid-table__row'>
+          <div className='grid-table__body__column'>
+            {/* colSpan='5' */}
             <span className='is-size-6 has-text-weight-bold'>
               No Inputs exist for this ABI Event.
             </span>
-          </td>
-        </tr>
+          </div>
+        </div>
       )
     } else {
       const inputRows = inputs.map(input => (
@@ -198,33 +195,45 @@ const AbiEventInputRows = class _AbiEventInputRows extends PureComponent {
 
       return (
         <>
-          <tr
-            className={className}
+          <div
+            className={`grid-table__row ${className}`}
           >
-            <td colSpan='5'>
-              <table className='table is-transparent is-fullwidth'>
-                <thead>
-                  <tr>
-                    <th>
-                      <span className='has-text-weight-normal has-text-lighter'>Name</span>
-                    </th>
-                    <th>
-                      <span className='has-text-weight-normal has-text-lighter'>Title</span>
-                    </th>
-                    <th>
-                      <span className='has-text-weight-normal has-text-lighter'>Type</span>
-                    </th>
-                    <th className='has-text-right'>
-                      <span className='has-text-weight-normal has-text-lighter'>MetaData Type</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {inputRows}
-                </tbody>
-              </table>
-            </td>
-          </tr>
+            <div className='grid-table__body__column grid-table__body__column--full-width is-dark'>
+              {/* colSpan='5' */}
+              {/* <div className='grid-table is-transparent is-fullwidth'> */}
+                <div className='grid-table__row'>
+                  <div className='grid-table__head__column'>
+                    <span className='has-text-weight-normal has-text-lighter'>
+                      Name <Help
+                        id={`abi-event-input-name-${abiEvent.id}`}
+                        text='The name this ABI Event was given when imported.'
+                      />
+                    </span>
+                  </div>
+                  <div className='grid-table__head__column grid-table__column-2'>
+                    <span className='has-text-weight-normal has-text-lighter'>
+                      Title <Help
+                        id={`abi-event-input-title-${abiEvent.id}`}
+                        text={`The text you and others will see for this ABI Event on Notus.<br />Click to rename this.`}
+                      />
+                    </span>
+                  </div>
+                  <div className='grid-table__head__column'>
+                    <span className='has-text-weight-normal has-text-lighter'>
+                      Type
+                    </span>
+                  </div>
+                  <div className='grid-table__head__column'>
+                    <span className='has-text-weight-normal has-text-lighter'>
+                      MetaData Type
+                    </span>
+                  </div>
+                </div>
+
+                {inputRows}
+              {/* </div> */}
+            </div>
+          </div>
         </>
       )
     }
@@ -247,27 +256,25 @@ const AbiEventInputRow = class _AbiEventInputRow extends PureComponent {
       handleMetaDataTypeChange
     } = this.props
 
-    return <tr>
-      <td>
+    return <div className='grid-table__row'>
+      <div className='grid-table__body__column'>
         {input.name}
-      </td>
-      <td>
-        <div className='form'>
-          <div className='field'>
-            <TextInput
-              id={`abi-event-input-${input.id}-title`}
-              value={input.title}
-              handleSubmit={(newTitle) => {
-                handleSubmitAbiEventInputTitle(input.id, newTitle)
-              }}
-            />
-          </div>
+      </div>
+      <div className='grid-table__body__column grid-table__column-2 form'>
+        <div className='field'>
+          <TextInput
+            id={`abi-event-input-${input.id}-title`}
+            value={input.title}
+            handleSubmit={(newTitle) => {
+              handleSubmitAbiEventInputTitle(input.id, newTitle)
+            }}
+          />
         </div>
-      </td>
-      <td>
+      </div>
+      <div className='grid-table__body__column'>
         {input.type}
-      </td>
-      <td className='has-text-right'>
+      </div>
+      <div className='grid-table__body__column'>
         {input.type === 'uint256' && (
           <MetaDataTypeSelect
             abiEventInputId={parseInt(input.id, 10)}
@@ -275,8 +282,8 @@ const AbiEventInputRow = class _AbiEventInputRow extends PureComponent {
             handleMetaDataTypeChange={handleMetaDataTypeChange}
           />
         )}
-      </td>
-    </tr>
+      </div>
+    </div>
   }
 }
 
@@ -519,43 +526,42 @@ export const ContractPage = class _ContractPage extends Component {
             </h6>
             <br />
 
-            <table className='table is-transparent is-fullwidth'>
-              <thead>
-                <tr>
-                  <th>
-                    Name <Help
-                      id='abi-event-name'
-                      text='The name this ABI Event was given when imported.'
-                    />
-                  </th>
-                  <th colSpan='2'>
-                    Title <Help
-                      id='abi-event-title'
-                      text={`The text you and others will see for this ABI Event on Notus.<br />Click to rename this.`}
-                    />
-                  </th>
-                  <th className='has-text-centered'>
-                    Visible
-                  </th>
-                  <th>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <AbiEventRows
-                  // why do we need this to force re-render when state changes?
-                  key={new Date()}
-                  abiEvents={abiEvents}
-                  contract={contract}
-                  handleToggleAbiEventVisible={this.handleToggleAbiEventVisible}
-                  handleSubmitAbiEventTitle={this.handleSubmitAbiEventTitle}
-                  handleSubmitAbiEventInputTitle={this.handleSubmitAbiEventInputTitle}
-                  handleMetaDataTypeChange={this.handleMetaDataTypeChange}
-                  toggleInputs={this.toggleInputs}
-                  abiEventInputsVisibleState={this.state.abiEventInputsVisible}
-                />
-              </tbody>
-            </table>
+            <div className='grid-table is-transparent is-fullwidth'>
+              <div className='grid-table__row'>
+                <div className='grid-table__head__column'>
+                  Name <Help
+                    id='abi-event-name'
+                    text='The name this ABI Event was given when imported.'
+                  />
+                </div>
+                <div className='grid-table__head__column grid-table__column-2'>
+                  {/* colSpan='2' */}
+                  Title <Help
+                    id='abi-event-title'
+                    text={`The text you and others will see for this ABI Event on Notus.<br />Click to rename this.`}
+                  />
+                </div>
+                <div className='grid-table__head__column has-text-centered mobile--has-text-left'>
+                  Visible
+                </div>
+                <div className='grid-table__head__column'>
+                  &nbsp;
+                </div>
+              </div>
+
+              <AbiEventRows
+                // why do we need this to force re-render when state changes?
+                key={new Date()}
+                abiEvents={abiEvents}
+                contract={contract}
+                handleToggleAbiEventVisible={this.handleToggleAbiEventVisible}
+                handleSubmitAbiEventTitle={this.handleSubmitAbiEventTitle}
+                handleSubmitAbiEventInputTitle={this.handleSubmitAbiEventInputTitle}
+                handleMetaDataTypeChange={this.handleMetaDataTypeChange}
+                toggleInputs={this.toggleInputs}
+                abiEventInputsVisibleState={this.state.abiEventInputsVisible}
+              />
+            </div>
           </ColorBlock>
         </section>
 
