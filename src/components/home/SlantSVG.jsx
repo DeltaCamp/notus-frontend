@@ -1,10 +1,15 @@
 import React from 'react'
 
-export const SlantSVG = ({ position, polygonClass }) => {
+export const SlantSVG = ({ position, polygonClass, fill }) => {
+  let style = {}
   let positionClass = 'top-svg'
 
   if (position === 'bottom') {
     positionClass = 'bottom-svg'
+  }
+  
+  if (fill) {
+    style = { fill }
   }
 
   return (
@@ -17,6 +22,7 @@ export const SlantSVG = ({ position, polygonClass }) => {
       <polygon
         points='0,100 100,0 100,100'
         className={polygonClass}
+        style={style}
       />
     </svg>
   )

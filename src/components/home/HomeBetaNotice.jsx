@@ -5,7 +5,10 @@ import { DiscordLink } from '~/components/DiscordLink'
 export class HomeBetaNotice extends Component {
   render () {
     return (
-      <div className='container-fluid is-pink pb100 color-block is-positioned-relatively'>
+      <div
+        className='container-fluid pb100 color-block is-positioned-relatively'
+        style={{ backgroundColor: '#a560e8' }}
+      >
         <div className='container pb50'>
           <div className='row'>
             <div className='col-xs-12 col-md-8 col-start-md-3 has-text-centered'>

@@ -125,14 +125,14 @@ form.is-tall .button.is-text.is-xsmall:hover,
 }
 
 .button.is-light {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: white;
   transition: all 70ms ease-in-out;
 }
 
 .button.is-light:hover,
 .button.is-light:active {
-  background-color: white;
-  border-color: $dark;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-color: transparent;
   transition: all 70ms ease-in-out;
 }
 

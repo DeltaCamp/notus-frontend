@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 416 361">
+  <defs>
+    <linearGradient id="ear-broadcast-a" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#DEFFFC"/>
+      <stop offset="100%" stop-color="#BAFDF8"/>
+    </linearGradient>
+    <linearGradient id="ear-broadcast-b" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#B56DEF"/>
+      <stop offset="100%" stop-color="#7E3BDB"/>
+    </linearGradient>
+    <linearGradient id="ear-broadcast-c" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#DEFFFC"/>
+      <stop offset="100%" stop-color="#BAFDF8"/>
+    </linearGradient>
+    <linearGradient id="ear-broadcast-d" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#B56DEF"/>
+      <stop offset="100%" stop-color="#7E3BDB"/>
+    </linearGradient>
+    <linearGradient id="ear-broadcast-e" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#DEFFFC"/>
+      <stop offset="100%" stop-color="#BAFDF8"/>
+    </linearGradient>
+    <linearGradient id="ear-broadcast-f" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#B56DEF"/>
+      <stop offset="100%" stop-color="#7E3BDB"/>
+    </linearGradient>
+    <linearGradient id="ear-broadcast-g" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#DEFFFC"/>
+      <stop offset="100%" stop-color="#BAFDF8"/>
+    </linearGradient>
+    <linearGradient id="ear-broadcast-h" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#B56DEF"/>
+      <stop offset="100%" stop-color="#7E3BDB"/>
+    </linearGradient>
+    <linearGradient id="ear-broadcast-i" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#DEFFFC"/>
+      <stop offset="100%" stop-color="#BAFDF8"/>
+    </linearGradient>
+    <linearGradient id="ear-broadcast-j" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#B56DEF"/>
+      <stop offset="100%" stop-color="#7E3BDB"/>
+    </linearGradient>
+    <linearGradient id="ear-broadcast-k" x1="50%" x2="50%" y1="0%" y2="98.907%">
+      <stop offset="0%" stop-color="#B56DEF"/>
+      <stop offset="100%" stop-color="#944FE3"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <polygon fill="url(#ear-broadcast-a)" points="0 121.927 31.223 33.172 121.71 0 205.586 22.734 234.547 94.516 248.535 193.844 247 289.278 228.934 336.141 175.406 361 128.293 336.781 103.812 289.278 94.895 240.885 36.316 223.035"/>
+    <path fill="#FFF" stroke="url(#ear-broadcast-b)" stroke-width="10" d="M118.964844,30.8398437 C165.710938,30.8398437 206.402344,62.2890625 208.640625,99.5390625 C210.878906,136.789062 221.539062,206.085937 221.34375,250.144531 C220.949219,276.179688 223.242188,321.714844 173.59375,319.8125 C123.945313,317.910156 137.048828,247.27832 133.642578,235.75 C131.923828,211.421875 100.248047,211.636719 75.8066406,196.587891 C51.3652344,181.539063 37.8867187,169.412109 37.479719,118.966797 C42.5039063,64.1777344 72.21875,30.8398437 118.964844,30.8398437 Z"/>
+    <polygon fill="url(#ear-broadcast-c)" points="269.824 116.941 269.824 166.648 282.555 182.555 295.129 166.648 295.129 116.941 282.477 104.289"/>
+    <path stroke="url(#ear-broadcast-d)" stroke-width="10" d="M271.824219,179.423942 L271.824219,206.413563 C272.609447,214.540978 275.061839,217.554687 279.554688,217.554688 C284.028993,217.554688 286.427903,214.565665 287.128906,206.438617 L287.128906,179.423942 C285.931314,173.516648 283.605195,171.289062 279.476562,171.289062 C275.34793,171.289062 273.021811,173.516648 271.824219,179.423942 Z"/>
+    <polygon fill="url(#ear-broadcast-e)" points="310.824 102.941 310.824 162.648 323.555 178.555 336.129 162.648 336.129 102.941 323.477 90.289"/>
+    <path stroke="url(#ear-broadcast-f)" stroke-width="10" d="M311.824219,179.423942 L311.824219,226.413563 C312.609447,234.540978 315.061839,237.554688 319.554687,237.554688 C324.028993,237.554688 326.427903,234.565665 327.128906,226.438617 L327.128906,179.423942 C325.931314,173.516648 323.605195,171.289062 319.476562,171.289062 C315.34793,171.289062 313.021811,173.516648 311.824219,179.423942 Z"/>
+    <polygon fill="url(#ear-broadcast-g)" points="349.824 83.941 349.824 163.648 362.555 179.555 375.129 163.648 375.129 83.941 362.477 71.289"/>
+    <path stroke="url(#ear-broadcast-h)" stroke-width="10" d="M351.824219,179.423942 L351.824219,256.413563 C352.609447,264.540978 355.061839,267.554687 359.554688,267.554687 C364.028993,267.554687 366.427903,264.565665 367.128906,256.438617 L367.128906,179.423942 C365.931314,173.516648 363.605195,171.289062 359.476562,171.289062 C355.34793,171.289062 353.021811,173.516648 351.824219,179.423942 Z"/>
+    <polygon fill="url(#ear-broadcast-i)" points="389.824 58.941 389.824 168.648 402.555 184.555 415.129 168.648 415.129 58.941 402.477 46.289"/>
+    <path stroke="url(#ear-broadcast-j)" stroke-width="10" d="M391.824219,179.423942 L391.824219,276.413563 C392.609447,284.540978 395.061839,287.554687 399.554687,287.554687 C404.028993,287.554687 406.427903,284.565665 407.128906,276.438617 L407.128906,179.423942 C405.931314,173.516648 403.605195,171.289062 399.476562,171.289062 C395.34793,171.289062 393.021811,173.516648 391.824219,179.423942 Z"/>
+    <path stroke="url(#ear-broadcast-k)" stroke-linecap="round" stroke-width="10" d="M60.2041016,113.227977 C54.4824219,133.839844 67.1992188,159.884766 87.9296875,170.251953 C108.660156,180.619141 114.894531,182.855469 128.679687,188.376953 C142.464844,193.898437 162.923828,206.1875 158.320312,238.212891"/>
+  </g>
+</svg>
