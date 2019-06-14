@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FooterContainer } from '~/components/layout/Footer'
 import { LandingHero } from '~/components/home/LandingHero'
 import { CustomActions } from '~/components/home/CustomActions'
-import { ShowDontTell } from '~/components/home/ShowDontTell'
+import { Features } from '~/components/home/Features'
 import { HomeDiscoverEvents } from '~/components/home/HomeDiscoverEvents'
 import { HomeBetaNotice } from '~/components/home/HomeBetaNotice'
 import { HomeSignupFooterCTA } from '~/components/home/HomeSignupFooterCTA'
@@ -24,7 +24,7 @@ export class HomePage extends Component {
           />
         </header>
         <section className='section'>
-          <ShowDontTell />
+          <Features />
           <CustomActions />
           <HomeDiscoverEvents />
           <HomeBetaNotice />

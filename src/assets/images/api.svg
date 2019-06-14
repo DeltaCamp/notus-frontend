@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 369 334">
+  <g fill="none" fill-rule="evenodd" transform="rotate(180 172.75 175.25)">
+    <polygon fill="#BAFDF8" points="57.5 134.102 99.948 79.005 182.728 59.5 250.872 101.335 263.5 167.302 241.514 213.097 193.265 241.423 116.705 242.5 68.643 206.225"/>
+    <circle cx="160.5" cy="152.5" r="52" fill="#FFF" stroke="#000" stroke-width="10"/>
+    <polygon fill="#BAFDF8" points="47.864 14.35 15.525 48.054 47.914 83.127 76.38 48.098" transform="rotate(-45 45.952 48.739)"/>
+    <polygon fill="#BAFDF8" points="276.01 12.141 243.618 45.887 275.961 80.91 304.481 45.844" transform="rotate(40 274.05 46.525)"/>
+    <polygon fill="#BAFDF8" points="161.941 275.5 129.5 308.846 161.941 343.5 190.5 308.846"/>
+    <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M161,294.5 L161,209.5"/>
+    <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M235.138587,128.391245 L235.200513,43.431583" transform="rotate(44 235.17 85.911)"/>
+    <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M86.3977452,131.60255 L86.3358188,46.642888" transform="rotate(136 86.367 89.123)"/>
+  </g>
+</svg>

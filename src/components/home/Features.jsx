@@ -1,21 +1,35 @@
 import React, { PureComponent } from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Vivus from 'vivus'
 
+import Api4 from '~/assets/images/api4.svg'
+import Community from '~/assets/images/community.svg'
 import EarBroadcast from '~/assets/images/ear-broadcast--final.svg'
-import A from '~/assets/images/a.svg'
-import B from '~/assets/images/b.svg'
-import C from '~/assets/images/c.svg'
-import * as routes from '~/../config/routes'
+// import A from '~/assets/images/a.svg'
+// import B from '~/assets/images/b.svg'
+// import C from '~/assets/images/c.svg'
+// import * as routes from '~/../config/routes'
 
-
-
-export const ShowDontTell = class extends PureComponent {
+export const Features = class extends PureComponent {
   componentDidMount() {
     new Vivus(
       'ear',
       {
-        duration: 160, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
+        duration: 170, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
+      }
+    )
+
+    new Vivus(
+      'api',
+      {
+        duration: 230, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
+      }
+    )
+
+    new Vivus(
+      'community',
+      {
+        duration: 300, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
       }
     )
   }
@@ -33,12 +47,12 @@ export const ShowDontTell = class extends PureComponent {
             </h5>
             <br />
             <p>
-              Keep those who use your Smart Contracts in the know with event triggers.
+              Keep those who use your Smart Contracts updated when Ethereum events occur.
             </p>
           </div>
   
           <div className='col-xs-12 col-sm-4 has-text-centered'>
-            <B style={{ height: 160 }} />
+            <Api4 id='api' style={{ height: 160 }} />
             <br />
             <br />
             <h5 className='is-size-5 animated pulse delay-3s has-text-weight-bold'>
@@ -46,7 +60,7 @@ export const ShowDontTell = class extends PureComponent {
             </h5>
             <br />
             <p>
-              Subscribe your dapp users and alert them when you need their attention.
+              Allow your dapp users to Subscribe to events dynamically.
             </p>
   
             {/* <CodeBox /> */}
@@ -56,20 +70,20 @@ export const ShowDontTell = class extends PureComponent {
           </div>
   
           <div className='col-xs-12 col-sm-4 has-text-centered'>
-            <C className='pt20' style={{ height: 160 }} />
+            <Community id='community' className='' style={{ height: 160 }} />
             <br />
             <br />
             <h5 className='is-size-5 animated pulse delay-4s has-text-weight-bold'>
-              API &amp; embed widgets
+              Community driven
             </h5>
             <br />
             <p>
-              Subscribe your dapp users and alert them when you need their attention.
+              Upload your Contracts and share your Event Triggers with the Notus community.
             </p>
           </div>
         </div>
   
-        <div className='row'>
+        {/* <div className='row'>
           <div className='col-xs-12 has-text-centered pt30'>
             <Link
               to={routes.ABOUT_PAGE}
@@ -78,7 +92,7 @@ export const ShowDontTell = class extends PureComponent {
               Learn how
             </Link>
           </div>
-        </div>
+        </div> */}
       </div>
     )
 

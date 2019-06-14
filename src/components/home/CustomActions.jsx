@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import * as routes from '~/../config/routes'
+// import { Link } from 'react-router-dom'
 import { SlantSVG } from '~/components/home/SlantSVG'
 import { GitIcons } from '~/components/GitIcons'
+
+// import * as routes from '~/../config/routes'
 
 export const CustomActions = () => {
   return (
@@ -30,11 +31,11 @@ export const CustomActions = () => {
             <br />
 
             <h5 className='is-size-6'>
-              Trigger actions when an event occurs.
+              Trigger actions when an event occurs, such as "When a contract is ready to be withdrawn from ...
               <ul className='list pt20'>
-                <li>Send a Slack message</li>
-                <li>Update an Oracle</li>
-                <li>Whatever you dream up</li>
+                <li>... Send me a Slack message</li>
+                <li>... And update an Oracle</li>
+                <li>... Or anything else you dream up</li>
               </ul>
             </h5>
 
