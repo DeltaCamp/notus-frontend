@@ -3,6 +3,10 @@ import React from 'react'
 import { SlantSVG } from '~/components/home/SlantSVG'
 import { GitIcons } from '~/components/GitIcons'
 
+import Diamond3 from '~/assets/images/diamond3.svg'
+import Diamond4 from '~/assets/images/diamond4.svg'
+import Diamond5 from '~/assets/images/diamond5.svg'
+
 // import * as routes from '~/../config/routes'
 
 export const CustomActions = () => {
@@ -19,25 +23,27 @@ export const CustomActions = () => {
 
       <div className='container'>
         <div className='row'>
-          <div className='col-sm-6 has-text-right'>
+          <div className='col-xs-12 col-sm-8 col-start-sm-3'>
             <GitIcons />
-          </div>
-
-          <div className='col-xs-12 col-sm-6 col-start-md-6'>
-            <h4 className='is-size-1 animated pulse delay-2s has-text-weight-bold'>
+            <h1 className='is-size-1 animated pulse delay-2s has-text-weight-bold'>
               Custom Actions
-            </h4>
+            </h1>
 
             <br />
 
-            <h5 className='is-size-6'>
-              Trigger actions when an event occurs, such as "When a contract is ready to be withdrawn from ...
-              <ul className='list pt20'>
-                <li>... Send me a Slack message</li>
-                <li>... And update an Oracle</li>
-                <li>... Or anything else you dream up</li>
+            <div style={{ backgroundColor: 'white', color: 'black', padding: 40, margin: '20px -40px -20px', borderRadius: 40 }}>
+
+            <h5 className='is-size-4'>
+              Trigger actions when an event occurs, such as "When a contract is ready to be withdrawn from:
+              <ul className='pt20 pl20 pb20'>
+                <li><Diamond3 /> send me a Slack message ...</li>
+                <li><Diamond5 /> send my coworker an email ...</li>
+                <li><Diamond4 /> ... and update an Oracle!</li>
               </ul>
+              Or anything else you dream up.
             </h5>
+
+            </div>
 
             <br />
 

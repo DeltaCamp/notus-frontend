@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react'
 import Vivus from 'vivus'
 
 import Api4 from '~/assets/images/api4.svg'
-import Community5 from '~/assets/images/community5.svg'
+import Community6 from '~/assets/images/community6.svg'
 import EarBroadcast from '~/assets/images/ear-broadcast--final.svg'
 // import A from '~/assets/images/a.svg'
 // import B from '~/assets/images/b.svg'
@@ -70,7 +70,7 @@ export const Features = class extends PureComponent {
           </div>
   
           <div className='col-xs-12 col-sm-4 has-text-centered'>
-            <Community5 id='community' style={{ height: 160 }} />
+            <Community6 id='community' style={{ height: 160 }} />
             <br />
             <br />
             <h5 className='is-size-5 animated pulse delay-4s has-text-weight-bold'>

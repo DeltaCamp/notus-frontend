@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 314">
+  <g fill="none" fill-rule="evenodd" stroke="#FFF" transform="rotate(180 244 157)">
+    <g stroke-width="7" transform="translate(18.5 14.5)">
+      <circle cx="413.5" cy="225.5" r="20"/>
+      <g transform="translate(406.5 246.5)">
+        <ellipse cx="7" cy="32.05" rx="7" ry="6.95"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7.19444444,25.0990099 L7.19444444,-2.27373675e-13"/>
+      </g>
+      <g transform="rotate(135 157.65 186.812)">
+        <ellipse cx="6.88" cy="31.762" rx="6.88" ry="6.888"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7.07142857,24.8736462 L7.07142857,2.27373675e-13"/>
+      </g>
+      <g transform="rotate(-135 262.73 18.543)">
+        <ellipse cx="6.88" cy="31.762" rx="6.88" ry="6.888"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7.07142857,24.8736462 L7.07142857,-1.13686838e-13"/>
+      </g>
+      <g transform="rotate(-135 221.646 -69.702)">
+        <ellipse cx="6.88" cy="31.762" rx="6.88" ry="6.888"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7.07142857,24.8736462 L7.07142857,-1.13686838e-13"/>
+      </g>
+      <g transform="rotate(-135 13.146 16.661)">
+        <ellipse cx="6.88" cy="31.762" rx="6.88" ry="6.888"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7.07142857,24.8736462 L7.07142857,-1.13686838e-13"/>
+      </g>
+      <g transform="rotate(-135 64.095 139.661)">
+        <ellipse cx="6.88" cy="31.762" rx="6.88" ry="6.888"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7.07142857,24.8736462 L7.07142857,-1.13686838e-13"/>
+      </g>
+    </g>
+    <rect width="484" height="312" x="2.5" y=".5"/>
+  </g>
+</svg>
