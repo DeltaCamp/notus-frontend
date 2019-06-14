@@ -30,21 +30,21 @@ export const SupportPage =
                     <a
                       className='button is-link'
                       href='https://twitter.com/NotusEvents'
-                    >Tweet Us</a>
+                    >Tweet us</a>
 
                     <a
                       className='button is-info'
                       href='mailto:support@notus.events'
                       target='_blank'
                       rel='noopener noreferrer'
-                    >Send Us An Email</a>
+                    >Send us an email</a>
 
                     <a
                       className='button is-purple'
                       href='https://discord.gg/WXMDXqb'
                       target='_blank'
                       rel='noopener noreferrer'
-                    >Join Discord Community</a>
+                    >Join Discord community</a>
                   </div>
                 </div>
               </div>

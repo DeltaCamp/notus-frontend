@@ -182,13 +182,13 @@ form.is-tall .button.is-text.is-xsmall:hover,
 
 .button.is-purple {
   background-color: $purple;
-  border-color: $purple;
+  border-color: transparent;
   color: white;
 }
 
 .button.is-purple:hover {
   background-color: lighten($purple, 5%);
-  border-color: lighten($purple, 10%);
+  border-color: transparent;
 }
 
 .button.is-purple:focus,

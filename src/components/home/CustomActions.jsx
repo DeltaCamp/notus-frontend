@@ -34,7 +34,7 @@ export const CustomActions = () => {
               <ul className='list pt20'>
                 <li>Send a Slack message</li>
                 <li>Update an Oracle</li>
-                <li>Do whatever you can dream up</li>
+                <li>Whatever you dream up</li>
               </ul>
             </h5>
 

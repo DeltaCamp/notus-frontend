@@ -26,19 +26,34 @@ export const AboutPage =
 
                   <div className='buttons mt30'>
                     <a
-                      className='button is-link'
+                      className='button is-purple'
                       href='#roadmap'
-                    >View Roadmap</a>
+                    >View roadmap</a>
 
                     <Link
                       exact
                       to={routes.SIGNUP}
-                      className='button is-info'
+                      className='button is-link'
                       onClick={this.closeMobileNav}
                       activeClassName='is-active'
                     >
-                      Join Open Beta
+                      Join open beta
                     </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className='container-fluid color-block is-dark mt100'>
+              <div className='container'>
+                <div className='row'>
+                  <div className='col-xs-12 col-xl-8 pt100 pb100'>
+                    <h2 className='is-size-2 has-text-weight-semibold pb20'>
+                      Why did we create this?
+                    </h2>
+                    <p>
+                      While consulting we were searching for the best way to build notification features in Smart Contract powered web apps. We didn't find anything ideal for our situation, and so: <em><strong>Voila!</strong></em> Notus was born.
+                    </p>
                   </div>
                 </div>
               </div>
