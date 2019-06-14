@@ -14,9 +14,9 @@ export const LandingHero = ({ setSuccess, success }) => {
                 Listen to Ethereum
               </h1>
 
-              <h6 className='is-size-6 hero--description-text'>
+              <h5 className='is-size-5 hero--description-text'>
                 Get notified when events occur. Notus has presets for popular Ethereum dapps or you can customize your own.
-              </h6>
+              </h5>
 
               <div className='mt30'>
                 <SignupForm

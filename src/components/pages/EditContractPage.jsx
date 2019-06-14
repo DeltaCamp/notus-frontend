@@ -52,7 +52,7 @@ export const EditContractPage =
 
             const title = contract ? 
               `Editing Contract ${contract.name}` :
-              `Creating a new Contract`
+              `Create a new Contract`
 
             if (!content) {
               content = <ContractForm
@@ -76,7 +76,7 @@ export const EditContractPage =
                     <div className='row'>
                       <div className='col-xs-12'>
                         <h6 className='is-size-6 has-text-weight-semibold has-text-lighter'>
-                          Creating a new Contract
+                          Create a new Contract
                         </h6>
                       </div>
                     </div>

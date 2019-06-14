@@ -831,7 +831,7 @@ export const EditEventPage = class _EditEventPage extends Component {
               <div className='row'>
                 <div className='col-xs-12'>
                   <h6 className='is-size-6 has-text-weight-semibold has-text-lighter'>
-                    Creating a new Event{recipe.title ? ` based on "${recipe.title}"` : ''}
+                    Create a new Event{recipe.title ? ` based on "${recipe.title}"` : ''}
                   </h6>
                 </div>
               </div>

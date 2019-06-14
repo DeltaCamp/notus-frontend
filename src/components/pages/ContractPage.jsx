@@ -513,7 +513,7 @@ export const ContractPage = class _ContractPage extends Component {
           } */}
 
           <FormBanner 
-            backgroundColor='#4a8594'
+            backgroundColor='#0676cb'
           >
             <div className='row'>
               <div className='col-xs-12 col-sm-6'>
@@ -536,7 +536,7 @@ export const ContractPage = class _ContractPage extends Component {
 
 
           <ColorBlock
-            backgroundColor='#4a8594'
+            backgroundColor='#0676cb'
             brightnessPercent={60}
             columnSizing='col-xs-12 col-sm-8 col-lg-4'
           >
@@ -547,7 +547,7 @@ export const ContractPage = class _ContractPage extends Component {
           </ColorBlock>
 
           <ColorBlock
-            backgroundColor='#4a8594'
+            backgroundColor='#0676cb'
             brightnessPercent={40}
             columnSizing='col-xs-12'
           >

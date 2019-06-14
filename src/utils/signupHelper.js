@@ -36,7 +36,7 @@ export const signupHelper = (component) => {
       trackSignup()
 
       notusToast.info('Account created successfully, welcome to Notus!')
-      component.props.history.push(routes.MY_EVENTS)
+      component.props.history.push(routes.NEW_EVENT)
     } else {
       // shouldn't end up here
       debug('unhandled mutationResult', mutationResult)
