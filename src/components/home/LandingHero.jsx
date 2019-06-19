@@ -20,7 +20,9 @@ export const LandingHero = class extends PureComponent {
 
     return (
       <section className={`hero ${success ? 'is-signed-up' : ''}`}>
-        <div className='hero-bg has-bg' />
+        {/* <div className='hero-bg has-bg' /> */}
+        {/* <div className='hero-bg' /> */}
+
         <div className='hero-body'>
           <div className='container'>
             <div className='row'>

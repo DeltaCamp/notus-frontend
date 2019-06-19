@@ -5,14 +5,16 @@ body:not(.home) .navbar {
 
 body.home .navbar.is-fixed-top,
 body:not(.home) .navbar.is-fixed-top {
+  // background-color: #fafafa !important;
+  background-color: white !important;
   // background-color: #121419 !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
-    0 4px 20px rgba(0, 0, 0, 0.1);
-  background-image: 
-    linear-gradient(220deg, black 0%, #0c0e12 30%, #0c0e12 80%, black 100%),
-    url('/funky-lines.png');
-  background-blend-mode: hard-light;
-  background-size: 100% 100%, 400px 400px;
+  // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
+  //   0 4px 20px rgba(0, 0, 0, 0.1);
+  // background-image: 
+  //   linear-gradient(220deg, black 0%, #0c0e12 30%, #0c0e12 80%, black 100%),
+  //   url('/funky-lines.png');
+  // background-blend-mode: hard-light;
+  // background-size: 100% 100%, 400px 400px;
 }
 
 .navbar.is-fixed-top .navbar-menu,
@@ -130,7 +132,7 @@ body.home .navbar {
 }
 
 .home .navbar-menu .navbar-item {
-  color: white;
+  color: black;
   $navbar-item-hover: rgba(255, 255, 255, 0.87);
 
   @media screen and (max-width: $navbar-breakpoint) {
