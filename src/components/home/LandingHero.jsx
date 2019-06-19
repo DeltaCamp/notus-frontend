@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import Vivus from 'vivus'
 
 import { SignupForm } from '~/components/SignupForm'
-import Diagram from '~/assets/images/diagram6.svg'
-import NotusWordmarkWhitePinkShadow from '~/assets/images/notus-wordmark--white-pink-shadow.svg'
+import Diagram from '~/assets/images/diagram8.svg'
+import NotusWordmarkWhitePinkShadow from '~/assets/images/notus-wordmark--white-pink-shadow2.svg'
 
 export const LandingHero = class extends PureComponent {
   componentDidMount() {
