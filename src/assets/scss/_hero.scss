@@ -38,6 +38,13 @@ section.hero {
   width: 100%;
 }
 
+.hero--diagram {
+  position: relative;
+  right: -20px;
+  top: -10px;
+  transform: scale3d(1.1, 1.1, 1);
+}
+
 .hero .hero--description-text {
   margin-top: 20px;
 }
