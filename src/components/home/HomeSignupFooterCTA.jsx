@@ -17,7 +17,7 @@ export class HomeSignupFooterCTA extends Component {
           <div className='row'>
             <div className='col-xs-12 col-md-8 col-start-md-3 has-text-centered'>
               <h1 className='is-size-1 has-text-weight-bold'>
-                Stay on top of Notus
+                Stay up to date
               </h1>
               <h5 className='is-size-5 has-text-weight-bold'>
                 Receive emails from us every now and then

@@ -34,7 +34,7 @@ export const LandingHero = class extends PureComponent {
                   Listen to Ethereum
                 </h1>
   
-                <h5 className='is-size-5 hero--description-text'>
+                <h5 className='hero--description-text'>
                   Easily connect devices &amp; apps with Ethereum. <NotusWordmarkWhitePinkShadow height='16' className='notus-wordmark--home' /> has presets for popular Ethereum events or you can customize your own.
                 </h5>
   
@@ -46,7 +46,7 @@ export const LandingHero = class extends PureComponent {
                 </div> */}
               </div>
   
-              <div className='col-xs-12 col-xl-5'>
+              <div className='col-xs-12 col-xl-5 is-grid-row-reverse'>
                 <Diagram
                   id='diagram'
                   className='hero--diagram'

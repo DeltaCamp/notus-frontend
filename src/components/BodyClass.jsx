@@ -16,9 +16,11 @@ export const BodyClass = ReactTimeout(
       scrollTop: 0
     }
 
-    componentDidMount () {
-      const { browser } = getSystemInfo()
+    async componentDidMount () {
+      const { browser, mobileOS } = await getSystemInfo()
+      
       document.body.classList.add(browser)
+      document.body.classList.add(mobileOS)
 
       document.body.classList.add(this.sanatizePathname(this.props.location.pathname))
 

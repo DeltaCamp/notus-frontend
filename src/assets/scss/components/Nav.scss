@@ -205,9 +205,7 @@ a.navbar-item,
 }
 
 .navbar-menu.is-active .navbar-item:hover {
-  @media screen and (max-width: $mobile) {
-    color: black;
-  }
+  color: black;
 }
 
 .navbar-item,

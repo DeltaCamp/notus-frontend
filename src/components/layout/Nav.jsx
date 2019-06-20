@@ -8,34 +8,32 @@ import { graphql } from 'react-apollo'
 
 import { withCurrentUser } from '~/components/withCurrentUser'
 import { signOutMutation } from '~/mutations/signOutMutation'
+import { getSystemInfo } from '~/utils/getSystemInfo'
 import { notusToast } from '~/utils/notusToast'
 import NotusLogo from '~/assets/images/notus-logo--black-blue-pink4.svg'
 import * as routes from '~/../config/routes'
 
 // const debug = require('debug')('notus:components:Nav')
 
-const Y_POS_NAV_APPEARS = 55
+const Y_POS_NAV_APPEARS = 770
 
 export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
   withCurrentUser(
     withRouter(
       ReactTimeout(class _Nav extends Component {
-        constructor (props) {
-          super(props)
-          this.state = {
-            signedOut: false,
-            scrollTop: 0
-          }
-        }
-
         state = {
           mobileNavActive: false,
-          navIsInFront: false
+          navIsInFront: false,
+          scrollTop: 0,
+          signedOut: false,
+          systemInfo: {},
         }
 
-        componentDidMount() {
-          window.addEventListener('scroll', this.listenToScroll)
+        async componentDidMount() {
+          const systemInfo = await getSystemInfo()
+          this.setState({ systemInfo })
 
+          window.addEventListener('scroll', this.listenToScroll)
           this.listenToScroll()
         }
 
@@ -114,23 +112,45 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
           const { currentUserData } = this.props || {}
           const { currentUser } = currentUserData || {}
           
-          let signUp, myEvents, signOut
+          let myEvents, 
+            links,
+            signInSignUpLinks
 
           const scrolledDown = this.state.scrollTop > Y_POS_NAV_APPEARS
-          const showFixedNav = this.isHomeRoute() && scrolledDown
+          const showFixedNav = (this.isHomeRoute() && scrolledDown) || this.state.mobileNavActive
 
-          let mobileOnlySignedOutNav
+          signInSignUpLinks = <>
+            <NavLink
+              exact
+              to={routes.SIGNIN}
+              className='navbar-item'
+              onClick={this.closeMobileNav}
+              activeClassName='is-active'
+            >
+              Sign in
+            </NavLink>
+            <NavLink
+              exact
+              to={routes.SIGNUP}
+              className='navbar-item bold'
+              onClick={this.closeMobileNav}
+              activeClassName='is-active'
+            >
+              Sign up
+            </NavLink>
+          </>
 
-          // <NavLink
-          //   exact
-          //   to={routes.SIGNIN}
-          //   className='navbar-item'
-          //   onClick={this.closeMobileNav}
-          //   activeClassName='is-active'
-          // >
+          if (!currentUser &&
+            (this.state.systemInfo.mobileOS === 'unknown')
+          ) { 
+            links = <>
+              {signInSignUpLinks}
+            </>
+          }
 
-          if (!currentUserData || !currentUser && this.state.mobileNavActive) {
-            mobileOnlySignedOutNav = <>
+          if (!currentUser && this.state.mobileNavActive) {
+            links = <>
+              {signInSignUpLinks}
               <hr />
               <NavLink
                 exact
@@ -179,29 +199,9 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
             </>
           }
 
-          if (!currentUserData || !currentUser) {
-            signUp = <>
-              <NavLink
-                exact
-                to={routes.SIGNIN}
-                className='navbar-item'
-                onClick={this.closeMobileNav}
-                activeClassName='is-active'
-              >
-                Sign in
-              </NavLink>
-              <NavLink
-                exact
-                to={routes.SIGNUP}
-                className='navbar-item bold'
-                onClick={this.closeMobileNav}
-                activeClassName='is-active'
-              >
-                Sign up
-              </NavLink>
-            </>
-          } else {
-            signOut = (
+          
+          if (currentUser) {
+            links = (
               <>
                 <NavLink
                   exact
@@ -306,10 +306,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                     {myEvents}
                   </div>
                   <div className='navbar-end'>
-                    {signUp}
-                    {signOut}
-
-                    {mobileOnlySignedOutNav}
+                    {links}
                   </div>
                 </div>
               </div>
