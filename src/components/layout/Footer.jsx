@@ -4,7 +4,8 @@ import {
   Twitter
 } from 'react-feather'
 import { withRouter } from 'react-router'
-import NotusLogo from '~/assets/images/notus-logo.svg'
+// import NotusLogo from '~/assets/images/notus-logo.svg'
+import NotusLogo from '~/assets/images/notus-logo--black-blue-pink4.svg'
 import * as routes from '~/../config/routes'
 
 export const Footer = class _Footer extends Component {

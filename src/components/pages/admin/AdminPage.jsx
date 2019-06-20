@@ -32,7 +32,7 @@ export const AdminPage =
 
                   <div className='mt20 has-text-centered'>
                     <Link
-                      className='button is-small is-info is-outlined has-fat-icons mt20'
+                      className='button is-small is-info has-fat-icons mt20'
                       to={routes.CONTRACTS}
                     >
                       Contracts

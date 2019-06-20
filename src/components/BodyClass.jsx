@@ -4,9 +4,9 @@ import ReactTimeout from 'react-timeout'
 import * as routes from '~/../config/routes'
 import { getSystemInfo } from '~/utils/getSystemInfo'
 
-const Y_POS_LOCK = 750
+const Y_POS_LOCK = 1200
 const Y_POS_OFFSET = 100
-const SPEED = 1000
+const SPEED = 600
 
 export const BodyClass = ReactTimeout(
   class _BodyClass extends Component {
@@ -97,7 +97,7 @@ export const BodyClass = ReactTimeout(
         //   (t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t) * -SPEED
         // ) - Y_POS_OFFSET
         newPx = (
-          (scrollTop * 0.0013) * -SPEED
+          (scrollTop * 0.001) * -SPEED
         ) - Y_POS_OFFSET
       }
       

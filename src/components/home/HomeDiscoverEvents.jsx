@@ -28,6 +28,11 @@ export class HomeDiscoverEvents extends Component {
   render () {
     return (
       <div className='container-fluid is-dark pb100 color-block is-positioned-relatively'>
+        <SlantSVG
+          position='top'
+          fill='dark'
+        />
+
         <div className='container'>
           <div className='row'>
             <div className='col-xs-12 col-sm-10 col-start-sm-2 col-md-8 col-start-md-3 col-lg-8 col-start-lg-3 has-text-centered'>
@@ -63,10 +68,6 @@ export class HomeDiscoverEvents extends Component {
           </div>
         </div>
 
-        <SlantSVG
-          position='bottom'
-          fill='#a560e8'
-        />
       </div>
     )
   }

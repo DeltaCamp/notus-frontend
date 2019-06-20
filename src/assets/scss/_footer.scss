@@ -1,6 +1,6 @@
 .footer {
   background-color: $footer-background-color;
-  border-top: 3px solid whitesmoke;
+  // border-top: 3px solid whitesmoke;
   padding: 3rem 2rem;
 }
 
@@ -16,19 +16,18 @@
   transition: all 700ms ease-in;
 }
 
-// .footer-brand svg:hover path {
-//   fill: $purple;
-//   transition: all 150ms ease-in;
-// }
-
 .footer-brand .brand-svg:hover path {
-  fill: $cyan;
-  stroke: white;
   transition: all 150ms ease-in;
 }
 
-.footer-brand .brand-svg:hover path:first-child {
-  fill: $orange;
+.footer-brand svg:hover path {
+  fill: darken($blue, 10%);
+  transition: all 250ms ease-in;
+  stroke: white;
+}
+
+.footer-brand svg:hover path:first-child {
+  fill: darken($blue, 10%);
 }
 
 .footer-brand .twitter-svg {

@@ -2,13 +2,9 @@ import React from 'react'
 
 import NotusSectionTriangle from '~/assets/images/notus-section-triangle.svg'
 
-export const SlantSVG = ({ position, polygonClass, fill }) => {
+export const SlantSVG = ({ position, fill }) => {
   let style = {}
-  let positionClass = 'top-svg'
-
-  if (position === 'bottom') {
-    positionClass = 'bottom-svg'
-  }
+  let positionClass = position || 'top'
   
   if (fill) {
     style = { fill }
@@ -16,12 +12,12 @@ export const SlantSVG = ({ position, polygonClass, fill }) => {
 
   return (
     <svg
-      className={positionClass}
+      className={`${positionClass}-svg`}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 100 100'
       preserveAspectRatio='none'
     >
-      <NotusSectionTriangle style={style} />
+      <NotusSectionTriangle className={`has-fill-${fill}`} />
       {/* <polygon
         points='0,100 100,0 100,100'
         className={polygonClass}

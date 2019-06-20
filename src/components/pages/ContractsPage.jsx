@@ -105,7 +105,7 @@ export const ContractsPage =
             if (skip + take < totalCount) {
               loadMore =
                 <button
-                  className='button is-small is-link is-outlined mt30'
+                  className='button is-small is-link mt30'
                   onClick={this.fetchMore}
                 >
                   Load more
@@ -206,7 +206,7 @@ export const ContractsPage =
 
                     <div className='mt20 has-text-centered'>
                       <Link
-                        className='button is-small is-info is-outlined has-fat-icons mt20'
+                        className='button is-small is-info has-fat-icons mt20'
                         to={routes.NEW_CONTRACT}
                       >
                         <Plus /> &nbsp;Create contract

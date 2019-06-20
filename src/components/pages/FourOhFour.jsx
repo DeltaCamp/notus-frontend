@@ -25,7 +25,7 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
                 <p className='mt50'>
                   <button
                     onClick={this.context.router.history.goBack}
-                    className='button is-small is-outlined is-dark'
+                    className='button is-small is-dark'
                   >
                     {'<'} Back
                   </button>
@@ -33,6 +33,10 @@ export const FourOhFour = class _FourOhFour extends PureComponent {
 
                 <br />
                 <br />
+
+                <h6 className='is-size-7'>
+                  Four "Uh-Oh" Four ...
+                </h6>
 
                 <h3 className='is-size-3'>
                   We couldn't find that ...

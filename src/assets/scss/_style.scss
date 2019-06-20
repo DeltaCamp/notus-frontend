@@ -408,8 +408,8 @@ hr {
 
 .has-bg {
   background-image: 
-    linear-gradient(220deg, $purple 0%, $purple 10%, $pink 100%),
-    url('/funky-lines.png');
+    linear-gradient(20deg, $blue 0, $purple 30%, $purple 70%, darken($pink, 20%) 100%);
+    // url('/funky-lines.png');
   background-blend-mode: multiply;
   background-size: 100% 100%, 400px 400px;
 }
@@ -535,8 +535,8 @@ hr {
 }
 
 .notus-toast .Toastify__toast--info {
-  // background: $purple;
-  background-image: linear-gradient(220deg, $purple 0%, $purple 10%, $pink 100%);
+  background: $blue;
+  // background-image: linear-gradient(220deg, $purple 0%, $purple 10%, $pink 100%);
 }
 
 .notus-toast .Toastify__toast-body {
@@ -728,7 +728,8 @@ hr {
 }
 
 .color-block.is-purple {
-  background-color: $purple;
+  // background-color: $purple;
+  background-color: #a560e8;
 }
 
 .color-block.is-success {
@@ -760,10 +761,10 @@ hr {
   bottom: 0;
   color: white;
   left: 0;
-  line-height: 1.5;
+  line-height: 1.3;
   opacity: 0;
   transition: opacity 500ms ease-out;
-  padding: 2rem 0;
+  padding: 1rem 0;
   position: fixed;
   right: 0;
   z-index: 70000;
@@ -778,9 +779,9 @@ hr {
 }
 
 .cookie-consent--inner {
-  font-size: 1.2rem;
+  font-size: 0.825rem;
   margin: 0 auto;
-  max-width: 1214px;
+  max-width: 814px;
 
   @media screen and (max-width: $widescreen) {
     font-size: 1rem;
@@ -805,7 +806,7 @@ hr {
 
 .cookie-consent .button {
   display: block;
-  margin: 1rem 0 0 0;
+  // margin: 1rem 0 0 0;
 }
 
 .cookie-consent-exit {
@@ -817,21 +818,68 @@ hr {
 
 .bottom-svg,
 .top-svg,
-.overflow-bottom-svg {
+.overflow-bottom-svg,
+.footer-bottom-svg {
   position: absolute;
   left: 0;
   height: 13em;
+  pointer-events: none;
   width: 100%;
 }
 
 .bottom-svg {
   bottom: 0;
   margin-bottom: -1px;
+  transform: rotate(180deg);
 }
 
 .top-svg {
   top: -8.5em;
   margin-top: 1px;
+}
+
+.footer-bottom-svg {
+  bottom: -5em;
+}
+
+.has-fill-dark,
+.has-fill-dark path {
+  fill: darken($dark, 5%);
+}
+
+.has-fill-white,
+.has-fill-white path {
+  fill: white;
+}
+
+.has-fill-footer,
+.has-fill-footer path {
+  fill: $footer-background-color;
+}
+
+.has-fill-primary,
+.has-fill-primary path {
+  fill: lighten($primary, 15%);
+}
+
+.has-fill-light,
+.has-fill-light path {
+  fill: $light;
+}
+
+.has-fill-cyan,
+.has-fill-cyan path {
+  fill: lighten($cyan, 20%);
+}
+
+.has-fill-purple,
+.has-fill-purple path {
+  fill: #a560e8;
+}
+
+.has-fill-pink,
+.has-fill-pink path {
+  fill: $pink;
 }
 
 .overflow-bottom-svg {
@@ -846,38 +894,6 @@ svg {
 
 .is-positioned-relatively {
   position: relative;
-}
-
-.has-fill-white {
-  fill: white;
-}
-
-.has-fill-footer {
-  fill: $footer-background-color;
-}
-
-.has-fill-dark {
-  fill: darken($dark, 5%);
-}
-
-.has-fill-primary {
-  fill: lighten($primary, 15%);
-}
-
-.has-fill-light {
-  fill: $light;
-}
-
-.has-fill-cyan {
-  fill: lighten($cyan, 20%);
-}
-
-.has-fill-purple {
-  fill: $purple;
-}
-
-.has-fill-pink {
-  fill: $pink;
 }
 
 .is-underlined {

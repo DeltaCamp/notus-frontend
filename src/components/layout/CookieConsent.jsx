@@ -19,10 +19,10 @@ export const CookieConsent = ReactTimeout(
       if (cookieConsent) {
         this.setState({ hidden: true })
       } else {
-        this.props.setTimeout(this.animateIn, 2000)
+        this.props.setTimeout(this.animateIn, 5000)
       }
     }
-
+ 
     handleAccept = (e) => {
       e.preventDefault()
 
@@ -48,15 +48,21 @@ export const CookieConsent = ReactTimeout(
             }
           )}
         >
-          <div className='cookie-consent--inner'>
-            We use cookies to store your session and for analytics / error reporting. You consent to our cookie usage if you continue to use the <a href='https://notus.events'>notus.events</a> site. Please refer to the <Link to={routes.PRIVACY_PAGE}>privacy policy</Link> for more information.
-
-            <button
-              className='button is-link is-small'
-              onClick={this.handleAccept}
-            >
-              Ok, got it!
-            </button>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-xs-12 col-sm-9'>
+                Cookies are used to store your login and for reporting. You consent to cookies if you continue using the <a href='https://notus.events'>notus.events</a> site. Please refer to the <Link to={routes.PRIVACY_PAGE}>privacy policy</Link> for more information.
+              </div>
+              <div className='col-xs-12 col-sm-3'>
+                <button
+                  className='button is-link is-small'
+                  onClick={this.handleAccept}
+                >
+                  Ok, got it!
+                </button>
+              </div>
+              
+            </div>
           </div>
         </div>
       )

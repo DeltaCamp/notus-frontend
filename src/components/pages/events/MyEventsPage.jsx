@@ -152,7 +152,7 @@ export const MyEventsPage =
                       <>
                         <div className='mt20'>
                           <Link
-                            className='button is-small mt20 is-link is-outlined has-fat-icons'
+                            className='button is-small mt20 is-link has-fat-icons'
                             to={routes.NEW_EVENT}
                           >
                             <Plus /> &nbsp;Create event

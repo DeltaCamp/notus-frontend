@@ -1,6 +1,6 @@
 body:not(.home) .navbar {
   background-color: white;
-  box-shadow: 0 1px 3px rgba(100, 130, 180, 0.1);
+  // box-shadow: 0 1px 3px rgba(100, 130, 180, 0.1);
 }
 
 body.home .navbar.is-fixed-top,
@@ -138,13 +138,13 @@ body.home .navbar {
 }
 
 .navbar-brand svg:hover path {
-  fill: #35BFF7;
+  fill: darken($blue, 10%);
   transition: all 250ms ease-in;
   stroke: white;
 }
 
 .navbar-brand svg:hover path:first-child {
-  fill: #35BFF7;
+  fill: darken($blue, 10%);
 }
 
 .navbar-brand svg {
@@ -184,14 +184,14 @@ body.home .navbar {
 
   @media screen and (max-width: $navbar-breakpoint) {
     background-color: inherit !important;
-    color: saturate(darken(#9B67E0, 5%), 10%) !important;
+    color: $pink !important;
   }
 }
 
 .home .navbar.is-fixed-top .navbar-menu .navbar-item.bold:hover {
   @media screen and (max-width: $navbar-breakpoint) {
     background-color: inherit !important;
-    color: saturate(darken(#9B67E0, 10%), 20%) !important;
+    color: saturate(darken($pink, 15%), 100%) !important;
   }
 }
 
@@ -361,7 +361,7 @@ a.navbar-item,
 .home .burger .burger-lines,
 .home .burger .burger-lines:after,
 .home .burger .burger-lines:before {
-  background-color: white;
+  // background-color: white;
 }
 
 .navbar.is-active .burger .burger-lines,
@@ -390,7 +390,8 @@ a.navbar-item,
 .home .burger:hover .burger-lines,
 .home .burger:hover .burger-lines:after,
 .home .burger:hover .burger-lines:before {
-  background-color: rgba(0, 255, 255, 1);
+  // background-color: rgba(0, 255, 255, 1);
+  background-color: $blue;
 }
 
 .burger.burger-slip .burger-lines:after, .burger.burger-slip .burger-lines:before {

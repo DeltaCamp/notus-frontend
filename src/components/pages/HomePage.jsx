@@ -62,7 +62,7 @@ export const HomePage = ReactTimeout(class extends Component {
             <Features />
             <CustomActions />
             <HomeDiscoverEvents />
-            <HomeBetaNotice />
+            {/* <HomeBetaNotice /> */}
           </section>
 
           <HomeSignupFooterCTA />

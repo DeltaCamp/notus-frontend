@@ -27,7 +27,7 @@ export const AppErrorPage = class _AppErrorPage extends PureComponent {
                 <p className='mt50'>
                   <button
                     onClick={this.context.router.history.goBack}
-                    className='button is-small is-outlined is-dark'
+                    className='button is-small is-dark'
                   >
                     {'<'} Back
                   </button>

@@ -103,7 +103,7 @@ export const EditEventButtons =
                     notEventAuthorButtons = (
                       <Link
                         to={createEventFromParentRoute}
-                        className='button is-small is-link is-outlined has-fat-icons'
+                        className='button is-small is-link has-fat-icons'
                       >
                         <Plus /> &nbsp;Duplicate this event
                       </Link>
@@ -126,7 +126,7 @@ export const EditEventButtons =
                         <br />
                         <div className='buttons'>
                           <button
-                            className='button is-small is-outlined is-light'
+                            className='button is-small is-light'
                             onClick={this.handleCloseConfirmDeleteModal}
                           >
                             Cancel

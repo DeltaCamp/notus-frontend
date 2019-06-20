@@ -119,6 +119,66 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
           const scrolledDown = this.state.scrollTop > Y_POS_NAV_APPEARS
           const showFixedNav = this.isHomeRoute() && scrolledDown
 
+          let mobileOnlySignedOutNav
+
+          // <NavLink
+          //   exact
+          //   to={routes.SIGNIN}
+          //   className='navbar-item'
+          //   onClick={this.closeMobileNav}
+          //   activeClassName='is-active'
+          // >
+
+          if (!currentUserData || !currentUser && this.state.mobileNavActive) {
+            mobileOnlySignedOutNav = <>
+              <hr />
+              <NavLink
+                exact
+                to={routes.ABOUT_PAGE}
+                className='navbar-item'
+                onClick={this.closeMobileNav}
+                activeClassName='is-active'
+              >
+                About
+              </NavLink>
+              <a
+                href='https://discord.gg/WXMDXqb'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='navbar-item'
+              >
+                Discord
+              </a>
+              <NavLink
+                exact
+                to={routes.TERMS_PAGE}
+                className='navbar-item'
+                onClick={this.closeMobileNav}
+                activeClassName='is-active'
+              >
+                Terms
+              </NavLink>
+              <NavLink
+                exact
+                to={routes.PRIVACY_PAGE}
+                className='navbar-item'
+                onClick={this.closeMobileNav}
+                activeClassName='is-active'
+              >
+                Privacy
+              </NavLink>
+              <NavLink
+                exact
+                to={routes.SUPPORT_PAGE}
+                className='navbar-item'
+                onClick={this.closeMobileNav}
+                activeClassName='is-active'
+              >
+                Support
+              </NavLink>
+            </>
+          }
+
           if (!currentUserData || !currentUser) {
             signUp = <>
               <NavLink
@@ -128,7 +188,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 onClick={this.closeMobileNav}
                 activeClassName='is-active'
               >
-              Sign in
+                Sign in
               </NavLink>
               <NavLink
                 exact
@@ -209,11 +269,13 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                     className='navbar-item'
                     onClick={this.closeMobileNav}
                   >
+                    <NotusLogo />
+{/* 
                     {!showFixedNav
                       || this.state.navIsInFront ?
                       <NotusLogo /> :
                       <NotusLogo />
-                    }
+                    } */}
                   </Link>
                 </div>
 
@@ -246,6 +308,8 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                   <div className='navbar-end'>
                     {signUp}
                     {signOut}
+
+                    {mobileOnlySignedOutNav}
                   </div>
                 </div>
               </div>

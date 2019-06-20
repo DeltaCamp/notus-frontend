@@ -103,7 +103,7 @@ export const AppUserConfirmPage = graphql(appUserConfirmPageMutation, { name: 'c
                   <p className='mt50'>
                     <button
                       onClick={this.context.router.history.goBack}
-                      className='button is-small is-outlined is-dark'
+                      className='button is-small is-dark'
                     >
                       {'<'} Back
                     </button>

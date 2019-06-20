@@ -7,21 +7,21 @@ export class HomeSignupFooterCTA extends Component {
 
   render () {
     return (
-      <div className='container-fluid color-block is-primary pt50 pb100 is-positioned-relatively'>
+      <div className='container-fluid color-block is-purple pt50 pb100 is-positioned-relatively'>
         <SlantSVG
           position='top'
-          polygonClass='has-fill-cyan'
+          fill='purple'
         />
 
         <div className='container'>
           <div className='row'>
             <div className='col-xs-12 col-md-8 col-start-md-3 has-text-centered'>
-              <h4 className='is-size-4 has-text-weight-bold'>
+              <h1 className='is-size-1 has-text-weight-bold'>
                 Stay on top of Notus
-              </h4>
-              <h6 className='is-size-6 has-text-weight-bold'>
+              </h1>
+              <h5 className='is-size-5 has-text-weight-bold'>
                 Receive emails from us every now and then
-              </h6>
+              </h5>
 
               <div className='mt30'>
                 <MailChimpSignupForm />
@@ -32,8 +32,9 @@ export class HomeSignupFooterCTA extends Component {
         </div>
 
         <SlantSVG
-          position='bottom'
-          polygonClass='has-fill-footer'
+          // position='bottom'
+          position='footer-bottom'
+          fill='footer'
         />
       </div>
     )

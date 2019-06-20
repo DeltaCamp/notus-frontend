@@ -61,10 +61,10 @@ export const CustomActions = () => {
         </div>
       </div>
 
-      <SlantSVG
+      {/* <SlantSVG
         position='bottom'
         polygonClass='has-fill-dark'
-      />
+      /> */}
     </div>
   )
 }
