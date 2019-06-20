@@ -820,7 +820,7 @@ hr {
 .overflow-bottom-svg {
   position: absolute;
   left: 0;
-  height: 8em;
+  height: 13em;
   width: 100%;
 }
 
@@ -830,7 +830,7 @@ hr {
 }
 
 .top-svg {
-  top: -8em;
+  top: -8.5em;
   margin-top: 1px;
 }
 
@@ -958,26 +958,33 @@ ul.list {
 
 .click-to-scroll {
   // background-color: transparent;
-  background-color: blue;
+  background-color: white;
   background-size: 100%;
   // background-image: url(/assets/home/new_home/scroll_indicator-e2c5a6e….svg);
   background-repeat: no-repeat;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
   // left: 800px;
   // margin: 0 auto;
   bottom: -100px;
   cursor: pointer;
   display: block;
-  height: 100px;
+  height: 70px;
   left: 0;
+  padding: 20px;
   opacity: 1;
   right: 0;
   margin: 0 auto;
   position: fixed;
   width: 100px;
 
-  transition: bottom 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
 .click-to-scroll.click-to-scroll__appear {
   bottom: 0;
+}
+
+.click-to-scroll:hover {
+  transform: scale3d(1.1, 1.1, 1);
 }

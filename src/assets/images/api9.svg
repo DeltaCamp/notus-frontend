@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 368 334">
+  <g fill="none" fill-rule="evenodd" transform="rotate(180 174.75 176.25)">
+    <polygon fill="#35BFF7" points="76.264 146.217 106.141 87.176 166.32 68.629 233.588 99.033 260.701 170.445 239.148 214.393 198.265 243.423 132.893 239.896 85.879 205.324"/>
+    <circle cx="165.5" cy="154.5" r="52" fill="#FFF" stroke="#000" stroke-width="10"/>
+    <g transform="translate(123.5 211.5)">
+      <polygon fill="#35BFF7" points="36.563 41.928 0 82.606 45.488 127.654 84.742 76.463"/>
+      <circle cx="42" cy="83" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M42.5,65 L42.5,0"/>
+    </g>
+    <g transform="rotate(135 56.868 76.688)">
+      <polygon fill="#35BFF7" points="36.563 41.928 0 82.606 45.488 127.654 84.742 76.463"/>
+      <circle cx="42" cy="83" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M42.5,65 L42.5,0"/>
+    </g>
+    <g transform="rotate(-135 151.632 25.533)">
+      <polygon fill="#35BFF7" points="36.563 41.928 0 82.606 45.488 127.654 84.742 76.463"/>
+      <circle cx="42" cy="83" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M42.5,65 L42.5,0"/>
+    </g>
+  </g>
+</svg>

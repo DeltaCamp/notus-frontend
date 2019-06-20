@@ -38,12 +38,12 @@ export const LandingHero = class extends PureComponent {
                   Easily connect devices &amp; apps with Ethereum. <NotusWordmarkWhitePinkShadow height='16' className='notus-wordmark--home' /> has presets for popular Ethereum events or you can customize your own.
                 </h5>
   
-                <div className='mt30'>
+                {/* <div className='mt30'>
                   <SignupForm
                     setSuccess={setSuccess}
                     autoFocus
                   />
-                </div>
+                </div> */}
               </div>
   
               <div className='col-xs-12 col-xl-5'>

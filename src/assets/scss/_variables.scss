@@ -47,9 +47,9 @@ $green: #09c758;
 $yellow: #ddcb09;
 $red: #e90e2b;
 $cyan: #41fff3;
-$blue: #0676cb;
+$blue: #60BDF2;
 $purple: #8a2cE4;
-$pink: #C305F3;
+$pink: #EB4BC7;
 $orange: #ff6600;
 
 $info: $orange;
@@ -78,7 +78,7 @@ $navbar-dark-item-hover-color: #d9d9d9;
 $navbar-item-hover-color: $navbar-item-hover;
 
 $link-color: $blue;
-$link-hover-color: lighten($blue, 20%);
+$link-hover-color: darken($blue, 20%);
 $link: $link-color;
 $link-visited: $link-hover-color;
 $link-hover: $link-hover-color;

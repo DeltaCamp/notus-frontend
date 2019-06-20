@@ -35,6 +35,8 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
 
         componentDidMount() {
           window.addEventListener('scroll', this.listenToScroll)
+
+          this.listenToScroll()
         }
 
         componentWillUnmount() {

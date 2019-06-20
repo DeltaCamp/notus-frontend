@@ -52,12 +52,14 @@
 }
 
 .footer-item--copyright a {
-  color: rgba(200, 110, 220, 1);
+  // color: rgba(200, 110, 220, 1);
+  color: $pink;
   font-weight: 700;
 }
 
 .footer-item--copyright a:hover {
-  color: rgba(255, 120, 240, 1);
+  // color: rgba(255, 120, 240, 1);
+  color: darken($pink, 10%);
 }
 
 .footer-list .list-item {

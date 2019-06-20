@@ -3,8 +3,8 @@ import React from 'react'
 import { SlantSVG } from '~/components/home/SlantSVG'
 import { GitIcons } from '~/components/GitIcons'
 
-import Diamond3 from '~/assets/images/diamond3.svg'
-import Diamond4 from '~/assets/images/diamond4.svg'
+import Diamond3 from '~/assets/images/diamond5.svg'
+import Diamond4 from '~/assets/images/diamond5.svg'
 import Diamond5 from '~/assets/images/diamond5.svg'
 
 // import * as routes from '~/../config/routes'
@@ -13,12 +13,12 @@ export const CustomActions = () => {
   return (
     <div
       className='container-fluid mt100 pt100 pb200 color-block is-positioned-relatively' 
-      style={{ backgroundColor: '#0689d8' }}
+      style={{ backgroundColor: '#35BFF7' }}
     >
       <SlantSVG
         position='top'
         polygonClass='has-fill-dark'
-        fill='#0689d8'
+        fill='#35BFF7'
       />
 
       <div className='container'>
@@ -31,7 +31,7 @@ export const CustomActions = () => {
 
             <br />
 
-            <div style={{ backgroundColor: 'white', color: 'black', padding: 40, margin: '20px -40px -20px', borderRadius: 40 }}>
+            <div style={{ padding: 40, margin: '20px -40px -20px', borderRadius: 40 }}>
 
             <h5 className='is-size-4'>
               Trigger actions when an event occurs, such as "When a contract is ready to be withdrawn from:
