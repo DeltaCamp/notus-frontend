@@ -3,7 +3,7 @@ import Vivus from 'vivus'
 
 import { SignupForm } from '~/components/SignupForm'
 import Diagram from '~/assets/images/diagram10.svg'
-import NotusWordmarkWhitePinkShadow from '~/assets/images/notus-wordmark--white-pink-shadow2.svg'
+import NotusWordmarkWhitePinkShadow from '~/assets/images/notus-wordmark--white-pink-shadow4.svg'
 
 export const LandingHero = class extends PureComponent {
   componentDidMount() {
@@ -19,7 +19,9 @@ export const LandingHero = class extends PureComponent {
     const { setSuccess, success } = this.props
 
     return (
-      <section className={`hero ${success ? 'is-signed-up' : ''}`}>
+      <section
+        className={`hero ${success ? 'is-signed-up' : ''}`}
+      >
         {/* <div className='hero-bg has-bg' /> */}
         {/* <div className='hero-bg' /> */}
 

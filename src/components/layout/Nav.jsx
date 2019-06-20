@@ -9,11 +9,12 @@ import { graphql } from 'react-apollo'
 import { withCurrentUser } from '~/components/withCurrentUser'
 import { signOutMutation } from '~/mutations/signOutMutation'
 import { notusToast } from '~/utils/notusToast'
-import NotusLogo from '~/assets/images/notus-logo.svg'
-import NotusLogoWhiteOnBlack2 from '~/assets/images/notus-logo--white-on-black2.svg'
+import NotusLogo from '~/assets/images/notus-logo--black-blue-pink4.svg'
 import * as routes from '~/../config/routes'
 
 // const debug = require('debug')('notus:components:Nav')
+
+const Y_POS_NAV_APPEARS = 55
 
 export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
   withCurrentUser(
@@ -113,7 +114,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
           
           let signUp, myEvents, signOut
 
-          const scrolledDown = this.state.scrollTop > 50
+          const scrolledDown = this.state.scrollTop > Y_POS_NAV_APPEARS
           const showFixedNav = this.isHomeRoute() && scrolledDown
 
           if (!currentUserData || !currentUser) {
@@ -209,7 +210,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                     {!showFixedNav
                       || this.state.navIsInFront ?
                       <NotusLogo /> :
-                      <NotusLogoWhiteOnBlack2 />
+                      <NotusLogo />
                     }
                   </Link>
                 </div>
@@ -265,7 +266,6 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
 
           const mainNavFixed = (
             <nav
-              style={{ backgroundPosition: `center ${this.state.scrollTop * 0.2}%` }}
               className={classnames(
                 'navbar',
                 'is-transparent',

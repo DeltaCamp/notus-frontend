@@ -21,7 +21,9 @@ export const HomePage = ReactTimeout(class extends Component {
   render () {
     return (
       <>
-        <div className='is-positioned-absolutely'>
+        <div
+          className='is-positioned-absolutely'
+        >
           <header className='header'>
             <LandingHero
               setSuccess={this.setSuccess}

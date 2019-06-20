@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import ReactTimeout from 'react-timeout'
 // import { Link } from 'react-router-dom'
 import Vivus from 'vivus'
 
@@ -10,34 +11,38 @@ import EarBroadcast from '~/assets/images/ear-broadcast--final.svg'
 // import C from '~/assets/images/c.svg'
 // import * as routes from '~/../config/routes'
 
-export const Features = class extends PureComponent {
+export const Features = ReactTimeout(class extends PureComponent {
   componentDidMount() {
+    this.kickOffAnimation()
+  }
+
+  kickOffAnimation = () => {
     new Vivus(
       'ear',
       {
-        duration: 170, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
+        delay: 169, duration: 170, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
       }
     )
 
     new Vivus(
       'api',
       {
-        duration: 230, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
+        delay: 229, duration: 300, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
       }
     )
 
     new Vivus(
       'community',
       {
-        duration: 300, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
+        delay: 299, duration: 400, type: 'oneByOne', animTimingFunction: Vivus.EASE_OUT
       }
     )
   }
 
   render () {
     return (
-      <div className='container pb150'>
-        <div className='row pt100'>
+      <div className='container pb200'>
+        <div className='row pt50'>
           <div className='col-xs-12 col-sm-4 has-text-centered'>
             <EarBroadcast id='ear' style={{ height: 160 }} />
             <br />
@@ -98,4 +103,4 @@ export const Features = class extends PureComponent {
 
   }
 
-}
+})

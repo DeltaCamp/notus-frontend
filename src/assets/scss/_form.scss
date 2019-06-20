@@ -1,4 +1,5 @@
 $addonsFormHeight: 57px;
+$hasAddonsFormColor: #FF30CC;
 
 .input:focus,
 .input.is-focused,
@@ -54,8 +55,6 @@ $addonsFormHeight: 57px;
 .switch[type="checkbox"].is-medium + label::after {
   top: 0.5rem;
 }
-
-$hasAddonsformColor: $cyan;
 
 .form .input,
 .form .select select,
@@ -171,7 +170,7 @@ form.is-active textarea.textarea,
 form.is-active textarea.textarea:hover,
 form.is-active textarea.textarea:focus,
 form.is-active textarea.textarea:active {
-  border-color: $cyan;
+  border-color: $hasAddonsFormColor;
 }
 
 .form .control,
@@ -278,7 +277,7 @@ form.has-addons.is-active input.input:focus,
 form.has-addons.is-active textarea.textarea:hover,
 form.has-addons.is-active textarea.textarea:focus,
 form.has-addons.is-active textarea.textarea:active {
-  border-color: $hasAddonsformColor;
+  border-color: $hasAddonsFormColor;
   border-right-color: white;
 }
 
@@ -330,7 +329,7 @@ form.has-addons.is-active textarea.textarea:active {
 .field.has-addons .button:hover,
 .field.has-addons .button:focus,
 .field.has-addons .button:active {
-  color: $cyan;
+  color: $hasAddonsFormColor;
   transform: scale3d(1, 1, 1);
 }
 
