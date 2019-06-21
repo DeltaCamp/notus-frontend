@@ -1,7 +1,7 @@
 ::placeholder,
 .input::placeholder,
 .textarea::placeholder {
-  color: rgba(200, 190, 210, 0.7);
+  color: rgba(200, 190, 210, 0.8);
 }
 
 input:-internal-autofill-previewed,
@@ -965,11 +965,6 @@ ul.list {
 
 .flex-button svg:first-child {
   margin-right: 10px;
-}
-
-.notus-wordmark--home {
-  position: relative;
-  top: 1px;
 }
 
 .click-to-scroll {

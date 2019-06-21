@@ -23,6 +23,10 @@ $event-font-size-sm: 18px;
   @media screen and (max-width: $tablet) {
     width: 100%;
   }
+
+  @media screen and (max-width: $mobile - 300px) {
+    height: 230px;
+  }
 }
 
 .event-card__title {
@@ -37,6 +41,10 @@ $event-font-size-sm: 18px;
 .event-card__header {
   height: 268px;
   padding: 1.5rem 1.5rem 0;
+
+  @media screen and (max-width: $mobile - 300px) {
+    height: 168px;
+  }
 }
 
 .event-card__footer {
