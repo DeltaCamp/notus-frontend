@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react'
 import Vivus from 'vivus'
+import { Link } from 'react-router-dom'
 
-import { SignupForm } from '~/components/SignupForm'
+// import { SignupForm } from '~/components/SignupForm'
 import Diagram from '~/assets/images/diagram10.svg'
 import NotusWordmarkWhitePinkShadow from '~/assets/images/notus-wordmark--white-pink-shadow4.svg'
+import * as routes from '~/../config/routes'
 
 export const LandingHero = class extends PureComponent {
   componentDidMount() {
@@ -40,6 +42,13 @@ export const LandingHero = class extends PureComponent {
                     className='notus-wordmark--home'
                   /> has presets for popular Ethereum events or you can customize your own.
                 </h5>
+
+                <Link
+                  to={routes.NEW_EVENT}
+                  className='button is-light mt20'
+                >
+                  Try it now!
+                </Link>
   
                 {/* <div className='mt30'>
                   <SignupForm

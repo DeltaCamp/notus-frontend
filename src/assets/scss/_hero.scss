@@ -190,41 +190,36 @@ header {
     font-size: 52px;
   }
 
-  @media screen and (max-width: $widescreen) {
-    max-width: 80%;
-  }
-
   @media screen and (max-width: $desktop) {
     font-size: 42px;
-    max-width: 80%;
-  }
-
-  @media screen and (max-width: $mobile) {
-    max-width: 90%;
   }
 
   @media screen and (max-width: $mobile - 300px) {
-    max-width: 100%;
     font-size: 27px;
   }
 }
 
 .hero--copy {
+  margin: 0 auto;
   position: relative;
 
   @media screen and (max-width: $widescreen) {
+    max-width: 80%;
     top: -390px;
   }
 
   @media screen and (max-width: $desktop) {
+    max-width: 80%;
     top: -260px;
   }
 
   @media screen and (max-width: $tablet) {
+    max-width: 90%;
     top: -100px;
   }
 
   @media screen and (max-width: $mobile - 300px) {
+    max-width: 100%;
     top: -100px;
   }
 }
@@ -236,20 +231,13 @@ header {
 
   @media screen and (max-width: $widescreen) {
     font-size: 1.325rem;
-    max-width: 80%;
   }
 
   @media screen and (max-width: $desktop) {
     font-size: 1.25rem;
-    max-width: 80%;
-  }
-
-  @media screen and (max-width: $mobile) {
-    max-width: 90%;
   }
 
   @media screen and (max-width: $mobile - 300px) {
-    max-width: 100%;
     font-size: 0.9rem;
   }
 }

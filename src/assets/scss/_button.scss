@@ -129,11 +129,14 @@ form.is-tall .button.is-text.is-xsmall:hover,
   transition: all 70ms ease-in-out;
 }
 
-.button.is-light:hover,
-.button.is-light:active {
-  background-color: rgba(255, 255, 255, 0.9);
+.button.is-light:hover {
+  background-color: rgba(255, 255, 255, 0.97);
   border-color: transparent;
   transition: all 70ms ease-in-out;
+}
+
+.button.is-light:active {
+  background-color: #f6f6ff;
 }
 
 .button.is-success.is-outlined {
@@ -191,9 +194,8 @@ form.is-tall .button.is-text.is-xsmall:hover,
   border-color: transparent;
 }
 
-.button.is-purple:focus,
 .button.is-purple:active {
-  background-color: lighten($purple, 10%);
+  background-color: darken($purple, 10%);
 }
 
 .button.is-purple.is-outlined {
@@ -437,7 +439,8 @@ button:active[disabled],
   width: 18px;
 }
 
-.button.is-light:focus:not(:active), .button.is-light.is-focused:not(:active) {
+.button.is-light:focus:not(:active),
+.button.is-light.is-focused:not(:active) {
   box-shadow: none;
 }
 
@@ -464,4 +467,17 @@ button:active[disabled],
 
 .button.disabled {
   opacity: 0.5;
+}
+
+.button.is-link:hover {
+  background-color: lighten($blue, 6%);
+}
+
+.button.is-link:active {
+  background-color: darken($blue, 6%);
+}
+
+.button.is-link:focus:not(:active),
+.button.is-link.is-focused:not(:active) {
+  box-shadow: none;
 }
