@@ -21,7 +21,7 @@ export const AboutPage =
               <div className='row'>
                 <div className='col-xs-12 col-xl-10'>
                   <h1 className='is-size-xlarge has-text-weight-bold'>
-                    Our mission is to enable you to stay connected with the future of finance.
+                    Our mission is to enable anyone to stay connected with the future of finance.
                   </h1>
 
                   <div className='buttons mt30'>
@@ -44,7 +44,23 @@ export const AboutPage =
               </div>
             </div>
 
-            <div className='container-fluid color-block is-dark mt100'>
+
+            <div id='roadmap' className='container-fluid color-block is-dark mt100'>
+              <div className='container'>
+                <div className='row'>
+                  <div className='col-xs-12 col-xl-8 pt100 pb100'>
+                    <h2 className='is-size-2 has-text-weight-semibold pb20'>
+                      Where we plan to take Notus:
+                    </h2>
+                    <p>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div className='container-fluid color-block is-white-ter'>
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-xl-8 pt100 pb100'>
@@ -52,14 +68,14 @@ export const AboutPage =
                       Why did we create this?
                     </h2>
                     <p>
-                      While consulting we were searching for the best way to build notification features in Smart Contract powered web apps. We didn't find anything ideal for our situation, and so: <em><strong>Voila!</strong></em> Notus was born.
+                      While consulting on distributed apps we were searching for the best way to build notifications which would react to Smart Contract. We didn't find anything ideal for our situation, and so: <em><strong>Voila!</strong></em> Notus was born.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className='container-fluid color-block is-dark mt100'>
+            <div className='container-fluid color-block is-dark'>
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-xl-8 pt100 pb100'>
@@ -67,7 +83,7 @@ export const AboutPage =
                       The easiest Ethereum automation experience.
                     </h2>
                     <p>
-                      Notus provides the easiest Ethereum automation experience for both developers and power users.
+                      Our goal is to provide the most succint yet comprehensive Ethereum automation experience for traders, developers &amp; power users.
                     </p>
 
                     <p>

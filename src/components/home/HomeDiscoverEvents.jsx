@@ -27,7 +27,7 @@ export class HomeDiscoverEvents extends Component {
 
   render () {
     return (
-      <div className='container-fluid is-dark pb100 color-block is-positioned-relatively'>
+      <div className='container-fluid is-dark pt50 pb100 color-block is-positioned-relatively'>
         <SlantSVG
           position='top'
           fill='dark'
@@ -36,10 +36,10 @@ export class HomeDiscoverEvents extends Component {
         <div className='container'>
           <div className='row'>
             <div className='col-xs-12 col-sm-10 col-start-sm-2 col-md-8 col-start-md-3 col-lg-8 col-start-lg-3 has-text-centered'>
-              <h4 className='is-size-4 has-text-weight-bold mt75'>
+              <h1 className='is-size-1 has-text-weight-bold'>
                 Share and Discover
-              </h4>
-              <h5 className='is-size-6'>
+              </h1>
+              <h5 className='is-size-5'>
                 Share your events with the Notus community and discover the events that others have created.
               </h5>
             </div>

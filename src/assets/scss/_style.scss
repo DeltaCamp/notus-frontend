@@ -128,7 +128,13 @@ h6 {
 }
 
 p {
+  font-size: 1.25rem;
+  
   margin-bottom: 1.25rem;
+
+  @media screen and (max-width: $tablet) {
+    font-size: 2rem;
+  }
 }
 
 .has-text-weight-extrabold {
@@ -675,19 +681,10 @@ hr {
   color: white;
 }
 
-// .color-block.is-grey,
-// .color-block.is-blue,
-// .color-block.is-dark,
-// .color-block.is-dark-colored,
-// .color-block.is-info,
-// .color-block.is-orange,
-// .color-block.is-pink,
-// .color-block.is-success,
-// .color-block.is-danger,
-// .color-block.is-purple,
-// .color-block.is-link {
-//   color: white;
-// }
+.color-block.is-light {
+  background-color: $white;
+  color: $dark;
+}
 
 .color-block.is-white-ter {
   background-color: $white-ter;
