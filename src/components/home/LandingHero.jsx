@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react'
 import Vivus from 'vivus'
 import { Link } from 'react-router-dom'
 
-// import { SignupForm } from '~/components/SignupForm'
 import Diagram from '~/assets/images/diagram10.svg'
 import NotusWordmarkWhitePinkShadow from '~/assets/images/notus-wordmark--white-pink-shadow4.svg'
 import * as routes from '~/../config/routes'
@@ -18,15 +17,14 @@ export const LandingHero = class extends PureComponent {
   }
 
   render () {
-    const { setSuccess, success } = this.props
+    const {
+      success
+    } = this.props
 
     return (
       <section
         className={`hero ${success ? 'is-signed-up' : ''}`}
       >
-        {/* <div className='hero-bg has-bg' /> */}
-        {/* <div className='hero-bg' /> */}
-
         <div className='hero-body'>
           <div className='container'>
             <div className='row'>
@@ -49,13 +47,6 @@ export const LandingHero = class extends PureComponent {
                 >
                   Try it now!
                 </Link>
-  
-                {/* <div className='mt30'>
-                  <SignupForm
-                    setSuccess={setSuccess}
-                    autoFocus
-                  />
-                </div> */}
               </div>
   
               <div className='col-xs-12 col-xl-5 is-grid-row-reverse-desktop'>

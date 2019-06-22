@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
+
+import RoadmapLines from '~/assets/images/roadmap2.svg'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import * as routes from '~/../config/routes'
@@ -31,11 +33,9 @@ export const AboutPage =
                     >View roadmap</a>
 
                     <Link
-                      exact
                       to={routes.SIGNUP}
                       className='button is-link'
                       onClick={this.closeMobileNav}
-                      activeClassName='is-active'
                     >
                       Join open beta
                     </Link>
@@ -45,22 +45,51 @@ export const AboutPage =
             </div>
 
 
-            <div id='roadmap' className='container-fluid color-block is-dark mt100'>
+            <div id='roadmap' className='container-fluid color-block is-white-ter mt100'>
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-xl-8 pt100 pb100'>
                     <h2 className='is-size-2 has-text-weight-semibold pb20'>
                       Where we plan to take Notus:
                     </h2>
-                    <p>
-                    </p>
+
+                    <div className='row'>
+                      <div className='col-xs-2'>
+                        <RoadmapLines
+                          height='900'
+                        />
+                      </div>
+                      <div className='col-xs-10'>
+                        <h1 className='is-size-1 has-text-weight-bold roadmap--goal-one'>
+                          Today
+                        </h1>
+                        <h4 className='is-size-4 has-text-weight-bold roadmap--goal-one'>
+                          Notus Today
+                        </h4>
+                        <h4 className='is-size-4 has-text-weight-bold roadmap--goal-one'>
+                          Notus Today
+                        </h4>
+                        <h4 className='is-size-4 has-text-weight-bold roadmap--goal-one'>
+                          Notus Today
+                        </h4>
+                        <h1 className='is-size-1 has-text-weight-bold roadmap--goal-one'>
+                          Public Launch
+                        </h1>
+                        <h4 className='is-size-4 has-text-weight-bold roadmap--goal-one'>
+                          Open Source
+                        </h4>
+                      </div>
+                    </div>
+
+
+                    
                   </div>
                 </div>
               </div>
             </div>
 
 
-            <div className='container-fluid color-block is-white-ter'>
+            <div className='container-fluid color-block is-dark'>
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-xl-8 pt100 pb100'>
@@ -75,7 +104,7 @@ export const AboutPage =
               </div>
             </div>
 
-            <div className='container-fluid color-block is-dark'>
+            <div className='container-fluid color-block is-white-ter'>
               <div className='container'>
                 <div className='row'>
                   <div className='col-xs-12 col-xl-8 pt100 pb100'>

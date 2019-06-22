@@ -6,7 +6,7 @@ import { LandingHero } from '~/components/home/LandingHero'
 import { CustomActions } from '~/components/home/CustomActions'
 import { Features } from '~/components/home/Features'
 import { HomeDiscoverEvents } from '~/components/home/HomeDiscoverEvents'
-import { HomeBetaNotice } from '~/components/home/HomeBetaNotice'
+// import { HomeBetaNotice } from '~/components/home/HomeBetaNotice'
 import { HomeSignupFooterCTA } from '~/components/home/HomeSignupFooterCTA'
 
 import NotusHomeArrow from '~/assets/images/notus-home-arrow.svg'

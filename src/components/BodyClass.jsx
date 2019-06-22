@@ -94,7 +94,7 @@ export const BodyClass = ReactTimeout(
       let newPx = -1000
       if ((scrollTop < Y_POS_LOCK)) {
         // normalizedScrollTop between 0 and 1 (if range is 0...1000)
-        const t = scrollTop * 0.0013
+        // const t = scrollTop * 0.0013
         // newPx = (
         //   (t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t) * -SPEED
         // ) - Y_POS_OFFSET
