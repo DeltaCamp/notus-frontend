@@ -15,6 +15,7 @@ import { StatusPage } from '~/components/pages/StatusPage'
 import { ContractsPage } from '~/components/pages/ContractsPage'
 import { ContractPageWrapper } from '~/components/pages/ContractPageWrapper'
 import { HomePage } from '~/components/pages/HomePage'
+import { PricingPage } from '~/components/pages/PricingPage'
 import { AboutPage } from '~/components/pages/AboutPage'
 import { PrivacyPage } from '~/components/pages/PrivacyPage'
 import { TermsPage } from '~/components/pages/TermsPage'
@@ -92,6 +93,7 @@ export const App = withRouter(hot(module)(
                 <Route exact path={routes.CONTRACT} component={withTracker(ContractPageWrapper)} />
 
                 <Route exact path={routes.HOME} component={withTracker(HomePage)} />
+                <Route exact path={routes.PRICING_PAGE} component={withTracker(PricingPage)} />
                 <Route exact path={routes.ABOUT_PAGE} component={withTracker(AboutPage)} />
                 <Route exact path={routes.PRIVACY_PAGE} component={withTracker(PrivacyPage)} />
                 <Route exact path={routes.TERMS_PAGE} component={withTracker(TermsPage)} />
