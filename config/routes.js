@@ -6,6 +6,7 @@ export const CONTRACTS = '/contracts'
 export const CONTRACT = '/contracts/:contractId'
 
 export const HOME = '/'
+export const PRICING_PAGE = '/pricing'
 export const ABOUT_PAGE = '/about'
 export const TERMS_PAGE = '/terms'
 export const PRIVACY_PAGE = '/privacy'
