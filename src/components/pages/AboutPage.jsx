@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
+import Vivus from 'vivus'
 import { Link } from 'react-router-dom'
 
-import RoadmapLines from '~/assets/images/roadmap2.svg'
+import RoadmapLines from '~/assets/images/roadmap3.svg'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import * as routes from '~/../config/routes'
 
 export const AboutPage =
   class _AboutPage extends Component {
+
+    componentDidMount() {
+      new Vivus(
+        'roadmap-lines',
+        {
+          duration: 300, type: 'oneByOne', animTimingFunction: Vivus.EASE_IN
+        }
+      )
+    }
+
     render () {
       return (
         <div className='is-positioned-absolutely'>
@@ -53,7 +64,7 @@ export const AboutPage =
                       What's the end goal?
                     </h2>
                     <p>
-                      We would love to see Notus utilized by a majority of DLT-based apps due to it's ease of use getting notifications and subscriptions going in your app.
+                      We would love to see Notus utilized by a majority of DLT-based apps due to it's ease of use getting notifications and subscriptions going in your app. Here's what we envision in the future:
                     </p>
 
                     <h5 className='is-size-5 has-text-weight-semibold pt50 pb20'>
@@ -63,54 +74,60 @@ export const AboutPage =
                     <div className='row'>
                       <div className='col-xs-4 col-sm-3 col-xl-2'>
                         <RoadmapLines
-                          height='900'
+                          id='roadmap-lines'
                           className='about--roadmap'
                         />
                       </div>
                       <div className='col-xs-8 col-sm-9 col-xl-10'>
-                        <h3 className='is-size-3 has-text-weight-bold roadmap--goal-primary'>
+                        <h3 className='is-size-3 has-text-weight-bold about--roadmap--goal-primary'>
                           Current Progress
                         </h3>
-                        <h5 className='is-size-5 has-text-weight-bold roadmap--goal-secondary'>
+                        <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
                           Embedded &amp; JS API (Dapp Integration)
                           <br /><span className='has-text-weight-normal'>Quick methods for dapps to integrate Notus.</span>
                         </h5>
-                        <h5 className='is-size-5 has-text-weight-bold roadmap--goal-secondary'>
-                          Traditional Internet App Integrations
-                          <br /><span className='has-text-weight-normal'>Easily connect Notus to Zapier, IFTTT, Segment, Google Analytics, etc.</span>
-                        </h5>
-                        <h5 className='is-size-5 has-text-weight-bold roadmap--goal-secondary'>
+                        <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
                           SMS Notifications
                           <br /><span className='has-text-weight-normal'>Receive or have your users receive text messages when Ethereum events occur.</span>
                         </h5>
-                        <h5 className='is-size-5 has-text-weight-bold roadmap--goal-secondary'>
-                          Push Notifications
-                          <br /><span className='has-text-weight-normal'>Allow owners of native iOS &amp; Android apps user's to receive push notifications based on Notus events.</span>
-                        </h5>
-                        <h5 className='is-size-5 has-text-weight-bold roadmap--goal-secondary'>
-                          Email Template Customization
-                          <br /><span className='has-text-weight-normal'>Provide Notus customers with a custom templating engine to brand emails the way they'd like.</span>
-                        </h5>
-                        <h5 className='is-size-5 has-text-weight-bold roadmap--goal-secondary'>
+                        <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
                           Paid Subscriptions
-                          <br /><span className='has-text-weight-normal'>Launch the Notus paid pricing model based on dapp usage quotas. <Link
+                          <br /><span className='has-text-weight-normal'>Launch a paid pricing model based on each dapp's usage. <Link
                             to={routes.PRICING_PAGE}
                           >More details on pricing plans</Link>.</span>
                         </h5>
-                        <h3 className='is-size-3 has-text-weight-bold roadmap--goal-primary'>
+                        <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
+                          Increased App Integrations
+                          <br /><span className='has-text-weight-normal'>Easily connect Notus to Zapier, IFTTT, Segment, Google Analytics, etc.</span>
+                        </h5>
+
+                        <h3 className='is-size-3 has-text-weight-bold about--roadmap--goal-primary'>
                           Public Launch
                         </h3>
-                        <h5 className='is-size-5 has-text-weight-bold roadmap--goal-secondary'>
+
+                        
+                        <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
+                          Push Notifications
+                          <br /><span className='has-text-weight-normal'>Afford owners of iOS &amp; Android apps to receive push notifications based on Notus events.</span>
+                        </h5>
+                        <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
+                          Email Template Customization
+                          <br /><span className='has-text-weight-normal'>Provide Notus customers with a custom templating engine to brand emails the way they'd like.</span>
+                        </h5>
+                        <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
                           Expanded DLT &amp; Blockchain Listeners
                           <br /><span className='has-text-weight-normal'>Encompass other chain &amp; DLT technologies both public and private.</span>
                         </h5>
-                        <h5 className='is-size-5 has-text-weight-bold roadmap--goal-secondary'>
+                        <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
                           Open Source Initiative
-                          <br /><span className='has-text-weight-normal'>Allow anyone to run their own Notus servers.</span>
+                          <br /><span className='has-text-weight-normal'>Provide anyone with code &amp; documentation to run their own Notus servers.</span>
                         </h5>
-                        <h5 className='is-size-5 has-text-weight-bold roadmap--goal-secondary'>
+                        <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
                           Decentralized Infrastructure
                           <br /><span className='has-text-weight-normal'>Allow anyone to act as a notification relayer and get paid to send notifications.</span>
+                        </h5>
+                        <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
+                          Continued Development ...
                         </h5>
                       </div>
                     </div>

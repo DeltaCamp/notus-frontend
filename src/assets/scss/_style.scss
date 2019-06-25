@@ -998,13 +998,39 @@ ul.list {
 }
 
 .about--roadmap {
+  height: 1630px;
   transform-origin: 0 0;
  
   @media screen and (max-width: $tablet) {
-    height: 700px;
+    height: 1610px;
   }
 
   @media screen and (max-width: $mobile - 300px) {
     height: 600px;
   }
+}
+
+.about--roadmap--goal-primary,
+.about--roadmap--goal-secondary {
+  // border: 1px dotted orange;
+  min-height: 80px;
+  margin-left: -30px;
+}
+
+.about--roadmap--goal-primary:first-of-type {
+  margin-bottom: 70px;
+  margin-top: 50px;
+}
+
+.about--roadmap--goal-primary:last-of-type {
+  // background: pink;
+  margin-bottom: 90px;
+  margin-top: 65px;
+}
+
+.about--roadmap--goal-secondary {
+  // border: 1px dotted blue;
+  padding-bottom: 14px;
+  margin-top: 45px;
+  max-height: 90px;
 }
