@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 2113">
+  <g fill="none" fill-rule="evenodd" transform="rotate(180 98.75 990.25)">
+    <polygon fill="#35BFF7" points="3.264 1865.217 33.141 1806.176 93.32 1787.629 160.588 1818.033 187.701 1889.445 166.148 1933.393 125.265 1962.423 59.893 1958.896 12.879 1924.324"/>
+    <circle cx="92.5" cy="1873.5" r="52" fill="#FFF" stroke="#000" stroke-width="10"/>
+    <polygon fill="#FF30CC" points=".264 951.217 30.141 892.176 90.32 873.629 157.588 904.033 184.701 975.445 163.148 1019.393 122.265 1048.423 56.893 1044.896 9.879 1010.324"/>
+    <circle cx="95.027" cy="961.758" r="52" fill="#FFF" stroke="#000" stroke-width="10"/>
+    <g transform="translate(31.5 .5)">
+      <polygon fill="#35BFF7" points="54.563 1621.928 18 1662.606 63.488 1707.654 102.742 1656.463"/>
+      <polygon fill="#35BFF7" points="54.563 1125.161 18 1165.839 63.488 1210.888 102.742 1159.696" transform="rotate(123 60.371 1168.024)"/>
+      <polygon fill="#35BFF7" points="54.563 1292.748 18 1333.427 63.488 1378.475 102.742 1327.284" transform="rotate(-28 60.371 1335.612)"/>
+      <polygon fill="#35BFF7" points="54.563 1453.336 18 1494.014 63.488 1539.063 102.742 1487.871" transform="rotate(-142 60.371 1496.2)"/>
+      <polygon fill="#35BFF7" points="54.563 202.144 18 242.822 63.488 287.87 102.742 236.679"/>
+      <polygon fill="#35BFF7" points="54.563 698.911 18 739.589 63.488 784.637 102.742 733.446" transform="rotate(123 60.371 741.774)"/>
+      <polygon fill="#35BFF7" points="54.563 531.323 18 572.001 63.488 617.05 102.742 565.858" transform="rotate(-28 60.371 574.186)"/>
+      <polygon fill="#35BFF7" points="54.563 370.736 18 411.414 63.488 456.462 102.742 405.271" transform="rotate(-142 60.371 413.599)"/>
+      <polygon fill="#35BFF7" points="54.563 17.736 18 58.414 63.488 103.462 102.742 52.271" transform="rotate(-142 60.371 60.599)"/>
+      <path stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" d="M60.5 1819.49219L60.5 1681M60.5 1640.49219L60.5 1502M60.5 1480.49219L60.5 1342M60.5 1310.49219L60.5 1172M60.5 1159.49219L60.5 1021M60.5 224.492187L60.5 86M60.5 392.492187L60.5 254M60.5 552.492187L60.5 414M60.5 722.492187L60.5 584M60.5 902.492187L60.5 764"/>
+      <circle cx="60" cy="1663" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <circle cx="60" cy="1496.75" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <circle cx="60" cy="1332.75" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <circle cx="60" cy="1167.75" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <circle cx="60" cy="247.75" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <circle cx="60" cy="62.75" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <circle cx="60" cy="414" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <circle cx="60" cy="578" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+      <circle cx="60" cy="743" r="18" fill="#FFF" stroke="#000" stroke-width="10"/>
+    </g>
+  </g>
+</svg>

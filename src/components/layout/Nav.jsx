@@ -30,8 +30,8 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
         }
 
         async componentDidMount() {
-          const systemInfo = await getSystemInfo()
-          this.setState({ systemInfo })
+          // const systemInfo = await getSystemInfo()
+          // this.setState({ systemInfo })
 
           window.addEventListener('scroll', this.listenToScroll)
           this.listenToScroll()
@@ -140,22 +140,22 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
             </NavLink>
           </>
 
-          if (!currentUser &&
-            (this.state.systemInfo.mobileOS === 'unknown')
-          ) { 
-            links = <>
-              {signInSignUpLinks}
-            </>
-          }
+          // if (!currentUser &&
+          //   (this.state.systemInfo.mobileOS === 'unknown')
+          // ) { 
+          //   links = <>
+          //     {signInSignUpLinks}
+          //   </>
+          // }
 
-          if (!currentUser && this.state.mobileNavActive) {
+          if (!currentUser) {
             links = <>
               {signInSignUpLinks}
               <hr />
               <NavLink
                 exact
                 to={routes.ABOUT_PAGE}
-                className='navbar-item'
+                className='navbar-item hide-on-desktop'
                 onClick={this.closeMobileNav}
                 activeClassName='is-active'
               >
@@ -165,14 +165,14 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
                 href='https://discord.gg/WXMDXqb'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='navbar-item'
+                className='navbar-item hide-on-desktop'
               >
                 Discord
               </a>
               <NavLink
                 exact
                 to={routes.TERMS_PAGE}
-                className='navbar-item'
+                className='navbar-item hide-on-desktop'
                 onClick={this.closeMobileNav}
                 activeClassName='is-active'
               >
@@ -181,7 +181,7 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
               <NavLink
                 exact
                 to={routes.PRIVACY_PAGE}
-                className='navbar-item'
+                className='navbar-item hide-on-desktop'
                 onClick={this.closeMobileNav}
                 activeClassName='is-active'
               >
@@ -190,17 +190,14 @@ export const Nav = graphql(signOutMutation, { name: 'signOutMutation' })(
               <NavLink
                 exact
                 to={routes.SUPPORT_PAGE}
-                className='navbar-item'
+                className='navbar-item hide-on-desktop'
                 onClick={this.closeMobileNav}
                 activeClassName='is-active'
               >
                 Support
               </NavLink>
             </>
-          }
-
-          
-          if (currentUser) {
+          } else {
             links = (
               <>
                 <NavLink

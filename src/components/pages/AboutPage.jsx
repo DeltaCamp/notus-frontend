@@ -3,21 +3,50 @@ import Helmet from 'react-helmet'
 import Vivus from 'vivus'
 import { Link } from 'react-router-dom'
 
-import RoadmapLines from '~/assets/images/roadmap3.svg'
+import RoadmapLines from '~/assets/images/roadmap5.svg'
 import { FooterContainer } from '~/components/layout/Footer'
 import { ScrollToTop } from '~/components/ScrollToTop'
 import * as routes from '~/../config/routes'
 
+const Y_POS_ANIMATION_START = 770
+
 export const AboutPage =
   class _AboutPage extends Component {
+    state = {
+      scrollTop: 0
+    }
+
+    roadmapVivus = null
 
     componentDidMount() {
-      new Vivus(
+      this.initAnimation()
+
+      window.addEventListener('scroll', this.listenToScroll)
+      this.listenToScroll()
+    }
+
+    componentWillUnmount() {
+      window.removeEventListener('scroll', this.listenToScroll)
+    }
+
+    initAnimation = () => {
+      this.roadmapVivus = new Vivus(
         'roadmap-lines',
         {
-          duration: 300, type: 'oneByOne', animTimingFunction: Vivus.EASE_IN
+          duration: 200, type: 'oneByOne', animTimingFunction: Vivus.EASE_IN_OUT, start: 'manual'
         }
       )
+    }
+
+    listenToScroll = () => {
+      const scrollTop = window.pageYOffset !== undefined ?
+        window.pageYOffset :
+        (document.documentElement || document.body.parentNode || document.body).scrollTop
+
+      if (scrollTop > Y_POS_ANIMATION_START) {
+        console.log(this.roadmapVivus)
+        this.roadmapVivus.play(1)
+      }
     }
 
     render () {
@@ -72,13 +101,13 @@ export const AboutPage =
                     </h5>
 
                     <div className='row'>
-                      <div className='col-xs-4 col-sm-3 col-xl-2'>
+                      <div className='col-xs-5 col-sm-3 col-xl-2'>
                         <RoadmapLines
                           id='roadmap-lines'
                           className='about--roadmap'
                         />
                       </div>
-                      <div className='col-xs-8 col-sm-9 col-xl-10'>
+                      <div className='col-xs-7 col-sm-9 col-xl-10'>
                         <h3 className='is-size-3 has-text-weight-bold about--roadmap--goal-primary'>
                           Current Progress
                         </h3>
@@ -92,9 +121,9 @@ export const AboutPage =
                         </h5>
                         <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
                           Paid Subscriptions
-                          <br /><span className='has-text-weight-normal'>Launch a paid pricing model based on each dapp's usage. <Link
-                            to={routes.PRICING_PAGE}
-                          >More details on pricing plans</Link>.</span>
+                          <br /><span className='has-text-weight-normal'>Launch a paid pricing model based on each dapp's usage. 
+                          {/* <Link to={routes.PRICING_PAGE}>More details on pricing plans</Link>. */}
+                          </span>
                         </h5>
                         <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
                           Increased App Integrations
@@ -127,7 +156,7 @@ export const AboutPage =
                           <br /><span className='has-text-weight-normal'>Allow anyone to act as a notification relayer and get paid to send notifications.</span>
                         </h5>
                         <h5 className='is-size-5 has-text-weight-bold about--roadmap--goal-secondary'>
-                          Continued Development ...
+                          Continue development &amp; support ...
                         </h5>
                       </div>
                     </div>

@@ -33,7 +33,15 @@ body:not(.home) .navbar.is-fixed-top {
 
 
 body.home .hide-on-home {
-  display: none;
+  @media screen and (min-width: $navbar-breakpoint) {
+    display: none;
+  }
+}
+
+.hide-on-desktop {
+  @media screen and (min-width: $navbar-breakpoint) {
+    display: none;
+  }  
 }
 
 body:not(.home) .hide-not-home {
